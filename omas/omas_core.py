@@ -24,7 +24,6 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
     'machine_mapping_function', 'run_machine_mapping_functions', 'mdstree', 'mdsvalue',
-    'omas_service', 'omas_service_script',
     'imas_json_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit'
@@ -470,8 +469,8 @@ class ODS(MutableMapping):
         top = self
         parent = self.parent
         while parent is not None:
-            top=parent
-            parent=parent.parent
+            top = parent
+            parent = parent.parent
         return top
 
     @property
@@ -664,8 +663,8 @@ class ODS(MutableMapping):
         property that tells in what COCOS format the data will be input/output
         """
         if not hasattr(self, '_coordsio'):
-            self.top._coordsio = {}
-        self._coordsio = self.top._coordsio # default value for coordsio
+            self.top._coordsio = {}  # default value for coordsio
+        self._coordsio = self.top._coordsio
         return self._coordsio
 
     @coordsio.setter
@@ -681,19 +680,14 @@ class ODS(MutableMapping):
 
         :return: dynamic_ODS object
         """
-        # pyro_cases[self._dynamic.idc].active
         if not hasattr(self, '_dynamic'):
-            self._dynamic = None
-        if self._dynamic is not None and self._dynamic.idc not in pyro_cases:
-            self._dynamic = None
+            self.top._dynamic = None  # default value for dynamic
+        self._dynamic = self.top._dynamic
         return self._dynamic
 
     @dynamic.setter
-    def dynamic(self, dynamic):
-        self._dynamic = dynamic
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item)._dynamic = dynamic
+    def dynamic(self, dynamic_value):
+        self.top._dynamic = dynamic_value
 
     @property
     def ulocation(self):
@@ -1995,7 +1989,6 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
-        remote = kw.pop('remote', False)
         # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw.pop('consistency_check')
@@ -2015,7 +2008,20 @@ class ODS(MutableMapping):
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
-            self.dynamic = dynamic_ODS_wrapper(ext, remote, *args, **kw)
+
+            if ext == 'nc':
+                from omas.omas_nc import dynamic_omas_nc
+
+                self.dynamic = dynamic_omas_nc(*args, **kw)
+            elif ext == 'imas':
+                from omas.omas_imas import dynamic_omas_imas
+
+                self.dynamic = dynamic_omas_imas(*args, **kw)
+            elif ext == 'machine':
+                from omas.omas_machine import dynamic_omas_machine
+
+                self.dynamic = dynamic_omas_machine(*args, **kw)
+
             self.dynamic.open()
             return self.dynamic
         else:
@@ -2279,140 +2285,6 @@ class ODC(ODS):
             kw['consistency_check'] = True
 
         return ODS.load(self, *args, **kw)
-
-
-class dynamic_ODS_wrapper:
-    def __init__(self, ext, remote, *args, **kw):
-        r"""
-        :param ext: format of the dynamic load
-
-        :param remote: False for local dynamic data access
-                       integer with the port number for remote data access on localhost
-                       string with server and port number in the format `server:port`
-
-        :param \*args: arguments passed to dynamic load function
-
-        :param \**kw: keyword arguments passed to dynamic load function
-        """
-        self.ext = ext
-        self.remote = remote
-        if remote:
-            if isinstance(remote, int):
-                remote = 'PYRO:dynamic_ODS_factory@localhost:%d' % remote
-            factory = Pyro5.api.Proxy(remote)
-        else:
-            factory = dynamic_ODS_factory()
-        self.factory = factory.initialize(self.idc, ext, *args, **kw)
-        self.keys_cache = {}
-        self.contains_cache = {}
-
-    @property
-    def idc(self):
-        return id(self)
-
-    def open(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.open(self.idc, *args, **kw)
-
-    def close(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.close(self.idc, *args, **kw)
-
-    def __enter__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.enter(self.idc, *args, **kw)
-
-    def __exit__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.exit(self.idc, *args, **kw)
-
-    def keys(self, location, *args, **kw):
-        if location not in self.keys_cache:
-            if self.remote:
-                self.factory._pyroClaimOwnership()
-            self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
-        return self.keys_cache[location]
-
-    def __contains__(self, location, *args, **kw):
-        if location not in self.contains_cache:
-            if self.remote:
-                self.factory._pyroClaimOwnership()
-            self.contains_cache[location] = self.factory.__contains__(self.idc, location, *args, **kw)
-        return self.contains_cache[location]
-
-    def __getitem__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        if self.remote:
-            tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
-            tmp = base64.b64decode(tmp['data'])
-            return pickle.loads(tmp)
-        else:
-            return self.factory.__getitem__(self.idc, self.remote, *args, **kw)
-
-
-pyro_cases = {}
-
-
-@Pyro5.api.expose
-class dynamic_ODS_factory:
-    """
-    Class file that serves the dynamic data
-    pyro_cases holds the instances of dynamic_omas objects
-    organized according an ID connection (idc) that is passed
-    to all methods of this class. Dynamic serving of data
-    through this class is needed to provide the same interface
-    whether the data is local or is accessed remotely via Pyro.
-    """
-
-    def initialize(self, idc, ext, *args, **kw):
-        if ext == 'nc':
-            from omas.omas_nc import dynamic_omas_nc
-
-            tmp = dynamic_omas_nc(*args, **kw)
-        elif ext == 'imas':
-            from omas.omas_imas import dynamic_omas_imas
-
-            tmp = dynamic_omas_imas(*args, **kw)
-        elif ext == 'machine':
-            from omas.omas_machine import dynamic_omas_machine
-
-            tmp = dynamic_omas_machine(*args, **kw)
-        if idc not in pyro_cases:
-            pyro_cases[idc] = tmp
-        return self
-
-    def open(self, idc, *args, **kw):
-        return pyro_cases[idc].open(*args, **kw)
-
-    def close(self, idc, *args, **kw):
-        tmp = pyro_cases[idc].close(*args, **kw)
-        del pyro_cases[idc]
-        return tmp
-
-    def enter(self, idc, *args, **kw):
-        return pyro_cases[idc].__enter__(*args, **kw)
-
-    def exit(self, idc, *args, **kw):
-        tmp = pyro_cases[idc].__exit__(*args, **kw)
-        del pyro_cases[idc]
-        return tmp
-
-    def keys(self, idc, *args, **kw):
-        return numpy.atleast_1d(pyro_cases[idc].keys(*args, **kw)).tolist()
-
-    def __contains__(self, idc, *args, **kw):
-        return pyro_cases[idc].__contains__(*args, **kw)
-
-    def __getitem__(self, idc, remote, *args, **kw):
-        if remote:
-            return pickle.dumps(pyro_cases[idc].__getitem__(*args, **kw), protocol=omas_rcparams['pickle_protocol'])
-        else:
-            return pyro_cases[idc].__getitem__(*args, **kw)
 
 
 class dynamic_ODS:
@@ -2804,6 +2676,5 @@ from .omas_ds import *
 from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
-from .omas_service import *
 from .omas_machine import *
 from . import omas_structure

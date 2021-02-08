@@ -4,7 +4,6 @@
 Dynamic loading of IMAS data
 ============================
 This example illustrates how OMAS can load in memory IMAS data only when it is first requested
-This approach can also be used to transfer data on demand from/to a server where an OMAS service is running.
 """
 
 import os
