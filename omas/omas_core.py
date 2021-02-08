@@ -1521,11 +1521,11 @@ class ODS(MutableMapping):
         state = {}
         for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
-                # we do not want to carry with us information other than
-                if item in ['_consistency_check', '_imas_version', '_cocos']:
-                    state[item] = self.__dict__[item]
-                else:
+                # we do not want to carry with us this information
+                if item in ['_cocosio', '_coordsio', '_unitsio', '_parent', '_dynamic']:
                     state[item] = None
+                else:
+                    state[item] = self.__dict__[item]
         return state
 
     def __setstate__(self, state):
@@ -1580,14 +1580,14 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         """
-        copy omas_ods_attrs ['_consistency_check','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
+        copy omas_ods_attrs attributes from input ods
 
         :param ods: input ods
 
         :return: self
         """
         for item in omas_ods_attrs:
-            if item not in ['_parent']:
+            if item not in ['_parent', '_dynamic']:
                 setattr(self, item, getattr(ods, item, None))
         return self
 
