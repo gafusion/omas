@@ -1334,7 +1334,7 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=False, **kw):
         """
         Traverse the ods and return paths to its leaves
 
@@ -1345,11 +1345,13 @@ class ODS(MutableMapping):
 
         :param include_structures: include paths leading to the leaves
 
+        :param dynamic: traverse paths that are not loaded in a dynamic ODS
+
         :return: list of paths that have data
         """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
-        for kid in self.keys():
+        for kid in self.keys(dynamic=dynamic):
             if isinstance(self.getraw(kid), ODS):
                 if include_structures:
                     paths.append(path + [kid])
@@ -1357,6 +1359,7 @@ class ODS(MutableMapping):
                     return_empty_leaves=return_empty_leaves,
                     traverse_code_parameters=traverse_code_parameters,
                     include_structures=include_structures,
+                    dynamic=dynamic,
                     paths=paths,
                     path=path + [kid],
                 )
@@ -1366,7 +1369,7 @@ class ODS(MutableMapping):
                 self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
-        if not len(self.keys()) and return_empty_leaves:
+        if not len(self.keys(dynamic=dynamic)) and return_empty_leaves:
             paths.append(path)
         return paths
 
