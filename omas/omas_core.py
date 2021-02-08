@@ -414,15 +414,10 @@ class ODS(MutableMapping):
 
     @property
     def parent(self):
-        if not hasattr(self, '_parent'):
-            self._parent = None
-            return None
-        if self._parent is None:
-            return None
-        elif self._parent() is None:
-            return None
-        else:
+        try:
             return self._parent()
+        except TypeError:
+            return None
 
     @parent.setter
     def parent(self, value):
