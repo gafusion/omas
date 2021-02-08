@@ -1902,7 +1902,7 @@ def omas_environment(
     if cocosio is not None:
         ods.cocosio = cocosio
     if coordsio is not None:
-        ods.coordsio = (ods, coordsio)
+        ods.coordsio = coordsio
     if unitsio is not None:
         ods.unitsio = unitsio
     if dynamic_path_creation is not None:

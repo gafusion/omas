@@ -206,7 +206,7 @@ class ODS(MutableMapping):
         self.imas_version = imas_version
         self.cocos = cocos
         self.cocosio = cocosio
-        self._coordsio = coordsio
+        self.coordsio = coordsio
         self.unitsio = unitsio
         self._dynamic = dynamic
 
@@ -614,9 +614,6 @@ class ODS(MutableMapping):
     def cocos(self):
         """
         property that tells in what COCOS format the data is stored internally of the ODS
-        (NOTE: this parameter can only be set when the object is created)
-
-        :return: cocos value
         """
         if not hasattr(self, '_cocos'):
             self.top._cocos = omas_rcparams['cocos']  # default value for cocos
@@ -633,8 +630,6 @@ class ODS(MutableMapping):
     def cocosio(self):
         """
         property that tells in what COCOS format the data will be input/output
-
-        :return: cocosio value
         """
         if not hasattr(self, '_cocosio'):
             self.top._cocosio = omas_rcparams['cocos']  # default value for cocosio
@@ -651,8 +646,6 @@ class ODS(MutableMapping):
     def unitsio(self):
         """
         property that if data should be returned with units or not
-
-        :return: unitsio value
         """
         if not hasattr(self, '_unitsio'):
             self.top.unitsio = {}  # default value for unitsio
@@ -669,23 +662,17 @@ class ODS(MutableMapping):
     def coordsio(self):
         """
         property that tells in what COCOS format the data will be input/output
-
-        :return: coordsio value
         """
-        if not hasattr(self, '_coordsio') or self._coordsio is None:
-            self.coordsio = None
+        if not hasattr(self, '_coordsio'):
+            self.top._coordsio = {}
+        self._coordsio = self.top._coordsio # default value for coordsio
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, coordsio_value):
         if coordsio_value is None:
-            coordsio_value = (None, {})  # default value for coordsio
-        elif not isinstance(coordsio_value, (list, tuple)):
-            coordsio_value = (self, coordsio_value)
-        self._coordsio = coordsio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).coordsio = coordsio_value
+            coordsio_value = {}  # default value for coordsio
+        self.top._coordsio = coordsio_value
 
     @property
     def dynamic(self):
@@ -900,7 +887,8 @@ class ODS(MutableMapping):
                         value = value.to(info['units']).magnitude
 
                 # coordinates interpolation
-                ods_coordinates, input_coordinates = self.coordsio
+                ods_coordinates = self.top
+                input_coordinates = self.coordsio
                 if input_coordinates:
                     all_coordinates = []
                     coordinates = []
@@ -1252,7 +1240,8 @@ class ODS(MutableMapping):
                 info = omas_info_node(ulocation, imas_version=self.imas_version)
 
                 # coordinates interpolation
-                ods_coordinates, output_coordinates = self.coordsio
+                ods_coordinates = self.top
+                output_coordinates = self.coordsio
                 if cocos_and_coords and output_coordinates:
                     all_coordinates = []
                     coordinates = []
