@@ -285,7 +285,7 @@ class ODS(MutableMapping):
                                 # squash the multidimensional time arrays if they are all the same
                                 if len(time.shape) > 1:
                                     time = numpy.reshape(time, (-1, time.shape[-1]))
-                                    if all([numpy.allclose(time[0], t) for t in time[1:]]):
+                                    if all(numpy.allclose(time[0], t) for t in time[1:]):
                                         time = time[0]
                             times[item] = time
                         except ValueError as _excp:
@@ -304,13 +304,13 @@ class ODS(MutableMapping):
                         return None
 
                     # We crossed [:] or something and picked up a 2D time array
-                    elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
+                    elif any(len(numpy.asarray(time).shape) > 1 for time in times_values):
                         # Make a 1D reference time0 that can be comapred against other time arrays
                         time0 = list(times.values())[0]
                         # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                         while len(time0.shape) > 1:
                             time0 = numpy.take(time0, 0, axis=0)
-                        if all([time.size == time0.size for time in times.values()]):
+                        if all(time.size == time0.size for time in times.values()):
                             for time in times.values():
                                 # Make sure all time arrays are close to the time0 we identified
                                 assert abs(time - time0).max() < 1e-7
@@ -388,7 +388,7 @@ class ODS(MutableMapping):
 
             # identify time-dependent data
             info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
-            if 'coordinates' in info and any([k.endswith('.time') for k in info['coordinates']]):
+            if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
 
                 # time-dependent arrays
                 if not isinstance(self.getraw(item), ODS):
@@ -892,7 +892,7 @@ class ODS(MutableMapping):
                                 ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate, False)
 
                         # if all coordinates information is present
-                        if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
+                        if all(coord in input_coordinates and coord in ods_coordinates for coord in coordinates):
                             # if there is any coordinate that does not match
                             if any(
                                 [
@@ -1128,7 +1128,7 @@ class ODS(MutableMapping):
             shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
             if not len(shapes):
                 return numpy.asarray(data0)
-            if not all([len(shape) == len(shapes[0]) for shape in shapes[1:]]):
+            if not all(len(shape) == len(shapes[0]) for shape in shapes[1:]):
                 return data0
 
             # find maximum shape
@@ -1145,7 +1145,7 @@ class ODS(MutableMapping):
             dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
             if not len(dtypes):
                 return numpy.asarray(data0)
-            if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
+            if not all(dtype.char == dtypes[0].char for dtype in dtypes[1:]):
                 return data0
             dtype = dtypes[0]
 
@@ -1239,7 +1239,7 @@ class ODS(MutableMapping):
                         coordinates = list(filter(lambda coord: not coord.startswith('1...'), all_coordinates))
                     if len(coordinates):
                         # if all coordinates information is present
-                        if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
+                        if all(coord in output_coordinates and coord in ods_coordinates for coord in coordinates):
                             # if there is any coordinate that does not match
                             if any(
                                 [

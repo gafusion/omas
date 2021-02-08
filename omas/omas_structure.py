@@ -325,7 +325,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
         lines.append(table_header)
         lines.append(sub_table_header)
         for item in sorted(structure):
-            if not any([item.endswith(k) for k in ['_error_index', '_error_lower', '_error_upper']]):
+            if not any(item.endswith(k) for k in ['_error_index', '_error_lower', '_error_upper']):
                 # uncertain quantities
                 is_uncertain = ''
                 if item + '_error_upper' in structure:
@@ -437,7 +437,7 @@ def extract_global_quantities(imas_version=omas_rcparams['default_imas_version']
         tmp = load_structure(structure, imas_version)[0]
 
         for item in tmp:
-            if any([item.endswith(error) for error in ['_error_index', '_error_lower', '_error_upper']]):
+            if any(item.endswith(error) for error in ['_error_index', '_error_lower', '_error_upper']):
                 continue
             elif not item.endswith('.global_quantities.' + item.split('.')[-1]):
                 continue

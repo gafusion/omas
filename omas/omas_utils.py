@@ -55,7 +55,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
         keys_to_ignore.extend(default_keys_to_ignore)
 
     def is_ignored(k):
-        return any([o2u(k).endswith(end) for end in keys_to_ignore])
+        return any(o2u(k).endswith(end) for end in keys_to_ignore)
 
     k1 = set(ods1.keys())
     k2 = set(ods2.keys())

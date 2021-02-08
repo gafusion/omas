@@ -82,9 +82,9 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
         out = {}
         for ds in self:
             out[ds] = self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
-        if any([k is False for k in out.values()]):
+        if any(k is False for k in out.values()):
             return False
-        elif any([k is None for k in out.values()]):
+        elif any(k is None for k in out.values()):
             return None
         else:
             return True
@@ -1305,7 +1305,7 @@ def delete_ggd(ods, ds=None):
 
     deleted = []
     for ggd in ggds:
-        if not any([ggd.startswith(structure + '.') for structure in ds]):
+        if not any(ggd.startswith(structure + '.') for structure in ds):
             continue
 
         if ':' not in ggd:
@@ -2093,9 +2093,9 @@ _cocos_signals = {}
             for item in sorted(list(load_structure(structure, omas_rcparams['default_imas_version'])[0].keys())):
                 item = i2o(item)
                 item_ = item
-                if any([item.endswith(k) for k in [':.values', ':.value', ':.data']]):
+                if any(item.endswith(k) for k in [':.values', ':.value', ':.data']):
                     item_ = l2o(p2l(item)[:-2])
-                elif any([item.endswith(k) for k in ['.values', '.value', '.data']]):
+                elif any(item.endswith(k) for k in ['.values', '.value', '.data']):
                     item_ = l2o(p2l(item)[:-1])
                 m = max(m, len(item))
                 score = 0
@@ -2113,10 +2113,10 @@ _cocos_signals = {}
                         continue
                     elif re.match('.*\.[rz]$', item):
                         continue
-                    elif any([(item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in skip_signals]):
+                    elif any((item_.endswith('.' + k) or item_.endswith('_' + k) or '.' + k + '.' in item) for k in skip_signals):
                         out[structure].setdefault(-1, []).append((item, p2l(item_)[-1]))
                         continue
-                    elif any([k in documentation for k in ['always positive']]):
+                    elif any(k in documentation for k in ['always positive']):
                         out[structure].setdefault(-1, []).append((item, documentation))
                         continue
                     n = item.count('.')
@@ -2128,7 +2128,7 @@ _cocos_signals = {}
                                 score += pnt
                                 break
                         for case in ['q', 'j', 'phi', 'psi', 'ip', 'b', 'f', 'v', 'f_df']:
-                            if key.startswith('%s_' % case) and not any([key.startswith(k) for k in ['psi_norm']]):
+                            if key.startswith('%s_' % case) and not any(key.startswith(k) for k in ['psi_norm']):
                                 rationale += [case]
                                 score += pnt
                                 break

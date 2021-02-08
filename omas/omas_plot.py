@@ -244,7 +244,7 @@ def gas_filter(label, which_gas):
         if which_gas == 'all':
             include = True
     elif isinstance(which_gas, list):
-        include = any([wg in label for wg in which_gas])
+        include = any(wg in label for wg in which_gas)
     return include
 
 
