@@ -3,32 +3,41 @@ name: Testing
 on:
   push:
     branches: [ master ]
+  tags:
+      - "v*"
   pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip github]')"
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        build_command: ["pip install ."]
       fail-fast: false
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
     - name: Install dependencies
       run: |
-        python -m pip install -r requirements.txt
+        python3 -m pip install -r requirements.txt
+
     - name: Install OMAS
-      run: ${{ matrix.build_command }}
+      run: |
+        python3 -m pip install .
+
     - name: Move to root and try importing OMAS
       run: |
         cd /
-        python -c "import omas; print(omas.__version__)"
+        python3 -c "import omas; print(omas.__version__)"
+
     - name: Run OMAS tests
       run: |
         make test
