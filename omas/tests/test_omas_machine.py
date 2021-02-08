@@ -73,7 +73,7 @@ class TestOmasMachine(UnittestCaseOmas):
 
     def test_user_mappings(self):
         location = 'dataset_description.data_entry.machine'
-        for user_machine_mappings in [{}, {"dataset_description.data_entry.machine": {"VALUE": "{machine}123"}}]:
+        for user_machine_mappings in [{}, {"dataset_description.data_entry.machine": {"EVAL": "{machine!r}+'123'"}}]:
             ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location, user_machine_mappings=user_machine_mappings)
             if not user_machine_mappings:
                 assert ods[location] == self.machine
