@@ -418,6 +418,9 @@ class ODS(MutableMapping):
             return self._parent()
         except TypeError:
             return None
+        except AttributeError:
+            self._parent = None
+            return None
 
     @parent.setter
     def parent(self, value):
@@ -483,14 +486,17 @@ class ODS(MutableMapping):
         :return: string with imas_version
         """
         if not hasattr(self, '_imas_version'):
-            self.top._imas_version = omas_rcparams['default_imas_version']
-        self._imas_version = self.top._imas_version
+            self._imas_version = omas_rcparams['default_imas_version']
+        top = self.top
+        if top._imas_version is None:
+            top._imas_version = omas_rcparams['default_imas_version']
+        self._imas_version = top._imas_version
         return self._imas_version
 
     @imas_version.setter
     def imas_version(self, imas_version_value):
         if imas_version_value is None:
-            imas_version_value = omas_rcparams['default_imas_version']  # default value for imas_version
+            imas_version_value = omas_rcparams['default_imas_version']
         self.top._imas_version = imas_version_value
 
     @property
@@ -610,14 +616,17 @@ class ODS(MutableMapping):
         property that tells in what COCOS format the data is stored internally of the ODS
         """
         if not hasattr(self, '_cocos'):
-            self.top._cocos = omas_rcparams['cocos']  # default value for cocos
-        self._cocos = self.top._cocos
+            self._cocos = omas_rcparams['cocos']
+        top = self.top
+        if top._cocos is None:
+            top._cocos = omas_rcparams['cocos']
+        self._cocos = top._cocos
         return self._cocos
 
     @cocos.setter
     def cocos(self, cocos_value):
         if cocos_value is None:
-            cocos_value = omas_rcparams['cocos']  # default value for cocos
+            cocos_value = omas_rcparams['cocos']
         self.top._cocos = cocos_value
 
     @property
@@ -626,14 +635,17 @@ class ODS(MutableMapping):
         property that tells in what COCOS format the data will be input/output
         """
         if not hasattr(self, '_cocosio'):
-            self.top._cocosio = omas_rcparams['cocos']  # default value for cocosio
-        self._cocosio = self.top._cocosio
+            self._cocosio = omas_rcparams['cocos']
+        top = self.top
+        if top._cocosio is None:
+            top._cocosio = omas_rcparams['cocos']
+        self._cocosio = top._cocosio
         return self._cocosio
 
     @cocosio.setter
     def cocosio(self, cocosio_value):
         if cocosio_value is None:
-            cocosio_value = omas_rcparams['cocos']  # default value for cocosio
+            cocosio_value = omas_rcparams['cocos']
         self.top._cocosio = cocosio_value
 
     @property
@@ -642,14 +654,17 @@ class ODS(MutableMapping):
         property that if data should be returned with units or not
         """
         if not hasattr(self, '_unitsio'):
-            self.top.unitsio = {}  # default value for unitsio
-        self._unitsio = self.top._unitsio
+            self._unitsio = {}
+        top = self.top
+        if top._unitsio is None:
+            top._unitsio = {}
+        self._unitsio = top._unitsio
         return self._unitsio
 
     @unitsio.setter
     def unitsio(self, unitsio_value):
         if unitsio_value is None:
-            unitsio_value = {}  # default value for unitsio
+            unitsio_value = {}
         self.top._unitsio = unitsio_value
 
     @property
@@ -658,26 +673,28 @@ class ODS(MutableMapping):
         property that tells in what COCOS format the data will be input/output
         """
         if not hasattr(self, '_coordsio'):
-            self.top._coordsio = {}  # default value for coordsio
-        self._coordsio = self.top._coordsio
+            self._coordsio = {}
+        top = self.top
+        if top._coordsio is None:
+            top._coordsio = {}
+        self._coordsio = top._coordsio
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, coordsio_value):
         if coordsio_value is None:
-            coordsio_value = {}  # default value for coordsio
+            coordsio_value = {}
         self.top._coordsio = coordsio_value
 
     @property
     def dynamic(self):
         """
         property that point to dynamic_ODS object
-
-        :return: dynamic_ODS object
         """
         if not hasattr(self, '_dynamic'):
-            self.top._dynamic = None  # default value for dynamic
-        self._dynamic = self.top._dynamic
+            self._coordsio = None
+        top = self.top
+        self._dynamic = top._dynamic
         return self._dynamic
 
     @dynamic.setter
@@ -1324,6 +1341,8 @@ class ODS(MutableMapping):
         :param return_empty_leaves: if False only return paths to leaves that have data
                                     if True also return paths to empty leaves
 
+        :param traverse_code_parameters: traverse code parameters
+
         :param include_structures: include paths leading to the leaves
 
         :return: list of paths that have data
@@ -1525,6 +1544,8 @@ class ODS(MutableMapping):
 
     def __setstate__(self, state):
         self.__dict__.update(state)
+        for item in omas_ods_attrs:
+            self.__dict__.setdefault(item, None)
         if isinstance(self.omas_data, list):
             for value in self.omas_data:
                 if isinstance(value, ODS):
