@@ -13,6 +13,10 @@
   "COMMENT": "VALUE is used for constants",
   "VALUE": "test"
  },
+ "dataset_description.data_entry.machine": {
+  "COMMENT": "EVAL is used evaluating PYTHON expressions",
+  "EVAL": "{machine!r}"
+ },
  "dataset_description.data_entry.user": {
   "COMMENT": "ENVIRON gets environmental variables",
   "ENVIRON": "USER"

@@ -6,10 +6,10 @@
   }
  },
  "equilibrium.code.name": {
-  "VALUE": "{EFIT_tree}"
+  "EVAL": "{EFIT_tree!r}"
  },
  "equilibrium.code.version": {
-  "VALUE": "{EFIT_tree}"
+  "EVAL": "{EFIT_tree!r}"
  },
  "equilibrium.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",

@@ -18,7 +18,7 @@ __all__ = [
     'mdsvalue',
 ]
 
-machine_expression_types = ['VALUE', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
+machine_expression_types = ['VALUE', 'EVAL', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
 
 _url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{branch}', 'omas_machine_mappings_url_{branch}'])
 
@@ -126,8 +126,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     # CONSTANT VALUE
     if 'VALUE' in mapped:
         data0 = data = mapped['VALUE']
-        if isinstance(data0, str):
-            data0 = data = data0.format(**options_with_defaults)
+
+    # EVAL
+    elif 'EVAL' in mapped:
+        data0 = data = eval(mapped['EVAL'].format(**options_with_defaults), _namespace_mappings[idm])
 
     # ENVIRONMENTAL VARIABLE
     elif 'ENVIRON' in mapped:
