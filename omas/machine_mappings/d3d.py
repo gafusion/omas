@@ -1,15 +1,14 @@
 import numpy as np
-import copy
 import inspect
 from omas import *
 from omas.omas_utils import printd
-from omas.machine_mappings.common import *
+from omas.machine_mappings._common import *
 
 __all__ = []
 
 
 @machine_mapping_function(__all__)
-def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
+def gas_injection_hardware(ods, pulse=133221):
     """
     Sets up DIII-D gas injector data.
 
@@ -38,12 +37,12 @@ def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
     def pipe_copy(pipe_in):
         pipe_out = ods['gas_injection']['pipe'][i]
         for field in ['name', 'exit_position.r', 'exit_position.z', 'exit_position.phi']:
-            pipe_out[field] = copy.copy(pipe_in[field])
+            pipe_out[field] = pipe_in[field]
         vvv = 0
-        while 'valve.{}.identifier'.format(vvv) in pipe_in:
-            pipe_out = copy.copy(pipe_in['valve.{}.identifier'.format(vvv)])
+        while f'valve.{vvv}.identifier' in pipe_in:
+            valve_identifier = pipe_in[f'valve.{vvv}.identifier']
             vvv += 1
-        return pipe_out
+        return valve_identifier
 
     # PFX1
     for angle in [12, 139, 259]:  # degrees, DIII-D hardware left handed coords
@@ -226,7 +225,7 @@ def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
     pipe_rfcomb['name'] = 'RF_COMB_'
     pipe_rfcomb['exit_position']['r'] = 2.38  # m
     pipe_rfcomb['exit_position']['z'] = -0.13  # m
-    # pipe_rfcomb['exit_position']['phi'] = Unknown, sorry
+    pipe_rfcomb['exit_position']['phi'] = np.nan  # Unknown, sorry
     pipe_rfcomb['valve'][0]['identifier'] = 'LOB2'
     # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
     i += 1
@@ -277,6 +276,7 @@ def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
     pipe_cpmid['name'] = 'CPMID'
     pipe_cpmid['exit_position']['r'] = 0.9  # m
     pipe_cpmid['exit_position']['z'] = -0.2  # m
+    pipe_cpmid['exit_position']['phi'] = np.nan  # Unknown, sorry
     pipe_cpmid['valve'][0]['identifier'] = '???'  # Seems to have been removed. Not on schematic.
     # pipe_cpmid['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
     i += 1
@@ -285,7 +285,7 @@ def setup_gas_injection_hardware_description_d3d(ods, pulse=133221):
 
 
 @machine_mapping_function(__all__)
-def setup_pf_active_hardware_description_d3d(ods):
+def pf_active_hardware(ods):
     r"""
     Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
     :param ods: ODS instance
@@ -330,7 +330,7 @@ def setup_pf_active_hardware_description_d3d(ods):
 
 
 @machine_mapping_function(__all__)
-def setup_interferometer_hardware_description_d3d(ods, pulse=133221):
+def interferometer_hardware(ods, pulse=133221):
     """
     Writes DIII-D CO2 interferometer chord locations into ODS.
 
@@ -364,7 +364,7 @@ def setup_interferometer_hardware_description_d3d(ods, pulse=133221):
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
-        ch['line_of_sight.third_point'] = copy.copy(ch['line_of_sight.first_point'])
+        ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
 
     if pulse < 125406:
         printe(
@@ -375,27 +375,8 @@ def setup_interferometer_hardware_description_d3d(ods, pulse=133221):
     return {}
 
 
-def find_thomson_lens_d3d(pulse, hw_call_sys, hw_revision='blessed'):
-    """Read the Thomson scattering hardware map to figure out which lens each chord looks through"""
-    cal_call = '.ts.{}.header.calib_nums'.format(hw_revision)
-    cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
-    hwi_call = '.{}.hwmapints'.format(hw_call_sys)
-    printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), 'd3d')
-    try:
-        hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
-    except MDSplus.MdsException:
-        printe('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
-        return None
-    else:
-        if len(np.shape(hw_ints)) < 2:
-            # Contingency needed for cases where all view-chords are taken off of divertor laser and reassigned to core
-            hw_ints = hw_ints.reshape(1, -1)
-        hw_lens = hw_ints[:, 2]
-        return hw_lens
-
-
 @machine_mapping_function(__all__)
-def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revision='BLESSED'):
+def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     """
     Gathers DIII-D Thomson measurement locations from MDSplus and loads them into OMAS
 
@@ -406,16 +387,35 @@ def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revisio
         Information or instructions for follow up in central hardware description setup
     """
     import MDSplus
-    printd('Setting up DIII-D Thomson locations...', 'd3d')
+
+    def _find_thomson_lens(pulse, hw_call_sys, revision='BLESSED'):
+        """Read the Thomson scattering hardware map to figure out which lens each chord looks through"""
+        cal_call = f'.ts.{revision}.header.calib_nums'
+        cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
+        hwi_call = f'.{hw_call_sys}.hwmapints'
+        printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), topic='mapping')
+        try:
+            hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
+        except MDSplus.MdsException:
+            printe('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
+            return None
+        else:
+            if len(np.shape(hw_ints)) < 2:
+                # Contingency needed for cases where all view-chords are taken off of divertor laser and reassigned to core
+                hw_ints = hw_ints.reshape(1, -1)
+            hw_lens = hw_ints[:, 2]
+            return hw_lens
+
+    printd('Setting up DIII-D Thomson locations...', topic='mapping')
 
     tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
 
-    is_subsys = np.array([np.all([item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']]) for k in list(tsdat.keys())])
+    is_subsys = np.array([all(item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']) for k in list(tsdat.keys())])
     subsystems = np.array(list(tsdat.keys()))[is_subsys]
 
     i = 0
     for sub in subsystems:
-        lenses = find_thomson_lens_d3d(pulse, sub, revision)
+        lenses = _find_thomson_lens(pulse, sub, revision)
         try:
             nc = len(tsdat[sub]['R'].data())
         except MDSplus.MdsException:
@@ -431,50 +431,7 @@ def setup_thomson_scattering_hardware_description_d3d(ods, pulse=133221, revisio
 
 
 @machine_mapping_function(__all__)
-def setup_charge_exchange_hardware_description_d3d(ods, pulse=133221, analysis_type='CERQUICK'):
-    """
-    Gathers DIII-D CER measurement locations from MDSplus and loads them into OMAS
-
-    :param analysis_type: string
-        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
-    """
-    printd('Setting up DIII-D CER locations...', 'd3d')
-
-    cerdat = mdstree('d3d', treename='IONS', pulse=pulse)['CER'][analysis_type]
-
-    subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
-
-    i = 0
-    for sub in subsystems:
-        try:
-            channels = [k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k]
-        except (TypeError, KeyError):
-            continue
-        for j, channel in enumerate(channels):
-            try:
-                postime = cerdat[sub][channel]['TIME'].data()
-            except Exception:
-                continue
-            inc = 0
-            for pos in ['R', 'Z', 'VIEW_PHI']:
-                posdat = cerdat[sub][channel][pos].data()
-                if postime is not None:
-                    inc = 1
-                    ch = ods['charge_exchange']['channel'][i]
-                    ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=j + 1)
-                    ch['identifier'] = '{}{:02d}'.format(sub[0], j + 1)
-                    chpos = ch['position'][pos.lower().split('_')[-1]]
-                    chpos['time'] = postime / 1000.0  # Convert ms to s
-                    chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
-            i += inc
-    return {}
-
-
-@machine_mapping_function(__all__)
-def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
+def bolometer_hardware(ods, pulse=133221):
     """
     Load DIII-D bolometer chord locations into the ODS
 
@@ -487,59 +444,14 @@ def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
     """
     printd('Setting up DIII-D bolometer locations...', topic='d3d')
 
+    # fmt: off
     if pulse < 91000:
         xangle = (
             np.array(
-                [
-                    292.40,
-                    288.35,
-                    284.30,
-                    280.25,
-                    276.20,
-                    272.15,
-                    268.10,
-                    264.87,
-                    262.27,
-                    259.67,
-                    257.07,
-                    254.47,
-                    251.87,
-                    249.27,
-                    246.67,
-                    243.81,
-                    235.81,
-                    227.81,
-                    219.81,
-                    211.81,
-                    203.81,
-                    195.81,
-                    187.81,
-                    179.80,
-                    211.91,
-                    206.41,
-                    200.91,
-                    195.41,
-                    189.91,
-                    184.41,
-                    178.91,
-                    173.41,
-                    167.91,
-                    162.41,
-                    156.91,
-                    156.30,
-                    149.58,
-                    142.86,
-                    136.14,
-                    129.77,
-                    126.77,
-                    123.77,
-                    120.77,
-                    117.77,
-                    114.77,
-                    111.77,
-                    108.77,
-                    102.25,
-                ]
+                [292.4, 288.35, 284.3, 280.25, 276.2, 272.15, 268.1, 264.87, 262.27, 259.67, 257.07, 254.47, 251.87, 249.27, 246.67, 243.81,
+                 235.81, 227.81, 219.81, 211.81, 203.81, 195.81, 187.81, 179.8, 211.91, 206.41, 200.91, 195.41, 189.91, 184.41, 178.91,
+                 173.41, 167.91, 162.41, 156.91, 156.3, 149.58, 142.86, 136.14, 129.77, 126.77, 123.77, 120.77, 117.77, 114.77, 111.77,
+                 108.77, 102.25]
             )
             * np.pi
             / 180.0
@@ -549,342 +461,67 @@ def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
 
         zxray = (
             np.array(
-                [
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    124.968,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    129.870,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -81.153,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                    -72.009,
-                ]
+                [124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968, 124.968,
+                 124.968, 124.968, 129.87, 129.87, 129.87, 129.87, 129.87, 129.87, 129.87, 129.87, 129.87, -81.153, -81.153, -81.153,
+                 -81.153, -81.153, -81.153, -81.153, -81.153, -81.153, -81.153, -81.153, -72.009, -72.009, -72.009, -72.009, -72.009,
+                 -72.009, -72.009, -72.009, -72.009, -72.009, -72.009, -72.009, -72.009]
             )
             / 100.0
         )  # Converted to m
 
         rxray = (
             np.array(
-                [
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    196.771,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    190.071,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    230.720,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                    232.900,
-                ]
+                [196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771, 196.771,
+                 196.771, 196.771, 190.071, 190.071, 190.071, 190.071, 190.071, 190.071, 190.071, 190.071, 190.071, 230.72, 230.72,
+                 230.72, 230.72, 230.72, 230.72, 230.72, 230.72, 230.72, 230.72, 230.72, 232.9, 232.9, 232.9, 232.9, 232.9, 232.9,
+                 232.9, 232.9, 232.9, 232.9, 232.9, 232.9, 232.9]
             )
             / 100.0
         )  # Converted to m
 
     else:
+        # There is a bigger step before the very last channel. Found in two different sources.
         xangle = (
             np.array(
-                [  # There is a bigger step before the very last channel. Found in two different sources.
-                    269.4,
-                    265.6,
-                    261.9,
-                    258.1,
-                    254.4,
-                    250.9,
-                    247.9,
-                    244.9,
-                    241.9,
-                    238.9,
-                    235.9,
-                    232.9,
-                    228.0,
-                    221.3,
-                    214.5,
-                    208.2,
-                    201.1,
-                    194.0,
-                    187.7,
-                    182.2,
-                    176.7,
-                    171.2,
-                    165.7,
-                    160.2,
-                    213.7,
-                    210.2,
-                    206.7,
-                    203.2,
-                    199.7,
-                    194.4,
-                    187.4,
-                    180.4,
-                    173.4,
-                    166.4,
-                    159.4,
-                    156.0,
-                    149.2,
-                    142.4,
-                    135.8,
-                    129.6,
-                    126.6,
-                    123.6,
-                    120.6,
-                    117.6,
-                    114.6,
-                    111.6,
-                    108.6,
-                    101.9,
-                ]
+                [269.4, 265.6, 261.9, 258.1, 254.4, 250.9, 247.9, 244.9, 241.9, 238.9, 235.9, 232.9, 228.0, 221.3, 214.5, 208.2, 201.1,
+                 194.0, 187.7, 182.2, 176.7, 171.2, 165.7, 160.2, 213.7, 210.2, 206.7, 203.2, 199.7, 194.4, 187.4, 180.4, 173.4, 166.4,
+                 159.4, 156.0, 149.2, 142.4, 135.8, 129.6, 126.6, 123.6, 120.6, 117.6, 114.6, 111.6, 108.6, 101.9]
             )
             * np.pi
             / 180.0
         )  # Converted to rad
 
+        # Angular full width of the view-chord: calculations assume it's a symmetric cone.
         xangle_width = (
             np.array(
-                [
-                    3.082,
-                    3.206,
-                    3.317,
-                    3.414,
-                    3.495,
-                    2.866,
-                    2.901,
-                    2.928,
-                    2.947,
-                    2.957,
-                    2.960,
-                    2.955,
-                    6.497,
-                    6.342,
-                    6.103,
-                    6.331,
-                    6.697,
-                    6.979,
-                    5.510,
-                    5.553,
-                    5.546,
-                    5.488,
-                    5.380,
-                    5.223,
-                    3.281,
-                    3.348,
-                    3.402,
-                    3.444,
-                    3.473,
-                    6.950,
-                    6.911,
-                    6.768,
-                    6.526,
-                    6.188,
-                    5.757,
-                    5.596,
-                    5.978,
-                    6.276,
-                    6.490,
-                    2.979,
-                    2.993,
-                    2.998,
-                    2.995,
-                    2.984,
-                    2.965,
-                    2.938,
-                    2.902,
-                    6.183,
-                ]
+                [3.082, 3.206, 3.317, 3.414, 3.495, 2.866, 2.901, 2.928, 2.947, 2.957, 2.96, 2.955, 6.497, 6.342, 6.103, 6.331, 6.697,
+                 6.979, 5.51, 5.553, 5.546, 5.488, 5.38, 5.223, 3.281, 3.348, 3.402, 3.444, 3.473, 6.95, 6.911, 6.768, 6.526, 6.188,
+                 5.757, 5.596, 5.978, 6.276, 6.49, 2.979, 2.993, 2.998, 2.995, 2.984, 2.965, 2.938, 2.902, 6.183]
             )
             * np.pi
             / 180.0
-        )  # Angular full width of the view-chord: calculations assume it's a symmetric cone.
+        )
 
         zxray = (
             np.array(
-                [
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    72.817,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    82.332,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -77.254,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                    -66.881,
-                ]
+                [72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817, 72.817,
+                 82.332, 82.332, 82.332, 82.332, 82.332, 82.332, 82.332, 82.332, 82.332, -77.254, -77.254, -77.254, -77.254, -77.254,
+                 -77.254, -77.254, -77.254, -77.254, -77.254, -77.254, -66.881, -66.881, -66.881, -66.881, -66.881, -66.881, -66.881,
+                 -66.881, -66.881, -66.881, -66.881, -66.881, -66.881]
             )
             / 100.0
         )  # Converted to m
 
         rxray = (
             np.array(
-                [
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    234.881,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.206,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    231.894,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                    234.932,
-                ]
+                [234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881, 234.881,
+                 234.881, 234.881, 231.206, 231.206, 231.206, 231.206, 231.206, 231.206, 231.206, 231.206, 231.206, 231.894, 231.894,
+                 231.894, 231.894, 231.894, 231.894, 231.894, 231.894, 231.894, 231.894, 231.894, 234.932, 234.932, 234.932, 234.932,
+                 234.932, 234.932, 234.932, 234.932, 234.932, 234.932, 234.932, 234.932, 234.932]
             )
             / 100.0
         )  # Converted to m
+    # fmt: on
 
     line_len = 3  # m  Make this long enough to go past the box for all chords.
 
@@ -908,7 +545,7 @@ def setup_bolometer_hardware_description_d3d(ods, pulse=133221):
 
 
 @machine_mapping_function(__all__)
-def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
+def langmuir_probes_hardware(ods, pulse=176235):
     """
     Load DIII-D Langmuir probe locations into an ODS
 
@@ -923,14 +560,14 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), 'd3d')
+    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='mapping')
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), 'd3d')
+    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='mapping')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -943,7 +580,7 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
                 z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
                 pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
                 label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
-                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), 'd3d')
+                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='mapping')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
@@ -954,29 +591,69 @@ def setup_langmuir_probes_hardware_description_d3d(ods, pulse=176235):
 
 
 @machine_mapping_function(__all__)
-def pf_active_coil_current_data_d3d(ods, pulse=133221, quiet=False):
-    """
-    Load DIII-D poloidal field coil currents
-
-    :param ods: ODS instance
-
-    :param pulse: int
-    """
-    import tqdm
-
-    r18 = range(18)
-    if not quiet:
-        r18 = tqdm.tqdm(r18)
-
-    time = mdsvalue('d3d', 'D3D', pulse, f'ptdata2("PCF1A",{pulse})').dim_of(0)
-    for k in r18:
-        fcid = 'F{}{}'.format((k % 9) + 1, 'AB'[int(k // 9)])
-        ods[f'pf_active.coil[{k}].current.data'] = mdsvalue('d3d', 'D3D', pulse, f'ptdata2("PC{fcid}",{pulse})').data()
-        ods[f'pf_active.coil[{k}].current.time'] = time
+def pf_active_coil_current_data(ods, pulse=133221):
+    ods1 = ODS()
+    inspect.unwrap(pf_active_hardware)(ods1)
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='pf_active.coil',
+            identifier='pf_active.coil.{channel}.element.0.identifier',
+            time='pf_active.coil.{channel}.current.time',
+            data='pf_active.coil.{channel}.current.data',
+            validity=None,
+        )
 
 
 @machine_mapping_function(__all__)
-def setup_magnetics_hardware_description_d3d(ods):
+def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
+    """
+    Gathers DIII-D CER measurement locations from MDSplus and loads them into OMAS
+
+    :param analysis_type: string
+        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
+
+    :return: dict
+        Information or instructions for follow up in central hardware description setup
+    """
+    import MDSplus
+
+    printd('Setting up DIII-D CER locations...', topic='mapping')
+
+    cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
+
+    subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
+
+    i = 0
+    for sub in subsystems:
+        try:
+            channels = [k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k]
+        except (TypeError, KeyError):
+            channels = []
+        for j, channel in enumerate(channels):
+            inc = 0
+            for pos in ['R', 'Z', 'VIEW_PHI']:
+                try:
+                    postime = cerdat[sub][channel]['TIME'].data()
+                except MDSplus.MdsException:
+                    continue
+                posdat = cerdat[sub][channel][pos].data()
+                if postime is not None:
+                    inc = 1
+                    ch = ods['charge_exchange']['channel'][i]
+                    ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=j + 1)
+                    ch['identifier'] = '{}{:02d}'.format(sub[0], j + 1)
+                    chpos = ch['position'][pos.lower().split('_')[-1]]
+                    chpos['time'] = postime / 1000.0  # Convert ms to s
+                    chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
+            i += inc
+    return {}
+
+
+@machine_mapping_function(__all__)
+def magnetics_hardware(ods):
     r"""
     Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
     :param ods: ODS instance
@@ -1113,54 +790,36 @@ def setup_magnetics_hardware_description_d3d(ods):
 @machine_mapping_function(__all__)
 def magnetics_probes_data(ods, pulse=133221):
     ods1 = ODS()
-    inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
-
+    inspect.unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
-        time = None
-        TDIs = []
-        for stage in ['fetch', 'assign']:
-            for k in ods1['magnetics.b_field_pol_probe']:
-                identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier']
-                TDI = f'ptdata2("{identifier}",{pulse})'
-                TDIs.append(TDI)
-                if stage == 'fetch' and time is None:
-                    time = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
-                if stage == 'assign':
-                    if len(tmp[TDI]) > 1:
-                        ods[f'magnetics.b_field_pol_probe.{k}.field.time'] = time / 1000.0
-                        ods[f'magnetics.b_field_pol_probe.{k}.field.data'] = tmp[TDI]
-                        ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = 0
-                    else:
-                        ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
-            if stage == 'fetch':
-                tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='magnetics.b_field_pol_probe',
+            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
+            time='magnetics.b_field_pol_probe.{channel}.field.time',
+            data='magnetics.b_field_pol_probe.{channel}.field.data',
+            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+        )
 
 
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
-    inspect.unwrap(setup_magnetics_hardware_description_d3d)(ods1)
-
+    inspect.unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
-        time = None
-        TDIs = []
-        for stage in ['fetch', 'assign']:
-            for k in ods1['magnetics.flux_loop']:
-                identifier = ods1[f'magnetics.flux_loop.{k}.identifier']
-                TDI = f'ptdata2("{identifier}",{pulse})'
-                TDIs.append(TDI)
-                if stage == 'fetch' and time is None:
-                    time = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
-                if stage == 'assign':
-                    if len(tmp[TDI]) > 1:
-                        ods[f'magnetics.flux_loop.{k}.flux.time'] = time / 1000.0
-                        ods[f'magnetics.flux_loop.{k}.flux.data'] = tmp[TDI]
-                        ods[f'magnetics.flux_loop.{k}.flux.validity'] = 0
-                    else:
-                        ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
-            if stage == 'fetch':
-                tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='magnetics.flux_loop',
+            identifier='magnetics.flux_loop.{channel}.identifier',
+            time='magnetics.flux_loop.{channel}.flux.time',
+            data='magnetics.flux_loop.{channel}.flux.data',
+            validity='magnetics.flux_loop.{channel}.flux.validity',
+        )
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    run_machine_mapping_functions(__all__, globals(), locals())

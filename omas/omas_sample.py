@@ -337,9 +337,9 @@ def magnetics(ods):
     :return: ODS instance with fake magnetics hardware information added
     """
 
-    from .machine_mappings.d3d import setup_magnetics_hardware_description_d3d
+    from .machine_mappings.d3d import magnetics_hardware
 
-    setup_magnetics_hardware_description_d3d(ods)
+    magnetics_hardware(ods)
     ods['magnetics.time'] = [0.0]
     return ods
 

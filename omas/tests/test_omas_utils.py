@@ -108,8 +108,8 @@ class TestOmasUtils(UnittestCaseOmas):
         assert isinstance(struct_dict, dict)
         assert isinstance(struct_dict2, dict)
         assert 'pf_active' in struct_dict2.keys()
-        assert all([item in struct_dict.keys() for item in struct_list])
-        assert all([item in struct_dict2.keys() for item in struct_list2])
+        assert all(item in struct_dict.keys() for item in struct_list)
+        assert all(item in struct_dict2.keys() for item in struct_list2)
         return
 
     def test_omas_info(self):
@@ -121,7 +121,7 @@ class TestOmasUtils(UnittestCaseOmas):
         if get_list[0] == 'pf_active':
             assert isinstance(ods_info_pfa['pf_active.circuit.0.connections.documentation'], str)
         ods_info_list = omas_info(get_list)
-        assert all([item in ods_info_list for item in get_list])
+        assert all(item in ods_info_list for item in get_list)
         return
 
     def test_o2u(self):

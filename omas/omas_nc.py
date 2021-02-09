@@ -30,8 +30,7 @@ def save_omas_nc(ods, filename, **kw):
             dims = []
             data = numpy.asarray(odsf[item])
             std = None
-            tmp = is_uncertain(odsf[item])
-            if numpy.any(numpy.atleast_1d(tmp)):
+            if is_uncertain(odsf[item]):
                 std = std_devs(data)
                 data = nominal_values(data)
             for k in range(len(numpy.asarray(odsf[item]).shape)):

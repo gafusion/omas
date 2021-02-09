@@ -1,0 +1,14 @@
+{
+ "dataset_description.data_entry.machine": {
+  "EVAL": "{machine!r}"
+ },
+ "dataset_description.data_entry.pulse": {
+  "EVAL": "{pulse}"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "VALUE": "pulse"
+ },
+ "dataset_description.data_entry.user": {
+  "ENVIRON": "USER"
+ }
+}

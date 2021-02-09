@@ -68,7 +68,7 @@ class TestOmasPhysics(UnittestCaseOmas):
         assert not diff
 
         ods2 = ods.physics_core_profiles_pressures(update=False)
-        assert all(['press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm')])
+        assert all('press' in item for item in ods2.flat().keys() if not item.endswith('rho_tor_norm'))
         return
 
     def test_core_profiles_currents(self):

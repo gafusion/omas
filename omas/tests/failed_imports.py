@@ -67,6 +67,21 @@ with warnings.catch_warnings():
     except ImportError as _excp:
         failed_OMFIT = _excp
 
+try:
+    import MDSplus
+
+    failed_MDS = False
+
+    try:
+        conn = MDSplus.Connection('atlas.gat.com:8000')
+        failed_D3D_MDS = False
+    except Exception as _excp:
+        failed_D3D_MDS = _excp
+
+except ImportError as _excp:
+    failed_MDS = _excp
+    failed_D3D_MDS = _excp
+
 __all__ = [
     'failed_IMAS',
     'failed_HDC',
@@ -74,6 +89,8 @@ __all__ = [
     'failed_MONGO',
     'failed_OMFIT',
     'failed_UDA',
+    'failed_MDS',
+    'failed_D3D_MDS',
     'not_running_on_iter_cluster',
     'not_running_on_cea_cluster',
 ]

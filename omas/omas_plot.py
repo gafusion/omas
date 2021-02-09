@@ -244,7 +244,7 @@ def gas_filter(label, which_gas):
         if which_gas == 'all':
             include = True
     elif isinstance(which_gas, list):
-        include = any([wg in label for wg in which_gas])
+        include = any(wg in label for wg in which_gas)
     return include
 
 
@@ -512,7 +512,7 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
     stime.on_changed(update)
     for time0 in time:
         axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
-    return {'stime': stime, 'axtime': axtime, 'ax': axs}
+    return {'stime': (stime, axtime), 'ax': axs}
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -2189,7 +2189,7 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                 ax.plot(
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
                     ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
-                    **kw
+                    **kw,
                 )
 
     ax.set_aspect('equal')

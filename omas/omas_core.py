@@ -24,7 +24,6 @@ __all__ = [
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
     'machine_mapping_function', 'run_machine_mapping_functions', 'mdstree', 'mdsvalue',
-    'omas_service', 'omas_service_script',
     'imas_json_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit'
@@ -91,7 +90,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     """
     # force type consistent with data dictionary
     txt = ''
-    if numpy.atleast_1d(is_uncertain(value)).any() or 'data_type' not in info:
+    if is_uncertain(value) or 'data_type' not in info:
         pass
     elif isinstance(value, numpy.ndarray):
         if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
@@ -203,12 +202,12 @@ class ODS(MutableMapping):
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         self._parent = None
-        self._imas_version = imas_version
-        self._cocos = cocos
-        self._cocosio = cocosio
-        self._coordsio = coordsio
-        self._unitsio = unitsio
-        self._dynamic = dynamic
+        self.imas_version = imas_version
+        self.cocos = cocos
+        self.cocosio = cocosio
+        self.coordsio = coordsio
+        self.unitsio = unitsio
+        self.dynamic = dynamic
 
     def homogeneous_time(self, key='', default=True):
         """
@@ -286,7 +285,7 @@ class ODS(MutableMapping):
                                 # squash the multidimensional time arrays if they are all the same
                                 if len(time.shape) > 1:
                                     time = numpy.reshape(time, (-1, time.shape[-1]))
-                                    if all([numpy.allclose(time[0], t) for t in time[1:]]):
+                                    if all(numpy.allclose(time[0], t) for t in time[1:]):
                                         time = time[0]
                             times[item] = time
                         except ValueError as _excp:
@@ -305,13 +304,13 @@ class ODS(MutableMapping):
                         return None
 
                     # We crossed [:] or something and picked up a 2D time array
-                    elif any([len(numpy.asarray(time).shape) > 1 for time in times_values]):
+                    elif any(len(numpy.asarray(time).shape) > 1 for time in times_values):
                         # Make a 1D reference time0 that can be comapred against other time arrays
                         time0 = list(times.values())[0]
                         # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
                         while len(time0.shape) > 1:
                             time0 = numpy.take(time0, 0, axis=0)
-                        if all([time.size == time0.size for time in times.values()]):
+                        if all(time.size == time0.size for time in times.values()):
                             for time in times.values():
                                 # Make sure all time arrays are close to the time0 we identified
                                 assert abs(time - time0).max() < 1e-7
@@ -389,7 +388,7 @@ class ODS(MutableMapping):
 
             # identify time-dependent data
             info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
-            if 'coordinates' in info and any([k.endswith('.time') for k in info['coordinates']]):
+            if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
 
                 # time-dependent arrays
                 if not isinstance(self.getraw(item), ODS):
@@ -415,15 +414,13 @@ class ODS(MutableMapping):
 
     @property
     def parent(self):
-        if not hasattr(self, '_parent'):
+        try:
+            return self._parent()
+        except TypeError:
+            return None
+        except AttributeError:
             self._parent = None
             return None
-        if self._parent is None:
-            return None
-        elif self._parent() is None:
-            return None
-        else:
-            return self._parent()
 
     @parent.setter
     def parent(self, value):
@@ -434,6 +431,9 @@ class ODS(MutableMapping):
 
     @property
     def location(self):
+        '''
+        Property which returns instance of parent ODS
+        '''
         parent = self.parent
         if isinstance(parent, ODC):
             return ''
@@ -460,7 +460,22 @@ class ODS(MutableMapping):
                 return str(loc)
 
     @property
+    def top(self):
+        '''
+        Property which returns instance of top level ODS
+        '''
+        top = self
+        parent = self.parent
+        while parent is not None:
+            top = parent
+            parent = parent.parent
+        return top
+
+    @property
     def structure(self, location):
+        '''
+        Property which returns structure of current ODS
+        '''
         return imas_structure(self.imas_version, self.location)
 
     @property
@@ -472,17 +487,17 @@ class ODS(MutableMapping):
         """
         if not hasattr(self, '_imas_version'):
             self._imas_version = omas_rcparams['default_imas_version']
+        top = self.top
+        if top._imas_version is None:
+            top._imas_version = omas_rcparams['default_imas_version']
+        self._imas_version = top._imas_version
         return self._imas_version
 
     @imas_version.setter
     def imas_version(self, imas_version_value):
-        self._imas_version = imas_version_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                if 'code.parameters' in self.getraw(item).location:
-                    continue
-                else:
-                    self.getraw(item).imas_version = imas_version_value
+        if imas_version_value is None:
+            imas_version_value = omas_rcparams['default_imas_version']
+        self.top._imas_version = imas_version_value
 
     @property
     def consistency_check(self):
@@ -599,100 +614,92 @@ class ODS(MutableMapping):
     def cocos(self):
         """
         property that tells in what COCOS format the data is stored internally of the ODS
-        (NOTE: this parameter can only be set when the object is created)
-
-        :return: cocos value
         """
         if not hasattr(self, '_cocos'):
             self._cocos = omas_rcparams['cocos']
+        top = self.top
+        if top._cocos is None:
+            top._cocos = omas_rcparams['cocos']
+        self._cocos = top._cocos
         return self._cocos
 
     @cocos.setter
     def cocos(self, cocos_value):
-        raise AttributeError('cocos parameter is readonly!')
+        if cocos_value is None:
+            cocos_value = omas_rcparams['cocos']
+        self.top._cocos = cocos_value
 
     @property
     def cocosio(self):
         """
         property that tells in what COCOS format the data will be input/output
-
-        :return: cocosio value
         """
-        if not hasattr(self, '_cocosio') or self._cocosio is None:
-            self.cocosio = None
+        if not hasattr(self, '_cocosio'):
+            self._cocosio = omas_rcparams['cocos']
+        top = self.top
+        if top._cocosio is None:
+            top._cocosio = omas_rcparams['cocos']
+        self._cocosio = top._cocosio
         return self._cocosio
 
     @cocosio.setter
     def cocosio(self, cocosio_value):
         if cocosio_value is None:
-            cocosio_value = omas_rcparams['cocos']  # default value for cocosio
-        self._cocosio = cocosio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).cocosio = cocosio_value
+            cocosio_value = omas_rcparams['cocos']
+        self.top._cocosio = cocosio_value
 
     @property
     def unitsio(self):
         """
         property that if data should be returned with units or not
-
-        :return: unitsio value
         """
-        if not hasattr(self, '_unitsio') or self._unitsio is None:
-            self.unitsio = None
+        if not hasattr(self, '_unitsio'):
+            self._unitsio = {}
+        top = self.top
+        if top._unitsio is None:
+            top._unitsio = {}
+        self._unitsio = top._unitsio
         return self._unitsio
 
     @unitsio.setter
     def unitsio(self, unitsio_value):
         if unitsio_value is None:
-            unitsio_value = {}  # default value for unitsio
-        self._unitsio = unitsio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).unitsio = unitsio_value
+            unitsio_value = {}
+        self.top._unitsio = unitsio_value
 
     @property
     def coordsio(self):
         """
         property that tells in what COCOS format the data will be input/output
-
-        :return: coordsio value
         """
-        if not hasattr(self, '_coordsio') or self._coordsio is None:
-            self.coordsio = None
+        if not hasattr(self, '_coordsio'):
+            self._coordsio = {}
+        top = self.top
+        if top._coordsio is None:
+            top._coordsio = {}
+        self._coordsio = top._coordsio
         return self._coordsio
 
     @coordsio.setter
     def coordsio(self, coordsio_value):
         if coordsio_value is None:
-            coordsio_value = (None, {})  # default value for coordsio
-        elif not isinstance(coordsio_value, (list, tuple)):
-            coordsio_value = (self, coordsio_value)
-        self._coordsio = coordsio_value
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item).coordsio = coordsio_value
+            coordsio_value = {}
+        self.top._coordsio = coordsio_value
 
     @property
     def dynamic(self):
         """
         property that point to dynamic_ODS object
-
-        :return: dynamic_ODS object
         """
-        # pyro_cases[self._dynamic.idc].active
         if not hasattr(self, '_dynamic'):
-            self._dynamic = None
-        if self._dynamic is not None and self._dynamic.idc not in pyro_cases:
-            self._dynamic = None
+            self._coordsio = None
+        top = self.top
+        self._dynamic = top._dynamic
         return self._dynamic
 
     @dynamic.setter
-    def dynamic(self, dynamic):
-        self._dynamic = dynamic
-        for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
-                self.getraw(item)._dynamic = dynamic
+    def dynamic(self, dynamic_value):
+        self.top._dynamic = dynamic_value
 
     @property
     def ulocation(self):
@@ -886,7 +893,8 @@ class ODS(MutableMapping):
                         value = value.to(info['units']).magnitude
 
                 # coordinates interpolation
-                ods_coordinates, input_coordinates = self.coordsio
+                ods_coordinates = self.top
+                input_coordinates = self.coordsio
                 if input_coordinates:
                     all_coordinates = []
                     coordinates = []
@@ -901,7 +909,7 @@ class ODS(MutableMapping):
                                 ods_coordinates[coordinate] = input_coordinates.__getitem__(coordinate, False)
 
                         # if all coordinates information is present
-                        if all([coord in input_coordinates and coord in ods_coordinates for coord in coordinates]):
+                        if all(coord in input_coordinates and coord in ods_coordinates for coord in coordinates):
                             # if there is any coordinate that does not match
                             if any(
                                 [
@@ -1137,7 +1145,7 @@ class ODS(MutableMapping):
             shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
             if not len(shapes):
                 return numpy.asarray(data0)
-            if not all([len(shape) == len(shapes[0]) for shape in shapes[1:]]):
+            if not all(len(shape) == len(shapes[0]) for shape in shapes[1:]):
                 return data0
 
             # find maximum shape
@@ -1154,7 +1162,7 @@ class ODS(MutableMapping):
             dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
             if not len(dtypes):
                 return numpy.asarray(data0)
-            if not all([dtype.char == dtypes[0].char for dtype in dtypes[1:]]):
+            if not all(dtype.char == dtypes[0].char for dtype in dtypes[1:]):
                 return data0
             dtype = dtypes[0]
 
@@ -1238,7 +1246,8 @@ class ODS(MutableMapping):
                 info = omas_info_node(ulocation, imas_version=self.imas_version)
 
                 # coordinates interpolation
-                ods_coordinates, output_coordinates = self.coordsio
+                ods_coordinates = self.top
+                output_coordinates = self.coordsio
                 if cocos_and_coords and output_coordinates:
                     all_coordinates = []
                     coordinates = []
@@ -1247,7 +1256,7 @@ class ODS(MutableMapping):
                         coordinates = list(filter(lambda coord: not coord.startswith('1...'), all_coordinates))
                     if len(coordinates):
                         # if all coordinates information is present
-                        if all([coord in output_coordinates and coord in ods_coordinates for coord in coordinates]):
+                        if all(coord in output_coordinates and coord in ods_coordinates for coord in coordinates):
                             # if there is any coordinate that does not match
                             if any(
                                 [
@@ -1280,7 +1289,7 @@ class ODS(MutableMapping):
                                         value,
                                     )
                                 except TypeError:
-                                    if numpy.atleast_1d(is_uncertain(value)).any():
+                                    if is_uncertain(value):
                                         v = omas_interp1d(
                                             output_coordinates.__getitem__(coordinate, None),
                                             ods_coordinates.__getitem__(coordinate, None),
@@ -1325,20 +1334,24 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=False, **kw):
         """
         Traverse the ods and return paths to its leaves
 
         :param return_empty_leaves: if False only return paths to leaves that have data
                                     if True also return paths to empty leaves
 
+        :param traverse_code_parameters: traverse code parameters
+
         :param include_structures: include paths leading to the leaves
+
+        :param dynamic: traverse paths that are not loaded in a dynamic ODS
 
         :return: list of paths that have data
         """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
-        for kid in self.keys():
+        for kid in self.keys(dynamic=dynamic):
             if isinstance(self.getraw(kid), ODS):
                 if include_structures:
                     paths.append(path + [kid])
@@ -1346,6 +1359,7 @@ class ODS(MutableMapping):
                     return_empty_leaves=return_empty_leaves,
                     traverse_code_parameters=traverse_code_parameters,
                     include_structures=include_structures,
+                    dynamic=dynamic,
                     paths=paths,
                     path=path + [kid],
                 )
@@ -1355,7 +1369,7 @@ class ODS(MutableMapping):
                 self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
-        if not len(self.keys()) and return_empty_leaves:
+        if not len(self.keys(dynamic=dynamic)) and return_empty_leaves:
             paths.append(path)
         return paths
 
@@ -1525,7 +1539,7 @@ class ODS(MutableMapping):
         for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
                 # we do not want to carry with us this information
-                if item in ['_cocosio', '_coordsio', '_unitsio', '_parent']:
+                if item in ['_cocosio', '_coordsio', '_unitsio', '_parent', '_dynamic']:
                     state[item] = None
                 else:
                     state[item] = self.__dict__[item]
@@ -1533,6 +1547,8 @@ class ODS(MutableMapping):
 
     def __setstate__(self, state):
         self.__dict__.update(state)
+        for item in omas_ods_attrs:
+            self.__dict__.setdefault(item, None)
         if isinstance(self.omas_data, list):
             for value in self.omas_data:
                 if isinstance(value, ODS):
@@ -1583,14 +1599,15 @@ class ODS(MutableMapping):
 
     def copy_attrs_from(self, ods):
         """
-        copy omas_ods_attrs ['_consistency_check','imas_version','location','structure','_cocos','_cocosio','_coordsio','_unitsio','_dynamic'] attributes from input ods
+        copy omas_ods_attrs attributes from input ods
 
         :param ods: input ods
 
         :return: self
         """
         for item in omas_ods_attrs:
-            setattr(self, item, getattr(ods, item, None))
+            if item not in ['_parent', '_dynamic']:
+                setattr(self, item, getattr(ods, item, None))
         return self
 
     def prune(self):
@@ -1992,7 +2009,6 @@ class ODS(MutableMapping):
 
         :return: ODS with loaded data
         """
-        remote = kw.pop('remote', False)
         # manage consistency_check logic
         if 'consistency_check' in kw:
             consistency_check = kw.pop('consistency_check')
@@ -2012,7 +2028,20 @@ class ODS(MutableMapping):
             # apply consistency checks
             if consistency_check != self.consistency_check:
                 self.consistency_check = consistency_check
-            self.dynamic = dynamic_ODS_wrapper(ext, remote, *args, **kw)
+
+            if ext == 'nc':
+                from omas.omas_nc import dynamic_omas_nc
+
+                self.dynamic = dynamic_omas_nc(*args, **kw)
+            elif ext == 'imas':
+                from omas.omas_imas import dynamic_omas_imas
+
+                self.dynamic = dynamic_omas_imas(*args, **kw)
+            elif ext == 'machine':
+                from omas.omas_machine import dynamic_omas_machine
+
+                self.dynamic = dynamic_omas_machine(*args, **kw)
+
             self.dynamic.open()
             return self.dynamic
         else:
@@ -2276,140 +2305,6 @@ class ODC(ODS):
             kw['consistency_check'] = True
 
         return ODS.load(self, *args, **kw)
-
-
-class dynamic_ODS_wrapper:
-    def __init__(self, ext, remote, *args, **kw):
-        r"""
-        :param ext: format of the dynamic load
-
-        :param remote: False for local dynamic data access
-                       integer with the port number for remote data access on localhost
-                       string with server and port number in the format `server:port`
-
-        :param \*args: arguments passed to dynamic load function
-
-        :param \**kw: keyword arguments passed to dynamic load function
-        """
-        self.ext = ext
-        self.remote = remote
-        if remote:
-            if isinstance(remote, int):
-                remote = 'PYRO:dynamic_ODS_factory@localhost:%d' % remote
-            factory = Pyro5.api.Proxy(remote)
-        else:
-            factory = dynamic_ODS_factory()
-        self.factory = factory.initialize(self.idc, ext, *args, **kw)
-        self.keys_cache = {}
-        self.contains_cache = {}
-
-    @property
-    def idc(self):
-        return id(self)
-
-    def open(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.open(self.idc, *args, **kw)
-
-    def close(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.close(self.idc, *args, **kw)
-
-    def __enter__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.enter(self.idc, *args, **kw)
-
-    def __exit__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        return self.factory.exit(self.idc, *args, **kw)
-
-    def keys(self, location, *args, **kw):
-        if location not in self.keys_cache:
-            if self.remote:
-                self.factory._pyroClaimOwnership()
-            self.keys_cache[location] = self.factory.keys(self.idc, location, *args, **kw)
-        return self.keys_cache[location]
-
-    def __contains__(self, location, *args, **kw):
-        if location not in self.contains_cache:
-            if self.remote:
-                self.factory._pyroClaimOwnership()
-            self.contains_cache[location] = self.factory.__contains__(self.idc, location, *args, **kw)
-        return self.contains_cache[location]
-
-    def __getitem__(self, *args, **kw):
-        if self.remote:
-            self.factory._pyroClaimOwnership()
-        if self.remote:
-            tmp = self.factory.__getitem__(self.idc, self.remote, *args, **kw)
-            tmp = base64.b64decode(tmp['data'])
-            return pickle.loads(tmp)
-        else:
-            return self.factory.__getitem__(self.idc, self.remote, *args, **kw)
-
-
-pyro_cases = {}
-
-
-@Pyro5.api.expose
-class dynamic_ODS_factory:
-    """
-    Class file that serves the dynamic data
-    pyro_cases holds the instances of dynamic_omas objects
-    organized according an ID connection (idc) that is passed
-    to all methods of this class. Dynamic serving of data
-    through this class is needed to provide the same interface
-    whether the data is local or is accessed remotely via Pyro.
-    """
-
-    def initialize(self, idc, ext, *args, **kw):
-        if ext == 'nc':
-            from omas.omas_nc import dynamic_omas_nc
-
-            tmp = dynamic_omas_nc(*args, **kw)
-        elif ext == 'imas':
-            from omas.omas_imas import dynamic_omas_imas
-
-            tmp = dynamic_omas_imas(*args, **kw)
-        elif ext == 'machine':
-            from omas.omas_machine import dynamic_omas_machine
-
-            tmp = dynamic_omas_machine(*args, **kw)
-        if idc not in pyro_cases:
-            pyro_cases[idc] = tmp
-        return self
-
-    def open(self, idc, *args, **kw):
-        return pyro_cases[idc].open(*args, **kw)
-
-    def close(self, idc, *args, **kw):
-        tmp = pyro_cases[idc].close(*args, **kw)
-        del pyro_cases[idc]
-        return tmp
-
-    def enter(self, idc, *args, **kw):
-        return pyro_cases[idc].__enter__(*args, **kw)
-
-    def exit(self, idc, *args, **kw):
-        tmp = pyro_cases[idc].__exit__(*args, **kw)
-        del pyro_cases[idc]
-        return tmp
-
-    def keys(self, idc, *args, **kw):
-        return numpy.atleast_1d(pyro_cases[idc].keys(*args, **kw)).tolist()
-
-    def __contains__(self, idc, *args, **kw):
-        return pyro_cases[idc].__contains__(*args, **kw)
-
-    def __getitem__(self, idc, remote, *args, **kw):
-        if remote:
-            return pickle.dumps(pyro_cases[idc].__getitem__(*args, **kw), protocol=omas_rcparams['pickle_protocol'])
-        else:
-            return pyro_cases[idc].__getitem__(*args, **kw)
 
 
 class dynamic_ODS:
@@ -2801,6 +2696,5 @@ from .omas_ds import *
 from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
-from .omas_service import *
 from .omas_machine import *
 from . import omas_structure
