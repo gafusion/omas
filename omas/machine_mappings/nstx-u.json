@@ -4,12 +4,26 @@
   "_common",
   "_efit"
  ],
- "__mdsserver__": "127.0.0.1:50269",
+ "__mdsserver__": "skylark.pppl.gov:8501",
  "__options__": {
   "EFIT_tree": "EFIT01"
  },
+ "equilibrium.time": {
+  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.time": {
+  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:": {
   "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.outline.r": {
+  "PYTHON": "MDS_gEQDSK_bbbs_nstx(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.outline.z": {
+  "PYTHON": "MDS_gEQDSK_bbbs_nstx(ods, {pulse}, {EFIT_tree!r})"
  },
  "equilibrium.time_slice.:.global_quantities.psi_axis": {
   "COCOSIO": 11,
@@ -25,5 +39,27 @@
  },
  "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
   "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z",
+  "treename": "{EFIT_tree}"
+ },
+  "wall.description_2d.:": {
+  "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.unit.:": {
+  "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.r": {
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RLIM",
+  "treename": "{EFIT_tree}"
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.z": {
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZLIM",
+  "treename": "{EFIT_tree}"
  }
 }

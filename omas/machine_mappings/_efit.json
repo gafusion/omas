@@ -15,6 +15,10 @@
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.time": {
+  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:": {
   "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
   "treename": "{EFIT_tree}"

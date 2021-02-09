@@ -18,7 +18,6 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
     :return: integer cocos convention
     '''
     if (machine, pulse, EFIT_tree) in _MDS_gEQDSK_COCOS_identify_cache:
-        print('cache hit')
         return _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
     res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
