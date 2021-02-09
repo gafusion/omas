@@ -169,10 +169,10 @@ _cocos_signals['core_profiles.vacuum_toroidal_field.b0']='TOR'                  
 _cocos_signals['core_profiles.profiles_1d.:.ion.:.state.:.velocity.diamagnetic']='TOR'                                    # 1.875000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.neutral.:.state.:.velocity.diamagnetic']='TOR'                                # 1.875000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.ion.:.velocity.diamagnetic']='TOR'                                            # 1.833333 # velocity  [m.s^-1]
-_cocos_signals['core_profiles.profiles_1d.:.rotation_frequency_tor_sonic']='TOR'                                          # 2.000000 # _tor  [rad.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.neutral.:.velocity.diamagnetic']='TOR'                                        # 1.833333 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.electrons.velocity.diamagnetic']='TOR'                                        # 1.800000 # velocity  [m.s^-1]
 _cocos_signals['core_profiles.profiles_1d.:.e_field.diamagnetic']='TOR'                                                   # 1.750000 # e_field  [V.m^-1]
+_cocos_signals['core_profiles.profiles_1d.:.rotation_frequency_tor_sonic']='TOR'                                          # 0.000000 # 
 
 # CORE_SOURCES
 _cocos_signals['core_sources.source.:.global_quantities.:.current_parallel']='TOR'                                         # 3.000000 # current  parallel  [A]
@@ -183,6 +183,7 @@ _cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.parallel']='?
 _cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.poloidal']='?'                                   #[ADD?]# 2.875000 # momentum  poloidal  [kg.m^-1.s^-2]
 _cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal']='?'                                   #[ADD?]# 2.875000 # momentum  toroidal  [kg.m^-1.s^-2]
 _cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.explicit_part']='?'          #[ADD?]# 2.666667 # momentum  toroidal  [kg.m^2.s^-2]
+_cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.implicit_part']='?'          #[ADD?]# 2.666667 # momentum  toroidal  [s^-1]
 _cocos_signals['core_sources.source.:.profiles_1d.:.current_parallel_inside']='TOR'                                        # 2.000000 # current  [A]
 _cocos_signals['core_sources.source.:.profiles_1d.:.grid.psi']='PSI'                                                       # 2.000000 # psi  [Wb]
 _cocos_signals['core_sources.source.:.profiles_1d.:.grid.psi_boundary']='PSI'                                              # 2.000000 # psi  [Wb]
@@ -191,7 +192,6 @@ _cocos_signals['core_sources.source.:.profiles_1d.:.momentum_tor_j_cross_b_field
 _cocos_signals['core_sources.source.:.profiles_1d.:.torque_tor_inside']='TOR'                                              # 2.000000 # torque  [kg.m^2.s^-2]
 _cocos_signals['core_sources.vacuum_toroidal_field.b0']='TOR'                                                              # 2.000000 # b0  [T]
 _cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.diamagnetic']='?'                                #[ADD?]# 1.875000 # momentum  [kg.m^-1.s^-2]
-_cocos_signals['core_sources.source.:.profiles_1d.:.ion.:.momentum.toroidal_decomposed.implicit_part']='?'          #[ADD?]# 1.666667 # momentum  toroidal
 
 # CORE_TRANSPORT
 _cocos_signals['core_transport.model.:.profiles_1d.:.grid_d.psi']='PSI'                                                         # 2.000000 # psi  [Wb]
@@ -754,6 +754,8 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate3.coefficients_real']='?'                #[ADD?]# 1.375000 # toroidal  [T.m]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate3.imaginary']='?'                        #[ADD?]# 1.375000 # toroidal  [T.m]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.a_field_perturbed.coordinate3.real']='?'                             #[ADD?]# 1.375000 # toroidal  [T.m]
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.imaginary']='?'                          #[ADD?]# 1.375000 # toroidal  [s^-1]
+_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.real']='?'                               #[ADD?]# 1.375000 # toroidal  [s^-1]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate1.coefficients_imaginary']='?'           #[ADD?]# 1.375000 # toroidal  [T.m]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate1.coefficients_real']='?'                #[ADD?]# 1.375000 # toroidal  [T.m]
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.a_field_perturbed.coordinate1.imaginary']='?'                        #[ADD?]# 1.375000 # toroidal  [T.m]
@@ -810,8 +812,6 @@ _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.coordinate_system
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim1']='?'                                                      #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.dim2']='?'                                                      #[ADD?]# 0.428571 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.vacuum.grid.volume_element']='?'                                            #[ADD?]# 0.428571 # toroidal
-_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.imaginary']='?'                          #[ADD?]# 0.375000 # toroidal
-_cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.alfven_frequency_spectrum.:.real']='?'                               #[ADD?]# 0.375000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.dim1']='?'                                    #[ADD?]# 0.375000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.dim2']='?'                                    #[ADD?]# 0.375000 # toroidal
 _cocos_signals['mhd_linear.time_slice.:.toroidal_mode.:.plasma.coordinate_system.grid.volume_element']='?'                          #[ADD?]# 0.375000 # toroidal
