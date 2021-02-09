@@ -214,7 +214,7 @@ _user_machine_mappings = {}
 _python_tdi_namespace = {}
 
 
-def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False):
+def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False):
     '''
     Function to load the json mapping files (local or remote)
     Allows for merging external mapping rules defined by users.
@@ -223,6 +223,13 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     :param machine: machine for which to load the mapping files
 
     :param branch: GitHub branch from which to load the machine mapping information
+
+    :param user_machine_mappings: Dictionary of mappings that users can pass to this function to temporarily use their mappings
+                                  (useful for development and testinig purposes)
+
+    :param return_raw_mappings: Return mappings without following __include__ statements nor resoliving `eval2TDI` directives
+
+    :param raise_errors: raise errors or simply print warnings if something isn't right
 
     :return: dictionary with mapping transformations
     '''
@@ -281,6 +288,8 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             mappings.pop('__user_machine_mappings__')
             return mappings
 
+        # ============= below this line we process the raw mappings =============
+
         mappings['__filename__'] = filename
         mappings['__branch__'] = branch
 
@@ -297,8 +306,12 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                     mappings['__cocos_rules__'][item]['TDI'] = eval(
                         mappings['__cocos_rules__'][item]['eval2TDI'].replace('\\', '\\\\'), python_tdi_namespace(branch)
                     )
-                except:
-                    print(mappings['__cocos_rules__'][item]['eval2TDI'])
+                except Exception as _excp:
+                    text = f"Error evaluating eval2TDI in ['__cocos_rules__'][{item!r}]: {mappings['__cocos_rules__'][item]['eval2TDI']}:\n{_excp!r}"
+                    if raise_errors:
+                        raise _excp.__class__(text)
+                    else:
+                        printe(text)
 
         # generate TDI and sanity check mappings
         for location in mappings:
@@ -318,7 +331,11 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                     if coordinate == '1...N':
                         continue
                     elif coordinate not in mappings:
-                        raise ValueError(f'missing coordinate {coordinate} for {location}')
+                        text = f'Missing coordinate {coordinate} for {location}'
+                        if raise_errors:
+                            raise ValueError(text)
+                        else:
+                            printe(text)
 
             # add cocos transformation info
             has_COCOS = o2u(location) in cocos_signals and cocos_signals[o2u(location)] is not None
@@ -332,9 +349,17 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                                     mappings[location]['COCOSIO_' + cocos_exp] = mappings['__cocos_rules__'][cocos_rule][cocos_exp]
                                     cocos_defined = True
                 if not cocos_defined:
-                    raise ValueError(f'{location} must have COCOS specified')
+                    text = f'{location} must have COCOS specified'
+                    if raise_errors:
+                        raise ValueError(text)
+                    else:
+                        printe(text)
             if 'COCOSIO' in mappings[location] and not has_COCOS:
-                raise ValueError(f'{location} should not have COCOS specified, or COCOS definition should be added to omas_cocos file')
+                text = f'{location} should not have COCOS specified, or COCOS definition should be added to omas_cocos file'
+                if raise_errors:
+                    raise ValueError(text)
+                else:
+                    printe(text)
 
         # cache
         _machine_mappings[idm] = mappings
