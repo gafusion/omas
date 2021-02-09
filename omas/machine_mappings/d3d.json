@@ -70,12 +70,16 @@
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "core_profiles.profiles_1d.:.electrons.density_thermal": {
-  "TDI": "\\{PROFIILES_tree}::TOP.PROFILES.EDENSFIT",
-  "treename": "{PROFIILES_tree}"
+  "TDI": "\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT",
+  "treename": "{PROFILES_tree}"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature": {
+  "TDI": "\\{PROFILES_tree}::TOP.PROFILES.ETEMPFIT",
+  "treename": "{PROFILES_tree}"
  },
  "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
-  "TDI": "dim_of(\\{PROFIILES_tree}::TOP.PROFILES.EDENSFIT,0)",
-  "treename": "{PROFIILES_tree}"
+  "eval2TDI": "py2tdi(tile,'dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,0)','size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)')",
+  "treename": "{PROFILES_tree}"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
