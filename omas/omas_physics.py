@@ -408,7 +408,7 @@ def summary_taue(ods, update=True, PRINTFLAG=False):
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'p_aux', 'aspect', 'isotope_factor', 'tau_e']:
+            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'heating_power', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
             tau_e_scaling.append(tau_e)
             tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / heating_power)
@@ -478,7 +478,7 @@ def summary_heating_power(ods, update=True):
     for key, value in power_dict.items():
         power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
         if numpy.sum(value) > 0:
-            if key is 'total_heating':
+            if 'total_heating' in key:
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
             elif key is 'fusion':
