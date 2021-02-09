@@ -37,7 +37,18 @@ with ods.open('machine', 'd3d', 168830):
     pyplot.ylabel('Field [T]')
 pyplot.show()
 
-# generate a gEQDSK file from experimental data
+# generate a D3D gEQDSK file from experimental data
+pyplot.figure()
 ods = ODS()
 with ods.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
     gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=1.1)
+gEQDSK.plot()
+pyplot.show()
+
+# generate a NSTX gEQDSK file from experimental data
+pyplot.figure()
+ods = ODS()
+with ods.open('machine', 'nstx-u', 139047, options={'EFIT_tree': 'EFIT01'}):
+    gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=.5)
+gEQDSK.plot()
+pyplot.show()
