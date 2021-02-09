@@ -16,6 +16,7 @@ __all__ = [
     'run_machine_mapping_functions',
     'mdstree',
     'mdsvalue',
+    'reload_machine_mappings',
 ]
 
 machine_expression_types = ['VALUE', 'EVAL', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
@@ -339,6 +340,14 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         _machine_mappings[idm] = mappings
 
     return _machine_mappings[idm]
+
+
+def reload_machine_mappings():
+    '''
+    Flush internal caches of machine mappings which will force the mapping files to be re-read when they are first accessed
+    '''
+    for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict]:
+        cache.clear()
 
 
 # ===================
