@@ -512,7 +512,7 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
     stime.on_changed(update)
     for time0 in time:
         axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
-    return {'stime': stime, 'axtime': axtime, 'ax': axs}
+    return {'stime': (stime, axtime), 'ax': axs}
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
