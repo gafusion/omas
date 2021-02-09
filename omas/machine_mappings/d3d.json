@@ -1,11 +1,13 @@
 {
- "__mdsserver__": "atlas.gat.com:8000",
+ "__cocos_rules__": {},
  "__include__": [
   "_common",
   "_efit"
  ],
+ "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
   "EFIT_tree": "EFIT01",
+  "PROFILES_tree": "ZIPFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
   "revision": "BLESSED"
@@ -66,6 +68,14 @@
  },
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "TDI": "\\{PROFIILES_tree}::TOP.PROFILES.EDENSFIT",
+  "treename": "{PROFIILES_tree}"
+ },
+ "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
+  "TDI": "dim_of(\\{PROFIILES_tree}::TOP.PROFILES.EDENSFIT,0)",
+  "treename": "{PROFIILES_tree}"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
