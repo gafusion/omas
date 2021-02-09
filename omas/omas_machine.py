@@ -324,6 +324,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                 mappings[location]['TDI'] = eval(mappings[location]['eval2TDI'].replace('\\', '\\\\'), python_tdi_namespace(branch))
 
             # make sure required coordinates info are present in the mapping
+            # this COORDINATES info is also used later to assing data in the ODS
             info = omas_info_node(location)
             if 'coordinates' in info:
                 mappings[location]['COORDINATES'] = list(map(i2o, info['coordinates']))
@@ -459,6 +460,9 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     :return: dictionary with updated raw mappings
     '''
     ulocation = l2u(p2l(location))
+    value = copy.copy(value)
+    if 'COORDINATES' in value:
+        del value['COORDINATES']
     if cocosio and ulocation in cocos_signals and cocos_signals[ulocation] is not None:
         assert isinstance(cocosio, int)
         value['COCOSIO'] = cocosio
