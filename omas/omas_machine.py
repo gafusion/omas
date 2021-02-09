@@ -561,6 +561,13 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     '''
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
     os.environ['OMAS_DEBUG_TOPIC'] = 'mapping'
+
+    # call machine mapping to make sure the json file is properly formatted
+    machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
+    print(f'Sanity check of `{machine}` mapping files: ... ', end='')
+    machine_mappings(machine,'',raise_errors=True)
+    print('OK')
+
     try:
         from pprint import pprint
 
