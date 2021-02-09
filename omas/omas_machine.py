@@ -592,7 +592,7 @@ def mds_machine_to_server_mapping(server, treename):
     '''
     try:
         import omfit_classes.omfit_mds
-    except (ImportError, ModuleNotFound):
+    except (ImportError, ModuleNotFoundError):
         return server.format(**os.environ)
     else:
         server0 = omfit_classes.omfit_mds.translate_MDSserver(server, treename)
