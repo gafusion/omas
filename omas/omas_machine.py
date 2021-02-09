@@ -369,9 +369,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
 
 def reload_machine_mappings():
     '''
-    Flush internal caches of machine mappings which will force the mapping files to be re-read when they are first accessed
+    Flushes internal caches of machine mappings.
+    This will force the mapping files to be re-read when they are first accessed.
     '''
-    for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict]:
+    for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict, _user_machine_mappings]:
         cache.clear()
 
 
