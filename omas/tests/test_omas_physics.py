@@ -191,9 +191,6 @@ class TestOmasPhysics(UnittestCaseOmas):
         ods.physics_summary_global_quantities()
         assert ods['summary']['global_quantities']['tau_energy']['value'] is not None
         assert ods['summary.global_quantities.beta_tor.value'] is not None
-
-        del ods['core_sources']
-        ods.physics_summary_global_quantities()
         return
 
     def test_current_from_eq(self):

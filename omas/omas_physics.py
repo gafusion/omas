@@ -387,14 +387,8 @@ def summary_taue(ods, update=True, PRINTFLAG=False):
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
             # Get total power from ods function:
-            if 'core_sources' not in ods:
-                if 'summary.global_quantities.power_steady.value' not in ods:
-                    raise Exception('No core sources nor total power in ods, unable to calculate tau_e')
-                print("Not recalculating heating power, reusing ods['summary.global_quantities.power_steady.value']")
-                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
-            else:
-                ods.physics_summary_heating_power()
-                heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            ods.physics_summary_heating_power()
+            heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
 
             # Calculate tau_e
             tau_e = abs(
@@ -448,9 +442,9 @@ def summary_heating_power(ods, update=True):
     sources = ods_n['core_sources']['source']
     index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6:'fusion', 7:'ohmic'}
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
     if 'core_sources.source.0' not in ods_n:
         return ods_n
+    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
 
     q_dict = {
         'total_heating': copy.deepcopy(q_init),
@@ -1668,7 +1662,7 @@ def define_cocos(cocos_ind):
     elif cocos_ind in [3, 13]:
         # These cocos are for
         # (3) Freidberg*, CAXE and KINX*, GRAY, CQL3D^, CarMa, EFIT* with : ORB5, GBSwith : GT5D
-        # (13) 	CLISTE, EQUAL, GEC, HELENA, EU ITM-TF up to end of 2011
+        # (13)  CLISTE, EQUAL, GEC, HELENA, EU ITM-TF up to end of 2011
         cocos['sigma_Bp'] = -1
         cocos['sigma_RpZ'] = +1
         cocos['sigma_rhotp'] = -1
