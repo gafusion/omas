@@ -1577,7 +1577,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     :return: list with indeces matching conditions
     """
 
-    if ods.omas_data is not None and not isinstance(ods.omas_data, list):
+    if not ods.omas_data.isinstance(list):
         raise Exception('ods location must be an array of structures')
 
     if isinstance(conditions, ODS):

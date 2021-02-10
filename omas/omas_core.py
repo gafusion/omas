@@ -201,6 +201,12 @@ class OMAS_DATA(MutableMapping):
     def __repr__(self):
         return self._store.__repr__()
 
+    def keys(self):
+        if isinstance(self._store, list):
+            return range(len(self._store))
+        else:
+            return self._store.keys()
+
     def isinstance(self, storage_type):
         if storage_type is None:
             return self._store is None
@@ -442,7 +448,7 @@ class ODS(MutableMapping):
                     self[item] = numpy.atleast_1d(self[item][time_index])
 
                 # time-depentend list of ODSs
-                elif isinstance(self[item].omas_data, list) and len(self[item]) and 'time' in self[item][0]:
+                elif self[item].omas_data.isinstance(list) and len(self[item]) and 'time' in self[item][0]:
                     if time_index is None:
                         raise ValueError('`time` array is not set for `%s` ODS' % self.ulocation)
                     tmp = self[item][time_index]
