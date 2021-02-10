@@ -468,11 +468,11 @@ def summary_heating_power(ods, update=True):
             if sources[source]['identifier.index'] in index_dict:
                 if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
                     q_dict['total_heating'] += source_1d['electrons']['energy']
-                    if sources[source]['identifier.index'] in index_dict:
+                    if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
                         q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
                 if 'total_ion_energy' in source_1d:
                     q_dict['total_heating'] += source_1d['total_ion_energy']
-                    if sources[source]['identifier.index'] in index_dict:
+                    if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
                         q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
