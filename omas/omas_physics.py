@@ -468,11 +468,11 @@ def summary_heating_power(ods, update=True):
             if sources[source]['identifier.index'] in index_dict:
                 if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
                     q_dict['total_heating'] += source_1d['electrons']['energy']
-                    if sources[source]['identifier.index'] in power_dict:
+                    if sources[source]['identifier.index'] in index_dict:
                         q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
                 if 'total_ion_energy' in source_1d:
                     q_dict['total_heating'] += source_1d['total_ion_energy']
-                    if sources[source]['identifier.index'] in power_dict:
+                    if sources[source]['identifier.index'] in index_dict:
                         q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
@@ -481,8 +481,9 @@ def summary_heating_power(ods, update=True):
             if 'total_heating' in key:
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
-            elif key is 'fusion':
+            elif 'fusion' in key:
                 ods_n['summary.fusion.power.value'] = numpy.array(value)
+                continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
     return ods_n
