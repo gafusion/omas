@@ -1035,7 +1035,7 @@ class ODS(MutableMapping):
         # accept path as list of keys
         if isinstance(key, list):
             if len(key) > 1:
-                if key[0] not in self.keys(dynamic=False):
+                if key[0] not in self.keys(dynamic=0):
                     self.setraw(key[0], self.same_init_ods())
                 return self.getraw(key[0]).setraw(key[1:], value)
             else:
@@ -1334,7 +1334,7 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=False, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=True, **kw):
         """
         Traverse the ods and return paths to its leaves
 
@@ -2257,7 +2257,7 @@ class ODC(ODS):
             cls = ODS
         return ODS.same_init_ods(self, cls=cls)
 
-    def keys(self, dynamic=False):
+    def keys(self, dynamic=True):
         keys = list(self.omas_data.keys())
         for k, item in enumerate(keys):
             try:
