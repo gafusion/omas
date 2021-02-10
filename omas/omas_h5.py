@@ -43,7 +43,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     for key, item in list(dictin.items()):
 
         if isinstance(item, ODS):
-            item = item.omas_data
+            item = item.omas_data.toJSON()
 
         if isinstance(item, dict):
             if recursive:

@@ -328,8 +328,8 @@ class TestOmasCore(UnittestCaseOmas):
         ods = ODS()
 
         # make sure data structure is of the right type
-        assert isinstance(ods['core_transport'].omas_data, dict)
-        assert isinstance(ods['core_transport.model'].omas_data, list)
+        assert ods['core_transport'].omas_data.isinstance(dict)
+        assert ods['core_transport.model'].omas_data.isinstance(list)
 
         # append elements by using `+`
         for k in range(10):
