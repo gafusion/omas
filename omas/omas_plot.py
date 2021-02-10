@@ -3346,7 +3346,7 @@ def summary(ods, fig=None, quantity=None, **kw):
                     ax.set_title(q)
                     ods.plot_quantity('summary.global_quantities.%s.value' % q, label=q, ax=ax, xlabel=['', None][int(k > (n - c))])
 
-    return {'ax': axs, 'fig': figg}
+    return {'ax': axs, 'fig': fig}
 
 
 @add_to__ODS__
