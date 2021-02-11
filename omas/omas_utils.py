@@ -384,17 +384,17 @@ def json_loader(object_pairs, cls=dict, null_to=None):
             if null_to is not None and y is None:
                 y = null_to
             if isinstance(y, list):
-                if len(y) and isinstance(y[0], ODS):
-                    dct.setraw(x, cls())
-                    for k in range(len(y)):
-                        dct[x].setraw(k, y[k])
-                else:
+                if not len(y) or (len(y) and all(isinstance(y[k], ODS) for k in range(len(y)))):
                     if null_to is not None:
                         for k in range(len(y)):
                             if y[k] is None:
                                 y[k] = null_to
                     y = numpy.array(y)  # to handle objects_encode=None as used in OMAS
                     dct.setraw(x, y)
+                else:
+                    dct.setraw(x, cls())
+                    for k in range(len(y)):
+                        dct[x].setraw(k, y[k])
             else:
                 dct.setraw(x, y)
     else:
