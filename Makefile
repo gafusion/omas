@@ -63,7 +63,7 @@ samples:
 	cd omas/utilities && python3 generate_ods_samples.py
 
 docs: html
-	cd sphinx && make commit && make push
+	cd sphinx && make commit && make push && rm -rf build
 
 json:
 	cd omas/utilities && python3 build_json_structures.py
