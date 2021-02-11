@@ -14,19 +14,19 @@ class ODX(MutableMapping):
     """
 
     def __init__(self, DS=None):
-        self.omas_data = DS
+        self._omas_data = DS
         self.ucache = {}
         if DS is not None:
-            for k in self.omas_data.data_vars:
+            for k in self._omas_data.data_vars:
                 self.ucache.setdefault(o2u(k), []).append(k)
 
     def __delitem__(self, key):
-        return self.omas_data.__delitem__(key)
+        return self._omas_data.__delitem__(key)
 
     def __getitem__(self, key):
         # return data if key is exactly in dataset
-        if key in self.omas_data:
-            return self.omas_data[key].values
+        if key in self._omas_data:
+            return self._omas_data[key].values
 
         # identify which element in DS has the requested data
         ukey = None
@@ -36,7 +36,7 @@ class ODX(MutableMapping):
                 break
 
         # slice the data as requested
-        tmp = self.omas_data[ukey].values
+        tmp = self._omas_data[ukey].values
         for uk, k in zip(p2l(ukey), p2l(key)):
             if uk == ':' and isinstance(k, int):
                 tmp = tmp[k]
@@ -48,24 +48,24 @@ class ODX(MutableMapping):
         # avoid picking up deepcopy and pickling methods from dataset
         if attr in ['__deepcopy__', '__getstate__', '__setstate__']:
             raise AttributeError('bad attribute `%s`' % attr)
-        return getattr(self.omas_data, attr)
+        return getattr(self._omas_data, attr)
 
     def __iter__(self):
-        return self.omas_data.__iter__()
+        return self._omas_data.__iter__()
 
     def __len__(self):
-        return self.omas_data.__len__()
+        return self._omas_data.__len__()
 
     def __setitem__(self, key, value):
-        if key in self.omas_data.data_vars:
-            self.omas_data[key].values[:] = value
+        if key in self._omas_data.data_vars:
+            self._omas_data[key].values[:] = value
 
     def save(self, *args, **kw):
         return save_omas_dx(self, *args, **kw)
 
     def load(self, *args, **kw):
         ods = load_omas_dx(*args, **kw)
-        self.omas_data = ods.omas_data
+        self._omas_data = ods._omas_data
         return self
 
     def to_ods(self, consistency_check=True):
@@ -117,7 +117,7 @@ def save_omas_dx(odx, filename):
 
     :param filename: filename or file descriptor to save to
     """
-    return odx.omas_data.to_netcdf(filename)
+    return odx._omas_data.to_netcdf(filename)
 
 
 def ods_2_odx(ods, homogeneous=None):
@@ -151,7 +151,7 @@ def odx_2_ods(odx, consistency_check=True):
 
     :return: OMAS data set
     """
-    DS = odx.omas_data
+    DS = odx._omas_data
     ods = ODS(consistency_check=False)
     with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
         for uitem in DS.data_vars:

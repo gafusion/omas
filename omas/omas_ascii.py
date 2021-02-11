@@ -110,7 +110,7 @@ def save_omas_ascii(ods, filename, machine=None, pulse=None, run=None, dir=None)
     ascii_string = []
     for path in imas_ascii_key_sorter(ods.pretty_paths(include_structures=True), ods.location):
         value = ods[path]
-        if isinstance(value, ODS) and not value.omas_data.isinstance(list):
+        if isinstance(value, ODS) and not value._omas_data.isinstance(list):
             continue
         value = force_imas_type(value)
         info = identify_imas_type(value)

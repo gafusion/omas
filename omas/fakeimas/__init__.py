@@ -19,7 +19,7 @@ class IDS(ODS):
         return super().__getitem__(attr)
 
     def __setattr__(self, attr, value):
-        if attr in ['parent', 'omas_data', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic'] or attr.startswith('_'):
+        if attr in ['parent', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic'] or attr.startswith('_'):
             return super().__setattr__(attr, value)
         else:
             return super().__setitem__(attr, value)
