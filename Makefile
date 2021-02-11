@@ -34,6 +34,9 @@ test_plot:
 test_physics:
 	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
+test_fakeimas:
+	python3 -m unittest discover --pattern="*_fakeimas.py" ${TEST_FLAGS}
+
 test_machine:
 	python3 -m unittest discover --pattern="*_machine.py" ${TEST_FLAGS}
 
