@@ -52,14 +52,22 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # ============================================
         # Load fake IMAS data with OMAS IMAS interface
         # ============================================
+        pf = imas.pf_active()
+        pf.coil.resize(1)
+        pf.coil[0].current.data=[1,2,3]
+        DB = imas.DBEntry('MDSPLUS_BACKEND', 'd3d', 123456, 0, os.environ['USER'], '3')
+        DB.create()
+        DB.put(pf)
+        DB.close()
+
         # use imas.fake_environment
         ods = ODS()
         with imas.fake_environment():
-            ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
 
         # make sure that outside of imas.fake_environment it would fail
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
@@ -67,13 +75,13 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # use nested imas.fake_environments
         ods = ODS()
         with imas.fake_environment():
-            ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
             with imas.fake_environment():
-                ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+                ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
 
         # make sure that outside of imas.fake_environment it would fail
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
@@ -81,11 +89,11 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # use imas.fake switch
         imas.fake_module(True)
 
-        ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+        ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
 
         imas.fake_module(False)
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 133221, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
