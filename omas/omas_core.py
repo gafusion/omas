@@ -636,7 +636,10 @@ class ODS(MutableMapping):
                         if not isinstance(self.getraw(item), ODS):
                             location = l2o([location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
-                            value, txt = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            try:
+                                value, txt = consistency_checker(location, self.getraw(item), info, consistency_value, self.imas_version)
+                            except Exception as _excp:
+                                raise _excp.__class__(f'Error consistency checking {location}')
                             if not len(txt):
                                 pass
                             elif isinstance(consistency_value, str) and ('warn' in consistency_value or 'drop' in consistency_value):
