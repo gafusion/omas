@@ -255,6 +255,7 @@ class ODS(MutableMapping):
         if consistency_check and imas_version not in imas_versions:
             raise ValueError("Unrecognized IMAS version `%s`. Possible options are:\n%s" % (imas_version, imas_versions.keys()))
         self._parent = None
+        self._toplocation = ''
         self.imas_version = imas_version
         self.cocos = cocos
         self.cocosio = cocosio
@@ -489,9 +490,9 @@ class ODS(MutableMapping):
         '''
         parent = self.parent
         if isinstance(parent, ODC):
-            return ''
+            return self._toplocation
         elif parent is None:
-            return ''
+            return self._toplocation
         else:
             parent_location = parent.location
             loc = None
@@ -506,7 +507,7 @@ class ODS(MutableMapping):
                         loc = key
                         break
             if loc is None:
-                return ''
+                return self._toplocation
             if parent_location:
                 return parent_location + '.' + str(loc)
             else:
