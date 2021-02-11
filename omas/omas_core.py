@@ -2306,6 +2306,19 @@ class ODS(MutableMapping):
                     out[item] = self[item]
         return out
 
+    def resize(self, n):
+        '''
+        Add empty ODSs to an array of ODSs
+
+        :param n: total lenght of the array of structures
+        '''
+        if self.omas_data.isinstance(dict):
+            raise ValueError('Can only resize arrays of structures')
+        if self.omas_data.isinstance(None):
+            self.omas_data = OMAS_DATA([])
+        for k in range(len(self.omas_data), n):
+            self.setraw(k, self.same_init_ods())
+
 
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
