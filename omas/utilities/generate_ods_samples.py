@@ -5,8 +5,8 @@ sys.path.insert(0, os.path.split(os.path.split(os.path.split(os.path.abspath(__f
 import numpy
 from matplotlib import pyplot
 from pprint import pprint
-from omfit.classes.omfit_eqdsk import OMFITgeqdsk
-from omfit.classes.omfit_onetwo import OMFITstatefile
+from omfit_classes.omfit_eqdsk import OMFITgeqdsk
+from omfit_classes.omfit_onetwo import OMFITstatefile
 from omas import *
 
 # settings

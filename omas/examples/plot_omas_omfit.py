@@ -8,8 +8,8 @@ How to generate ODSs from OMFITclasses, and use OMAS plot methods
 
 from matplotlib.pyplot import show
 
-from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
-from omfit.classes.omfit_gacode import OMFITgacode
+from omfit_classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
+from omfit_classes.omfit_gacode import OMFITgacode
 from omas import *
 
 # =====================
