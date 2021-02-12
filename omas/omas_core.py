@@ -26,7 +26,8 @@ __all__ = [
     'machine_mapping_function', 'run_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'imas_json_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'latexit'
+    'latexit',
+    'fakeimas'
 ]
 # fmt: on
 
@@ -164,7 +165,17 @@ def _handle_extension(*args, **kw):
     return ext, args
 
 
-omas_ods_attrs = ['_consistency_check', '_imas_version', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic', '_parent', '_toplocation']
+omas_ods_attrs = [
+    '_consistency_check',
+    '_imas_version',
+    '_cocos',
+    '_cocosio',
+    '_coordsio',
+    '_unitsio',
+    '_dynamic',
+    '_parent',
+    '_toplocation',
+]
 
 
 class OMAS_DATA(MutableMapping):
@@ -2817,3 +2828,4 @@ from .omas_mongo import *
 from .omas_symbols import *
 from .omas_machine import *
 from . import omas_structure
+from . import fakeimas

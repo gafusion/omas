@@ -35,23 +35,21 @@ with omas_environment(ods, xmlcodeparams=True):
     pprint(ods)
 pprint(ods)
 
-# The IMAS save is the only one that forces saving code.parameters as XML
-# All other save methods maintain the dictionary structure
-omas_rcparams['allow_fake_imas_fallback'] = True
+# allow fallback on fake IMAS environment in OMAS in case real IMAS installation is not present
+with fakeimas.fake_environment('fallback'):
+    # Save to IMAS
+    # code.parameters are saved as XML
+    print('=' * 20)
+    print(' Writing data to IMAS')
+    print('=' * 20)
+    save_omas_imas(ods, machine='ITER', pulse=1, new=True)
 
-# Save to IMAS
-# code.parameters are saved as XML
-print('=' * 20)
-print(' Writing data to IMAS')
-print('=' * 20)
-save_omas_imas(ods, machine='ITER', pulse=1, new=True)
-
-# Load from IMAS
-# code.parameters are loaded as XML
-print('=' * 20)
-print(' Reading data from IMAS')
-print('=' * 20)
-ods1 = load_omas_imas(machine='ITER', pulse=1)
+    # Load from IMAS
+    # code.parameters are loaded as XML
+    print('=' * 20)
+    print(' Reading data from IMAS')
+    print('=' * 20)
+    ods1 = load_omas_imas(machine='ITER', pulse=1)
 
 # code.parameters are dictionaries in the ODS
 pprint(ods['equilibrium.code.parameters'])

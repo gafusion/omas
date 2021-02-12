@@ -22,7 +22,7 @@ os.environ['OMAS_DEBUG_TOPIC'] = '*'
 from omas import *
 
 # load some sample data
-ods_start = ods_sample()
+ods_start = ODS().sample()
 
 # save/load Python pickle
 filename = 'test.pkl'
@@ -50,9 +50,10 @@ save_omas_s3(ods, filename)
 ods = load_omas_s3(filename)
 
 # save/load IMAS
-omas_rcparams['allow_fake_imas_fallback'] = True
-paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
-ods_end = load_omas_imas(machine='ITER', pulse=1, paths=paths)
+# allow fallback on fake IMAS environment in OMAS in case real IMAS installation is not present
+with fakeimas.fake_environment('fallback'):
+    paths = save_omas_imas(ods, machine='ITER', pulse=1, new=True)
+    ods_end = load_omas_imas(machine='ITER', pulse=1, paths=paths)
 
 # check data
 difference = different_ods(ods_start, ods_end)

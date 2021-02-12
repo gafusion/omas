@@ -570,7 +570,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     # call machine mapping to make sure the json file is properly formatted
     machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
-    machine_mappings(machine,'',raise_errors=True)
+    machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
     try:

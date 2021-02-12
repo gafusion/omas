@@ -115,9 +115,6 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     if hasattr(ids, ds):
         debug_path += '%s' % ds
         m = getattr(ids, ds)
-        if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
-            m.time.resize(1)
-            m.time[0] = -1.0
     elif l2i(path) == 'ids_properties.occurrence':  # IMAS does not store occurrence info as part of the IDSs
         return
     elif skip_missing_nodes is not False:
@@ -339,28 +336,6 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
 
-    except ImportError:
-        # fallback on saving IMAS as NC file if IMAS is not installed
-        if not omas_rcparams['allow_fake_imas_fallback']:
-            raise
-        filename = os.sep.join(
-            [
-                omas_rcparams['fake_imas_dir'],
-                '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version)),
-            ]
-        )
-        printe(f'Overloaded save_omas_imas: {filename}')
-        from . import save_omas_pkl
-
-        if not os.path.exists(omas_rcparams['fake_imas_dir']):
-            os.makedirs(omas_rcparams['fake_imas_dir'])
-        ods['dataset_description.data_entry.user'] = str(user)
-        ods['dataset_description.data_entry.machine'] = str(machine)
-        ods['dataset_description.data_entry.pulse'] = int(pulse)
-        ods['dataset_description.data_entry.run'] = int(run)
-        ods['dataset_description.imas_version'] = str(imas_version)
-        save_omas_pkl(ods, filename)
-
     else:
 
         try:
@@ -511,83 +486,64 @@ def load_omas_imas(
         'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
     )
 
-    try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
+    ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
 
-        if imas_version is None:
-            try:
-                imas_version = ids.dataset_description.imas_version
-                if not imas_version:
-                    imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
-                    if verbose:
-                        print('dataset_description.imas_version is missing: assuming IMAS version %s' % imas_version)
-                else:
-                    print('%s IMAS version detected' % imas_version)
-            except Exception:
-                raise
-
-    except ImportError:
-        if imas_version is None:
-            imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
-        if not omas_rcparams['allow_fake_imas_fallback']:
-            raise
-        filename = os.sep.join(
-            [
-                omas_rcparams['fake_imas_dir'],
-                '%s_%s_%d_%d_v%s.pkl' % (user, machine, pulse, run, imas_versions.get(imas_version, imas_version)),
-            ]
-        )
-        printe('Overloaded load_omas_imas: %s' % filename)
-        from . import load_omas_pkl
-
-        ods = load_omas_pkl(filename, consistency_check=False)
-
-    else:
-
+    if imas_version is None:
         try:
-            # see what paths have data
-            # NOTE: this is where the IDS.get operation occurs
-            fetch_paths, joined_fetch_paths = infer_fetch_paths(
-                ids, occurrence=occurrence, paths=paths, time=time, imas_version=imas_version, verbose=verbose
-            )
-            # build omas data structure
-            ods = ODS(imas_version=imas_version, consistency_check=False)
-            if verbose and tqdm is not None:
-                progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
+            imas_version = ids.dataset_description.imas_version
+            if not imas_version:
+                imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
+                if verbose:
+                    print('dataset_description.imas_version is missing: assuming IMAS version %s' % imas_version)
             else:
-                progress_fetch_paths = fetch_paths
-            with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
-                for k, path in enumerate(progress_fetch_paths):
-                    # print progress
-                    if verbose:
-                        if tqdm is not None:
-                            progress_fetch_paths.set_description(joined_fetch_paths[k])
-                        elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
-                            print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
-                    # uncertain data is loaded as part of the nominal value of the data
-                    if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
-                        continue
-                    # get data from IDS
-                    data = imas_get(ids, path, None)
-                    # continue for empty data
-                    if data is None:
-                        continue
-                    # add uncertainty
-                    if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
-                        stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
-                        if stdata is not None:
-                            try:
-                                data = uarray(data, stdata)
-                            except uncertainties.core.NegativeStdDev as _excp:
-                                printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
-                    # assign data to ODS
-                    # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
-                    ods.setraw(path, data)
+                print('%s IMAS version detected' % imas_version)
+        except Exception:
+            raise
 
-        finally:
-            # close connection to IMAS database
-            printd("ids.close()", topic='imas_code')
-            ids.close()
+    try:
+        # see what paths have data
+        # NOTE: this is where the IDS.get operation occurs
+        fetch_paths, joined_fetch_paths = infer_fetch_paths(
+            ids, occurrence=occurrence, paths=paths, time=time, imas_version=imas_version, verbose=verbose
+        )
+        # build omas data structure
+        ods = ODS(imas_version=imas_version, consistency_check=False)
+        if verbose and tqdm is not None:
+            progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
+        else:
+            progress_fetch_paths = fetch_paths
+        with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+            for k, path in enumerate(progress_fetch_paths):
+                # print progress
+                if verbose:
+                    if tqdm is not None:
+                        progress_fetch_paths.set_description(joined_fetch_paths[k])
+                    elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
+                        print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                # uncertain data is loaded as part of the nominal value of the data
+                if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
+                    continue
+                # get data from IDS
+                data = imas_get(ids, path, None)
+                # continue for empty data
+                if data is None:
+                    continue
+                # add uncertainty
+                if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
+                    stdata = imas_get(ids, path[:-1] + [path[-1] + '_error_upper'], None)
+                    if stdata is not None:
+                        try:
+                            data = uarray(data, stdata)
+                        except uncertainties.core.NegativeStdDev as _excp:
+                            printe('Error loading uncertainty for %s: %s' % (l2i(path), repr(_excp)))
+                # assign data to ODS
+                # NOTE: here we can use setraw since IMAS data is by definition compliant with IMAS
+                ods.setraw(path, data)
+
+    finally:
+        # close connection to IMAS database
+        printd("ids.close()", topic='imas_code')
+        ids.close()
 
     # add dataset_description information to this ODS
     if paths is None:

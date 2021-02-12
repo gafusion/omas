@@ -2,8 +2,19 @@ import os
 import sys
 from contextlib import contextmanager
 from ..omas_core import ODS, list_structures, latest_imas_version, omas_rcparams
+from ..omas_utils import p2l, o2i, l2u, _extra_structures
 
-working_omas_imas_folder = omas_rcparams['fake_imas_dir']
+working_omas_imas_folder = omas_rcparams['fakeimas_dir']
+
+
+def empty(data_type):
+    if 'STR' in data_type:
+        value = ''
+    elif 'INT' in data_type:
+        value = -999999999
+    elif 'FLT' in data_type:
+        value = -9e40
+    return value
 
 
 class imasdef:
@@ -15,8 +26,18 @@ class imasdef:
 
 
 class IDS(ODS):
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+
     def __getattr__(self, attr):
-        return super().__getitem__(attr)
+        location = p2l(self.location + '.' + attr)
+        if o2i(l2u(location)) in _extra_structures.get(location[0], {}):
+            raise AttributeError(f'{attr} is not part of IMAS')
+        try:
+            return super().__getitem__(attr)
+        except ValueError:
+            # return empty IMAS value
+            return empty(self.info(attr)['data_type'])
 
     def __setattr__(self, attr, value):
         if attr in ['parent', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic'] or attr.startswith('_'):
@@ -30,6 +51,9 @@ class IDS(ODS):
     def deepcopy(self):
         return self.copy()
 
+    def put(self, occurrence, DB):
+        return DB.put(self, occurrence)
+
 
 class DBEntry(dict):
     def __init__(self, backend, machine, pulse, run, user, imas_major_version):
@@ -39,6 +63,7 @@ class DBEntry(dict):
         self.run = run
         self.user = user
         self.imas_major_version = imas_major_version
+        self.mode = None
 
     @property
     def filename(self):
@@ -50,16 +75,24 @@ class DBEntry(dict):
         )
 
     def create(self):
-        self.ods = ODS()
+        self.ods = IDS()
+        self.mode = 'create'
+        return 0, 0
 
     def open(self):
-        self.ods = ODS()
+        if not os.path.exists(self.filename):
+            raise IOError(f'{self.filename} does not exist')
+        print(self.filename)
+        self.ods = IDS()
         self.ods.load(self.filename)
+        self.mode = 'open'
         return 0, 0
 
     def close(self):
-        print(self.filename)
-        self.ods.save(self.filename)
+        if self.mode == 'create':
+            print(self.filename)
+            self.ods.save(self.filename)
+        self.mode = None
         return 0, 0
 
     def get(self, idsname, occurrence=0):
@@ -81,6 +114,15 @@ def {ds}():
 
 
 def fake_module(enabled, injected=None):
+    '''
+    :param enabled: True/False/'fallback'
+                    'fallback' is used to turn on the OMAS fake IMAS module if the original IMAS is not installed
+    '''
+    if enabled == 'fallback':
+        try:
+            import imas
+        except ImportError:
+            enabled = True
     if enabled:
         injected = False
         if 'imas' in sys.modules and 'imas_orig_' not in sys.modules:
@@ -97,10 +139,13 @@ def fake_module(enabled, injected=None):
                 sys.modules['imas'] = sys.modules['imas_orig_']
                 del sys.modules['imas_orig_']
 
+
 @contextmanager
-def fake_environment():
-    injected = fake_module(True)
-    print(injected)
+def fake_environment(enabled=True):
+    '''
+    :param enabled: True/False/'fallback'
+    '''
+    injected = fake_module(enabled)
     try:
         yield sys.modules['imas']
     finally:

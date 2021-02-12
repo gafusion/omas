@@ -49,6 +49,6 @@ pyplot.show()
 pyplot.figure()
 ods = ODS()
 with ods.open('machine', 'nstx-u', 139047, options={'EFIT_tree': 'EFIT01'}):
-    gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=.5)
+    gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=0.5)
 gEQDSK.plot()
 pyplot.show()

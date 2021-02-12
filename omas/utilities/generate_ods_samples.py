@@ -11,7 +11,6 @@ from omas import *
 
 # settings
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
-omas_rcparams['allow_fake_imas_fallback'] = True
 
 # generate equilibrium sample
 eq = OMFITgeqdsk(imas_json_dir + '/../samples/g145419.02100')

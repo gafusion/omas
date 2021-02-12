@@ -54,7 +54,7 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # ============================================
         pf = imas.pf_active()
         pf.coil.resize(1)
-        pf.coil[0].current.data=[1,2,3]
+        pf.coil[0].current.data = [1, 2, 3]
         DB = imas.DBEntry('MDSPLUS_BACKEND', 'd3d', 123456, 0, os.environ['USER'], '3')
         DB.create()
         DB.put(pf)
@@ -97,4 +97,3 @@ class TestOmasFakeImas(UnittestCaseOmas):
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
-
