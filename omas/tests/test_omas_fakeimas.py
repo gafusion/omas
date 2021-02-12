@@ -12,8 +12,7 @@ Test script for omas/imas/__init__.py
 """
 
 # OMAS imports
-from omas import ODS
-from omas import fakeimas as imas
+from omas import ODS, fakeimas
 from omas.omas_utils import *
 from omas.tests import warning_setup
 from omas.tests.failed_imports import *
@@ -28,18 +27,18 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # ============================================
         # Use fake IMAS API in OMAS
         # ============================================
-        eq = imas.equilibrium()
+        eq = fakeimas.equilibrium()
         eq.time_slice.resize(10)
         eq.time_slice[5].global_quantities.ip = 1.0
         print(eq.time_slice[5].global_quantities.ip)
         pprint(eq.pretty_paths())
 
-        DB = imas.DBEntry('MDSPLUS_BACKEND', 'd3d', 133221, 0, os.environ['USER'], '3')
+        DB = fakeimas.DBEntry('MDSPLUS_BACKEND', 'd3d', 133221, 0, os.environ['USER'], '3')
         DB.create()
         DB.put(eq)
         DB.close()
 
-        DB = imas.DBEntry('MDSPLUS_BACKEND', 'd3d', 133221, 0, os.environ['USER'], '3')
+        DB = fakeimas.DBEntry('MDSPLUS_BACKEND', 'd3d', 133221, 0, os.environ['USER'], '3')
         DB.open()
         eq1 = DB.get('equilibrium')
         DB.close()
@@ -52,48 +51,50 @@ class TestOmasFakeImas(UnittestCaseOmas):
         # ============================================
         # Load fake IMAS data with OMAS IMAS interface
         # ============================================
-        pf = imas.pf_active()
-        pf.coil.resize(1)
-        pf.coil[0].current.data = [1, 2, 3]
-        DB = imas.DBEntry('MDSPLUS_BACKEND', 'd3d', 123456, 0, os.environ['USER'], '3')
-        DB.create()
-        DB.put(pf)
-        DB.close()
+        with fakeimas.fake_environment():
+            pf = fakeimas.pf_active()
+            pf.coil.resize(1)
+            pf.coil[0].current.data = [1, 2, 3]
+            pf.ids_properties.homogeneous_time=1
+            DB = fakeimas.DBEntry('MDSPLUS_BACKEND', 'd3d', 123456, 0, os.environ['USER'], '3')
+            DB.create()
+            DB.put(pf)
+            DB.close()
 
-        # use imas.fake_environment
+        # use fakeimas.fake_environment
         ods = ODS()
-        with imas.fake_environment():
-            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
+        with fakeimas.fake_environment():
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
 
-        # make sure that outside of imas.fake_environment it would fail
+        # make sure that outside of fakeimas.fake_environment it would fail
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
 
-        # use nested imas.fake_environments
+        # use nested fakeimas.fake_environments
         ods = ODS()
-        with imas.fake_environment():
-            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
-            with imas.fake_environment():
-                ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
+        with fakeimas.fake_environment():
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
+            with fakeimas.fake_environment():
+                ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
 
-        # make sure that outside of imas.fake_environment it would fail
+        # make sure that outside of fakeimas.fake_environment it would fail
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass
 
-        # use imas.fake switch
-        imas.fake_module(True)
+        # use fakeimas.fake_module switch
+        fakeimas.fake_module(True)
+        ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
 
-        ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
-
-        imas.fake_module(False)
+        fakeimas.fake_module(False)
+        # make sure that after fakeimas.fake_module(False) it would fail
         try:
-            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, False, '3', 'HDF5')
+            ods.load('imas', os.environ['USER'], 'd3d', 123456, 0, backend='MDSPLUS')
             raise RuntimeError('Should not be here')
         except ModuleNotFoundError:
             pass

@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import baseODS, ODS
 
 
 def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None):

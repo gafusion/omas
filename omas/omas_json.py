@@ -71,7 +71,7 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
     if not len(json_string.strip()):
         return cls(imas_version=imas_version, consistency_check=consistency_check)
 
-    if cls is None:
+    if cls is None or cls is ODC:
 
         def base_class(x):
             clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)

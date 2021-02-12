@@ -453,6 +453,7 @@ def load_omas_imas(
     occurrence={},
     paths=None,
     time=None,
+    backend='MDSPLUS',
     imas_version=None,
     skip_uncertainties=False,
     consistency_check=True,
@@ -475,6 +476,8 @@ def load_omas_imas(
 
     :param time: time slice [expressed in seconds] to be extracted
 
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
+
     :param imas_version: IMAS version (force specific version)
 
     :param skip_uncertainties: do not load uncertain data
@@ -496,7 +499,7 @@ def load_omas_imas(
         'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
     )
 
-    DB = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, verbose=verbose)
+    DB = imas_open(user=user, machine=machine, pulse=pulse, run=run, new=False, backend=backend, verbose=verbose)
 
     if imas_version is None:
         imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])

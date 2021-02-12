@@ -1580,7 +1580,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     if not ods._omas_data.isinstance(list):
         raise Exception('ods location must be an array of structures')
 
-    if isinstance(conditions, baseODS):
+    if isinstance(conditions, ODS):
         conditions = conditions.flat()
 
     match = []

@@ -1908,7 +1908,10 @@ class baseODS(MutableMapping):
             kw['consistency_check'] = consistency_check
 
         # load the data
-        results = eval('load_omas_' + ext)(*args, **kw)
+        try:
+            results = eval('load_omas_' + ext)(*args, **kw)
+        except Exception as _excp:
+            raise _excp.__class__(f'Error loading data from `ext`: args={args}, kw={kw}')
 
         # mongoDB may return more than one result, or none
         if ext in ['mongo']:
