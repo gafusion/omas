@@ -42,7 +42,7 @@ def save_omas_json(ods, filename, objects_encode=None, **kw):
         f.write(json_string)
 
 
-def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS, **kw):
+def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=None, **kw):
     """
     Load ODS or ODC from Json
 
@@ -69,21 +69,26 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
 
     # allow for empty json file
     if not len(json_string.strip()):
-        return ODS(imas_version=imas_version, consistency_check=consistency_check)
+        return cls(imas_version=imas_version, consistency_check=consistency_check)
 
-    def base_class(x):
-        clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
-        clsODC = lambda: ODC(imas_version=imas_version, consistency_check=False)
-        try:
-            tmp = json_loader(x, clsODS, null_to=numpy.NaN)
-        except Exception:
-            tmp = json_loader(x, clsODC, null_to=numpy.NaN)
-        return tmp
+    if cls is None:
 
-    tmp = json.loads(json_string, object_pairs_hook=lambda x: base_class(x), **kw)
+        def base_class(x):
+            clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
+            clsODC = lambda: ODC(imas_version=imas_version, consistency_check=False)
+            try:
+                tmp = json_loader(x, clsODS, null_to=numpy.NaN)
+            except Exception:
+                tmp = json_loader(x, clsODC, null_to=numpy.NaN)
+            return tmp
 
-    # convert to cls
-    tmp.__class__ = cls
+    else:
+
+        def base_class(x):
+            clscls = lambda: cls(imas_version=imas_version, consistency_check=False)
+            return json_loader(x, clscls, null_to=numpy.NaN)
+
+    tmp = json.loads(json_string, object_pairs_hook=base_class, **kw)
 
     # perform consistency check
     tmp.consistency_check = consistency_check

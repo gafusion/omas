@@ -40,19 +40,27 @@ class IDS(baseODS):
             return empty(self.info(attr)['data_type'])
 
     def __setattr__(self, attr, value):
-        if attr in ['parent', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic'] or attr.startswith('_'):
+        if attr in ['parent', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic', 'consistency_check'] or attr.startswith(
+            '_'
+        ):
             return super().__setattr__(attr, value)
         else:
             return super().__setitem__(attr, value)
 
-    def __getitem__(self, key):
-        return super().__getitem__(key)
+    def __getitem__(self, key, cocos_and_coords=True):
+        return super().__getitem__(key, cocos_and_coords)
 
     def deepcopy(self):
         return self.copy()
 
     def put(self, occurrence, DB):
         return DB.put(self, occurrence)
+
+    def get(self, occurrence, DB):
+        self._omas_data = DB.get(self._toplocation, occurrence)._omas_data
+        for item in self._omas_data:
+            if isinstance(self._omas_data[item], baseODS):
+                self._omas_data[item].parent = self
 
 
 class DBEntry(dict):
@@ -75,7 +83,7 @@ class DBEntry(dict):
         )
 
     def create(self):
-        self.ods = IDS()
+        self.ids = IDS()
         self.mode = 'create'
         return 0, 0
 
@@ -83,23 +91,23 @@ class DBEntry(dict):
         if not os.path.exists(self.filename):
             raise IOError(f'{self.filename} does not exist')
         print(self.filename)
-        self.ods = IDS()
-        self.ods.load(self.filename)
+        self.ids = IDS()
+        self.ids.load(self.filename, cls=IDS)
         self.mode = 'open'
         return 0, 0
 
     def close(self):
         if self.mode == 'create':
             print(self.filename)
-            self.ods.save(self.filename)
+            self.ids.save(self.filename)
         self.mode = None
         return 0, 0
 
     def get(self, idsname, occurrence=0):
-        return self.ods[idsname]
+        return self.ids[idsname]
 
     def put(self, ids, occurrence=0):
-        self.ods[ids.location] = ids
+        self.ids[ids.location] = ids
 
 
 for ds in list_structures(latest_imas_version):
