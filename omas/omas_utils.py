@@ -44,7 +44,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
 
     :return: string with reason for difference, or False otherwise
     """
-    from omas import ODS, CodeParameters
+    from omas import baseODS, CodeParameters
 
     ods1 = ods1.flat(return_empty_leaves=True, traverse_code_parameters=True)
     ods2 = ods2.flat(return_empty_leaves=True, traverse_code_parameters=True)
@@ -61,10 +61,10 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     k2 = set(ods2.keys())
     differences = []
     for k in k1.difference(k2):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], ODS) and not len(ods1[k])) and not is_ignored(k):
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods1[k], baseODS) and not len(ods1[k])) and not is_ignored(k):
             differences.append(f'DIFF: key `{k}` missing in 2nd ods')
     for k in k2.difference(k1):
-        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])) and not is_ignored(k):
+        if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], baseODS) and not len(ods2[k])) and not is_ignored(k):
             differences.append(f'DIFF: key `{k}` missing in 1st ods')
     for k in k1.intersection(k2):
         try:
@@ -293,9 +293,9 @@ def json_dumper(obj, objects_encode=True):
 
     :return: json-compatible object
     """
-    from omas import ODS
+    from omas import baseODS
 
-    if isinstance(obj, ODS):
+    if isinstance(obj, baseODS):
         return obj._omas_data.toJSON()
 
     if objects_encode is False:
@@ -371,7 +371,7 @@ def json_loader(object_pairs, cls=dict, null_to=None):
 
     :return: ojbect
     """
-    from omas import ODS
+    from omas import baseODS
 
     object_pairs = list(map(lambda o: (convert_int(o[0]), o[1]), object_pairs))
 
@@ -379,13 +379,13 @@ def json_loader(object_pairs, cls=dict, null_to=None):
     # for ODSs we can use the setraw() method which does
     # not peform any sort of check, nor tries to parse
     # special OMAS syntaxes and is thus much faster
-    if isinstance(dct, ODS):
+    if isinstance(dct, baseODS):
         for x, y in object_pairs:
             if null_to is not None and y is None:
                 y = null_to
             if isinstance(y, list):
                 # determine if it is an array of structures
-                if len(y) and all(isinstance(y[k], ODS) or y[k] is None for k in range(len(y))):
+                if len(y) and all(isinstance(y[k], baseODS) or y[k] is None for k in range(len(y))):
                     dct.setraw(x, cls())
                     for k in range(len(y)):
                         dct[x].setraw(k, y[k])
@@ -404,7 +404,7 @@ def json_loader(object_pairs, cls=dict, null_to=None):
             if null_to is not None and y is None:
                 y = null_to
             if isinstance(y, list):
-                if len(y) and isinstance(y[0], ODS):
+                if len(y) and isinstance(y[0], baseODS):
                     dct[x] = cls()
                     for k in range(len(y)):
                         dct[x][k] = y[k]
@@ -905,7 +905,7 @@ def omas_info(structures=None, hide_obsolescent=True, cumulative_queries=False, 
     :return: ods showcasing IDS structure
     """
 
-    from omas import ODS
+    from omas import baseODS
 
     if not structures:
         structures = sorted(list(structures_filenames(imas_version).keys()))

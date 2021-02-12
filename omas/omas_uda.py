@@ -198,7 +198,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         for kid in list(ods._omas_data.keys()):
             if kid.endswith('_error_upper') and kid[: -len('_error_upper')] in ods._omas_data:
                 try:
-                    if isinstance(ods[kid], ODS):
+                    if isinstance(ods[kid], baseODS):
                         pass
                     elif isinstance(ods[kid], float):
                         ods[kid[: -len('_error_upper')]] = ufloat(ods[kid[: -len('_error_upper')]], ods[kid])

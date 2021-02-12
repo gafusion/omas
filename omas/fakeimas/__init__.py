@@ -1,7 +1,7 @@
 import os
 import sys
 from contextlib import contextmanager
-from ..omas_core import ODS, list_structures, latest_imas_version, omas_rcparams
+from ..omas_core import baseODS, list_structures, latest_imas_version, omas_rcparams
 from ..omas_utils import p2l, o2i, l2u, _extra_structures
 
 working_omas_imas_folder = omas_rcparams['fakeimas_dir']
@@ -25,7 +25,7 @@ class imasdef:
     ASCII_BACKEND = 'ASCII_BACKEND'
 
 
-class IDS(ODS):
+class IDS(baseODS):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
 

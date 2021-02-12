@@ -8,7 +8,7 @@ from .omas_core import ODS, codeparams_xml_save, codeparams_xml_load, dynamic_OD
 from .omas_utils import _extra_structures
 
 
-class IDS:
+class DBIDS:
     def __init__(self, DBentry, occurrence):
         self.DBentry = DBentry
         self.occurrence = occurrence
@@ -77,7 +77,7 @@ def imas_open(user, machine, pulse, run, occurrence={}, new=False, imas_major_ve
             'Error opening imas entry (user:%s machine:%s pulse:%s run:%s imas_major_version:%s backend=%s)'
             % (user, machine, pulse, run, imas_major_version, backend)
         )
-    return IDS(DBentry, occurrence)
+    return DBIDS(DBentry, occurrence)
 
 
 def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
@@ -481,6 +481,9 @@ def load_omas_imas(
 
     if pulse is None or run is None:
         raise Exception('`pulse` and `run` must be specified')
+
+    if not isinstance(occurrence, dict):
+        raise ValueError('occcurrence should be a dictionary specifying occurrence for each IDS')
 
     printd(
         'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'

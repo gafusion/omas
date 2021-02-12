@@ -8,7 +8,7 @@ from .omas_utils import __version__, _extra_structures
 
 # fmt: off
 __all__ = [
-    'ODS', 'ODC', 'ODX',
+    'baseODS', 'ODS', 'ODC', 'ODX',
     'CodeParameters', 'codeparams_xml_save', 'codeparams_xml_load',
     'ods_sample', 'different_ods', 'omas_structure',
     'save_omas_pkl', 'load_omas_pkl', 'through_omas_pkl',
@@ -115,13 +115,13 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
             value = b2s(value)
 
     # structure type is respected check type
-    if 'data_type' in info and info['data_type'] in ['STRUCTURE', 'STRUCT_ARRAY'] and not isinstance(value, ODS):
+    if 'data_type' in info and info['data_type'] in ['STRUCTURE', 'STRUCT_ARRAY'] and not isinstance(value, baseODS):
         txt = f'{location} is of type {type(value)} but this should be an ODS'
     # check type
     elif not (
         isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable))
         or value is None
-        or isinstance(value, (CodeParameters, ODS))
+        or isinstance(value, (CodeParameters, baseODS))
     ):
         txt = f'{location} is of type {type(value)} but supported types are: string, float, int, array'
     # check consistency for scalar entries
@@ -231,7 +231,7 @@ class OMAS_DATA(MutableMapping):
         return self._store
 
 
-class ODS(MutableMapping):
+class baseODS(MutableMapping):
     """
     OMAS Data Structure class
     """
@@ -274,156 +274,6 @@ class ODS(MutableMapping):
         self.unitsio = unitsio
         self.dynamic = dynamic
 
-    def homogeneous_time(self, key='', default=True):
-        """
-        Dynamically evaluate whether time is homogeneous or not
-        NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
-
-        :param default: what to return in case no time basis is defined
-
-        :return: True/False or default value (True) if no time basis is defined
-        """
-        if not len(self.location) and not len(key):
-            raise ValueError('homogeneous_time() can not be called on a top-level ODS')
-        extra_info = {}
-        self.time(key=key, extra_info=extra_info)
-        homogeneous_time = extra_info['homogeneous_time']
-        if homogeneous_time is None:
-            return default
-        else:
-            return homogeneous_time
-
-    def time(self, key='', extra_info=None):
-        """
-        Return the time information for a given ODS location
-
-        :param key: ods location
-
-        :param extra_info: dictionary that will be filled in place with extra information about time
-
-        :return: time information for a given ODS location (scalar or array)
-        """
-
-        if extra_info is None:
-            extra_info = {}
-
-        location = self.location
-
-        # subselect on requested key
-        subtree = p2l(location + '.' + key)
-
-        # get time nodes from data structure definitions
-        loc = p2l(subtree)
-        if not loc:
-            raise LookupError('Must specify a location in the ODS to get the time of')
-        utimes_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0] + '.')]
-
-        # get time nodes with actual numbers for indexes of arrays of structures and identify time index
-        times_ds = list(map(lambda item: u2o(item, l2o(subtree)), utimes_ds))
-        try:
-            time_array_index = int(re.sub('.*\.([0-9]+)\.time.*', r'\1', ' '.join(times_ds)))
-        except Exception:
-            time_array_index = None
-
-        try:
-            try:
-                # traverse ODS upstream until time information is found
-                time = {}
-                for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
-                    times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
-                    this_subtree = l2o(sub)
-
-                    # get time data from ods
-                    times = {}
-                    n = len(location)
-                    for item in times_sub_ds:
-                        otem = u2o(item, this_subtree)[n:]
-                        if otem.replace(':', '0') not in self:
-                            continue
-                        try:
-                            time = self.__getitem__(otem, None)  # traverse ODS
-                            if isinstance(time, numpy.ndarray):
-                                if time.size == 0:
-                                    continue
-                                # if time is still multidimensional
-                                # (eg. because we are querying the time across different diagnostic channels)
-                                # squash the multidimensional time arrays if they are all the same
-                                if len(time.shape) > 1:
-                                    time = numpy.reshape(time, (-1, time.shape[-1]))
-                                    if all(numpy.allclose(time[0], t) for t in time[1:]):
-                                        time = time[0]
-                            times[item] = time
-                        except ValueError as _excp:
-                            if 'has no data' in repr(_excp):
-                                pass
-                            else:
-                                # return False if time is not homogeneous
-                                extra_info['homogeneous_time'] = False
-                                return None
-                    times_values = list(times.values())
-                    extra_info['location'] = times.keys()
-
-                    # no time data defined
-                    if not len(times_values):
-                        extra_info['homogeneous_time'] = None
-                        return None
-
-                    # We crossed [:] or something and picked up a 2D time array
-                    elif any(len(numpy.asarray(time).shape) > 1 for time in times_values):
-                        # Make a 1D reference time0 that can be comapred against other time arrays
-                        time0 = list(times.values())[0]
-                        # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
-                        while len(time0.shape) > 1:
-                            time0 = numpy.take(time0, 0, axis=0)
-                        if all(time.size == time0.size for time in times.values()):
-                            for time in times.values():
-                                # Make sure all time arrays are close to the time0 we identified
-                                assert abs(time - time0).max() < 1e-7
-                            extra_info['homogeneous_time'] = True
-                            if isinstance(time0, (float, int)):
-                                return time0
-                            elif time_array_index is not None:
-                                return time0[time_array_index]
-                            return time0
-                        else:  # Similar to ValueError exception caught above
-                            extra_info['homogeneous_time'] = False
-                            return None
-
-                    # if the time entries that are all consistent with one another
-                    elif all([len(numpy.asarray(time).shape) == 1] for time in times_values):
-                        # if the time entries that are all consistent with one another
-                        if all(
-                            [
-                                numpy.array_equiv(times_values[0], time) and numpy.allclose(times_values[0], time)
-                                for time in times_values[1:]
-                            ]
-                        ):
-                            time = times_values[0]
-                            extra_info['homogeneous_time'] = True
-                            if isinstance(time, (float, int)):
-                                return time
-                            elif time_array_index is not None:
-                                return time[time_array_index]
-                            return time
-                        # if the time entries are not consistent with one another
-                        else:
-                            extra_info['homogeneous_time'] = False
-                            return None
-
-                    # We should never end up here
-                    else:
-                        raise ValueError(
-                            f'Error handling time in OMAS for `{l2o(subtree)}`:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()])
-                        )
-
-            except Exception:
-                raise
-        except Exception as _excp:
-            raise _excp.__class__(f'Error setting time for `{l2o(subtree)}`')
-
-        # We should never end up here
-        raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`')
-
     def slice_at_time(self, time=None, time_index=None):
         """
         method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
@@ -456,7 +306,7 @@ class ODS(MutableMapping):
             if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
 
                 # time-dependent arrays
-                if not isinstance(self.getraw(item), ODS):
+                if not isinstance(self.getraw(item), baseODS):
                     self[item] = numpy.atleast_1d(self[item][time_index])
 
                 # time-depentend list of ODSs
@@ -468,7 +318,7 @@ class ODS(MutableMapping):
                     self.getraw(item)[0] = tmp
 
             # go deeper inside ODSs that do not have time info
-            elif isinstance(self.getraw(item), ODS):
+            elif isinstance(self.getraw(item), baseODS):
                 self.getraw(item).slice_at_time(time=time, time_index=time_index)
 
         # treat time
@@ -591,7 +441,7 @@ class ODS(MutableMapping):
             self._consistency_check = consistency_value
             # set .consistency_check
             for item in list(self.keys(dynamic=0)):
-                if isinstance(self.getraw(item), ODS) and 'code.parameters' in self.getraw(item).location:
+                if isinstance(self.getraw(item), baseODS) and 'code.parameters' in self.getraw(item).location:
                     # consistency_check=True makes sure that code.parameters is of type CodeParameters
                     if consistency_value:
                         tmp = CodeParameters()
@@ -645,7 +495,7 @@ class ODS(MutableMapping):
                                     del self[item]
                                     continue
                         # check that value is consistent
-                        if not isinstance(self.getraw(item), ODS):
+                        if not isinstance(self.getraw(item), baseODS):
                             location = l2o([location] + [item])
                             info = omas_info_node(o2u(location), imas_version=self.imas_version)
                             try:
@@ -666,14 +516,14 @@ class ODS(MutableMapping):
                             if value is not self.getraw(item):
                                 self.setraw(item, value)
                     # propagate consistency check
-                    if isinstance(self.getraw(item), ODS):
+                    if isinstance(self.getraw(item), baseODS):
                         self.getraw(item).consistency_check = consistency_value_propagate
 
         except Exception as _excp:
             # restore existing consistency_check value in case of error
             if old_consistency_check != consistency_value:
                 for item in self.keys(dynamic=0):
-                    if isinstance(self.getraw(item), ODS):
+                    if isinstance(self.getraw(item), baseODS):
                         self.getraw(item).consistency_check = old_consistency_check
                 self.consistency_check = old_consistency_check
             raise  # (LookupError('Consistency check failed: %s' % repr(_excp)))
@@ -788,7 +638,7 @@ class ODS(MutableMapping):
         """
         for key in value.keys(dynamic=0):
             structure_key = o2u(key)
-            if go_deep and isinstance(value[key], ODS) and value[key].consistency_check:
+            if go_deep and isinstance(value[key], baseODS) and value[key].consistency_check:
                 value._validate(value[key], structure[structure_key])
             else:
                 structure[structure_key]
@@ -864,7 +714,7 @@ class ODS(MutableMapping):
             structure_key = key[0] if not isinstance(key[0], int) else ':'
             try:
                 structure = imas_structure(self.imas_version, location)
-                if isinstance(value, ODS):
+                if isinstance(value, baseODS):
                     if value._omas_data.isinstance(None) and not len(structure) and '.code.parameters' not in location:
                         raise ValueError('`%s` has no data' % location)
                     self._validate(value, structure)
@@ -878,7 +728,7 @@ class ODS(MutableMapping):
                 txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
                 if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
                     printe(txt)
-                    if isinstance(value, ODS):
+                    if isinstance(value, baseODS):
                         value.consistency_check = False
                 elif self.consistency_check:
                     try:
@@ -911,10 +761,10 @@ class ODS(MutableMapping):
             raise TypeError('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
-        if not isinstance(value, ODS):
+        if not isinstance(value, baseODS):
 
             # convert simple dict of code.parameters to CodeParameters instances
-            if '.code.parameters' in location and not isinstance(value, CodeParameters) and isinstance(value, (dict, ODS)):
+            if '.code.parameters' in location and not isinstance(value, CodeParameters) and isinstance(value, (dict, baseODS)):
                 tmp = value
                 value = CodeParameters()
                 value.update(tmp)
@@ -929,7 +779,7 @@ class ODS(MutableMapping):
                     and self.cocosio != self.cocos
                     and '.' in location
                     and ulocation in omas_physics.cocos_signals
-                    and not isinstance(value, ODS)
+                    and not isinstance(value, baseODS)
                 ):
                     transform = omas_physics.cocos_signals[ulocation]
                     if transform == '?':
@@ -1051,7 +901,7 @@ class ODS(MutableMapping):
                 raise
 
         # if the value is an ODS strucutre
-        if isinstance(value, ODS) and not value._omas_data.isinstance(None) and len(value.keys(dynamic=0)):
+        if isinstance(value, baseODS) and not value._omas_data.isinstance(None) and len(value.keys(dynamic=0)):
             # we purposly do not force value.consistency_check = self.consistency_check
             # because sub-ODSs could be shared among ODSs that have different settings of consistency_check
             if False and value.consistency_check != self.consistency_check:
@@ -1112,7 +962,7 @@ class ODS(MutableMapping):
         # set .parent
         if isinstance(value, ODC):
             pass
-        elif isinstance(value, ODS):
+        elif isinstance(value, baseODS):
             if value.parent is not None:
                 value = copy.deepcopy(value)
             value.parent = self
@@ -1282,7 +1132,7 @@ class ODS(MutableMapping):
         if len(key) > 1:
             # if the user has entered a path rather than a single key
             try:
-                if isinstance(value, ODS):
+                if isinstance(value, baseODS):
                     return value.__getitem__(key[1:], cocos_and_coords)
                 else:
                     return value[l2o(key[1:])]
@@ -1292,7 +1142,7 @@ class ODS(MutableMapping):
                 raise
         else:
 
-            if cocos_and_coords is not None and self.consistency_check and not isinstance(value, ODS):
+            if cocos_and_coords is not None and self.consistency_check and not isinstance(value, baseODS):
 
                 location = l2o([self.location, key[0]])
                 ulocation = o2u(location)
@@ -1420,7 +1270,7 @@ class ODS(MutableMapping):
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys(dynamic=dynamic):
-            if isinstance(self.getraw(kid), ODS):
+            if isinstance(self.getraw(kid), baseODS):
                 if include_structures:
                     paths.append(path + [kid])
                 self.getraw(kid).paths(
@@ -1508,7 +1358,7 @@ class ODS(MutableMapping):
                 else:
                     return False
         # return False if checking existance of a leaf and the leaf exists but is unassigned
-        if not self.dynamic and isinstance(h, ODS) and h._omas_data.isinstance(None):
+        if not self.dynamic and isinstance(h, baseODS) and h._omas_data.isinstance(None):
             return False
         return True
 
@@ -1646,11 +1496,11 @@ class ODS(MutableMapping):
         # update parent information
         if self._omas_data.isinstance(list):
             for value in self._omas_data:
-                if isinstance(value, ODS):
+                if isinstance(value, baseODS):
                     value.parent = self
         elif self._omas_data.isinstance(dict):
             for key in self._omas_data:
-                if isinstance(self._omas_data[key], ODS):
+                if isinstance(self._omas_data[key], baseODS):
                     self._omas_data[key].parent = self
         return self
 
@@ -1667,7 +1517,7 @@ class ODS(MutableMapping):
         else:
             tmp._omas_data = OMAS_DATA({})
             for key in self._omas_data:
-                if isinstance(self._omas_data[key], ODS):
+                if isinstance(self._omas_data[key], baseODS):
                     tmp._omas_data[key] = self[key].__deepcopy__(memo=memo)
                     tmp._omas_data[key].parent = tmp
                 else:
@@ -1713,7 +1563,7 @@ class ODS(MutableMapping):
         """
         n = 0
         for item in self.keys(dynamic=0):
-            if isinstance(self.getraw(item), ODS):
+            if isinstance(self.getraw(item), baseODS):
                 n += self.getraw(item).prune()
                 if not len(self.getraw(item).keys()):
                     n += 1
@@ -1756,7 +1606,7 @@ class ODS(MutableMapping):
 
         :param ods2: dictionary or ODS to be added into the ODS
         """
-        if isinstance(ods2, ODS):
+        if isinstance(ods2, baseODS):
             for item in ods2.paths():
                 self[item] = ods2[item]
         else:
@@ -2076,7 +1926,7 @@ class ODS(MutableMapping):
                 value._omas_data.parent = self
         elif self._omas_data.isinstance(dict):
             for key in self._omas_data:
-                if isinstance(self._omas_data[key], ODS):
+                if isinstance(self._omas_data[key], baseODS):
                     self._omas_data[key].parent = self
 
         # for pickle we can copy attrs over
@@ -2203,7 +2053,7 @@ class ODS(MutableMapping):
                     self[item].from_structure(structure[item], depth=depth + 1)
             else:
                 self.setraw(item, copy.deepcopy(structure[item]))
-            if depth == 0 and isinstance(self[item], ODS):
+            if depth == 0 and isinstance(self[item], baseODS):
                 self[item].consistency_check = self.consistency_check
         return self
 
@@ -2335,7 +2185,7 @@ class ODS(MutableMapping):
             out = []
         if not self._omas_data.isinstance(None):
             for item in self:
-                if isinstance(self[item], ODS):
+                if isinstance(self[item], baseODS):
                     if self[item]._omas_data.isinstance(dict):
                         out[item] = self[item].to_builtin()
                     elif self[item]._omas_data.isinstance(dict):
@@ -2358,12 +2208,164 @@ class ODS(MutableMapping):
             self.setraw(k, self.same_init_ods())
 
 
+class ODS(baseODS):
+    def homogeneous_time(self, key='', default=True):
+        """
+        Dynamically evaluate whether time is homogeneous or not
+        NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out
+
+        :param default: what to return in case no time basis is defined
+
+        :return: True/False or default value (True) if no time basis is defined
+        """
+        if not len(self.location) and not len(key):
+            raise ValueError('homogeneous_time() can not be called on a top-level ODS')
+        extra_info = {}
+        self.time(key=key, extra_info=extra_info)
+        homogeneous_time = extra_info['homogeneous_time']
+        if homogeneous_time is None:
+            return default
+        else:
+            return homogeneous_time
+
+    def time(self, key='', extra_info=None):
+        """
+        Return the time information for a given ODS location
+
+        :param key: ods location
+
+        :param extra_info: dictionary that will be filled in place with extra information about time
+
+        :return: time information for a given ODS location (scalar or array)
+        """
+
+        if extra_info is None:
+            extra_info = {}
+
+        location = self.location
+
+        # subselect on requested key
+        subtree = p2l(location + '.' + key)
+
+        # get time nodes from data structure definitions
+        loc = p2l(subtree)
+        if not loc:
+            raise LookupError('Must specify a location in the ODS to get the time of')
+        utimes_ds = [i2o(k) for k in omas_times(self.imas_version) if k.startswith(loc[0] + '.')]
+
+        # get time nodes with actual numbers for indexes of arrays of structures and identify time index
+        times_ds = list(map(lambda item: u2o(item, l2o(subtree)), utimes_ds))
+        try:
+            time_array_index = int(re.sub('.*\.([0-9]+)\.time.*', r'\1', ' '.join(times_ds)))
+        except Exception:
+            time_array_index = None
+
+        try:
+            try:
+                # traverse ODS upstream until time information is found
+                time = {}
+                for sub in [subtree[:k] for k in range(len(subtree), 0, -1)]:
+                    times_sub_ds = [k for k in utimes_ds if k.startswith(l2u(sub))]
+                    this_subtree = l2o(sub)
+
+                    # get time data from ods
+                    times = {}
+                    n = len(location)
+                    for item in times_sub_ds:
+                        otem = u2o(item, this_subtree)[n:]
+                        if otem.replace(':', '0') not in self:
+                            continue
+                        try:
+                            time = self.__getitem__(otem, None)  # traverse ODS
+                            if isinstance(time, numpy.ndarray):
+                                if time.size == 0:
+                                    continue
+                                # if time is still multidimensional
+                                # (eg. because we are querying the time across different diagnostic channels)
+                                # squash the multidimensional time arrays if they are all the same
+                                if len(time.shape) > 1:
+                                    time = numpy.reshape(time, (-1, time.shape[-1]))
+                                    if all(numpy.allclose(time[0], t) for t in time[1:]):
+                                        time = time[0]
+                            times[item] = time
+                        except ValueError as _excp:
+                            if 'has no data' in repr(_excp):
+                                pass
+                            else:
+                                # return False if time is not homogeneous
+                                extra_info['homogeneous_time'] = False
+                                return None
+                    times_values = list(times.values())
+                    extra_info['location'] = times.keys()
+
+                    # no time data defined
+                    if not len(times_values):
+                        extra_info['homogeneous_time'] = None
+                        return None
+
+                    # We crossed [:] or something and picked up a 2D time array
+                    elif any(len(numpy.asarray(time).shape) > 1 for time in times_values):
+                        # Make a 1D reference time0 that can be comapred against other time arrays
+                        time0 = list(times.values())[0]
+                        # Collapse extra dimensions, assuming time is the last one. If it isn't, this will fail.
+                        while len(time0.shape) > 1:
+                            time0 = numpy.take(time0, 0, axis=0)
+                        if all(time.size == time0.size for time in times.values()):
+                            for time in times.values():
+                                # Make sure all time arrays are close to the time0 we identified
+                                assert abs(time - time0).max() < 1e-7
+                            extra_info['homogeneous_time'] = True
+                            if isinstance(time0, (float, int)):
+                                return time0
+                            elif time_array_index is not None:
+                                return time0[time_array_index]
+                            return time0
+                        else:  # Similar to ValueError exception caught above
+                            extra_info['homogeneous_time'] = False
+                            return None
+
+                    # if the time entries that are all consistent with one another
+                    elif all([len(numpy.asarray(time).shape) == 1] for time in times_values):
+                        # if the time entries that are all consistent with one another
+                        if all(
+                            [
+                                numpy.array_equiv(times_values[0], time) and numpy.allclose(times_values[0], time)
+                                for time in times_values[1:]
+                            ]
+                        ):
+                            time = times_values[0]
+                            extra_info['homogeneous_time'] = True
+                            if isinstance(time, (float, int)):
+                                return time
+                            elif time_array_index is not None:
+                                return time[time_array_index]
+                            return time
+                        # if the time entries are not consistent with one another
+                        else:
+                            extra_info['homogeneous_time'] = False
+                            return None
+
+                    # We should never end up here
+                    else:
+                        raise ValueError(
+                            f'Error handling time in OMAS for `{l2o(subtree)}`:\n' + '\n'.join([f'{k}:{v}' for k, v in times.items()])
+                        )
+
+            except Exception:
+                raise
+        except Exception as _excp:
+            raise _excp.__class__(f'Error setting time for `{l2o(subtree)}`')
+
+        # We should never end up here
+        raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`')
+
+
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['_omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
 
 
-class ODC(ODS):
+class ODC(baseODS):
     """
     OMAS Data Collection class
     """
@@ -2542,7 +2544,7 @@ class CodeParameters(dict):
         # return leaf
         else:
             # convert ODSs to CodeParameters
-            if isinstance(value, ODS):
+            if isinstance(value, baseODS):
                 value = CodeParameters()
             self.setraw(key[0], value)
 
