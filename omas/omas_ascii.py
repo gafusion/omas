@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS, ODC, force_imas_type
+from .omas_core import baseODS, ODS, ODC, force_imas_type
 
 
 def identify_imas_type(value):

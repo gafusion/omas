@@ -905,7 +905,7 @@ def omas_info(structures=None, hide_obsolescent=True, cumulative_queries=False, 
     :return: ods showcasing IDS structure
     """
 
-    from omas import baseODS
+    from omas import ODS
 
     if not structures:
         structures = sorted(list(structures_filenames(imas_version).keys()))

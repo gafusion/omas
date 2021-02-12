@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import baseODS, ODS
 
 __all__ = []
 __ods__ = []
@@ -1580,7 +1580,7 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     if not ods._omas_data.isinstance(list):
         raise Exception('ods location must be an array of structures')
 
-    if isinstance(conditions, ODS):
+    if isinstance(conditions, baseODS):
         conditions = conditions.flat()
 
     match = []
