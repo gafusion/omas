@@ -12,6 +12,7 @@ class IDSs:
     '''
     Container for multiple IDSs
     '''
+
     pass
 
 
@@ -578,20 +579,22 @@ class dynamic_omas_imas(dynamic_ODS):
         self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence': occurrence}
         self.ids = None
         self.active = False
-        self.open_ids = []
+        self.idss = IDSs()
 
     def open(self):
         printd('Dynamic open  %s' % self.kw, topic='dynamic')
-        self.ids = imas_open(new=False, **self.kw)
+        kw0 = self.kw.copy()
+        kw0.pop('occurrence')
+        self.DB = imas_open(new=False, **kw0)
         self.active = True
-        self.open_ids = []
+        self.idss = IDSs()
         return self
 
     def close(self):
         printd('Dynamic close %s' % self.kw, topic='dynamic')
-        self.ids.close()
-        self.open_ids = []
-        self.ids = None
+        self.DB.close()
+        self.idss = IDSs()
+        self.DB = None
         self.active = False
         return self
 
@@ -599,21 +602,26 @@ class dynamic_omas_imas(dynamic_ODS):
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
-        return imas_get(self.ids, p2l(key))
+        return imas_get(self.idss, p2l(key))
 
     def __contains__(self, key):
+        import imas
+
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
         path = p2l(key)
         ds = path[0]
-        if ds not in self.open_ids:
-            occ = self.ids.occurrence.get(ds, 0)
-            getattr(self.ids, ds).get(occ, self.ids.DBentry)
-            self.open_ids.append(ds)
-        return imas_empty(imas_get(self.ids, path)) is not None
+        if not hasattr(self.idss, ds):
+            occ = self.kw['occurrence'].get(ds, 0)
+            ids = getattr(imas, ds)()
+            ids.get(occ, self.DB)
+            setattr(self.idss, ds, ids)
+        return imas_empty(imas_get(self.idss, path)) is not None
 
     def keys(self, location):
-        return keys_leading_to_a_filled_path(self.ids, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version']))
+        return keys_leading_to_a_filled_path(
+            self.idss, self.DB, location, os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
+        )
 
 
 def browse_imas(
@@ -844,11 +852,13 @@ def reach_ds_location(path, imas_version):
     return out
 
 
-def keys_leading_to_a_filled_path(ids, location, imas_version):
+def keys_leading_to_a_filled_path(idss, DB, location, imas_version):
     """
     What keys at a given IMAS location lead to a leaf that has data
 
-    :param ids: IMAS ids
+    :param idss: container with multiple IDSs
+
+    :param DB: IMAS DBentry
 
     :param location: location to query
 
@@ -860,26 +870,28 @@ def keys_leading_to_a_filled_path(ids, location, imas_version):
     if not len(location):
         filled_keys = []
         for ds in list_structures(imas_version=imas_version):
-            if not hasattr(ids, ds):
+            if not hasattr(idss, ds):
                 continue
-            occ = ids.occurrence.get(ds, 0)
-            getattr(ids, ds).get(occ, ids.DBentry)
-            if getattr(ids, ds).ids_properties.homogeneous_time != -999999999:
+            occ = idss.occurrence.get(ds, 0)
+            ids = getattr(idss, ds)()
+            ids.get(occ, DB)
+            setattr(idss, ds, ids)
+            if getattr(idss, ds).ids_properties.homogeneous_time != -999999999:
                 filled_keys.append(ds)
         return filled_keys
 
     path = p2l(location)
-    ids = reach_ids_location(ids, path)
+    idss = reach_ids_location(idss, path)
     ds = reach_ds_location(path, imas_version)
 
     # always list all arrays of structures
     if list(ds.keys())[0] == ':':
-        return list(range(len(ids)))
+        return list(range(len(idss)))
 
     # find which keys have at least one filled path underneath
     filled_keys = []
     for kid in ds.keys():
-        paths = filled_paths_in_ids(getattr(ids, kid), ds[kid], stop_on_first_fill=True)
+        paths = filled_paths_in_ids(getattr(idss, kid), ds[kid], stop_on_first_fill=True)
         if len(paths):
             filled_keys.append(kid)
 

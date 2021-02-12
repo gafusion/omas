@@ -9,6 +9,9 @@ This example illustrates how OMAS can load in memory IMAS data only when it is f
 import os
 from omas import *
 
+fakeimas.fake_module('fallback')
+
+
 # set OMAS_DEBUG_TOPIC to see when data is loaded dynamically
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
 
