@@ -96,6 +96,8 @@ class DBEntry(dict):
     def close(self):
         if self.mode == 'create':
             print(self.filename)
+            if not os.path.exists(os.path.split(self.filename)[0]):
+                os.makedirs(os.path.split(self.filename)[0])
             self.ids.save(self.filename)
         self.mode = None
         return 0, 0
