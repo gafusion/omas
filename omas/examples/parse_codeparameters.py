@@ -21,7 +21,8 @@ ods['equilibrium.code.parameters']['test'] = {}
 ods['equilibrium.code.parameters']['test']['parameter1'] = 1
 ods['equilibrium.code.parameters']['test']['parameter2'] = 'hello'
 with omas_environment(ods, xmlcodeparams=True):
-    pprint(ods)
+    print(ods['equilibrium.code.parameters'])
+    assert isinstance(ods['equilibrium.code.parameters'], str) and '<?xml' in ods['equilibrium.code.parameters']
 
 # Load code parameters from XML file
 ods = ODS()
@@ -29,33 +30,36 @@ ods['equilibrium.time'] = [0.0]
 ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
 
 # In OMAS code.parameters are represented as dicts
-pprint(ods)
+print(ods['equilibrium.code.parameters'])
+assert isinstance(ods['equilibrium.code.parameters'], dict)
+
 # the XML representation can be set with an environment
 with omas_environment(ods, xmlcodeparams=True):
-    pprint(ods)
-pprint(ods)
+    print(ods['equilibrium.code.parameters'])
+    assert isinstance(ods['equilibrium.code.parameters'], str) and '<?xml' in ods['equilibrium.code.parameters']
 
 # allow fallback on fake IMAS environment in OMAS in case real IMAS installation is not present
 with fakeimas.fake_environment('fallback'):
     # Save to IMAS
-    # code.parameters are saved as XML
+    # code.parameters are loaded from OMAS to IMAS XML
     print('=' * 20)
     print(' Writing data to IMAS')
     print('=' * 20)
-    save_omas_imas(ods, machine='ITER', pulse=1, new=True)
+    ods.save('imas', machine='ITER', pulse=2, new=True)
 
     # Load from IMAS
-    # code.parameters are loaded as XML
+    # code.parameters are loaded from IMAS XML to OMAS dict
     print('=' * 20)
     print(' Reading data from IMAS')
     print('=' * 20)
-    ods1 = load_omas_imas(machine='ITER', pulse=1)
+    ods1 = ODS().load('imas', machine='ITER', pulse=2)
+    assert isinstance(ods1['equilibrium.code.parameters'], dict)
 
 # code.parameters are dictionaries in the ODS
-pprint(ods['equilibrium.code.parameters'])
+print(ods['equilibrium.code.parameters'])
 
 # Handle code.parameters that are not in XML format as per IMAS specifications
 ods = ODS()
 ods['equilibrium.code.parameters'] = 'not in XML format'
-with omas_environment(ods, xmlcodeparams=True):
-    print(ods['equilibrium.code.parameters'])  # This will not raise an error
+with omas_environment(ods, xmlcodeparams=True):  # This will print a warning
+    assert ods['equilibrium.code.parameters'] == 'not in XML format'
