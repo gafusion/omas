@@ -39,4 +39,4 @@ jobs:
 
     - name: Run OMAS tests
       run: |
-        make test
+        python3 -m unittest discover --pattern="*.py" -f -b -v -c -s omas/tests

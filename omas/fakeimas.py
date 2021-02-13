@@ -4,9 +4,6 @@ from contextlib import contextmanager
 from .omas_core import baseODS, list_structures, latest_imas_version, omas_rcparams
 from .omas_utils import p2l, o2i, l2u, _extra_structures
 
-working_omas_imas_folder = omas_rcparams['fakeimas_dir']
-
-
 def empty(data_type):
     if 'STR' in data_type:
         value = ''
@@ -76,7 +73,7 @@ class DBEntry(dict):
     @property
     def filename(self):
         return (
-            working_omas_imas_folder
+            omas_rcparams['fakeimas_dir']
             + os.sep
             + '_'.join(map(str, [self.backend, self.machine, self.pulse, self.run, self.user, self.imas_major_version]))
             + '.json'

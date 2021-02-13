@@ -426,7 +426,7 @@ def infer_fetch_paths(idss, DB, occurrence, paths, time, imas_version, verbose=T
                 continue
 
         # see if the IDS has any data (if so homogeneous_time must be populated)
-        printd(f"{ds}.ids_properties.homogeneous_time={ids.ids_properties.homogeneous_time}", topic='imas_code')
+        printd(f"{ds}.ids_properties.homogeneous_time   # --> {ids.ids_properties.homogeneous_time}", topic='imas_code')
         if ids.ids_properties.homogeneous_time != -999999999:
             setattr(idss, ds, ids)
             if verbose:

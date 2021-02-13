@@ -20,7 +20,7 @@ all:
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
 
-TEST_FLAGS=-s omas/tests -v -f
+TEST_FLAGS=-f -b -v -c -s omas/tests
 
 test:
 	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}

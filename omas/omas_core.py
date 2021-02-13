@@ -2089,9 +2089,9 @@ class baseODS(MutableMapping):
             elif 'parameters' in self and isinstance(self['parameters'], str):
                 self['parameters'] = CodeParameters().from_string(self['parameters'])
         except xml.parsers.expat.ExpatError:
-            printe('%s.code.parameters is not formatted as XML' % self.location)
+            printe(f'Warning: {self.location}.code.parameters is not formatted as XML')
         except Exception as _excp:
-            printe('Issue with %s.code.parameters: %s' % (self.location, repr(_excp)))
+            printe(f'Issue with {self.location}.code.parameters: ' + repr(_excp))
 
     def sample(self, ntimes=1, homogeneous_time=None):
         """
