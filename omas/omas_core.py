@@ -96,7 +96,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     elif isinstance(value, numpy.ndarray):
         if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
             value = ODS()
-            value._omas_data = OMAS_DATA([])
+            value._omas_data = OMAS_DATA(list)
         elif 'FLT' in info['data_type']:
             value = value.astype(float)
         elif 'INT' in info['data_type']:
@@ -180,7 +180,11 @@ omas_ods_attrs = [
 
 class OMAS_DATA(MutableMapping):
     def __init__(self, storage_type):
-        self._store = storage_type
+        self.storage_type = storage_type
+        if storage_type is None:
+            self._store = None
+        else:
+            self._store = storage_type()
 
     def __getitem__(self, key):
         return self._store[key]
@@ -198,7 +202,7 @@ class OMAS_DATA(MutableMapping):
         self._store[key] = value
 
     def __delitem__(self, key):
-        if isinstance(self._store, list):
+        if self.storage_type is list:
             self._store.pop(key)
         else:
             del self._store[key]
@@ -213,7 +217,7 @@ class OMAS_DATA(MutableMapping):
         return self._store.__repr__()
 
     def keys(self):
-        if isinstance(self._store, list):
+        if self.storage_type is list:
             return range(len(self._store))
         else:
             return self._store.keys()
@@ -273,59 +277,6 @@ class baseODS(MutableMapping):
         self.coordsio = coordsio
         self.unitsio = unitsio
         self.dynamic = dynamic
-
-    def slice_at_time(self, time=None, time_index=None):
-        """
-        method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
-
-        :param time: time value to select
-
-        :param time_index: time index to select (NOTE: time_index has precedence over time)
-
-        :return: modified ODS
-        """
-
-        # set time_index for parent and children
-        if 'time' in self and isinstance(self['time'], numpy.ndarray):
-            if time_index is None:
-                time_index = numpy.argmin(abs(self['time'] - time))
-                if (time - self['time'][time_index]) != 0.0:
-                    printe('%s sliced at %s instead of requested time %s' % (self.location, self['time'][time_index], time))
-                time = self['time'][time_index]
-            if time is None:
-                time = self['time'][time_index]
-
-        # loop over items
-        for item in self.keys():
-            # time (if present) is treated last
-            if item == 'time':
-                continue
-
-            # identify time-dependent data
-            info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
-            if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
-
-                # time-dependent arrays
-                if not isinstance(self.getraw(item), baseODS):
-                    self[item] = numpy.atleast_1d(self[item][time_index])
-
-                # time-depentend list of ODSs
-                elif self[item]._omas_data.isinstance(list) and len(self[item]) and 'time' in self[item][0]:
-                    if time_index is None:
-                        raise ValueError('`time` array is not set for `%s` ODS' % self.ulocation)
-                    tmp = self[item][time_index]
-                    self.getraw(item).clear()
-                    self.getraw(item)[0] = tmp
-
-            # go deeper inside ODSs that do not have time info
-            elif isinstance(self.getraw(item), baseODS):
-                self.getraw(item).slice_at_time(time=time, time_index=time_index)
-
-        # treat time
-        if 'time' in self:
-            self['time'] = numpy.atleast_1d(self['time'][time_index])
-
-        return self
 
     @property
     def parent(self):
@@ -720,9 +671,9 @@ class baseODS(MutableMapping):
                     self._validate(value, structure)
                     if value._omas_data.isinstance(None):
                         if ':' in structure:
-                            value._omas_data = OMAS_DATA([])
+                            value._omas_data = OMAS_DATA(list)
                         elif len(structure):
-                            value._omas_data = OMAS_DATA({})
+                            value._omas_data = OMAS_DATA(dict)
 
             except (LookupError, TypeError):
                 txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
@@ -751,10 +702,10 @@ class baseODS(MutableMapping):
         elif self._omas_data.isinstance(None) or not len(self._omas_data):
             if isinstance(key[0], int):
                 if not self._omas_data.isinstance(list):
-                    self._omas_data = OMAS_DATA([])
+                    self._omas_data = OMAS_DATA(list)
             else:
                 if not self._omas_data.isinstance(dict):
-                    self._omas_data = OMAS_DATA({})
+                    self._omas_data = OMAS_DATA(dict)
         elif isinstance(key[0], int) and not self._omas_data.isinstance(list):
             raise TypeError('Cannot convert from dict to list once ODS has data')
         elif isinstance(key[0], str) and not self._omas_data.isinstance(dict):
@@ -970,13 +921,13 @@ class baseODS(MutableMapping):
         # structure
         if isinstance(key, str) or isinstance(self, ODC):
             if self._omas_data.isinstance(None):
-                self._omas_data = OMAS_DATA({})
+                self._omas_data = OMAS_DATA(dict)
             self._omas_data[key] = value
 
         # arrays of structures
         else:
             if self._omas_data.isinstance(None):
-                self._omas_data = OMAS_DATA([])
+                self._omas_data = OMAS_DATA(list)
 
             # dynamic array structure creation
             if key > len(self._omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
@@ -1469,10 +1420,10 @@ class baseODS(MutableMapping):
             if state['omas_data'] is None:
                 state['_omas_data'] = OMAS_DATA(None)
             elif isinstance(state['omas_data'], dict):
-                state['_omas_data'] = OMAS_DATA({})
+                state['_omas_data'] = OMAS_DATA(dict)
                 state['_omas_data']._store.update(state['omas_data'])
             elif isinstance(state['omas_data'], list):
-                state['_omas_data'] = OMAS_DATA([])
+                state['_omas_data'] = OMAS_DATA(list)
                 state['_omas_data']._store[:] = state['omas_data']
             else:
                 raise RuntimeException('Should not be here')
@@ -1510,12 +1461,12 @@ class baseODS(MutableMapping):
         if self._omas_data.isinstance(None):
             return tmp
         elif self._omas_data.isinstance(list):
-            tmp._omas_data = OMAS_DATA([])
+            tmp._omas_data = OMAS_DATA(list)
             for k, value in enumerate(self._omas_data):
                 tmp._omas_data.append(value.__deepcopy__(memo=memo))
                 tmp._omas_data[k].parent = tmp
         else:
-            tmp._omas_data = OMAS_DATA({})
+            tmp._omas_data = OMAS_DATA(dict)
             for key in self._omas_data:
                 if isinstance(self._omas_data[key], baseODS):
                     tmp._omas_data[key] = self[key].__deepcopy__(memo=memo)
@@ -2093,34 +2044,6 @@ class baseODS(MutableMapping):
         except Exception as _excp:
             printe(f'Issue with {self.location}.code.parameters: ' + repr(_excp))
 
-    def sample(self, ntimes=1, homogeneous_time=None):
-        """
-        Populates the ods with sample data
-
-        :param ntimes: number of time slices to generate
-
-        :param homogeneous_time: only return samples that have ids_properties.homogeneous_time either True or False
-
-        :return: self
-        """
-        for func in omas_sample.__ods__:
-            printd(f'Adding {func} sample data to ods', topic='sample')
-            args, kw, _, _ = function_arguments(getattr(self, 'sample_' + func))
-            if 'time_index' in kw:
-                for k in range(ntimes):
-                    getattr(self, 'sample_' + func)(time_index=k)
-            else:
-                getattr(self, 'sample_' + func)()
-
-        # remove IDSs that do not have the same homogeneous_time property as requested
-        if homogeneous_time is not None:
-            self.physics_consistent_times()  # to add homogeneous_time info
-            for ds in list(self.keys()):
-                if self[ds]['ids_properties']['homogeneous_time'] != homogeneous_time:
-                    del self[ds]
-
-        return self
-
     def document(self, what=['coordinates', 'data_type', 'documentation', 'units']):
         """
         RST documentation of the ODs content
@@ -2206,9 +2129,62 @@ class baseODS(MutableMapping):
         if self._omas_data.isinstance(dict):
             raise ValueError('Can only resize arrays of structures')
         if self._omas_data.isinstance(None):
-            self._omas_data = OMAS_DATA([])
+            self._omas_data = OMAS_DATA(list)
         for k in range(len(self._omas_data), n):
             self.setraw(k, self.same_init_ods())
+
+    def slice_at_time(self, time=None, time_index=None):
+        """
+        method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
+
+        :param time: time value to select
+
+        :param time_index: time index to select (NOTE: time_index has precedence over time)
+
+        :return: modified ODS
+        """
+
+        # set time_index for parent and children
+        if 'time' in self and isinstance(self['time'], numpy.ndarray):
+            if time_index is None:
+                time_index = numpy.argmin(abs(self['time'] - time))
+                if (time - self['time'][time_index]) != 0.0:
+                    printe('%s sliced at %s instead of requested time %s' % (self.location, self['time'][time_index], time))
+                time = self['time'][time_index]
+            if time is None:
+                time = self['time'][time_index]
+
+        # loop over items
+        for item in self.keys():
+            # time (if present) is treated last
+            if item == 'time':
+                continue
+
+            # identify time-dependent data
+            info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
+            if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
+
+                # time-dependent arrays
+                if not isinstance(self.getraw(item), baseODS):
+                    self[item] = numpy.atleast_1d(self[item][time_index])
+
+                # time-depentend list of ODSs
+                elif self[item]._omas_data.isinstance(list) and len(self[item]) and 'time' in self[item][0]:
+                    if time_index is None:
+                        raise ValueError('`time` array is not set for `%s` ODS' % self.ulocation)
+                    tmp = self[item][time_index]
+                    self.getraw(item).clear()
+                    self.getraw(item)[0] = tmp
+
+            # go deeper inside ODSs that do not have time info
+            elif isinstance(self.getraw(item), baseODS):
+                self.getraw(item).slice_at_time(time=time, time_index=time_index)
+
+        # treat time
+        if 'time' in self:
+            self['time'] = numpy.atleast_1d(self['time'][time_index])
+
+        return self
 
 
 class ODS(baseODS):
@@ -2362,10 +2338,33 @@ class ODS(baseODS):
         # We should never end up here
         raise ValueError(f'Error handling time in OMAS for `{l2o(subtree)}`')
 
+    def sample(self, ntimes=1, homogeneous_time=None):
+        """
+        Populates the ods with sample data
 
-omas_dictstate = dir(ODS)
-omas_dictstate.extend(['_omas_data'] + omas_ods_attrs)
-omas_dictstate = sorted(list(set(omas_dictstate)))
+        :param ntimes: number of time slices to generate
+
+        :param homogeneous_time: only return samples that have ids_properties.homogeneous_time either True or False
+
+        :return: self
+        """
+        for func in omas_sample.__ods__:
+            printd(f'Adding {func} sample data to ods', topic='sample')
+            args, kw, _, _ = function_arguments(getattr(self, 'sample_' + func))
+            if 'time_index' in kw:
+                for k in range(ntimes):
+                    getattr(self, 'sample_' + func)(time_index=k)
+            else:
+                getattr(self, 'sample_' + func)()
+
+        # remove IDSs that do not have the same homogeneous_time property as requested
+        if homogeneous_time is not None:
+            self.physics_consistent_times()  # to add homogeneous_time info
+            for ds in list(self.keys()):
+                if self[ds]['ids_properties']['homogeneous_time'] != homogeneous_time:
+                    del self[ds]
+
+        return self
 
 
 class ODC(baseODS):
@@ -2375,7 +2374,7 @@ class ODC(baseODS):
 
     def __init__(self, *args, **kw):
         ODS.__init__(self, *args, **kw)
-        self._omas_data = OMAS_DATA({})
+        self._omas_data = OMAS_DATA(dict)
 
     @property
     def consistency_check(self):
