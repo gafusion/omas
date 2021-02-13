@@ -177,8 +177,91 @@ omas_ods_attrs = [
     '_toplocation',
 ]
 
+mode = 'imas'
+
 
 class OMAS_DATA(MutableMapping):
+    def __init__(self, *args, **kw):
+        if mode == 'python':
+            self.__class__ = OMAS_DATA_PYTHON
+        elif mode == 'imas':
+            self.__class__ = OMAS_DATA_IMAS
+        self.__init__(*args, **kw)
+
+    def __delitem__(self, key):
+        pass
+
+    def __getitem__(self, key):
+        pass
+
+    def __iter__(self):
+        pass
+
+    def __len__(self):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+
+class OMAS_DATA_PYTHON(MutableMapping):
+    def __init__(self, storage_type):
+        self.storage_type = storage_type
+        if storage_type is None:
+            self._store = None
+        else:
+            self._store = storage_type()
+
+    def __getitem__(self, key):
+        return self._store[key]
+
+    def append(self, value):
+        self._store.append(value)
+
+    def extend(self, value):
+        self._store.extend(value)
+
+    def pop(self, index):
+        self._store.pop(index)
+
+    def __setitem__(self, key, value):
+        self._store[key] = value
+
+    def __delitem__(self, key):
+        if self.storage_type is list:
+            self._store.pop(key)
+        else:
+            del self._store[key]
+
+    def __iter__(self):
+        return iter(self._store)
+
+    def __len__(self):
+        return len(self._store)
+
+    def __repr__(self):
+        return self._store.__repr__()
+
+    def keys(self):
+        if self.storage_type is list:
+            return range(len(self._store))
+        else:
+            return self._store.keys()
+
+    def isinstance(self, storage_type):
+        if storage_type is None:
+            return self._store is None
+        else:
+            return isinstance(self._store, storage_type)
+
+    def update(self, value):
+        return self._store.update(value)
+
+    def toJSON(self):
+        return self._store
+
+
+class OMAS_DATA_IMAS(MutableMapping):
     def __init__(self, storage_type):
         self.storage_type = storage_type
         if storage_type is None:
