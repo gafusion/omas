@@ -194,9 +194,9 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         )
 
     # generate uncertain data
-    if not skip_uncertainties and ods._omas_data.isinstance(dict):
-        for kid in list(ods._omas_data.keys()):
-            if kid.endswith('_error_upper') and kid[: -len('_error_upper')] in ods._omas_data:
+    if not skip_uncertainties and ods.omas_data.isinstance(dict):
+        for kid in list(ods.omas_data.keys()):
+            if kid.endswith('_error_upper') and kid[: -len('_error_upper')] in ods.omas_data:
                 try:
                     if isinstance(ods[kid], baseODS):
                         pass

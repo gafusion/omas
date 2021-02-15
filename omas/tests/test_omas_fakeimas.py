@@ -55,7 +55,7 @@ class TestOmasFakeImas(UnittestCaseOmas):
             pf = fakeimas.pf_active()
             pf.coil.resize(1)
             pf.coil[0].current.data = [1, 2, 3]
-            pf.ids_properties.homogeneous_time=1
+            pf.ids_properties.homogeneous_time = 1
             DB = fakeimas.DBEntry('MDSPLUS_BACKEND', 'd3d', 123456, 0, os.environ['USER'], '3')
             DB.create()
             DB.put(pf)

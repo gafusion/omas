@@ -296,7 +296,7 @@ def json_dumper(obj, objects_encode=True):
     from omas import baseODS
 
     if isinstance(obj, baseODS):
-        return obj._omas_data.toJSON()
+        return obj.omas_data.toJSON()
 
     if objects_encode is False:
         if isinstance(obj, numpy.ndarray):

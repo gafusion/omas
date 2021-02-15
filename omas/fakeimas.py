@@ -4,6 +4,7 @@ from contextlib import contextmanager
 from .omas_core import baseODS, list_structures, latest_imas_version, omas_rcparams
 from .omas_utils import p2l, o2i, l2u, _extra_structures
 
+
 def empty(data_type):
     if 'STR' in data_type:
         value = ''
@@ -24,6 +25,7 @@ class imasdef:
 
 class IDS(baseODS):
     def __init__(self, *args, **kw):
+        kw['backend'] = 'python'
         super().__init__(*args, **kw)
 
     def __getattr__(self, attr):
@@ -37,15 +39,29 @@ class IDS(baseODS):
             return empty(self.info(attr)['data_type'])
 
     def __setattr__(self, attr, value):
-        if attr in ['parent', 'imas_version', 'cocos', 'cocosio', 'coordsio', 'unitsio', 'dynamic', 'consistency_check'] or attr.startswith(
-            '_'
-        ):
+        if attr in [
+            'omas_data',
+            'parent',
+            'imas_version',
+            'cocos',
+            'cocosio',
+            'coordsio',
+            'unitsio',
+            'dynamic',
+            'consistency_check',
+        ] or attr.startswith('_'):
             return super().__setattr__(attr, value)
         else:
             return super().__setitem__(attr, value)
 
     def __getitem__(self, key, cocos_and_coords=True):
-        return super().__getitem__(key, cocos_and_coords)
+        if isinstance(key, int) and key >= len(self):
+            raise RuntimeError(f'IMAS {self.location} has size {len(self)} and needs resize to {key+1}')
+        try:
+            return super().__getitem__(key, cocos_and_coords)
+        except ValueError:
+            # return empty IMAS value
+            return empty(self.info(key)['data_type'])
 
     def deepcopy(self):
         return self.copy()
@@ -54,10 +70,10 @@ class IDS(baseODS):
         return DB.put(self, occurrence)
 
     def get(self, occurrence, DB):
-        self._omas_data = DB.get(self._toplocation, occurrence)._omas_data
-        for item in self._omas_data:
-            if isinstance(self._omas_data[item], baseODS):
-                self._omas_data[item].parent = self
+        self.omas_data = DB.get(self._toplocation, occurrence).omas_data
+        for item in self.omas_data:
+            if isinstance(self.omas_data[item], baseODS):
+                self.omas_data[item].parent = self
 
 
 class DBEntry(dict):

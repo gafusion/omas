@@ -33,7 +33,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
         parent = filename
 
     if isinstance(dictin, baseODS):
-        dictin = dictin._omas_data
+        dictin = dictin.omas_data
 
     if groupname:
         g = parent.create_group(groupname)
@@ -43,7 +43,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     for key, item in list(dictin.items()):
 
         if isinstance(item, baseODS):
-            item = item._omas_data.toJSON()
+            item = item.omas_data.toJSON()
 
         if isinstance(item, dict):
             if recursive:
