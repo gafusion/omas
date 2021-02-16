@@ -56,7 +56,7 @@ class IDS(baseODS):
 
     def __getitem__(self, key, cocos_and_coords=True):
         if isinstance(key, int) and key >= len(self):
-            raise RuntimeError(f'IMAS {self.location} has size {len(self)} and needs resize to {key+1}')
+            raise IndexError(f'IMAS {self.location} has size {len(self)} and needs resize to {key+1}')
         try:
             return super().__getitem__(key, cocos_and_coords)
         except ValueError:
