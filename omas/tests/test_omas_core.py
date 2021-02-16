@@ -573,18 +573,18 @@ class TestOmasCore(UnittestCaseOmas):
         with fakeimas.fake_environment(True):
             ods = ODS(backend='imas')
             assert ods.backend == 'imas'
-            assert isinstance(ods.omas_data._store_dd, IDSs)
+            assert isinstance(ods.omas_data.store_dd, IDSs)
 
             tmp1 = tmp = ods['equilibrium']
             assert tmp.backend == 'imas'
-            assert isinstance(tmp.omas_data._store_dd, IDS)
-            assert tmp.omas_data._store_dd.location == 'equilibrium'
+            assert isinstance(tmp.omas_data.store_dd, IDS)
+            assert tmp.omas_data.store_dd.location == 'equilibrium'
             assert 'equilibrium' in ods
 
             tmp2 = tmp = ods['equilibrium']['ids_properties']
             assert tmp.backend == 'imas'
-            assert isinstance(tmp.omas_data._store_dd, IDS)
-            assert tmp.omas_data._store_dd.location == 'equilibrium.ids_properties'
+            assert isinstance(tmp.omas_data.store_dd, IDS)
+            assert tmp.omas_data.store_dd.location == 'equilibrium.ids_properties'
             assert 'equilibrium.ids_properties' in ods
 
             ods['equilibrium']['ids_properties']['homogeneous_time'] = 1
