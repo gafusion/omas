@@ -434,7 +434,7 @@ def infer_fetch_paths(idss, DB, occurrence, paths, time, imas_version, verbose=T
                     print(f'* {ds.ljust(ndss)} IDS has data ({len(ids.time)} times)')
                 except Exception as _excp:
                     print(f'* {ds.ljust(ndss)} IDS')
-                fetch_paths += filled_paths_in_ids(idss, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
+                fetch_paths += filled_paths_in_ids(idss, load_structure(ds, imas_version=imas_version,include_extra_structures=False)[1], [], [], requested_paths)
 
         else:
             if verbose:
@@ -846,7 +846,7 @@ def reach_ds_location(path, imas_version):
 
     :return: requested location in ds
     """
-    ds = load_structure(path[0], imas_version=imas_version)[1]
+    ds = load_structure(path[0], imas_version=imas_version,include_extra_structures=False)[1]
     out = ds
     for kp, p in enumerate(path):
         if not isinstance(p, str):

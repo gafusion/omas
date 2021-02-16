@@ -52,14 +52,15 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_parse_codeparameters(self):
         from omas.examples import parse_codeparameters
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_solps_imas(self):
-        from omas.examples import solps_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import solps_imas
 
-    @unittest.skipIf((failed_IMAS or failed_OMFIT), str(failed_IMAS) + str(failed_OMFIT))
+    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_geqdsk_to_from_imas(self):
-        from omas.examples import geqdsk_to_from_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import geqdsk_to_from_imas
 
     def test_showcase_paths(self):
         from omas.examples import showcase_paths
@@ -108,14 +109,14 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_cocos(self):
         from omas.examples import omas_cocos
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_iter_scenario(self):
-        from omas.examples import iter_scenario
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import iter_scenario
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_simple_imas(self):
-        from omas.examples import simple_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import simple_imas
 
     def test_consistency_check(self):
         from omas.examples import consistency_check
@@ -134,9 +135,9 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_dynamic_nc(self):
         from omas.examples import omas_dynamic_nc
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_dynamic_imas(self):
-        from omas.examples import omas_dynamic_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import omas_dynamic_imas
 
     @unittest.skipIf(failed_D3D_MDS, str(failed_D3D_MDS))
     def test_omas_dynamic_machine(self):
@@ -145,10 +146,10 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_collection(self):
         from omas.examples import omas_collection
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     @unittest.skipIf(not_running_on_cea_cluster, str(not_running_on_cea_cluster))
     def test_west_geqdsk(self):
-        from omas.examples import west_geqdsk
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import west_geqdsk
 
 
 # for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):

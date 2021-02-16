@@ -94,7 +94,7 @@ def load_omas_uda(
             client,
             pulse,
             run,
-            load_structure(ds, imas_version=imas_version)[1],
+            load_structure(ds, imas_version=imas_version,include_extra_structures=False)[1],
             path=[],
             paths=[],
             requested_paths=requested_paths,

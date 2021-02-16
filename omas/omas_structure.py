@@ -313,7 +313,7 @@ def create_html_documentation(imas_version=omas_rcparams['default_imas_version']
     for structure_file in list_structures(imas_version=imas_version):
         print('Adding to html documentation: ' + structure_file)
         # load structure information
-        structure = load_structure(structure_file, imas_version=imas_version)[0]
+        structure = load_structure(structure_file, imas_version=imas_version, include_extra_structures=False)[0]
         # idenfity coordinates in the structure
         coords = []
         for item in structure:
@@ -387,7 +387,7 @@ def extract_coordinates(imas_version=omas_rcparams['default_imas_version']):
 
     coordinates = set()
     for structure in list_structures(imas_version=imas_version):
-        tmp = load_structure(structure, imas_version)[0]
+        tmp = load_structure(structure, imas_version,include_extra_structures=False)[0]
         coords = []
         for item in tmp:
             if 'coordinates' in tmp[item]:
@@ -411,7 +411,7 @@ def extract_times(imas_version=omas_rcparams['default_imas_version']):
 
     times = []
     for structure in list_structures(imas_version=imas_version):
-        tmp = load_structure(structure, imas_version)[0]
+        tmp = load_structure(structure, imas_version,include_extra_structures=False)[0]
 
         for item in tmp:
             if not item.endswith('.time') or 'data_type' not in tmp[item] or tmp[item]['data_type'] == 'STRUCTURE':
@@ -434,7 +434,7 @@ def extract_global_quantities(imas_version=omas_rcparams['default_imas_version']
 
     global_quantities = []
     for structure in list_structures(imas_version=imas_version):
-        tmp = load_structure(structure, imas_version)[0]
+        tmp = load_structure(structure, imas_version,include_extra_structures=False)[0]
 
         for item in tmp:
             if any(item.endswith(error) for error in ['_error_index', '_error_lower', '_error_upper']):
@@ -459,7 +459,7 @@ def extract_ggd(imas_version=omas_rcparams['default_imas_version']):
 
     omas_ggd = []
     for structure in list_structures(imas_version=imas_version):
-        tmp = load_structure(structure, imas_version)[0]
+        tmp = load_structure(structure, imas_version,include_extra_structures=False)[0]
 
         for item in tmp:
             if item.endswith('.ggd') or item.endswith('.grids_ggd'):
@@ -502,7 +502,7 @@ def extract_cocos(imas_version=omas_rcparams['default_imas_version']):
 
     omas_cocos = {}
     for structure in list_structures(imas_version=imas_version):
-        tmp = load_structure(structure, imas_version)[0]
+        tmp = load_structure(structure, imas_version,include_extra_structures=False)[0]
         for item in tmp:
             if 'cocos_transformation_expression' in tmp[item]:
                 cocos = tmp[item]['cocos_transformation_expression']

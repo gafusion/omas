@@ -396,6 +396,12 @@ class baseODS(MutableMapping):
 
         :return: string with memory backend
         """
+        if not hasattr(self, '_backend'):
+            self._backend = 'python'
+        top = self.top
+        if top._backend is None:
+            top._backend = 'python'
+        self._backend = top._backend
         return self._backend
 
     @backend.setter

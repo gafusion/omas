@@ -676,7 +676,7 @@ _global_quantities = {}
 #             "data_type": "FLT_1D",
 #             "description": "centroid r max",
 #             "units": 'm',
-#             "cocos_signal": '?'  # optional
+#             "cocos_signal": '?'  # if appropriate
 #         }
 #     }
 # }
@@ -718,13 +718,15 @@ def structures_filenames(imas_version):
     return _structures_filenames[imas_version]
 
 
-def load_structure(filename, imas_version):
+def load_structure(filename, imas_version, include_extra_structures=True):
     """
     load omas structure from given json filename or IDS name
 
     :param filename: full path to json file or IDS name
 
     :param imas_version: imas version to load the data schema of (optional if filename is a full path)
+
+    :param include_extra_structures: whether to include _extra_structures information
 
     :return: tuple with structure, hashing mapper, and ods
     """
@@ -736,7 +738,7 @@ def load_structure(filename, imas_version):
         filename = structures_filenames(imas_version)[filename]
 
     # check if _structures and _structures_dict already have this in cache
-    id = (filename, imas_version)
+    id = (filename, imas_version, include_extra_structures)
     if id in _structures and id in _structures_dict:
         return _structures[id], _structures_dict[id]
 
@@ -748,7 +750,7 @@ def load_structure(filename, imas_version):
 
         # add _extra_structures definitions
         structure_name = os.path.splitext(os.path.split(filename)[1])[0]
-        if structure_name in _extra_structures:
+        if include_extra_structures and structure_name in _extra_structures:
             for item in _extra_structures[structure_name]:
                 if item not in _structures[id]:
                     cs = _extra_structures[structure_name][item].pop('cocos_signal', None)
@@ -768,13 +770,15 @@ def load_structure(filename, imas_version):
     return _structures[id], _structures_dict[id]
 
 
-def imas_structure(imas_version, location):
+def imas_structure(imas_version, location, include_extra_structures=True):
     '''
     Returns a dictionary with the IMAS structure given a location
 
     :param imas_version: imas version
 
     :param location: path in OMAS format
+
+    :param include_extra_structures: whether to include _extra_structures information
 
     :return: dictionary as loaded by load_structure() at location
     '''
@@ -786,7 +790,7 @@ def imas_structure(imas_version, location):
             structure = {k: k for k in list_structures(imas_version=imas_version)}
         else:
             path = p2l(ulocation)
-            structure = load_structure(path[0], imas_version=imas_version)[1][path[0]]
+            structure = load_structure(path[0], imas_version=imas_version, include_extra_structures=include_extra_structures)[1][path[0]]
             for key in path[1:]:
                 structure = structure[key]
         _ods_structure_cache[imas_version][ulocation] = structure
@@ -922,7 +926,7 @@ def omas_info(structures=None, hide_obsolescent=True, cumulative_queries=False, 
     # generate ODS with info
     for structure in structures:
         if structure not in ods:
-            tmp = load_structure(structure, imas_version)[0]
+            tmp = load_structure(structure, imas_version, include_extra_structures=True)[0]
             lst = sorted(tmp.keys())
             for k, item in enumerate(lst):
                 if re.match('.*_error_(index|lower|upper)$', item.split('.')[-1]):
@@ -959,7 +963,7 @@ def omas_info_node(key, imas_version=omas_rcparams['default_imas_version']):
     :return: dictionary with IMAS information (or an empty dictionary if the node is not found)
     """
     try:
-        return copy.copy(load_structure(key.split('.')[0], imas_version)[0][o2i(o2u(key))])
+        return copy.copy(load_structure(key.split('.')[0], imas_version, include_extra_structures=True)[0][o2i(o2u(key))])
     except KeyError:
         return {}
 
