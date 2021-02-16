@@ -48,6 +48,9 @@ class TestOmasFakeImas(UnittestCaseOmas):
         print(eq.time_slice[5].global_quantities.ip)
 
     def test_fake_module(self):
+        if 'imas' in sys.modules:
+            del sys.modules['imas']
+
         # ============================================
         # Load fake IMAS data with OMAS IMAS interface
         # ============================================
