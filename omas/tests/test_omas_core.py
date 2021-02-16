@@ -563,6 +563,38 @@ class TestOmasCore(UnittestCaseOmas):
         assert ods.imas_version == 'test'
         assert ods['equilibrium.time_slice.0.global_quantities'].imas_version == 'test'
 
+    def test_imas_backend_fakeimas(self):
+        '''
+        Test IMAS memory backend using OMAS fakeimas interface
+        '''
+        from omas.omas_imas import IDSs
+        from omas.fakeimas import IDS
+
+        with fakeimas.fake_environment(True):
+            ods = ODS(backend='imas')
+            assert ods.backend == 'imas'
+            assert isinstance(ods.omas_data._store_dd, IDSs)
+
+            tmp1 = tmp = ods['equilibrium']
+            assert tmp.backend == 'imas'
+            assert isinstance(tmp.omas_data._store_dd, IDS)
+            assert tmp.omas_data._store_dd.location == 'equilibrium'
+            assert 'equilibrium' in ods
+
+            tmp2 = tmp = ods['equilibrium']['ids_properties']
+            assert tmp.backend == 'imas'
+            assert isinstance(tmp.omas_data._store_dd, IDS)
+            assert tmp.omas_data._store_dd.location == 'equilibrium.ids_properties'
+            assert 'equilibrium.ids_properties' in ods
+
+            ods['equilibrium']['ids_properties']['homogeneous_time'] = 1
+            assert 'equilibrium.ids_properties.homogeneous_time' in ods
+            assert ods['equilibrium']['ids_properties']['homogeneous_time'] == 1
+
+            ods['equilibrium.time_slice[0].global_quantities.ip'] = 2.0
+            assert len(ods['equilibrium.time_slice']) == 1
+            assert ods['equilibrium.time_slice[0].global_quantities.ip'] == 2.0
+
     # End of TestOmasCore class
 
 

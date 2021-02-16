@@ -96,7 +96,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     elif isinstance(value, numpy.ndarray):
         # if 'STRUCT_ARRAY' in info['data_type'] and not len(value):
         #     value = ODS()
-        #     value.omas_data = OMAS_DATA(self._backend, list, value.omas_data._store_dd)
+        #     value.omas_data = OMAS_DATA_factory(self._backend, list, value.omas_data._store_dd)
         if 'FLT' in info['data_type']:
             value = value.astype(float)
         elif 'INT' in info['data_type']:
@@ -179,7 +179,18 @@ omas_ods_attrs = [
 ]
 
 
-def OMAS_DATA(backend, *args, **kw):
+def OMAS_DATA_factory(backend, *args, **kw):
+    r'''
+    Function used to pick the data class for the ODS memory backend
+
+    :param backend: string with the backend name 
+
+    :param \*args: arguments passed to the data class
+
+    :param \**kw: keywords arguments passed to the data class
+
+    :return: object of the OMAS_DATA_{backend}
+    '''
     if backend == 'python':
         return OMAS_DATA_PYTHON(*args, **kw)
     elif backend == 'imas':
@@ -190,18 +201,29 @@ def OMAS_DATA(backend, *args, **kw):
 
 class OMAS_DATA_PYTHON(MutableMapping):
     '''
-    self._store is either None, a dict or a list
-    self._store contains the data of an ODS independently of whether these are the branches or leaves of the data structure
-    self._store_dd is not used
+    Native backend for storing data in ODSs
+
+    NOTES: How it works:
+     * self._store is either None, a dict or a list
+     * self._store contains the data of an ODS independently of whether these are the branches or leaves of the data structure
+     * self._store_dd is not used
     '''
 
     def __init__(self, storage_type, store_dd):
+        '''
+        :param storage_type: `None` (unknown), `list` (for arrays of structures), or `dict` (everything else)
+        
+        :param store_dd: not used
+        '''
         self.storage_type = storage_type
         if storage_type is None:
             self._store = None
         else:
             self._store = storage_type()
         self._store_dd = None
+
+    def __getstate__(self):
+        return {'storage_type': self.storage_type, '_store': self._store, '_store_dd': self._store_dd}
 
     def __getitem__(self, key):
         return self._store[key]
@@ -257,6 +279,11 @@ class OMAS_DATA_IMAS(OMAS_DATA_PYTHON):
     '''
 
     def __init__(self, storage_type, store_dd):
+        '''
+        :param storage_type: `None` (unknown), `list` (for arrays of structures), or `dict` (everything else)
+
+        :param store_dd: pointer to the IMAS data structure
+        '''
         # at the top level we use `IDSs`, that is just an empty class that
         # will keep track of all the IDSs that are associated with an ODS
         if store_dd is None:
@@ -317,7 +344,9 @@ class OMAS_DATA_IMAS(OMAS_DATA_PYTHON):
 
 class baseODS(MutableMapping):
     """
-    OMAS Data Structure class
+    Class with the basic functionalities of the OMAS Data Structure class
+    This class does not include any of the physics, plot, and sample functions.
+    Both the ODS and IDS class (of the omas.fakeimas package) inherit from this.
     """
 
     def __init__(
@@ -358,7 +387,7 @@ class baseODS(MutableMapping):
         self.unitsio = unitsio
         self.dynamic = dynamic
         self._backend = backend
-        self.omas_data = OMAS_DATA(self._backend, None, None)
+        self.omas_data = OMAS_DATA_factory(self._backend, None, None)
 
     @property
     def backend(self):
@@ -776,9 +805,9 @@ class baseODS(MutableMapping):
                     self._validate(value, structure)
                     if value.omas_data.isinstance(None):
                         if ':' in structure:
-                            value.omas_data = OMAS_DATA(self._backend, list, self.omas_data._store_dd)
+                            value.omas_data = OMAS_DATA_factory(self._backend, list, self.omas_data._store_dd)
                         elif len(structure):
-                            value.omas_data = OMAS_DATA(self._backend, dict, self.omas_data._store_dd)
+                            value.omas_data = OMAS_DATA_factory(self._backend, dict, self.omas_data._store_dd)
 
             except (LookupError, TypeError):
                 txt = 'Not a valid IMAS %s location: %s' % (self.imas_version, location)
@@ -807,10 +836,10 @@ class baseODS(MutableMapping):
         elif self.omas_data.isinstance(None) or not len(self.omas_data):
             if isinstance(key[0], int):
                 if not self.omas_data.isinstance(list):
-                    self.omas_data = OMAS_DATA(self._backend, list, self.omas_data._store_dd)
+                    self.omas_data = OMAS_DATA_factory(self._backend, list, self.omas_data._store_dd)
             else:
                 if not self.omas_data.isinstance(dict):
-                    self.omas_data = OMAS_DATA(self._backend, dict, self.omas_data._store_dd)
+                    self.omas_data = OMAS_DATA_factory(self._backend, dict, self.omas_data._store_dd)
         elif isinstance(key[0], int) and not self.omas_data.isinstance(list):
             raise TypeError('Cannot convert from dict to list once ODS has data')
         elif isinstance(key[0], str) and not self.omas_data.isinstance(dict):
@@ -1027,13 +1056,13 @@ class baseODS(MutableMapping):
         # structure
         if isinstance(key, str) or isinstance(self, ODC):
             if self.omas_data.isinstance(None):
-                self.omas_data = OMAS_DATA(self._backend, dict, self.omas_data._store_dd)
+                self.omas_data = OMAS_DATA_factory(self._backend, dict, self.omas_data._store_dd)
             self.omas_data[key] = value
 
         # arrays of structures
         else:
             if self.omas_data.isinstance(None):
-                self.omas_data = OMAS_DATA(self._backend, list, self.omas_data._store_dd)
+                self.omas_data = OMAS_DATA_factory(self._backend, list, self.omas_data._store_dd)
 
             # dynamic array structure creation
             if key > len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
@@ -1524,12 +1553,12 @@ class baseODS(MutableMapping):
         # handle old omas_data attribute
         if 'omas_data' in state:
             if state['omas_data'] is None:
-                state['_omas_data'] = OMAS_DATA('python', None, None)
+                state['_omas_data'] = OMAS_DATA_factory('python', None, None)
             elif isinstance(state['omas_data'], dict):
-                state['_omas_data'] = OMAS_DATA('python', dict, None)
+                state['_omas_data'] = OMAS_DATA_factory('python', dict, None)
                 state['_omas_data']._store.update(state['omas_data'])
             elif isinstance(state['omas_data'], list):
-                state['_omas_data'] = OMAS_DATA('python', list, None)
+                state['_omas_data'] = OMAS_DATA_factory('python', list, None)
                 state['_omas_data']._store[:] = state['omas_data']
             else:
                 raise RuntimeException('Should not be here')
@@ -1567,12 +1596,12 @@ class baseODS(MutableMapping):
         if self.omas_data.isinstance(None):
             return tmp
         elif self.omas_data.isinstance(list):
-            tmp.omas_data = OMAS_DATA(self._backend, list, None)  # need to figure this one out for IMAS backend
+            tmp.omas_data = OMAS_DATA_factory(self._backend, list, None)  # need to figure this one out for IMAS backend
             for k, value in enumerate(self.omas_data):
                 tmp.omas_data.append(value.__deepcopy__(memo=memo))
                 tmp.omas_data[k].parent = tmp
         else:
-            tmp.omas_data = OMAS_DATA(self._backend, dict, None)  # need to figure this one out for IMAS backend
+            tmp.omas_data = OMAS_DATA_factory(self._backend, dict, None)  # need to figure this one out for IMAS backend
             for key in self.omas_data:
                 if isinstance(self.omas_data[key], baseODS):
                     tmp.omas_data[key] = self[key].__deepcopy__(memo=memo)
@@ -2235,7 +2264,7 @@ class baseODS(MutableMapping):
         if self.omas_data.isinstance(dict):
             raise ValueError('Can only resize arrays of structures')
         if self.omas_data.isinstance(None):
-            self.omas_data = OMAS_DATA(self._backend, list, self.omas_data._store_dd)
+            self.omas_data = OMAS_DATA_factory(self._backend, list, self.omas_data._store_dd)
         for k in range(len(self.omas_data), n):
             self.setraw(k, self.same_init_ods())
 
@@ -2480,7 +2509,7 @@ class ODC(baseODS):
 
     def __init__(self, *args, **kw):
         ODS.__init__(self, *args, **kw)
-        self.omas_data = OMAS_DATA('python', dict, None)
+        self.omas_data = OMAS_DATA_factory('python', dict, None)
 
     @property
     def consistency_check(self):
