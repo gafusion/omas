@@ -854,15 +854,20 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
     return _global_quantities[imas_version]
 
 
-try:
-    import pyximport
-
-    pyximport.install(language_level=3)
-    from .omas_cython import *
-except Exception as _excp:
-    warnings.warn('omas cython failed: ' + str(_excp))
+# only attempt cython if user owns this copy of omas
+if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
     with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
         exec(f.read(), globals())
+else:
+    try:
+        import pyximport
+    
+        pyximport.install(language_level=3)
+        from .omas_cython import *
+    except Exception as _excp:
+        warnings.warn('omas cython failed: ' + str(_excp))
+        with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
+            exec(f.read(), globals())
 
 
 def l2ut(path):
