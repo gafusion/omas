@@ -535,11 +535,12 @@ def machine_mapping_function(__all__):
 
                 # call signature
                 argspec = inspect.getfullargspec(f)
-                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args)
+                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args if not item.startswith('_'))
                 call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
                 default_options = None
                 if argspec.defaults:
                     default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
+                    default_options = {item:value for item,value in default_options.items() if not item.startswith('_')}
 
             # call
             out = f(*args, **kwargs)
@@ -767,10 +768,19 @@ class mdsvalue(dict):
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
-                        try:
-                            return {name: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
-                        except KeyError:
-                            return {name: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
+                        results = {}
+                        for name, expr in TDI.items():
+                            try:
+                                results[name]=MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
+                            except KeyError:
+                                try:
+                                    results[name]=MDSplus.Data.data(res[str(name)][str('value')])
+                                except KeyError:
+                                    try:
+                                        results[name]=Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
+                                    except KeyError:
+                                        results[name]=Exception(MDSplus.Data.data(res[str(name)][str('error')]))
+                        return results
                 else:
                     return MDSplus.Data.data(conn.get(TDI))
             except Exception as _excp:

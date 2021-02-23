@@ -65,7 +65,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
 def pf_coils_to_ods(ods, coil_data):
     """
-    Transfers poloidal field coil geometry data from a standard format used by efitviewer to ODS.
+    Transfers poloidal field coil geometry data from a standard EFIT mhdin.dat format to ODS.
 
     WARNING: only rudimentary identifies are assigned.
     You should assign your own identifiers and only rely on this function to assign numerical geometry data.

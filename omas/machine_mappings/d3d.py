@@ -1,7 +1,7 @@
 import numpy as np
 import inspect
 from omas import *
-from omas.omas_utils import printd
+from omas.omas_utils import printd, unumpy
 from omas.machine_mappings._common import *
 
 __all__ = []
@@ -10,7 +10,7 @@ __all__ = []
 @machine_mapping_function(__all__)
 def gas_injection_hardware(ods, pulse=133221):
     """
-    Sets up DIII-D gas injector data.
+    Loads DIII-D gas injectors hardware geometry
 
     R and Z are from the tips of the arrows in puff_loc.pro; phi from angle listed in labels in puff_loc.pro .
     I recorded the directions of the arrows on the EFITviewer overlay, but I don't know how to include them in IMAS, so
@@ -287,7 +287,8 @@ def gas_injection_hardware(ods, pulse=133221):
 @machine_mapping_function(__all__)
 def pf_active_hardware(ods):
     r"""
-    Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
+    Loads DIII-D tokamak poloidal field coil hardware geometry
+
     :param ods: ODS instance
 
     :return: dict
@@ -332,7 +333,7 @@ def pf_active_hardware(ods):
 @machine_mapping_function(__all__)
 def interferometer_hardware(ods, pulse=133221):
     """
-    Writes DIII-D CO2 interferometer chord locations into ODS.
+    Loads DIII-D CO2 interferometer chord locations
 
     The chord endpoints ARE NOT RIGHT. Only the R for vertical lines or Z for horizontal lines is right.
 
@@ -375,10 +376,11 @@ def interferometer_hardware(ods, pulse=133221):
     return {}
 
 
-@machine_mapping_function(__all__)
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     """
-    Gathers DIII-D Thomson measurement locations from MDSplus and loads them into OMAS
+    Gathers DIII-D Thomson measurement locations
+
+    :param pulse: int
 
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
@@ -386,54 +388,75 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     :return: dict
         Information or instructions for follow up in central hardware description setup
     """
-    import MDSplus
+    inspect.unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
+    return {}
 
-    def _find_thomson_lens(pulse, hw_call_sys, revision='BLESSED'):
-        """Read the Thomson scattering hardware map to figure out which lens each chord looks through"""
-        cal_call = f'.ts.{revision}.header.calib_nums'
-        cal_set = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=cal_call).data()[0]
-        hwi_call = f'.{hw_call_sys}.hwmapints'
-        printd('  Reading hw map int values: treename = "tscal", cal_set = {}, hwi_call = {}'.format(cal_set, hwi_call), topic='mapping')
-        try:
-            hw_ints = mdsvalue('d3d', treename='tscal', pulse=cal_set, TDI=hwi_call).data()
-        except MDSplus.MdsException:
-            printe('WARNING: Error reading Thomson scattering hardware map to determine which lenses were used!')
-            return None
-        else:
-            if len(np.shape(hw_ints)) < 2:
-                # Contingency needed for cases where all view-chords are taken off of divertor laser and reassigned to core
-                hw_ints = hw_ints.reshape(1, -1)
-            hw_lens = hw_ints[:, 2]
-            return hw_lens
 
-    printd('Setting up DIII-D Thomson locations...', topic='mapping')
+@machine_mapping_function(__all__)
+def thomson_scattering_data(ods, pulse=133221, revision='BLESSED', _measurements=True):
+    """
+    Loads DIII-D Thomson measurement data
 
-    tsdat = mdstree('d3d', treename='ELECTRONS', pulse=pulse)['TS'][revision]
+    :param pulse: int
 
-    is_subsys = np.array([all(item in tsdat[k] for item in ['DENSITY', 'TEMP', 'R', 'Z']) for k in list(tsdat.keys())])
-    subsystems = np.array(list(tsdat.keys()))[is_subsys]
+    :param revision: string
+        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+    """
+    systems = ['TANGENTIAL', 'DIVERTOR', 'CORE']
 
+    # get the actual data
+    query = {'calib_nums': f'.ts.{revision}.header.calib_nums'}
+    for system in systems:
+        for quantity in ['R', 'Z', 'PHI']:
+            query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
+        if _measurements:
+            for quantity in ['TEMP', 'TEMP_E', 'DENSITY', 'DENSITY_E', 'TIME']:
+                query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
+    tsdat = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+
+    # Read the Thomson scattering hardware map to figure out which lens each chord looks through
+    cal_set = tsdat['calib_nums'][0]
+    query = {}
+    for system in systems:
+        query[f'{system}_hwmapints'] = f'.{system}.hwmapints'
+    hw_ints = mdsvalue('d3d', treename='TSCAL', pulse=cal_set, TDI=query).raw()
+
+    # assign data in ODS
     i = 0
-    for sub in subsystems:
-        lenses = _find_thomson_lens(pulse, sub, revision)
-        try:
-            nc = len(tsdat[sub]['R'].data())
-        except MDSplus.MdsException:
-            nc = 0
+    for system in systems:
+        if isinstance(tsdat[f'{system}_R'], Exception):
+            continue
+        nc = len(tsdat[f'{system}_R'])
+        if not nc:
+            continue
+
+        # determine which lenses were used
+        ints = hw_ints[f'{system}_hwmapints']
+        if len(np.shape(ints)) < 2:
+            # Contingency needed for cases where all view-chords are taken off of divertor laser and reassigned to core
+            ints = ints.reshape(1, -1)
+        lenses = ints[:, 2]
+
+        # Assign data to ODS
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
-            ch['name'] = 'TS_{sub:}_r{lens:+0d}_{ch:}'.format(sub=sub.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
-            ch['identifier'] = '{}{:02d}'.format(sub[0], j)
-            for pos in ['R', 'Z', 'PHI']:
-                ch['position'][pos.lower()] = tsdat[sub][pos].data()[j] * (-np.pi / 180.0 if pos == 'PHI' else 1)
+            ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
+            ch['identifier'] = f'{system[0]}{j:02d}'
+            ch['position']['r'] = tsdat[f'{system}_R'][j]
+            ch['position']['z'] = tsdat[f'{system}_Z'][j]
+            ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
+            if _measurements:
+                ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
+                ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
+                ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
+                ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], tsdat[f'{system}_TEMP_E'][j])
             i += 1
-    return {}
 
 
 @machine_mapping_function(__all__)
 def bolometer_hardware(ods, pulse=133221):
     """
-    Load DIII-D bolometer chord locations into the ODS
+    Load DIII-D bolometer chord locations
 
     Data sources:
     - iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/bolometerpaths.pro
@@ -547,7 +570,7 @@ def bolometer_hardware(ods, pulse=133221):
 @machine_mapping_function(__all__)
 def langmuir_probes_hardware(ods, pulse=176235):
     """
-    Load DIII-D Langmuir probe locations into an ODS
+    Load DIII-D Langmuir probe locations
 
     :param ods: ODS instance
 
@@ -610,7 +633,7 @@ def pf_active_coil_current_data(ods, pulse=133221):
 @machine_mapping_function(__all__)
 def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
-    Gathers DIII-D CER measurement locations from MDSplus and loads them into OMAS
+    Gathers DIII-D CER measurement locations from MDSplus
 
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
@@ -655,7 +678,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
 @machine_mapping_function(__all__)
 def magnetics_hardware(ods):
     r"""
-    Adds DIII-D tokamak poloidal field coil hardware geometry to ODS
+    Load DIII-D tokamak poloidal field coil hardware geometry
     :param ods: ODS instance
 
     :return: dict
@@ -779,7 +802,7 @@ def magnetics_hardware(ods):
             ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
             ods[f'magnetics.b_field_pol_probe.{k}.position.z'] = z
             ods[f'magnetics.b_field_pol_probe.{k}.length'] = s
-            ods[f'magnetics.b_field_pol_probe.{k}.poloidal_angle'] = a / 180 * np.pi
+            ods[f'magnetics.b_field_pol_probe.{k}.poloidal_angle'] = -a / 180 * np.pi
             ods[f'magnetics.b_field_pol_probe.{k}.toroidal_angle'] = 0.0 / 180 * np.pi
             ods[f'magnetics.b_field_pol_probe.{k}.type.index'] = 1
             ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
