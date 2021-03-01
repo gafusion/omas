@@ -336,7 +336,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
-def summary_taue(ods, update=True, PRINTFLAG=False):
+def summary_taue(ods, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
@@ -472,10 +472,10 @@ def summary_heating_power(ods, update=True):
     for key, value in power_dict.items():
         power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
         if numpy.sum(value) > 0:
-            if 'total_heating' in key:
+            if key == 'total_heating':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
                 continue
-            elif 'fusion' in key:
+            elif key == 'fusion':
                 ods_n['summary.fusion.power.value'] = numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
