@@ -12,10 +12,6 @@
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:": {
   "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
  },
@@ -48,7 +44,48 @@
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z",
   "treename": "{EFIT_tree}"
  },
-  "wall.description_2d.:": {
+ "equilibrium.time_slice.:.time": {
+  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
+ "pf_active.coil.:": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.time": {
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.geometry_type": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.height": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.r": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.width": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.z": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.identifier": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.name": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "wall.description_2d.:": {
   "VALUE": 1
  },
  "wall.description_2d.:.limiter.unit.:": {

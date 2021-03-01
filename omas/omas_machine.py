@@ -540,7 +540,7 @@ def machine_mapping_function(__all__):
                 default_options = None
                 if argspec.defaults:
                     default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
-                    default_options = {item:value for item,value in default_options.items() if not item.startswith('_')}
+                    default_options = {item: value for item, value in default_options.items() if not item.startswith('_')}
 
             # call
             out = f(*args, **kwargs)
@@ -571,7 +571,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     # call machine mapping to make sure the json file is properly formatted
     machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
-    machine_mappings(machine,'',raise_errors=True)
+    machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
     try:
@@ -771,15 +771,15 @@ class mdsvalue(dict):
                         results = {}
                         for name, expr in TDI.items():
                             try:
-                                results[name]=MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
+                                results[name] = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
                             except KeyError:
                                 try:
-                                    results[name]=MDSplus.Data.data(res[str(name)][str('value')])
+                                    results[name] = MDSplus.Data.data(res[str(name)][str('value')])
                                 except KeyError:
                                     try:
-                                        results[name]=Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
+                                        results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
                                     except KeyError:
-                                        results[name]=Exception(MDSplus.Data.data(res[str(name)][str('error')]))
+                                        results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
                         return results
                 else:
                     return MDSplus.Data.data(conn.get(TDI))

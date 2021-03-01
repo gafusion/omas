@@ -295,10 +295,12 @@ def pf_active_hardware(ods):
         Information or instructions for follow up in central hardware description setup
     """
     # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08  D. Eldon
+    # R        Z       dR      dZ    tilt1  tilt2
+    # 0 in the last column really means 90 degrees
     # fmt: off
     fc_dat = np.array(
-        [  # R        Z       dR      dZ    tilt1  tilt2
-            [0.8608, 0.16830, 0.0508, 0.32106, 0.0, 0.0],  # 0 in the last column really means 90 degrees.
+        [
+            [0.8608, 0.16830, 0.0508, 0.32106, 0.0, 0.0],
             [0.8614, 0.50810, 0.0508, 0.32106, 0.0, 0.0],
             [0.8628, 0.84910, 0.0508, 0.32106, 0.0, 0.0],
             [0.8611, 1.1899, 0.0508, 0.32106, 0.0, 0.0],
@@ -328,6 +330,28 @@ def pf_active_hardware(ods):
         ods['pf_active.coil'][i]['element.0.identifier'] = fcid
 
     return {}
+
+
+@machine_mapping_function(__all__)
+def pf_active_coil_current_data(ods, pulse=133221):
+    ods1 = ODS()
+    inspect.unwrap(pf_active_hardware)(ods1)
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='pf_active.coil',
+            identifier='pf_active.coil.{channel}.element.0.identifier',
+            time='pf_active.coil.{channel}.current.time',
+            data='pf_active.coil.{channel}.current.data',
+            validity=None,
+            mds_server='d3d',
+            mds_tree='D3D',
+            tdi_expression='ptdata2("{signal}",{pulse})',
+            time_norm=0.001,
+            data_norm=1.0,
+        )
 
 
 @machine_mapping_function(__all__)
@@ -614,23 +638,6 @@ def langmuir_probes_hardware(ods, pulse=176235):
 
 
 @machine_mapping_function(__all__)
-def pf_active_coil_current_data(ods, pulse=133221):
-    ods1 = ODS()
-    inspect.unwrap(pf_active_hardware)(ods1)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.element.0.identifier',
-            time='pf_active.coil.{channel}.current.time',
-            data='pf_active.coil.{channel}.current.data',
-            validity=None,
-        )
-
-
-@machine_mapping_function(__all__)
 def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
     Gathers DIII-D CER measurement locations from MDSplus
@@ -824,6 +831,11 @@ def magnetics_probes_data(ods, pulse=133221):
             time='magnetics.b_field_pol_probe.{channel}.field.time',
             data='magnetics.b_field_pol_probe.{channel}.field.data',
             validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+            mds_server='d3d',
+            mds_tree='D3D',
+            tdi_expression='ptdata2("{signal}",{pulse})',
+            time_norm=0.001,
+            data_norm=1.0,
         )
 
 
@@ -841,6 +853,11 @@ def magnetics_floops_data(ods, pulse=133221):
             time='magnetics.flux_loop.{channel}.flux.time',
             data='magnetics.flux_loop.{channel}.flux.data',
             validity='magnetics.flux_loop.{channel}.flux.validity',
+            mds_server='d3d',
+            mds_tree='D3D',
+            tdi_expression='ptdata2("{signal}",{pulse})',
+            time_norm=0.001,
+            data_norm=1.0,
         )
 
 

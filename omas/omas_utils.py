@@ -861,7 +861,7 @@ if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
 else:
     try:
         import pyximport
-    
+
         pyximport.install(language_level=3)
         from .omas_cython import *
     except Exception as _excp:

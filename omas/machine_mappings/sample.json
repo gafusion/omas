@@ -9,13 +9,13 @@
   "EFIT_tree": "EFIT01",
   "user_argument": "this is a test"
  },
- "dataset_description.data_entry.pulse_type": {
-  "COMMENT": "VALUE is used for constants",
-  "VALUE": "test"
- },
  "dataset_description.data_entry.machine": {
   "COMMENT": "EVAL is used evaluating PYTHON expressions",
   "EVAL": "{machine!r}"
+ },
+ "dataset_description.data_entry.pulse_type": {
+  "COMMENT": "VALUE is used for constants",
+  "VALUE": "test"
  },
  "dataset_description.data_entry.user": {
   "COMMENT": "ENVIRON gets environmental variables",
