@@ -163,7 +163,7 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
                 if len(t) <= 1:
                     t = None
             if stage == 'assign':
-                if len(tmp[TDI]) > 1:
+                if not isinstance(tmp[TDI], Exception):
                     ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm
                     if validity is not None:

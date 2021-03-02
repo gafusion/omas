@@ -91,7 +91,8 @@ def magnetics_hardware(ods):
 
     :param ods: ODS instance
     """
-    # From `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat').pretty_print()`
+    # From: `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat').pretty_print()`
+    # From: `OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat').pretty_print()`
     # fmt: off
     # ==========
     # Flux loops
@@ -110,6 +111,7 @@ def magnetics_hardware(ods):
                    0.55000001, 0.34999999, 0.41999999, 0.41999999, 0.47999999,
                    0.47999999, 0.41999999, 0.41999999, 0.34999999, 0.55000001,
                    0.28]
+
     Z_flux_loop = [-1.73959994, -1.61829996, -1.44099998, -1.15489995, -0.81279999,
                    -0.36090002, 1.74000001, 1.648, 1.45140004, 1.11600006,
                    0.78990001, 0.3436, -0.62309998, -1.04920006, 0.60829997,
@@ -124,14 +126,15 @@ def magnetics_hardware(ods):
                    1.95000005, 1.94000006, 1.85000002, 1.75, 1.70500004,
                    -1.70500004, -1.75, -1.85000002, -1.95500004, -1.96500003,
                    0.]
-    name_flux_loop = ['_FLEVVL2', '_FLEVVL3', '_FLEVVL4', '_FLEVVL5', '_FLEVVL6', '_FLEVVL7', '_FLEVVU2', '_FLEVVU3', '_FLEVVU4',
-                      '_FLEVVU5', '_FLEVVU6', '_FLEVVU7', '_FLIVVL1', '_FLIVVL2', '_FLIVVU1', '_FLIVVU2', '_FLOBDL1', '_FLOBDL2',
-                      '_FLOBDL3', '_FLOBDU1', '_FLOBDU2', '_FLOBDU3', 'F_FLOHL1', 'F_FLOHL2', 'F_FLOHL3', 'F_FLOHL4', '\\F_FLOHM',
-                      'F_FLOHU1', 'F_FLOHU2', 'F_FLOHU3', 'F_FLOHU4', 'FLPF1AL1', 'FLPF1AL2', 'FLPF1AL3', 'FLPF1AL4', 'FLPF1AU1',
-                      'FLPF1AU2', 'FLPF1AU3', 'FLPF1AU4', '_FLPPPL1', '_FLPPPL2', '_FLPPPL3', '_FLPPPL4', '_FLPPPU1', '_FLPPPU2',
-                      '_FLPPPU3', '_FLPPPU4', '_FLSPPL1', '_FLSPPL2', '_FLSPPL3', '_FLSPPL4', '_FLSPPU1', '_FLSPPU2', '_FLSPPU3',
-                      '_FLSPPU4', '_FLMDLU2', '_FLMDLU1', 'FLPF1BU2', 'FLPF1BU1', '_FLCSCU4', '_FLCSCL4', 'FLBF1BL1', 'FLBF1BL2',
-                      '_FLMDLL1', '_FLMDLL2', '_FLEXTRA']
+
+    name_flux_loop = ['FLEVVL2', 'FLEVVL3', 'FLEVVL4', 'FLEVVL5', 'FLEVVL6', 'FLEVVL7', 'FLEVVU2', 'FLEVVU3', 'FLEVVU4',
+                      'FLEVVU5', 'FLEVVU6', 'FLEVVU7', 'FLIVVL1', 'FLIVVL2', 'FLIVVU1', 'FLIVVU2', 'FLOBDL1', 'FLOBDL2',
+                      'FLOBDL3', 'FLOBDU1', 'FLOBDU2', 'FLOBDU3', 'FLOHL1', 'FLOHL2', 'FLOHL3', 'FLOHL4', 'FLOHM',
+                      'FLOHU1', 'FLOHU2', 'FLOHU3', 'FLOHU4', 'FLPF1AL1', 'FLPF1AL2', 'FLPF1AL3', 'FLPF1AL4', 'FLPF1AU1',
+                      'FLPF1AU2', 'FLPF1AU3', 'FLPF1AU4', 'FLPPPL1', 'FLPPPL2', 'FLPPPL3', 'FLPPPL4', 'FLPPPU1', 'FLPPPU2',
+                      'FLPPPU3', 'FLPPPU4', 'FLSPPL1', 'FLSPPL2', 'FLSPPL3', 'FLSPPL4', 'FLSPPU1', 'FLSPPU2', 'FLSPPU3',
+                      'FLSPPU4', 'FLMDLU2', 'FLMDLU1', 'FLPF1BU2', 'FLPF1BU1', 'FLCSCU4', 'FLCSCL4', 'FLBF1BL1', 'FLBF1BL2',
+                      'FLMDLL1', 'FLMDLL2', 'FLEXTRA']
     # ===============
     # Magnetic probes
     # ===============
@@ -157,6 +160,7 @@ def magnetics_hardware(ods):
                   1.13660002, 0.79000002, 0.79000002, 1.02110004, 1.02110004,
                   0.79000002, 0.79000002, 1.02110004, 1.02110004, 0.47279999,
                   0.47279999, 0.47279999, 0.47279999]
+
     Z_magnetic = [-0.033, -0.13600001, -0.27200001, -0.40799999, -0.54400003,
                   -0.68000001, 0.13600001, 0.27200001, 0.40799999, 0.54400003,
                   0.68000001, -0.68000001, -0.40799999, -0.27200001, -0.033,
@@ -179,6 +183,7 @@ def magnetics_hardware(ods):
                   1.43610001, -1.57260001, -1.57260001, -1.48160005, -1.48160005,
                   1.57260001, 1.57260001, 1.48160005, 1.48160005, 1.64900005,
                   1.64900005, -1.64900005, -1.64900005]
+
     A_magnetic = [90., 90., 90., 90., 90.,
                   90., 90., 90., 90., 90.,
                   90., 90., 90., 90., 90.,
@@ -201,6 +206,7 @@ def magnetics_hardware(ods):
                   68.0830002, 21.5, 111.5, 21.5, 111.5,
                   -21.5, 68.5, -21.5, 68.5, 0.,
                   90., 0., 90.]
+
     S_magnetic = [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
                   0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
                   0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
@@ -211,28 +217,38 @@ def magnetics_hardware(ods):
                   0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
                   0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
                   0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
-    name_magnetic = ['1DMCSCL1', '1DMCSCL2', '1DMCSCL3', '1DMCSCL4', '1DMCSCL5', '1DMCSCL6', '1DMCSCU2', '1DMCSCU3', '1DMCSCU4', '1DMCSCU5',
-                     '1DMCSCU6', 'DMCSC2L6', 'DMCSC2L4', 'DMCSC2L2', 'DMCSC2L1', 'DMCSC2U2', 'DMCSC2U4', 'DMCSC2U6', 'DMCSCL2N', 'DMCSCL2T',
-                     'DMCSCU1N', 'DMCSCU1T', 'DMCSCL1T', 'DMCSCL1N', 'DMCSCU2T', 'DMCSCU2N', 'MCSC2L2T', 'MCSC2L2N', 'MCSC2U2T', 'MCSC2U2N',
-                     'DMPPPGL1', 'DMPPPGL2', 'DMPPPGL3', 'DMPPPGU1', 'DMPPPGU2', 'DMPPPGU3', 'DMSPPGL1', 'DMSPPGL2', 'DMSPPGL3', 'DMSPPGU1',
-                     'DMSPPGU2', 'DMSPPGU3', 'DMPPPGL4', 'DMPPPGL5', 'DMPPPGL6', 'DMPPPGL7', 'DMPPPGL8', 'DMPPPGU4', 'DMPPPGU5', 'DMPPPGU6',
-                     'DMPPPGU7', 'DMPPPGU8', 'DMSPPGL4', 'DMSPPGL5', 'DMSPPGL6', 'DMSPPGL7', 'DMSPPGU4', 'DMSPPGU5', 'DMSPPGU6', 'DMSPPGU7',
-                     'MIBDHL6T', 'MIBDHL6N', 'MIBDHU5T', 'MIBDHU5N', 'MIBDHU6T', 'MIBDHU6N', 'MIBDHL5T', 'MIBDHL5N', 'MIBDVU1T', 'MIBDVU1N',
-                     'MIBDVU2T', 'MIBDVU2N', 'MIBDVU3T', 'MIBDVU3N', 'MIBDVL1T', 'MIBDVL1N', 'MIBDVL2T', 'MIBDVL2N', 'MIBDVL3T', 'MIBDVL3N',
-                     'IBDV2U2T', 'IBDV2U2N', 'IBDV2L2T', 'IBDV2L2N', 'DMOBDL1T', 'DMOBDL1N', 'DMOBDL3T', 'DMOBDL3N', 'DMOBDL5T', 'DMOBDL5N',
-                     'DMOBDU1T', 'DMOBDU1N', 'DMOBDU3T', 'DMOBDU3N', 'DMOBDU5T', 'DMOBDU5N', 'DMOBDL2T', 'DMOBDL2N', 'DMOBDL4T', 'DMOBDL4N',
-                     'DMOBDU2T', 'DMOBDU2N', 'DMOBDU4T', 'DMOBDU4N', 'IBDH2U6T', 'IBDH2U6N', 'IBDH2L6T', 'IBDH2L6N']
+
+    name_magnetic = ['1DMCSCL1', '1DMCSCL2', '1DMCSCL3', '1DMCSCL4', '1DMCSCL5', '1DMCSCL6', '1DMCSCU2',
+                     '1DMCSCU3', '1DMCSCU4', '1DMCSCU5', '1DMCSCU6', '1DMCSC2L6', '1DMCSC2L4', '1DMCSC2L2',
+                     '1DMCSC2L1', '1DMCSC2U2', '1DMCSC2U4', '1DMCSC2U6', '2DMCSCL2N', '2DMCSCL2T', '2DMCSCU1N',
+                     '2DMCSCU1T', '2DMCSCL1T', '2DMCSCL1N', '2DMCSCU2T', '2DMCSCU2N', '2DMCSC2L2T',
+                     '2DMCSC2L2N', '2DMCSC2U2T', '2DMCSC2U2N', 'L1DMPPPGL1', 'L1DMPPPGL2', 'L1DMPPPGL3',
+                     'L1DMPPPGU1', 'L1DMPPPGU2', 'L1DMPPPGU3', 'L1DMSPPGL1', 'L1DMSPPGL2', 'L1DMSPPGL3',
+                     'L1DMSPPGU1', 'L1DMSPPGU2', 'L1DMSPPGU3', 'L1DMPPPGL4', 'L1DMPPPGL5', 'L1DMPPPGL6',
+                     'L1DMPPPGL7', 'L1DMPPPGL8', 'L1DMPPPGU4', 'L1DMPPPGU5', 'L1DMPPPGU6', 'L1DMPPPGU7',
+                     'L1DMPPPGU8', 'L1DMSPPGL4', 'L1DMSPPGL5', 'L1DMSPPGL6', 'L1DMSPPGL7', 'L1DMSPPGU4',
+                     'L1DMSPPGU5', 'L1DMSPPGU6', 'L1DMSPPGU7', '2DMIBDHL6T', '2DMIBDHL6N', '2DMIBDHU5T',
+                     '2DMIBDHU5N', '2DMIBDHU6T', '2DMIBDHU6N', '2DMIBDHL5T', '2DMIBDHL5N', '2DMIBDVU1T',
+                     '2DMIBDVU1N', '2DMIBDVU2T', '2DMIBDVU2N', '2DMIBDVU3T', '2DMIBDVU3N', '2DMIBDVL1T',
+                     '2DMIBDVL1N', '2DMIBDVL2T', '2DMIBDVL2N', '2DMIBDVL3T', '2DMIBDVL3N', '2DMIBDV2U2T',
+                     '2DMIBDV2U2N', '2DMIBDV2L2T', '2DMIBDV2L2N', '2DMOBDL1T', '2DMOBDL1N', '2DMOBDL3T',
+                     '2DMOBDL3N', '2DMOBDL5T', '2DMOBDL5N', '2DMOBDU1T', '2DMOBDU1N', '2DMOBDU3T',
+                     '2DMOBDU3N', '2DMOBDU5T', '2DMOBDU5N', '2DMOBDL2T', '2DMOBDL2N', '2DMOBDL4T',
+                     '2DMOBDL4N', '2DMOBDU2T', '2DMOBDU2N', '2DMOBDU4T', '2DMOBDU4N', '2DMIBDH2U6T',
+                     '2DMIBDH2U6N', '2DMIBDH2L6T', '2DMIBDH2L6N']
     # fmt: on
 
     with omas_environment(ods, cocosio=1):
         for k, (r, z, name) in enumerate(zip(R_flux_loop, Z_flux_loop, name_flux_loop)):
-            ods[f'magnetics.flux_loop.{k}.identifier'] = ods[f'magnetics.flux_loop.{k}.name'] = name
+            ods[f'magnetics.flux_loop.{k}.name'] = name
+            ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_' + name
             ods[f'magnetics.flux_loop.{k}.position[0].r'] = r
             ods[f'magnetics.flux_loop.{k}.position[0].z'] = z
             ods[f'magnetics.flux_loop.{k}.type.index'] = 1
 
         for k, (r, z, a, s, name) in enumerate(zip(R_magnetic, Z_magnetic, A_magnetic, S_magnetic, name_magnetic)):
-            ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
+            ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
+            ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_' + name
             ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
             ods[f'magnetics.b_field_pol_probe.{k}.position.z'] = z
             ods[f'magnetics.b_field_pol_probe.{k}.length'] = s
@@ -243,12 +259,56 @@ def magnetics_hardware(ods):
 
 
 @machine_mapping_function(__all__)
-def MDS_gEQDSK_psi_nstx(ods, pulse=139047, EFIT_tree='EFIT01'):
+def magnetics_floops_data(ods, pulse=203679):
+    ods1 = ODS()
+    inspect.unwrap(magnetics_hardware)(ods1)
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='magnetics.flux_loop',
+            identifier='magnetics.flux_loop.{channel}.identifier',
+            time='magnetics.flux_loop.{channel}.flux.time',
+            data='magnetics.flux_loop.{channel}.flux.data',
+            validity='magnetics.flux_loop.{channel}.flux.validity',
+            mds_server='nstxu',
+            mds_tree='NSTX',
+            tdi_expression='\{signal}',
+            time_norm=0.001,
+            data_norm=1.0,
+        )
+
+
+@machine_mapping_function(__all__)
+def magnetics_probes_data(ods, pulse=203679):
+    ods1 = ODS()
+    inspect.unwrap(magnetics_hardware)(ods1)
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='magnetics.b_field_pol_probe',
+            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
+            time='magnetics.b_field_pol_probe.{channel}.field.time',
+            data='magnetics.b_field_pol_probe.{channel}.field.data',
+            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+            mds_server='nstxu',
+            mds_tree='NSTX',
+            tdi_expression='\{signal}',
+            time_norm=0.001,
+            data_norm=1.0,
+        )
+
+
+@machine_mapping_function(__all__)
+def MDS_gEQDSK_psi_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
     return MDS_gEQDSK_psi(ods, 'nstxu', pulse, EFIT_tree)
 
 
 @machine_mapping_function(__all__)
-def MDS_gEQDSK_bbbs_nstx(ods, pulse=139047, EFIT_tree='EFIT01'):
+def MDS_gEQDSK_bbbs_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',

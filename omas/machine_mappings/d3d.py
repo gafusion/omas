@@ -788,29 +788,6 @@ def magnetics_hardware(ods):
             ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
 
 
-
-@machine_mapping_function(__all__)
-def magnetics_probes_data(ods, pulse=133221):
-    ods1 = ODS()
-    inspect.unwrap(magnetics_hardware)(ods1)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='magnetics.b_field_pol_probe',
-            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
-            time='magnetics.b_field_pol_probe.{channel}.field.time',
-            data='magnetics.b_field_pol_probe.{channel}.field.data',
-            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
-            mds_server='d3d',
-            mds_tree='D3D',
-            tdi_expression='ptdata2("{signal}",{pulse})',
-            time_norm=0.001,
-            data_norm=1.0,
-        )
-
-
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
@@ -832,6 +809,27 @@ def magnetics_floops_data(ods, pulse=133221):
             data_norm=1.0,
         )
 
+
+@machine_mapping_function(__all__)
+def magnetics_probes_data(ods, pulse=133221):
+    ods1 = ODS()
+    inspect.unwrap(magnetics_hardware)(ods1)
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='magnetics.b_field_pol_probe',
+            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
+            time='magnetics.b_field_pol_probe.{channel}.field.time',
+            data='magnetics.b_field_pol_probe.{channel}.field.data',
+            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+            mds_server='d3d',
+            mds_tree='D3D',
+            tdi_expression='ptdata2("{signal}",{pulse})',
+            time_norm=0.001,
+            data_norm=1.0,
+        )
 
 if __name__ == '__main__':
     run_machine_mapping_functions(__all__, globals(), locals())

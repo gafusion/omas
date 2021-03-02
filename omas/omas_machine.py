@@ -746,7 +746,10 @@ class mdsvalue(dict):
                     if self.old_MDS_server:
                         res = {}
                         for tdi in TDI:
-                            res[tdi] = mdsvalue(self.server, self.treename, self.pulse, tdi).raw()
+                            try:
+                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, tdi).raw()
+                            except Exception as _excp:
+                                res[tdi] = Exception(str(_excp))
                         return res
                     else:
                         conns = conn.getMany()
