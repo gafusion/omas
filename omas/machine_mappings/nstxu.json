@@ -48,6 +48,59 @@
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
   "treename": "{EFIT_tree}"
  },
+ "magnetics.b_field_pol_probe.:": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.identifier": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.length": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.name": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.poloidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.r": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.z": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.toroidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.turns": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.type.index": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.identifier": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.name": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.position.:": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.r": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.z": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.type.index": {
+  "PYTHON": "magnetics_hardware(ods)"
+ },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
  },

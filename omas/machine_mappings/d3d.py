@@ -685,7 +685,8 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
 @machine_mapping_function(__all__)
 def magnetics_hardware(ods):
     r"""
-    Load DIII-D tokamak poloidal field coil hardware geometry
+    Load DIII-D tokamak flux loops and magnetic probes hardware geometry
+
     :param ods: ODS instance
 
     :return: dict
@@ -720,15 +721,7 @@ def magnetics_hardware(ods):
                       'PSI45B', 'PSI58B', 'PSI9B', 'PSF7FB',
                       'PSI7B', 'PSF6FB', 'PSI6B', 'PSI89FB',
                       'PSI89NB', 'PSI1L', 'PSI2L', 'PSI3L']
-    # fmt: on
 
-    for k, (r, z, name) in enumerate(zip(R_flux_loop, Z_flux_loop, name_flux_loop)):
-        ods[f'magnetics.flux_loop.{k}.identifier'] = ods[f'magnetics.flux_loop.{k}.name'] = name
-        ods[f'magnetics.flux_loop.{k}.position[0].r'] = r
-        ods[f'magnetics.flux_loop.{k}.position[0].z'] = z
-        ods[f'magnetics.flux_loop.{k}.type.index'] = 1
-
-    # fmt: off
     R_magnetic = [0.9729, 0.9787, 0.9726, 0.9767, 0.9793, 0.9764, 0.9785, 2.413,
                   1.7617, 2.2124, 2.2641, 2.2655, 2.3137, 2.4066, 2.4133, 0.9771,
                   0.9722, 0.9792, 0.9769, 0.9801, 0.9774, 2.4129, 0.9719, 2.0436,
@@ -804,6 +797,12 @@ def magnetics_hardware(ods):
     # fmt: on
 
     with omas_environment(ods, cocosio=1):
+        for k, (r, z, name) in enumerate(zip(R_flux_loop, Z_flux_loop, name_flux_loop)):
+            ods[f'magnetics.flux_loop.{k}.identifier'] = ods[f'magnetics.flux_loop.{k}.name'] = name
+            ods[f'magnetics.flux_loop.{k}.position[0].r'] = r
+            ods[f'magnetics.flux_loop.{k}.position[0].z'] = z
+            ods[f'magnetics.flux_loop.{k}.type.index'] = 1
+
         for k, (r, z, a, s, name) in enumerate(zip(R_magnetic, Z_magnetic, A_magnetic, S_magnetic, name_magnetic)):
             ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
             ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
@@ -815,7 +814,6 @@ def magnetics_hardware(ods):
             ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
 
     return {}
-
 
 @machine_mapping_function(__all__)
 def magnetics_probes_data(ods, pulse=133221):
