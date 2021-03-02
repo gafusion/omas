@@ -23,11 +23,6 @@ def gas_injection_hardware(ods, pulse=133221):
     EFITVIEWER: iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/puff_loc.pro accessed 2018 June 05, revised 20090317
     DIII-D webpage: https://diii-d.gat.com/diii-d/Gas_Schematic accessed 2018 June 05
     DIII-D wegpage: https://diii-d.gat.com/diii-d/Gas_PuffLocations accessed 2018 June 05
-
-    Updated 2018 June 05 by David Eldon
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     if pulse < 100775:
         warnings.warn('DIII-D Gas valve locations not applicable for pulses earlier than 100775 (2000 JAN 17)')
@@ -281,7 +276,7 @@ def gas_injection_hardware(ods, pulse=133221):
     # pipe_cpmid['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
     i += 1
 
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -290,11 +285,8 @@ def pf_active_hardware(ods):
     Loads DIII-D tokamak poloidal field coil hardware geometry
 
     :param ods: ODS instance
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
-    # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08  D. Eldon
+    # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08 by D. Eldon
     # R        Z       dR      dZ    tilt1  tilt2
     # 0 in the last column really means 90 degrees
     # fmt: off
@@ -329,7 +321,7 @@ def pf_active_hardware(ods):
         ods['pf_active.coil'][i]['name'] = ods['pf_active.coil'][i]['identifier'] = fcid
         ods['pf_active.coil'][i]['element.0.identifier'] = fcid
 
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -362,14 +354,11 @@ def interferometer_hardware(ods, pulse=133221):
     The chord endpoints ARE NOT RIGHT. Only the R for vertical lines or Z for horizontal lines is right.
 
     Data sources:
-    DIII-D webpage: https://diii-d.gat.com/diii-d/Mci accessed 2018 June 07  D. Eldon
+    DIII-D webpage: https://diii-d.gat.com/diii-d/Mci accessed 2018 June 07 by D. Eldon
 
     :param ods: an OMAS ODS instance
 
     :param pulse: int
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
 
     # As of 2018 June 07, DIII-D has four interferometers
@@ -397,7 +386,7 @@ def interferometer_hardware(ods, pulse=133221):
             'have been the same, though, so there has not been a problem yet (I think).'
         )
 
-    return {}
+
 
 
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
@@ -408,12 +397,9 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
 
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     inspect.unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -484,10 +470,7 @@ def bolometer_hardware(ods, pulse=133221):
 
     Data sources:
     - iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/bolometerpaths.pro
-    - OMFIT-source/modules/_PCS_prad_control/SETTINGS/PHYSICS/reference/DIII-D/bolometer_geo , access 2018June11 Eldon
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
+    - OMFIT-source/modules/_PCS_prad_control/SETTINGS/PHYSICS/reference/DIII-D/bolometer_geo , access 2018 June 11 by D. Eldon
     """
     printd('Setting up DIII-D bolometer locations...', topic='d3d')
 
@@ -599,9 +582,6 @@ def langmuir_probes_hardware(ods, pulse=176235):
     :param ods: ODS instance
 
     :param pulse: int
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     import MDSplus
 
@@ -634,7 +614,7 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 j += 1
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -644,9 +624,6 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
 
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     import MDSplus
 
@@ -679,7 +656,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
                     chpos['time'] = postime / 1000.0  # Convert ms to s
                     chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
             i += inc
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -688,9 +665,6 @@ def magnetics_hardware(ods):
     Load DIII-D tokamak flux loops and magnetic probes hardware geometry
 
     :param ods: ODS instance
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat
     # https://nomos.gat.com/DIII-D/diag/magnetics/magnetics.html
@@ -813,7 +787,7 @@ def magnetics_hardware(ods):
             ods[f'magnetics.b_field_pol_probe.{k}.type.index'] = 1
             ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
 
-    return {}
+
 
 @machine_mapping_function(__all__)
 def magnetics_probes_data(ods, pulse=133221):

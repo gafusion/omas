@@ -18,12 +18,10 @@ east_divertor_corners = {  # Upper, Lower, Outer, Inner
 def setup_pf_active_hardware_description_east(ods):
     r"""
     Adds EAST tokamak poloidal field coil hardware geometry to ODS
-    :param ods: ODS instance
 
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
+    :param ods: ODS instance
     """
-    # Coil data from iris:/fusion/usc/src/idl/efitview/diagnoses/EAST/coils_east.dat accessed 2019-12-30 by eldond
+    # Coil data from iris:/fusion/usc/src/idl/efitview/diagnoses/EAST/coils_east.dat accessed 2019 December 30 by D. Eldon
     east_pf_coil_data = np.array(
         [
             [6.2866000e-1, 2.5132000e-1, 1.5078000e-1, 4.4260000e-1, 0, 0],
@@ -59,7 +57,7 @@ def setup_pf_active_hardware_description_east(ods):
         ods['pf_active.coil'][i]['name'] = ods['pf_active.coil'][i]['identifier'] = fcid
         ods['pf_active.coil'][i]['element.0.identifier'] = fcid
 
-    return {}
+
 
 
 def east_coords_along_wall(s, rlim, zlim, surface):
@@ -118,9 +116,6 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
 
     :param pulse: int
         Will try to fill in from ODS machine data if None
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     try:
         rlim = ods['wall.description_2d[0].limiter.unit[0].outline.r']
@@ -151,7 +146,7 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
 
                 numbering_starts_at = 1
                 for i in range(len(r)):
-                    # Probe numbering scheme confirmed with EAST handbook using data access 2018-07-16 by D. Eldon
+                    # Probe numbering scheme confirmed with EAST handbook using data access 2018 July 16 by D. Eldon
                     probe_number = i + numbering_starts_at
                     identifier = '{}{:02d}'.format(corner.upper(), probe_number)
                     ods['langmuir_probes.embedded'][j]['position.r'] = r[i]
@@ -161,7 +156,7 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
                     ods['langmuir_probes.embedded'][j]['name'] = identifier
                     j += 1
 
-    return {}
+
 
 
 @machine_mapping_function(__all__)
@@ -171,11 +166,6 @@ def setup_gas_injection_hardware_description_east(ods, pulse=85282):
 
     Data sources:
     Figure downloaded from EAST handbook into notes
-
-    Updated 2020-01-01 by David Eldon
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
 
     i = 0
@@ -226,7 +216,7 @@ def setup_gas_injection_hardware_description_east(ods, pulse=85282):
     pipe['second_point']['z'] = -0.9715
     i += 1
 
-    return {}
+
 
 
 if __name__ == '__main__':

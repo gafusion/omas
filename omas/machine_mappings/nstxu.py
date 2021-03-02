@@ -13,9 +13,6 @@ def pf_active_hardware(ods):
     Loads NSTX-U tokamak poloidal field coil hardware geometry
 
     :param ods: ODS instance
-
-    :return: dict
-        Information or instructions for follow up in central hardware description setup
     """
     # From `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat').pretty_print()`
     # R        Z       dR      dZ    tilt1  tilt2
