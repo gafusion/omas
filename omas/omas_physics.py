@@ -795,10 +795,10 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
             n = prof1d_z['ion'][k]['density']  # from new ODS
             Z2n += n * Z ** 2
             Zn += n * Z
-            if use_electrons_density:
-                prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
-            else:
-                prof1d_z['zeff'] = Z2n / Zn
+        if use_electrons_density:
+            prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
+        else:
+            prof1d_z['zeff'] = Z2n / Zn
     return ods_z
 
 
