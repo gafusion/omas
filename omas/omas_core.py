@@ -697,6 +697,15 @@ class ODS(MutableMapping):
         self._dynamic = top._dynamic
         return self._dynamic
 
+    @property
+    def active_dynamic(self):
+        """
+        property that point to dynamic_ODS object and says if it is active
+        """
+        dynamic = self.dynamic
+        if dynamic and dynamic.active:
+            return dynamic
+
     @dynamic.setter
     def dynamic(self, dynamic_value):
         self.top._dynamic = dynamic_value
@@ -943,7 +952,7 @@ class ODS(MutableMapping):
                         else:
                             printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                    elif not self.dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                    elif not self.active_dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
@@ -1193,12 +1202,12 @@ class ODS(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys(dynamic=0):
             if omas_rcparams['dynamic_path_creation']:
-                if self.dynamic:
+                if self.active_dynamic:
                     location = l2o([self.location, key[0]])
-                if self.dynamic is not None and self.dynamic.__contains__(location):
+                if self.active_dynamic and self.dynamic.__contains__(location):
                     value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
-                elif self.dynamic is not None and o2u(location).endswith(':'):
+                elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
                     for k in self.keys(dynamic=1):
                         if k not in self.keys(dynamic=0):
@@ -1432,7 +1441,7 @@ class ODS(MutableMapping):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
             else:
-                if self.dynamic:
+                if self.active_dynamic:
                     if k in self.dynamic.keys(l2o(p2l(self.location) + key[:c])):
                         continue
                     else:
@@ -1440,7 +1449,7 @@ class ODS(MutableMapping):
                 else:
                     return False
         # return False if checking existance of a leaf and the leaf exists but is unassigned
-        if not self.dynamic and isinstance(h, ODS) and h.omas_data is None:
+        if not self.active_dynamic and isinstance(h, ODS) and h.omas_data is None:
             return False
         return True
 
@@ -1458,7 +1467,7 @@ class ODS(MutableMapping):
         :return: list of keys
         '''
         dynamic_keys = []
-        if dynamic and self.dynamic:
+        if dynamic and self.active_dynamic:
             dynamic_keys = list(self.dynamic.keys(self.location))
             if isinstance(self.omas_data, dict):
                 return sorted(numpy.unique(list(self.omas_data.keys()) + dynamic_keys).tolist())

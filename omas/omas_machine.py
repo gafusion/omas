@@ -843,9 +843,9 @@ class dynamic_omas_machine(dynamic_ODS):
             return self.cache[o2u(key)][key]
 
     def __contains__(self, location):
-        ulocation = o2u(location)
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        ulocation = o2u(location)
         if ulocation.endswith(':'):
             return False
         return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
