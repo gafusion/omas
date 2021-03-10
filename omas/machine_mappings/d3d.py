@@ -277,8 +277,6 @@ def gas_injection_hardware(ods, pulse=133221):
     i += 1
 
 
-
-
 @machine_mapping_function(__all__)
 def pf_active_hardware(ods):
     r"""
@@ -314,14 +312,15 @@ def pf_active_hardware(ods):
     )
     # fmt: on
 
+    turns = [58.0, 58.0, 58.0, 58.0, 58.0, 55.0, 55.0, 58.0, 55.0, 58.0, 58.0, 58.0, 58.0, 58.0, 55.0, 55.0, 58.0, 55.0]
+
     ods = pf_coils_to_ods(ods, fc_dat)
 
-    for i in range(len(fc_dat[:, 0])):
-        fcid = 'F{}{}'.format((i % 9) + 1, 'AB'[int(fc_dat[i, 1] < 0)])
-        ods['pf_active.coil'][i]['name'] = ods['pf_active.coil'][i]['identifier'] = fcid
-        ods['pf_active.coil'][i]['element.0.identifier'] = fcid
-
-
+    for k in range(len(fc_dat[:, 0])):
+        fcid = 'F{}{}'.format((k % 9) + 1, 'AB'[int(fc_dat[k, 1] < 0)])
+        ods['pf_active.coil'][k]['name'] = ods['pf_active.coil'][k]['identifier'] = fcid
+        ods['pf_active.coil'][k]['element.0.identifier'] = fcid
+        ods['pf_active.coil'][k]['element.0.turns_with_sign'] = turns[k]
 
 
 @machine_mapping_function(__all__)
@@ -387,8 +386,6 @@ def interferometer_hardware(ods, pulse=133221):
         )
 
 
-
-
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     """
     Gathers DIII-D Thomson measurement locations
@@ -399,7 +396,6 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
     inspect.unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
-
 
 
 @machine_mapping_function(__all__)
@@ -616,7 +612,6 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 j += 1
 
 
-
 @machine_mapping_function(__all__)
 def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
@@ -656,7 +651,6 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
                     chpos['time'] = postime / 1000.0  # Convert ms to s
                     chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
             i += inc
-
 
 
 @machine_mapping_function(__all__)
@@ -830,6 +824,7 @@ def magnetics_probes_data(ods, pulse=133221):
             time_norm=0.001,
             data_norm=1.0,
         )
+
 
 if __name__ == '__main__':
     run_machine_mapping_functions(__all__, globals(), locals())

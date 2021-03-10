@@ -296,6 +296,9 @@
  "pf_active.coil.:.element.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
+ "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
  "pf_active.coil.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
