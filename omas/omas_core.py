@@ -1466,15 +1466,19 @@ class ODS(MutableMapping):
 
         :return: list of keys
         '''
-        dynamic_keys = []
         if dynamic and self.active_dynamic:
-            dynamic_keys = list(self.dynamic.keys(self.location))
             if isinstance(self.omas_data, dict):
+                dynamic_keys = list(self.dynamic.keys(self.location))
                 return sorted(numpy.unique(list(self.omas_data.keys()) + dynamic_keys).tolist())
             elif isinstance(self.omas_data, list):
-                return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
+                # the first time dynamic data is loaded, empty ODS structures will populate self.omas_data
+                if len(self.omas_data):
+                    return list(range(len(self.omas_data)))
+                else:
+                    dynamic_keys = list(self.dynamic.keys(self.location))
+                    return dynamic_keys
             else:
-                return dynamic_keys
+                return []
         else:
             if isinstance(self.omas_data, dict):
                 return list(self.omas_data.keys())
