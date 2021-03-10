@@ -213,8 +213,11 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "magnetics_hardware(ods)"
  },
+ "magnetics.diamagnetic_flux.:": {
+  "VALUE": 1
+ },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
+  "TDI": "[ptdata2(\"DIAMAG3\",{pulse}) * 1E-3]"
  },
  "magnetics.diamagnetic_flux.:.time": {
   "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
@@ -254,10 +257,10 @@
  },
  "magnetics.ip.:.data": {
   "COCOSIO": 1,
-  "TDI": "[ptdata2(\"ip\",{pulse})]"
+  "TDI": "[ptdata2(\"IP\",{pulse})]"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)/1000.]"
+  "TDI": "[dim_of(ptdata2(\"IP\",{pulse}),0)/1000.]"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
