@@ -742,25 +742,12 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
+                # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
-                    if self.old_MDS_server:
-                        res = {}
-                        for tdi in TDI:
-                            try:
-                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, tdi).raw()
-                            except Exception as _excp:
-                                res[tdi] = Exception(str(_excp))
-                        return res
-                    else:
-                        conns = conn.getMany()
-                        for expr in TDI:
-                            conns.append(str(expr.__hash__()), expr)
-                        res = conns.execute()
-                        try:
-                            return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
-                        except KeyError:
-                            return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
-                elif isinstance(TDI, dict):
+                    TDI = {expr: expr for expr in TDI}
+
+                # dictionary of TDI expressions
+                if isinstance(TDI, dict):
                     if self.old_MDS_server:
                         res = {}
                         for tdi in TDI:
@@ -784,14 +771,18 @@ class mdsvalue(dict):
                                     except KeyError:
                                         results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
                         return results
+
+                # single TDI expression
                 else:
                     return MDSplus.Data.data(conn.get(TDI))
+
             except Exception as _excp:
                 txt = []
                 for item in ['server', 'treename', 'pulse']:
                     txt += [f' - {item}: {getattr(self, item)}']
                 txt += [f' - TDI: {TDI}']
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
+
         finally:
             printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='mapping')
 
