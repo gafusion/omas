@@ -58,8 +58,6 @@ def setup_pf_active_hardware_description_east(ods):
         ods['pf_active.coil'][i]['element.0.identifier'] = fcid
 
 
-
-
 def east_coords_along_wall(s, rlim, zlim, surface):
     """
     Transforms s into R, Z. Useful for finding LP locations
@@ -157,8 +155,6 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
                     j += 1
 
 
-
-
 @machine_mapping_function(__all__)
 def setup_gas_injection_hardware_description_east(ods, pulse=85282):
     """
@@ -215,8 +211,6 @@ def setup_gas_injection_hardware_description_east(ods, pulse=85282):
     pipe['second_point']['r'] = 1.806
     pipe['second_point']['z'] = -0.9715
     i += 1
-
-
 
 
 if __name__ == '__main__':

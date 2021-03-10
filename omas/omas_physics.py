@@ -65,10 +65,9 @@ class constants(object):
 
 
 @add_to__ODS__
-def consistent_times(self, attempt_fix=True, raise_errors=True):
+def consistent_times(ods, attempt_fix=True, raise_errors=True):
     """
-    Assign .time and .ids_properties.homogeneous_time info for top-level structures
-    since these are required for writing an IDS to IMAS
+    Assign .time and .ids_properties.homogeneous_time info for top-level structures since these are required for writing an IDS to IMAS
 
     :param attempt_fix: fix dataset_description and wall IDS to have 0 times if none is set
 
@@ -78,10 +77,10 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
     """
 
     # if called at top level, loop over all data structures
-    if not len(self.location):
+    if not len(ods.location):
         out = {}
-        for ds in self:
-            out[ds] = self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        for ds in ods:
+            out[ds] = ods.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
         if any(k is False for k in out.values()):
             return False
         elif any(k is None for k in out.values()):
@@ -89,39 +88,45 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
         else:
             return True
 
-    ds = p2l(self.location)[0]
+    ds = p2l(ods.location)[0]
 
     extra_info = {}
-    time = self.time(extra_info=extra_info)
+    time = ods.time(extra_info=extra_info)
     if extra_info['homogeneous_time'] is False:
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
     elif time is not None and len(time):
-        self['time'] = time
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['time'] = time
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
     elif attempt_fix:
-        self['time'] = [-1.0]
+        ods['time'] = [-1.0]
         extra_info['homogeneous_time'] = True
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
         return None
     elif raise_errors:
-        raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+        raise ValueError(ods.location + '.time cannot be automatically filled! Missing time information in the data structure.')
     else:
         return False
     return True
 
 
 @add_to__ODS__
-def imas_info(self):
+def imas_info(ods):
+    '''
+    add ids_properties.version_put... information
+
+    :return: updated ods
+    '''
     # if called at top level, loop over all data structures
-    if not len(self.location):
-        for ds in self:
-            self.getraw(ds).physics_imas_info()
+    if not len(ods.location):
+        for ds in ods:
+            ods.getraw(ds).physics_imas_info()
         return
     else:
-        self['ids_properties.version_put.access_layer'] = 'N/A'
-        self['ids_properties.version_put.access_layer_language'] = 'OMAS'
-        self['ids_properties.version_put.data_dictionary'] = self.imas_version
+        ods['ids_properties.version_put.access_layer'] = 'N/A'
+        ods['ids_properties.version_put.access_layer_language'] = 'OMAS'
+        ods['ids_properties.version_put.data_dictionary'] = ods.imas_version
 
+    return ods
 
 @add_to__ODS__
 @preprocess_ods('equilibrium')
