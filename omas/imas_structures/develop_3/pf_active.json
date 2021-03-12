@@ -2,7 +2,7 @@
  "pf_active": {
   "documentation": "Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems",
   "full_path": "pf_active",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -1317,6 +1317,78 @@
   "full_path": "pf_active/coil(i1)/voltage/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.global_quantities": {
+  "data_type": "STRUCTURE",
+  "documentation": "Global quantities",
+  "full_path": "pf_active/global_quantities",
+  "lifecycle_status": "alpha",
+  "structure_reference": "pf_active_global_quantities"
+ },
+ "pf_active.global_quantities.psi_coils_average": {
+  "coordinates": [
+   "pf_active.global_quantities.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Average (over the plasma poloidal cross section) plasma poloidal magnetic flux produced by the coils listed under psi_coils_list (sum over the coils), given by the following formula : int(psi_coils.j_tor.dS) / Ip",
+  "full_path": "pf_active/global_quantities/psi_coils_average(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "pf_active.global_quantities.psi_coils_average_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi_coils_average\"",
+  "full_path": "pf_active/global_quantities/psi_coils_average_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.global_quantities.psi_coils_average_error_lower": {
+  "coordinates": [
+   "pf_active.global_quantities.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"psi_coils_average\"",
+  "full_path": "pf_active/global_quantities/psi_coils_average_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "pf_active.global_quantities.psi_coils_average_error_upper": {
+  "coordinates": [
+   "pf_active.global_quantities.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"psi_coils_average\"",
+  "full_path": "pf_active/global_quantities/psi_coils_average_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "pf_active.global_quantities.psi_coils_list": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "List of coil indices (from pf_active/coil) used for calculating psi_coils_average",
+  "full_path": "pf_active/global_quantities/psi_coils_list(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.global_quantities.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time array for quantities at this level",
+  "full_path": "pf_active/global_quantities/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/time",
   "type": "dynamic",
   "units": "s"
  },

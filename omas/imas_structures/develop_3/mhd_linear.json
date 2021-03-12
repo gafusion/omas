@@ -5,7 +5,7 @@
   "lifecycle_last_change": "3.30.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
-  "maxoccur": "5"
+  "maxoccur": "10"
  },
  "mhd_linear.code": {
   "data_type": "STRUCTURE",

@@ -2,7 +2,7 @@
  "bolometer": {
   "documentation": "Bolometer diagnostic",
   "full_path": "bolometer",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.4",
   "maxoccur": "2"
@@ -15,7 +15,7 @@
   "documentation": "Set of channels (detector or pixel of a camera)",
   "full_path": "bolometer/channel(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "100",
+  "maxoccur": "500",
   "structure_reference": "bolometer_channel"
  },
  "bolometer.channel[:].aperture": {

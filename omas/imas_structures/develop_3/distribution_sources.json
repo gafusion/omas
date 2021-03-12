@@ -2,7 +2,7 @@
  "distribution_sources": {
   "documentation": "Sources of particles for input to kinetic equations, e.g. Fokker-Planck calculation. The sources could originate from e.g. NBI or fusion reactions.",
   "full_path": "distribution_sources",
-  "lifecycle_last_change": "3.15.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.2.1",
   "maxoccur": "4"
@@ -1308,6 +1308,208 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "distribution_sources.source[:].markers[:].orbit_integrals": {
+  "data_type": "STRUCTURE",
+  "documentation": "Integrals along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral (f(n_tor,m_pol,k,eq,...) dt) from time - tau to time, where tau is the transit/trapping time of the marker and f() a dimensionless function (phase factor,drift,etc) of the equilibrium (e.g. q) and perturbation (Fourier harmonics n_tor,m_pol and bounce harmonic k) along the particles orbits. In fact the integrals are taken during the last orbit of each marker at the time value of the time node below",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals",
+  "lifecycle_status": "alpha",
+  "structure_reference": "distribution_markers_orbit"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.bounce_harmonics": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Array of bounce harmonics k",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/bounce_harmonics(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.expressions": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the expressions f(n_tor,m_pol,k,q,...) used in the orbit integrals",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/expressions(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.m_pol": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Array of poloidal mode numbers, where quantities vary as exp(-i.m_pol.theta) and theta is the angle defined by the choice of ../../coordinate_identifier, with its centre at the magnetic axis recalled at the root of this IDS",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/m_pol(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.n_tor": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Array of toroidal mode numbers, n_tor, where quantities vary as exp(i.n_tor.phi) and phi runs anticlockwise when viewed from above",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/n_tor(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.values": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals.n_tor",
+   "distribution_sources.source[:].markers[:].orbit_integrals.m_pol",
+   "distribution_sources.source[:].markers[:].orbit_integrals.bounce_harmonics"
+  ],
+  "data_type": "CPX_5D",
+  "documentation": "Values of the orbit integrals",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/values(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/values_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.values_error_lower": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals.n_tor",
+   "distribution_sources.source[:].markers[:].orbit_integrals.m_pol",
+   "distribution_sources.source[:].markers[:].orbit_integrals.bounce_harmonics"
+  ],
+  "data_type": "CPX_5D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/values_error_lower(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals.values_error_upper": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals.n_tor",
+   "distribution_sources.source[:].markers[:].orbit_integrals.m_pol",
+   "distribution_sources.source[:].markers[:].orbit_integrals.bounce_harmonics"
+  ],
+  "data_type": "CPX_5D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals/values_error_upper(:,:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant": {
+  "data_type": "STRUCTURE",
+  "documentation": "Integrals/quantities along the markers orbit. These dimensionless expressions are of the form: (1/tau) integral ( f(eq) dt) from time - tau to time_orbit for different values of time_orbit in the interval from time - tau to time, where tau is the transit/trapping time of the marker and f(eq) a dimensionless function (phase, drift,q,etc) of the equilibrium along the markers orbits. The integrals are taken during the last orbit of each marker at the time value of the time node below",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant",
+  "lifecycle_status": "alpha",
+  "structure_reference": "distribution_markers_orbit_instant"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.expressions": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of the expressions f(eq) used in the orbit integrals",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/expressions(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Time array along the markers last orbit",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/time_orbit(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_orbit\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/time_orbit_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_orbit\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/time_orbit_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_orbit\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/time_orbit_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.values": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Values of the orbit integrals",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/values(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/values_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.values_error_lower": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/values_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "distribution_sources.source[:].markers[:].orbit_integrals_instant.values_error_upper": {
+  "coordinates": [
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.expressions",
+   "distribution_sources.source[:].markers[:].weights",
+   "distribution_sources.source[:].markers[:].orbit_integrals_instant.time_orbit"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/orbit_integrals_instant/values_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
  "distribution_sources.source[:].markers[:].positions": {
   "coordinates": [
    "distribution_sources.source[:].markers[:].weights",
@@ -1358,6 +1560,13 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
+ },
+ "distribution_sources.source[:].markers[:].toroidal_mode": {
+  "data_type": "INT_0D",
+  "documentation": "In case the orbit integrals are calculated for a given MHD perturbation, index of the toroidal mode considered. Refers to the time_slice/toroidal_mode array of the MHD_LINEAR IDS in which this perturbation is described",
+  "full_path": "distribution_sources/source(i1)/markers(itime)/toroidal_mode",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
  },
  "distribution_sources.source[:].markers[:].weights": {
   "coordinates": [

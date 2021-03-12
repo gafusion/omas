@@ -2,7 +2,7 @@
  "summary": {
   "documentation": "Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the \"time\" vector) or time-averaged over an interval (in such case the \"time_width\" of the interval is indicated and the \"time\" vector represents the end of each time interval).",
   "full_path": "summary",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "1"
@@ -5150,6 +5150,64 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"value\"",
   "full_path": "summary/global_quantities/energy_total/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "summary.global_quantities.fusion_fluence": {
+  "data_type": "STRUCTURE",
+  "documentation": "Fusion fluence : power provided by fusion reactions, integrated over time since the beginning of the pulse",
+  "full_path": "summary/global_quantities/fusion_fluence",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "J"
+ },
+ "summary.global_quantities.fusion_fluence.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/global_quantities/fusion_fluence/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.fusion_fluence.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/global_quantities/fusion_fluence/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "summary.global_quantities.fusion_fluence.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/global_quantities/fusion_fluence/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.global_quantities.fusion_fluence.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/global_quantities/fusion_fluence/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "summary.global_quantities.fusion_fluence.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/global_quantities/fusion_fluence/value_error_upper(:)",
   "lifecycle_status": "active",
   "timebasepath": "/time",
   "type": "dynamic",
@@ -11038,11 +11096,12 @@
  },
  "summary.local.divertor_plate[:].flux_expansion": {
   "data_type": "STRUCTURE",
-  "documentation": "Flux expansion",
+  "documentation": "Magnetic flux expansion as defined by Stangeby : ratio between the poloidal field at the midplane separatrix and the poloidal field at the strike-point see formula attached, where u means upstream (midplane separatrix) and t means at divertor target (downstream).",
   "full_path": "summary/local/divertor_plate(i1)/flux_expansion",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
-  "units": "-"
+  "units": "-",
+  "url": "divertors/flux_expansion.png"
  },
  "summary.local.divertor_plate[:].flux_expansion.source": {
   "data_type": "STR_0D",
@@ -12132,7 +12191,7 @@
  },
  "summary.local.divertor_plate[:].name": {
   "data_type": "STRUCTURE",
-  "documentation": "Name of the limiter or divertor plate",
+  "documentation": "Name of the limiter or divertor plate. Standard names are : LI (resp. LO) for lower inner (resp. outer) plates;  UI (resp. UO) for upper inner (resp. outer) plates. ",
   "full_path": "summary/local/divertor_plate(i1)/name",
   "lifecycle_status": "active",
   "structure_reference": "summary_static_str_0d"
@@ -12150,6 +12209,64 @@
   "full_path": "summary/local/divertor_plate(i1)/name/value",
   "lifecycle_status": "active",
   "type": "static"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak": {
+  "data_type": "STRUCTURE",
+  "documentation": "Peak power flux on the divertor target or limiter surface",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W.m^-2"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "summary.local.divertor_plate[:].power_flux_peak.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/divertor_plate(i1)/power_flux_peak/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
  },
  "summary.local.divertor_plate[:].t_e": {
   "data_type": "STRUCTURE",
@@ -14841,11 +14958,12 @@
  },
  "summary.local.limiter.flux_expansion": {
   "data_type": "STRUCTURE",
-  "documentation": "Flux expansion",
+  "documentation": "Magnetic flux expansion as defined by Stangeby : ratio between the poloidal field at the midplane separatrix and the poloidal field at the strike-point see formula attached, where u means upstream (midplane separatrix) and t means at divertor target (downstream).",
   "full_path": "summary/local/limiter/flux_expansion",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
-  "units": "-"
+  "units": "-",
+  "url": "divertors/flux_expansion.png"
  },
  "summary.local.limiter.flux_expansion.source": {
   "data_type": "STR_0D",
@@ -15935,7 +16053,7 @@
  },
  "summary.local.limiter.name": {
   "data_type": "STRUCTURE",
-  "documentation": "Name of the limiter or divertor plate",
+  "documentation": "Name of the limiter or divertor plate. Standard names are : LI (resp. LO) for lower inner (resp. outer) plates;  UI (resp. UO) for upper inner (resp. outer) plates. ",
   "full_path": "summary/local/limiter/name",
   "lifecycle_status": "active",
   "structure_reference": "summary_static_str_0d"
@@ -15953,6 +16071,64 @@
   "full_path": "summary/local/limiter/name/value",
   "lifecycle_status": "active",
   "type": "static"
+ },
+ "summary.local.limiter.power_flux_peak": {
+  "data_type": "STRUCTURE",
+  "documentation": "Peak power flux on the divertor target or limiter surface",
+  "full_path": "summary/local/limiter/power_flux_peak",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_dynamic_flt_1d_root",
+  "units": "W.m^-2"
+ },
+ "summary.local.limiter.power_flux_peak.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/local/limiter/power_flux_peak/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.limiter.power_flux_peak.value": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value",
+  "full_path": "summary/local/limiter/power_flux_peak/value(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "summary.local.limiter.power_flux_peak.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/local/limiter/power_flux_peak/value_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.local.limiter.power_flux_peak.value_error_lower": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/local/limiter/power_flux_peak/value_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "summary.local.limiter.power_flux_peak.value_error_upper": {
+  "coordinates": [
+   "summary.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/local/limiter/power_flux_peak/value_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "/time",
+  "type": "dynamic",
+  "units": "W.m^-2"
  },
  "summary.local.limiter.t_e": {
   "data_type": "STRUCTURE",
