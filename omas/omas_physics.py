@@ -128,6 +128,7 @@ def imas_info(ods):
 
     return ods
 
+
 @add_to__ODS__
 @preprocess_ods('equilibrium')
 def equilibrium_stored_energy(ods, update=True):
@@ -210,6 +211,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim1'] = r
         profiles_2d['grid.dim2'] = z
     return ods_n
+
 
 @add_to__ODS__
 def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):

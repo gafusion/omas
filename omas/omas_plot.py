@@ -1512,6 +1512,237 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
     return {'ax': axs, 'fig': fig}
 
 
+@add_to__ODS__
+def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot pf_active time traces
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time traces
+    for channel in ods['pf_active.coil']:
+        label = ods[f'pf_active.coil.{channel}.element[0].identifier']
+        turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
+        data = ods[f'pf_active.coil.{channel}.current.data']
+        time = ods[f'pf_active.coil.{channel}.current.time']
+        ax.plot(time, data * turns, label=label, **kw)
+
+    # equilibrium constraints
+    if equilibrium_constraints:
+        for channel in ods['pf_active.coil']:
+            if f'equilibrium.time_slice.0.constraints.pf_current.{channel}.measured' in ods:
+                ax.plot(
+                    ods[f'equilibrium.time'],
+                    ods[f'equilibrium.time_slice.:.constraints.pf_current.{channel}.measured'],
+                    marker='o',
+                    color='k',
+                    mec='none',
+                )
+
+    return ax
+
+
+@add_to__ODS__
+def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot bpol_probe time traces and equilibrium constraints
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time traces
+    for channel in ods['magnetics.b_field_pol_probe']:
+        valid = ods.get(f'magnetics.b_field_pol_probe.{channel}.field.validity', 0)
+        if valid == 0:
+            label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
+            data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+            time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+            ax.plot(time, data, label=label, **kw)
+
+    # equilibrium constraints
+    if equilibrium_constraints:
+        for channel in ods['magnetics.b_field_pol_probe']:
+            valid = ods.get(f'magnetics.b_field_pol_probe.{channel}.field.validity', 0)
+            if valid == 0:
+                if f'equilibrium.time_slice.0.constraints.bpol_probe.{channel}.measured' in ods:
+                    ax.plot(
+                        ods[f'equilibrium.time'],
+                        ods[f'equilibrium.time_slice.:.constraints.bpol_probe.{channel}.measured'],
+                        marker='o',
+                        color='k',
+                        mec='none',
+                    )
+
+    return ax
+
+
+@add_to__ODS__
+def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot flux_loop time traces and equilibrium constraints
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time traces
+    for channel in ods['magnetics.flux_loop']:
+        valid = ods.get(f'magnetics.flux_loop.{channel}.flux.validity', 0)
+        if valid == 0:
+            label = ods[f'magnetics.flux_loop.{channel}.identifier']
+            data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+            time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+            ax.plot(time, data, label=label, **kw)
+
+    # equilibrium constraints
+    if equilibrium_constraints:
+        for channel in ods['magnetics.flux_loop']:
+            valid = ods.get(f'magnetics.flux_loop.{channel}.flux.validity', 0)
+            if valid == 0:
+                if f'equilibrium.time_slice.0.constraints.flux_loop.{channel}.measured' in ods:
+                    ax.plot(
+                        ods[f'equilibrium.time'],
+                        ods[f'equilibrium.time_slice.:.constraints.flux_loop.{channel}.measured'],
+                        marker='o',
+                        color='k',
+                        mec='none',
+                    )
+
+    return ax
+
+
+@add_to__ODS__
+def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot ip time trace and equilibrium constraint
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    return _plot_signal_eq_constraint(
+        'magnetics.ip.0.time',
+        'magnetics.ip.0.data',
+        'equilibrium.time_slice.:.constraints.ip.measured',
+        equilibrium_constraints,
+        ax,
+        label='ip',
+        **kw,
+    )
+
+
+@add_to__ODS__
+def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot diamagnetic_flux time trace and equilibrium constraint
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    return _plot_signal_eq_constraint(
+        'magnetics.diamagnetic_flux.0.time',
+        'magnetics.diamagnetic_flux.0.data',
+        'equilibrium.time_slice.:.constraints.diamagnetic_flux.measured',
+        equilibrium_constraints,
+        ax,
+        label='dflux',
+        **kw,
+    )
+
+
+@add_to__ODS__
+def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **kw):
+    '''
+    plot b_field_tor_vacuum_r time trace and equilibrium constraint
+
+    :param equilibrium_constraints: plot equilibrium constraints if present
+
+    :param ax: Axes instance [optional]
+        axes to plot in (active axes is generated if `ax is None`)
+
+    :param \**kw: Additional keywords for plot
+
+    :return: axes instance
+    '''
+    return _plot_signal_eq_constraint(
+        'tf.b_field_tor_vacuum_r.time',
+        'tf.b_field_tor_vacuum_r.data',
+        'equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.measured',
+        equilibrium_constraints,
+        ax,
+        label='bt',
+        **kw,
+    )
+
+
+def _plot_signal_eq_constraint(time, data, constraint, equilibrium_constraints, ax, **kw):
+    '''
+    Utility function to plot individual signal and their constraint in equilibrium IDS
+
+    :param time: ods location for time
+
+    :param data: ods location for data
+
+    :param constraint: ods location fro equilibrium constraint
+
+    :param ax: axes where to plot
+
+    :param kw: extra arguments passed to
+
+    :return:
+    '''
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time traces
+    time = ods[time]
+    data = ods[data]
+    ax.plot(time, data, **kw)
+
+    # equilibrium constraints
+    if equilibrium_constraints and constraint in ods:
+        ax.plot(ods['equilibrium.time'], ods[constraint], marker='o', color='k', mec='none')
+    return ax
+
+
 # ================================
 # actuator aimings
 # ================================
