@@ -61,7 +61,7 @@ except (ImportError, ServerSelectionTimeoutError) as _excp:
 with warnings.catch_warnings():
     warnings.simplefilter('ignore')
     try:
-        from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
+        from omfit_classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 
         failed_OMFIT = False
     except ImportError as _excp:
