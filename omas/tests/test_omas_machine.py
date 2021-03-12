@@ -17,7 +17,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 from omas.tests.failed_imports import *
 from omas.omas_machine import *
-from omas.omas_machine import machine_to_omas, mds_machine_to_server_mapping
+from omas.omas_machine import machine_to_omas
 
 
 class TestOmasMachine(UnittestCaseOmas):
