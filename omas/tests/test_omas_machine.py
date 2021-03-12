@@ -92,4 +92,4 @@ class TestOmasMachine(UnittestCaseOmas):
     def test_tdi(self):
         # make sure all machines have a MDS+ server assigned
         for machine in machines():
-            mds_machine_to_server_mapping(machine, '')
+            machine_mappings(self.machine, '')['__mdsserver__']
