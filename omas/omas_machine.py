@@ -297,7 +297,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         _namespace_mappings[idm] = {}
         if os.path.exists(os.path.splitext(filename)[0] + '.py'):
             with open(os.path.splitext(filename)[0] + '.py', 'r') as f:
-                exec(f.read(), _namespace_mappings[idm])
+                try:
+                    exec(f.read(), _namespace_mappings[idm])
+                except Exception as _excp:
+                    raise _excp.__class__(f'Error in {filename}\n'+str(_excp))
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
