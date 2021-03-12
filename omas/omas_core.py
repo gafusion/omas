@@ -1435,22 +1435,33 @@ class ODS(MutableMapping):
     def __contains__(self, key):
         key = p2l(key)
         h = self
+
         for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys(dynamic=0):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
+
             else:
+                # dynamic loading
                 if self.active_dynamic:
                     if k in self.dynamic.keys(l2o(p2l(self.location) + key[:c])):
-                        continue
-                    else:
-                        return False
-                else:
-                    return False
+                        continue  # continue to the next key
+
+                # handle ':' by looking under each array of structure
+                # and returning True if any of them have the entry we are loooking for
+                if isinstance(k, str) and ':' in k:
+                    s = slice(*map(lambda x: int(x.strip()) if x.strip() else None, k.split(':')))
+                    for k in range(len(h.omas_data))[s]:
+                        if key[c + 1 :] in h.omas_data[k]:
+                            return True
+
+                return False
+
         # return False if checking existance of a leaf and the leaf exists but is unassigned
         if not self.active_dynamic and isinstance(h, ODS) and h.omas_data is None:
             return False
+
         return True
 
     def keys(self, dynamic=True):
