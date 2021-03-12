@@ -300,7 +300,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                 try:
                     exec(f.read(), _namespace_mappings[idm])
                 except Exception as _excp:
-                    raise _excp.__class__(f'Error in {filename}\n'+str(_excp))
+                    raise _excp.__class__(f'Error in {filename}\n' + str(_excp))
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
@@ -620,12 +620,12 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
 # ===================
 # MDS+ functions
 # ===================
-def mds_machine_to_server_mapping(server, treename):
+def tunnel_mds(server, treename):
     '''
     Resolve MDS+ server
     NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
 
-    :param machine: machine name
+    :param server: MDS+ server address:port
 
     :param treename: treename (in case treename affects server to be used)
 
@@ -671,19 +671,21 @@ class mdsvalue(dict):
     '''
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
-        if 'nstx' in server:
-            old_MDS_server = True
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
-        self.old_MDS_server = old_MDS_server
+        if 'nstx' in server:
+            old_MDS_server = True
         try:
             # handle the case that server is just the machine name
             server = machine_mappings(server, '')['__mdsserver__']
         except NotImplementedError:
             if '.' not in server:
                 raise
-        self.server = mds_machine_to_server_mapping(server, self.treename)
+        self.server = tunnel_mds(server, self.treename)
+        if any([k in ['skylark.pppl.gov:8501'] for k in [server, self.server]]):
+            old_MDS_server = True
+        self.old_MDS_server = old_MDS_server
 
     def data(self):
         return self.raw(f'data({self.TDI})')
