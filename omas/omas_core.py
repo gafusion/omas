@@ -2030,9 +2030,12 @@ class ODS(MutableMapping):
         if self.location:
             consistency_check = False
 
-        # without args/kw re-connect
-        if self.dynamic and not len(args) and not len(kw):
-            return self.dynamic.open()
+        # without args/kw re-connect to a dynamic ODS
+        if not len(args) and not len(kw):
+            if self.dynamic:
+                return self.dynamic.open()
+            else:
+                raise ValueError('ods was not previously open. Must specify .open() arguments.')
 
         # figure out format used
         ext, args = _handle_extension(*args)
