@@ -38,11 +38,13 @@
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
@@ -165,10 +167,12 @@
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RLIM",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZLIM",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  }
 }
