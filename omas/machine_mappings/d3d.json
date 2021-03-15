@@ -69,6 +69,10 @@
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
+ "core_profiles.profiles_1d.:": {
+  "TDI": "size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)",
+  "treename": "{PROFILES_tree}"
+ },
  "core_profiles.profiles_1d.:.electrons.density_thermal": {
   "TDI": "\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT",
   "treename": "{PROFILES_tree}"
@@ -79,6 +83,10 @@
  },
  "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
   "eval2TDI": "py2tdi(tile,'dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,0)','size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)')",
+  "treename": "{PROFILES_tree}"
+ },
+ "core_profiles.profiles_1d.:.time": {
+  "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
  },
  "gas_injection.pipe.:": {
