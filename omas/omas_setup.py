@@ -46,6 +46,7 @@ import traceback
 import difflib
 import weakref
 import unittest
+import itertools
 
 try:
     import tqdm

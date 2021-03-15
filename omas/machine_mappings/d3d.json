@@ -357,10 +357,20 @@
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
   "treename": "{EFIT_tree}"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
   "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[1,])",
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
   "treename": "{EFIT_tree}"
  }
 }

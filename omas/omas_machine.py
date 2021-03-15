@@ -182,6 +182,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     # transpose manipulation
     if mapped.get('TRANSPOSE', False):
+        for k in range(len(mapped['TRANSPOSE']) - len(data.shape)):
+            data = numpy.array([data])
         data = numpy.transpose(data, mapped['TRANSPOSE'])
 
     # transpose filter
@@ -194,16 +196,21 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         ods[location] = data
     else:
         with omas_environment(ods, cocosio=cocosio):
-            csize = mapped.get('COORDINATES', [])
-            osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])
-            dsize = len(data.shape)
+            dsize = len(data.shape)  # size of the data fetched from MDS+
+            csize = len(mapped.get('COORDINATES', []))  # number of coordinates
+            osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])  # number of named coordinates
+            asize = location.count(':') + csize  # data size required from MDS+ to make the assignement
+            if asize != dsize:
+                raise Exception(
+                    f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':']*location.count(':')+mapped.get('COORDINATES', []))}]"
+                )
             if dsize - osize == 0 or ':' not in location:
                 if data.size == 1:
                     data = data.item()
                 ods[location] = nanfilter(data)
             else:
-                for k in range(data.shape[0]):
-                    ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
+                for k in itertools.product(*list(map(range, data.shape[: location.count(':')]))):
+                    ods[u2n(location, k)] = nanfilter(data[k])
 
     return ods, {'raw_data': data0, 'processed_data': data, 'cocosio': cocosio, 'branch': mappings['__branch__']}
 
