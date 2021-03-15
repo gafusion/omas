@@ -678,10 +678,16 @@ class mdsvalue(dict):
             old_MDS_server = True
         try:
             # handle the case that server is just the machine name
-            server = machine_mappings(server, '')['__mdsserver__']
+            tmp = machine_mappings(server, '')
         except NotImplementedError:
+            # hanlde case where server is actually a URL
             if '.' not in server:
                 raise
+        else:
+            if '__mdsserver__' not in tmp or not len(tmp['__mdsserver__']):
+                raise Exception(f'Must specify `__mdsserver__` for {server}')
+            else:
+                server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
         if any([k in ['skylark.pppl.gov:8501'] for k in [server, self.server]]):
             old_MDS_server = True
