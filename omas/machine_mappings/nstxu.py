@@ -63,7 +63,7 @@ def pf_active_hardware(ods):
 
 
 @machine_mapping_function(__all__)
-def pf_active_coil_current_data(ods, pulse=203679):
+def pf_active_coil_current_data(ods, pulse=204202):
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -259,7 +259,7 @@ def magnetics_hardware(ods):
 
 
 @machine_mapping_function(__all__)
-def magnetics_floops_data(ods, pulse=203679):
+def magnetics_floops_data(ods, pulse=204202):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -281,7 +281,7 @@ def magnetics_floops_data(ods, pulse=203679):
 
 
 @machine_mapping_function(__all__)
-def magnetics_probes_data(ods, pulse=203679):
+def magnetics_probes_data(ods, pulse=204202):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -303,12 +303,12 @@ def magnetics_probes_data(ods, pulse=203679):
 
 
 @machine_mapping_function(__all__)
-def MDS_gEQDSK_psi_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
+def MDS_gEQDSK_psi_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
     return MDS_gEQDSK_psi(ods, 'nstxu', pulse, EFIT_tree)
 
 
 @machine_mapping_function(__all__)
-def MDS_gEQDSK_bbbs_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
+def MDS_gEQDSK_bbbs_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
@@ -319,7 +319,6 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
     for k in range(len(res['n'])):
         ods[f'equilibrium.time_slice.{k}.boundary.outline.r'] = res['r'][k, : res['n'][k]]
         ods[f'equilibrium.time_slice.{k}.boundary.outline.z'] = res['z'][k, : res['n'][k]]
-
 
 
 # =====================
