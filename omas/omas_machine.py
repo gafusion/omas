@@ -364,7 +364,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                                     mappings[location]['COCOSIO_' + cocos_exp] = mappings['__cocos_rules__'][cocos_rule][cocos_exp]
                                     cocos_defined = True
                 if not cocos_defined:
-                    text = f'{location} must have COCOS specified'
+                    text = f'{location} must have COCOSIO specified'
                     if raise_errors:
                         raise ValueError(text)
                     else:
