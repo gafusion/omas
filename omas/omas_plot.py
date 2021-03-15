@@ -865,7 +865,6 @@ def equilibrium_CX_topview(ods, time_index=None, time=None, ax=None, **kw):
         else:
             return ods_time_plot(equilibrium_CX_topview, time, ods, time_index, ax=ax, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -1208,7 +1207,6 @@ def core_profiles_pressures(ods, time_index=None, time=None, ax=None, **kw):
     ax.set_ylabel('Pressure (Pa)')
     ax.set_xlabel('$\\rho_N$')
     leg = ax.legend(loc=0)
-    import matplotlib
 
     if compare_version(matplotlib.__version__, '3.1.0') >= 0:
         leg.set_draggable(True)
@@ -1526,6 +1524,9 @@ def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
     :return: axes instance
     '''
+
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -1566,6 +1567,9 @@ def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
     :return: axes instance
     '''
+
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -1609,6 +1613,9 @@ def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
     :return: axes instance
     '''
+
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -1729,6 +1736,8 @@ def _plot_signal_eq_constraint(time, data, constraint, equilibrium_constraints, 
 
     :return:
     '''
+    from matplotlib import pyplot
+
     if ax is None:
         ax = pyplot.gca()
 
@@ -1777,7 +1786,6 @@ def pellets_trajectory_CX(ods, time_index=None, time=None, ax=None, **kw):
         else:
             return ods_time_plot(pellets_trajectory_CX, ods, time_index, time, ax=ax, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -1822,7 +1830,6 @@ def pellets_trajectory_CX_topview(ods, time_index=None, time=None, ax=None, **kw
         else:
             return ods_time_plot(pellets_trajectory_CX_topview, ods, time_index, time, ax=ax, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -1875,7 +1882,6 @@ def lh_antennas_CX(ods, time_index=None, time=None, ax=None, antenna_trajectory=
         else:
             return ods_time_plot(lh_antennas_CX, ods, time_index, time, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -1936,7 +1942,6 @@ def lh_antennas_CX_topview(ods, time_index=None, time=None, ax=None, antenna_tra
         else:
             return ods_time_plot(lh_antennas_CX_topview, ods, time_index, time, ax=ax, antenna_trajectory=antenna_trajectory, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -1992,7 +1997,6 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
         else:
             return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -2051,7 +2055,6 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
         else:
             return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -2107,7 +2110,6 @@ def waves_beam_CX(ods, time_index=None, time=None, ax=None, **kw):
         else:
             return ods_time_plot(waves_beam_CX, ods, time_index, time, ax=ax, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
@@ -2154,7 +2156,6 @@ def waves_beam_profile(ods, time_index=None, time=None, what=['power_density', '
         else:
             return ods_time_plot(waves_beam_profile, ods, time_index, time, what=what, ax=ax, **kw)
 
-    import matplotlib
     from matplotlib import pyplot
 
     if ax is None:
