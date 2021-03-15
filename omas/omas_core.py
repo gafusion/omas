@@ -353,6 +353,7 @@ class ODS(MutableMapping):
 
             except Exception:
                 raise
+
         except Exception as _excp:
             raise _excp.__class__(f'Error setting time for `{l2o(subtree)}`')
 
@@ -1487,6 +1488,10 @@ class ODS(MutableMapping):
                     return list(range(len(self.omas_data)))
                 else:
                     dynamic_keys = list(self.dynamic.keys(self.location))
+                    if ':' in dynamic_keys:
+                        raise Exception(
+                            f'{self.dynamic.__class__.__name__}.keys() at `{self.location}` did not return a range with number of structures'
+                        )
                     return dynamic_keys
             else:
                 return []

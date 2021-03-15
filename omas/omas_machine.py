@@ -851,13 +851,16 @@ class dynamic_omas_machine(dynamic_ODS):
         if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
             return list(range(self[ulocation + '.:']))
         else:
-            return numpy.unique(
+            tmp = numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
                     if k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
                 ]
             )
+            if ':' in tmp:
+                raise ValueError(f"Please specify number of structures for `{o2u(location)}.:` in {self.kw['machine']}.json")
+            return tmp
 
 
 def load_omas_machine(
