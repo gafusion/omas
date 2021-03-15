@@ -371,13 +371,24 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     return _machine_mappings[idm]
 
 
-def reload_machine_mappings():
+def reload_machine_mappings(verbose=True):
     '''
     Flushes internal caches of machine mappings.
     This will force the mapping files to be re-read when they are first accessed.
+
+    :param verbose: print to screen when mappings are reloaded
     '''
+    # reset machine mapping caches
     for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict, _user_machine_mappings]:
         cache.clear()
+
+    # in case users did a `from omas.machine_mappings import ...`
+    for mod in list(sys.modules):
+        if mod.startswith('omas.machine_mappings'):
+            del sys.modules[mod]
+
+    if verbose:
+        print('Reloaded OMAS machine mapping info')
 
 
 # ===================
