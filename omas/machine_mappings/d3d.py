@@ -1,5 +1,5 @@
 import numpy as np
-import inspect
+from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, unumpy
 from omas.machine_mappings._common import *
@@ -326,7 +326,7 @@ def pf_active_hardware(ods):
 @machine_mapping_function(__all__)
 def pf_active_coil_current_data(ods, pulse=133221):
     ods1 = ODS()
-    inspect.unwrap(pf_active_hardware)(ods1)
+    unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -395,7 +395,7 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
-    inspect.unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
+    unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
 
 
 @machine_mapping_function(__all__)
@@ -785,7 +785,7 @@ def magnetics_hardware(ods):
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
-    inspect.unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -807,7 +807,7 @@ def magnetics_floops_data(ods, pulse=133221):
 @machine_mapping_function(__all__)
 def magnetics_probes_data(ods, pulse=133221):
     ods1 = ODS()
-    inspect.unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,

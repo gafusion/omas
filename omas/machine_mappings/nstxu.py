@@ -1,5 +1,5 @@
 import numpy as np
-import inspect
+from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
@@ -65,7 +65,7 @@ def pf_active_hardware(ods):
 @machine_mapping_function(__all__)
 def pf_active_coil_current_data(ods, pulse=203679):
     ods1 = ODS()
-    inspect.unwrap(pf_active_hardware)(ods1)
+    unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -261,7 +261,7 @@ def magnetics_hardware(ods):
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=203679):
     ods1 = ODS()
-    inspect.unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -283,7 +283,7 @@ def magnetics_floops_data(ods, pulse=203679):
 @machine_mapping_function(__all__)
 def magnetics_probes_data(ods, pulse=203679):
     ods1 = ODS()
-    inspect.unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -319,6 +319,7 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse=203679, EFIT_tree='EFIT01'):
     for k in range(len(res['n'])):
         ods[f'equilibrium.time_slice.{k}.boundary.outline.r'] = res['r'][k, : res['n'][k]]
         ods[f'equilibrium.time_slice.{k}.boundary.outline.z'] = res['z'][k, : res['n'][k]]
+
 
 
 # =====================
