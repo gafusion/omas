@@ -889,7 +889,7 @@ class dynamic_omas_machine(dynamic_ODS):
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
-                    if k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
+                    if not k.startswith('_') and k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
                 ]
             )
             if ':' in tmp:

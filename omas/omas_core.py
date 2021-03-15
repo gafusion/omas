@@ -1493,6 +1493,8 @@ class ODS(MutableMapping):
                             f'{self.dynamic.__class__.__name__}.keys() at `{self.location}` did not return a range with number of structures'
                         )
                     return dynamic_keys
+            elif not self.location:
+                return self.dynamic.keys(self.location)
             else:
                 return []
         else:
