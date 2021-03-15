@@ -753,11 +753,17 @@ class mdsvalue(dict):
 
                 # dictionary of TDI expressions
                 if isinstance(TDI, dict):
+                    # old versions of MDS+ server do not support getMany
                     if self.old_MDS_server:
                         res = {}
                         for tdi in TDI:
-                            res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                            try:
+                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                            except Exception as _excp:
+                                res[tdi] = Exception(str(_excp))
                         return res
+
+                    # more recent MDS+ server
                     else:
                         conns = conn.getMany()
                         for name, expr in TDI.items():
