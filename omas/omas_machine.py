@@ -248,11 +248,14 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         filename = machines(machine, branch)
 
         # load mappings from file following __include__ directives
-        with open(filename, 'r') as f:
-            try:
-                top = json.load(f)
-            except json.decoder.JSONDecodeError as _excp:
-                raise ValueError(f'Error reading {filename}\n' + str(_excp))
+        if not os.stat(filename).st_size:
+            top = {}
+        else:
+            with open(filename, 'r') as f:
+                try:
+                    top = json.load(f)
+                except json.decoder.JSONDecodeError as _excp:
+                    raise ValueError(f'Error reading {filename}\n' + str(_excp))
         go_deep = ['__cocos_rules__', '__options__']
         mappings = {k: {} for k in go_deep}
         if not return_raw_mappings:
