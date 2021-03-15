@@ -258,8 +258,9 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                     raise ValueError(f'Error reading {filename}\n' + str(_excp))
         go_deep = ['__cocos_rules__', '__options__']
         mappings = {k: {} for k in go_deep}
+        mappings.setdefault('__include__', ['_common'])
         if not return_raw_mappings:
-            for item in top.get('__include__', []):
+            for item in top.get('__include__', ['_common']):
                 include_filename = os.path.split(filename)[0] + os.sep + f'{item}.json'
                 with open(include_filename, 'r') as f:
                     try:
