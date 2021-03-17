@@ -100,6 +100,17 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "magnetics_hardware(ods)"
  },
+ "magnetics.diamagnetic_flux.:": {
+  "VALUE": 1
+ },
+ "magnetics.diamagnetic_flux.:.data": {
+  "TDI": "[\\F_DIAMAG2]",
+  "treename": "NSTX"
+ },
+ "magnetics.diamagnetic_flux.:.time": {
+  "TDI": "[dim_of(\\F_DIAMAG2,0)]",
+  "treename": "NSTX"
+ },
  "magnetics.flux_loop.:": {
   "PYTHON": "magnetics_hardware(ods)"
  },
