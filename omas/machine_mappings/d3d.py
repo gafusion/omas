@@ -621,7 +621,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     """
     import MDSplus
 
-    printd('Setting up DIII-D CER locations...', topic='mapping')
+    printd('Setting up DIII-D CER locations...', topic='machine')
 
     cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
 
