@@ -264,84 +264,102 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    times = np.atleast_1d(times)
+    times = numpy.atleast_1d(times)
     ods_n[f'equilibrium.time'] = times
 
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
-            label = ods[f'pf_active.coil.{channel}.element[0].identifier']
-            turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
-            data = ods[f'pf_active.coil.{channel}.current.data']
-            time = ods[f'pf_active.coil.{channel}.current.time']
-            const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
-            for time_index in range(len(times)):
-                ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
-                ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
+            try:
+                label = ods[f'pf_active.coil.{channel}.element[0].identifier']
+                turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
+                data = ods[f'pf_active.coil.{channel}.current.data']
+                time = ods[f'pf_active.coil.{channel}.current.time']
+                const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with pf_current channel {channel} :' + str(_excp))
 
     # bpol_probe
     if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
         average = averages.get('bpol_probe', default_average)
         for channel in ods[f'magnetics.b_field_pol_probe']:
-            valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
-            for time_index in range(len(times)):
-                ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
-            if valid == 0:
-                label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
-                data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
-                time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
-                const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            try:
+                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
                 for time_index in range(len(times)):
-                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
-            else:
-                for time_index in range(len(times)):
-                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = np.nan
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
+                if valid == 0:
+                    label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
+                    data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+                    time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with bpol_probe channel {channel}: ' + str(_excp))
 
     # flux_loop
     if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
         average = averages.get('flux_loop', default_average)
         for channel in ods[f'magnetics.flux_loop']:
-            valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
-            for time_index in range(len(times)):
-                ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
-            if valid == 0:
-                label = ods[f'magnetics.flux_loop.{channel}.identifier']
-                data = ods[f'magnetics.flux_loop.{channel}.flux.data']
-                time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            try:
+                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
                 for time_index in range(len(times)):
-                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
-            else:
-                for time_index in range(len(times)):
-                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = np.nan
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
+                if valid == 0:
+                    label = ods[f'magnetics.flux_loop.{channel}.identifier']
+                    data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+                    time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with flux_loop channel {channel}: ' + str(_excp))
 
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
-        average = averages.get('ip', default_average)
-        time = ods['magnetics.ip.0.time']
-        data = ods['magnetics.ip.0.data']
-        const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
-        for time_index in range(len(times)):
-            ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
+        try:
+            average = averages.get('ip', default_average)
+            time = ods['magnetics.ip.0.time']
+            data = ods['magnetics.ip.0.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with ip')
 
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
-        average = averages.get('diamagnetic_flux', default_average)
-        time = ods['magnetics.diamagnetic_flux.0.time']
-        data = ods['magnetics.diamagnetic_flux.0.data']
-        const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
-        for time_index in range(len(times)):
-            ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
+        try:
+            average = averages.get('diamagnetic_flux', default_average)
+            time = ods['magnetics.diamagnetic_flux.0.time']
+            data = ods['magnetics.diamagnetic_flux.0.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with diamagnetic_flux')
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
-        average = averages.get('b_field_tor_vacuum_r', default_average)
-        time = ods['tf.b_field_tor_vacuum_r.time']
-        data = ods['tf.b_field_tor_vacuum_r.data']
-        const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
-        for time_index in range(len(times)):
-            ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
+        try:
+            average = averages.get('b_field_tor_vacuum_r', default_average)
+            time = ods['tf.b_field_tor_vacuum_r.time']
+            data = ods['tf.b_field_tor_vacuum_r.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r')
 
     return ods_n
 
