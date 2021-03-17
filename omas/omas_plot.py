@@ -1660,6 +1660,7 @@ def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :return: axes instance
     '''
     return _plot_signal_eq_constraint(
+        ods,
         'magnetics.ip.0.time',
         'magnetics.ip.0.data',
         'equilibrium.time_slice.:.constraints.ip.measured',
@@ -1685,6 +1686,7 @@ def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, 
     :return: axes instance
     '''
     return _plot_signal_eq_constraint(
+        ods,
         'magnetics.diamagnetic_flux.0.time',
         'magnetics.diamagnetic_flux.0.data',
         'equilibrium.time_slice.:.constraints.diamagnetic_flux.measured',
@@ -1710,6 +1712,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
     :return: axes instance
     '''
     return _plot_signal_eq_constraint(
+        ods,
         'tf.b_field_tor_vacuum_r.time',
         'tf.b_field_tor_vacuum_r.data',
         'equilibrium.time_slice.:.constraints.b_field_tor_vacuum_r.measured',
@@ -1720,7 +1723,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
     )
 
 
-def _plot_signal_eq_constraint(time, data, constraint, equilibrium_constraints, ax, **kw):
+def _plot_signal_eq_constraint(ods, time, data, constraint, equilibrium_constraints, ax, **kw):
     '''
     Utility function to plot individual signal and their constraint in equilibrium IDS
 
@@ -1748,7 +1751,7 @@ def _plot_signal_eq_constraint(time, data, constraint, equilibrium_constraints, 
 
     # equilibrium constraints
     if equilibrium_constraints and constraint in ods:
-        ax.plot(ods['equilibrium.time'], ods[constraint], marker='o', color='k', mec='none')
+        ax.plot(ods['equilibrium.time'], ods[constraint], ls='', marker='o', color='k', mec='none')
     return ax
 
 
