@@ -121,7 +121,7 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
         zlim = ods['wall.description_2d[0].limiter.unit[0].outline.z']
     except (ValueError, KeyError):
         # Don't have rlim and zlim yet
-        printd('No limiter in ods. Gathering it from MDSplus to support ', topic='mapping')
+        printd('No limiter in ods. Gathering it from MDSplus to support ', topic='machine')
         lim = mdsvalue('east', 'EFIT_EAST', pulse, TDI=r'\top.results.geqdsk.lim').data()
         rlim = lim[:, 0]
         zlim = lim[:, 1]
@@ -136,10 +136,10 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
             try:
                 s = m.data()
             except Exception:
-                printd('Failed MDSplus data check for {}; data invalid. Halting.'.format(pointname), topic='mapping')
+                printd('Failed MDSplus data check for {}; data invalid. Halting.'.format(pointname), topic='machine')
             else:
                 # Data appear to be valid; proceed
-                printd('Processing data for probe group {}; {}'.format(corner.upper(), pointname), topic='mapping')
+                printd('Processing data for probe group {}; {}'.format(corner.upper(), pointname), topic='machine')
 
                 r, z, _ = east_coords_along_wall(s, rlim, zlim, corner)
 

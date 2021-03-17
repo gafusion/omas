@@ -28,7 +28,7 @@ def save_omas_mongo(ods, collection, database='omas', server=omas_rcparams['defa
     :return: unique `_id` identifier of the record
     """
 
-    printd('Saving OMAS data to MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
+    printd('Saving OMAS data to MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic='MongoDB')
 
     # importing module
     from pymongo import MongoClient
@@ -95,7 +95,7 @@ def load_omas_mongo(
         find = copy.deepcopy(find)
         find['_id'] = ObjectId(find['_id'])
 
-    printd('Loading OMAS data from MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic=['MongoDB'])
+    printd('Loading OMAS data from MongoDB: collection=%s database=%s  server=%s' % (collection, database, server), topic='MongoDB')
 
     # connect
     client = MongoClient(server.format(**get_mongo_credentials(server, database, collection)))

@@ -202,7 +202,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             asize = location.count(':') + csize  # data size required from MDS+ to make the assignement
             if asize != dsize:
                 raise Exception(
-                    f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':']*location.count(':')+mapped.get('COORDINATES', []))}]"
+                    f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"
                 )
             if dsize - osize == 0 or ':' not in location:
                 if data.size == 1:
@@ -591,7 +591,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     :param namespace: testing namespace
     '''
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
-    os.environ['OMAS_DEBUG_TOPIC'] = 'mapping'
+    os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
     # call machine mapping to make sure the json file is properly formatted
     machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
@@ -823,7 +823,7 @@ class mdsvalue(dict):
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
 
         finally:
-            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='mapping')
+            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='machine')
 
 
 # ===================

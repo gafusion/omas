@@ -468,7 +468,7 @@ def bolometer_hardware(ods, pulse=133221):
     - iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/bolometerpaths.pro
     - OMFIT-source/modules/_PCS_prad_control/SETTINGS/PHYSICS/reference/DIII-D/bolometer_geo , access 2018 June 11 by D. Eldon
     """
-    printd('Setting up DIII-D bolometer locations...', topic='d3d')
+    printd('Setting up DIII-D bolometer locations...', topic='machine')
 
     # fmt: off
     if pulse < 91000:
@@ -583,14 +583,13 @@ def langmuir_probes_hardware(ods, pulse=176235):
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='mapping')
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='mapping')
+    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='machine')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -603,7 +602,7 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
                 pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
                 label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
-                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='mapping')
+                printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='machine')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
