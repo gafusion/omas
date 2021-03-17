@@ -14,7 +14,7 @@ def pf_active_hardware(ods):
 
     :param ods: ODS instance
     """
-    # From `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat').pretty_print()`
+    # From `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat', serverPicker='portal').pretty_print()`
     # R        Z       dR      dZ    tilt1  tilt2
     # 0 in the last column really means 90 degrees
     # fmt: off
@@ -43,6 +43,8 @@ def pf_active_hardware(ods):
          [0.324600011, -1.59060001, 0.0625, 0.463400006, 0.0, 0.0]]
     )
 
+    turns = [64, 32, 20, 14, 14, 15, 15, 9, 8, 12, 12, 12, 12, 9, 8, 15, 15, 14, 14, 20, 32, 64]
+
     names = {'PF1AU':'PF1AU', 'PF1BU':'PF1BU', 'PF1CU':'PF1CU',
              'PF2U1':'PF2U', 'PF2U2':'PF2U',
              'PF3U1':'PF3U', 'PF3U2':'PF3U',
@@ -57,9 +59,10 @@ def pf_active_hardware(ods):
 
     ods = pf_coils_to_ods(ods, fc_dat)
 
-    for i, (name, fcid) in enumerate(names.items()):
-        ods['pf_active.coil'][i]['name'] = ods['pf_active.coil'][i]['identifier'] = name
-        ods['pf_active.coil'][i]['element.0.identifier'] = fcid
+    for k, (name, fcid) in enumerate(names.items()):
+        ods['pf_active.coil'][k]['name'] = ods['pf_active.coil'][k]['identifier'] = name
+        ods['pf_active.coil'][k]['element.0.identifier'] = fcid
+        ods['pf_active.coil'][k]['element.0.turns_with_sign'] = turns[k]
 
 
 @machine_mapping_function(__all__)
@@ -91,8 +94,12 @@ def magnetics_hardware(ods):
 
     :param ods: ODS instance
     """
-    # From: `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat').pretty_print()`
-    # From: `OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat').pretty_print()`
+    # magnetics hardware from
+    #  OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat', serverPicker='portal').pretty_print()
+    # magnetics signals from
+    #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
+    #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
+
     # fmt: off
     # ==========
     # Flux loops

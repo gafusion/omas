@@ -38,13 +38,21 @@
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
@@ -122,6 +130,18 @@
  "magnetics.flux_loop.:.type.index": {
   "PYTHON": "magnetics_hardware(ods)"
  },
+ "magnetics.ip.:": {
+  "VALUE": 1
+ },
+ "magnetics.ip.:.data": {
+  "COCOSIO": 1,
+  "TDI": "[\\IP1]",
+  "treename": "NSTX"
+ },
+ "magnetics.ip.:.time": {
+  "TDI": "[dim_of(\\IP1,0)]",
+  "treename": "NSTX"
+ },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
  },
@@ -153,11 +173,26 @@
  "pf_active.coil.:.element.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
+ "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
  "pf_active.coil.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods)"
+ },
+ "tf.b_field_tor_vacuum_r.data": {
+  "COCOSIO": 1,
+  "TDI": "\\ITF*7.2385e-06",
+  "treename": "NSTX"
+ },
+ "tf.b_field_tor_vacuum_r.time": {
+  "TDI": "dim_of(\\ITF,0)",
+  "treename": "NSTX"
+ },
+ "tf.r0": {
+  "VALUE": 0.941
  },
  "wall.description_2d.:": {
   "VALUE": 1
@@ -167,12 +202,20 @@
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RLIM",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
+  "treename": "{EFIT_tree}"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
   "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZLIM",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
+  "treename": "{EFIT_tree}"
  }
 }

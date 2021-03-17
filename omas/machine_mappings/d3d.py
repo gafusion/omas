@@ -312,7 +312,7 @@ def pf_active_hardware(ods):
     )
     # fmt: on
 
-    turns = [58.0, 58.0, 58.0, 58.0, 58.0, 55.0, 55.0, 58.0, 55.0, 58.0, 58.0, 58.0, 58.0, 58.0, 55.0, 55.0, 58.0, 55.0]
+    turns = [58, 58, 58, 58, 58, 55, 55, 58, 55, 58, 58, 58, 58, 58, 55, 55, 58, 55]
 
     ods = pf_coils_to_ods(ods, fc_dat)
 
@@ -583,6 +583,7 @@ def langmuir_probes_hardware(ods, pulse=176235):
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
+    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='machine')
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
