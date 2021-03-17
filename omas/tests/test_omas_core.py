@@ -243,13 +243,7 @@ class TestOmasCore(UnittestCaseOmas):
         assert sizes[None] == sizes['time'], 'sample equilibrium and core_profiles should be homogeneous'
 
         ods.sample_pf_active()
-        try:
-            DS = ods.dataset(homogeneous='full')
-            raise AssertionError(
-                'sample pf_active data should not be able to collect across channels because their time arrays are not homogeneous'
-            )
-        except ValueError:
-            pass
+        DS = ods.dataset(homogeneous='full')
 
     def test_time(self):
         # test generation of a sample ods
