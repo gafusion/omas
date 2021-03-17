@@ -65,10 +65,9 @@ class constants(object):
 
 
 @add_to__ODS__
-def consistent_times(self, attempt_fix=True, raise_errors=True):
+def consistent_times(ods, attempt_fix=True, raise_errors=True):
     """
-    Assign .time and .ids_properties.homogeneous_time info for top-level structures
-    since these are required for writing an IDS to IMAS
+    Assign .time and .ids_properties.homogeneous_time info for top-level structures since these are required for writing an IDS to IMAS
 
     :param attempt_fix: fix dataset_description and wall IDS to have 0 times if none is set
 
@@ -78,10 +77,10 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
     """
 
     # if called at top level, loop over all data structures
-    if not len(self.location):
+    if not len(ods.location):
         out = {}
-        for ds in self:
-            out[ds] = self.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
+        for ds in ods:
+            out[ds] = ods.getraw(ds).physics_consistent_times(attempt_fix=attempt_fix, raise_errors=raise_errors)
         if any(k is False for k in out.values()):
             return False
         elif any(k is None for k in out.values()):
@@ -89,38 +88,45 @@ def consistent_times(self, attempt_fix=True, raise_errors=True):
         else:
             return True
 
-    ds = p2l(self.location)[0]
+    ds = p2l(ods.location)[0]
 
     extra_info = {}
-    time = self.time(extra_info=extra_info)
+    time = ods.time(extra_info=extra_info)
     if extra_info['homogeneous_time'] is False:
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
     elif time is not None and len(time):
-        self['time'] = time
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['time'] = time
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
     elif attempt_fix:
-        self['time'] = [-1.0]
+        ods['time'] = [-1.0]
         extra_info['homogeneous_time'] = True
-        self['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
+        ods['ids_properties']['homogeneous_time'] = extra_info['homogeneous_time']
         return None
     elif raise_errors:
-        raise ValueError(self.location + '.time cannot be automatically filled! Missing time information in the data structure.')
+        raise ValueError(ods.location + '.time cannot be automatically filled! Missing time information in the data structure.')
     else:
         return False
     return True
 
 
 @add_to__ODS__
-def imas_info(self):
+def imas_info(ods):
+    '''
+    add ids_properties.version_put... information
+
+    :return: updated ods
+    '''
     # if called at top level, loop over all data structures
-    if not len(self.location):
-        for ds in self:
-            self.getraw(ds).physics_imas_info()
+    if not len(ods.location):
+        for ds in ods:
+            ods.getraw(ds).physics_imas_info()
         return
     else:
-        self['ids_properties.version_put.access_layer'] = 'N/A'
-        self['ids_properties.version_put.access_layer_language'] = 'OMAS'
-        self['ids_properties.version_put.data_dictionary'] = self.imas_version
+        ods['ids_properties.version_put.access_layer'] = 'N/A'
+        ods['ids_properties.version_put.access_layer_language'] = 'OMAS'
+        ods['ids_properties.version_put.data_dictionary'] = ods.imas_version
+
+    return ods
 
 
 @add_to__ODS__
@@ -204,6 +210,157 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
             profiles_2d[what] = interpolated.T
         profiles_2d['grid.dim1'] = r
         profiles_2d['grid.dim2'] = z
+    return ods_n
+
+
+@add_to__ODS__
+def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):
+    '''
+    generate equilibrium constraints from experimental data in ODS
+
+    :param ods: input ODS
+
+    :param times: list of times at which to generate the constraints
+
+    :param default_average: default averaging time
+
+    :param constraints: list of constraints to be formed (if experimental data is available)
+                        NOTE: only the constraints marked with `OK` are supported at this time::
+
+                         OK b_field_tor_vacuum_r
+                         OK bpol_probe
+                         OK diamagnetic_flux
+                          * faraday_angle
+                         OK flux_loop
+                         OK ip
+                          * iron_core_segment
+                          * mse_polarisation_angle
+                          * n_e
+                          * n_e_line
+                         OK pf_current
+                          * pf_passive_current
+                          * pressure
+                          * q
+                          * strike_point
+                          * x_point
+
+    :param averages: dictionary with average times for individual constraints
+
+    :param update: operate in place
+
+    :return: updated ods
+    '''
+    from omfit_classes.utils_math import smooth_by_convolution
+
+    if averages is None:
+        averages = {}
+
+    if constraints is None:
+        constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
+
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    times = numpy.atleast_1d(times)
+    ods_n[f'equilibrium.time'] = times
+
+    # pf_current
+    if 'pf_current' in constraints and 'pf_active.coil' in ods:
+        average = averages.get('pf_active', default_average)
+        for channel in ods['pf_active.coil']:
+            try:
+                label = ods[f'pf_active.coil.{channel}.element[0].identifier']
+                turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
+                data = ods[f'pf_active.coil.{channel}.current.data']
+                time = ods[f'pf_active.coil.{channel}.current.time']
+                const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with pf_current channel {channel} :' + str(_excp))
+
+    # bpol_probe
+    if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
+        average = averages.get('bpol_probe', default_average)
+        for channel in ods[f'magnetics.b_field_pol_probe']:
+            try:
+                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
+                if valid == 0:
+                    label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
+                    data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+                    time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with bpol_probe channel {channel}: ' + str(_excp))
+
+    # flux_loop
+    if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
+        average = averages.get('flux_loop', default_average)
+        for channel in ods[f'magnetics.flux_loop']:
+            try:
+                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
+                if valid == 0:
+                    label = ods[f'magnetics.flux_loop.{channel}.identifier']
+                    data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+                    time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with flux_loop channel {channel}: ' + str(_excp))
+
+    # ip
+    if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
+        try:
+            average = averages.get('ip', default_average)
+            time = ods['magnetics.ip.0.time']
+            data = ods['magnetics.ip.0.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with ip')
+
+    # diamagnetic_flux
+    if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
+        try:
+            average = averages.get('diamagnetic_flux', default_average)
+            time = ods['magnetics.diamagnetic_flux.0.time']
+            data = ods['magnetics.diamagnetic_flux.0.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with diamagnetic_flux')
+
+    # b_field_tor_vacuum_r
+    if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
+        try:
+            average = averages.get('b_field_tor_vacuum_r', default_average)
+            time = ods['tf.b_field_tor_vacuum_r.time']
+            data = ods['tf.b_field_tor_vacuum_r.data']
+            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            for time_index in range(len(times)):
+                ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
+        except Exception as _excp:
+            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r')
+
     return ods_n
 
 
@@ -792,10 +949,10 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
             n = prof1d_z['ion'][k]['density']  # from new ODS
             Z2n += n * Z ** 2
             Zn += n * Z
-            if use_electrons_density:
-                prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
-            else:
-                prof1d_z['zeff'] = Z2n / Zn
+        if use_electrons_density:
+            prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
+        else:
+            prof1d_z['zeff'] = Z2n / Zn
     return ods_z
 
 

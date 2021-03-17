@@ -94,22 +94,26 @@
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
   "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
   "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
   "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}"
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.profiles_2d.:.psi": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIRZ)",
+  "TDI": "[data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIRZ)]",
   "TRANSPOSE": [
+   1,
    0,
-   2,
-   1
+   3,
+   2
   ],
   "treename": "{EFIT_tree}"
  },

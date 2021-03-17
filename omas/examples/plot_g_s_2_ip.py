@@ -11,9 +11,9 @@ from matplotlib import pyplot
 import os
 from omas import *
 
-from omfit.classes.omfit_eqdsk import OMFITgeqdsk
-from omfit.classes.omfit_onetwo import OMFITstatefile
-from omfit.classes.omfit_gacode import OMFITinputprofiles
+from omfit_classes.omfit_eqdsk import OMFITgeqdsk
+from omfit_classes.omfit_onetwo import OMFITstatefile
+from omfit_classes.omfit_gacode import OMFITinputprofiles
 
 gfilename = imas_json_dir + '/../samples/g145419.02100'  # gEQDSK file
 sfilename = imas_json_dir + '/../samples/state145419_02100.nc'  # ONETWO statefile

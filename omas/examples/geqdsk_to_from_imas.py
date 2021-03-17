@@ -21,7 +21,7 @@ Prior running this script, the following commands must be typed at the teriminal
 import os
 from matplotlib import pyplot
 
-from omfit.classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
+from omfit_classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
 from omas import *
 
 imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])

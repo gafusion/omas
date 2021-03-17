@@ -353,6 +353,7 @@ class ODS(MutableMapping):
 
             except Exception:
                 raise
+
         except Exception as _excp:
             raise _excp.__class__(f'Error setting time for `{l2o(subtree)}`')
 
@@ -697,6 +698,15 @@ class ODS(MutableMapping):
         self._dynamic = top._dynamic
         return self._dynamic
 
+    @property
+    def active_dynamic(self):
+        """
+        property that point to dynamic_ODS object and says if it is active
+        """
+        dynamic = self.dynamic
+        if dynamic and dynamic.active:
+            return dynamic
+
     @dynamic.setter
     def dynamic(self, dynamic_value):
         self.top._dynamic = dynamic_value
@@ -943,7 +953,7 @@ class ODS(MutableMapping):
                         else:
                             printd('Adding `%s` without knowing coordinates `%s`' % (self.location, all_coordinates), topic='coordsio')
 
-                    elif not self.dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
+                    elif not self.active_dynamic and ulocation in omas_coordinates(self.imas_version) and location in ods_coordinates:
                         value = ods_coordinates.__getitem__(location, None)
 
             # lists are saved as numpy arrays, and 0D numpy arrays as scalars
@@ -1193,12 +1203,12 @@ class ODS(MutableMapping):
         # dynamic path creation
         elif key[0] not in self.keys(dynamic=0):
             if omas_rcparams['dynamic_path_creation']:
-                if self.dynamic:
+                if self.active_dynamic:
                     location = l2o([self.location, key[0]])
-                if self.dynamic is not None and self.dynamic.__contains__(location):
+                if self.active_dynamic and self.dynamic.__contains__(location):
                     value = self.dynamic.__getitem__(location)
                     self.__setitem__(key[0], value)
-                elif self.dynamic is not None and o2u(location).endswith(':'):
+                elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
                     for k in self.keys(dynamic=1):
                         if k not in self.keys(dynamic=0):
@@ -1426,22 +1436,33 @@ class ODS(MutableMapping):
     def __contains__(self, key):
         key = p2l(key)
         h = self
+
         for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
             if h.omas_data is not None and k in h.keys(dynamic=0):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
+
             else:
-                if self.dynamic:
+                # dynamic loading
+                if self.active_dynamic:
                     if k in self.dynamic.keys(l2o(p2l(self.location) + key[:c])):
-                        continue
-                    else:
-                        return False
-                else:
-                    return False
+                        continue  # continue to the next key
+
+                # handle ':' by looking under each array of structure
+                # and returning True if any of them have the entry we are loooking for
+                if isinstance(k, str) and ':' in k:
+                    s = slice(*map(lambda x: int(x.strip()) if x.strip() else None, k.split(':')))
+                    for k in range(len(h.omas_data))[s]:
+                        if key[c + 1 :] in h.omas_data[k]:
+                            return True
+
+                return False
+
         # return False if checking existance of a leaf and the leaf exists but is unassigned
-        if not self.dynamic and isinstance(h, ODS) and h.omas_data is None:
+        if not self.active_dynamic and isinstance(h, ODS) and h.omas_data is None:
             return False
+
         return True
 
     def keys(self, dynamic=True):
@@ -1457,15 +1478,25 @@ class ODS(MutableMapping):
 
         :return: list of keys
         '''
-        dynamic_keys = []
-        if dynamic and self.dynamic:
-            dynamic_keys = list(self.dynamic.keys(self.location))
+        if dynamic and self.active_dynamic:
             if isinstance(self.omas_data, dict):
+                dynamic_keys = list(self.dynamic.keys(self.location))
                 return sorted(numpy.unique(list(self.omas_data.keys()) + dynamic_keys).tolist())
             elif isinstance(self.omas_data, list):
-                return sorted(numpy.unique(list(range(len(self.omas_data))) + dynamic_keys).tolist())
+                # the first time dynamic data is loaded, empty ODS structures will populate self.omas_data
+                if len(self.omas_data):
+                    return list(range(len(self.omas_data)))
+                else:
+                    dynamic_keys = list(self.dynamic.keys(self.location))
+                    if ':' in dynamic_keys:
+                        raise Exception(
+                            f'{self.dynamic.__class__.__name__}.keys() at `{self.location}` did not return a range with number of structures'
+                        )
+                    return dynamic_keys
+            elif not self.location:
+                return self.dynamic.keys(self.location)
             else:
-                return dynamic_keys
+                return []
         else:
             if isinstance(self.omas_data, dict):
                 return list(self.omas_data.keys())
@@ -2017,9 +2048,12 @@ class ODS(MutableMapping):
         if self.location:
             consistency_check = False
 
-        # without args/kw re-connect
-        if self.dynamic and not len(args) and not len(kw):
-            return self.dynamic.open()
+        # without args/kw re-connect to a dynamic ODS
+        if not len(args) and not len(kw):
+            if self.dynamic:
+                return self.dynamic.open()
+            else:
+                raise ValueError('ods was not previously open. Must specify .open() arguments.')
 
         # figure out format used
         ext, args = _handle_extension(*args)

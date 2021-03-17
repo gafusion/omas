@@ -17,7 +17,7 @@ from omas.omas_utils import *
 from omas.tests import warning_setup
 from omas.tests.failed_imports import *
 from omas.omas_machine import *
-from omas.omas_machine import machine_to_omas, mds_machine_to_server_mapping
+from omas.omas_machine import machine_to_omas
 
 
 class TestOmasMachine(UnittestCaseOmas):
@@ -92,4 +92,4 @@ class TestOmasMachine(UnittestCaseOmas):
     def test_tdi(self):
         # make sure all machines have a MDS+ server assigned
         for machine in machines():
-            mds_machine_to_server_mapping(machine, '')
+            machine_mappings(self.machine, '')['__mdsserver__']

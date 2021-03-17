@@ -2,7 +2,7 @@
  "equilibrium": {
   "documentation": "Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.",
   "full_path": "equilibrium",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "3"
@@ -1787,6 +1787,204 @@
   "type": "dynamic",
   "units": "m"
  },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix": {
+  "data_type": "STRUCTURE",
+  "documentation": "Geometry of the secondary separatrix, defined as the outer flux surface with an X-point",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix",
+  "lifecycle_status": "active",
+  "structure_reference": "equilibrium_boundary_second_separatrix"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline": {
+  "data_type": "STRUCTURE",
+  "documentation": "RZ outline of the plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline",
+  "lifecycle_status": "active",
+  "structure_reference": "rz1d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/r(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/r_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/r_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.z": {
+  "coordinates": [
+   "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/z(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.z_error_lower": {
+  "coordinates": [
+   "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/z_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.z_error_upper": {
+  "coordinates": [
+   "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/z_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.psi": {
+  "data_type": "FLT_0D",
+  "documentation": "Value of the poloidal flux at the separatrix",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/psi",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/psi_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.psi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/psi_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.psi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/psi_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Array of X-points, for each of them the RZ position is given",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)",
+  "lifecycle_status": "active",
+  "maxoccur": "unbounded",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/r",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
  "equilibrium.time_slice[:].boundary_separatrix": {
   "data_type": "STRUCTURE",
   "documentation": "Description of the plasma boundary at the separatrix",
@@ -1859,6 +2057,75 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/active_limiter_point/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "(R, Z) position of the point of the first wall which is the closest to plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point",
+  "lifecycle_status": "active",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/r",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z_error_upper",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m"
@@ -9013,6 +9280,106 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].global_quantities.current_centre": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position and vertical velocity of the current centre",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre",
+  "lifecycle_status": "active",
+  "structure_reference": "equilibrium_global_quantities_current_centre"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius of the current center, defined as integral over the poloidal cross section of (j_tor*r*dS) / Ip",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/r",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.velocity_z": {
+  "data_type": "FLT_0D",
+  "documentation": "Vertical velocity of the current center",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/velocity_z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.velocity_z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"velocity_z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/velocity_z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.velocity_z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"velocity_z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/velocity_z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.velocity_z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"velocity_z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/velocity_z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height of the current center, defined as integral over the poloidal cross section of (j_tor*z*dS) / Ip",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.current_centre.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
  "equilibrium.time_slice[:].global_quantities.energy_mhd": {
   "data_type": "FLT_0D",
   "documentation": "Plasma energy content = 3/2 * int(p,dV) with p being the total pressure (thermal + fast particles) [J]. Time-dependent; Scalar",
@@ -9298,6 +9665,37 @@
   "type": "dynamic",
   "units": "m"
  },
+ "equilibrium.time_slice[:].global_quantities.plasma_inductance": {
+  "data_type": "FLT_0D",
+  "documentation": "Plasma inductance 2 E_magnetic/Ip^2, where E_magnetic = 1/2 * int(psi.j_tor.dS) (integral over the plasma poloidal cross-section)",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_inductance",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "H"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_inductance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"plasma_inductance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_inductance_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_inductance_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"plasma_inductance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_inductance_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "H"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_inductance_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"plasma_inductance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_inductance_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "H"
+ },
  "equilibrium.time_slice[:].global_quantities.psi_axis": {
   "cocos_label_transformation": "psi_like",
   "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.psi_axis",
@@ -9374,6 +9772,46 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"psi_boundary\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_boundary_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.psi_external_average": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.psi_external_average",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Average (over the plasma poloidal cross section) plasma poloidal magnetic flux produced by all external circuits (CS and PF coils, eddy currents, VS in-vessel coils), given by the following formula : int(psi_external.j_tor.dS) / Ip",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_external_average",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.psi_external_average_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi_external_average\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_external_average_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.psi_external_average_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.psi_external_average",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi_external_average\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_external_average_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.psi_external_average_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.psi_external_average",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi_external_average\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_external_average_error_upper",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
@@ -11830,6 +12268,9 @@
   "units": "T"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_tor": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.b_field_tor",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -11849,6 +12290,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_tor_error_lower": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.b_field_tor",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -11861,6 +12305,9 @@
   "units": "T"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_tor_error_upper": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.b_field_tor",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12233,12 +12680,15 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_parallel": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_parallel",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Parallel (to magnetic field) plasma current density",
+  "documentation": "Defined as (j.B)/B0 where j and B are the current density and magnetic field vectors and B0 is the (signed) vacuum toroidal magnetic field strength at the geometric reference point (R0,Z0). It is formally not the component of the plasma current density parallel to the magnetic field",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/j_parallel(:,:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -12252,6 +12702,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_parallel_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_parallel",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12264,6 +12717,9 @@
   "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_parallel_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_parallel",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12276,6 +12732,9 @@
   "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_tor": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_tor",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12295,6 +12754,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_tor_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_tor",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12307,6 +12769,9 @@
   "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_tor_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.j_tor",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12319,6 +12784,9 @@
   "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_2d[:].phi": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.phi",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12338,6 +12806,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].phi_error_lower": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.phi",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"
@@ -12350,6 +12821,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].profiles_2d[:].phi_error_upper": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.profiles_2d{j}.phi",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim2"

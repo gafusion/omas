@@ -1,5 +1,5 @@
 import numpy as np
-import inspect
+from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *

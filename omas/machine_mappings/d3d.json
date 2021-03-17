@@ -69,6 +69,10 @@
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
+ "core_profiles.profiles_1d.:": {
+  "TDI": "size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)",
+  "treename": "{PROFILES_tree}"
+ },
  "core_profiles.profiles_1d.:.electrons.density_thermal": {
   "TDI": "\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT",
   "treename": "{PROFILES_tree}"
@@ -79,6 +83,10 @@
  },
  "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
   "eval2TDI": "py2tdi(tile,'dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,0)','size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)')",
+  "treename": "{PROFILES_tree}"
+ },
+ "core_profiles.profiles_1d.:.time": {
+  "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
  },
  "gas_injection.pipe.:": {
@@ -213,8 +221,11 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "magnetics_hardware(ods)"
  },
+ "magnetics.diamagnetic_flux.:": {
+  "VALUE": 1
+ },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[ptdata2(\"DIAMAG3\",{pulse})/1000.]"
+  "TDI": "[ptdata2(\"DIAMAG3\",{pulse}) * 1E-3]"
  },
  "magnetics.diamagnetic_flux.:.time": {
   "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
@@ -254,10 +265,10 @@
  },
  "magnetics.ip.:.data": {
   "COCOSIO": 1,
-  "TDI": "[ptdata2(\"ip\",{pulse})]"
+  "TDI": "[ptdata2(\"IP\",{pulse})]"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"ip\",{pulse}),0)/1000.]"
+  "TDI": "[dim_of(ptdata2(\"IP\",{pulse}),0)/1000.]"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
@@ -296,6 +307,9 @@
  "pf_active.coil.:.element.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
+ "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
  "pf_active.coil.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
@@ -313,23 +327,35 @@
   "VALUE": 1.6955
  },
  "thomson_scattering.channel.:": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.n_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.n_e.time": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.t_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.t_e.time": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
   "VALUE": 1
@@ -339,10 +365,20 @@
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
   "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
   "treename": "{EFIT_tree}"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
   "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[1,])",
+  "TRANSPOSE": [
+   1,
+   0,
+   2
+  ],
   "treename": "{EFIT_tree}"
  }
 }

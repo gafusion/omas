@@ -168,6 +168,9 @@ def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
 # --------------------------
 # general utility functions
 # --------------------------
+_streams = {'DEBUG': sys.stderr, 'STDERR': sys.stderr}
+
+
 def printd(*objects, **kw):
     """
     debug print
@@ -188,10 +191,11 @@ def printd(*objects, **kw):
         dump = True
         topic_selected = re.sub('_dump$', '', topic_selected)
     if topic_selected and (topic_selected == '*' or topic_selected in topic or '*' in topic):
-        if eval(os.environ.get('OMAS_DEBUG_STDOUT', '1')):
-            print(*objects, **kw)
+        if eval(os.environ.get('OMAS_DEBUG_STDOUT', '0')):
+            kw.setdefault('file', sys.stdout)
         else:
-            printe(*objects, **kw)
+            kw.setdefault('file', _streams['DEBUG'])
+        print(*objects, **kw)
         if dump:
             fb = StringIO()
             print(*objects[1:], file=fb)
@@ -204,7 +208,7 @@ def printe(*objects, **kw):
     """
     print to stderr
     """
-    kw['file'] = sys.stderr
+    kw['file'] = _streams['STDERR']
     print(*objects, **kw)
 
 
@@ -854,15 +858,20 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
     return _global_quantities[imas_version]
 
 
-try:
-    import pyximport
-
-    pyximport.install(language_level=3)
-    from .omas_cython import *
-except Exception as _excp:
-    warnings.warn('omas cython failed: ' + str(_excp))
+# only attempt cython if user owns this copy of omas
+if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
     with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
         exec(f.read(), globals())
+else:
+    try:
+        import pyximport
+
+        pyximport.install(language_level=3)
+        from .omas_cython import *
+    except Exception as _excp:
+        warnings.warn('omas cython failed: ' + str(_excp))
+        with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
+            exec(f.read(), globals())
 
 
 def l2ut(path):

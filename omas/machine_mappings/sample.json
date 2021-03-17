@@ -4,22 +4,13 @@
    "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
   }
  },
+ "__include__": [
+  "_common"
+ ],
  "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
   "EFIT_tree": "EFIT01",
   "user_argument": "this is a test"
- },
- "dataset_description.data_entry.pulse_type": {
-  "COMMENT": "VALUE is used for constants",
-  "VALUE": "test"
- },
- "dataset_description.data_entry.machine": {
-  "COMMENT": "EVAL is used evaluating PYTHON expressions",
-  "EVAL": "{machine!r}"
- },
- "dataset_description.data_entry.user": {
-  "COMMENT": "ENVIRON gets environmental variables",
-  "ENVIRON": "USER"
  },
  "dataset_description.ids_properties.comment": {
   "COMMENT": "Python function defined in the sample.py file",

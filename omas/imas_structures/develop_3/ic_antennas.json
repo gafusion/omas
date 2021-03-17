@@ -2,7 +2,7 @@
  "ic_antennas": {
   "documentation": "Antenna systems for heating and current drive in the ion cylcotron (IC) frequencies.",
   "full_path": "ic_antennas",
-  "lifecycle_last_change": "3.23.1",
+  "lifecycle_last_change": "3.31.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -2813,6 +2813,69 @@
   "full_path": "ic_antennas/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "ic_antennas.power_launched": {
+  "data_type": "STRUCTURE",
+  "documentation": "Power launched into the vacuum vessel by the whole ICRH system (sum over antennas)",
+  "full_path": "ic_antennas/power_launched",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "W"
+ },
+ "ic_antennas.power_launched.data": {
+  "coordinates": [
+   "ic_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ic_antennas/power_launched/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ic_antennas.power_launched.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ic_antennas/power_launched/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.power_launched.data_error_lower": {
+  "coordinates": [
+   "ic_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ic_antennas/power_launched/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ic_antennas.power_launched.data_error_upper": {
+  "coordinates": [
+   "ic_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ic_antennas/power_launched/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ic_antennas.power_launched.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ic_antennas/power_launched/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "ic_antennas.reference_point": {
   "data_type": "STRUCTURE",

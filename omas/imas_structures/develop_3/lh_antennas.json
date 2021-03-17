@@ -2,7 +2,7 @@
  "lh_antennas": {
   "documentation": "Antenna systems for heating and current drive in the Lower Hybrid (LH) frequencies. In the definitions below, the front (or mouth) of the antenna refers to the plasma facing side of the antenna, while the back refers to the waveguides connected side of the antenna (towards the RF generators).",
   "full_path": "lh_antennas",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.31.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "2"
@@ -1700,7 +1700,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Power coupled to the plasma by the whole LH system (sum over antennas)",
   "full_path": "lh_antennas/power",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.31.1",
   "structure_reference": "signal_flt_1d",
   "units": "W"
  },
@@ -1711,7 +1712,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "lh_antennas/power/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
@@ -1720,7 +1721,7 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "lh_antennas/power/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "lh_antennas.power.data_error_lower": {
@@ -1730,7 +1731,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "lh_antennas/power/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
@@ -1742,7 +1743,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "lh_antennas/power/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "power/time",
   "type": "dynamic",
   "units": "W"
@@ -1754,8 +1755,71 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "lh_antennas/power/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "power/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "lh_antennas.power_launched": {
+  "data_type": "STRUCTURE",
+  "documentation": "Power launched into the vacuum vessel by the whole LH system (sum over antennas)",
+  "full_path": "lh_antennas/power_launched",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "W"
+ },
+ "lh_antennas.power_launched.data": {
+  "coordinates": [
+   "lh_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "lh_antennas/power_launched/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "lh_antennas.power_launched.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "lh_antennas/power_launched/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "lh_antennas.power_launched.data_error_lower": {
+  "coordinates": [
+   "lh_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "lh_antennas/power_launched/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "lh_antennas.power_launched.data_error_upper": {
+  "coordinates": [
+   "lh_antennas.power_launched.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "lh_antennas/power_launched/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "lh_antennas.power_launched.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "lh_antennas/power_launched/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "power_launched/time",
   "type": "dynamic",
   "units": "s"
  },

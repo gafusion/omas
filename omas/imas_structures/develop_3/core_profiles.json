@@ -2,7 +2,7 @@
  "core_profiles": {
   "documentation": "Core plasma radial profiles",
   "full_path": "core_profiles",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.32.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "15",
@@ -347,6 +347,49 @@
   "type": "dynamic",
   "units": "A"
  },
+ "core_profiles.global_quantities.ejima": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ejima coefficient : resistive psi losses divided by (mu0*R*Ip). See S. Ejima et al, Nuclear Fusion, Vol.22, No.10 (1982), 1313",
+  "full_path": "core_profiles/global_quantities/ejima(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.ejima_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"ejima\"",
+  "full_path": "core_profiles/global_quantities/ejima_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.global_quantities.ejima_error_lower": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"ejima\"",
+  "full_path": "core_profiles/global_quantities/ejima_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.ejima_error_upper": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"ejima\"",
+  "full_path": "core_profiles/global_quantities/ejima_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
  "core_profiles.global_quantities.energy_diamagnetic": {
   "coordinates": [
    "core_profiles.time"
@@ -527,6 +570,135 @@
   "full_path": "core_profiles/global_quantities/li_error_upper(:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.7.0",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.resistive_psi_losses": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Resistive part of the poloidal flux losses, defined as the volume-averaged scalar product of the electric field and the ohmic current density, normalized by the plasma current and integrated in time from the beginning of the plasma discharge: int ( (int(E_field_tor.j_ohm_tor) dV) / Ip ) dt)",
+  "full_path": "core_profiles/global_quantities/resistive_psi_losses(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "core_profiles.global_quantities.resistive_psi_losses_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"resistive_psi_losses\"",
+  "full_path": "core_profiles/global_quantities/resistive_psi_losses_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.global_quantities.resistive_psi_losses_error_lower": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"resistive_psi_losses\"",
+  "full_path": "core_profiles/global_quantities/resistive_psi_losses_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "core_profiles.global_quantities.resistive_psi_losses_error_upper": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"resistive_psi_losses\"",
+  "full_path": "core_profiles/global_quantities/resistive_psi_losses_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "core_profiles.global_quantities.t_e_peaking": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Electron temperature peaking factor, defined as the Te value at the magnetic axis divided by the volume averaged Te (average over the plasma volume up to the LCFS)",
+  "full_path": "core_profiles/global_quantities/t_e_peaking(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.t_e_peaking_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"t_e_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_e_peaking_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.global_quantities.t_e_peaking_error_lower": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_e_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_e_peaking_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.t_e_peaking_error_upper": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_e_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_e_peaking_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.t_i_average_peaking": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion temperature (averaged over ion species and states) peaking factor, defined as the Ti value at the magnetic axis divided by the volume averaged Ti (average over the plasma volume up to the LCFS)",
+  "full_path": "core_profiles/global_quantities/t_i_average_peaking(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.t_i_average_peaking_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"t_i_average_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_i_average_peaking_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.global_quantities.t_i_average_peaking_error_lower": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"t_i_average_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_i_average_peaking_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.global_quantities.t_i_average_peaking_error_upper": {
+  "coordinates": [
+   "core_profiles.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"t_i_average_peaking\"",
+  "full_path": "core_profiles/global_quantities/t_i_average_peaking_error_upper(:)",
+  "lifecycle_status": "active",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "-"

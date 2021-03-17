@@ -27,6 +27,7 @@ OMAS v%s only runs with Python 3.6+ and you are running Python %s
         % (__version__, '.'.join(map(str, sys.version_info[:2])))
     )
 
+import pwd
 import glob
 import json
 import copy
@@ -45,6 +46,7 @@ import traceback
 import difflib
 import weakref
 import unittest
+import itertools
 
 try:
     import tqdm

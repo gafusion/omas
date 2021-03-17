@@ -182,6 +182,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     # transpose manipulation
     if mapped.get('TRANSPOSE', False):
+        for k in range(len(mapped['TRANSPOSE']) - len(data.shape)):
+            data = numpy.array([data])
         data = numpy.transpose(data, mapped['TRANSPOSE'])
 
     # transpose filter
@@ -194,16 +196,21 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         ods[location] = data
     else:
         with omas_environment(ods, cocosio=cocosio):
-            csize = mapped.get('COORDINATES', [])
-            osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])
-            dsize = len(data.shape)
+            dsize = len(data.shape)  # size of the data fetched from MDS+
+            csize = len(mapped.get('COORDINATES', []))  # number of coordinates
+            osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])  # number of named coordinates
+            asize = location.count(':') + csize  # data size required from MDS+ to make the assignement
+            if asize != dsize:
+                raise Exception(
+                    f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"
+                )
             if dsize - osize == 0 or ':' not in location:
                 if data.size == 1:
                     data = data.item()
                 ods[location] = nanfilter(data)
             else:
-                for k in range(data.shape[0]):
-                    ods[u2n(location, [k] + [0] * 10)] = nanfilter(data[k, ...])
+                for k in itertools.product(*list(map(range, data.shape[: location.count(':')]))):
+                    ods[u2n(location, k)] = nanfilter(data[k])
 
     return ods, {'raw_data': data0, 'processed_data': data, 'cocosio': cocosio, 'branch': mappings['__branch__']}
 
@@ -248,15 +255,19 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         filename = machines(machine, branch)
 
         # load mappings from file following __include__ directives
-        with open(filename, 'r') as f:
-            try:
-                top = json.load(f)
-            except json.decoder.JSONDecodeError as _excp:
-                raise ValueError(f'Error reading {filename}\n' + str(_excp))
+        if not os.stat(filename).st_size:
+            top = {}
+        else:
+            with open(filename, 'r') as f:
+                try:
+                    top = json.load(f)
+                except json.decoder.JSONDecodeError as _excp:
+                    raise ValueError(f'Error reading {filename}\n' + str(_excp))
         go_deep = ['__cocos_rules__', '__options__']
         mappings = {k: {} for k in go_deep}
+        mappings.setdefault('__include__', ['_common'])
         if not return_raw_mappings:
-            for item in top.get('__include__', []):
+            for item in top.get('__include__', ['_common']):
                 include_filename = os.path.split(filename)[0] + os.sep + f'{item}.json'
                 with open(include_filename, 'r') as f:
                     try:
@@ -297,7 +308,10 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         _namespace_mappings[idm] = {}
         if os.path.exists(os.path.splitext(filename)[0] + '.py'):
             with open(os.path.splitext(filename)[0] + '.py', 'r') as f:
-                exec(f.read(), _namespace_mappings[idm])
+                try:
+                    exec(f.read(), _namespace_mappings[idm])
+                except Exception as _excp:
+                    raise _excp.__class__(f'Error in {filename}\n' + str(_excp))
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
@@ -350,7 +364,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                                     mappings[location]['COCOSIO_' + cocos_exp] = mappings['__cocos_rules__'][cocos_rule][cocos_exp]
                                     cocos_defined = True
                 if not cocos_defined:
-                    text = f'{location} must have COCOS specified'
+                    text = f'{location} must have COCOSIO specified'
                     if raise_errors:
                         raise ValueError(text)
                     else:
@@ -368,13 +382,24 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     return _machine_mappings[idm]
 
 
-def reload_machine_mappings():
+def reload_machine_mappings(verbose=True):
     '''
     Flushes internal caches of machine mappings.
     This will force the mapping files to be re-read when they are first accessed.
+
+    :param verbose: print to screen when mappings are reloaded
     '''
+    # reset machine mapping caches
     for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict, _user_machine_mappings]:
         cache.clear()
+
+    # in case users did a `from omas.machine_mappings import ...`
+    for mod in list(sys.modules):
+        if mod.startswith('omas.machine_mappings'):
+            del sys.modules[mod]
+
+    if verbose:
+        print('Reloaded OMAS machine mapping info')
 
 
 # ===================
@@ -535,11 +560,12 @@ def machine_mapping_function(__all__):
 
                 # call signature
                 argspec = inspect.getfullargspec(f)
-                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args)
+                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args if not item.startswith('_'))
                 call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
                 default_options = None
                 if argspec.defaults:
                     default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
+                    default_options = {item: value for item, value in default_options.items() if not item.startswith('_')}
 
             # call
             out = f(*args, **kwargs)
@@ -565,12 +591,12 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     :param namespace: testing namespace
     '''
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
-    os.environ['OMAS_DEBUG_TOPIC'] = 'mapping'
+    os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
     # call machine mapping to make sure the json file is properly formatted
     machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
-    machine_mappings(machine,'',raise_errors=True)
+    machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
     try:
@@ -616,12 +642,12 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
 # ===================
 # MDS+ functions
 # ===================
-def mds_machine_to_server_mapping(server, treename):
+def tunnel_mds(server, treename):
     '''
     Resolve MDS+ server
     NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
 
-    :param machine: machine name
+    :param server: MDS+ server address:port
 
     :param treename: treename (in case treename affects server to be used)
 
@@ -667,19 +693,27 @@ class mdsvalue(dict):
     '''
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
-        if 'nstx' in server:
-            old_MDS_server = True
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
-        self.old_MDS_server = old_MDS_server
+        if 'nstx' in server:
+            old_MDS_server = True
         try:
             # handle the case that server is just the machine name
-            server = machine_mappings(server, '')['__mdsserver__']
+            tmp = machine_mappings(server, '')
         except NotImplementedError:
+            # hanlde case where server is actually a URL
             if '.' not in server:
                 raise
-        self.server = mds_machine_to_server_mapping(server, self.treename)
+        else:
+            if '__mdsserver__' not in tmp or not len(tmp['__mdsserver__']):
+                raise Exception(f'Must specify `__mdsserver__` for {server}')
+            else:
+                server = tmp['__mdsserver__']
+        self.server = tunnel_mds(server, self.treename)
+        if any([k in ['skylark.pppl.gov:8501'] for k in [server, self.server]]):
+            old_MDS_server = True
+        self.old_MDS_server = old_MDS_server
 
     def data(self):
         return self.raw(f'data({self.TDI})')
@@ -741,46 +775,55 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
+                # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
+                    TDI = {expr: expr for expr in TDI}
+
+                # dictionary of TDI expressions
+                if isinstance(TDI, dict):
+                    # old versions of MDS+ server do not support getMany
                     if self.old_MDS_server:
                         res = {}
                         for tdi in TDI:
-                            res[tdi] = mdsvalue(self.server, self.treename, self.pulse, tdi).raw()
+                            try:
+                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                            except Exception as _excp:
+                                res[tdi] = Exception(str(_excp))
                         return res
-                    else:
-                        conns = conn.getMany()
-                        for expr in TDI:
-                            conns.append(str(expr.__hash__()), expr)
-                        res = conns.execute()
-                        try:
-                            return {expr: MDSplus.Data.data(res[mdsk(expr.__hash__())][mdsk('value')]) for expr in TDI}
-                        except KeyError:
-                            return {expr: MDSplus.Data.data(res[str(expr.__hash__())][str('value')]) for expr in TDI}
-                elif isinstance(TDI, dict):
-                    if self.old_MDS_server:
-                        res = {}
-                        for tdi in TDI:
-                            res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
-                        return res
+
+                    # more recent MDS+ server
                     else:
                         conns = conn.getMany()
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
-                        try:
-                            return {name: MDSplus.Data.data(res[mdsk(name)][mdsk('value')]) for name, expr in TDI.items()}
-                        except KeyError:
-                            return {name: MDSplus.Data.data(res[str(name)][str('value')]) for name, expr in TDI.items()}
+                        results = {}
+                        for name, expr in TDI.items():
+                            try:
+                                results[name] = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
+                            except KeyError:
+                                try:
+                                    results[name] = MDSplus.Data.data(res[str(name)][str('value')])
+                                except KeyError:
+                                    try:
+                                        results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
+                                    except KeyError:
+                                        results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
+                        return results
+
+                # single TDI expression
                 else:
                     return MDSplus.Data.data(conn.get(TDI))
+
             except Exception as _excp:
                 txt = []
                 for item in ['server', 'treename', 'pulse']:
                     txt += [f' - {item}: {getattr(self, item)}']
                 txt += [f' - TDI: {TDI}']
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
+
         finally:
-            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='mapping')
+            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='machine')
 
 
 # ===================
@@ -830,9 +873,9 @@ class dynamic_omas_machine(dynamic_ODS):
             return self.cache[o2u(key)][key]
 
     def __contains__(self, location):
-        ulocation = o2u(location)
         if not self.active:
             raise RuntimeError('Dynamic link broken: %s' % self.kw)
+        ulocation = o2u(location)
         if ulocation.endswith(':'):
             return False
         return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
@@ -842,13 +885,16 @@ class dynamic_omas_machine(dynamic_ODS):
         if ulocation + '.:' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
             return list(range(self[ulocation + '.:']))
         else:
-            return numpy.unique(
+            tmp = numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
                     for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
-                    if k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
+                    if not k.startswith('_') and k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
                 ]
             )
+            if ':' in tmp:
+                raise ValueError(f"Please specify number of structures for `{o2u(location)}.:` in {self.kw['machine']}.json")
+            return tmp
 
 
 def load_omas_machine(

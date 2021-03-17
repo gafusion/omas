@@ -65,7 +65,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
 def pf_coils_to_ods(ods, coil_data):
     """
-    Transfers poloidal field coil geometry data from a standard format used by efitviewer to ODS.
+    Transfers poloidal field coil geometry data from a standard EFIT mhdin.dat format to ODS.
 
     WARNING: only rudimentary identifies are assigned.
     You should assign your own identifiers and only rely on this function to assign numerical geometry data.
@@ -119,7 +119,7 @@ def pf_coils_to_ods(ods, coil_data):
     return ods
 
 
-def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity):
+def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, mds_server, mds_tree, tdi_expression, time_norm, data_norm):
     '''
     Utility function to get data from a list of TDI signals which all share the same time basis
 
@@ -139,27 +139,40 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity):
 
     :param validity: location in `ods` where to set the validity flag
 
+    :param mds_server: MDS+ server to connect to
+
+    :param mds_tree: MDS+ tree from where to get the data
+
+    :param tdi_expression: string with tdi_expression to use
+
+    :param time_norm: time normalization
+
+    :param data_norm: data normalization
+
     :return: ODS instance
     '''
     t = None
     TDIs = []
     for stage in ['fetch', 'assign']:
         for channel in ods1[channels]:
-            TDI = f'ptdata2("{ods1[identifier.format(**locals())]}",{pulse})'
+            signal = ods1[identifier.format(**locals())]
+            TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
             if stage == 'fetch' and t is None:
-                t = mdsvalue('d3d', 'D3D', pulse, TDI=TDI).dim_of(0)
+                t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
                 if len(t) <= 1:
                     t = None
             if stage == 'assign':
-                if len(tmp[TDI]) > 1:
-                    ods[time.format(**locals())] = t / 1000.0
-                    ods[data.format(**locals())] = tmp[TDI]
+                if not isinstance(tmp[TDI], Exception):
+                    ods[time.format(**locals())] = t * time_norm
+                    ods[data.format(**locals())] = tmp[TDI] * data_norm
                     if validity is not None:
-                        ods[validity.format(**locals())] = 0
+                        if len(ods[time.format(**locals())]) == len(ods[data.format(**locals())]) and len(ods[data.format(**locals())]) > 1:
+                            ods[validity.format(**locals())] = 0
+                        else:
+                            ods[validity.format(**locals())] = -2
                 elif validity is not None:
                     ods[validity.format(**locals())] = -2
         if stage == 'fetch':
-            tmp = mdsvalue('d3d', 'D3D', pulse, TDI=TDIs).raw()
-
+            tmp = mdsvalue(mds_server, mds_tree, pulse, TDI=TDIs).raw()
     return ods
