@@ -167,10 +167,12 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
                     ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm
                     if validity is not None:
-                        ods[validity.format(**locals())] = 0
+                        if len(ods[time.format(**locals())]) == len(ods[data.format(**locals())]) and len(ods[data.format(**locals())]) > 1:
+                            ods[validity.format(**locals())] = 0
+                        else:
+                            ods[validity.format(**locals())] = -2
                 elif validity is not None:
                     ods[validity.format(**locals())] = -2
         if stage == 'fetch':
             tmp = mdsvalue(mds_server, mds_tree, pulse, TDI=TDIs).raw()
-
     return ods
