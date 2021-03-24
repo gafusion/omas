@@ -570,3 +570,24 @@ def symlink_imas_structure_versions(test=True, verbose=True):
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))
                         subprocess.Popen(command, shell=True).communicate()
     return structures_strides
+
+
+def add_extra_structures(extra_structures, lifecycle_status='tmp'):
+    '''
+    Function used to extend the IMAS data dictionary with user defined structures
+
+    :param extra_structures: dictionary with extra IDS entries to assign
+
+    :param lifecycle_status: default lifecycle_status to assign
+    '''
+    from . import omas_utils
+
+    # reset structure caches
+    omas_utils._structures = {}
+    omas_utils._structures_dict = {}
+
+    # add _structures
+    for _ids in extra_structures:
+        omas_utils._extra_structures.setdefault(_ids, {}).update(extra_structures[_ids])
+        for _item in extra_structures[_ids]:
+            omas_utils._extra_structures[_ids][_item].setdefault('lifecycle_status', lifecycle_status)
