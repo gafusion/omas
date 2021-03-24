@@ -543,9 +543,24 @@ def summary_taue(ods, update=True):
                     n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
+            info_string = ''
             # Get total power from ods function:
-            ods.physics_summary_heating_power()
-            heating_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            if 'power_loss' in ods['summary.global_quantities']:
+                power_loss = ods['summary.global_quantities.power_loss.value'][time_index]
+                info_string += "Power from: summary.global_quantities.power_loss.value,  "
+            else:
+                print("Warning: taue calculation radiation losses not subtracted from auxiliary power")
+                ods.physics_summary_heating_power()
+                power_loss = ods['summary.global_quantities.power_steady.value'][time_index]
+                info_string += "INACCURATE Power from: summary.global_quantities.power_steady.value,  "
+
+            # Stored energy from profiles or equilibrium
+            if 'summary.global_quantities.energy_thermal' in ods:
+                stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
+                info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
+            else:
+                stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
+                info_string += "Stored energy from: 'global_quantities']['energy_mhd"
 
             # Calculate tau_e
             tau_e = abs(
@@ -553,26 +568,23 @@ def summary_taue(ods, update=True):
                 * (abs(ip) / 1e6) ** 0.93
                 * abs(bt) ** 0.15
                 * (ne_vol_avg / 1e19) ** 0.41
-                * (heating_power / 1e6) ** -0.69
+                * (power_loss / 1e6) ** -0.69
                 * r_major ** 1.97
                 * kappa ** 0.78
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'heating_power', 'aspect', 'isotope_factor', 'tau_e']:
+            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
             tau_e_scaling.append(tau_e)
-            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / heating_power)
+            tau_e_MHD.append(stored_energy / power_loss)
 
     # assign quantities in the ODS
     ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
     ods_n['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
-    ods_n['summary']['global_quantities']['tau_energy'][
-        'source'
-    ] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
-    ods_n['summary']['global_quantities']['tau_energy_98'][
-        'source'
-    ] = "Combination of equilibrium, core_sources and core_profiles calculated"
+
+    ods_n['summary.global_quantities.tau_energy.source'] = info_string
+    ods_n['summary.global_quantities.tau_energy_98.source'] = "h98y2 scaling law"
 
     return ods_n
 
