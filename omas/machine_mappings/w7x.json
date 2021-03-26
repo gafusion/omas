@@ -1,0 +1,48 @@
+{
+ "__cocos_rules__": {},
+ "__include__": [
+  "_common"
+ ],
+ "__options__": {
+  "coil_version": "ideal",
+  "stellarator_symmetric_ic_coils": true
+ },
+ "pf_active.circuit.:": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.circuit.:.coils": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.circuit.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.circuit.:.supplies": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.current.time": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.element.:": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.identifier": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ },
+ "pf_active.coil.:.name": {
+  "PYTHON": "active_coils(ods, {coil_version!r}, {stellarator_symmetric_ic_coils!r})"
+ }
+}
