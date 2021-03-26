@@ -1967,7 +1967,7 @@ class ODS(MutableMapping):
         # figure out format used
         ext, args = _handle_extension(*args)
         # save
-        return eval('save_omas_' + ext)(self, *args, **kw)
+        return eval('save_omas_' + ext)(self, *args, **kw)  # TODO: dangerous! Use getattr/globals
 
     def load(self, *args, **kw):
         r"""

@@ -532,9 +532,11 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 # ===================
 # machine mapping functions
 # ===================
-def machine_mapping_function(__all__):
+def machine_mapping_function(__all__: list):
     """
     Decorator used to identify machine mapping functions
+
+    :param __all__: list of functions to append the decorated function to
 
     NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
           from another function decorated with `@machine_mapping_function`
@@ -586,7 +588,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     '''
     Function used to test python mapping functions
 
-    :param __all__: list of functionss to test
+    :param __all__: list of functions to test
 
     :param namespace: testing namespace
     '''
