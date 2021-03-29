@@ -104,10 +104,13 @@ if os.path.exists(imas_json_dir + '/../../.git') and os.access(imas_json_dir + '
 
 class IMAS_versions(OrderedDict):
     """
-    dictionary with list of IMAS version and their sub-folder name in the imas_json_dir
+    Dictionary with list of IMAS version and their sub-folder name in the imas_json_dir
     """
 
     def __init__(self, mode='all'):
+        '''
+        :param mode: `all`, `named`, `tagged`
+        '''
         OrderedDict.__init__(self)
         if mode in ['all', 'named']:
             # first `develop/3` and other branches
@@ -119,6 +122,10 @@ class IMAS_versions(OrderedDict):
             for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
                 if _item.startswith('3'):
                     self[_item.replace('_', '.')] = _item
+        # do not include empty imas_structures directories (eg. needed to avoid issues wheen switching to old git branches)
+        for item, value in list(self.items()):
+            if not len(glob.glob(imas_json_dir + os.sep + value + os.sep + '*.json')):
+                del self[item]
 
 
 # imas versions
