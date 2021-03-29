@@ -464,7 +464,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     # return filename with mappings for this machine
     else:
         if machine not in _machines_dict[branch]:
-            raise NotImplementedError(f'Machine `{machine}` has no mapping defined')
+            raise NotImplementedError(f'Machine mapping file `{machine}.json` does not exist')
         return _machines_dict[branch][machine]
 
 

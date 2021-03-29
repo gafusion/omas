@@ -145,6 +145,9 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_omas_collection(self):
         from omas.examples import omas_collection
 
+    def test_extra_structures(self):
+        from omas.examples import extra_structures
+
     @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     @unittest.skipIf(not_running_on_cea_cluster, str(not_running_on_cea_cluster))
     def test_west_geqdsk(self):

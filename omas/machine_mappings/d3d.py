@@ -284,7 +284,7 @@ def pf_active_hardware(ods):
 
     :param ods: ODS instance
     """
-    # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat , accessed 2018 June 08 by D. Eldon
+    # OMFITmhdin('/fusion/projects/codes/efit/Test/Green/example_2019/mhdin.dat', serverPicker='iris')
     # R        Z       dR      dZ    tilt1  tilt2
     # 0 in the last column really means 90 degrees
     # fmt: off
@@ -325,8 +325,12 @@ def pf_active_hardware(ods):
 
 @machine_mapping_function(__all__)
 def pf_active_coil_current_data(ods, pulse=133221):
+    # get pf_active hardware description --without-- placing the data in this ods
+    # use `unwrap` to avoid calling `@machine_mapping_function` of `pf_active_hardware`
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1)
+
+    # fetch the actual pf_active currents data
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -786,6 +790,7 @@ def magnetics_hardware(ods):
 def magnetics_floops_data(ods, pulse=133221):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
+
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -808,6 +813,7 @@ def magnetics_floops_data(ods, pulse=133221):
 def magnetics_probes_data(ods, pulse=133221):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
+
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,

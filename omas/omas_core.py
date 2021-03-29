@@ -1196,7 +1196,11 @@ class ODS(MutableMapping):
                     data[k] = item
             else:
                 for k, item in enumerate(data0):
-                    data[k, : len(item)] = item
+                    if not sum(numpy.squeeze(item).shape):
+                        if len(numpy.atleast_1d(numpy.squeeze(item))):
+                            data[k, 0] = numpy.atleast_1d(numpy.squeeze(item))[0]
+                    else:
+                        data[k, : len(item)] = item
 
             return data
 
