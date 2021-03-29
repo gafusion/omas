@@ -242,7 +242,26 @@ def core_transport(ods, time_index=0):
         for model in models:
             ods['core_transport.model'][model]['identifier'].update(models[model]['identifier'])
             ods['core_transport.model'][model]['profiles_1d'][time_index].update(models[model]['profiles_1d.0'])
-    ods.set_time_array('core_sources.time', time_index, float(time_index))
+    ods.set_time_array('core_transport.time', time_index, float(time_index))
+    return ods
+
+@add_to_ODS
+def summary(ods, time_index=0):
+    """
+    Add sample core_profiles data
+    This method operates in in-place
+
+    :param ods: ODS instance
+
+    :param time_index: int
+
+    :return: ODS instance with sources added
+    """
+    from omas import load_omas_json
+
+    pr = load_omas_json(imas_json_dir + '/../samples/sample_summary_ods.json', consistency_check=False)['summary']
+    ods['summary'].update(pr)
+    ods.set_time_array('summary.time', time_index, float(time_index))
     return ods
 
 
