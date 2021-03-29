@@ -8,11 +8,27 @@ Only the data that is queried in the ODS will be loaded.
 """
 
 import os
+import logging
 from omas import *
-from omfit_classes.omfit_eqdsk import OMFITgeqdsk
 from matplotlib import pyplot
+logging.basicConfig()
+try:
+    from omfit_classes.omfit_eqdsk import OMFITgeqdsk
+except ImportError:
+    logger = logging.getLogger(__name__)
+    logger.error("If you want the full example, you need to install OMFIT.")
+    OMFITgeqdsk = None
+try:
+    import MDSplus
+except ImportError:
+    logger = logging.getLogger(__name__)
+    logger.error("If you want the full example, you need to install MDSplus.")
+    MDSplus = None
 
 os.environ['OMAS_DEBUG_TOPIC'] = 'dynamic'
+
+if MDSplus is None:
+    quit()
 
 # load of some experiment quantities
 ods = ODS()
@@ -37,18 +53,19 @@ with ods.open('machine', 'd3d', 168830):
     pyplot.ylabel('Field [T]')
 pyplot.show()
 
-# generate a D3D gEQDSK file from experimental data
-pyplot.figure()
-ods = ODS()
-with ods.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
-    gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=1.1)
-gEQDSK.plot()
-pyplot.show()
+if OMFITgeqdsk is not None:
+    # generate a D3D gEQDSK file from experimental data
+    pyplot.figure()
+    ods = ODS()
+    with ods.open('machine', 'd3d', 168830, options={'EFIT_tree': 'EFIT02'}):
+        gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=1.1)
+    gEQDSK.plot()
+    pyplot.show()
 
-# generate a NSTX gEQDSK file from experimental data
-pyplot.figure()
-ods = ODS()
-with ods.open('machine', 'nstxu', 139047, options={'EFIT_tree': 'EFIT01'}):
-    gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=0.5)
-gEQDSK.plot()
-pyplot.show()
+    # generate a NSTX gEQDSK file from experimental data
+    pyplot.figure()
+    ods = ODS()
+    with ods.open('machine', 'nstxu', 139047, options={'EFIT_tree': 'EFIT01'}):
+        gEQDSK = OMFITgeqdsk(None).from_omas(ods, time=0.5)
+    gEQDSK.plot()
+    pyplot.show()
