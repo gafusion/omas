@@ -60,9 +60,9 @@ def pf_active_hardware(ods):
     ods = pf_coils_to_ods(ods, fc_dat)
 
     for k, (name, fcid) in enumerate(names.items()):
-        ods['pf_active.coil'][k]['name'] = ods['pf_active.coil'][k]['identifier'] = name
-        ods['pf_active.coil'][k]['element.0.identifier'] = fcid
-        ods['pf_active.coil'][k]['element.0.turns_with_sign'] = turns[k]
+        ods[f'pf_active.coil.{k}.name'] = ods[f'pf_active.coil.{k}.identifier'] = name
+        ods[f'pf_active.coil.{k}.element.0.identifier'] = fcid
+        ods[f'pf_active.coil.{k}.element.0.turns_with_sign'] = turns[k]
 
 
 @machine_mapping_function(__all__)
@@ -85,6 +85,9 @@ def pf_active_coil_current_data(ods, pulse=204202):
             time_norm=1.0,
             data_norm=1.0,
         )
+    # IMAS stores the current in the coil not multiplied by the number of turns
+    for channel in ods1['pf_active.coil']:
+        ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
 
 
 @machine_mapping_function(__all__)
@@ -282,8 +285,8 @@ def magnetics_floops_data(ods, pulse=204202):
             mds_server='nstxu',
             mds_tree='NSTX',
             tdi_expression='\{signal}',
-            time_norm=0.001,
-            data_norm=1.0,
+            time_norm=1.0,
+            data_norm=1.0 / 2 / np.pi,
         )
 
 
@@ -304,7 +307,7 @@ def magnetics_probes_data(ods, pulse=204202):
             mds_server='nstxu',
             mds_tree='NSTX',
             tdi_expression='\{signal}',
-            time_norm=0.001,
+            time_norm=1.0,
             data_norm=1.0,
         )
 
