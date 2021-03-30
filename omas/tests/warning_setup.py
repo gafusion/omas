@@ -11,7 +11,7 @@ def set_omas_warnings():
     import matplotlib
 
     # Turn all warnings into errors!
-    warnings.filterwarnings('always')
+    warnings.filterwarnings('error')
 
     # these are errors that are know to happen ouside of OMAS
     warnings.filterwarnings('ignore', category=DeprecationWarning, message='Using or importing the ABCs.*')

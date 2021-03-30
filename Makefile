@@ -3,7 +3,7 @@ VERSION := $(shell cat omas/version)
 all:
 	@echo 'OMAS $(VERSION) makefile help'
 	@echo ''
-	@echo ' - make tests         : run all regression tests'
+	@echo ' - make test          : run all regression tests'
 	@echo ' - make omfit_tests   : run test_omas in OMFIT'
 	@echo ' - make requirements  : build requirements.txt'
 	@echo ' - make json          : generate IMAS json structure files'
