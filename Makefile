@@ -46,6 +46,9 @@ test_examples:
 test_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
+test_no_munittest:
+	omas/tests/run_tests.sh
+
 requirements:
 	rm -f requirements.txt
 	python3 setup.py --name
