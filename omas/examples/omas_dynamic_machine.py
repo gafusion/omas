@@ -5,6 +5,8 @@ Dynamic loading of experimental data
 ====================================
 This example illustrates how OMAS can load experimental data on demand.
 Only the data that is queried in the ODS will be loaded.
+
+NOTE: Running this example requires having MDSplus and the omfit_classes Python packages installed
 """
 
 import os
