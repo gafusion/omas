@@ -543,9 +543,24 @@ def summary_taue(ods, update=True):
                     n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
+            info_string = ''
             # Get total power from ods function:
-            ods.physics_summary_total_powers()
-            total_power = ods['summary.global_quantities.power_steady.value'][time_index]
+            if 'power_loss' in ods['summary.global_quantities']:
+                power_loss = ods['summary.global_quantities.power_loss.value'][time_index]
+                info_string += "Power from: summary.global_quantities.power_loss.value,  "
+            else:
+                print("Warning: taue calculation radiation losses not subtracted from auxiliary power")
+                ods.physics_summary_heating_power()
+                power_loss = ods['summary.global_quantities.power_steady.value'][time_index]
+                info_string += "INACCURATE Power from: summary.global_quantities.power_steady.value,  "
+
+            # Stored energy from profiles or equilibrium
+            if 'summary.global_quantities.energy_thermal' in ods:
+                stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
+                info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
+            else:
+                stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
+                info_string += "Stored energy from: 'global_quantities']['energy_mhd"
 
             # Calculate tau_e
             tau_e = abs(
@@ -553,33 +568,32 @@ def summary_taue(ods, update=True):
                 * (abs(ip) / 1e6) ** 0.93
                 * abs(bt) ** 0.15
                 * (ne_vol_avg / 1e19) ** 0.41
-                * (total_power / 1e6) ** -0.69
+                * (power_loss / 1e6) ** -0.69
                 * r_major ** 1.97
                 * kappa ** 0.78
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            # print('kap', kappa, 'bt', bt, 'ip', ip, 'ne_vol', ne_vol_avg, 'paux', p_aux, 'aspect', aspect, 'isotope', isotope_factor, 'tau_e', tau_e)
+            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
+                printd(f'{k}: {eval(k)}', topic='summary_taue')
             tau_e_scaling.append(tau_e)
-            tau_e_MHD.append(equilibrium_ods['global_quantities']['energy_mhd'] / total_power)
+            tau_e_MHD.append(stored_energy / power_loss)
 
     # assign quantities in the ODS
     ods_n['summary']['global_quantities']['tau_energy_98']['value'] = numpy.array(tau_e_scaling)
     ods_n['summary']['global_quantities']['tau_energy']['value'] = numpy.array(tau_e_MHD)
-    ods_n['summary']['global_quantities']['tau_energy'][
-        'source'
-    ] = "Combination of stored energy calculated from MHD equilibrium and external power from core_sources"
-    ods_n['summary']['global_quantities']['tau_energy_98'][
-        'source'
-    ] = "Combination of equilibrium, core_sources and core_profiles calculated"
+
+    ods_n['summary.global_quantities.tau_energy.source'] = info_string
+    ods_n['summary.global_quantities.tau_energy_98.source'] = "h98y2 scaling law"
 
     return ods_n
 
 
 @add_to__ODS__
 @preprocess_ods('core_sources')
-def summary_total_powers(ods, update=True):
+def summary_heating_power(ods, update=True):
     """
+
     Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities
 
     :param ods: input ods
@@ -594,53 +608,48 @@ def summary_total_powers(ods, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
+    sources = ods_n['core_sources']['source']
+    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6:'fusion', 7:'ohmic'}
+    power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
     if 'core_sources.source.0' not in ods_n:
         return ods_n
+    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
 
-    sources = ods_n['core_sources.source']
-    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic'}
-    power_dict = {'total': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': []}
-    q_init = numpy.zeros(len(sources['0.profiles_1d.0.grid.volume']))
     q_dict = {
-        'total': copy.deepcopy(q_init),
+        'total_heating': copy.deepcopy(q_init),
         'nbi': copy.deepcopy(q_init),
         'ec': copy.deepcopy(q_init),
         'lh': copy.deepcopy(q_init),
         'ic': copy.deepcopy(q_init),
+        'fusion': copy.deepcopy(q_init)
     }
-    ignore_indices = list(range(100, 108)) + list(range(900, 910))
 
-    for time_index in sources['0.profiles_1d']:
-        vol = sources[f'0.profiles_1d.{time_index}.grid.volume']
+    for time_index in sources[0]['profiles_1d']:
+        vol = sources[0]['profiles_1d'][time_index]['grid']['volume']
         for source in sources:
-            if sources[f'{source}.identifier.index'] in ignore_indices:
-                # Skip the combined sources to prevent double counting
-                continue
-            if f'{source}.profiles_1d.{time_index}.electrons.energy' in sources:
-                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.electrons.energy']
-                if sources[f'{source}.identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
-                        f'{source}.profiles_1d.{time_index}.electrons.energy'
-                    ]
-            if f'{source}.profiles_1d.{time_index}.total_ion_energy' in sources:
-                q_dict['total'] += sources[f'{source}.profiles_1d.{time_index}.total_ion_energy']
-                if sources[f'{source}.identifier.index'] in index_dict:
-                    q_dict[index_dict[sources[f'{source}.identifier.index']]] += sources[
-                        f'{source}.profiles_1d.{time_index}.total_ion_energy'
-                    ]
-
-        for key, value in power_dict.items():
-            power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
+            source_1d = sources[source]['profiles_1d'][time_index]
+            if sources[source]['identifier.index'] in index_dict:
+                if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
+                    q_dict['total_heating'] += source_1d['electrons']['energy']
+                    if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
+                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
+                if 'total_ion_energy' in source_1d:
+                    q_dict['total_heating'] += source_1d['total_ion_energy']
+                    if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
+                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
+        power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
         if numpy.sum(value) > 0:
-            if key == 'total':
+            if key == 'total_heating':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
+                continue
+            elif key == 'fusion':
+                ods_n['summary.fusion.power.value'] = numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
     return ods_n
-
 
 @add_to__ODS__
 @preprocess_ods()
@@ -660,7 +669,7 @@ def summary_global_quantities(ods, update=True):
     """
     ods_n = ods.physics_summary_greenwald(update=update)
     ods_n.physics_summary_taue(update=True)
-    ods_n.physics_summary_total_powers(update=True)
+    ods_n.physics_summary_heating_power(update=True)
     ods_n.physics_summary_consistent_global_quantities(update=True)
     return ods_n
 
@@ -1822,7 +1831,7 @@ def define_cocos(cocos_ind):
     elif cocos_ind in [3, 13]:
         # These cocos are for
         # (3) Freidberg*, CAXE and KINX*, GRAY, CQL3D^, CarMa, EFIT* with : ORB5, GBSwith : GT5D
-        # (13) 	CLISTE, EQUAL, GEC, HELENA, EU ITM-TF up to end of 2011
+        # (13)  CLISTE, EQUAL, GEC, HELENA, EU ITM-TF up to end of 2011
         cocos['sigma_Bp'] = -1
         cocos['sigma_RpZ'] = +1
         cocos['sigma_rhotp'] = -1
