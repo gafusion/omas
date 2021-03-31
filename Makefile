@@ -3,7 +3,7 @@ VERSION := $(shell cat omas/version)
 all:
 	@echo 'OMAS $(VERSION) makefile help'
 	@echo ''
-	@echo ' - make tests         : run all regression tests'
+	@echo ' - make test          : run all regression tests'
 	@echo ' - make omfit_tests   : run test_omas in OMFIT'
 	@echo ' - make requirements  : build requirements.txt'
 	@echo ' - make json          : generate IMAS json structure files'
@@ -45,6 +45,9 @@ test_examples:
 
 test_suite:
 	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
+
+test_no_munittest:
+	omas/tests/run_tests.sh
 
 requirements:
 	rm -f requirements.txt

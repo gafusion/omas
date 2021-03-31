@@ -1,11 +1,6 @@
-name: Regression tests
+name: Regression no -m unittest
 
 on:
-  push:
-    branches: [ master ]
-
-  pull_request:
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -39,4 +34,4 @@ jobs:
 
     - name: Run OMAS tests
       run: |
-        make test
+        make test_no_munittest
