@@ -159,8 +159,13 @@ def _handle_extension(*args, **kw):
         ext = os.path.splitext(args[0])[-1].strip('.')
         if not ext:
             ext = 'pkl'
+    # use `ids` extension for IMAS ASCII format
     if ext == 'ids':
         ext = 'ascii'
+    # understand machine names as `machine` extension
+    if ext in machines(None):
+        args = tuple([ext] + list(args))
+        ext = 'machine'
     return ext, args
 
 
