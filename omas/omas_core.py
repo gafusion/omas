@@ -2081,7 +2081,7 @@ class ODS(MutableMapping):
                 self.dynamic = dynamic_omas_machine(*args, **kw)
 
             self.dynamic.open()
-            return self.dynamic
+            return self
         else:
             raise ValueError(ext + ' OMAS storage does not support dynamic loading')
 
@@ -2264,6 +2264,18 @@ class ODS(MutableMapping):
         :return: dictionary with info
         '''
         return omas_info_node((self.location + '.' + location).lstrip('.'))
+
+    def __enter__(self):
+        if self.dynamic:
+            return self.dynamic.__enter__()
+        else:
+            raise RuntimeError('Missing call to .open() ?')
+
+    def __exit__(self, type, value, traceback):
+        if self.dynamic:
+            return self.dynamic.__exit__(type, value, traceback)
+        else:
+            raise RuntimeError('Missing call to .open() ?')
 
 
 omas_dictstate = dir(ODS)
