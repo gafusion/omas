@@ -609,7 +609,7 @@ def summary_heating_power(ods, update=True):
         ods_n = ODS().copy_attrs_from(ods)
 
     sources = ods_n['core_sources']['source']
-    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6:'fusion', 7:'ohmic'}
+    index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6: 'fusion', 7: 'ohmic'}
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
     if 'core_sources.source.0' not in ods_n:
         return ods_n
@@ -621,7 +621,7 @@ def summary_heating_power(ods, update=True):
         'ec': copy.deepcopy(q_init),
         'lh': copy.deepcopy(q_init),
         'ic': copy.deepcopy(q_init),
-        'fusion': copy.deepcopy(q_init)
+        'fusion': copy.deepcopy(q_init),
     }
 
     for time_index in sources[0]['profiles_1d']:
@@ -650,6 +650,7 @@ def summary_heating_power(ods, update=True):
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
     return ods_n
+
 
 @add_to__ODS__
 @preprocess_ods()

@@ -1112,7 +1112,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
             for index, specie in enumerate(species_in_tree):
                 unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
                 if q in prof1d[specie]:
-                    if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.:
+                    if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.0:
                         plotting_list.append(prof1d[specie][q] * prof1d[specie]['element[0].z_n'])
                         label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     else:
@@ -1122,7 +1122,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
 
                 else:
                     plotting_list.append(numpy.zeros(len(rho)))
-                    
+
         else:
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
@@ -1143,7 +1143,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
         if "Temp" in label_name[index]:
             ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index] )
+            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
@@ -1493,7 +1493,8 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
     # if list is too small use all colors
     if len(ods[f'core_sources.source']) > len(colors):
         import matplotlib.colors as mcolors
-        colors =list(mcolors.CSS4_COLORS.keys())
+
+        colors = list(mcolors.CSS4_COLORS.keys())
 
     for k, s in enumerate(ods['core_sources.source']):
         rho = ods[f'core_sources.source.{s}.profiles_1d.{time_index}.grid.rho_tor_norm']
