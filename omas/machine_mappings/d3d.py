@@ -622,7 +622,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     Gathers DIII-D CER measurement locations from MDSplus
 
     :param analysis_type: string
-        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT.  CERQUICK is probably fine.
+        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
     import MDSplus
 
@@ -632,29 +632,36 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
 
     subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
 
-    i = 0
+    # fetch
+    TDIs = {}
     for sub in subsystems:
         try:
-            channels = [k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k]
+            channels = sorted([k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k])
         except (TypeError, KeyError):
-            channels = []
-        for j, channel in enumerate(channels):
-            inc = 0
+            continue
+        for k, channel in enumerate(channels):
+            for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
+                TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
+    data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
+
+    # assign
+    for sub in subsystems:
+        try:
+            channels = sorted([k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k])
+        except (TypeError, KeyError):
+            continue
+        for k, channel in enumerate(channels):
+            postime = data[f'{sub}_{channel}_TIME']
+            if isinstance(postime, Exception):
+                continue
+            ch = ods['charge_exchange.channel.+']
             for pos in ['R', 'Z', 'VIEW_PHI']:
-                try:
-                    postime = cerdat[sub][channel]['TIME'].data()
-                except MDSplus.MdsException:
-                    continue
-                posdat = cerdat[sub][channel][pos].data()
-                if postime is not None:
-                    inc = 1
-                    ch = ods['charge_exchange']['channel'][i]
-                    ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=j + 1)
-                    ch['identifier'] = '{}{:02d}'.format(sub[0], j + 1)
-                    chpos = ch['position'][pos.lower().split('_')[-1]]
-                    chpos['time'] = postime / 1000.0  # Convert ms to s
-                    chpos['data'] = posdat * -np.pi / 180.0 if (pos == 'VIEW_PHI') and posdat is not None else posdat
-            i += inc
+                posdat = data[f'{sub}_{channel}_{pos}']
+                ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
+                ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
+                chpos = ch['position'][pos.lower().split('_')[-1]]
+                chpos['time'] = postime / 1000.0  # Convert ms to s
+                chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
 
 
 @machine_mapping_function(__all__)
