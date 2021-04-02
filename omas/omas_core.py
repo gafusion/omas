@@ -1138,6 +1138,12 @@ class ODS(MutableMapping):
                     key[0] = 0
                 else:
                     key[0] = len(self.omas_data) + key[0]
+        # '+' is used to append new entry in array structure
+        if key[0] == '+':
+            if self.omas_data is None:
+                key[0] = 0
+            elif isinstance(self.omas_data, list):
+                key[0] = len(self.omas_data)
         # slice
         elif isinstance(key[0], str) and ':' in key[0]:
             key[0] = slice(*map(lambda x: int(x.strip()) if x.strip() else None, key[0].split(':')))
