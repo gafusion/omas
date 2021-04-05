@@ -142,7 +142,7 @@ import omas
 
 tp_mapper = OrderedDict((('ABCMeta', 'OMAS data class'), ('function', 'Functions'), ('Misc', 'Misc'), ('module', 'Modules')))
 members = {}
-for item in omas.__all__:
+for item in omas.omas_core.__all__:
     tp = tp_mapper.get(type(getattr(omas, item)).__name__, 'Misc')
     if tp not in members:
         members[tp] = []
