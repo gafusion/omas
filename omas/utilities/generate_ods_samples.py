@@ -14,15 +14,15 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 omas_rcparams['allow_fake_imas_fallback'] = True
 
 # generate equilibrium sample
-eq = OMFITgeqdsk(imas_json_dir + '/../samples/g145419.02100')
+eq = OMFITgeqdsk(omas_dir + 'samples/g145419.02100')
 eq.resample(17)
 eq['fluxSurfaces'].changeResolution(1)
 ods = eq.to_omas()
 ods.consistency_check = 'strict_drop_warn'
-save_omas_json(ods, imas_json_dir + '/../samples/sample_equilibrium_ods.json')
+save_omas_json(ods, omas_dir + 'samples/sample_equilibrium_ods.json')
 
 # generate core_profiles and core_sources sample
-state = OMFITstatefile(imas_json_dir + '/../samples/state145419_02100.nc')
+state = OMFITstatefile(omas_dir + 'samples/state145419_02100.nc')
 state.load()
 ods = state.to_omas()
 
@@ -37,4 +37,4 @@ for what in ['core_sources', 'core_profiles']:
     ods_subsampled = ODS()
     with omas_environment(ods, coordsio=coordsio):
         ods_subsampled[what].update(ods[what])
-    save_omas_json(ods_subsampled, imas_json_dir + '/../samples/sample_%s_ods.json' % what)
+    save_omas_json(ods_subsampled, omas_dir + 'samples/sample_%s_ods.json' % what)

@@ -15,9 +15,9 @@ from omfit_classes.omfit_eqdsk import OMFITgeqdsk
 from omfit_classes.omfit_onetwo import OMFITstatefile
 from omfit_classes.omfit_gacode import OMFITinputprofiles
 
-gfilename = imas_json_dir + '/../samples/g145419.02100'  # gEQDSK file
-sfilename = imas_json_dir + '/../samples/state145419_02100.nc'  # ONETWO statefile
-ipfilename = imas_json_dir + '/../samples/input.profiles_145419_02100'  # input.profiles generated with PROFILES_GEN
+gfilename = omas_dir + 'samples/g145419.02100'  # gEQDSK file
+sfilename = omas_dir + 'samples/state145419_02100.nc'  # ONETWO statefile
+ipfilename = omas_dir + 'samples/input.profiles_145419_02100'  # input.profiles generated with PROFILES_GEN
 
 # load OMFIT classes
 gEQDSK = OMFITgeqdsk(gfilename)

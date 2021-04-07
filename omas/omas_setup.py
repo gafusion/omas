@@ -95,10 +95,12 @@ class IMAS_json_dir(str):
     pass
 
 
-imas_json_dir = IMAS_json_dir(os.path.abspath(str(os.path.dirname(__file__)) + '/imas_structures/'))
+omas_dir = os.path.abspath(str(os.path.dirname(__file__))) + os.sep
+omas_install_dir = os.path.abspath(omas_dir + os.sep + '..') + os.sep
+imas_json_dir = IMAS_json_dir(omas_dir + os.sep + 'imas_structures' + os.sep)
 
 omas_git_repo = False
-if os.path.exists(imas_json_dir + '/../../.git') and os.access(imas_json_dir + '/../../.git', os.W_OK):
+if os.path.exists(omas_install_dir + '.git') and os.access(omas_install_dir + '.git', os.W_OK):
     omas_git_repo = True
 
 

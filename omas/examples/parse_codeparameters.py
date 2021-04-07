@@ -26,7 +26,7 @@ with omas_environment(ods, xmlcodeparams=True):
 # Load code parameters from XML file
 ods = ODS()
 ods['equilibrium.time'] = [0.0]
-ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
+ods['equilibrium.code.parameters'] = CodeParameters(omas_dir + 'samples/input_gray.xml')
 
 # In OMAS code.parameters are represented as dicts
 pprint(ods)

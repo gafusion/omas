@@ -42,7 +42,7 @@ print(f' - found {len(odss)} entries')
 # showcase use of MongoDB storage for GKDB data
 # =============================================
 print('load a sample GKDB sample json file')
-sample_filename = imas_json_dir + '/../samples/gkdb_linear_eigenvalue.json'
+sample_filename = omas_dir + 'samples/gkdb_linear_eigenvalue.json'
 ods = ODS()
 # warn about `gyrokinetics.fluxes_integrated_norm = []` and drop it
 ods['gyrokinetics'].load(sample_filename, consistency_check='warn_drop')

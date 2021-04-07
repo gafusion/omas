@@ -34,25 +34,21 @@ def generate_xml_schemas(imas_version=None):
     saxon_major_version = '9.' + saxon_version.split('-')[1]
 
     # clone the IMAS data-dictionary repository
-    dd_folder = os.sep.join([imas_json_dir, '..', 'data-dictionary'])
+    dd_folder = os.sep.join([omas_dir, 'data-dictionary'])
     if not os.path.exists(dd_folder):
         subprocess.Popen(
-            'cd %s ; git clone ssh://git@git.iter.org/imas/data-dictionary.git' % os.sep.join([imas_json_dir, '..']),
-            stdout=subprocess.PIPE,
-            shell=True,
+            f'cd {omas_dir} ; git clone ssh://git@git.iter.org/imas/data-dictionary.git', stdout=subprocess.PIPE, shell=True
         ).communicate()[0]
 
     # download Saxon
-    sax_folder = os.sep.join([imas_json_dir, '..', saxon_version])
+    sax_folder = os.sep.join([omas_dir, saxon_version])
     if not os.path.exists(sax_folder):
         subprocess.Popen(
-            """
-        cd {install_dir}
+            f"""
+        cd {omas_dir}
         curl https://iweb.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
-        rm {saxon_version}.zip""".format(
-                install_dir=os.sep.join([imas_json_dir, '..']), saxon_major_version=saxon_major_version, saxon_version=saxon_version
-            ),
+        rm {saxon_version}.zip""",
             shell=True,
         ).communicate()
 
@@ -80,10 +76,10 @@ def generate_xml_schemas(imas_version=None):
 
     # generate IDSDef.xml files for given imas_version
     _imas_version = imas_versions[imas_version]
-    executable = """
-export CLASSPATH={imas_json_dir}/../{saxon_version}/saxon9he.jar;
+    executable = f"""
+export CLASSPATH={omas_dir}/{saxon_version}/saxon9he.jar;
 cd {dd_folder}
-git checkout {tag}
+git checkout {imas_version}
 git pull
 export JAVA_HOME=$(dirname $(dirname `which java`))
 make clean
@@ -91,9 +87,7 @@ make
 rm -rf {imas_json_dir}/{_imas_version}/
 mkdir {imas_json_dir}/{_imas_version}/
 cp IDSDef.xml {imas_json_dir}/{_imas_version}/
-""".format(
-        tag=imas_version, _imas_version=_imas_version, imas_json_dir=imas_json_dir, dd_folder=dd_folder, saxon_version=saxon_version
-    )
+"""
     print(executable)
     subprocess.Popen(executable, shell=True).communicate()
 
@@ -147,7 +141,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                         me[coord] = path_propagate[0] + '/' + me[coord]
                 # identifiers documentation
                 if '@doc_identifier' in me:
-                    doc_id = xmltodict.parse(open(imas_json_dir + '/../data-dictionary/' + me['@doc_identifier']).read())
+                    doc_id = xmltodict.parse(open(omas_dir + os.sep + 'data-dictionary' + os.sep + me['@doc_identifier']).read())
                     hlp = doc_id['constants']['int']
                     doc = []
                     for row in hlp:
@@ -564,7 +558,7 @@ def symlink_imas_structure_versions(test=True, verbose=True):
             for stride in structures_strides[ds]:
                 if len(stride) > 1:
                     for version in stride[:-1]:
-                        dir = imas_json_dir + '/'
+                        dir = imas_json_dir + os.sep
                         this = structures_filenames(stride[-1])[ds][len(dir) :]
                         prev = structures_filenames(version)[ds]
                         command = 'cd %s; ln -s -f ../%s %s' % (os.path.dirname(prev), this, os.path.basename(prev))

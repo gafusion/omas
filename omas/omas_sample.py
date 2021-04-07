@@ -79,7 +79,7 @@ def equilibrium(
     """
     from omas import load_omas_json
 
-    eq = load_omas_json(imas_json_dir + '/../samples/sample_equilibrium_ods.json', consistency_check=False)
+    eq = load_omas_json(omas_dir + 'samples/sample_equilibrium_ods.json', consistency_check=False)
 
     phi = eq['equilibrium.time_slice.0.profiles_1d.phi']
     psi = eq['equilibrium.time_slice.0.profiles_1d.psi']
@@ -144,7 +144,7 @@ def core_profiles(ods, time_index=0, add_junk_ion=False, include_pressure=True):
     """
     from omas import load_omas_json
 
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_profiles_ods.json', consistency_check=False)
+    pr = load_omas_json(omas_dir + 'samples/sample_core_profiles_ods.json', consistency_check=False)
 
     ods['core_profiles.profiles_1d'][time_index].update(pr['core_profiles.profiles_1d.0'])
     ods['core_profiles.vacuum_toroidal_field.r0'] = pr['core_profiles.vacuum_toroidal_field.r0']
@@ -181,7 +181,7 @@ def ic_antennas(ods):
     """
     from omas import load_omas_json
 
-    ods.update(load_omas_json(imas_json_dir + '/../samples/sample_ic_antennas_ods.json', consistency_check=False))
+    ods.update(load_omas_json(omas_dir + 'samples/sample_ic_antennas_ods.json', consistency_check=False))
 
     return ods
 
@@ -200,7 +200,7 @@ def core_sources(ods, time_index=0):
     """
     from omas import load_omas_json
 
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_sources_ods.json', consistency_check=False)['core_sources']
+    pr = load_omas_json(omas_dir + 'samples/sample_core_sources_ods.json', consistency_check=False)['core_sources']
 
     if 'core_sources' not in ods:
         ods['core_sources'].update(pr)
@@ -230,7 +230,7 @@ def core_transport(ods, time_index=0):
     """
     from omas import load_omas_json
 
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_core_transport_ods.json', consistency_check=False)['core_transport']
+    pr = load_omas_json(omas_dir + 'samples/sample_core_transport_ods.json', consistency_check=False)['core_transport']
 
     if 'core_transport' not in ods:
         ods['core_transport'].update(pr)
@@ -260,7 +260,7 @@ def summary(ods):
     """
     from omas import load_omas_json
 
-    pr = load_omas_json(imas_json_dir + '/../samples/sample_summary_ods.json', consistency_check=False)['summary']
+    pr = load_omas_json(omas_dir + 'samples/sample_summary_ods.json', consistency_check=False)['summary']
     ods['summary'].update(pr)
     return ods
 

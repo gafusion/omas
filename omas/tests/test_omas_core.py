@@ -453,7 +453,7 @@ class TestOmasCore(UnittestCaseOmas):
 
     def test_codeparameters(self):
         ods = ODS()
-        ods['equilibrium.code.parameters'] = CodeParameters(imas_json_dir + '/../samples/input_gray.xml')
+        ods['equilibrium.code.parameters'] = CodeParameters(omas_dir + 'samples/input_gray.xml')
 
         tmp = {}
         tmp.update(ods['equilibrium.code.parameters'])
@@ -478,7 +478,7 @@ class TestOmasCore(UnittestCaseOmas):
         assert isinstance(ods['equilibrium.code.parameters'], CodeParameters)
 
         # test loading CodeParameters from a json
-        ods = ODS().load(imas_json_dir + '/../samples/ods_w_code_parameters.json')
+        ods = ODS().load(omas_dir + 'samples/ods_w_code_parameters.json')
         # test traversing ODS and code parameters with OMAS syntax
         assert ods['ec_launchers.code.parameters.launcher.0.mharm'] == 2
         # test that sub-tree elements of code parameters are also of CodeParameters class

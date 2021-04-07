@@ -430,7 +430,7 @@ def machines(machine=None, branch=''):
 
     # local mappings
     if not branch:
-        dir = imas_json_dir + '/../machine_mappings'
+        dir = omas_dir + 'machine_mappings'
 
     # remote mappings from GitHub
     else:

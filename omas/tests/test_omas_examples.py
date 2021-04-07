@@ -154,7 +154,7 @@ class TestOmasExamples(UnittestCaseOmas):
         from omas.examples import west_geqdsk
 
 
-# for filename in glob.glob(os.path.abspath(imas_json_dir+'/../examples/*.py')):
+# for filename in glob.glob(os.path.abspath(omas_dir + 'examples/*.py')):
 #     if '__init__' in filename:
 #         continue
 #     name = os.path.splitext(os.path.split(filename)[1])[0]

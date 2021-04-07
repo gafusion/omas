@@ -1,9 +1,9 @@
 import os, sys, re
 
-omas_dir = os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0]
-sys.path.insert(0, omas_dir)
+omas_install_dir = os.path.split(os.path.split(os.path.split(os.path.abspath(__file__))[0])[0])[0]
+sys.path.insert(0, omas_install_dir)
 
-with open(omas_dir + os.sep + 'omas' + os.sep + 'omas_symbols.py', 'r') as f:
+with open(omas_install_dir + os.sep + 'omas' + os.sep + 'omas_symbols.py', 'r') as f:
     lines = f.read().split('\n')
 
 groups = {'symbols': [], 'units': []}
@@ -24,5 +24,5 @@ for action in ['gather', 'apply']:
 
 print('\n'.join(lines))
 
-with open(omas_dir + os.sep + 'omas' + os.sep + 'omas_symbols.py', 'w') as f:
+with open(omas_install_dir + os.sep + 'omas' + os.sep + 'omas_symbols.py', 'w') as f:
     f.write('\n'.join(lines))

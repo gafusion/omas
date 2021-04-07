@@ -41,7 +41,7 @@ class TestOmasMachine(UnittestCaseOmas):
                 pass
 
         # with branch=None return file in current repo
-        assert os.path.abspath(imas_json_dir + '/..') in machines(self.machine, '')
+        assert omas_dir in machines(self.machine, '')
 
         # with branch='master' return file in temp dir
         assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')
