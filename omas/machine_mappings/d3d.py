@@ -366,14 +366,14 @@ def interferometer_hardware(ods, pulse=133221):
 
     # As of 2018 June 07, DIII-D has four interferometers
     # phi angles are compliant with odd COCOS
-    ods['interferometer.channel.0.identifier'] = 'r0'
+    ods['interferometer.channel.0.identifier'] = ods['interferometer.channel.0.name'] = 'r0'
     r0 = ods['interferometer.channel.0.line_of_sight']
     r0['first_point.phi'] = r0['second_point.phi'] = 225 * (-np.pi / 180.0)
     r0['first_point.r'], r0['second_point.r'] = 3.0, 0.8  # These are not the real endpoints
     r0['first_point.z'] = r0['second_point.z'] = 0.0
 
     for i, r in enumerate([1.48, 1.94, 2.10]):
-        ods['interferometer.channel'][i + 1]['identifier'] = 'v{}'.format(i + 1)
+        ods['interferometer.channel'][i + 1]['identifier'] = ods['interferometer.channel'][i + 1]['name'] = 'v{}'.format(i + 1)
         los = ods['interferometer.channel'][i + 1]['line_of_sight']
         los['first_point.phi'] = los['second_point.phi'] = 240 * (-np.pi / 180.0)
         los['first_point.r'] = los['second_point.r'] = r
@@ -388,6 +388,33 @@ def interferometer_hardware(ods, pulse=133221):
             'DIII-D CO2 pointnames were different before pulse 125406. The physical locations of the chords seems to '
             'have been the same, though, so there has not been a problem yet (I think).'
         )
+
+
+@machine_mapping_function(__all__)
+def interferometer_data(ods, pulse=133221):
+    """
+    Loads DIII-D interferometer measurement data
+
+    :param pulse: int
+    """
+    ods1 = ODS()
+    unwrap(interferometer_hardware)(ods1, pulse=pulse)
+
+    # fetch
+    TDIs = {}
+    for k, channel in enumerate(ods1['interferometer.channel']):
+        identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
+        TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
+        TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
+    TDIs['time'] = f"dim_of({TDIs['R0']})"
+    data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
+
+    # assign
+    for k, channel in enumerate(ods1['interferometer.channel']):
+        identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
+        ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']
+        ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1E6
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = - data[f'{identifier}_validity']
 
 
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):

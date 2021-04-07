@@ -160,6 +160,18 @@
  "interferometer.channel.:.line_of_sight.third_point.z": {
   "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
+ "interferometer.channel.:.n_e_line.data": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.time": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.validity_timed": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.name": {
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
+ },
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
