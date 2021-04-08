@@ -359,12 +359,6 @@ def interferometer_hardware(ods, pulse=133221):
         ch = ods['interferometer.channel'][i]
         ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
 
-    if pulse < 125406:
-        printe(
-            'DIII-D CO2 pointnames were different before pulse 125406. The physical locations of the chords seems to '
-            'have been the same, though, so there has not been a problem yet (I think).'
-        )
-
 
 @machine_mapping_function(__all__)
 def interferometer_data(ods, pulse=133221):
@@ -389,8 +383,8 @@ def interferometer_data(ods, pulse=133221):
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']
-        ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1E6
-        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = - data[f'{identifier}_validity']
+        ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
