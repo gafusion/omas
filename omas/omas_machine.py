@@ -678,7 +678,11 @@ class mdstree(dict):
 
     def __init__(self, server, treename, pulse):
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
-            TDI = TDI.decode('utf8').strip()
+            try:
+                TDI = TDI.decode('utf8')
+            except AttributeError:
+                pass
+            TDI = TDI.strip()
             path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
             h = self
             for p in path[1:-1]:
