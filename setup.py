@@ -19,7 +19,8 @@ install_requires = [
     'setuptools>=41.2',
     'tqdm',
     'Cython',
-    'omfit_classes'
+    'omfit_classes',
+    'pexpect'
 ]
 
 extras_require = {
