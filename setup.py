@@ -20,7 +20,8 @@ install_requires = [
     'tqdm',
     'Cython',
     'omfit_classes',
-    'pexpect'
+    'pexpect',
+    'fortranformat'
 ]
 
 extras_require = {

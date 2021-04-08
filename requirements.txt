@@ -19,6 +19,7 @@ tqdm                     # required
 Cython                   # required
 omfit_classes            # required
 pexpect                  # required
+fortranformat            # required
 
 #bs4                     # build_structures
 #pyhdc                   # hdc
