@@ -345,23 +345,21 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
     return ods
 
 
-@add_to_ODS
-def magnetics(ods):
-    """
-    Adds fake magnetic probe locations
-    This method operates in place
-
-    :param ods: ODS instance
-
-    :return: ODS instance with fake magnetics hardware information added
-    """
-
-    from . import machine_mappings
-    from .machine_mappings.d3d import magnetics_hardware
-
-    magnetics_hardware(ods)
-    ods['magnetics.time'] = [0.0]
-    return ods
+# @add_to_ODS
+# def magnetics(ods):
+#     """
+#     Adds fake magnetic probe locations
+#     This method operates in place
+#
+#     :param ods: ODS instance
+#
+#     :return: ODS instance with fake magnetics hardware information added
+#     """
+#     from .machine_mappings.d3d import magnetics_hardware
+#
+#     magnetics_hardware(ods)
+#     ods['magnetics.time'] = [0.0]
+#     return ods
 
 
 @add_to_ODS
