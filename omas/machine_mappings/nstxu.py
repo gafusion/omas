@@ -94,8 +94,6 @@ def magnetics_hardware(ods):
 
     :param ods: ODS instance
     """
-    # magnetics hardware from
-    #  OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat', serverPicker='portal').pretty_print()
     # magnetics signals from
     #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
     #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
