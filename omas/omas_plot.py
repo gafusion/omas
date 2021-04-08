@@ -2648,30 +2648,33 @@ def pf_active_overlay(ods, ax=None, **kw):
         return numpy.array([outline['r'], outline['z']]).T
 
     patches = []
-    for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
-        if mask[i]:
-            try:
-                geometry_type = geo_type_lookup(ods['pf_active.coil'][i]['element.0.geometry.geometry_type'], 'pf_active', ods.imas_version)
-            except (IndexError, ValueError):
-                geometry_type = 'unrecognized'
-            try:
-                path = eval('path_{}'.format(geometry_type))(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
-            except NameError:
-                print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(i, geometry_type))
-                continue
-            patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
-            kw.pop('label', None)  # Prevent label from being placed on more than one patch
-            try:
-                pf_id = ods['pf_active.coil'][i]['element.0.identifier']
-            except ValueError:
-                pf_id = None
-            if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
+    for c in range(nc):
+        if mask[c]:
+            for e in ods['pf_active.coil'][c]['element']:
+                try:
+                    geometry_type = geo_type_lookup(
+                        ods['pf_active.coil'][c]['element'][e]['geometry.geometry_type'], 'pf_active', ods.imas_version
+                    )
+                except (IndexError, ValueError):
+                    geometry_type = 'unrecognized'
+                try:
+                    path = eval('path_{}'.format(geometry_type))(ods['pf_active.coil'][c]['element'][e]['geometry'][geometry_type])
+                except NameError:
+                    print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(c, geometry_type))
+                    continue
+                patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
+                kw.pop('label', None)  # Prevent label from being placed on more than one patch
+                try:
+                    pf_id = ods['pf_active.coil'][c]['element'][e]['identifier']
+                except ValueError:
+                    pf_id = None
+            if labelevery > 0 and c % labelevery == 0 and pf_id is not None:
                 ax.text(
-                    numpy.mean(path[:, 0]) + label_dr[i],
-                    numpy.mean(path[:, 1]) + label_dz[i],
+                    numpy.mean(path[:, 0]) + label_dr[c],
+                    numpy.mean(path[:, 1]) + label_dz[c],
                     pf_id,
-                    ha=label_ha[i],
-                    va=label_va[i],
+                    ha=label_ha[c],
+                    va=label_va[c],
                     fontsize=notesize,
                 )
 
@@ -2732,7 +2735,7 @@ def magnetics_overlay(
         for k, (r, z) in enumerate(zip(ods[f'magnetics.flux_loop.:.position[0].r'], ods[f'magnetics.flux_loop.:.position[0].z'])):
             ax.plot(r, z, **flux_loop_style)
             flux_loop_style.setdefault('color', ax.lines[-1].get_color())
-            if (labelevery > 0) and ((k % labelevery) == 0):
+            if labelevery > 0 and k % labelevery == 0:
                 ax.text(
                     r + label_dr[k],
                     z + label_dz[k],
@@ -2774,7 +2777,7 @@ def magnetics_overlay(
             if show_bpol_probe:
                 ax.plot(px, py, label='_' + ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)), **pol_probe_style, **kw)
                 pol_probe_style.setdefault('color', ax.lines[-1].get_color())
-                if (labelevery > 0) and ((k % labelevery) == 0):
+                if labelevery > 0 and k % labelevery == 0:
                     ax.text(
                         r + label_dr[k],
                         z + label_dz[k],
@@ -2802,7 +2805,7 @@ def magnetics_overlay(
         for k, (r, z) in enumerate(zip(ods['magnetics.b_field_tor_probe[:].position.r'], ods['magnetics.b_field_tor_probe[:].position.z'])):
             ax.plot(r, z, '.m', label='_' + ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)), **tor_probe_style, **kw)
             tor_probe_style.setdefault('color', ax.lines[-1].get_color())
-            if (labelevery > 0) and ((k % labelevery) == 0):
+            if labelevery > 0 and k % labelevery == 0:
                 ax.text(
                     r + label_dr[k],
                     z + label_dz[k],

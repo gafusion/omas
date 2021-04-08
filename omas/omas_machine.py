@@ -311,7 +311,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                 try:
                     exec(f.read(), _namespace_mappings[idm])
                 except Exception as _excp:
-                    raise _excp.__class__(f'Error in {filename}\n' + str(_excp))
+                    raise _excp.__class__(f"Error in {os.path.splitext(filename)[0] + '.py'}\n" + str(_excp))
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
@@ -618,7 +618,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
                     raise _excp.__class__(
                         str(_excp)
                         + '\n'
-                        + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
+                        + 'For testing purposes, make sure to provide default values to all arguments of the machine mapping functions'
                     )
                 else:
                     raise
@@ -629,7 +629,9 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
             n = max(map(lambda x: len(x), tmp))
             for item in tmp:
                 try:
-                    print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
+                    with warnings.catch_warnings():
+                        warnings.filterwarnings('error')
+                        print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
                 except Exception:
                     print(f'{item.ljust(n)}   mixed')
     finally:
