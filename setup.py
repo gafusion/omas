@@ -19,6 +19,7 @@ install_requires = [
     'setuptools>=41.2',
     'tqdm',
     'Cython',
+    'omfit_classes'
 ]
 
 extras_require = {

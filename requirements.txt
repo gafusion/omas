@@ -17,6 +17,7 @@ xarray                   # required
 setuptools>=41.2         # required
 tqdm                     # required
 Cython                   # required
+omfit_classes            # required
 
 #bs4                     # build_structures
 #pyhdc                   # hdc
