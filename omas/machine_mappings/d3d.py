@@ -575,26 +575,35 @@ def bolometer_hardware(ods, pulse=133221):
 
 
 @machine_mapping_function(__all__)
-def langmuir_probes_hardware(ods, pulse=176235):
+def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
     """
-    Load DIII-D Langmuir probe locations
+    Gathers DIII-D Langmuir probe measurements and loads them into an ODS
 
     :param ods: ODS instance
 
     :param pulse: int
+
+    :param get_measurements: bool
+        Gather measurements from the probes, like saturation current, in addition to the hardware
+
+    Data are written into ods instead of being returned.
     """
     import MDSplus
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='machine')
+    printd(
+        f'Setting up Langmuir probes {"data" if get_measurements else "hardware description"}, '
+        f'pulse {pulse}; checking availability, TDI={tdi}',
+        topic='machine'
+    )
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='machine')
+    printd('Looks like up to {nprobe} Langmuir probes might have valid data for DIII-D#{pulse}', topic='machine')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -613,7 +622,32 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
+                if get_measurements:
+                    t = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.time').data()
+                    isat_m = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.isat')
+                    if np.array_equal(t, isat_m.dim_of(0)):
+                        isat = isat_m.data()
+                    else:
+                        raise ValueError('Time base for Langmuir probe {i:03d} does not match isat data')
+                    ods['langmuir_probes.embedded'][j]['time'] = t
+                    ods['langmuir_probes.embedded'][j]['ion_saturation_current.data'] = isat
                 j += 1
+
+
+@machine_mapping_function(__all__)
+def langmuir_probes_hardware(ods, pulse=176235):
+    """
+    Load DIII-D Langmuir probe locations without the probe's measurements
+
+    :param ods: ODS instance
+
+    :param pulse: int
+
+    Data are written into ods instead of being returned.
+    """
+
+    langmuir_probes_data(ods, pulse=pulse, get_measurements=False)
+
 
 
 @machine_mapping_function(__all__)
