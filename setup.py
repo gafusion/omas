@@ -21,7 +21,8 @@ install_requires = [
     'Cython',
     'omfit_classes',
     'pexpect',
-    'fortranformat'
+    'fortranformat',
+    'pygacode'
 ]
 
 extras_require = {

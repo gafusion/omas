@@ -20,6 +20,7 @@ Cython                   # required
 omfit_classes            # required
 pexpect                  # required
 fortranformat            # required
+pygacode                 # required
 
 #bs4                     # build_structures
 #pyhdc                   # hdc
