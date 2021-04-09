@@ -267,20 +267,20 @@ class TestOmasPlot(UnittestCaseOmas):
         ODS().plot_overlay(thomson_scattering=True, pf_active=True)
         ODS().plot_pf_active_overlay()
 
-    # # Magnetics overlay
-    # def test_magnetics_overlay(self):
-    #     # Basic test
-    #     mag_ods = copy.deepcopy(self.ods)
-    #     mag_ods.sample_magnetics()
-    #     mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
-    #     # Test keywords
-    #     mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_flux_loop=False, labelevery=1))
-    #     mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_bpol_probe=False, notesize=9, labelevery=1))
-    #     # Test direct call
-    #     mag_ods.plot_magnetics_overlay()
-    #     # Test empty one; make sure fail is graceful
-    #     ODS().plot_overlay(thomson_scattering=True, magnetics=True)
-    #     ODS().plot_magnetics_overlay()
+    # Magnetics overlay
+    def test_magnetics_overlay(self):
+        # Basic test
+        mag_ods = copy.deepcopy(self.ods)
+        mag_ods.sample_magnetics()
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=True)
+        # Test keywords
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_flux_loop=False, labelevery=1))
+        mag_ods.plot_overlay(thomson_scattering=False, magnetics=dict(show_bpol_probe=False, notesize=9, labelevery=1))
+        # Test direct call
+        mag_ods.plot_magnetics_overlay()
+        # Test empty one; make sure fail is graceful
+        ODS().plot_overlay(thomson_scattering=True, magnetics=True)
+        ODS().plot_magnetics_overlay()
 
     # Thomson scattering overlay
     def test_ts_overlay(self):
