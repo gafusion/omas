@@ -20,7 +20,10 @@ def p2l(key):
 
     if isinstance(key, str) and not ('.' in key or '[' in key):
         if len(key):
-            return [key]
+            try:
+               return [int(key)]
+            except ValueError:
+                return [key]
         else:
             return []
 

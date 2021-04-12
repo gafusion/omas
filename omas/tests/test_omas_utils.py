@@ -63,11 +63,9 @@ class TestOmasUtils(UnittestCaseOmas):
         diff_prof5 = different_ods(ods2, ods3)
         assert isinstance(diff_prof5, list)
         assert 'name' in ' '.join(diff_prof5)
-        return
 
     def test_printe(self):
         printe('printe_test,', end='')
-        return
 
     def test_is_numeric(self):
         assert is_numeric(5) is True
@@ -76,11 +74,9 @@ class TestOmasUtils(UnittestCaseOmas):
         assert is_numeric({'blah': 'blah'}) is False
         assert is_numeric([]) is False
         assert is_numeric(None) is False
-        return
 
     def test_remove_parentheses(self):
         assert remove_parentheses('zoom(b(la)h)what', replace_with='|') == 'zoom|what'
-        return
 
     def test_closest_index(self):
         # Basic tests
@@ -94,7 +90,6 @@ class TestOmasUtils(UnittestCaseOmas):
         self.assertRaises(TypeError, closest_index, 5, 5)  # First arg is not a list --> TypeError
         self.assertRaises(TypeError, closest_index, [1, 2, 3], 'string_not_number')
         self.assertRaises(TypeError, closest_index, [1, 2, 3], [3, 2, 1])  # Can't call w/ list as 2nd arg unless len=1
-        return
 
     def test_list_structures(self):  # Also tests structures_filenames
         struct_list = list_structures(omas_rcparams['default_imas_version'])
@@ -110,7 +105,6 @@ class TestOmasUtils(UnittestCaseOmas):
         assert 'pf_active' in struct_dict2.keys()
         assert all(item in struct_dict.keys() for item in struct_list)
         assert all(item in struct_dict2.keys() for item in struct_list2)
-        return
 
     def test_omas_info(self):
         get_list = ['pf_active', 'thomson_scattering', 'charge_exchange']
@@ -122,7 +116,11 @@ class TestOmasUtils(UnittestCaseOmas):
             assert isinstance(ods_info_pfa['pf_active.circuit.0.connections.documentation'], str)
         ods_info_list = omas_info(get_list)
         assert all(item in ods_info_list for item in get_list)
-        return
+
+    def test_p2l(self):
+        assert p2l('0') == [0]
+        assert p2l('equilibrium') == ['equilibrium']
+        assert p2l('equilibrium.time_slice.0.global_quantities.ip') == ['equilibrium', 'time_slice', 0, 'global_quantities', 'ip']
 
     def test_o2u(self):
         assert o2u('equilibrium.time_slice.0.global_quantities.ip') == 'equilibrium.time_slice.:.global_quantities.ip'
@@ -130,18 +128,15 @@ class TestOmasUtils(UnittestCaseOmas):
         assert o2u('2') == ':'
         assert o2u('equilibrium') == 'equilibrium'
         assert o2u('equilibrium.2') == 'equilibrium.:'
-        return
 
     def test_set_time_array(self):
         ods = ODS()
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 0, 0.1)
         ods.set_time_array('equilibrium.vacuum_toroidal_field.b0', 1, 0.2)
-        return
 
     def test_info(self):
         omas_info('equilibrium')
         omas_info(None)
-        return
 
     # End of TestOmasUtils class
 
