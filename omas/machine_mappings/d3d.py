@@ -666,7 +666,7 @@ def langmuir_probes_hardware(ods, pulse=176235):
     Data are written into ods instead of being returned.
     """
 
-    langmuir_probes_data(ods, pulse=pulse, get_measurements=False)
+    unwrap(langmuir_probes_data)(ods, pulse=pulse, get_measurements=False)
 
 
 @machine_mapping_function(__all__)
