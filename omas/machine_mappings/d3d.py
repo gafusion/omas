@@ -595,7 +595,7 @@ def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
     printd(
         f'Setting up Langmuir probes {"data" if get_measurements else "hardware description"}, '
         f'pulse {pulse}; checking availability, TDI={tdi}',
-        topic='machine'
+        topic='machine',
     )
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
@@ -624,13 +624,33 @@ def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 if get_measurements:
                     t = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.time').data()
-                    isat_m = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.isat')
-                    if np.array_equal(t, isat_m.dim_of(0)):
-                        isat = isat_m.data()
-                    else:
-                        raise ValueError('Time base for Langmuir probe {i:03d} does not match isat data')
                     ods['langmuir_probes.embedded'][j]['time'] = t
-                    ods['langmuir_probes.embedded'][j]['ion_saturation_current.data'] = isat
+
+                    nodes = dict(
+                        isat='ion_saturation_current',
+                        dens='n_e',
+                        area='surface_area_effective',
+                        temp='t_e',
+                        angle='b_field_angle',
+                        pot='v_floating',
+                        heatflux='heat_flux_parallel',
+                    )
+                    # Unit conversions: DIII-D MDS --> imas
+                    unit_conversions = dict(
+                        dens=1e6,  # cm^-3 --> m^-3   (MDSplus reports the units as 1e13 cm^-3, but this can't be)
+                        isat=1,  # A --> A
+                        temp=1,  # eV --> eV
+                        area=1e-4,  # cm^2 --> m^2
+                        pot=1,  # V --> V
+                        angle=np.pi / 180,  # degrees --> radians
+                        heatflux=1e3 * 1e-4  # kW cm^-2 --> W m^-2
+                    )
+                    for tdi_part, imas_part in nodes.items():
+                        mds_dat = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
+                        if np.array_equal(t, mds_dat.dim_of(0)):
+                            ods['langmuir_probes.embedded'][j][f'{imas_part}.data'] = mds_dat.data() * unit_conversions.get(tdi_part, 1)
+                        else:
+                            raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
 
 
@@ -647,7 +667,6 @@ def langmuir_probes_hardware(ods, pulse=176235):
     """
 
     langmuir_probes_data(ods, pulse=pulse, get_measurements=False)
-
 
 
 @machine_mapping_function(__all__)
