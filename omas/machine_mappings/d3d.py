@@ -7,6 +7,61 @@ from omas.machine_mappings._common import *
 __all__ = []
 
 
+def is_machine(machine1, machine2):
+    """
+    Compares to see if machine1 and machine2 are the same machine, allowing for variations in machine names.
+
+    For example, d3d and DIII-D refer to the same machine and is_machine('d3d', 'DIII-D') should return True.
+
+    :param machine1: str
+
+    :param machine2: str
+
+    :return: bool
+    """
+    # TODO: implement this for real
+    return machine1 == machine2  # This is clearly not finished
+
+def verify_machine_data(ods, machine=None, pulse=None):
+    """
+    Used to make sure that data are entered for a consistent machine+pulse combination
+
+    Raises ValueError if ods contains machine or pulse that do not match input machine or pulse.
+    Writes machine or pulse to ods if they are missing in ods but supplied as inputs.
+    Raises ValueError if neither machine or pulse is supplied
+    (but supplying only one is valid if enforcing both is not needed).
+
+    :param ods: ODS instance
+
+    :param machine: string
+        Machine name
+
+    :param pulse: int
+        Pulse or shot number
+    """
+
+    if machine is None or pulse is None:
+        raise ValueError(
+            'Please supply machine, pulse, or both. This function is used to avoid writing data from mismatched '
+            'shots or machines and it is not useful if neither machine nor pulse is given.'
+        )
+    if machine is not None:
+        if 'dataset_description.data_entry.machine' in ods:
+            ods_machine = ods['dataset_description.data_entry.machine']
+            if not is_machine(ods_machine, machine):
+                raise ValueError(f"Input machine {machine} is inconsistent with machine recorded in ODS {ods_machine}")
+        else:
+            ods['dataset_description.data_entry.machine'] = machine
+            print(f'Wrote dataset_description.data_entry.machine = {machine}')
+    if pulse is not None:
+        if 'dataset_description.data_entry.pulse' in ods:
+            ods_pulse = ods['dataset_description.data_entry.pulse']
+            if ods_pulse != pulse:
+                raise ValueError(f"Input pulse {pulse} does not match pulse recorded in ODS {ods_pulse}")
+        else:
+            ods['dataset_description.data_entry.pulse'] = pulse
+            print(f'Wrote dataset_description.data_entry.pulse = {pulse}')
+
 @machine_mapping_function(__all__)
 def gas_injection_hardware(ods, pulse=133221):
     """
@@ -26,6 +81,8 @@ def gas_injection_hardware(ods, pulse=133221):
     """
     if pulse < 100775:
         warnings.warn('DIII-D Gas valve locations not applicable for pulses earlier than 100775 (2000 JAN 17)')
+
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
 
     i = 0
 
@@ -284,6 +341,9 @@ def pf_active_hardware(ods):
 
     :param ods: ODS instance
     """
+
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
+
     # OMFITmhdin('/fusion/projects/codes/efit/Test/Green/example_2019/mhdin.dat', serverPicker='iris')
     # R        Z       dR      dZ    tilt1  tilt2
     # 0 in the last column really means 90 degrees
@@ -364,6 +424,8 @@ def interferometer_hardware(ods, pulse=133221):
     :param pulse: int
     """
 
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
+
     # As of 2018 June 07, DIII-D has four interferometers
     # phi angles are compliant with odd COCOS
     ods['interferometer.channel.0.identifier'] = 'r0'
@@ -412,6 +474,9 @@ def thomson_scattering_data(ods, pulse=133221, revision='BLESSED', _measurements
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
+
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
+
     systems = ['TANGENTIAL', 'DIVERTOR', 'CORE']
 
     # get the actual data
@@ -473,7 +538,7 @@ def bolometer_hardware(ods, pulse=133221):
     - OMFIT-source/modules/_PCS_prad_control/SETTINGS/PHYSICS/reference/DIII-D/bolometer_geo , access 2018 June 11 by D. Eldon
     """
     printd('Setting up DIII-D bolometer locations...', topic='machine')
-
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
     # fmt: off
     if pulse < 91000:
         xangle = (
@@ -590,6 +655,8 @@ def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
     """
     import MDSplus
 
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
+
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
     printd(
@@ -680,6 +747,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
     import MDSplus
 
     printd('Setting up DIII-D CER locations...', topic='machine')
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
 
     cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
 
@@ -724,6 +792,8 @@ def magnetics_hardware(ods):
 
     :param ods: ODS instance
     """
+    verify_machine_data(ods, machine='DIII-D', pulse=pulse)
+
     # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.dat
     # https://nomos.gat.com/DIII-D/diag/magnetics/magnetics.html
     # fmt: off
