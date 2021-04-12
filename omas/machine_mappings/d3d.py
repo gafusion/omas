@@ -387,6 +387,7 @@ def interferometer_data(ods, pulse=133221):
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
+@machine_mapping_function(__all__)
 def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     """
     Gathers DIII-D Thomson measurement locations
