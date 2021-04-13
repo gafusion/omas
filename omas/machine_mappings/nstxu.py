@@ -104,6 +104,12 @@ def magnetics_hardware(ods):
     mhdin = OMFITmhdin(mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
+    for k in ods[f'magnetics.flux_loop']:
+        ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_'+ ods[f'magnetics.flux_loop.{k}.identifier']
+
+    for k in ods[f'magnetics.b_field_pol_probe']:
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_'+ods[f'magnetics.b_field_pol_probe.{k}.identifier']
+
 
 @machine_mapping_function(__all__)
 def magnetics_floops_data(ods, pulse=204202):

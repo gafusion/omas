@@ -671,7 +671,7 @@ def magnetics_hardware(ods):
     """
     from omfit_classes.omfit_efund import OMFITmhdin
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
+    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
     mhdin = OMFITmhdin(mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
