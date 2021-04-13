@@ -487,35 +487,36 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
     fast = 'F' if fast else ''
     setup = '\\ECE::TOP.SETUP.'
     cal = '\\ECE::TOP.CAL%s.' % fast
-    TECE = '\\ECE::TOP.TECE' + fast
+    TECE = '\\ECE::TOP.TECE.TECE' + fast
     query = {}
-    for node,quantity in zip([setup, cal], \
-                             [['PHI', 'THETA', 'ZH', 'FREQ'],\
+    for node, quantities in zip([setup, cal], \
+                             [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ'],\
                              ['NUMCH']]):
-        query[quantity] = node + quantity
-    query["TIME"] = f"dim_of({TECE + '01'})"
+        for quantity in quantities:
+            query[quantity] = node + quantity
+    query['TIME'] = f"dim_of({TECE + '01'})"
     ece_map = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
-    N_time = len(ece_map["TIME"])
+    N_time = len(ece_map['TIME'])
     N_ch = ece_map['NUMCH'].item()
     if _measurements:
         query = {}
-        for ch in range(1,N_ch+1):
-            query["T" + str(ch)] = TECE + "%02d" % (ch + 1)
-        query["TIME"] = f"dim_of({TECE + '01'})"
+        for ich in range(1,N_ch+1):
+            query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
+        query['TIME'] = f"dim_of({TECE + '01'})"
     ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
     # Read the Thomson scattering hardware map to figure out which lens each chord looks through
     # Not in mds+
     points = [{},{}]
-    points[0]["r"] = 2.5
-    points[1]["r"] = 0.8
-    points[0]["phi"] = np.deg2rad(ece_map["PHI"]) 
-    points[1]["phi"] = np.deg2rad(ece_map["PHI"])
-    dR = points[1]["r"] - points[0]["r"]
-    dz = np.sin(np.deg2rad(ece_map["THETA"]))
-    points[0]["z"] = ece_map["ZH"]
-    points[1]["z"] = points[0]["Z"] + dz
-    for entry, point in zip([ods['ece']["line_of_sight"]["first_point"], \
-                             ods['ece']["line_of_sight"]["second_point"]], \
+    points[0]['r'] = 2.5
+    points[1]['r'] = 0.8
+    points[0]['phi'] = np.deg2rad(ece_map['ECEPHI']) 
+    points[1]['phi'] = np.deg2rad(ece_map['ECEPHI'])
+    dR = points[1]['r'] - points[0]['r']
+    dz = np.sin(np.deg2rad(ece_map['ECETHETA']))
+    points[0]['z'] = ece_map['ECEZH']
+    points[1]['z'] = points[0]['z'] + dz
+    for entry, point in zip([ods['ece']['line_of_sight']['first_point'], \
+                             ods['ece']['line_of_sight']['second_point']], \
                             points):
         for key in point:
             entry[key] = point[key]
@@ -523,13 +524,13 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
     # Assign data to ODS
     for ich in range(N_ch):
         ch = ods['ece']['channel'][ich]
-        ch['name'] = "ECE" + str(ich + 1)
-        ch['identifier'] = TECE + "{0:02d}".format(ch + 1)
-        f[:] = ece_map["freq"][ich]
-        ch['frequency'] = f
-        ch['time'] = ece_map["TIME"]
+        ch['name'] = 'ECE' + str(ich + 1)
+        ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
+        f[:] = ece_map['FREQ'][ich]
+        ch['frequency']['data'] = f
+        ch['time'] = ece_map['TIME']
         if _measurements:
-            ch['t_e'] = ece_data["T" + str(ich + 1)] * 1.e3
+            ch['t_e']['data']  = ece_data[f'T{ich + 1}'] * 1.e3
 
 @machine_mapping_function(__all__)
 def bolometer_hardware(ods, pulse=133221):
@@ -907,5 +908,18 @@ def magnetics_probes_data(ods, pulse=133221):
         )
 
 
+def unit_test_ece_ods():
+    ods = ODS()
+    electron_cyclotron_emission_data(ods, pulse=185069, fast=False)
+    import matplotlib.pyplot as plt
+    plt.plot([ods['ece']["line_of_sight"]["first_point"]["r"], \
+              ods['ece']["line_of_sight"]["second_point"]["r"]], \
+             [ods['ece']["line_of_sight"]["first_point"]["z"], \
+              ods['ece']["line_of_sight"]["second_point"]["z"]])
+    fig = plt.figure()
+    plt.plot(ods['ece']['channel'][12]["time"], ods['ece']['channel'][12]["t_e"]['data'])
+    plt.show()
+
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    unit_test_ece_ods()
+    # run_machine_mapping_functions(__all__, globals(), locals())
