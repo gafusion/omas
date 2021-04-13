@@ -717,7 +717,7 @@ class mdsvalue(dict):
             else:
                 server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
-        if any([k in ['skylark.pppl.gov:8501'] for k in [server, self.server]]):
+        if any([k in ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501'] for k in [server, self.server]]):
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
 
@@ -767,6 +767,7 @@ class mdsvalue(dict):
                 TDI = self.TDI
 
             try:
+                # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
                         conn = MDSplus.Connection(self.server)
@@ -781,6 +782,9 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
+
+                out_results = None
+
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
                     TDI = {expr: expr for expr in TDI}
@@ -789,13 +793,13 @@ class mdsvalue(dict):
                 if isinstance(TDI, dict):
                     # old versions of MDS+ server do not support getMany
                     if self.old_MDS_server:
-                        res = {}
+                        results = {}
                         for tdi in TDI:
                             try:
-                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                                results[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
                             except Exception as _excp:
-                                res[tdi] = Exception(str(_excp))
-                        return res
+                                results[tdi] = Exception(str(_excp))
+                        out_results = results
 
                     # more recent MDS+ server
                     else:
@@ -815,11 +819,14 @@ class mdsvalue(dict):
                                         results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
                                     except KeyError:
                                         results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
-                        return results
+                        out_results = results
 
                 # single TDI expression
                 else:
-                    return MDSplus.Data.data(conn.get(TDI))
+                    out_results = MDSplus.Data.data(conn.get(TDI))
+
+                # return values
+                return out_results
 
             except Exception as _excp:
                 txt = []
@@ -829,7 +836,18 @@ class mdsvalue(dict):
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
 
         finally:
-            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='machine')
+            if out_results is not None:
+                if isinstance(out_results, dict):
+                    if all(isinstance(out_results[k], Exception) for k in out_results):
+                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                    elif any(not isinstance(out_results[k], Exception) for k in out_results):
+                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                    else:
+                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
+                else:
+                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
+            else:
+                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
 
 
 # ===================

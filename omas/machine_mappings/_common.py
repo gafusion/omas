@@ -159,10 +159,15 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
             if stage == 'fetch' and t is None:
-                t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
-                if len(t) <= 1:
-                    t = None
+                try:
+                    t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
+                    if len(t) <= 1:
+                        t = None
+                except Exception:
+                    pass
             if stage == 'assign':
+                if time is None:
+                    raise RuntimeError(f'Could not determine time info from {TDI} signals')
                 if not isinstance(tmp[TDI], Exception):
                     ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm
