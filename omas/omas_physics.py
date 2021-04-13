@@ -212,6 +212,44 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def compute_equilibrium_profiles_2d_quantity(ods, time_index, quantity):
+    if(quantity == "rho_poloidal"):
+        return numpy.sqrt((ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
+                           ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.psi']) /
+                          (ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
+                           ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_boundary']))
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def equilibrium_rect_grid_map(ods, time_index, quantity, r=None, z=None, cache=None):
+    # This routines creates rectangular spline of quantities and stores them in the cache for future use
+    if(r is None or z is None):
+        r = ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1']
+        z = ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2']
+    if(cache is not None):
+        if(time_index in cache):
+            if(quantity in cache[time_index]):
+                return cache[time_index][quantity](r,z,grid=False), cache
+    if(cache is None):
+        cache = {}
+    if(time_index not in cache):
+        cache[time_index] = {}
+    try:
+        cache[time_index][quantity] = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
+            )
+    except:
+        cache[time_index][quantity] = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
+                compute_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
+            )  
+    return cache[time_index][quantity](r,z,grid=False), cache
+
 
 @add_to__ODS__
 def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):
