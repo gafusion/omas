@@ -907,19 +907,5 @@ def magnetics_probes_data(ods, pulse=133221):
             data_norm=1.0,
         )
 
-
-def unit_test_ece_ods():
-    ods = ODS()
-    electron_cyclotron_emission_data(ods, pulse=185069, fast=False)
-    import matplotlib.pyplot as plt
-    plt.plot([ods['ece']["line_of_sight"]["first_point"]["r"], \
-              ods['ece']["line_of_sight"]["second_point"]["r"]], \
-             [ods['ece']["line_of_sight"]["first_point"]["z"], \
-              ods['ece']["line_of_sight"]["second_point"]["z"]])
-    fig = plt.figure()
-    plt.plot(ods['ece']['channel'][12]["time"], ods['ece']['channel'][12]["t_e"]['data'])
-    plt.show()
-
 if __name__ == '__main__':
-    unit_test_ece_ods()
-    # run_machine_mapping_functions(__all__, globals(), locals())
+    run_machine_mapping_functions(__all__, globals(), locals())
