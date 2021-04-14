@@ -575,13 +575,14 @@ def bolometer_hardware(ods, pulse=133221):
 
 
 @machine_mapping_function(__all__)
-def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
+def langmuir_probes_data(ods, pulse, get_measurements=True):
     """
     Gathers DIII-D Langmuir probe measurements and loads them into an ODS
 
     :param ods: ODS instance
 
     :param pulse: int
+        For example, see 176235
 
     :param get_measurements: bool
         Gather measurements from the probes, like saturation current, in addition to the hardware
@@ -655,18 +656,19 @@ def langmuir_probes_data(ods, pulse=176235, get_measurements=True):
 
 
 @machine_mapping_function(__all__)
-def langmuir_probes_hardware(ods, pulse=176235):
+def langmuir_probes_hardware(ods, pulse):
     """
     Load DIII-D Langmuir probe locations without the probe's measurements
 
     :param ods: ODS instance
 
     :param pulse: int
+        For a workable example, see 176235
 
     Data are written into ods instead of being returned.
     """
 
-    unwrap(langmuir_probes_data)(ods, pulse=pulse, get_measurements=False)
+    unwrap(langmuir_probes_data)(ods, pulse, get_measurements=False)
 
 
 @machine_mapping_function(__all__)
