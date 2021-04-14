@@ -3,6 +3,7 @@
 -------
 '''
 
+from scipy.interpolate.fitpack2 import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -215,11 +216,29 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 @add_to__ODS__
 @preprocess_ods('equilibrium')
 def compute_equilibrium_profiles_2d_quantity(ods, time_index, quantity):
-    if(quantity == "rho_poloidal"):
+    from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
+    if quantity == "rho_poloidal":
         return numpy.sqrt((ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
                            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.psi']) /
                           (ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
                            ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_boundary']))
+    elif quantity in ["b_field_r","b_field_tor", "b_field_z"]:
+        r, z = numpy.meshgrid(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], indexing="ij")
+        psi_spl = RectBivariateSpline(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.psi'])
+        if quantity == "b_field_r": 
+            return psi_spl(r,z,dy=1,grid=False) / (2.0 * numpy.pi * r)
+        elif quantity == "b_field_z":
+            return -psi_spl(r,z,dx=1,grid=False) / (2.0 * numpy.pi * r)
+        else:
+            f_spl = InterpolatedUnivariateSpline(
+                'equilibrium.time_slice.{time_index}.profiles_1d.psi',
+                'equilibrium.time_slice.{time_index}.profiles_1d.f')
+            return f_spl(psi_spl(r,z,grid=False)) / r
 
 @add_to__ODS__
 @preprocess_ods('equilibrium')
