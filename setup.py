@@ -22,7 +22,7 @@ install_requires = [
     'omfit_classes',
     'pexpect',
     'fortranformat',
-    'pygacode'
+    'pygacode',
 ]
 
 extras_require = {

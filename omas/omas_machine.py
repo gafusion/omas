@@ -30,13 +30,13 @@ _url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{bra
 
 
 def python_tdi_namespace(branch):
-    '''
+    """
     Returns the namespace of the python_tdi.py file
 
     :param branch: remote branch to load
 
     :return: namespace
-    '''
+    """
     # return cached python tdi function namespace
     if branch in _python_tdi_namespace:
         return _python_tdi_namespace[branch]
@@ -64,7 +64,7 @@ def python_tdi_namespace(branch):
 
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
-    '''
+    """
     Routine to convert machine data to ODS
 
     :param ods: input ODS to populate
@@ -84,7 +84,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     :param cache: if cache is a dictionary, this will be used to establiish a cash
 
     :return: updated ODS and data before being assigned to the ODS
-    '''
+    """
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -122,6 +122,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 cache[call] = cocosio
     elif 'COCOSIO_TDI' in mapped:
         TDI = mapped['COCOSIO_TDI'].format(**options_with_defaults)
+        treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
         cocosio = int(mdsvalue(machine, treename, pulse, TDI).raw())
 
     # CONSTANT VALUE
@@ -222,7 +223,7 @@ _python_tdi_namespace = {}
 
 
 def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False):
-    '''
+    """
     Function to load the json mapping files (local or remote)
     Allows for merging external mapping rules defined by users.
     This function sanity-checks and the mapping file and adds extra info required for mapping
@@ -239,7 +240,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     :param raise_errors: raise errors or simply print warnings if something isn't right
 
     :return: dictionary with mapping transformations
-    '''
+    """
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -383,12 +384,12 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
 
 
 def reload_machine_mappings(verbose=True):
-    '''
+    """
     Flushes internal caches of machine mappings.
     This will force the mapping files to be re-read when they are first accessed.
 
     :param verbose: print to screen when mappings are reloaded
-    '''
+    """
     # reset machine mapping caches
     for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict, _user_machine_mappings]:
         cache.clear()
@@ -409,7 +410,7 @@ _machines_dict = {}
 
 
 def machines(machine=None, branch=''):
-    '''
+    """
     Function to get machines that have their mappings defined
     This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested
 
@@ -419,7 +420,7 @@ def machines(machine=None, branch=''):
 
     :return: if `machine==None` returns dictionary with list of machines and their json mapping files
              if `machine` is a string, then returns json mapping filename
-    '''
+    """
 
     # return cached results
     if branch in _machines_dict:
@@ -469,7 +470,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
 
 
 def update_mapping(machine, location, value, cocosio=None, default_options=None, update_path=False):
-    '''
+    """
     Utility function that updates the local mapping file of a given machine with the mapping info of a given location
 
     :param machine: machine name
@@ -483,7 +484,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     :param update_path: use the same value for the arrays of structures leading to this location
 
     :return: dictionary with updated raw mappings
-    '''
+    """
     ulocation = l2u(p2l(location))
     value = copy.copy(value)
     if 'COORDINATES' in value:
@@ -652,7 +653,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
 # MDS+ functions
 # ===================
 def tunnel_mds(server, treename):
-    '''
+    """
     Resolve MDS+ server
     NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
 
@@ -661,7 +662,7 @@ def tunnel_mds(server, treename):
     :param treename: treename (in case treename affects server to be used)
 
     :return: string with MDS+ server and port to be used
-    '''
+    """
     try:
         import omfit_classes.omfit_mds
     except (ImportError, ModuleNotFoundError):
@@ -678,10 +679,10 @@ _mds_connection_cache = {}
 
 
 class mdstree(dict):
-    '''
+    """
     Class to handle the structure of an MDS+ tree.
     Nodes in this tree are mdsvalue objects
-    '''
+    """
 
     def __init__(self, server, treename, pulse):
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
@@ -701,9 +702,9 @@ class mdstree(dict):
 
 
 class mdsvalue(dict):
-    '''
+    """
     Execute MDS+ TDI functions
-    '''
+    """
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
         self.treename = treename
@@ -750,14 +751,14 @@ class mdsvalue(dict):
         return self.raw(f'size({self.TDI})')
 
     def raw(self, TDI=None):
-        '''
+        """
         Fetch data from MDS+ with connection caching
 
         :param TDI: string, list or dict of strings
             MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
 
         :return: result of TDI expression, or dictionary with results of TDI expressions
-        '''
+        """
         try:
             import time
 
@@ -765,9 +766,9 @@ class mdsvalue(dict):
             import MDSplus
 
             def mdsk(value):
-                '''
+                """
                 Translate strings to MDS+ bytes
-                '''
+                """
                 return str(str(value).encode('utf8'))
 
             if TDI is None:
