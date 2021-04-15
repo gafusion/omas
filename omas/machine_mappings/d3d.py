@@ -6,10 +6,11 @@ from omas.omas_utils import printd, unumpy
 from omas.machine_mappings._common import *
 
 __all__ = []
+__regression_arguments__ = {'__all__': __all__}
 
 
-@machine_mapping_function(__all__)
-def gas_injection_hardware(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def gas_injection_hardware(ods, pulse):
     """
     Loads DIII-D gas injectors hardware geometry
 
@@ -278,7 +279,7 @@ def gas_injection_hardware(ods, pulse=133221):
     i += 1
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
     Loads DIII-D tokamak poloidal field coil hardware geometry
@@ -299,8 +300,8 @@ def pf_active_hardware(ods):
         ods['pf_active.coil'][k]['element.0.identifier'] = fcid
 
 
-@machine_mapping_function(__all__)
-def pf_active_coil_current_data(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def pf_active_coil_current_data(ods, pulse):
     # get pf_active hardware description --without-- placing the data in this ods
     # use `unwrap` to avoid calling `@machine_mapping_function` of `pf_active_hardware`
     ods1 = ODS()
@@ -325,8 +326,8 @@ def pf_active_coil_current_data(ods, pulse=133221):
         )
 
 
-@machine_mapping_function(__all__)
-def interferometer_hardware(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def interferometer_hardware(ods, pulse):
     """
     Loads DIII-D CO2 interferometer chord locations
 
@@ -360,8 +361,8 @@ def interferometer_hardware(ods, pulse=133221):
         ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
 
 
-@machine_mapping_function(__all__)
-def interferometer_data(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def interferometer_data(ods, pulse):
     """
     Loads DIII-D interferometer measurement data
 
@@ -387,8 +388,8 @@ def interferometer_data(ods, pulse=133221):
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
-@machine_mapping_function(__all__)
-def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     """
     Gathers DIII-D Thomson measurement locations
 
@@ -400,8 +401,8 @@ def thomson_scattering_hardware(ods, pulse=133221, revision='BLESSED'):
     unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
 
 
-@machine_mapping_function(__all__)
-def thomson_scattering_data(ods, pulse=133221, revision='BLESSED', _measurements=True):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
     """
     Loads DIII-D Thomson measurement data
 
@@ -461,8 +462,8 @@ def thomson_scattering_data(ods, pulse=133221, revision='BLESSED', _measurements
             i += 1
 
 
-@machine_mapping_function(__all__)
-def bolometer_hardware(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def bolometer_hardware(ods, pulse):
     """
     Load DIII-D bolometer chord locations
 
@@ -572,8 +573,8 @@ def bolometer_hardware(ods, pulse=133221):
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
 
-@machine_mapping_function(__all__)
-def langmuir_probes_hardware(ods, pulse=176235):
+@machine_mapping_function(__regression_arguments__, pulse=176235)
+def langmuir_probes_hardware(ods, pulse):
     """
     Load DIII-D Langmuir probe locations
 
@@ -614,8 +615,8 @@ def langmuir_probes_hardware(ods, pulse=176235):
                 j += 1
 
 
-@machine_mapping_function(__all__)
-def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     """
     Gathers DIII-D CER measurement locations from MDSplus
 
@@ -662,7 +663,7 @@ def charge_exchange_hardware(ods, pulse=133221, analysis_type='CERQUICK'):
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
     Load DIII-D tokamak flux loops and magnetic probes hardware geometry
@@ -676,8 +677,8 @@ def magnetics_hardware(ods):
     mhdin.to_omas(ods, update='magnetics')
 
 
-@machine_mapping_function(__all__)
-def magnetics_floops_data(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def magnetics_floops_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
 
@@ -699,8 +700,8 @@ def magnetics_floops_data(ods, pulse=133221):
         )
 
 
-@machine_mapping_function(__all__)
-def magnetics_probes_data(ods, pulse=133221):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
 
@@ -723,4 +724,4 @@ def magnetics_probes_data(ods, pulse=133221):
 
 
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())

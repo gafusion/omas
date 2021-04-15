@@ -13,7 +13,7 @@ __all__ = [
     'machine_mappings',
     'load_omas_machine',
     'machine_mapping_function',
-    'run_machine_mapping_functions',
+    'test_machine_mapping_functions',
     'mdstree',
     'mdsvalue',
     'reload_machine_mappings',
@@ -532,16 +532,22 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 # ===================
 # machine mapping functions
 # ===================
-def machine_mapping_function(__all__):
+def machine_mapping_function(__regression_arguments__, **regression_args):
     """
     Decorator used to identify machine mapping functions
+
+    :param \**regression_args: arguments used to run regression test
 
     NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
           from another function decorated with `@machine_mapping_function`
     """
 
+    __all__ = __regression_arguments__['__all__']
+
     def machine_mapping_decorator(f, __all__):
         __all__.append(f.__name__)
+        if __regression_arguments__ is not None:
+            __regression_arguments__[f.__name__] = regression_args
 
         @functools.wraps(f)
         def machine_mapping_caller(*args, **kwargs):
@@ -553,9 +559,7 @@ def machine_mapping_function(__all__):
 
                 # figure out the machine name from where the function `f` is defined
                 machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
-                if (
-                    machine == '<string>'
-                ):  # if `f` is called via exec then we need to look at the call stack to figure out the macchine name
+                if machine == '<string>':  # if `f` is called via exec then we need to look at the call stack to figure out the machine name
                     machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
 
                 # call signature
@@ -582,14 +586,16 @@ def machine_mapping_function(__all__):
     return lambda f: machine_mapping_decorator(f, __all__)
 
 
-def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
-    '''
+def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+    """
     Function used to test python mapping functions
 
     :param __all__: list of functionss to test
 
     :param namespace: testing namespace
-    '''
+    """
+    from pprint import pprint
+
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
     os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
@@ -599,18 +605,19 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
+    __regression_arguments__ = global_namespace['__regression_arguments__']
     try:
-        from pprint import pprint
-
-        for func in __all__:
-            print('=' * len(func))
-            print(func)
-            print('=' * len(func))
+        for func_name in __all__:
+            regression_kw = {item: value for item, value in __regression_arguments__.get(func_name, {}).items() if item != '__all__'}
+            print('=' * len(func_name))
+            print(func_name)
+            pprint(regression_kw)
+            print('=' * len(func_name))
             ods = ODS()
-            func = eval(func, global_namespace, local_namespace)
+            func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
-                    func(ods)
+                    func(ods, **regression_kw)
                 except Exception:
                     raise
             except TypeError as _excp:
@@ -618,7 +625,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
                     raise _excp.__class__(
                         str(_excp)
                         + '\n'
-                        + 'For testing purposes, make sure to provide default values to all arguments of the machine mapping functions'
+                        + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
                     )
                 else:
                     raise

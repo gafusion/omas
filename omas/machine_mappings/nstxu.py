@@ -10,9 +10,10 @@ from omas.machine_mappings._common import *
 # https://nstx.pppl.gov/nstx/Software/FAQ/signallabels.html
 
 __all__ = []
+__regression_arguments__ = {'__all__': __all__}
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
     Loads NSTX-U tokamak poloidal field coil hardware geometry
@@ -62,8 +63,8 @@ def pf_active_hardware(ods):
             k += 1
 
 
-@machine_mapping_function(__all__)
-def pf_active_coil_current_data(ods, pulse=204202):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def pf_active_coil_current_data(ods, pulse):
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -87,7 +88,7 @@ def pf_active_coil_current_data(ods, pulse=204202):
         ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
     Load NSTX-U tokamak flux loops and magnetic probes hardware geometry
@@ -105,14 +106,14 @@ def magnetics_hardware(ods):
     mhdin.to_omas(ods, update='magnetics')
 
     for k in ods[f'magnetics.flux_loop']:
-        ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_'+ ods[f'magnetics.flux_loop.{k}.identifier']
+        ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_' + ods[f'magnetics.flux_loop.{k}.identifier']
 
     for k in ods[f'magnetics.b_field_pol_probe']:
-        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_'+ods[f'magnetics.b_field_pol_probe.{k}.identifier']
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_' + ods[f'magnetics.b_field_pol_probe.{k}.identifier']
 
 
-@machine_mapping_function(__all__)
-def magnetics_floops_data(ods, pulse=204202):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def magnetics_floops_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -133,8 +134,8 @@ def magnetics_floops_data(ods, pulse=204202):
         )
 
 
-@machine_mapping_function(__all__)
-def magnetics_probes_data(ods, pulse=204202):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -155,13 +156,13 @@ def magnetics_probes_data(ods, pulse=204202):
         )
 
 
-@machine_mapping_function(__all__)
-def MDS_gEQDSK_psi_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def MDS_gEQDSK_psi_nstx(ods, pulse, EFIT_tree='EFIT01'):
     return MDS_gEQDSK_psi(ods, 'nstxu', pulse, EFIT_tree)
 
 
-@machine_mapping_function(__all__)
-def MDS_gEQDSK_bbbs_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
@@ -176,4 +177,4 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
 
 # =====================
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())
