@@ -109,7 +109,7 @@ different_ods.__doc__ = different_ods.__doc__ % '\n                            '
 
 
 def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
-    '''
+    """
     Checks if two ODSs have any difference in their attributes
 
     :param ods1: first ods to check
@@ -121,7 +121,7 @@ def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
     :param verbose: print differences to stdout
 
     :return: dictionary with list of attriibutes that have differences, or False otherwise
-    '''
+    """
 
     if isinstance(attrs, str):
         attrs = [attrs]
@@ -771,7 +771,7 @@ def load_structure(filename, imas_version):
 
 
 def imas_structure(imas_version, location):
-    '''
+    """
     Returns a dictionary with the IMAS structure given a location
 
     :param imas_version: imas version
@@ -779,7 +779,7 @@ def imas_structure(imas_version, location):
     :param location: path in OMAS format
 
     :return: dictionary as loaded by load_structure() at location
-    '''
+    """
     if imas_version not in _ods_structure_cache:
         _ods_structure_cache[imas_version] = {}
     ulocation = o2u(location)

@@ -13,7 +13,7 @@ __all__ = [
     'machine_mappings',
     'load_omas_machine',
     'machine_mapping_function',
-    'run_machine_mapping_functions',
+    'test_machine_mapping_functions',
     'mdstree',
     'mdsvalue',
     'reload_machine_mappings',
@@ -30,13 +30,13 @@ _url_dir = os.sep.join([omas_rcparams['tmp_omas_dir'], 'machine_mappings', '{bra
 
 
 def python_tdi_namespace(branch):
-    '''
+    """
     Returns the namespace of the python_tdi.py file
 
     :param branch: remote branch to load
 
     :return: namespace
-    '''
+    """
     # return cached python tdi function namespace
     if branch in _python_tdi_namespace:
         return _python_tdi_namespace[branch]
@@ -64,7 +64,7 @@ def python_tdi_namespace(branch):
 
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
-    '''
+    """
     Routine to convert machine data to ODS
 
     :param ods: input ODS to populate
@@ -84,7 +84,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     :param cache: if cache is a dictionary, this will be used to establiish a cash
 
     :return: updated ODS and data before being assigned to the ODS
-    '''
+    """
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -122,6 +122,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 cache[call] = cocosio
     elif 'COCOSIO_TDI' in mapped:
         TDI = mapped['COCOSIO_TDI'].format(**options_with_defaults)
+        treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
         cocosio = int(mdsvalue(machine, treename, pulse, TDI).raw())
 
     # CONSTANT VALUE
@@ -222,7 +223,7 @@ _python_tdi_namespace = {}
 
 
 def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False):
-    '''
+    """
     Function to load the json mapping files (local or remote)
     Allows for merging external mapping rules defined by users.
     This function sanity-checks and the mapping file and adds extra info required for mapping
@@ -239,7 +240,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     :param raise_errors: raise errors or simply print warnings if something isn't right
 
     :return: dictionary with mapping transformations
-    '''
+    """
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -311,7 +312,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
                 try:
                     exec(f.read(), _namespace_mappings[idm])
                 except Exception as _excp:
-                    raise _excp.__class__(f'Error in {filename}\n' + str(_excp))
+                    raise _excp.__class__(f"Error in {os.path.splitext(filename)[0] + '.py'}\n" + str(_excp))
 
         # generate TDI for cocos_rules
         for item in mappings['__cocos_rules__']:
@@ -383,12 +384,12 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
 
 
 def reload_machine_mappings(verbose=True):
-    '''
+    """
     Flushes internal caches of machine mappings.
     This will force the mapping files to be re-read when they are first accessed.
 
     :param verbose: print to screen when mappings are reloaded
-    '''
+    """
     # reset machine mapping caches
     for cache in [_machine_mappings, _namespace_mappings, _python_tdi_namespace, _machines_dict, _user_machine_mappings]:
         cache.clear()
@@ -409,7 +410,7 @@ _machines_dict = {}
 
 
 def machines(machine=None, branch=''):
-    '''
+    """
     Function to get machines that have their mappings defined
     This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested
 
@@ -419,7 +420,7 @@ def machines(machine=None, branch=''):
 
     :return: if `machine==None` returns dictionary with list of machines and their json mapping files
              if `machine` is a string, then returns json mapping filename
-    '''
+    """
 
     # return cached results
     if branch in _machines_dict:
@@ -469,7 +470,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
 
 
 def update_mapping(machine, location, value, cocosio=None, default_options=None, update_path=False):
-    '''
+    """
     Utility function that updates the local mapping file of a given machine with the mapping info of a given location
 
     :param machine: machine name
@@ -483,7 +484,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     :param update_path: use the same value for the arrays of structures leading to this location
 
     :return: dictionary with updated raw mappings
-    '''
+    """
     ulocation = l2u(p2l(location))
     value = copy.copy(value)
     if 'COORDINATES' in value:
@@ -532,16 +533,22 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 # ===================
 # machine mapping functions
 # ===================
-def machine_mapping_function(__all__):
+def machine_mapping_function(__regression_arguments__, **regression_args):
     """
     Decorator used to identify machine mapping functions
+
+    :param \**regression_args: arguments used to run regression test
 
     NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
           from another function decorated with `@machine_mapping_function`
     """
 
+    __all__ = __regression_arguments__['__all__']
+
     def machine_mapping_decorator(f, __all__):
         __all__.append(f.__name__)
+        if __regression_arguments__ is not None:
+            __regression_arguments__[f.__name__] = regression_args
 
         @functools.wraps(f)
         def machine_mapping_caller(*args, **kwargs):
@@ -553,9 +560,7 @@ def machine_mapping_function(__all__):
 
                 # figure out the machine name from where the function `f` is defined
                 machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
-                if (
-                    machine == '<string>'
-                ):  # if `f` is called via exec then we need to look at the call stack to figure out the macchine name
+                if machine == '<string>':  # if `f` is called via exec then we need to look at the call stack to figure out the machine name
                     machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
 
                 # call signature
@@ -582,14 +587,16 @@ def machine_mapping_function(__all__):
     return lambda f: machine_mapping_decorator(f, __all__)
 
 
-def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
-    '''
+def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+    """
     Function used to test python mapping functions
 
     :param __all__: list of functionss to test
 
     :param namespace: testing namespace
-    '''
+    """
+    from pprint import pprint
+
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
     os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
@@ -599,18 +606,19 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
     machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
+    __regression_arguments__ = global_namespace['__regression_arguments__']
     try:
-        from pprint import pprint
-
-        for func in __all__:
-            print('=' * len(func))
-            print(func)
-            print('=' * len(func))
+        for func_name in __all__:
+            regression_kw = {item: value for item, value in __regression_arguments__.get(func_name, {}).items() if item != '__all__'}
+            print('=' * len(func_name))
+            print(func_name)
+            pprint(regression_kw)
+            print('=' * len(func_name))
             ods = ODS()
-            func = eval(func, global_namespace, local_namespace)
+            func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
-                    func(ods)
+                    func(ods, **regression_kw)
                 except Exception:
                     raise
             except TypeError as _excp:
@@ -618,7 +626,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
                     raise _excp.__class__(
                         str(_excp)
                         + '\n'
-                        + 'For testing purposes, make sure to provide default valuess to all arguments of the machine mapping functions'
+                        + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
                     )
                 else:
                     raise
@@ -629,7 +637,9 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
             n = max(map(lambda x: len(x), tmp))
             for item in tmp:
                 try:
-                    print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
+                    with warnings.catch_warnings():
+                        warnings.filterwarnings('error')
+                        print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
                 except Exception:
                     print(f'{item.ljust(n)}   mixed')
     finally:
@@ -643,7 +653,7 @@ def run_machine_mapping_functions(__all__, global_namespace, local_namespace):
 # MDS+ functions
 # ===================
 def tunnel_mds(server, treename):
-    '''
+    """
     Resolve MDS+ server
     NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
 
@@ -652,7 +662,7 @@ def tunnel_mds(server, treename):
     :param treename: treename (in case treename affects server to be used)
 
     :return: string with MDS+ server and port to be used
-    '''
+    """
     try:
         import omfit_classes.omfit_mds
     except (ImportError, ModuleNotFoundError):
@@ -669,14 +679,18 @@ _mds_connection_cache = {}
 
 
 class mdstree(dict):
-    '''
+    """
     Class to handle the structure of an MDS+ tree.
     Nodes in this tree are mdsvalue objects
-    '''
+    """
 
     def __init__(self, server, treename, pulse):
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
-            TDI = TDI.decode('utf8').strip()
+            try:
+                TDI = TDI.decode('utf8')
+            except AttributeError:
+                pass
+            TDI = TDI.strip()
             path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
             h = self
             for p in path[1:-1]:
@@ -688,9 +702,9 @@ class mdstree(dict):
 
 
 class mdsvalue(dict):
-    '''
+    """
     Execute MDS+ TDI functions
-    '''
+    """
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
         self.treename = treename
@@ -711,7 +725,7 @@ class mdsvalue(dict):
             else:
                 server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
-        if any([k in ['skylark.pppl.gov:8501'] for k in [server, self.server]]):
+        if any([k in ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501'] for k in [server, self.server]]):
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
 
@@ -737,14 +751,14 @@ class mdsvalue(dict):
         return self.raw(f'size({self.TDI})')
 
     def raw(self, TDI=None):
-        '''
+        """
         Fetch data from MDS+ with connection caching
 
         :param TDI: string, list or dict of strings
             MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
 
         :return: result of TDI expression, or dictionary with results of TDI expressions
-        '''
+        """
         try:
             import time
 
@@ -752,15 +766,16 @@ class mdsvalue(dict):
             import MDSplus
 
             def mdsk(value):
-                '''
+                """
                 Translate strings to MDS+ bytes
-                '''
+                """
                 return str(str(value).encode('utf8'))
 
             if TDI is None:
                 TDI = self.TDI
 
             try:
+                # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
                         conn = MDSplus.Connection(self.server)
@@ -775,6 +790,9 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
+
+                out_results = None
+
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
                     TDI = {expr: expr for expr in TDI}
@@ -783,13 +801,13 @@ class mdsvalue(dict):
                 if isinstance(TDI, dict):
                     # old versions of MDS+ server do not support getMany
                     if self.old_MDS_server:
-                        res = {}
+                        results = {}
                         for tdi in TDI:
                             try:
-                                res[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                                results[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
                             except Exception as _excp:
-                                res[tdi] = Exception(str(_excp))
-                        return res
+                                results[tdi] = Exception(str(_excp))
+                        out_results = results
 
                     # more recent MDS+ server
                     else:
@@ -809,11 +827,14 @@ class mdsvalue(dict):
                                         results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
                                     except KeyError:
                                         results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
-                        return results
+                        out_results = results
 
                 # single TDI expression
                 else:
-                    return MDSplus.Data.data(conn.get(TDI))
+                    out_results = MDSplus.Data.data(conn.get(TDI))
+
+                # return values
+                return out_results
 
             except Exception as _excp:
                 txt = []
@@ -823,7 +844,18 @@ class mdsvalue(dict):
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
 
         finally:
-            printd(f'{TDI} \t {time.time() - t0:3.3f} secs', topic='machine')
+            if out_results is not None:
+                if isinstance(out_results, dict):
+                    if all(isinstance(out_results[k], Exception) for k in out_results):
+                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                    elif any(not isinstance(out_results[k], Exception) for k in out_results):
+                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                    else:
+                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
+                else:
+                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
+            else:
+                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
 
 
 # ===================

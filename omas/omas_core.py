@@ -23,7 +23,7 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
-    'machine_mapping_function', 'run_machine_mapping_functions', 'mdstree', 'mdsvalue',
+    'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit'
@@ -437,9 +437,9 @@ class ODS(MutableMapping):
 
     @property
     def location(self):
-        '''
+        """
         Property which returns instance of parent ODS
-        '''
+        """
         parent = self.parent
         if isinstance(parent, ODC):
             return ''
@@ -467,9 +467,9 @@ class ODS(MutableMapping):
 
     @property
     def top(self):
-        '''
+        """
         Property which returns instance of top level ODS
-        '''
+        """
         top = self
         parent = self.parent
         while parent is not None:
@@ -479,9 +479,9 @@ class ODS(MutableMapping):
 
     @property
     def structure(self, location):
-        '''
+        """
         Property which returns structure of current ODS
-        '''
+        """
         return imas_structure(self.imas_version, self.location)
 
     @property
@@ -1481,7 +1481,7 @@ class ODS(MutableMapping):
         return True
 
     def keys(self, dynamic=True):
-        '''
+        """
         Return list of keys
 
         :param dynamic: whether dynamic loaded key should be shown.
@@ -1492,7 +1492,7 @@ class ODS(MutableMapping):
                         calls come from the user and not from within the library itself.
 
         :return: list of keys
-        '''
+        """
         if dynamic and self.active_dynamic:
             if isinstance(self.omas_data, dict):
                 dynamic_keys = list(self.dynamic.keys(self.location))
@@ -2117,7 +2117,7 @@ class ODS(MutableMapping):
         )
 
     def diff_attrs(self, ods, attrs=omas_ods_attrs, verbose=False):
-        '''
+        """
         Checks if two ODSs have any difference in their attributes
 
         :param ods: ODS to compare against
@@ -2127,7 +2127,7 @@ class ODS(MutableMapping):
         :param verbose: print differences to stdout
 
         :return: dictionary with list of attriibutes that have differences, or False otherwise
-        '''
+        """
         return different_ods_attrs(self, ods, attrs=attrs, verbose=verbose)
 
     def from_structure(self, structure, depth=0):
@@ -2249,7 +2249,7 @@ class ODS(MutableMapping):
         return '\n'.join(txt)
 
     def to_odx(self, homogeneous=None):
-        '''
+        """
         Generate a ODX from current ODS
 
         :param homogeneous: * False: flat representation of the ODS
@@ -2263,17 +2263,17 @@ class ODS(MutableMapping):
                             * None: smart setting, uses homogeneous='time' if homogeneous_time=True else False
 
         :return: ODX
-        '''
+        """
         return ods_2_odx(self, homogeneous=homogeneous)
 
     def info(self, location):
-        '''
+        """
         return node info
 
         :param location: location of the node to return info of
 
         :return: dictionary with info
-        '''
+        """
         return omas_info_node((self.location + '.' + location).lstrip('.'))
 
     def __enter__(self):

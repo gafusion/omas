@@ -69,13 +69,13 @@ class ODX(MutableMapping):
         return self
 
     def to_ods(self, consistency_check=True):
-        '''
+        """
         Generate a ODS from current ODX
 
         :param consistency_check: use consistency_check flag in ODS
 
         :return: ODS
-        '''
+        """
         return odx_2_ods(self, consistency_check=consistency_check)
 
 

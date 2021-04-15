@@ -111,11 +111,11 @@ def consistent_times(ods, attempt_fix=True, raise_errors=True):
 
 @add_to__ODS__
 def imas_info(ods):
-    '''
+    """
     add ids_properties.version_put... information
 
     :return: updated ods
-    '''
+    """
     # if called at top level, loop over all data structures
     if not len(ods.location):
         for ds in ods:
@@ -215,7 +215,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 
 @add_to__ODS__
 def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):
-    '''
+    """
     generate equilibrium constraints from experimental data in ODS
 
     :param ods: input ODS
@@ -249,7 +249,7 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
     :param update: operate in place
 
     :return: updated ods
-    '''
+    """
     from omfit_classes.utils_math import smooth_by_convolution
 
     if averages is None:
@@ -405,9 +405,9 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Calculates line-average electron density for each time slice and stores them in the summary ods
 
     :param ods: input ods
-    
+
     :param line_grid: number of points to calculate line average density over (includes point outside of boundary)
-    
+
     :param time_index: time slices to process
 
     :param update: operate in place
@@ -1423,13 +1423,13 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
 @add_to__ODS__
 @preprocess_ods('magnetics')
 def magnetics_sanitize(ods, remove_bpol_probe=True):
-    '''
+    """
     Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe
 
     :param ods: ODS to update in-place
 
     :return: updated ods
-    '''
+    """
     if 'magnetics.bpol_probe' not in ods:
         return ods
 
@@ -1574,11 +1574,11 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
 
 @add_to__ODS__
 def check_iter_scenario_requirements(ods):
-    '''
+    """
     Check that the current ODS satisfies the ITER scenario database requirements as defined in https://confluence.iter.org/x/kQqOE
 
     :return: list of elements that are missing to satisfy the ITER scenario requirements
-    '''
+    """
     from .omas_imas import iter_scenario_requirements
 
     fail = []
@@ -1592,7 +1592,7 @@ def check_iter_scenario_requirements(ods):
 
 @add_to__ALL__
 def probe_endpoints(r0, z0, a0, l0, cocos):
-    '''
+    """
     Transform r,z,a,l arrays commonly used to describe poloidal magnetic
     probes geometry to actual r,z coordinates of the end-points of the probes.
     This is useful for plotting purposes.
@@ -1608,7 +1608,7 @@ def probe_endpoints(r0, z0, a0, l0, cocos):
     :param cocos: cocos convention
 
     :return: list of 2-points r and z coordinates of individual probes
-    '''
+    """
     theta_convention = 1
     if cocos in [1, 4, 6, 7, 11, 14, 16, 17]:
         theta_convention = -1

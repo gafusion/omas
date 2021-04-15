@@ -21,7 +21,7 @@ Prior running this script, the following commands must be typed at the teriminal
 import os
 from matplotlib import pyplot
 
-from omfit_classes.omfit_eqdsk import OMFITgeqdsk, OMFITsrc
+from omfit_classes.omfit_eqdsk import OMFITgeqdsk
 from omas import *
 
 imas_version = os.environ.get('IMAS_VERSION', omas_rcparams['default_imas_version'])
@@ -31,22 +31,22 @@ os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
 omas_rcparams['allow_fake_imas_fallback'] = True
 
 # read gEQDSK file in OMFIT
-eq = OMFITgeqdsk(OMFITsrc + '/../samples/g133221.01000')
+eq = OMFITgeqdsk(f'{omas_dir}samples/g145419.02100')
 
 # convert gEQDSK to OMAS data structure
 ods = eq.to_omas()
 
 # save OMAS data structure to IMAS
-paths = save_omas_imas(ods, machine='DIII-D', pulse=133221, new=True)
+paths = save_omas_imas(ods, machine='DIII-D', pulse=145419, new=True)
 
 # load OMAS data structure from IMAS
-ods1 = load_omas_imas(machine='DIII-D', pulse=133221)
+ods1 = load_omas_imas(machine='DIII-D', pulse=145419)
 
 # generate gEQDSK file from OMAS data structure
-eq1 = OMFITgeqdsk('g133221.02000').from_omas(ods1)
+eq1 = OMFITgeqdsk('145419.02100').from_omas(ods1)
 
 # save gEQDSK file
-eq1.deploy('g133221.02000')
+eq1.deploy('145419.02100')
 
 # plot
 eq.plot()

@@ -5,7 +5,7 @@ _MDS_gEQDSK_COCOS_identify_cache = {}
 
 
 def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
-    '''
+    """
     Python function that queries MDS+ EFIT tree to figure
     out COCOS convention used for a particular reconstruction
 
@@ -16,7 +16,7 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
     :param EFIT_tree: MDS+ EFIT tree name
 
     :return: integer cocos convention
-    '''
+    """
     if (machine, pulse, EFIT_tree) in _MDS_gEQDSK_COCOS_identify_cache:
         return _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
@@ -32,7 +32,7 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
 
 
 def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
-    '''
+    """
     evaluate EFIT psi
 
     :param ODS: input ODS
@@ -44,7 +44,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
     :param EFIT_tree: MDS+ EFIT tree name
 
     :return: integer cocos convention
-    '''
+    """
     cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree)
     with omas_environment(ods, cocosio=cocosio):
         TDIs = {
@@ -120,7 +120,7 @@ def pf_coils_to_ods(ods, coil_data):
 
 
 def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, mds_server, mds_tree, tdi_expression, time_norm, data_norm):
-    '''
+    """
     Utility function to get data from a list of TDI signals which all share the same time basis
 
     :param ods: ODS that will hold the data
@@ -150,7 +150,7 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
     :param data_norm: data normalization
 
     :return: ODS instance
-    '''
+    """
     t = None
     TDIs = []
     for stage in ['fetch', 'assign']:
@@ -159,10 +159,15 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
             if stage == 'fetch' and t is None:
-                t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
-                if len(t) <= 1:
-                    t = None
+                try:
+                    t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
+                    if len(t) <= 1:
+                        t = None
+                except Exception:
+                    pass
             if stage == 'assign':
+                if time is None:
+                    raise RuntimeError(f'Could not determine time info from {TDI} signals')
                 if not isinstance(tmp[TDI], Exception):
                     ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm

@@ -567,13 +567,13 @@ def symlink_imas_structure_versions(test=True, verbose=True):
 
 
 def add_extra_structures(extra_structures, lifecycle_status='tmp'):
-    '''
+    """
     Function used to extend the IMAS data dictionary with user defined structures
 
     :param extra_structures: dictionary with extra IDS entries to assign
 
     :param lifecycle_status: default lifecycle_status to assign
-    '''
+    """
     from . import omas_utils
 
     # reset structure caches
