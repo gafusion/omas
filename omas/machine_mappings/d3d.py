@@ -656,7 +656,6 @@ def langmuir_probes_data(ods, pulse, get_measurements=True):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=176235)
-@machine_mapping_function(__all__)
 def langmuir_probes_hardware(ods, pulse):
     """
     Load DIII-D Langmuir probe locations without the probe's measurements

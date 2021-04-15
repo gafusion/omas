@@ -10,6 +10,7 @@
   "PROFILES_tree": "ZIPFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
+  "get_measurements": true,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
@@ -175,21 +176,49 @@
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
+ "langmuir_probes.embedded.:.b_field_angle.data": {
+  "COCOSIO": 11,
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.heat_flux_parallel.data": {
+  "COCOSIO": 11,
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
  "langmuir_probes.embedded.:.identifier": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.ion_saturation_current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.n_e.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
  },
  "langmuir_probes.embedded.:.name": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
  },
  "langmuir_probes.embedded.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
  },
  "langmuir_probes.embedded.:.position.r": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
  },
  "langmuir_probes.embedded.:.position.z": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.surface_area_effective.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.t_e.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.time": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
+ },
+ "langmuir_probes.embedded.:.v_floating.data": {
+  "COCOSIO": 11,
+  "PYTHON": "langmuir_probes_data(ods, {pulse}, {get_measurements!r})"
  },
  "magnetics.b_field_pol_probe.:": {
   "PYTHON": "magnetics_hardware(ods)"
