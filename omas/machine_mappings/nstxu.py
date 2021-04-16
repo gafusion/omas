@@ -8,6 +8,8 @@ from omas.machine_mappings._common import *
 # NOTES:
 # List of MDS+ signals
 # https://nstx.pppl.gov/nstx/Software/FAQ/signallabels.html
+# magnetics:
+# https://nstx.pppl.gov/DragNDrop/Operations/Physics_Operations_Course/11%20OpsCourse_EquilibriumMagnetics_Rev1.pdf
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
