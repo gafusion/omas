@@ -1,0 +1,1723 @@
+{
+"magnetics": {
+"b_field_pol_probe": [
+{
+"identifier": "MPI11M067",
+"length": 0.1408,
+"name": "MPI11M067",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 0.9729,
+"z": -0.0037
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1A139",
+"length": 0.1419,
+"name": "MPI1A139",
+"poloidal_angle": -1.575334182850082,
+"position": {
+"r": 0.9787,
+"z": 0.0699
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2A067",
+"length": 0.1404,
+"name": "MPI2A067",
+"poloidal_angle": -1.567305668290908,
+"position": {
+"r": 0.9726,
+"z": 0.518
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2A139",
+"length": 0.1408,
+"name": "MPI2A139",
+"poloidal_angle": -1.568527398767304,
+"position": {
+"r": 0.9767,
+"z": 0.2094
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3A139",
+"length": 0.1412,
+"name": "MPI3A139",
+"poloidal_angle": -1.5720180572712925,
+"position": {
+"r": 0.9793,
+"z": 0.3471
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI4A139",
+"length": 0.1409,
+"name": "MPI4A139",
+"poloidal_angle": -1.570970859720096,
+"position": {
+"r": 0.9764,
+"z": 0.4851
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI5A139",
+"length": 0.1414,
+"name": "MPI5A139",
+"poloidal_angle": -1.5662584707397111,
+"position": {
+"r": 0.9785,
+"z": 0.7591
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI66M247",
+"length": 0.1402,
+"name": "MPI66M247",
+"poloidal_angle": 1.579522973054868,
+"position": {
+"r": 2.413,
+"z": -0.0025
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI79A147",
+"length": 0.1534,
+"name": "MPI79A147",
+"poloidal_angle": 0.6894050545377601,
+"position": {
+"r": 1.7617,
+"z": 1.3123
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7NA142",
+"length": 0.1385,
+"name": "MPI7NA142",
+"poloidal_angle": 1.1789699097221695,
+"position": {
+"r": 2.2124,
+"z": 0.8732
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67A3",
+"length": 0.1561,
+"name": "MPI67A3",
+"poloidal_angle": 1.1833332328521553,
+"position": {
+"r": 2.2641,
+"z": 0.7598
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67A067",
+"length": 0.155,
+"name": "MPI67A067",
+"poloidal_angle": 1.1798425743481666,
+"position": {
+"r": 2.2655,
+"z": 0.7578
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6FA142",
+"length": 0.1399,
+"name": "MPI6FA142",
+"poloidal_angle": 1.1796680414229672,
+"position": {
+"r": 2.3137,
+"z": 0.6285
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6NA157",
+"length": 0.1406,
+"name": "MPI6NA157",
+"poloidal_angle": 1.5601498183577311,
+"position": {
+"r": 2.4066,
+"z": 0.2544
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI66M067",
+"length": 0.1409,
+"name": "MPI66M067",
+"poloidal_angle": 1.5690509975429023,
+"position": {
+"r": 2.4133,
+"z": 0.0029
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1B139",
+"length": 0.1418,
+"name": "MPI1B139",
+"poloidal_angle": -1.570970859720096,
+"position": {
+"r": 0.9771,
+"z": -0.0691
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2B067",
+"length": 0.1392,
+"name": "MPI2B067",
+"poloidal_angle": -1.5760323145508797,
+"position": {
+"r": 0.9722,
+"z": -0.5165
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2B139",
+"length": 0.1414,
+"name": "MPI2B139",
+"poloidal_angle": -1.5636404768617198,
+"position": {
+"r": 0.9792,
+"z": -0.207
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3B139",
+"length": 0.1411,
+"name": "MPI3B139",
+"poloidal_angle": -1.5716689914208934,
+"position": {
+"r": 0.9769,
+"z": -0.3428
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI4B139",
+"length": 0.1407,
+"name": "MPI4B139",
+"poloidal_angle": -1.5683528658421044,
+"position": {
+"r": 0.9801,
+"z": -0.4818
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI5B139",
+"length": 0.142,
+"name": "MPI5B139",
+"poloidal_angle": -1.5671311353657085,
+"position": {
+"r": 0.9774,
+"z": -0.757
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI66M157",
+"length": 0.1375,
+"name": "MPI66M157",
+"poloidal_angle": 1.566956602440509,
+"position": {
+"r": 2.4129,
+"z": -0.001
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1B157",
+"length": 0.1408,
+"name": "MPI1B157",
+"poloidal_angle": -1.5629423451609221,
+"position": {
+"r": 0.9719,
+"z": -0.1831
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI79B142",
+"length": 0.1537,
+"name": "MPI79B142",
+"poloidal_angle": 2.253220064324679,
+"position": {
+"r": 2.0436,
+"z": -1.1098
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7NB142",
+"length": 0.1422,
+"name": "MPI7NB142",
+"poloidal_angle": 1.9647171389700167,
+"position": {
+"r": 2.2089,
+"z": -0.8669
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67B3",
+"length": 0.1549,
+"name": "MPI67B3",
+"poloidal_angle": 1.9687313962496038,
+"position": {
+"r": 2.2596,
+"z": -0.7538
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67B067",
+"length": 0.1557,
+"name": "MPI67B067",
+"poloidal_angle": 1.965240737745615,
+"position": {
+"r": 2.2624,
+"z": -0.751
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6FB142",
+"length": 0.1398,
+"name": "MPI6FB142",
+"poloidal_angle": 1.9722220547535922,
+"position": {
+"r": 2.3119,
+"z": -0.6202
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6NB157",
+"length": 0.1407,
+"name": "MPI6NB157",
+"poloidal_angle": 1.5634659439365204,
+"position": {
+"r": 2.414,
+"z": -0.2441
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI8A322",
+"length": 0.1394,
+"name": "MPI8A322",
+"poloidal_angle": -0.005235987755982988,
+"position": {
+"r": 1.2194,
+"z": 1.4055
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI89A322",
+"length": 0.1145,
+"name": "MPI89A322",
+"poloidal_angle": -0.011641346110802179,
+"position": {
+"r": 1.4017,
+"z": 1.407
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI9A322",
+"length": 0.1403,
+"name": "MPI9A322",
+"poloidal_angle": -0.010768681484805013,
+"position": {
+"r": 1.5841,
+"z": 1.4084
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI79FA322",
+"length": 0.1409,
+"name": "MPI79FA322",
+"poloidal_angle": 0.6856176900609325,
+"position": {
+"r": 1.7825,
+"z": 1.323
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI79NA322",
+"length": 0.1141,
+"name": "MPI79NA322",
+"poloidal_angle": 0.6835931081286191,
+"position": {
+"r": 1.9243,
+"z": 1.2064
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7FA322",
+"length": 0.1398,
+"name": "MPI7FA322",
+"poloidal_angle": 0.6879564312586048,
+"position": {
+"r": 2.0673,
+"z": 1.0904
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7NA322",
+"length": 0.1403,
+"name": "MPI7NA322",
+"poloidal_angle": 1.1885692206081382,
+"position": {
+"r": 2.2193,
+"z": 0.8698
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67A322",
+"length": 0.1407,
+"name": "MPI67A322",
+"poloidal_angle": 1.1850785621041497,
+"position": {
+"r": 2.2702,
+"z": 0.7462
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6FA322",
+"length": 0.1402,
+"name": "MPI6FA322",
+"poloidal_angle": 1.186823891356144,
+"position": {
+"r": 2.3189,
+"z": 0.6228
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6NA322",
+"length": 0.1407,
+"name": "MPI6NA322",
+"poloidal_angle": 1.5591549806840943,
+"position": {
+"r": 2.4159,
+"z": 0.2492
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI66M322",
+"length": 0.1399,
+"name": "MPI66M322",
+"poloidal_angle": 1.5690509975429023,
+"position": {
+"r": 2.4182,
+"z": -0.0009
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6NB322",
+"length": 0.1399,
+"name": "MPI6NB322",
+"poloidal_angle": -4.699299010994732,
+"position": {
+"r": 2.4162,
+"z": -0.2438
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6FB322",
+"length": 0.1403,
+"name": "MPI6FB322",
+"poloidal_angle": 1.9792033717615696,
+"position": {
+"r": 2.3154,
+"z": -0.624
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI67B322",
+"length": 0.14,
+"name": "MPI67B322",
+"poloidal_angle": 1.9687313962496038,
+"position": {
+"r": 2.2631,
+"z": -0.7487
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7NB322",
+"length": 0.1407,
+"name": "MPI7NB322",
+"poloidal_angle": 1.980948701013564,
+"position": {
+"r": 2.212,
+"z": -0.8725
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7FB322",
+"length": 0.1403,
+"name": "MPI7FB322",
+"poloidal_angle": -4.028516619575752,
+"position": {
+"r": 2.0848,
+"z": -1.102
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI79B322",
+"length": 0.1406,
+"name": "MPI79B322",
+"poloidal_angle": -4.022407967193772,
+"position": {
+"r": 1.894,
+"z": -1.3327
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI9B322",
+"length": 0.1415,
+"name": "MPI9B322",
+"poloidal_angle": -3.1392713656846403,
+"position": {
+"r": 1.6989,
+"z": -1.4063
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI89B322",
+"length": 0.1403,
+"name": "MPI89B322",
+"poloidal_angle": -3.143041276868948,
+"position": {
+"r": 1.4769,
+"z": -1.4055
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI8B322",
+"length": 0.1403,
+"name": "MPI8B322",
+"poloidal_angle": -3.142168612242951,
+"position": {
+"r": 1.2541,
+"z": -1.4047
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI5B322",
+"length": 0.1403,
+"name": "MPI5B322",
+"poloidal_angle": -2.3803323937474263,
+"position": {
+"r": 1.0479,
+"z": -1.3302
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI4B322",
+"length": 0.1405,
+"name": "MPI4B322",
+"poloidal_angle": -1.563239051133761,
+"position": {
+"r": 0.9724,
+"z": -1.1589
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3B322",
+"length": 0.1402,
+"name": "MPI3B322",
+"poloidal_angle": -1.5664330036649108,
+"position": {
+"r": 0.974,
+"z": -0.8542
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2B322",
+"length": 0.1404,
+"name": "MPI2B322",
+"poloidal_angle": -1.5754563558977213,
+"position": {
+"r": 0.9748,
+"z": -0.5122
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1B322",
+"length": 0.14,
+"name": "MPI1B322",
+"poloidal_angle": -1.5728383620197302,
+"position": {
+"r": 0.9737,
+"z": -0.187
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI11M322",
+"length": 0.1153,
+"name": "MPI11M322",
+"poloidal_angle": -1.5696269561960605,
+"position": {
+"r": 0.9732,
+"z": -0.0023
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1A322",
+"length": 0.14,
+"name": "MPI1A322",
+"poloidal_angle": -1.5710930327677355,
+"position": {
+"r": 0.9741,
+"z": 0.1817
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2A322",
+"length": 0.1403,
+"name": "MPI2A322",
+"poloidal_angle": -1.5655603390389137,
+"position": {
+"r": 0.9742,
+"z": 0.5116
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3A322",
+"length": 0.1404,
+"name": "MPI3A322",
+"poloidal_angle": -1.5734143206728881,
+"position": {
+"r": 0.9745,
+"z": 0.8503
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI4A322",
+"length": 0.1404,
+"name": "MPI4A322",
+"poloidal_angle": -1.5792262670820292,
+"position": {
+"r": 0.9722,
+"z": 1.1609
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI5A322",
+"length": 0.1407,
+"name": "MPI5A322",
+"poloidal_angle": -0.77871355236231,
+"position": {
+"r": 1.0511,
+"z": 1.3304
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1U157",
+"length": 0.027,
+"name": "MPI1U157",
+"poloidal_angle": 0.7077310116837006,
+"position": {
+"r": 1.445,
+"z": 1.277
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2U157",
+"length": 0.027,
+"name": "MPI2U157",
+"poloidal_angle": 0.7115707360380882,
+"position": {
+"r": 1.56,
+"z": 1.187
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3U157",
+"length": 0.027,
+"name": "MPI3U157",
+"poloidal_angle": 0.05759586531581287,
+"position": {
+"r": 1.723,
+"z": 1.112
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI4U157",
+"length": 0.054,
+"name": "MPI4U157",
+"poloidal_angle": 0.04799655442984406,
+"position": {
+"r": 1.873,
+"z": 1.116
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL1U180",
+"length": -0.094,
+"name": "DSL1U180",
+"poloidal_angle": -0.8644615785127914,
+"position": {
+"r": 1.506,
+"z": 1.27
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL2U180",
+"length": -0.088,
+"name": "DSL2U180",
+"poloidal_angle": -0.8644615785127914,
+"position": {
+"r": 1.59,
+"z": 1.198
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL3U180",
+"length": -0.106,
+"name": "DSL3U180",
+"poloidal_angle": -1.610938899590766,
+"position": {
+"r": 1.73,
+"z": 1.142
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL4U157",
+"length": -0.1955,
+"name": "DSL4U157",
+"poloidal_angle": -1.579522973054868,
+"position": {
+"r": 1.877,
+"z": 1.133
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI5U157",
+"length": 0.027,
+"name": "MPI5U157",
+"poloidal_angle": -1.1572056539498004,
+"position": {
+"r": 1.218,
+"z": 1.298
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI6U157",
+"length": 0.027,
+"name": "MPI6U157",
+"poloidal_angle": -0.012723450247038661,
+"position": {
+"r": 1.075,
+"z": 1.202
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI7U157",
+"length": 0.027,
+"name": "MPI7U157",
+"poloidal_angle": -1.5753167295575619,
+"position": {
+"r": 0.976,
+"z": 0.979
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL5U157",
+"length": -0.091,
+"name": "DSL5U157",
+"poloidal_angle": -2.732312943997123,
+"position": {
+"r": 1.185,
+"z": 1.286
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "DSL6U157",
+"length": -0.107,
+"name": "DSL6U157",
+"poloidal_angle": -1.5777776438028739,
+"position": {
+"r": 1.086,
+"z": 1.228
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI1L180",
+"length": 0.0271,
+"name": "MPI1L180",
+"poloidal_angle": -3.141767186514992,
+"position": {
+"r": 1.5104,
+"z": -1.2915
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI2L180",
+"length": 0.0277,
+"name": "MPI2L180",
+"poloidal_angle": -3.145955976719779,
+"position": {
+"r": 1.6103,
+"z": -1.2915
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MPI3L180",
+"length": 0.0273,
+"name": "MPI3L180",
+"poloidal_angle": -3.1595695448853345,
+"position": {
+"r": 1.7103,
+"z": -1.2918
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+}
+],
+"flux_loop": [
+{
+"identifier": "PSF1A",
+"name": "PSF1A",
+"position": [
+{
+"r": 0.8929,
+"z": 0.1683
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF2A",
+"name": "PSF2A",
+"position": [
+{
+"r": 0.8936,
+"z": 0.5092
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF3A",
+"name": "PSF3A",
+"position": [
+{
+"r": 0.895,
+"z": 0.85
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF4A",
+"name": "PSF4A",
+"position": [
+{
+"r": 0.8932,
+"z": 1.1909
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF5A",
+"name": "PSF5A",
+"position": [
+{
+"r": 1.0106,
+"z": 1.4475
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF6NA",
+"name": "PSF6NA",
+"position": [
+{
+"r": 2.511,
+"z": 0.332
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF7NA",
+"name": "PSF7NA",
+"position": [
+{
+"r": 2.285,
+"z": 1.018
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF8A",
+"name": "PSF8A",
+"position": [
+{
+"r": 1.2517,
+"z": 1.5517
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF9A",
+"name": "PSF9A",
+"position": [
+{
+"r": 1.6885,
+"z": 1.5169
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF1B",
+"name": "PSF1B",
+"position": [
+{
+"r": 0.8929,
+"z": -0.1726
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF2B",
+"name": "PSF2B",
+"position": [
+{
+"r": 0.8928,
+"z": -0.5135
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF3B",
+"name": "PSF3B",
+"position": [
+{
+"r": 0.8933,
+"z": -0.8543
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF4B",
+"name": "PSF4B",
+"position": [
+{
+"r": 0.8952,
+"z": -1.1953
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF5B",
+"name": "PSF5B",
+"position": [
+{
+"r": 1.0152,
+"z": -1.4536
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF6NB",
+"name": "PSF6NB",
+"position": [
+{
+"r": 2.509,
+"z": -0.335
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF7NB",
+"name": "PSF7NB",
+"position": [
+{
+"r": 2.297,
+"z": -1.01
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF8B",
+"name": "PSF8B",
+"position": [
+{
+"r": 1.2491,
+"z": -1.5527
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF9B",
+"name": "PSF9B",
+"position": [
+{
+"r": 1.6882,
+"z": -1.5075
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI11M",
+"name": "PSI11M",
+"position": [
+{
+"r": 0.9247,
+"z": 0.0
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI12A",
+"name": "PSI12A",
+"position": [
+{
+"r": 0.9247,
+"z": 0.3429
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI23A",
+"name": "PSI23A",
+"position": [
+{
+"r": 0.9247,
+"z": 0.6858
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI34A",
+"name": "PSI34A",
+"position": [
+{
+"r": 0.9247,
+"z": 1.0287
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI45A",
+"name": "PSI45A",
+"position": [
+{
+"r": 0.9621,
+"z": 1.3208
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI58A",
+"name": "PSI58A",
+"position": [
+{
+"r": 1.1212,
+"z": 1.4646
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI9A",
+"name": "PSI9A",
+"position": [
+{
+"r": 1.6978,
+"z": 1.4646
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF7FA",
+"name": "PSF7FA",
+"position": [
+{
+"r": 2.209,
+"z": 1.213
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI7A",
+"name": "PSI7A",
+"position": [
+{
+"r": 2.1933,
+"z": 1.0629
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF6FA",
+"name": "PSF6FA",
+"position": [
+{
+"r": 2.501,
+"z": 0.527
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI6A",
+"name": "PSI6A",
+"position": [
+{
+"r": 2.4347,
+"z": 0.4902
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI12B",
+"name": "PSI12B",
+"position": [
+{
+"r": 0.9247,
+"z": -0.3429
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI23B",
+"name": "PSI23B",
+"position": [
+{
+"r": 0.9247,
+"z": -0.6858
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI34B",
+"name": "PSI34B",
+"position": [
+{
+"r": 0.9247,
+"z": -1.0287
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI45B",
+"name": "PSI45B",
+"position": [
+{
+"r": 0.9611,
+"z": -1.3198
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI58B",
+"name": "PSI58B",
+"position": [
+{
+"r": 1.1199,
+"z": -1.4625
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI9B",
+"name": "PSI9B",
+"position": [
+{
+"r": 1.8559,
+"z": -1.4625
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF7FB",
+"name": "PSF7FB",
+"position": [
+{
+"r": 2.215,
+"z": -1.214
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI7B",
+"name": "PSI7B",
+"position": [
+{
+"r": 2.1933,
+"z": -1.0602
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSF6FB",
+"name": "PSF6FB",
+"position": [
+{
+"r": 2.501,
+"z": -0.524
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI6B",
+"name": "PSI6B",
+"position": [
+{
+"r": 2.4328,
+"z": -0.4909
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI89FB",
+"name": "PSI89FB",
+"position": [
+{
+"r": 1.3828,
+"z": -1.4625
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI89NB",
+"name": "PSI89NB",
+"position": [
+{
+"r": 1.5771,
+"z": -1.4625
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI1L",
+"name": "PSI1L",
+"position": [
+{
+"r": 1.3929,
+"z": -1.3057
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI2L",
+"name": "PSI2L",
+"position": [
+{
+"r": 1.5983,
+"z": -1.3057
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "PSI3L",
+"name": "PSI3L",
+"position": [
+{
+"r": 1.7759,
+"z": -1.3053
+}
+],
+"type": {
+"index": 1
+}
+}
+],
+"time": [
+0.0
+]
+}
+}
