@@ -775,6 +775,8 @@ class mdsvalue(dict):
                 TDI = self.TDI
 
             try:
+                out_results = None
+
                 # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
@@ -790,8 +792,6 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
-
-                out_results = None
 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
