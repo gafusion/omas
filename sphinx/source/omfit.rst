@@ -50,30 +50,57 @@ OMFIT provides an effective way to translate between legacy and IMAS via OMAS
   :alt: OMFIT+OMAS facilitate save/load gEQDSK to/from IMAS
   :target: /.._images/eq_omas_omfit.png
 
+* OMFITcotsim
+
+  *  `OMFITcotsim.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_cotsim.OMFITcotsim.to_omas>`_
+* OMFITdprobe
+
+  *  `OMFITdprobe.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_efund.OMFITdprobe.to_omas>`_
+* OMFITfbm
+
+  *  `OMFITfbm.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_transp.OMFITfbm.to_omas>`_
+* OMFITgenray
+
+  *  `OMFITgenray.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_genray.OMFITgenray.to_omas>`_
 * OMFITgeqdsk
 
-  * `OMFITgeqdsk.to_omas() <https://omfit.io/_modules/classes/omfit_eqdsk.html#OMFITgeqdsk.to_omas>`_
+  *  `OMFITgeqdsk.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_eqdsk.OMFITgeqdsk.to_omas>`_
+  *  `OMFITgeqdsk.from_omas() <https://omfit.io/code.html#omfit_classes.omfit_eqdsk.OMFITgeqdsk.from_omas>`_
+* OMFITinputgacode
 
-  * `OMFITgeqdsk.from_omas() <https://omfit.io/_modules/classes/omfit_eqdsk.html#OMFITgeqdsk.from_omas>`_
+  *  `OMFITinputgacode.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_gapy.OMFITinputgacode.to_omas>`_
+  *  `OMFITinputgacode.from_omas() <https://omfit.io/code.html#omfit_classes.omfit_gapy.OMFITinputgacode.from_omas>`_
+* OMFITinputprofiles
 
-* OMFITgacode
+  *  `OMFITinputprofiles.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_gapy.OMFITinputprofiles.to_omas>`_
+  *  `OMFITinputprofiles.from_omas() <https://omfit.io/code.html#omfit_classes.omfit_gapy.OMFITinputprofiles.from_omas>`_
+* OMFITkeqdsk
 
-  * `OMFITgacode.to_omas() <https://omfit.io/_modules/classes/omfit_gacode.html#OMFITgacode.to_omas>`_
+  *  `OMFITkeqdsk.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_eqdsk.OMFITkeqdsk.to_omas>`_
+  *  `OMFITkeqdsk.from_omas() <https://omfit.io/code.html#omfit_classes.omfit_eqdsk.OMFITkeqdsk.from_omas>`_
+* OMFITmeqdsk
 
-  * `OMFITgacode.from_omas() <https://omfit.io/_modules/classes/omfit_gacode.html#OMFITgacode.from_omas>`_
+  *  `OMFITmeqdsk.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_eqdsk.OMFITmeqdsk.to_omas>`_
+* OMFITmhdin
 
-* FluxSurfaces
+  *  `OMFITmhdin.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_efund.OMFITmhdin.to_omas>`_
+* OMFITpFile
 
-  * `FluxSurfaces.to_omas() <https://omfit.io/_modules/classes/fluxSurface.html#fluxSurfaces.to_omas>`_
-
+  *  `OMFITpFile.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_osborne.OMFITpFile.to_omas>`_
+  *  `OMFITpFile.from_omas() <https://omfit.io/code.html#omfit_classes.omfit_osborne.OMFITpFile.from_omas>`_
 * OMFITplasmastate
 
-  * `OMFITplasmastate.to_omas() <https://omfit.io/_modules/classes/omfit_transp.html#OMFITplasmastate.to_omas>`_
+  *  `OMFITplasmastate.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_transp.OMFITplasmastate.to_omas>`_
+* OMFITprofiles
 
+  *  `OMFITprofiles.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_profiles.OMFITprofiles.to_omas>`_
 * OMFITstatefile
 
-  * `OMFITstatefile.to_omas() <https://omfit.io/_modules/classes/omfit_onetwo.html#OMFITstatefile.to_omas>`_
+  *  `OMFITstatefile.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_onetwo.OMFITstatefile.to_omas>`_
+* OMFITtranspOutput
 
-* OMFITosborne
+  *  `OMFITtranspOutput.to_omas() <https://omfit.io/code.html#omfit_classes.omfit_transp.OMFITtranspOutput.to_omas>`_
+* fluxSurfaces
 
-  * `OMFITosborne.to_omas() <https://omfit.io/_modules/classes/omfit_osborne.html#OMFITpFile.to_omas>`_
+  *  `fluxSurfaces.to_omas() <https://omfit.io/code.html#omfit_classes.fluxSurface.fluxSurfaces.to_omas>`_
+  *  `fluxSurfaces.from_omas() <https://omfit.io/code.html#omfit_classes.fluxSurface.fluxSurfaces.from_omas>`_
