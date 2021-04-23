@@ -4,7 +4,7 @@
   "_common",
   "_efit"
  ],
- "__mdsserver__": "skylark.pppl.gov:8500",
+ "__mdsserver__": "skylark.pppl.gov:8000",
  "__options__": {
   "EFIT_tree": "EFIT01"
  },
