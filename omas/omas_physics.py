@@ -255,8 +255,13 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
     if averages is None:
         averages = {}
 
+    possible_constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
     if constraints is None:
-        constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
+        constraints = possible_constraints
+    else:
+        for constraint in constraints:
+            if constraint not in possible_constraints:
+                raise ValueError(f'Constraint `{constraint}` not recognized: possible options are {possible_constraints}')
 
     ods_n = ods
     if not update:
