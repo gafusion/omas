@@ -725,7 +725,8 @@ class mdsvalue(dict):
             else:
                 server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
-        if any([k in ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000'] for k in [server, self.server]]):
+        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
+        if server in old_servers or self.server in old_servers:
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
 
