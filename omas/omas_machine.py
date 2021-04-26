@@ -848,7 +848,7 @@ class mdsvalue(dict):
                 if isinstance(out_results, dict):
                     if all(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(not isinstance(out_results[k], Exception) for k in out_results):
+                    elif any(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
                     else:
                         printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
