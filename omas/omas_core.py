@@ -1221,7 +1221,10 @@ class ODS(MutableMapping):
                 if self.active_dynamic:
                     location = l2o([self.location, key[0]])
                 if self.active_dynamic and self.dynamic.__contains__(location):
-                    value = self.dynamic.__getitem__(location)
+                    try:
+                        value = self.dynamic.__getitem__(location)
+                    except Exception as _excp:
+                        raise _excp.__class__(f'Error dynamical fetching of `{location}` for {self.dynamic.kw}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
@@ -2338,6 +2341,8 @@ class ODC(ODS):
 
     def keys(self, dynamic=True):
         keys = list(self.omas_data.keys())
+        if keys is None:
+            return []
         for k, item in enumerate(keys):
             try:
                 keys[k] = c(item)
