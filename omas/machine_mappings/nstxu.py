@@ -22,47 +22,26 @@ def pf_active_hardware(ods):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_efund import OMFITmhdin
+    from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
     mhdin = OMFITmhdin(mhdin_dat_filename)
     mhdin.to_omas(ods, update='pf_active')
 
-    names = [
-        ['PF1AU', 'PF1AU'],
-        ['PF1BU', 'PF1BU'],
-        ['PF1CU', 'PF1CU'],
-        ['PF2U1', 'PF2U'],
-        ['PF2U2', 'PF2U'],
-        ['PF3U1', 'PF3U'],
-        ['PF3U2', 'PF3U'],
-        ['PF4U1', 'PF4'],
-        ['PF4U2', 'PF4'],
-        ['PF5U1', 'PF5'],
-        ['PF5U2', 'PF5'],
-        ['PF5L1', 'PF5'],
-        ['PF5L2', 'PF5'],
-        ['PF4L1', 'PF4'],
-        ['PF4L2', 'PF4'],
-        ['PF3L1', 'PF3L'],
-        ['PF3L2', 'PF3L'],
-        ['PF2L1', 'PF2L'],
-        ['PF2L2', 'PF2L'],
-        ['PF1CL', 'PF1CL'],
-        ['PF1BL', 'PF1BL'],
-        ['PF1AL', 'PF1AL'],
-    ]
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = OMFITnstxMHD(signals_dat_filename)
+    pf_active_signals = signals['mappings']['icoil']
 
-    k = 0
     for c in ods[f'pf_active.coil']:
         for e in ods[f'pf_active.coil'][c]['element']:
-            if k < len(names):
-                ename, cname = names[k]
-                ods[f'pf_active.coil'][c]['name'] = cname
-                ods[f'pf_active.coil'][c]['identifier'] = cname
-                ods[f'pf_active.coil'][c]['element'][e]['name'] = ename
-                ods[f'pf_active.coil'][c]['element'][e]['identifier'] = ename
-            k += 1
+            cname = pf_active_signals[c + 1]['name']
+            cid = pf_active_signals[c + 1]['mds_name_resolved'].strip('\\')
+            ename = pf_active_signals[c + 1]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            eid = ename
+            ods[f'pf_active.coil'][c]['name'] = cname
+            ods[f'pf_active.coil'][c]['identifier'] = cid
+            ods[f'pf_active.coil'][c]['element'][e]['name'] = ename
+            ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -74,20 +53,41 @@ def pf_active_coil_current_data(ods, pulse):
             ods,
             ods1,
             pulse,
-            channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.element.0.identifier',
+            channels=range(14),
+            identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
             mds_server='nstxu',
             mds_tree='ENGINEERING',
-            tdi_expression='\\ENGINEERING::TOP.ANALYSIS.I{signal}',
+            tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
         )
+
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels=range(14, 54),
+            identifier='pf_active.coil.{channel}.identifier',
+            time='pf_active.coil.{channel}.current.time',
+            data='pf_active.coil.{channel}.current.data',
+            validity=None,
+            mds_server='nstxu',
+            mds_tree='OPERATIONS',
+            tdi_expression='\\{signal}',
+            time_norm=1.0,
+            data_norm=1.0,
+        )
+
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
-        ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+        if f'pf_active.coil.{channel}.current.data' in ods:
+            ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+        else:
+            print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
 @machine_mapping_function(__regression_arguments__)
@@ -101,17 +101,21 @@ def magnetics_hardware(ods):
     #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
     #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
 
-    from omfit_classes.omfit_efund import OMFITmhdin
+    from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
     mhdin = OMFITmhdin(mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = OMFITnstxMHD(signals_dat_filename)
+    pf_active_signals = signals['mappings']['bmc']
+
     for k in ods[f'magnetics.flux_loop']:
-        ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_' + ods[f'magnetics.flux_loop.{k}.identifier']
+        ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
 
     for k in ods[f'magnetics.b_field_pol_probe']:
-        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_' + ods[f'magnetics.b_field_pol_probe.{k}.identifier']
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = signals['mappings']['bmc'][k + 1]['mds_name'].strip('\\')
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -129,7 +133,7 @@ def magnetics_floops_data(ods, pulse):
             data='magnetics.flux_loop.{channel}.flux.data',
             validity='magnetics.flux_loop.{channel}.flux.validity',
             mds_server='nstxu',
-            mds_tree='NSTX',
+            mds_tree='OPERATIONS',
             tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0 / 2 / np.pi,
@@ -151,7 +155,7 @@ def magnetics_probes_data(ods, pulse):
             data='magnetics.b_field_pol_probe.{channel}.field.data',
             validity='magnetics.b_field_pol_probe.{channel}.field.validity',
             mds_server='nstxu',
-            mds_tree='NSTX',
+            mds_tree='OPERATIONS',
             tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,

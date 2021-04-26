@@ -153,8 +153,12 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
     """
     t = None
     TDIs = []
+
+    if isinstance(channels, str):
+        channels = ods1[channels]
+
     for stage in ['fetch', 'assign']:
-        for channel in ods1[channels]:
+        for channel in channels:
             signal = ods1[identifier.format(**locals())]
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
