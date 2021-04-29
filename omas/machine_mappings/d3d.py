@@ -398,11 +398,11 @@ def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
-    unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
+    unwrap(thomson_scattering_data)(ods, pulse, revision, _get_measurements=False)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
+def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=True):
     """
     Loads DIII-D Thomson measurement data
 
@@ -418,7 +418,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
     for system in systems:
         for quantity in ['R', 'Z', 'PHI']:
             query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
-        if _measurements:
+        if _get_measurements:
             for quantity in ['TEMP', 'TEMP_E', 'DENSITY', 'DENSITY_E', 'TIME']:
                 query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
     tsdat = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
@@ -454,7 +454,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
             ch['position']['r'] = tsdat[f'{system}_R'][j]
             ch['position']['z'] = tsdat[f'{system}_Z'][j]
             ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
-            if _measurements:
+            if _get_measurements:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
                 ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
@@ -573,9 +573,8 @@ def bolometer_hardware(ods, pulse):
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
 
-
 @machine_mapping_function(__regression_arguments__, pulse=176235)
-def langmuir_probes_data(ods, pulse, get_measurements=True):
+def langmuir_probes_data(ods, pulse, _get_measurements=True):
     """
     Gathers DIII-D Langmuir probe measurements and loads them into an ODS
 
@@ -584,7 +583,7 @@ def langmuir_probes_data(ods, pulse, get_measurements=True):
     :param pulse: int
         For example, see 176235
 
-    :param get_measurements: bool
+    :param _get_measurements: bool
         Gather measurements from the probes, like saturation current, in addition to the hardware
 
     Data are written into ods instead of being returned.
@@ -594,7 +593,7 @@ def langmuir_probes_data(ods, pulse, get_measurements=True):
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
     printd(
-        f'Setting up Langmuir probes {"data" if get_measurements else "hardware description"}, '
+        f'Setting up Langmuir probes {"data" if _get_measurements else "hardware description"}, '
         f'pulse {pulse}; checking availability, TDI={tdi}',
         topic='machine',
     )
@@ -623,7 +622,7 @@ def langmuir_probes_data(ods, pulse, get_measurements=True):
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
-                if get_measurements:
+                if _get_measurements:
                     t = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.time').data()
                     ods['langmuir_probes.embedded'][j]['time'] = t
 
@@ -644,7 +643,7 @@ def langmuir_probes_data(ods, pulse, get_measurements=True):
                         area=1e-4,  # cm^2 --> m^2
                         pot=1,  # V --> V
                         angle=np.pi / 180,  # degrees --> radians
-                        heatflux=1e3 * 1e-4  # kW cm^-2 --> W m^-2
+                        heatflux=1e3 * 1e-4,  # kW cm^-2 --> W m^-2
                     )
                     for tdi_part, imas_part in nodes.items():
                         mds_dat = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
@@ -668,9 +667,9 @@ def langmuir_probes_hardware(ods, pulse):
     Data are written into ods instead of being returned.
     """
 
-    unwrap(langmuir_probes_data)(ods, pulse, get_measurements=False)
+    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
 
-    
+
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     """
@@ -780,4 +779,9 @@ def magnetics_probes_data(ods, pulse):
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(['langmuir_probes_data'], globals(), locals())
+
+
+'''
+
+'''
