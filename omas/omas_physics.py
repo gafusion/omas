@@ -1994,9 +1994,9 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
     if clockwise_phi is None:
         sigma_rpz = clockwise_phi
     elif clockwise_phi:
-        sigma_rpz = +1
-    else:
         sigma_rpz = -1
+    else:
+        sigma_rpz = +1
 
     # return both even and odd COCOS if clockwise_phi is not provided
     if sigma_rpz is None:
