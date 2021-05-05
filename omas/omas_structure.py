@@ -145,13 +145,13 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                     hlp = doc_id['constants']['int']
                     try:
                         if '@name' in hlp:
-                            doc=['%s) %s : %s' % (hlp['#text'], hlp['@name'], hlp['@description'])]
+                            doc = ['%s) %s : %s' % (hlp['#text'], hlp['@name'], hlp['@description'])]
                         else:
                             doc = []
                             for row in hlp:
                                 doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
                     except Exception:
-                        print(me['@doc_identifier'],hlp)
+                        print(me['@doc_identifier'], hlp)
                         raise
                     me['@documentation'] = me['@documentation'].strip() + '\n' + '\n'.join(doc)
 

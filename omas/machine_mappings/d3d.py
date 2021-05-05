@@ -780,8 +780,3 @@ def magnetics_probes_data(ods, pulse):
 
 if __name__ == '__main__':
     test_machine_mapping_functions(['langmuir_probes_data'], globals(), locals())
-
-
-'''
-
-'''
