@@ -8,6 +8,22 @@ from omas.machine_mappings._common import *
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
+"""
+Connects to tokamak-profiledb.ccfe.ac.uk and generates an ODS with core profiles and zero-D parameters
+
+options:
+tok     : string  : 'jet' or 'd3d'
+db      : string  : '98' or '08'  (1998 or 2008 database)
+ngrid   : int     : nrho grid output into ods
+
+Data sources:
+profiles-db with more information:tokamak-profiledb.ccfe.ac.uk
+
+example usage:
+    ods = ODS()
+    ods.open('profiles_db_ccfe', pulse=81499, options={'tok':'d3d', 'db':'08'})
+"""
+
 @machine_mapping_function(__regression_arguments__, pulse=77557, tok="d3d", db='98', ngrid=201)
 def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
     ods['dataset_description.ids_properties.comment'] = f'Comment for {tok}'
@@ -16,12 +32,19 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
         ods = ODS()
     if tok == 'DIII-D':
         tok = 'd3d'
+    elif tok =='JET':
+        tok = 'jet'
 
     # fmt: off
     available_in_database = {
         'd3d': [69627, 69648, 71378, 71384, 77557, 77559, 78106, 78109, 78281, 78283, 78316, 78328, 81321, 81329, 81499, 81507, 82183,
                 82188, 82205, 82788, 84682, 87031, 89943, 90105, 90108, 90117, 90118, 92664, 95989, 98549, 98775, 98777, 99251, 99411,
-                99696, 103818, 104276, 106919, 106956, 111203, 111221, 111239, 118334, 118341, 118348, 118446]
+                99696, 103818, 104276, 106919, 106956, 111203, 111221, 111239, 118334, 118341, 118348, 118446],
+        'jet': [19649, 19691, 26087, 26095, 32745, 33131, 33140, 33465, 34340, 35156, 35171, 35174, 37379, 37718, 37728, 37944, 38285,
+                38287, 38407, 38415, 40542, 40847, 42762, 42794, 42976, 42982, 42997, 43002, 43134, 43452, 46123, 46664, 49687, 50844,
+                51599, 51976, 52009, 52014, 52015, 52022, 52024, 52025, 52096, 52979, 53028, 53030, 53212, 53299, 53501, 53521, 53532,
+                53537, 53550, 55935, 57987, 58159, 58323, 60927, 60931, 60933]
+
         }
     # fmt: on
 
