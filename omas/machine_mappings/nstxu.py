@@ -2,7 +2,7 @@ import os
 import numpy as np
 from inspect import unwrap
 from omas import *
-from omas.omas_utils import printd
+from omas.omas_utils import printd, unumpy
 from omas.machine_mappings._common import *
 
 # NOTES:
@@ -30,13 +30,13 @@ def pf_active_hardware(ods):
 
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
     signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
-    pf_active_signals = signals['mappings']['icoil']
+    icoil_signals = signals['mappings']['icoil']
 
     for c in ods[f'pf_active.coil']:
         for e in ods[f'pf_active.coil'][c]['element']:
-            cname = pf_active_signals[c + 1]['name']
-            cid = pf_active_signals[c + 1]['mds_name_resolved'].strip('\\')
-            ename = pf_active_signals[c + 1]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            cname = icoil_signals[c + 1]['name']
+            cid = icoil_signals[c + 1]['mds_name_resolved'].strip('\\')
+            ename = icoil_signals[c + 1]['mds_name_resolved'].strip('\\') + f'_element_{e}'
             eid = ename
             ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
@@ -46,6 +46,8 @@ def pf_active_hardware(ods):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def pf_active_coil_current_data(ods, pulse):
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -82,6 +84,17 @@ def pf_active_coil_current_data(ods, pulse):
             data_norm=1.0,
         )
 
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    icoil_signals = signals['mappings']['icoil']
+    for channel in ods1['pf_active.coil']:
+        if f'pf_active.coil.{channel}.current.data' in ods:
+            printd(f'Assigning uncertainty to pf_active.coil.{channel}', topic='machine')
+            error = ods[f'pf_active.coil.{channel}.current.data'] * icoil_signals[channel + 1]['rel_error']
+            error[error < icoil_signals[channel + 1]['abs_error']] = icoil_signals[channel + 1]['abs_error']
+            ods[f'pf_active.coil.{channel}.current.data'] = unumpy.uarray(ods[f'pf_active.coil.{channel}.current.data'], error)
+
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
@@ -109,7 +122,6 @@ def magnetics_hardware(ods):
 
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
     signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
-    pf_active_signals = signals['mappings']['bmc']
 
     for k in ods[f'magnetics.flux_loop']:
         ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
@@ -120,6 +132,8 @@ def magnetics_hardware(ods):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_floops_data(ods, pulse):
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -139,9 +153,22 @@ def magnetics_floops_data(ods, pulse):
             data_norm=1.0 / 2 / np.pi,
         )
 
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    tfl_signals = signals['mappings']['tfl']
+    for channel in ods1['magnetics.flux_loop']:
+        if f'magnetics.flux_loop.{channel}.flux.data' in ods:
+            printd(f'Assigning uncertainty to magnetics.flux_loop.{channel}', topic='machine')
+            error = ods[f'magnetics.flux_loop.{channel}.flux.data'] * tfl_signals[channel + 1]['rel_error']
+            error[error < tfl_signals[channel + 1]['abs_error']] = tfl_signals[channel + 1]['abs_error']
+            ods[f'magnetics.flux_loop.{channel}.flux.data'] = unumpy.uarray(ods[f'magnetics.flux_loop.{channel}.flux.data'], error)
+
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -160,6 +187,19 @@ def magnetics_probes_data(ods, pulse):
             time_norm=1.0,
             data_norm=1.0,
         )
+
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    bmc_signals = signals['mappings']['bmc']
+    for channel in ods1['magnetics.b_field_pol_probe']:
+        if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
+            printd(f'Assigning uncertainty to magnetics.b_field_pol_probe.{channel}', topic='machine')
+            error = ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] * bmc_signals[channel + 1]['rel_error']
+            error[error < bmc_signals[channel + 1]['abs_error']] = bmc_signals[channel + 1]['abs_error']
+            ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] = unumpy.uarray(
+                ods[f'magnetics.b_field_pol_probe.{channel}.field.data'], error
+            )
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
