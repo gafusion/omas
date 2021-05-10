@@ -46,7 +46,7 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
                 51599, 51976, 52009, 52014, 52015, 52022, 52024, 52025, 52096, 52979, 53028, 53030, 53212, 53299, 53501, 53521, 53532,
                 53537, 53550, 55935, 57987, 58159, 58323, 60927, 60931, 60933]
 
-        }
+    }
     # fmt: on
 
     if tok not in available_in_database:
@@ -54,68 +54,40 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
     if pulse not in available_in_database[tok]:
         print(f"Shot {pulse} not in {tok} database, available pulses = {available_in_database[tok]}")
 
-    zero_d_ods_locations = {
-        'R': 'summary.boundary.geometric_axis_r.value',
-        'a': 'summary.boundary.minor_radius.value',
-        'dwdt': 'summary.global_quantities.denergy_thermal_dt.value',
-        'hl_mode': 'summary.global_quantities.h_mode.value',
-        'Ip': 'summary.global_quantities.ip.value',
-        'zeff': 'summary.volume_average.zeff.value',
-        'tau_exp': 'summary.global_quantities.tau_energy.value',
-        'Bt': 'summary.global_quantities.b0.value',
-        'kappa': 'summary.boundary.elongation.value',
-        'delta_u': 'summary.boundary.triangularity_upper.value',
-        'delta_l': 'summary.boundary.triangularity_lower.value',
-        'nel': 'summary.line_average.n_e.value',
-        'power_nbi': 'summary.heating_current_drive.power_launched_nbi.value',
-        'power_ec': 'summary.heating_current_drive.power_launched_ec.value',
-        'power_ohm': 'summary.global_quantities.power_ohm.value',
-        'power_ic': 'summary.heating_current_drive.power_launched_ic.value',
-        'power_loss': 'summary.global_quantities.power_loss.value',
-        'stored_energy': 'summary.global_quantities.energy_thermal.value',
-    }
-    zero_d_profiles_locations = {
-        'a': "['ZEROD']['AMIN']",
-        'R': "['ZEROD']['RGEO']",
-        'dwdt': "['ZEROD']['DWDIA']",
-        'Ip': "['ZEROD']['IP']",
-        'zeff': "['ZEROD']['ZEFF']",
-        'tau_exp': "['ZEROD']['TAUTH']",
-        'Bt': "['ZEROD']['BT']",
-        'kappa': "['ZEROD']['KAPPA']",
-        'delta_l': "['ZEROD']['DELTA']",
-        'delta_u': "['ZEROD']['DELTA']",
-        'nel': "['ZEROD']['NEL']",
-        'power_nbi': "['ZEROD']['PINJ']",
-        'power_ec': "['ZEROD']['PECH']",
-        'power_ohm': "['ZEROD']['POHM']",
-        'power_ic': "['ZEROD']['PECH']",
-        'power_loss': "['ZEROD']['PLTH']",
-        'stored_energy': "['ZEROD']['WTH']",
+    zero_d_locations = {
+        "['ZEROD']['RGEO']": 'summary.boundary.geometric_axis_r.value',
+        "['ZEROD']['AMIN']": 'summary.boundary.minor_radius.value',
+        "['ZEROD']['DWTOT']": 'summary.global_quantities.denergy_thermal_dt.value',
+        # 'hl_mode': 'summary.global_quantities.h_mode.value',
+        "['ZEROD']['IP']": 'summary.global_quantities.ip.value',
+        "['ZEROD']['ZEFF']": 'summary.volume_average.zeff.value',
+        "['ZEROD']['TAUTH']": 'summary.global_quantities.tau_energy.value',
+        "['ZEROD']['BT']": 'summary.global_quantities.b0.value',
+        "['ZEROD']['KAPPA']": 'summary.boundary.elongation.value',
+        "['ZEROD']['DELTA']": 'summary.boundary.triangularity_upper.value',
+        "['ZEROD']['DELTA']": 'summary.boundary.triangularity_lower.value',
+        "['ZEROD']['NEL']": 'summary.line_average.n_e.value',
+        "['ZEROD']['PINJ']": 'summary.heating_current_drive.power_launched_nbi.value',
+        "['ZEROD']['PECH']": 'summary.heating_current_drive.power_launched_ec.value',
+        "['ZEROD']['POHM']": 'summary.global_quantities.power_ohm.value',
+        "['ZEROD']['PICRH']": 'summary.heating_current_drive.power_launched_ic.value',
+        "['ZEROD']['PLTH']": 'summary.global_quantities.power_loss.value',
+        "['ZEROD']['WTH']": 'summary.global_quantities.energy_thermal.value',
     }
 
-    one_d_ods_locations = {
-        'zeff': 'core_profiles.profiles_1d[0].zeff',
-        'volume': 'core_profiles.profiles_1d[0].grid.volume',
-        'omega': 'core_profiles.profiles_1d[0].rotation_frequency_tor_sonic',
-        'q': 'core_profiles.profiles_1d[0].q',
-        'Ti': 'core_profiles.profiles_1d[0].t_i_average',
-        'Te': 'core_profiles.profiles_1d[0].electrons.temperature',
-        'ne': 'core_profiles.profiles_1d[0].electrons.density_thermal',
-        'jtot': 'core_profiles.profiles_1d[0].j_tor',
-    }
-    one_d_profiles_locations = {
-        'volume': "['TWOD']['VOLUME']",
-        'omega': "['TWOD']['VROT']",
-        'q': "['TWOD']['Q']",
-        'Ti': "['TWOD']['TI']",
-        'Te': "['TWOD']['TE']",
-        'ne': "['TWOD']['NE']",
-        'q_nbi_i': "['TWOD']['QNBII']",
-        'q_nbi_e': "['TWOD']['QNBIE']",
-        's_nbi_se': "['TWOD']['SNBII']",
-        'q_ohm_e': "['TWOD']['QOHM']",
-        'jtot': "['TWOD']['CURTOT']",
+    one_d_locations = {
+        # 'zeff': 'core_profiles.profiles_1d[0].zeff',
+        "['TWOD']['VOLUME']": 'core_profiles.profiles_1d[0].grid.volume',
+        "['TWOD']['VROT']": 'core_profiles.profiles_1d[0].rotation_frequency_tor_sonic',  # this is wrong
+        "['TWOD']['Q']": 'core_profiles.profiles_1d[0].q',
+        "['TWOD']['TI']": 'core_profiles.profiles_1d[0].t_i_average',
+        "['TWOD']['TE']": 'core_profiles.profiles_1d[0].electrons.temperature',
+        "['TWOD']['NE']": 'core_profiles.profiles_1d[0].electrons.density_thermal',
+        "['TWOD']['CURTOT']": 'core_profiles.profiles_1d[0].j_tor',
+        "['TWOD']['QNBII']": 'q_nbi_i',
+        "['TWOD']['QNBIE']": 'q_nbi_e',
+        "['TWOD']['SNBII']": 's_nbi_se',
+        "['TWOD']['QOHM']": 'q_ohm_e',
     }
 
     mds_tree = mdstree(server='tokamak-profiledb.ccfe.ac.uk:8000', pulse=int(pulse), treename=f'pr{db}_{tok}')
@@ -124,19 +96,14 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
     ods['dataset_description.data_entry.machine'] = tok
     ods['dataset_description.data_entry.pulse'] = int(mds_tree['ZEROD']['SHOT'].data())
     ods['summary.time'] = mds_tree['ZEROD']['TIME'].data()
-    for key, location in zero_d_profiles_locations.items():
+    for mds_location, ods_location in zero_d_locations.items():
         try:
-            if key in zero_d_ods_locations:
-                # print(location, eval(f"mds_tree{location}").data()[-1])
-                ods[zero_d_ods_locations[key]] = np.array(eval(f"mds_tree{location}").data())
-
-        except Exception as e:
-            printe(repr(e))
-            if key in zero_d_ods_locations:
-                ods[zero_d_ods_locations[key]] = [0.0]
+            ods[ods_location] = np.array(eval(f"mds_tree{mds_location}").data())
+        except Exception as _excp:
+            printe(repr(_excp))
+            ods[ods_location] = [0.0]
 
     heating_idx_dict = {'nbi': 2, 'ec': 3, 'lh': 4, 'ic': 5, 'fusion': 6, 'ohm': 7}
-    source_index = 0
     ion_elec = {'i': 'total_ion_energy', 'e': 'electrons.energy', 'se': 'electrons.particles'}
 
     rho_init = np.linspace(0, 1, len(mds_tree['TWOD']['VOLUME'].data()[0]))
@@ -146,32 +113,28 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
         rho_tor_norm = rho_init
     ods['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = rho_tor_norm
 
-    for key, location in one_d_profiles_locations.items():
+    for mds_location, ods_location in one_d_locations.items():
         try:
-            if 'q_' in key or 's_' in key:
-                name = key.split(sep='_')[1]
-                ods[f'core_sources.source[{source_index}].identifier.index'] = heating_idx_dict[name]
-                ods[f'core_sources.source[{source_index}].identifier.name'] = name
-                ods[f'core_sources.source[{source_index}].profiles_1d[0].grid.rho_tor_norm'] = rho_tor_norm
-                ods[f'core_sources.source[{source_index}].profiles_1d[0].grid.volume'] = np.interp(
+            if '.' not in ods_location:
+                name = ods_location.split(sep='_')[1]
+                ods[f'core_sources.source.+.identifier.index'] = heating_idx_dict[name]
+                ods[f'core_sources.source.-1.identifier.name'] = name
+                ods[f'core_sources.source.-1.profiles_1d[0].grid.rho_tor_norm'] = rho_tor_norm
+                ods[f'core_sources.source.-1.profiles_1d[0].grid.volume'] = np.interp(
                     x=rho_tor_norm, xp=rho_init, fp=mds_tree['TWOD']['VOLUME'].data()[0]
                 )
-                ods[f"core_sources.source[{source_index}].profiles_1d[0].{ion_elec[key.split(sep='_')[-1]]}"] = np.interp(
-                    x=rho_tor_norm, xp=rho_init, fp=eval(f"mds_tree{location}").data()[0]
+                ods[f"core_sources.source.-1.profiles_1d[0].{ion_elec[ods_location.split(sep='_')[-1]]}"] = np.interp(
+                    x=rho_tor_norm, xp=rho_init, fp=eval(f"mds_tree{mds_location}").data()[0]
                 )
 
-                source_index += 1
-
-            elif key in one_d_ods_locations:
-                ods[one_d_ods_locations[key]] = np.interp(x=rho_tor_norm, xp=rho_init, fp=eval(f"mds_tree{location}").data()[0])
-
-                if key == 'omega':
-                    ods[one_d_ods_locations[key]] /= 2 * np.pi
+            else:
+                ods[ods_location] = np.interp(x=rho_tor_norm, xp=rho_init, fp=eval(f"mds_tree{mds_location}").data()[0])
+                if 'rotation_frequency_tor_sonic' in ods_location:
+                    ods[ods_location] /= 2 * np.pi
 
         except Exception as e:
             printe(repr(e))
-            if key in zero_d_ods_locations:
-                ods[one_d_ods_locations[key]] = np.zeros(ngrid)
+            ods[ods_location] = np.zeros(ngrid)
 
 
 # =====================
