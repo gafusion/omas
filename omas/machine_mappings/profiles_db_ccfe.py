@@ -24,6 +24,7 @@ example usage:
     ods.open('profiles_db_ccfe', pulse=81499, options={'tok':'d3d', 'db':'08'})
 """
 
+
 @machine_mapping_function(__regression_arguments__, pulse=77557, tok="d3d", db='98', ngrid=201)
 def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
     ods['dataset_description.ids_properties.comment'] = f'Comment for {tok}'
@@ -32,7 +33,7 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
         ods = ODS()
     if tok == 'DIII-D':
         tok = 'd3d'
-    elif tok =='JET':
+    elif tok == 'JET':
         tok = 'jet'
 
     # fmt: off
@@ -126,7 +127,7 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
     for key, location in zero_d_profiles_locations.items():
         try:
             if key in zero_d_ods_locations:
-                #print(location, eval(f"mds_tree{location}").data()[-1])
+                # print(location, eval(f"mds_tree{location}").data()[-1])
                 ods[zero_d_ods_locations[key]] = np.array(eval(f"mds_tree{location}").data())
 
         except Exception as e:

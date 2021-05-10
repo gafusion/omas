@@ -286,7 +286,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
-             try:
+            try:
                 label = ods[f'pf_active.coil.{channel}.element[0].identifier']
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
                 data = ods[f'pf_active.coil.{channel}.current.data']
@@ -297,7 +297,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
-             except Exception as _excp:
+            except Exception as _excp:
                 raise _excp.__class__(f'Problem with pf_current channel {channel} :' + str(_excp))
 
     # bpol_probe

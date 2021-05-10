@@ -75,7 +75,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
             ods[f'equilibrium.time_slice.{k}.global_quantities.psi_boundary'] = res['psi_boundary'][k]
             ods[f'equilibrium.time_slice.{k}.profiles_1d.rho_tor_norm'] = res['rho_tor_norm'][k]
             ods[f'equilibrium.time_slice.{k}.profiles_1d.psi'] = res['psi_axis'][k] + np.linspace(0, 1, n) * (
-                    res['psi_boundary'][k] - res['psi_axis'][k]
+                res['psi_boundary'][k] - res['psi_axis'][k]
             )
 
 
