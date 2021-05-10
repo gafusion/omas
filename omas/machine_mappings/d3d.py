@@ -289,7 +289,7 @@ def pf_active_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='pf_active')
 
     for k in range(len(ods['pf_active.coil'])):
@@ -728,7 +728,7 @@ def magnetics_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
 
@@ -779,4 +779,4 @@ def magnetics_probes_data(ods, pulse):
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(['langmuir_probes_data'], globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())

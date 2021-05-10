@@ -176,18 +176,15 @@
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.b_field_angle.data": {
-  "COCOSIO": 11,
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.heat_flux_parallel.data": {
-  "COCOSIO": 11,
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.identifier": {
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.ion_saturation_current.data": {
-  "COCOSIO": 11,
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.n_e.data": {
@@ -216,7 +213,6 @@
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.v_floating.data": {
-  "COCOSIO": 11,
   "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "magnetics.b_field_pol_probe.:": {

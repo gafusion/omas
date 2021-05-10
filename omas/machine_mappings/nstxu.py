@@ -25,11 +25,11 @@ def pf_active_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='pf_active')
 
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = OMFITnstxMHD(signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
     pf_active_signals = signals['mappings']['icoil']
 
     for c in ods[f'pf_active.coil']:
@@ -104,11 +104,11 @@ def magnetics_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = OMFITnstxMHD(signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
     pf_active_signals = signals['mappings']['bmc']
 
     for k in ods[f'magnetics.flux_loop']:
