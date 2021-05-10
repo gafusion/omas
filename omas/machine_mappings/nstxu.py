@@ -46,6 +46,13 @@ def pf_active_hardware(ods):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def pf_active_coil_current_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak pf_active coil current data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
@@ -132,6 +139,13 @@ def magnetics_hardware(ods):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_floops_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak flux loops flux data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
@@ -167,6 +181,13 @@ def magnetics_floops_data(ods, pulse):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak magnetic probes field data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
@@ -209,6 +230,15 @@ def MDS_gEQDSK_psi_nstx(ods, pulse, EFIT_tree='EFIT01'):
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
+    r"""
+    Load NSTX-U EFIT boundary data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+
+    :param EFIT_tree: MDS+ EFIT tree
+    """
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
@@ -219,6 +249,44 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
     for k in range(len(res['n'])):
         ods[f'equilibrium.time_slice.{k}.boundary.outline.r'] = res['r'][k, : res['n'][k]]
         ods[f'equilibrium.time_slice.{k}.boundary.outline.z'] = res['z'][k, : res['n'][k]]
+
+
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def ip_bt_dflux_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak Ip, Bt, and diamagnetic flux data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+
+    mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
+
+    TDIs = {}
+    for item in ['PR', 'TF', 'DL']:
+        TDIs[item + '_data'] = '\\' + signals[item][0]['mds_name'].strip('\\')
+        TDIs[item + '_time'] = 'dim_of(\\' + signals[item][0]['mds_name'].strip('\\') + ')'
+    res = mdsvalue('nstxu', pulse=pulse, treename='ENGINEERING', TDI=TDIs).raw()
+
+    for item in ['PR', 'TF', 'DL']:
+        if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
+            ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
+            ods[mappings[item] + '.time'] = res[item + '_time']
+
+    # handle uncertainties
+    for item in ['PR', 'TF', 'DL']:
+        if mappings[item] + '.data' in ods:
+            printd(f'Assigning uncertainty to {mappings[item]}', topic='machine')
+            error = ods[mappings[item] + '.data'] * signals[item][0]['rel_error']
+            error[error < signals[item][0]['abs_error'] * signals[item][0]['scale']] = (
+                signals[item][0]['abs_error'] * signals[item][0]['scale']
+            )
+            ods[mappings[item] + '.data'] = unumpy.uarray(ods[mappings[item] + '.data'], error)
 
 
 # =====================

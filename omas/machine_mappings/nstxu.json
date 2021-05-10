@@ -101,15 +101,13 @@
   "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.diamagnetic_flux.:": {
-  "VALUE": 1
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[\\F_DIAMAG2]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.diamagnetic_flux.:.time": {
-  "TDI": "[dim_of(\\F_DIAMAG2,0)]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:": {
   "PYTHON": "magnetics_hardware(ods)"
@@ -142,16 +140,14 @@
   "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.ip.:": {
-  "VALUE": 1
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.ip.:.data": {
-  "COCOSIO": 1,
-  "TDI": "[\\IP1]",
-  "treename": "NSTX"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(\\IP1,0)]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
@@ -203,13 +199,11 @@
   "PYTHON": "pf_active_hardware(ods)"
  },
  "tf.b_field_tor_vacuum_r.data": {
-  "COCOSIO": 1,
-  "TDI": "\\ITF*7.2385e-06",
-  "treename": "NSTX"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "TDI": "dim_of(\\ITF,0)",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.r0": {
   "VALUE": 0.941
