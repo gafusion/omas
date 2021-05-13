@@ -1221,7 +1221,10 @@ class ODS(MutableMapping):
                 if self.active_dynamic:
                     location = l2o([self.location, key[0]])
                 if self.active_dynamic and self.dynamic.__contains__(location):
-                    value = self.dynamic.__getitem__(location)
+                    try:
+                        value = self.dynamic.__getitem__(location)
+                    except Exception as _excp:
+                        raise _excp.__class__(f'Error dynamical fetching of `{location}` for {self.dynamic.kw}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
@@ -2100,7 +2103,7 @@ class ODS(MutableMapping):
         if self.dynamic:
             self.dynamic.close()
 
-    def diff(self, ods, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True):
+    def diff(self, ods, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True, rtol=1.0e-5, atol=1.0e-8):
         """
         return differences between this ODS and the one passed
 
@@ -2108,12 +2111,28 @@ class ODS(MutableMapping):
 
         :param ignore_type: ignore object type differences
 
-        :param ignore_empty: ignore empty nodes
+        :param ignore_empty: ignore emptry nodes
+
+        :param ignore_keys: ignore the following keys
+
+        :param ignore_default_keys: ignores the following keys from the comparison
+                                %s
+
+        rtol : The relative tolerance parameter
+
+        atol : The absolute tolerance parameter
 
         :return: dictionary with differences
         """
         return different_ods(
-            self, ods, ignore_type=ignore_type, ignore_empty=ignore_empty, ignore_keys=ignore_keys, ignore_default_keys=ignore_default_keys
+            self,
+            ods,
+            ignore_type=ignore_type,
+            ignore_empty=ignore_empty,
+            ignore_keys=ignore_keys,
+            ignore_default_keys=ignore_default_keys,
+            rtol=rtol,
+            atol=atol,
         )
 
     def diff_attrs(self, ods, attrs=omas_ods_attrs, verbose=False):
@@ -2289,6 +2308,8 @@ class ODS(MutableMapping):
             raise RuntimeError('Missing call to .open() ?')
 
 
+ODS.diff.__doc__ = ODS.diff.__doc__ % '\n                            '.join(default_keys_to_ignore)
+
 omas_dictstate = dir(ODS)
 omas_dictstate.extend(['omas_data'] + omas_ods_attrs)
 omas_dictstate = sorted(list(set(omas_dictstate)))
@@ -2320,6 +2341,8 @@ class ODC(ODS):
 
     def keys(self, dynamic=True):
         keys = list(self.omas_data.keys())
+        if keys is None:
+            return []
         for k, item in enumerate(keys):
             try:
                 keys[k] = c(item)

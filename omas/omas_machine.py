@@ -725,7 +725,8 @@ class mdsvalue(dict):
             else:
                 server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
-        if any([k in ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501'] for k in [server, self.server]]):
+        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
+        if server in old_servers or self.server in old_servers:
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
 
@@ -775,6 +776,8 @@ class mdsvalue(dict):
                 TDI = self.TDI
 
             try:
+                out_results = None
+
                 # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
@@ -790,8 +793,6 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
-
-                out_results = None
 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
@@ -848,7 +849,7 @@ class mdsvalue(dict):
                 if isinstance(out_results, dict):
                     if all(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(not isinstance(out_results[k], Exception) for k in out_results):
+                    elif any(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
                     else:
                         printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')

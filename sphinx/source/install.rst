@@ -32,7 +32,7 @@ The development version of omas can also be installed with pip:
 
     git clone git@github.com:gafusion/omas.git
     cd omas
-    sudo pip install --upgrade -e .[build_structures,build_documentation]       # Add this `omas` directory to your $PYTHONPATH
+    sudo pip install --upgrade -e '.[build_structures,build_documentation]'     # Add this `omas` directory to your $PYTHONPATH
                                                                                 # The [build_structures,build_documentation] options
                                                                                 # install packages required for extra development purposes
                                                                                 # Maybe necessary to use `--user` option of `pip` with no `sudo`

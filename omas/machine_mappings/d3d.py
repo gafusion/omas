@@ -289,7 +289,7 @@ def pf_active_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='pf_active')
 
     for k in range(len(ods['pf_active.coil'])):
@@ -398,11 +398,11 @@ def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     :param revision: string
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
-    unwrap(thomson_scattering_data)(ods, pulse, revision, _measurements=False)
+    unwrap(thomson_scattering_data)(ods, pulse, revision, _get_measurements=False)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
+def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=True):
     """
     Loads DIII-D Thomson measurement data
 
@@ -418,7 +418,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
     for system in systems:
         for quantity in ['R', 'Z', 'PHI']:
             query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
-        if _measurements:
+        if _get_measurements:
             for quantity in ['TEMP', 'TEMP_E', 'DENSITY', 'DENSITY_E', 'TIME']:
                 query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
     tsdat = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
@@ -454,7 +454,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _measurements=True):
             ch['position']['r'] = tsdat[f'{system}_R'][j]
             ch['position']['z'] = tsdat[f'{system}_Z'][j]
             ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
-            if _measurements:
+            if _get_measurements:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
                 ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
@@ -574,26 +574,36 @@ def bolometer_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=176235)
-def langmuir_probes_hardware(ods, pulse):
+def langmuir_probes_data(ods, pulse, _get_measurements=True):
     """
-    Load DIII-D Langmuir probe locations
+    Gathers DIII-D Langmuir probe measurements and loads them into an ODS
 
     :param ods: ODS instance
 
     :param pulse: int
+        For example, see 176235
+
+    :param _get_measurements: bool
+        Gather measurements from the probes, like saturation current, in addition to the hardware
+
+    Data are written into ods instead of being returned.
     """
     import MDSplus
 
     tdi = r'GETNCI("\\langmuir::top.probe_*.r", "LENGTH")'
     # "LENGTH" is the size of the data, I think (in bits?). Single scalars seem to be length 12.
-    printd('Setting up Langmuir probes hardware description, pulse {}; checking availability, TDI={}'.format(pulse, tdi), topic='machine')
+    printd(
+        f'Setting up Langmuir probes {"data" if _get_measurements else "hardware description"}, '
+        f'pulse {pulse}; checking availability, TDI={tdi}',
+        topic='machine',
+    )
     m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
     try:
         data_present = m.data() > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
-    printd('Looks like up to {} Langmuir probes might have valid data for {}'.format(nprobe, pulse), topic='machine')
+    printd('Looks like up to {nprobe} Langmuir probes might have valid data for DIII-D#{pulse}', topic='machine')
     j = 0
     for i in range(nprobe):
         if data_present[i]:
@@ -612,7 +622,52 @@ def langmuir_probes_hardware(ods, pulse):
                 ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
+                if _get_measurements:
+                    t = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.time').data()
+                    ods['langmuir_probes.embedded'][j]['time'] = t
+
+                    nodes = dict(
+                        isat='ion_saturation_current',
+                        dens='n_e',
+                        area='surface_area_effective',
+                        temp='t_e',
+                        angle='b_field_angle',
+                        pot='v_floating',
+                        heatflux='heat_flux_parallel',
+                    )
+                    # Unit conversions: DIII-D MDS --> imas
+                    unit_conversions = dict(
+                        dens=1e6,  # cm^-3 --> m^-3   (MDSplus reports the units as 1e13 cm^-3, but this can't be)
+                        isat=1,  # A --> A
+                        temp=1,  # eV --> eV
+                        area=1e-4,  # cm^2 --> m^2
+                        pot=1,  # V --> V
+                        angle=np.pi / 180,  # degrees --> radians
+                        heatflux=1e3 * 1e-4,  # kW cm^-2 --> W m^-2
+                    )
+                    for tdi_part, imas_part in nodes.items():
+                        mds_dat = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
+                        if np.array_equal(t, mds_dat.dim_of(0)):
+                            ods['langmuir_probes.embedded'][j][f'{imas_part}.data'] = mds_dat.data() * unit_conversions.get(tdi_part, 1)
+                        else:
+                            raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
+
+
+@machine_mapping_function(__regression_arguments__, pulse=176235)
+def langmuir_probes_hardware(ods, pulse):
+    """
+    Load DIII-D Langmuir probe locations without the probe's measurements
+
+    :param ods: ODS instance
+
+    :param pulse: int
+        For a workable example, see 176235
+
+    Data are written into ods instead of being returned.
+    """
+
+    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -673,7 +728,7 @@ def magnetics_hardware(ods):
     from omfit_classes.omfit_efund import OMFITmhdin
 
     mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = OMFITmhdin(mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
     mhdin.to_omas(ods, update='magnetics')
 
 

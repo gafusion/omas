@@ -50,30 +50,4 @@ OMFIT provides an effective way to translate between legacy and IMAS via OMAS
   :alt: OMFIT+OMAS facilitate save/load gEQDSK to/from IMAS
   :target: /.._images/eq_omas_omfit.png
 
-* OMFITgeqdsk
-
-  * `OMFITgeqdsk.to_omas() <https://omfit.io/_modules/classes/omfit_eqdsk.html#OMFITgeqdsk.to_omas>`_
-
-  * `OMFITgeqdsk.from_omas() <https://omfit.io/_modules/classes/omfit_eqdsk.html#OMFITgeqdsk.from_omas>`_
-
-* OMFITgacode
-
-  * `OMFITgacode.to_omas() <https://omfit.io/_modules/classes/omfit_gacode.html#OMFITgacode.to_omas>`_
-
-  * `OMFITgacode.from_omas() <https://omfit.io/_modules/classes/omfit_gacode.html#OMFITgacode.from_omas>`_
-
-* FluxSurfaces
-
-  * `FluxSurfaces.to_omas() <https://omfit.io/_modules/classes/fluxSurface.html#fluxSurfaces.to_omas>`_
-
-* OMFITplasmastate
-
-  * `OMFITplasmastate.to_omas() <https://omfit.io/_modules/classes/omfit_transp.html#OMFITplasmastate.to_omas>`_
-
-* OMFITstatefile
-
-  * `OMFITstatefile.to_omas() <https://omfit.io/_modules/classes/omfit_onetwo.html#OMFITstatefile.to_omas>`_
-
-* OMFITosborne
-
-  * `OMFITosborne.to_omas() <https://omfit.io/_modules/classes/omfit_osborne.html#OMFITpFile.to_omas>`_
+.. include:: omfit_to_from_omas.rst

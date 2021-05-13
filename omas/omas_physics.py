@@ -214,7 +214,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 
 
 @add_to__ODS__
-def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):
+def equilibrium_form_constraints(ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True):
     """
     generate equilibrium constraints from experimental data in ODS
 
@@ -246,26 +246,41 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
 
     :param averages: dictionary with average times for individual constraints
 
+    :param cutoff_hz: a list of two elements with low and high cutoff frequencies [lowFreq, highFreq]
+
     :param update: operate in place
 
     :return: updated ods
     """
-    from omfit_classes.utils_math import smooth_by_convolution
+    from omfit_classes.utils_math import smooth_by_convolution, firFilter
 
     if averages is None:
         averages = {}
 
+    # identify possible constraints
+    possible_constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
     if constraints is None:
-        constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
+        constraints = possible_constraints
+    else:
+        for constraint in constraints:
+            if constraint not in possible_constraints:
+                raise ValueError(f'Constraint `{constraint}` not recognized: possible options are {possible_constraints}')
 
+    # instantiate new ODS if not operating in place
     ods_n = ods
     if not update:
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
 
+    if times is None:
+        if 'equilibrium.time' in ods:
+            times = ods['equilibrium.time']
+        else:
+            raise ValueError('Must specify times at which to apply equilibrium constraint')
+
     times = numpy.atleast_1d(times)
-    ods_n[f'equilibrium.time'] = times
+    ods_n['equilibrium.time'] = times
 
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
@@ -276,6 +291,8 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
                 data = ods[f'pf_active.coil.{channel}.current.data']
                 time = ods[f'pf_active.coil.{channel}.current.time']
+                if cutoff_hz is not None:
+                    data = firFilter(time, data, cutoff_hz)
                 const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
@@ -295,6 +312,8 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
                     label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                     data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
@@ -316,6 +335,8 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
                     label = ods[f'magnetics.flux_loop.{channel}.identifier']
                     data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
@@ -323,7 +344,7 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = numpy.nan
             except Exception as _excp:
-                raise _excp.__class__(f'Problem with flux_loop channel {channel}: ' + str(_excp))
+                raise _excp.__class__(f'Problem with flux_loop channel {channel}: {_excp}')
 
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
@@ -331,11 +352,13 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
             average = averages.get('ip', default_average)
             time = ods['magnetics.ip.0.time']
             data = ods['magnetics.ip.0.data']
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with ip')
+            raise _excp.__class__(f'Problem with ip: {_excp}')
 
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
@@ -343,11 +366,13 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
             average = averages.get('diamagnetic_flux', default_average)
             time = ods['magnetics.diamagnetic_flux.0.time']
             data = ods['magnetics.diamagnetic_flux.0.data']
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with diamagnetic_flux')
+            raise _excp.__class__(f'Problem with diamagnetic_flux: {_excp}')
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
@@ -355,11 +380,13 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
             average = averages.get('b_field_tor_vacuum_r', default_average)
             time = ods['tf.b_field_tor_vacuum_r.time']
             data = ods['tf.b_field_tor_vacuum_r.data']
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r')
+            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r: {_excp}')
 
     return ods_n
 
@@ -1967,9 +1994,9 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
     if clockwise_phi is None:
         sigma_rpz = clockwise_phi
     elif clockwise_phi:
-        sigma_rpz = +1
-    else:
         sigma_rpz = -1
+    else:
+        sigma_rpz = +1
 
     # return both even and odd COCOS if clockwise_phi is not provided
     if sigma_rpz is None:
