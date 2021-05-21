@@ -286,6 +286,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
+            printd(f'Working on pf_active.coil.{channel}',topic='machine')
             try:
                 label = ods[f'pf_active.coil.{channel}.element[0].identifier']
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
@@ -304,12 +305,13 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
         average = averages.get('bpol_probe', default_average)
         for channel in ods[f'magnetics.b_field_pol_probe']:
+            printd(f'Working on magnetics.b_field_pol_probe.{channel}',topic='machine')
             try:
-                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
+                label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
+                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
                 if valid == 0:
-                    label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                     data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
                     if cutoff_hz is not None:
@@ -327,12 +329,13 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
         average = averages.get('flux_loop', default_average)
         for channel in ods[f'magnetics.flux_loop']:
+            printd(f'Working on magnetics.flux_loop.{channel}',topic='machine')
             try:
-                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
+                label = ods[f'magnetics.flux_loop.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
+                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
                 if valid == 0:
-                    label = ods[f'magnetics.flux_loop.{channel}.identifier']
                     data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     time = ods[f'magnetics.flux_loop.{channel}.flux.time']
                     if cutoff_hz is not None:
@@ -348,6 +351,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
 
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
+        printd(f'Working on magnetics.ip', topic='machine')
         try:
             average = averages.get('ip', default_average)
             time = ods['magnetics.ip.0.time']
@@ -362,6 +366,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
 
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
+        printd(f'Working on magnetics.diamagnetic_flux', topic='machine')
         try:
             average = averages.get('diamagnetic_flux', default_average)
             time = ods['magnetics.diamagnetic_flux.0.time']
@@ -376,6 +381,7 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
+        printd(f'Working on tf.b_field_tor_vacuum_r', topic='machine')
         try:
             average = averages.get('b_field_tor_vacuum_r', default_average)
             time = ods['tf.b_field_tor_vacuum_r.time']
