@@ -149,7 +149,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             namespace.update(_namespace_mappings[idm])
             namespace['ods'] = ODS()
             namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            tmp = compile(call, machines(machine, branch)[:-5] + '.py', 'exec')
+            printd(f"Calling `{call}` in {os.path.basename(namespace['__file__'])}", topic='machine')
+            tmp = compile(call, namespace['__file__'], 'exec')
             exec(tmp, namespace)
             ods = namespace[mapped.get('RETURN', 'ods')]
             if isinstance(cache, dict):
