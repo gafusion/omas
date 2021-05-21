@@ -14,6 +14,7 @@ def get_support_file(object_type, filename):
     """
     if filename not in __support_files_cache__:
         __support_files_cache__[filename] = object_type(filename)
+        __support_files_cache__[filename].load()
     return __support_files_cache__[filename]
 
 
