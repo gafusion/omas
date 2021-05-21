@@ -2,7 +2,7 @@ import os
 import numpy as np
 from inspect import unwrap
 from omas import *
-from omas.omas_utils import printd, unumpy
+from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 
 # NOTES:
@@ -277,6 +277,10 @@ def ip_bt_dflux_data(ods, pulse):
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
             ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
             ods[mappings[item] + '.time'] = res[item + '_time']
+        else:
+            printe(f'No data for {mappings[item]}')
+            ods[mappings[item] + '.data'] = []
+            ods[mappings[item] + '.time'] = []
 
     # handle uncertainties
     for item in ['PR', 'TF', 'DL']:
