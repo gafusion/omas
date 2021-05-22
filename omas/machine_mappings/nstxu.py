@@ -98,9 +98,10 @@ def pf_active_coil_current_data(ods, pulse):
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
             printd(f'Assigning uncertainty to pf_active.coil.{channel}', topic='machine')
-            error = ods[f'pf_active.coil.{channel}.current.data'] * icoil_signals[channel + 1]['rel_error']
-            error[error < icoil_signals[channel + 1]['abs_error']] = icoil_signals[channel + 1]['abs_error']
-            ods[f'pf_active.coil.{channel}.current.data'] = unumpy.uarray(ods[f'pf_active.coil.{channel}.current.data'], error)
+            data = ods[f'pf_active.coil.{channel}.current.data']
+            error = data * icoil_signals[channel + 1]['rel_error'] + icoil_signals[channel + 1]['abs_error']
+            error[data < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
@@ -174,9 +175,10 @@ def magnetics_floops_data(ods, pulse):
     for channel in ods1['magnetics.flux_loop']:
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             printd(f'Assigning uncertainty to magnetics.flux_loop.{channel}', topic='machine')
-            error = ods[f'magnetics.flux_loop.{channel}.flux.data'] * tfl_signals[channel + 1]['rel_error']
-            error[error < tfl_signals[channel + 1]['abs_error']] = tfl_signals[channel + 1]['abs_error']
-            ods[f'magnetics.flux_loop.{channel}.flux.data'] = unumpy.uarray(ods[f'magnetics.flux_loop.{channel}.flux.data'], error)
+            data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+            error = data * tfl_signals[channel + 1]['rel_error'] + tfl_signals[channel + 1]['abs_error']
+            error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
+            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -216,11 +218,10 @@ def magnetics_probes_data(ods, pulse):
     for channel in ods1['magnetics.b_field_pol_probe']:
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
             printd(f'Assigning uncertainty to magnetics.b_field_pol_probe.{channel}', topic='machine')
-            error = ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] * bmc_signals[channel + 1]['rel_error']
-            error[error < bmc_signals[channel + 1]['abs_error']] = bmc_signals[channel + 1]['abs_error']
-            ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] = unumpy.uarray(
-                ods[f'magnetics.b_field_pol_probe.{channel}.field.data'], error
-            )
+            data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+            error = data * bmc_signals[channel + 1]['rel_error'] + bmc_signals[channel + 1]['abs_error']
+            error[data < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
+            ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -286,11 +287,12 @@ def ip_bt_dflux_data(ods, pulse):
     for item in ['PR', 'TF', 'DL']:
         if mappings[item] + '.data' in ods:
             printd(f'Assigning uncertainty to {mappings[item]}', topic='machine')
-            error = ods[mappings[item] + '.data'] * signals[item][0]['rel_error']
-            error[error < signals[item][0]['abs_error'] * signals[item][0]['scale']] = (
-                signals[item][0]['abs_error'] * signals[item][0]['scale']
+            data = ods[mappings[item] + '.data']
+            error = data * signals[item][0]['rel_error'] + signals[item][0]['abs_error'] * signals[item][0]['scale']
+            error[data < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
+                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )
-            ods[mappings[item] + '.data'] = unumpy.uarray(ods[mappings[item] + '.data'], error)
+            ods[mappings[item] + '.data_error_upper'] = error
 
 
 # =====================

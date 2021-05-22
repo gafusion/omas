@@ -65,6 +65,9 @@
   "COCOSIO": 11,
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
  "magnetics.b_field_pol_probe.:.field.time": {
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
@@ -106,6 +109,9 @@
  "magnetics.diamagnetic_flux.:.data": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
+ "magnetics.diamagnetic_flux.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
  "magnetics.diamagnetic_flux.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
@@ -113,6 +119,9 @@
   "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.flux.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper": {
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.time": {
@@ -146,6 +155,9 @@
   "COCOSIO": 11,
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
+ "magnetics.ip.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
@@ -154,6 +166,9 @@
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.data_error_upper": {
   "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.current.time": {
@@ -200,6 +215,9 @@
  },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.time": {
