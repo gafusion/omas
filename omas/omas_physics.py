@@ -214,7 +214,9 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 
 
 @add_to__ODS__
-def equilibrium_form_constraints(ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True):
+def equilibrium_form_constraints(
+    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True, **nuconv_kw
+):
     """
     generate equilibrium constraints from experimental data in ODS
 
@@ -282,21 +284,36 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     times = numpy.atleast_1d(times)
     ods_n['equilibrium.time'] = times
 
+    nuconv_kw.setdefault('window_function', 'boxcar')
+
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
-            printd(f'Working on pf_active.coil.{channel}',topic='machine')
+            printd(f'Working on pf_active.coil.{channel}', topic='machine')
             try:
+                # get
                 label = ods[f'pf_active.coil.{channel}.element[0].identifier']
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
                 data = ods[f'pf_active.coil.{channel}.current.data']
                 time = ods[f'pf_active.coil.{channel}.current.time']
+                if f'pf_active.coil.{channel}.current.data_error_upper' in ods:
+                    error = ods[f'pf_active.coil.{channel}.current.data_error_upper']
+                else:
+                    error = None
+                # process
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
-                const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
+                const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
+                if error is not None:
+                    const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                # assign
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
+                    if error is not None:
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured_error_upper'] = const_error[
+                            time_index
+                        ]
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with pf_current channel {channel} :' + str(_excp))
@@ -305,8 +322,9 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
         average = averages.get('bpol_probe', default_average)
         for channel in ods[f'magnetics.b_field_pol_probe']:
-            printd(f'Working on magnetics.b_field_pol_probe.{channel}',topic='machine')
+            printd(f'Working on magnetics.b_field_pol_probe.{channel}', topic='machine')
             try:
+                # get
                 label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
@@ -314,14 +332,28 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
                 if valid == 0:
                     data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                    if f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper' in ods:
+                        error = ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper']
+                    else:
+                        error = None
+                    # process
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
-                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
                 else:
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured_error_upper'] = numpy.nan
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with bpol_probe channel {channel}: ' + str(_excp))
 
@@ -329,8 +361,9 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
     if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
         average = averages.get('flux_loop', default_average)
         for channel in ods[f'magnetics.flux_loop']:
-            printd(f'Working on magnetics.flux_loop.{channel}',topic='machine')
+            printd(f'Working on magnetics.flux_loop.{channel}', topic='machine')
             try:
+                # get
                 label = ods[f'magnetics.flux_loop.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
@@ -338,59 +371,110 @@ def equilibrium_form_constraints(ods, times=None, default_average=0.02, constrai
                 if valid == 0:
                     data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                    if f'magnetics.flux_loop.{channel}.flux.data_error_upper' in ods:
+                        error = ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper']
+                    else:
+                        error = None
+                    # process
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
-                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
                 else:
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured_error_upper'] = numpy.nan
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with flux_loop channel {channel}: {_excp}')
 
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
+        average = averages.get('ip', default_average)
         printd(f'Working on magnetics.ip', topic='machine')
         try:
-            average = averages.get('ip', default_average)
-            time = ods['magnetics.ip.0.time']
+            # get
             data = ods['magnetics.ip.0.data']
+            time = ods['magnetics.ip.0.time']
+            if 'magnetics.ip.0.data_error_upper' in ods:
+                error = ods['magnetics.ip.0.data_error_upper']
+            else:
+                error = None
+            # process
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured_error_upper'] = const_error[time_index]
         except Exception as _excp:
             raise _excp.__class__(f'Problem with ip: {_excp}')
 
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
+        average = averages.get('diamagnetic_flux', default_average)
         printd(f'Working on magnetics.diamagnetic_flux', topic='machine')
         try:
-            average = averages.get('diamagnetic_flux', default_average)
-            time = ods['magnetics.diamagnetic_flux.0.time']
+            # get
             data = ods['magnetics.diamagnetic_flux.0.data']
+            time = ods['magnetics.diamagnetic_flux.0.time']
+            if 'magnetics.diamagnetic_flux.0.data_error_upper' in ods:
+                error = ods['magnetics.diamagnetic_flux.0.data_error_upper']
+            else:
+                error = None
+            # process
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured_error_upper'] = const_error[
+                        time_index
+                    ]
         except Exception as _excp:
             raise _excp.__class__(f'Problem with diamagnetic_flux: {_excp}')
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
         printd(f'Working on tf.b_field_tor_vacuum_r', topic='machine')
+        average = averages.get('b_field_tor_vacuum_r', default_average)
         try:
-            average = averages.get('b_field_tor_vacuum_r', default_average)
-            time = ods['tf.b_field_tor_vacuum_r.time']
+            # get
             data = ods['tf.b_field_tor_vacuum_r.data']
+            time = ods['tf.b_field_tor_vacuum_r.time']
+            if 'tf.b_field_tor_vacuum_r.data_error_upper' in ods:
+                error = ods['tf.b_field_tor_vacuum_r.data_error_upper']
+            else:
+                error = None
+            # process
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured_error_upper'] = const_error[
+                        time_index
+                    ]
         except Exception as _excp:
             raise _excp.__class__(f'Problem with b_field_tor_vacuum_r: {_excp}')
 
