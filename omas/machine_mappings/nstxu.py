@@ -266,13 +266,18 @@ def ip_bt_dflux_data(ods, pulse):
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
     signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
 
+    # F_DIA does not work at least for 204202
+    signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
+    signals['DL'][0]['mds_tree'] = 'operations'
+    signals['DL'][0]['mds_tree_resolved'] = 'operations'
+
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
 
     TDIs = {}
     for item in ['PR', 'TF', 'DL']:
         TDIs[item + '_data'] = '\\' + signals[item][0]['mds_name'].strip('\\')
         TDIs[item + '_time'] = 'dim_of(\\' + signals[item][0]['mds_name'].strip('\\') + ')'
-    res = mdsvalue('nstxu', pulse=pulse, treename='ENGINEERING', TDI=TDIs).raw()
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
 
     for item in ['PR', 'TF', 'DL']:
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
