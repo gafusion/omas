@@ -8,6 +8,213 @@ from .omas_setup import __version__
 import sys
 
 # --------------------------------------------
+# OMAS uncertain quantities
+# --------------------------------------------
+# The uncertainty package is awesome but slow
+from uncertainties.unumpy import nominal_values as _orig_nominal_values
+from uncertainties.unumpy import std_devs as _orig_std_devs
+import uncertainties
+
+if not hasattr(uncertainties.unumpy, '_orig_nominal_values'):
+    uncertainties.unumpy._orig_nominal_values = _orig_nominal_values
+if not hasattr(uncertainties.unumpy, '_orig_std_devs'):
+    uncertainties.unumpy._orig_std_devs = _orig_std_devs
+
+
+def nominal_values(obj):
+    if isinstance(obj, ouarray):
+        return obj.nominal_value
+    else:
+        return uncertainties.unumpy._orig_nominal_values(obj)
+
+
+uncertainties.unumpy.nominal_values = nominal_values
+
+
+def std_devs(obj):
+    if isinstance(obj, ouarray):
+        return obj.std_dev
+    else:
+        return uncertainties.unumpy._orig_std_devs(obj)
+
+
+uncertainties.unumpy.std_devs = std_devs
+
+
+class ouarray(numpy.lib.mixins.NDArrayOperatorsMixin):
+    '''
+    The uncertainty package is awesome but slow :(
+    Also, IMAS allows to make a distinction between upper and lower error bounds.
+
+    The ouarray (OMAS Uncertain array) class simply aims at keeping
+    the nominal value and standard deviation in a single object,
+    without doing any uncertainty propagation.
+
+    Any array operation on the ouarray class will result in dropping
+    the standard deviation information (a warning is issued when that happens).
+
+    This means that users need to decide by themselves on how to handle uncertainties:
+    To extract the nominal value and standard deviation use the
+        ouarray_object.nominal_values and ouarray_object.std_devs attributes
+    or the uncertainties.unumpy functions (which we monkey patch!)
+        nominal_values(ouarray_object) and std_devs(ouarray_object) functions
+
+    '''
+
+    def __init__(self, nominal_value, error_upper=None, error_lower=None, error_index=None, location=None):
+        '''
+        By convention, only the upper_error node should be filled in case of symmetrical error bars.
+        The upper and lower errors are absolute and defined positive, the effective values of the data will be within the interval [data-data_error_lower, data+data_error_upper].
+        Thus whatever the sign of data, data_error_lower relates to the lower bound and data_error_upper to the upper bound of the error bar interval.
+
+        :param nominal_value: nominal value of the uncertain quantity
+
+        :param error_upper: standard_deviation of symmetrical uncertainty, or upper error bound for asymmetrical one
+
+        :param error_lower: lower error bound for asymmetrical uncertainty
+
+        :param error_index: type of error bar description which is used for a given location
+
+        :param location: location from which this data was loaded
+        '''
+        self._nominal_value = nominal_value
+        assert error_upper is None or not isinstance(error_upper, str), 'error_upper must be a number'
+        self._error_upper = error_upper
+        assert error_lower is None or not isinstance(error_lower, str), 'error_lower must be a number'
+        self._error_lower = error_lower
+        assert error_index is None or isinstance(error_index, int), 'error_index must be a integer'
+        self._error_index = error_index
+        assert location is None or isinstance(location, str), 'location must be a string'
+        self._location = location
+
+    def __getstate__(self):
+        state = {}
+        for item in ['_nominal_value', '_error_upper', '_error_lower', '_error_index', '_location']:
+            state[item] = self.__dict__[item]
+        return state
+
+    def __setstate__(self, state):
+        for item in ['_nominal_value', '_error_upper', '_error_lower', '_error_index', '_location']:
+            self.__dict__[item] = state[item]
+        return self
+
+    @property
+    def location(self):
+        return self._location
+
+    @property
+    def nominal_value(self):
+        return self._nominal_value
+
+    @property
+    def error_upper(self):
+        if self._error_upper is not None:
+            return self._error_upper
+        else:
+            return self.nominal_value * 0.0
+
+    @property
+    def error_lower(self):
+        if self._error_lower is not None:
+            return self._error_lower
+        elif self._error_upper is not None:
+            return self._error_upper
+        else:
+            return self.nominal_value * 0.0
+
+    @property
+    def error_index(self):
+        return self._error_index
+
+    @property
+    def std_dev(self):
+        '''
+        Return standard deviation for symmetric uncertainty bounds
+        NOTE: This method will raise an error if uncertainty is not symmetrical
+        '''
+        if self._error_upper is None:
+            return self.nominal_value * 0.0
+        elif self._error_lower is None:
+            return self.error_upper
+        else:
+            if self.location is not None:
+                print(f'Uncertainty at `{self.location}` is not symmetrical')
+                raise ValueError(f'Uncertainty at `{self.location}` is not symmetrical')
+            else:
+                print(f'Uncertainty is not symmetrical')
+                raise ValueError(f'Uncertainty is not symmetrical')
+
+    @property
+    def bounds(self):
+        '''
+        Return upper/lower bounds of standard deviation
+        '''
+        lower = self.nominal_value - self.error_lower
+        upper = self.nominal_value + self.error_upper
+        return (lower, upper)
+
+    def __array__(self, dtype=None):
+        if self.location is not None:
+            print(f'Lost uncertainty information at `{self.location}`')
+            warnings.warn(f'Lost uncertainty information at `{self.location}`')
+        else:
+            print(f'Lost uncertainty information')
+            warnings.warn(f'Lost uncertainty information')
+        return numpy.asarray(self.nominal_value)
+
+    def __eq__(self, other):
+        if isinstance(other, ouarray):
+            tmp = numpy.ones_like(self.nominal_value).astype(bool)
+            for item in ['_nominal_value', '_error_upper', '_error_lower', '_error_index']:
+                if self.__dict__[item].__class__ is not other.__dict__[item].__class__:
+                    return numpy.zeros_like(self.nominal_value).astype(bool)
+                elif any(numpy.atleast_1d(self.__dict__[item]).flat != numpy.atleast_1d(other.__dict__[item]).flat):
+                    tmp[self.__dict__[item] != other.__dict__[item]] = False
+            return tmp
+        else:
+            return numpy.zeros_like(self.nominal_value).astype(bool)
+
+    def to_string(self, func=str):
+        space = ' ' * (len(self.__class__.__name__) + 1)
+        txt = [f"{self.__class__.__name__}(nominal_value={func(self._nominal_value)}"]
+        if self._error_upper is not None:
+            txt.append(f"{space}error_upper={func(self._error_upper)}")
+        if self._error_lower is not None:
+            txt.append(f"{space}error_lower={func(self._error_lower)}")
+        if self._error_index is not None:
+            txt.append(f"{space}error_index={func(self._error_index)}")
+        return ',\n'.join(txt) + ')'
+
+    def __repr__(self):
+        return self.to_string(repr)
+
+    def __str__(self):
+        return self.to_string(str)
+
+    def to_uarray(self):
+        '''
+        Convert ouarray to uncertainties uarray
+        '''
+        from uncertainties.unumpy import uarray
+
+        return uarray(self.nominal_value, self.std_dev)
+
+    def __getattr__(self, attr):
+        return getattr(self.nominal_value, attr)
+
+    def copy(self):
+        return copy.deepcopy(self)
+
+    def __len__(self):
+        return len(self.nominal_value)
+
+    def __format__(self, format_spec):
+        return self.nominal_value.__format__(format_spec) + '\u00B1' + self.std_dev.__format__(format_spec)
+
+    def __getitem__(self, key):
+        return ouarray(self.nominal_value[key], self.std_dev[key])
+
+# --------------------------------------------
 # ODS utilities
 # --------------------------------------------
 default_keys_to_ignore = [
@@ -243,6 +450,17 @@ def is_uncertain(var):
             return any(_uncertain_check(x) for x in tmp.flat)
     else:
         return _uncertain_check(var)
+
+
+def is_omas_uncertain(var):
+    """
+    :param var: Variable or array to test
+
+    :return: True if input variable is a omas uncertain object
+    """
+    if isinstance(var, ouarray):
+        return True
+    return False
 
 
 def is_numeric(value):

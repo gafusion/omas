@@ -26,7 +26,8 @@ __all__ = [
     'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'latexit'
+    'latexit',
+    'ouarray', 'nominal_values', 'std_devs'
 ]
 # fmt: on
 
@@ -858,6 +859,9 @@ class ODS(MutableMapping):
             raise TypeError('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
+        error_upper = None
+        error_lower = None
+        error_index = None
         if not isinstance(value, ODS):
 
             # convert simple dict of code.parameters to CodeParameters instances
@@ -891,6 +895,16 @@ class ODS(MutableMapping):
 
                 # get node information
                 info = omas_info_node(ulocation, imas_version=self.imas_version)
+
+                # handle uncertainty
+                if is_omas_uncertain(value):
+                    error_upper = value._error_upper
+                    error_lower = value._error_lower
+                    error_index = value._error_index
+                    value = value.nominal_value
+                elif is_uncertain(value):
+                    error_upper = std_devs(value)
+                    value = nominal_values(value)
 
                 # handle units (Python pint package)
                 if str(value.__class__).startswith("<class 'pint."):
@@ -1003,6 +1017,14 @@ class ODS(MutableMapping):
             # because sub-ODSs could be shared among ODSs that have different settings of consistency_check
             if False and value.consistency_check != self.consistency_check:
                 value.consistency_check = self.consistency_check
+
+        # if the input data was uncertain, then save the data in error_upper
+        if error_upper is not None:
+            self[key[0] + '_error_upper'] = error_upper
+        if error_lower is not None:
+            self[key[0] + '_error_lower'] = error_lower
+        if error_index is not None:
+            self[key[0] + '_error_index'] = error_index
 
     def getraw(self, key):
         """
@@ -1163,7 +1185,10 @@ class ODS(MutableMapping):
                 raise ValueError('`%s` has no data' % self.location)
 
             # if they are filled but do not have the same number of dimensions
-            shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
+            if not isinstance(data0[0], ouarray):
+                shapes = [numpy.asarray(item).shape for item in data0 if numpy.asarray(item).size]
+            else:
+                shapes = [numpy.asarray(item.nominal_value).shape for item in data0 if numpy.asarray(item.nominal_value).size]
             if not len(shapes):
                 return numpy.asarray(data0)
             if not all(len(shape) == len(shapes[0]) for shape in shapes[1:]):
@@ -1180,7 +1205,10 @@ class ODS(MutableMapping):
             max_shape = tuple([len(data0)] + max_shape)
 
             # find types
-            dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
+            if not isinstance(data0[0], ouarray):
+                dtypes = [numpy.asarray(item).dtype for item in data0 if numpy.asarray(item).size]
+            else:
+                dtypes = [numpy.asarray(item.nominal_value).dtype for item in data0 if numpy.asarray(item.nominal_value).size]
             if not len(dtypes):
                 return numpy.asarray(data0)
             if not all(dtype.char == dtypes[0].char for dtype in dtypes[1:]):
@@ -1192,7 +1220,9 @@ class ODS(MutableMapping):
                 return numpy.asarray(data0)
 
             # define an empty array of shape max_shape
-            if dtype.char in 'iIl':
+            if isinstance(data0[0], ouarray):
+                data = ouarray(numpy.full(max_shape, numpy.nan), numpy.full(max_shape, numpy.nan))
+            elif dtype.char in 'iIl':
                 data = numpy.full(max_shape, 0)
             elif dtype.char in 'df':
                 data = numpy.full(max_shape, numpy.nan)
@@ -1201,17 +1231,36 @@ class ODS(MutableMapping):
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 
-            # place the data withing the the empty array
-            if len(max_shape) == 1:
-                for k, item in enumerate(data0):
-                    data[k] = item
+            # place the data in the empty array
+
+            if not isinstance(data0[0], ouarray):
+                if len(max_shape) == 1:
+                    for k, item in enumerate(data0):
+                        data[k] = item
+                else:
+                    for k, item in enumerate(data0):
+                        if not sum(numpy.squeeze(item).shape):
+                            if len(numpy.atleast_1d(numpy.squeeze(item))):
+                                data[k, 0] = numpy.atleast_1d(numpy.squeeze(item))[0]
+                        else:
+                            data[k, : len(item)] = item
+
             else:
-                for k, item in enumerate(data0):
-                    if not sum(numpy.squeeze(item).shape):
-                        if len(numpy.atleast_1d(numpy.squeeze(item))):
-                            data[k, 0] = numpy.atleast_1d(numpy.squeeze(item))[0]
-                    else:
-                        data[k, : len(item)] = item
+                if len(max_shape) == 1:
+                    for k, uitem in enumerate(data0):
+                        data.nominal_value[k] = uitem.nominal_value
+                        data.std_dev[k] = uitem.std_dev
+                else:
+                    for k, uitem in enumerate(data0):
+                        nitem=uitem.nominal_value
+                        sitem=uitem.std_dev
+                        if not sum(numpy.squeeze(nitem).shape):
+                            if len(numpy.atleast_1d(numpy.squeeze(nitem))):
+                                data.nominal_value[k, 0] = numpy.atleast_1d(numpy.squeeze(nitem))[0]
+                                data.std_dev[k, 0] = numpy.atleast_1d(numpy.squeeze(sitem))[0]
+                        else:
+                            data.nominal_value[k, : len(nitem)] = nitem
+                            data.std_dev[k, : len(sitem)] = sitem
 
             return data
 
@@ -1350,6 +1399,19 @@ class ODS(MutableMapping):
 
                         ureg[0] = pint.UnitRegistry()
                     value = value * getattr(ureg[0], info['units'])
+
+            # return omas uncertain array if errors are filled
+            if isinstance(key[0],str) and key[0] + '_error_upper' in self:
+                error_upper = self.__getitem__(key[0] + '_error_upper', cocos_and_coords)
+                if key[0] + '_error_lower' in self:
+                    error_lower = self.__getitem__(key[0] + '_error_lower', cocos_and_coords)
+                else:
+                    error_lower = None
+                if key[0] + '_error_index' in self:
+                    error_index = self.__getitem__(key[0] + '_error_index', cocos_and_coords)
+                else:
+                    error_index = None
+                value = ouarray(value, error_upper, error_lower, error_index, ulocation)
 
             return value
 
