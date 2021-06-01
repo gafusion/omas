@@ -143,8 +143,11 @@ class TestOmasUtils(UnittestCaseOmas):
         import time
         import copy
         import pickle
-        from omas import ouarray, nominal_values, std_devs
-        from uncertainties.unumpy import uarray
+        from omas import ODS, omas_environment
+        from omas.omas_utils import is_uncertain
+        from uncertainties import ufloat, unumpy
+        from uncertainties.unumpy import uarray, nominal_values, std_devs
+        from pprint import pprint
 
         n = 1001
         v = numpy.linspace(0, 1, n)
@@ -156,54 +159,8 @@ class TestOmasUtils(UnittestCaseOmas):
         tmp = uarray(v, u)
         tu = time.time() - t0
 
-        # use omas uncertain array
-        t0 = time.time()
-        tmp = ouarray(v, u, location='test')
-        to = time.time() - t0
-        print(f'ouarray is {tu / to:3.3f} times faster than uarray for a {n} samples array')
-
-        # use monkey patched version of std_devs
         assert all(nominal_values(tmp) == v)
-        assert all(tmp.nominal_value == v)
-
         assert all(std_devs(tmp) == u)
-        assert all(tmp.std_dev == u)
-
-        assert all(nominal_values(tmp) == v)
-        assert all(tmp.bounds[0] == v - u)
-        assert all(tmp.bounds[1] == v + u)
-
-        tmp = ouarray(v, u, l, location='test')
-        assert all(nominal_values(tmp) == v)
-        assert all(tmp.bounds[0] == v - l)
-        assert all(tmp.bounds[1] == v + u)
-
-        try:
-            assert all(tmp.std_dev)
-            raise AssertionError('This should raise an error')
-        except ValueError:
-            pass
-
-        tmp1 = pickle.loads(pickle.dumps(tmp))
-        assert all(tmp1 == tmp)
-
-        tmp1 = copy.deepcopy(tmp)
-        assert all(tmp1 == tmp)
-
-    def test_ouarray_use(self):
-        import numpy
-        from omas import ODS, ouarray, nominal_values, std_devs
-        from uncertainties import unumpy
-        from uncertainties import ufloat
-        from pprint import pprint
-
-        n = 1001
-        v = numpy.linspace(0, 1, n)
-        u = v * 2
-        l = v * 3
-
-        # use omas uncertain array
-        tmp = ouarray(v, u, location='test')
 
         ods = ODS()
         ods['equilibrium.time'] = [0.0]
@@ -211,25 +168,26 @@ class TestOmasUtils(UnittestCaseOmas):
         # float separate
         ods['equilibrium.time_slice[0].global_quantities.ip'] = 3
         ods['equilibrium.time_slice[0].global_quantities.ip_error_upper'] = 0.1
-        # float ouarray
-        ods['equilibrium.time_slice[1].global_quantities.ip'] = ouarray(3, 0.1)
-        # float ufloat
-        ods['equilibrium.time_slice[2].global_quantities.ip'] = ufloat(3, 0.1)
+        # ufloat
+        ods['equilibrium.time_slice[1].global_quantities.ip'] = ufloat(3, 0.1)
+        assert 'equilibrium.time_slice[1].global_quantities.ip_error_upper' in ods
+        assert (
+            ods['equilibrium.time_slice[1].global_quantities.ip_error_upper']
+            == ods['equilibrium.time_slice[0].global_quantities.ip_error_upper']
+        )
 
         # array separate
         ods['thomson_scattering.channel[0].t_e.data'] = numpy.array([1.0, 2.0, 3.0])
         ods['thomson_scattering.channel[0].t_e.data_error_upper'] = numpy.array([0.1, 0.2, 0.3])
 
-        # array ouarray
-        ods['thomson_scattering.channel[1].t_e.data'] = ouarray([1, 2, 3], [0.1, 0.2, 0.3])
+        # uarray
+        ods['thomson_scattering.channel[1].t_e.data'] = unumpy.uarray([1, 2, 3], [0.1, 0.2, 0.3])
+        assert 'thomson_scattering.channel[1].t_e.data_error_upper' in ods
+        assert all(ods['thomson_scattering.channel[0].t_e.data_error_upper'] == ods['thomson_scattering.channel[01.t_e.data_error_upper'])
 
-        # array separate
-        ods['thomson_scattering.channel[2].t_e.data'] = unumpy.uarray([1, 2, 3], [0.1, 0.2, 0.3])
-
-        pprint(ods.pretty_paths())
-
-        print(ods['thomson_scattering.channel[:].t_e.data'])
-        print(ods['equilibrium.time_slice[:].global_quantities.ip'])
+        with omas_environment(ods, uncertainio=True):
+            assert is_uncertain(ods['thomson_scattering.channel[:].t_e.data'])
+            assert is_uncertain(ods['equilibrium.time_slice[:].global_quantities.ip'])
 
     # End of TestOmasUtils class
 
