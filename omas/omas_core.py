@@ -1379,7 +1379,7 @@ class ODS(MutableMapping):
         """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
-        for kid in self.keys(dynamic=dynamic):
+        for kid in sorted(self.keys(dynamic=dynamic)):
             if isinstance(self.getraw(kid), ODS):
                 if include_structures:
                     paths.append(path + [kid])
