@@ -891,9 +891,6 @@ class ODS(MutableMapping):
             raise TypeError('Cannot convert from list to dict once ODS has data')
 
         # if the value is not an ODS strucutre
-        error_upper = None
-        error_lower = None
-        error_index = None
         if not isinstance(value, ODS):
 
             # convert simple dict of code.parameters to CodeParameters instances
@@ -927,11 +924,6 @@ class ODS(MutableMapping):
 
                 # get node information
                 info = omas_info_node(ulocation, imas_version=self.imas_version)
-
-                # handle uncertainty
-                if is_uncertain(value):
-                    error_upper = std_devs(value)
-                    value = nominal_values(value)
 
                 # handle units (Python pint package)
                 if str(value.__class__).startswith("<class 'pint."):
@@ -1045,14 +1037,6 @@ class ODS(MutableMapping):
             if False and value.consistency_check != self.consistency_check:
                 value.consistency_check = self.consistency_check
 
-        # if the input data was uncertain, then save the data in error_upper
-        if error_upper is not None:
-            self[key[0] + '_error_upper'] = error_upper
-        if error_lower is not None:
-            self[key[0] + '_error_lower'] = error_lower
-        if error_index is not None:
-            self[key[0] + '_error_index'] = error_index
-
     def getraw(self, key):
         """
         Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__(key)
@@ -1117,7 +1101,18 @@ class ODS(MutableMapping):
         if isinstance(key, str) or isinstance(self, ODC):
             if self.omas_data is None:
                 self.omas_data = {}
-            self.omas_data[key] = value
+            # handle uncertainty
+            if is_uncertain(value):
+                # scalar
+                if isinstance(value, uncertainties.core.AffineScalarFunc):
+                    self.omas_data[key] = numpy.asarray(nominal_values(value)).item()
+                    self.omas_data[key + '_error_upper'] = numpy.asarray(std_devs(value)).item()
+                # array
+                else:
+                    self.omas_data[key] = nominal_values(value)
+                    self.omas_data[key + '_error_upper'] = std_devs(value)
+            else:
+                self.omas_data[key] = value
 
         # arrays of structures
         else:
@@ -1405,7 +1400,10 @@ class ODS(MutableMapping):
                 if key[0] + '_error_lower' in self:
                     raise TypeError(f"Error for {self.location+'.'+key[0]} is not symmetrical")
                 error_upper = self.__getitem__(key[0] + '_error_upper', cocos_and_coords)
-                value = uarray(value, error_upper)
+                if isinstance(value, float):
+                    value = ufloat(value, error_upper)
+                else:
+                    value = uarray(value, error_upper)
 
             return value
 
