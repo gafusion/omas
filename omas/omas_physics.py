@@ -2134,7 +2134,15 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 @add_to__ALL__
 @contextmanager
 def omas_environment(
-    ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw
+    ods,
+    cocosio=None,
+    coordsio=None,
+    unitsio=None,
+    uncertainio=None,
+    input_data_process_functions=None,
+    xmlcodeparams=False,
+    dynamic_path_creation=None,
+    **kw,
 ):
     """
     Provides environment for data input/output to/from OMAS
@@ -2146,6 +2154,8 @@ def omas_environment(
     :param coordsio: dictionary/ODS with coordinates for data interpolation
 
     :param unitsio: True/False whether data read from OMAS should have units
+
+    :param uncertainio: True/False whether data read from OMAS should have uncertainties
 
     :param input_data_process_functions: list of functions that are used to process data that is passed to the ODS
 
@@ -2178,6 +2188,7 @@ def omas_environment(
     bkp_cocosio = ods.cocosio
     bkp_coordsio = ods.coordsio
     bkp_unitsio = ods.unitsio
+    bkp_uncertainio = ods.uncertainio
     bkp_args = {}
     for item in kw:
         bkp_args[item] = getattr(ods, item)
@@ -2191,6 +2202,8 @@ def omas_environment(
         ods.coordsio = coordsio
     if unitsio is not None:
         ods.unitsio = unitsio
+    if uncertainio is not None:
+        ods.uncertainio = uncertainio
     if dynamic_path_creation is not None:
         omas_rcparams['dynamic_path_creation'] = dynamic_path_creation
 
@@ -2221,6 +2234,7 @@ def omas_environment(
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio
+        ods.uncertainio = bkp_uncertainio
         for item in kw:
             try:
                 setattr(ods, item, bkp_args[item])
