@@ -99,7 +99,9 @@ def pf_active_coil_current_data(ods, pulse):
         if f'pf_active.coil.{channel}.current.data' in ods:
             printd(f'Assigning uncertainty to pf_active.coil.{channel}', topic='machine')
             data = ods[f'pf_active.coil.{channel}.current.data']
-            error = data * icoil_signals[channel + 1]['rel_error'] + icoil_signals[channel + 1]['abs_error']
+            rel_error = data * icoil_signals[channel + 1]['rel_error']
+            abs_error = icoil_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
@@ -176,7 +178,9 @@ def magnetics_floops_data(ods, pulse):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             printd(f'Assigning uncertainty to magnetics.flux_loop.{channel}', topic='machine')
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
-            error = data * tfl_signals[channel + 1]['rel_error'] + tfl_signals[channel + 1]['abs_error']
+            rel_error = data * tfl_signals[channel + 1]['rel_error']
+            abs_error = tfl_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
 
@@ -219,7 +223,9 @@ def magnetics_probes_data(ods, pulse):
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
             printd(f'Assigning uncertainty to magnetics.b_field_pol_probe.{channel}', topic='machine')
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
-            error = data * bmc_signals[channel + 1]['rel_error'] + bmc_signals[channel + 1]['abs_error']
+            rel_error = data * bmc_signals[channel + 1]['rel_error']
+            abs_error = bmc_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
@@ -293,7 +299,9 @@ def ip_bt_dflux_data(ods, pulse):
         if mappings[item] + '.data' in ods:
             printd(f'Assigning uncertainty to {mappings[item]}', topic='machine')
             data = ods[mappings[item] + '.data']
-            error = data * signals[item][0]['rel_error'] + signals[item][0]['abs_error'] * signals[item][0]['scale']
+            rel_error = data * signals[item][0]['rel_error']
+            abs_error = signals[item][0]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
                 signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )
