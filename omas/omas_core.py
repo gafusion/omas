@@ -26,7 +26,7 @@ __all__ = [
     'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'latexit'
+    'latexit', 'OmasDynamicException'
 ]
 # fmt: on
 
@@ -180,6 +180,14 @@ omas_ods_attrs = [
     '_dynamic',
     '_parent',
 ]
+
+
+class OmasDynamicException(RuntimeError):
+    """
+    Exception raised when dynamic data fetching fails
+    """
+
+    pass
 
 
 class ODS(MutableMapping):
@@ -1195,6 +1203,8 @@ class ODS(MutableMapping):
         dynamically_created = False
 
         # data slicing
+        # NOTE: OMAS will try to return numpy arrays if the sliced data can be stacked in a uniform array
+        # otherwise a list will be returned (that's where we do `return data0` below)
         if isinstance(key[0], slice):
             data0 = []
             for k in self.keys(dynamic=1)[key[0]]:
@@ -1248,6 +1258,8 @@ class ODS(MutableMapping):
             # place the data in the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
+                    if isinstance(item, list):  # item is [] if a subtree was missing in one of the slices
+                        return data0
                     data[k] = numpy.asarray(item).item()
             else:
                 for k, item in enumerate(data0):
@@ -1268,7 +1280,7 @@ class ODS(MutableMapping):
                     try:
                         value = self.dynamic.__getitem__(location)
                     except Exception as _excp:
-                        raise _excp.__class__(f'Error dynamical fetching of `{location}` for {self.dynamic.kw}')
+                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
