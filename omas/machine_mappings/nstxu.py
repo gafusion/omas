@@ -136,6 +136,10 @@ def magnetics_hardware(ods):
     for k in ods[f'magnetics.flux_loop']:
         ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
 
+    # loop voltage measurement (this has to go here because this is the function where we determine the number of loops)
+    ods[f'magnetics.flux_loop.{k+1}.identifier'] = signals['all']['VFLOHM']['mds_name'].strip('\\')
+    ods[f'magnetics.flux_loop.{k+1}.type.index'] = 1  # toroidal : Toroidal flux loop
+
     for k in ods[f'magnetics.b_field_pol_probe']:
         ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = signals['mappings']['bmc'][k + 1]['mds_name'].strip('\\')
 
@@ -170,11 +174,24 @@ def magnetics_floops_data(ods, pulse):
             data_norm=1.0 / 2 / np.pi,
         )
 
+    # the last channel measures the loop voltage, not the toroidal flux
+    # we keep the flux data around (though mark it as invalid) so that
+    # the data slicing does not have issues with missing data for one
+    # of the channels
+    channel = -1
+    for what in ['time', 'data', 'validity']:
+        ods[f'magnetics.flux_loop.{channel}.voltage.{what}'] = ods[f'magnetics.flux_loop.{channel}.flux.{what}']
+    ods[f'magnetics.flux_loop.{channel}.voltage.data'] *= 2 * np.pi
+    ods[f'magnetics.flux_loop.{channel}.flux.data'] *= 0.0
+    ods[f'magnetics.flux_loop.{channel}.flux.validity'] = -1
+
     # handle uncertainties
     signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
     signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+
+    # flux loops
     tfl_signals = signals['mappings']['tfl']
-    for channel in ods1['magnetics.flux_loop']:
+    for channel in range(len(ods1['magnetics.flux_loop']) - 1):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             printd(f'Assigning uncertainty to magnetics.flux_loop.{channel}', topic='machine')
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
@@ -183,6 +200,17 @@ def magnetics_floops_data(ods, pulse):
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
+
+    # loop voltage
+    vl_signal = signals['all']['VFLOHM']
+    channel = len(ods[f'magnetics.flux_loop']) - 1
+    if f'magnetics.flux_loop.{channel}.voltage.data' in ods:
+        data = ods[f'magnetics.flux_loop.{channel}.voltage.data']
+        rel_error = data * vl_signal['rel_error']
+        abs_error = vl_signal['abs_error']
+        error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+        error[data < vl_signal['sig_thresh']] = vl_signal['sig_thresh']
+        ods[f'magnetics.flux_loop.{channel}.voltage.data_error_upper'] = error
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)

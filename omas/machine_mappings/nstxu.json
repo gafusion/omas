@@ -148,6 +148,18 @@
  "magnetics.flux_loop.:.type.index": {
   "PYTHON": "magnetics_hardware(ods)"
  },
+ "magnetics.flux_loop.:.voltage.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.voltage.data_error_upper": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.voltage.time": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.voltage.validity": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
  "magnetics.ip.:": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
