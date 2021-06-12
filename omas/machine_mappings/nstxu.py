@@ -179,7 +179,7 @@ def magnetics_floops_data(ods, pulse):
     # of the channels
     channel = -1
     for what in ['time', 'data', 'validity']:
-        ods[f'magnetics.flux_loop.{channel}.voltage.{what}'] = ods[f'magnetics.flux_loop.{channel}.flux.{what}']
+        ods[f'magnetics.flux_loop.{channel}.voltage.{what}'] = copy.deepcopy(ods[f'magnetics.flux_loop.{channel}.flux.{what}'])
     ods[f'magnetics.flux_loop.{channel}.voltage.data'] *= 2 * np.pi
     ods[f'magnetics.flux_loop.{channel}.flux.data'] *= 0.0
     ods[f'magnetics.flux_loop.{channel}.flux.validity'] = -1
