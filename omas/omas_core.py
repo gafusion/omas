@@ -186,7 +186,9 @@ class OmasDynamicException(RuntimeError):
     """
     Exception raised when dynamic data fetching fails
     """
+
     pass
+
 
 class ODS(MutableMapping):
     """

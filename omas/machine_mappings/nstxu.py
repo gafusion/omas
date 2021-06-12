@@ -97,7 +97,6 @@ def pf_active_coil_current_data(ods, pulse):
     icoil_signals = signals['mappings']['icoil']
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
-            printd(f'Assigning uncertainty to pf_active.coil.{channel}', topic='machine')
             data = ods[f'pf_active.coil.{channel}.current.data']
             rel_error = data * icoil_signals[channel + 1]['rel_error']
             abs_error = icoil_signals[channel + 1]['abs_error']
@@ -193,7 +192,6 @@ def magnetics_floops_data(ods, pulse):
     tfl_signals = signals['mappings']['tfl']
     for channel in range(len(ods1['magnetics.flux_loop']) - 1):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
-            printd(f'Assigning uncertainty to magnetics.flux_loop.{channel}', topic='machine')
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
             abs_error = tfl_signals[channel + 1]['abs_error']
@@ -249,7 +247,6 @@ def magnetics_probes_data(ods, pulse):
     bmc_signals = signals['mappings']['bmc']
     for channel in ods1['magnetics.b_field_pol_probe']:
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
-            printd(f'Assigning uncertainty to magnetics.b_field_pol_probe.{channel}', topic='machine')
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
@@ -325,7 +322,6 @@ def ip_bt_dflux_data(ods, pulse):
     # handle uncertainties
     for item in ['PR', 'TF', 'DL']:
         if mappings[item] + '.data' in ods:
-            printd(f'Assigning uncertainty to {mappings[item]}', topic='machine')
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error']

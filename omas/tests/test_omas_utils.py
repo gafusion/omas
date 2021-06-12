@@ -189,7 +189,7 @@ class TestOmasUtils(UnittestCaseOmas):
             assert is_uncertain(ods['thomson_scattering.channel[:].t_e.data'])
             assert is_uncertain(ods['equilibrium.time_slice[:].global_quantities.ip'])
             assert isinstance(ods['equilibrium.time_slice[0].global_quantities.ip'], uncertainties.core.AffineScalarFunc)
-            assert isinstance(ods['equilibrium.time_slice[1].global_quantities.ip'],uncertainties.core.AffineScalarFunc)
+            assert isinstance(ods['equilibrium.time_slice[1].global_quantities.ip'], uncertainties.core.AffineScalarFunc)
 
     # End of TestOmasUtils class
 
