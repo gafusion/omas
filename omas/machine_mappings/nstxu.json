@@ -104,7 +104,7 @@
   "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.diamagnetic_flux.:": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "VALUE": 1
  },
  "magnetics.diamagnetic_flux.:.data": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
@@ -161,7 +161,7 @@
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.ip.:": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "VALUE": 1
  },
  "magnetics.ip.:.data": {
   "COCOSIO": 11,
