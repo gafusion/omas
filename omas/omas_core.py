@@ -1254,7 +1254,8 @@ class ODS(MutableMapping):
             # place the data in the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
-                    data[k] = numpy.asarray(item).item()
+                    if not isinstance(item, list): # item is [] if a subtree was missing, when we leave the data as empty
+                        data[k] = numpy.asarray(item).item()
             else:
                 for k, item in enumerate(data0):
                     if not sum(numpy.squeeze(item).shape):
