@@ -328,8 +328,11 @@ def equilibrium_form_constraints(
                 label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
-                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
-                if valid == 0:
+                valid = ods.get(
+                    f'magnetics.b_field_pol_probe.{channel}.field.validity',
+                    1 - int(f'magnetics.b_field_pol_probe.{channel}.field.data' in ods),
+                )
+                if valid == 0:  # 0 means that the data is good
                     data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
                     if f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper' in ods:
@@ -367,8 +370,8 @@ def equilibrium_form_constraints(
                 label = ods[f'magnetics.flux_loop.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
-                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
-                if valid == 0:
+                valid = ods.get(f'magnetics.flux_loop.{channel}.flux.validity', 1 - int(f'magnetics.flux_loop.{channel}.flux.data' in ods))
+                if valid == 0:  # 0 means that the data is good
                     data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     time = ods[f'magnetics.flux_loop.{channel}.flux.time']
                     if f'magnetics.flux_loop.{channel}.flux.data_error_upper' in ods:
