@@ -1203,6 +1203,8 @@ class ODS(MutableMapping):
         dynamically_created = False
 
         # data slicing
+        # NOTE: OMAS will try to return numpy arrays if the sliced data can be stacked in a uniform array
+        # otherwise a list will be returned (that's where we do `return data0` below)
         if isinstance(key[0], slice):
             data0 = []
             for k in self.keys(dynamic=1)[key[0]]:
@@ -1256,8 +1258,9 @@ class ODS(MutableMapping):
             # place the data in the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
-                    if not isinstance(item, list): # item is [] if a subtree was missing, when we leave the data as empty
-                        data[k] = numpy.asarray(item).item()
+                    if isinstance(item, list):  # item is [] if a subtree was missing in one of the slices
+                        return data0
+                    data[k] = numpy.asarray(item).item()
             else:
                 for k, item in enumerate(data0):
                     if not sum(numpy.squeeze(item).shape):
