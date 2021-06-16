@@ -306,6 +306,132 @@ def ip_bt_dflux_data(ods, pulse):
             ods[mappings[item] + '.data_error_upper'] = error
 
 
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
+    r"""
+    Load NSTX-U MSE data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+
+    :param MSE_revision: revision of the data to load
+
+    :param MSE_Er_correction: Use pitch angle corrected data using Er from between-shot EFIT and CHERS
+
+    NOTES:
+    MSE constraint in GA EFIT code follows the description given in Brad Rice RSI Vol. 70 No. 1 (1999)
+    Geometry follows right-handed coordinate system
+
+    Alpha is the angle between a beam directed in +phi and the phi vector at the MSE measurement location
+        Alpha is positive and less than 90 degrees for co-Ip beam, zero for a tangential beam, +90 deg for a radial beam
+    Omega is the angle between the MSE sightline vector and phi vector at the MSE measurement location
+        Omega is zero for tangential sightline that is pointed toward +phi (starting from the measurement, pointing to the MSE collection optics)
+        Omega is +90 degrees for a radial sightline, assuming MSE port is on the outboard midplane
+        Omega is 180 degrees for a tangential sightline that is pointed toward -phi
+
+    NOTE: In this coordinate system, the omega = om_nstx + 180 degrees where om_nstx is the omega recorded in the MDS+ Tree
+    **NOTE: The signs of the A1, A4, A5 and A7 coefficients are reversed compared to DIII-D to reflect the NSTX definition of omega
+
+    In NSTX, standard operation is BT<0 (CCW) and Ip>0 (CW) ... identical to standard DIII-D operation
+    Thus, Bpol>0 in theta dimension. Bz<0 at outboard midplane, Bz>0 at inboard midplane
+
+    Gamma is the pitch of the local electric field relative to the MSE sightline vector (sigma polization component)
+    GA EFIT assumes pitch angle (gamma) is the measured polarization angle
+    NSTX MSE data is saved on the MDS+ tree as the actual field pitch angle = (A2/A1)*tan(gamma)
+    The MSE data from MDS+ is multiplied by A1/A2 to convert the actual field pitch angle into the measured polization angle to be consistent with GA EFIT
+    A2 and A1 are positive in the NSTX geometry
+        For a co-Ip beam (+phi) with CCW BT, EZ = vb x Bphi is positive (+Z), Ephi = vb x Bz is negative (-phi) at outboard midplane
+        Thus, on NSTX, with MSE sightline vectors pointing in -phi, postive R, gamma should be positive outboard of the magnetic axis
+        This is consistent with the tan_alpha recorded in MDS+
+
+    The A coefficients modified from for the NSTX convention are A1>0, A2>0, A5>0 for alpha and omega between 0 and 90 degrees
+    At outboard midplane, BZ<0, Bphi<0, ER>0
+        tan(gamma_cor) ~ [ (A1 Bz) / (A2 Bphi) ] - [ (A5 ER) / (A2 Bphi) ]  (assuming for simplicity that Br ~ 0)
+    making
+        tan(gamma_cor) ~ (big positive) - (small negative)
+    Thus, tan(gamma_cor) is more positive than the reported tan(gamma)
+    """
+    beamline, beam_species, minVolt_keV, usebeam = ('1A', 'D', 40.0, True)
+    geometries = [('ALPHA', f'{np.pi/180.0}', True), ('OMEGA', f'{np.pi/180.0}', True), ('RADIUS', '1', True)]
+
+    if not MSE_Er_correction:
+        # Uncorrected pitch angle from a subset of good channels
+        measurements = ('PA', 'PA_ERR', f'{np.pi / 180.0}', 'tan_alpha', False)
+    else:
+        # Pitch angle corrected using Er uses between-shot EFIT and CHERS
+        measurements = ('PA_CORR_ER', 'PA_ERR', f'{np.pi / 180.0}', 'tan_alpha', False)
+
+    TDIs = {'time': f'\\MSE::TOP.MSE_CIF.{MSE_revision}.TIME'}
+
+    # find average beam voltage
+    voltage = mdsvalue('nstxu', pulse=pulse, treename='NBI', TDI=f'\\NBI::CALC_NB_{beamline}_VACCEL').raw()
+    keep = voltage >= minVolt_keV
+    avg_voltage = np.mean(voltage[keep]) * 1000.0  # Average beam voltage in Volts
+    if beam_species == 'D':
+        ud = 2.014
+    elif beam_species == 'H':
+        ud = 1.0
+    else:
+        raise ValueError('beam_species can only be D or H')
+    vbeam = np.sqrt(2.0 * 1.6022e-19 * avg_voltage / (ud * 1.6605e-27))
+    printd('Beam voltage:', avg_voltage / 1000.0, ' kV', topic='machine')
+    printd('Beam species mass:', ud, ' amu', topic='machine')
+
+    # Geometry for all channels
+    for name, norm, usegeo in geometries:
+        if usegeo:
+            TDIs['geom_' + name] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.GEOMETRY.{name} * {norm}'
+    TDIs['geom_R'] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.RADIUS'
+
+    # pitch angle measurements
+    MDSname, MDSERRname, norm, name, fit = measurements
+    TDIs[name] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.{MDSname} * {norm}'
+    TDIs[name + '_error'] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.{MDSERRname} * {norm}'
+
+    # data fetching
+    res = mdsvalue('nstxu', pulse=pulse, treename='MSE', TDI=TDIs).raw()
+
+    # Er correction coefficients (assumes MSE sight lines are in the same Z plane as the beam line (theta =0)
+    coef_list = {}
+    zero_array = res['geom_ALPHA'] * 0.0
+    one_array = zero_array + 1.0
+    coef_list['beam_velocity'] = vbeam + zero_array
+    coef_list['AA1GAM'] = np.cos(res['geom_ALPHA'] + res['geom_OMEGA'])  # See notes at top on sign convention
+    coef_list['AA2GAM'] = np.sin(res['geom_ALPHA'])
+    coef_list['AA3GAM'] = np.cos(res['geom_ALPHA'])
+    coef_list['AA4GAM'] = zero_array  # Assume theta=0
+    coef_list['AA5GAM'] = np.cos(res['geom_OMEGA']) / coef_list['beam_velocity']  # See notes at top on sign convention
+    coef_list['AA6GAM'] = -1.0 / coef_list['beam_velocity']  # Assume theta=0
+    coef_list['AA7GAM'] = zero_array  # Assume theta=0
+
+    # remap data per individual channel
+    MDSname, MDSERRname, norm, name, fit = measurements
+    if isinstance(res[name], Exception):
+        return
+    for ch in range(res[name].shape[1]):  # Loop through subset of good channels with pitch angle data
+        valid = res[name + '_error'][:, ch] > 0  # uncertainty greater than zero
+        valid &= res[name][:, ch] != 0  # no exact zero values
+        valid &= (res[name][:, ch] * np.min(np.abs(res['geom_RADIUS'] - res['geom_R'][ch]))) < 0.001  # radius of measurement as expected
+
+        if False:
+            norm = 1.0
+        else:
+            # Convert actual pitch angle to measured pitch angle
+            norm = coef_list['AA1GAM'][ch] / coef_list['AA2GAM'][ch]
+
+        ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = (valid != 1).astype(int)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
+
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+
+
 # =====================
 if __name__ == '__main__':
     test_machine_mapping_functions(__all__, globals(), locals())

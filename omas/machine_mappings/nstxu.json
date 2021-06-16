@@ -6,7 +6,9 @@
  ],
  "__mdsserver__": "skylark.pppl.gov:8000",
  "__options__": {
-  "EFIT_tree": "EFIT01"
+  "EFIT_tree": "EFIT01",
+  "MSE_Er_correction": true,
+  "MSE_revision": "ANALYSIS"
  },
  "equilibrium.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
@@ -160,6 +162,40 @@
  },
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "mse.channel.:": {
+  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:": {
+  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.r": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.z": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.name": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.data": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.data_error_upper": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity_timed": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
