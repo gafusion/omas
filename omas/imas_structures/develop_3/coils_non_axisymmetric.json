@@ -2,7 +2,7 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "5"
@@ -852,7 +852,7 @@
  },
  "coils_non_axisymmetric.coil[:].current": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in the coil",
+  "documentation": "Current in one turn of the coil (to be multiplied by the number of turns to calculate the magnetic field generated)",
   "full_path": "coils_non_axisymmetric/coil(i1)/current",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",

@@ -50,7 +50,7 @@
  },
  "core_instant_changes.change[:].profiles_1d": {
   "cocos_alias": "IDSPATH",
-  "cocos_replace": "core_instant_changes.change{i}.profile_1d{j}",
+  "cocos_replace": "core_instant_changes.change{i}.profiles_1d{j}",
   "coordinates": [
    "core_instant_changes.change[:].profiles_1d[:].time"
   ],
