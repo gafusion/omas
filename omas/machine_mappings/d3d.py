@@ -504,7 +504,6 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         query['TIME'] = f"dim_of({TECE + '01'})"
     ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
-    # Read the Thomson scattering hardware map to figure out which lens each chord looks through
     # Not in mds+
     points = [{},{}]
     points[0]['r'] = 2.5
