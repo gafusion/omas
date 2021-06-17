@@ -477,12 +477,12 @@ def electrpn_cyclotron_emission_hardware(ods, pulse=133221, fast=False):
 @machine_mapping_function(__all__)
 def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast=False):
     """
-    Loads DIII-D Thomson measurement data
+   Loads DIII-D Electron cyclotron emission data
 
     :param pulse: int
 
-    :param revision: string
-        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+    :param fast: bool
+            Use data sampled at high frequency
     """
     fast = 'F' if fast else ''
     setup = '\\ECE::TOP.SETUP.'
