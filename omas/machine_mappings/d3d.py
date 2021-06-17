@@ -468,8 +468,8 @@ def electrpn_cyclotron_emission_hardware(ods, pulse=133221, fast=False):
 
     :param pulse: int
 
-    :param revision: string
-        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+    :param fast: bool
+        Use data sampled at high frequency
     """
     unwrap(electron_cyclotron_emission_data)(ods, pulse, _measurements=False, fast=fast)
 
