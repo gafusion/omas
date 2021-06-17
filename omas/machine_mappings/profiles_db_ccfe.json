@@ -1,0 +1,135 @@
+{
+ "__cocos_rules__": {},
+ "__include__": [
+  "_common"
+ ],
+ "__mdsserver__": "tokamak-profiledb.ccfe.ac.uk:8000",
+ "__options__": {
+  "ngrid": -1
+ },
+ "core_profiles.profiles_1d.:": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.volume": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.j_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.q": {
+  "COCOSIO": 11,
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.rotation_frequency_tor_sonic": {
+  "COCOSIO": 11,
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_profiles.profiles_1d.:.t_i_average": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.identifier.index": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.identifier.name": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:.electrons.energy": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:.electrons.particles": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:.grid.rho_tor_norm": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:.grid.volume": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "core_sources.source.:.profiles_1d.:.total_ion_energy": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "dataset_description.data_entry.machine": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "dataset_description.data_entry.pulse": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "dataset_description.ids_properties.comment": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.boundary.elongation.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.boundary.geometric_axis_r.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.boundary.minor_radius.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.boundary.triangularity_lower.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.boundary.triangularity_upper.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.b0.value": {
+  "COCOSIO": 11,
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.denergy_thermal_dt.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.energy_thermal.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.h_mode.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.ip.value": {
+  "COCOSIO": 11,
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.power_loss.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.power_ohm.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.global_quantities.tau_energy.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.heating_current_drive.power_launched_ec.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.heating_current_drive.power_launched_ic.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.heating_current_drive.power_launched_nbi.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.line_average.n_e.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.time": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ },
+ "summary.volume_average.zeff.value": {
+  "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
+ }
+}

@@ -476,7 +476,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "nbi/unit(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -607,7 +608,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "nbi/unit(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -738,7 +740,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "nbi/unit(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1273,7 +1276,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].direction": {
-  "cocos_label_transformation": "phi_like",
+  "cocos_label_transformation": "tor_angle_like",
   "cocos_leaf_name_aos_indices": "nbi.unit{i}.beamlets_group{j}.direction",
   "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "INT_0D",
@@ -2303,7 +2306,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "nbi/unit(i1)/source/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -2434,7 +2438,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "nbi/unit(i1)/source/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -2565,7 +2570,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "nbi/unit(i1)/source/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x3_unit_vector.x": {
   "data_type": "FLT_0D",

@@ -4,9 +4,11 @@
   "_common",
   "_efit"
  ],
- "__mdsserver__": "skylark.pppl.gov:8500",
+ "__mdsserver__": "skylark.pppl.gov:8000",
  "__options__": {
-  "EFIT_tree": "EFIT01"
+  "EFIT_tree": "EFIT01",
+  "MSE_Er_correction": true,
+  "MSE_revision": "ANALYSIS"
  },
  "equilibrium.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
@@ -65,6 +67,9 @@
   "COCOSIO": 11,
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
  "magnetics.b_field_pol_probe.:.field.time": {
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
@@ -104,17 +109,21 @@
   "VALUE": 1
  },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[\\F_DIAMAG2]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.diamagnetic_flux.:.time": {
-  "TDI": "[dim_of(\\F_DIAMAG2,0)]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:": {
   "PYTHON": "magnetics_hardware(ods)"
  },
  "magnetics.flux_loop.:.flux.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper": {
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.time": {
@@ -145,19 +154,57 @@
   "VALUE": 1
  },
  "magnetics.ip.:.data": {
-  "COCOSIO": 1,
-  "TDI": "[\\IP1]",
-  "treename": "NSTX"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.ip.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(\\IP1,0)]",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "mse.channel.:": {
+  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:": {
+  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.r": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.z": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.name": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.data": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.data_error_upper": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity_timed": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.data_error_upper": {
   "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.current.time": {
@@ -167,6 +214,12 @@
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.geometry_type": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.r": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.z": {
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.geometry.rectangle.height": {
@@ -184,6 +237,9 @@
  "pf_active.coil.:.element.:.identifier": {
   "PYTHON": "pf_active_hardware(ods)"
  },
+ "pf_active.coil.:.element.:.name": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
  "pf_active.coil.:.element.:.turns_with_sign": {
   "PYTHON": "pf_active_hardware(ods)"
  },
@@ -194,13 +250,14 @@
   "PYTHON": "pf_active_hardware(ods)"
  },
  "tf.b_field_tor_vacuum_r.data": {
-  "COCOSIO": 1,
-  "TDI": "\\ITF*7.2385e-06",
-  "treename": "NSTX"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "TDI": "dim_of(\\ITF,0)",
-  "treename": "NSTX"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.r0": {
   "VALUE": 0.941

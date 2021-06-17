@@ -356,10 +356,10 @@ def magnetics(ods):
     :return: ODS instance with fake magnetics hardware information added
     """
 
-    from .machine_mappings.d3d import magnetics_hardware
+    from omas import load_omas_json
 
-    magnetics_hardware(ods)
-    ods['magnetics.time'] = [0.0]
+    pr = load_omas_json(omas_dir + 'samples/sample_magnetics_ods.json', consistency_check=False)['magnetics']
+    ods['magnetics'].update(pr)
     return ods
 
 

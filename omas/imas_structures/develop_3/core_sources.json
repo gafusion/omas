@@ -469,7 +469,7 @@
  },
  "core_sources.source[:].profiles_1d": {
   "cocos_alias": "IDSPATH",
-  "cocos_replace": "core_sources.source{i}.profile_1d{j}",
+  "cocos_replace": "core_sources.source{i}.profiles_1d{j}",
   "coordinates": [
    "core_sources.source[:].profiles_1d[:].time"
   ],

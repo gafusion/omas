@@ -160,24 +160,60 @@
  "interferometer.channel.:.line_of_sight.third_point.z": {
   "PYTHON": "interferometer_hardware(ods, {pulse})"
  },
+ "interferometer.channel.:.n_e_line.data": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.time": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.validity_timed": {
+  "PYTHON": "interferometer_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.name": {
+  "PYTHON": "interferometer_hardware(ods, {pulse})"
+ },
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
+ "langmuir_probes.embedded.:.b_field_angle.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.heat_flux_parallel.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
  "langmuir_probes.embedded.:.identifier": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.ion_saturation_current.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.n_e.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.name": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.r": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "langmuir_probes.embedded.:.position.z": {
-  "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.surface_area_effective.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.t_e.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.time": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
+ },
+ "langmuir_probes.embedded.:.v_floating.data": {
+  "PYTHON": "langmuir_probes_data(ods, {pulse})"
  },
  "magnetics.b_field_pol_probe.:": {
   "PYTHON": "magnetics_hardware(ods)"
@@ -305,6 +341,9 @@
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "pf_active_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.name": {
   "PYTHON": "pf_active_hardware(ods)"
  },
  "pf_active.coil.:.element.:.turns_with_sign": {

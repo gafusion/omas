@@ -1,11 +1,28 @@
 import numpy as np
 from omas import *
 
-_MDS_gEQDSK_COCOS_identify_cache = {}
+__support_files_cache__ = {}
+
+
+def get_support_file(object_type, filename):
+    """
+    Cached loading of support files
+
+    :param object_type: Typically a OMFIT class
+
+    :param filename: filename of the support file to load
+    """
+    if filename not in __support_files_cache__:
+        __support_files_cache__[filename] = object_type(filename)
+        __support_files_cache__[filename].load()
+    return __support_files_cache__[filename]
+
+
+__MDS_gEQDSK_COCOS_identify_cache__ = {}
 
 
 def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
-    '''
+    """
     Python function that queries MDS+ EFIT tree to figure
     out COCOS convention used for a particular reconstruction
 
@@ -16,9 +33,9 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
     :param EFIT_tree: MDS+ EFIT tree name
 
     :return: integer cocos convention
-    '''
-    if (machine, pulse, EFIT_tree) in _MDS_gEQDSK_COCOS_identify_cache:
-        return _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)]
+    """
+    if (machine, pulse, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
+        return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
     res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
     bt = res['bt']
@@ -27,12 +44,12 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
     sign_Bt = int(np.sign(bt))
     sign_Ip = int(np.sign(ip))
     cocosio = g_cocos.get((sign_Bt, sign_Ip), None)
-    _MDS_gEQDSK_COCOS_identify_cache[(machine, pulse, EFIT_tree)] = cocosio
+    __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)] = cocosio
     return cocosio
 
 
 def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
-    '''
+    """
     evaluate EFIT psi
 
     :param ODS: input ODS
@@ -44,7 +61,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
     :param EFIT_tree: MDS+ EFIT tree name
 
     :return: integer cocos convention
-    '''
+    """
     cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree)
     with omas_environment(ods, cocosio=cocosio):
         TDIs = {
@@ -120,7 +137,7 @@ def pf_coils_to_ods(ods, coil_data):
 
 
 def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, mds_server, mds_tree, tdi_expression, time_norm, data_norm):
-    '''
+    """
     Utility function to get data from a list of TDI signals which all share the same time basis
 
     :param ods: ODS that will hold the data
@@ -150,19 +167,28 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
     :param data_norm: data normalization
 
     :return: ODS instance
-    '''
+    """
     t = None
     TDIs = []
+
+    if isinstance(channels, str):
+        channels = ods1[channels]
+
     for stage in ['fetch', 'assign']:
-        for channel in ods1[channels]:
+        for channel in channels:
             signal = ods1[identifier.format(**locals())]
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
             if stage == 'fetch' and t is None:
-                t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
-                if len(t) <= 1:
-                    t = None
+                try:
+                    t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
+                    if len(t) <= 1:
+                        t = None
+                except Exception:
+                    pass
             if stage == 'assign':
+                if time is None:
+                    raise RuntimeError(f'Could not determine time info from {TDI} signals')
                 if not isinstance(tmp[TDI], Exception):
                     ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm

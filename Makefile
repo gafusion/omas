@@ -4,7 +4,6 @@ all:
 	@echo 'OMAS $(VERSION) makefile help'
 	@echo ''
 	@echo ' - make test          : run all regression tests'
-	@echo ' - make omfit_tests   : run test_omas in OMFIT'
 	@echo ' - make requirements  : build requirements.txt'
 	@echo ' - make json          : generate IMAS json structure files'
 	@echo ' - make docs          : generate sphinx documentation and pushes it online'
@@ -16,6 +15,7 @@ all:
 	@echo ' - make html          : generate sphinx documentation'
 	@echo ' - make examples      : generate sphinx documentation with examples'
 	@echo ' - make samples       : generate sample files'
+	@echo ' - make omfit         : scan OMFIT to_omas and from_omas for documentation'
 	@echo ' - make format        : format source using black'
 	@echo ' - make site-packages : pip install requirements in site-packages folder'
 	@echo ''
@@ -52,6 +52,9 @@ test_no_munittest:
 requirements:
 	rm -f requirements.txt
 	python3 setup.py --name
+
+omfit:
+	cd omas/utilities && python3 generate_to_from_omas.py
 
 html:
 	cd sphinx && make html

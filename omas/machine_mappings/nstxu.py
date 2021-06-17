@@ -1,72 +1,60 @@
+import os
 import numpy as np
 from inspect import unwrap
 from omas import *
-from omas.omas_utils import printd
+from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 
+# NOTES:
+# List of MDS+ signals
+# https://nstx.pppl.gov/nstx/Software/FAQ/signallabels.html
+# magnetics:
+# https://nstx.pppl.gov/DragNDrop/Operations/Physics_Operations_Course/11%20OpsCourse_EquilibriumMagnetics_Rev1.pdf
+
 __all__ = []
+__regression_arguments__ = {'__all__': __all__}
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
     Loads NSTX-U tokamak poloidal field coil hardware geometry
 
     :param ods: ODS instance
     """
-    # From `OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat', serverPicker='portal').pretty_print()`
-    # R        Z       dR      dZ    tilt1  tilt2
-    # 0 in the last column really means 90 degrees
-    # fmt: off
-    fc_dat = np.array(
-        [[0.324600011, 1.59060001, 0.0625, 0.463400006, 0.0, 0.0],
-         [0.400299996, 1.80420005, 0.0337999985, 0.181400001, 0.0, 0.0],
-         [0.550400019, 1.81560004, 0.0375000015, 0.1664, 0.0, 0.0],
-         [0.799170017, 1.85264003, 0.162711993, 0.0679700002, 0.0, 0.0],
-         [0.799170017, 1.93350995, 0.162711993, 0.0679700002, 0.0, 0.0],
-         [1.49445999, 1.55263996, 0.186435997, 0.0679700002, 0.0, 0.0],
-         [1.49445999, 1.63350999, 0.186435997, 0.0679700002, 0.0, 0.0],
-         [1.80649996, 0.888100028, 0.115264997, 0.0679700002, 0.0, 0.0],
-         [1.79460001, 0.807200015, 0.0915419981, 0.0679700002, 0.0, 0.0],
-         [2.01180005, 0.648899972, 0.135900006, 0.0684999973, 0.0, 0.0],
-         [2.01180005, 0.575100005, 0.135900006, 0.0684999973, 0.0, 0.0],
-         [2.01180005, -0.648899972, 0.135900006, 0.0684999973, 0.0, 0.0],
-         [2.01180005, -0.575100005, 0.135900006, 0.0684999973, 0.0, 0.0],
-         [1.80649996, -0.888100028, 0.115264997, 0.0679700002, 0.0, 0.0],
-         [1.79460001, -0.807200015, 0.0915419981, 0.0679700002, 0.0, 0.0],
-         [1.49445999, -1.55263996, 0.186435997, 0.0679700002, 0.0, 0.0],
-         [1.49445999, -1.63350999, 0.186435997, 0.0679700002, 0.0, 0.0],
-         [0.799170017, -1.85264003, 0.162711993, 0.0679700002, 0.0, 0.0],
-         [0.799170017, -1.93350995, 0.162711993, 0.0679700002, 0.0, 0.0],
-         [0.550400019, -1.82959998, 0.0375000015, 0.1664, 0.0, 0.0],
-         [0.400299996, -1.80420005, 0.0337999985, 0.181400001, 0.0, 0.0],
-         [0.324600011, -1.59060001, 0.0625, 0.463400006, 0.0, 0.0]]
-    )
+    from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    turns = [64, 32, 20, 14, 14, 15, 15, 9, 8, 12, 12, 12, 12, 9, 8, 15, 15, 14, 14, 20, 32, 64]
+    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin.to_omas(ods, update='pf_active')
 
-    names = {'PF1AU':'PF1AU', 'PF1BU':'PF1BU', 'PF1CU':'PF1CU',
-             'PF2U1':'PF2U', 'PF2U2':'PF2U',
-             'PF3U1':'PF3U', 'PF3U2':'PF3U',
-             'PF4U1':'PF4', 'PF4U2':'PF4',
-             'PF5U1':'PF5', 'PF5U2':'PF5',
-             'PF5L1':'PF5', 'PF5L2':'PF5',
-             'PF4L1':'PF4', 'PF4L2':'PF4',
-             'PF3L1':'PF3L', 'PF3L2':'PF3L',
-             'PF2L1':'PF2L', 'PF2L2':'PF2L',
-             'PF1CL':'PF1CL', 'PF1BL':'PF1BL', 'PF1AL':'PF1AL'}
-    # fmt: on
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    icoil_signals = signals['mappings']['icoil']
 
-    ods = pf_coils_to_ods(ods, fc_dat)
-
-    for k, (name, fcid) in enumerate(names.items()):
-        ods[f'pf_active.coil.{k}.name'] = ods[f'pf_active.coil.{k}.identifier'] = name
-        ods[f'pf_active.coil.{k}.element.0.identifier'] = fcid
-        ods[f'pf_active.coil.{k}.element.0.turns_with_sign'] = turns[k]
+    for c in ods[f'pf_active.coil']:
+        for e in ods[f'pf_active.coil'][c]['element']:
+            cname = icoil_signals[c + 1]['name']
+            cid = icoil_signals[c + 1]['mds_name_resolved'].strip('\\')
+            ename = icoil_signals[c + 1]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            eid = ename
+            ods[f'pf_active.coil'][c]['name'] = cname
+            ods[f'pf_active.coil'][c]['identifier'] = cid
+            ods[f'pf_active.coil'][c]['element'][e]['name'] = ename
+            ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
 
 
-@machine_mapping_function(__all__)
-def pf_active_coil_current_data(ods, pulse=204202):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def pf_active_coil_current_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak pf_active coil current data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -74,202 +62,94 @@ def pf_active_coil_current_data(ods, pulse=204202):
             ods,
             ods1,
             pulse,
-            channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.element.0.identifier',
+            channels=range(14),
+            identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
             mds_server='nstxu',
             mds_tree='ENGINEERING',
-            tdi_expression='\\ENGINEERING::TOP.ANALYSIS.I{signal}',
+            tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
         )
+
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels=range(14, 54),
+            identifier='pf_active.coil.{channel}.identifier',
+            time='pf_active.coil.{channel}.current.time',
+            data='pf_active.coil.{channel}.current.data',
+            validity=None,
+            mds_server='nstxu',
+            mds_tree='OPERATIONS',
+            tdi_expression='\\{signal}',
+            time_norm=1.0,
+            data_norm=1.0,
+        )
+
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    icoil_signals = signals['mappings']['icoil']
+    for channel in ods1['pf_active.coil']:
+        if f'pf_active.coil.{channel}.current.data' in ods:
+            data = ods[f'pf_active.coil.{channel}.current.data']
+            rel_error = data * icoil_signals[channel + 1]['rel_error']
+            abs_error = icoil_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error[data < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
+
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
-        ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+        if f'pf_active.coil.{channel}.current.data' in ods:
+            ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+        else:
+            print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
     Load NSTX-U tokamak flux loops and magnetic probes hardware geometry
 
     :param ods: ODS instance
     """
-    # magnetics hardware from
-    #  OMFITmhdin(OMFITsrc + '/../modules/EFUND/TEMPLATES/mhdin_nstxu.dat', serverPicker='portal').pretty_print()
     # magnetics signals from
     #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
     #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
 
-    # fmt: off
-    # ==========
-    # Flux loops
-    # ==========
-    R_flux_loop = [0.63270003, 1.00399995, 1.32000005, 1.72599995, 1.72590005,
-                   1.71340001, 0.63730001, 0.97780001, 1.33570004, 1.72520006,
-                   1.72490001, 1.71340001, 1.67719996, 1.67719996, 1.67719996,
-                   1.67719996, 0.65170002, 0.8405, 1.00049996, 0.85860002,
-                   0.64810002, 1.00329995, 0.28, 0.28, 0.28,
-                   0.28, 0.28, 0.28, 0.28, 0.28,
-                   0.28, 0.36000001, 0.36000001, 0.36000001, 0.36000001,
-                   0.36000001, 0.36000001, 0.36000001, 0.36000001, 1.50740004,
-                   1.47430003, 1.43480003, 1.40989995, 1.51139998, 1.47549999,
-                   1.44560003, 1.40970004, 1.34590006, 1.29750001, 1.24969995,
-                   1.19809997, 1.34640002, 1.29690003, 1.24759996, 1.19519997,
-                   0.55000001, 0.34999999, 0.41999999, 0.41999999, 0.47999999,
-                   0.47999999, 0.41999999, 0.41999999, 0.34999999, 0.55000001,
-                   0.28]
+    from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    Z_flux_loop = [-1.73959994, -1.61829996, -1.44099998, -1.15489995, -0.81279999,
-                   -0.36090002, 1.74000001, 1.648, 1.45140004, 1.11600006,
-                   0.78990001, 0.3436, -0.62309998, -1.04920006, 0.60829997,
-                   1.03550005, -1.70239997, -1.65279996, -1.58790004, 1.65090001,
-                   1.70580006, 1.58840001, -0.25, -0.5, -0.75,
-                   -1., 0., 0.25, 0.5, 0.75,
-                   1., -1.39999998, -1.5, -1.70000005, -1.79999995,
-                   1.39999998, 1.5, 1.70000005, 1.79999995, -0.66289997,
-                   -0.76190001, -0.82690001, -0.9533, 0.65079999, 0.74980003,
-                   0.83679998, 0.9382, -1.09379995, -1.15789998, -1.22449994,
-                   -1.28859997, 1.08360004, 1.15059996, 1.21609998, 1.28460002,
-                   1.95000005, 1.94000006, 1.85000002, 1.75, 1.70500004,
-                   -1.70500004, -1.75, -1.85000002, -1.95500004, -1.96500003,
-                   0.]
+    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
+    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin.to_omas(ods, update='magnetics')
 
-    name_flux_loop = ['FLEVVL2', 'FLEVVL3', 'FLEVVL4', 'FLEVVL5', 'FLEVVL6', 'FLEVVL7', 'FLEVVU2', 'FLEVVU3', 'FLEVVU4',
-                      'FLEVVU5', 'FLEVVU6', 'FLEVVU7', 'FLIVVL1', 'FLIVVL2', 'FLIVVU1', 'FLIVVU2', 'FLOBDL1', 'FLOBDL2',
-                      'FLOBDL3', 'FLOBDU1', 'FLOBDU2', 'FLOBDU3', 'FLOHL1', 'FLOHL2', 'FLOHL3', 'FLOHL4', 'FLOHM',
-                      'FLOHU1', 'FLOHU2', 'FLOHU3', 'FLOHU4', 'FLPF1AL1', 'FLPF1AL2', 'FLPF1AL3', 'FLPF1AL4', 'FLPF1AU1',
-                      'FLPF1AU2', 'FLPF1AU3', 'FLPF1AU4', 'FLPPPL1', 'FLPPPL2', 'FLPPPL3', 'FLPPPL4', 'FLPPPU1', 'FLPPPU2',
-                      'FLPPPU3', 'FLPPPU4', 'FLSPPL1', 'FLSPPL2', 'FLSPPL3', 'FLSPPL4', 'FLSPPU1', 'FLSPPU2', 'FLSPPU3',
-                      'FLSPPU4', 'FLMDLU2', 'FLMDLU1', 'FLPF1BU2', 'FLPF1BU1', 'FLCSCU4', 'FLCSCL4', 'FLBF1BL1', 'FLBF1BL2',
-                      'FLMDLL1', 'FLMDLL2', 'FLEXTRA']
-    # ===============
-    # Magnetic probes
-    # ===============
-    R_magnetic = [0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  0.30199999, 0.30199999, 0.30199999, 0.30199999, 0.30199999,
-                  1.48860002, 1.46099997, 1.42910004, 1.49109995, 1.4619,
-                  1.42879999, 1.30540001, 1.25629997, 1.20720005, 1.32050002,
-                  1.26779997, 1.21809995, 1.39709997, 1.42490005, 1.45720005,
-                  1.48959994, 1.51740003, 1.39709997, 1.42490005, 1.45720005,
-                  1.48959994, 1.51740003, 1.18340003, 1.22280002, 1.27139997,
-                  1.32959998, 1.18340003, 1.22280002, 1.27139997, 1.32959998,
-                  0.47279999, 0.47279999, 0.47279999, 0.47279999, 0.47279999,
-                  0.47279999, 0.47279999, 0.47279999, 0.39399999, 0.39399999,
-                  0.39399999, 0.39399999, 0.39399999, 0.39399999, 0.39399999,
-                  0.39399999, 0.39399999, 0.39399999, 0.39399999, 0.39399999,
-                  0.39399999, 0.39399999, 0.39399999, 0.39399999, 0.68159998,
-                  0.68159998, 0.9055, 0.9055, 1.13660002, 1.13660002,
-                  0.68159998, 0.68159998, 0.9055, 0.9055, 1.13660002,
-                  1.13660002, 0.79000002, 0.79000002, 1.02110004, 1.02110004,
-                  0.79000002, 0.79000002, 1.02110004, 1.02110004, 0.47279999,
-                  0.47279999, 0.47279999, 0.47279999]
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
 
-    Z_magnetic = [-0.033, -0.13600001, -0.27200001, -0.40799999, -0.54400003,
-                  -0.68000001, 0.13600001, 0.27200001, 0.40799999, 0.54400003,
-                  0.68000001, -0.68000001, -0.40799999, -0.27200001, -0.033,
-                  0.13600001, 0.40799999, 0.68000001, -0.95300001, -0.95300001,
-                  0.81699997, 0.81699997, -0.81699997, -0.81699997, 0.95300001,
-                  0.95300001, -0.95300001, -0.95300001, 0.95200002, 0.95200002,
-                  -0.71109998, -0.79619998, -0.89450002, 0.69859999, 0.78549999,
-                  0.88410002, -1.15240002, -1.22529995, -1.29550004, 1.13600004,
-                  1.20930004, 1.27859998, -0.96899998, -0.88459998, -0.78659999,
-                  -0.6886, -0.60420001, 0.96899998, 0.88459998, 0.78659999,
-                  0.6886, 0.60420001, -1.31700003, -1.26119995, -1.1925,
-                  -1.11020005, 1.31700003, 1.26119995, 1.1925, 1.11020005,
-                  -1.64900005, -1.64900005, 1.64900005, 1.64900005, 1.64900005,
-                  1.64900005, -1.64900005, -1.64900005, 1.36399996, 1.36399996,
-                  1.46200001, 1.46200001, 1.55999994, 1.55999994, -1.36399996,
-                  -1.36399996, -1.46200001, -1.46200001, -1.55999994, -1.55999994,
-                  1.46200001, 1.46200001, -1.46200001, -1.46200001, -1.61530006,
-                  -1.61530006, -1.52709997, -1.52709997, -1.43610001, -1.43610001,
-                  1.61530006, 1.61530006, 1.52709997, 1.52709997, 1.43610001,
-                  1.43610001, -1.57260001, -1.57260001, -1.48160005, -1.48160005,
-                  1.57260001, 1.57260001, 1.48160005, 1.48160005, 1.64900005,
-                  1.64900005, -1.64900005, -1.64900005]
+    for k in ods[f'magnetics.flux_loop']:
+        ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
 
-    A_magnetic = [90., 90., 90., 90., 90.,
-                  90., 90., 90., 90., 90.,
-                  90., 90., 90., 90., 90.,
-                  90., 90., 90., 0., 90.,
-                  0., 90., 90., 0., 90.,
-                  0., 90., 0., 90., 0.,
-                  71.6707993, 66.3263016, 70.4561996, 107.652, 113.017998,
-                  107.425003, 57.6887016, 53.9482994, 54.1119995, 126.530998,
-                  126.248001, 124.803001, 71.5, 74.0999985, 70.,
-                  69.2235031, 71.8610001, 109.301003, 108.685997, 105.824997,
-                  106.981003, 107.504997, 52.9403, 55.6543999, 54.1320992,
-                  57.5690994, 126.985001, 127.282997, 128.231995, 126.612999,
-                  0., 90., 0., 90., 0.,
-                  90., 0., 90., 90., 0.,
-                  90., 0., 90., 0., 90.,
-                  0., 90., 0., 90., 0.,
-                  90., 0., 90., 0., 19.2000008,
-                  116., 26.4097996, 110.654999, 17.1231995, 111.585999,
-                  -22.0321007, 66.8696976, -21.3855991, 69.2611008, -21.3295002,
-                  68.0830002, 21.5, 111.5, 21.5, 111.5,
-                  -21.5, 68.5, -21.5, 68.5, 0.,
-                  90., 0., 90.]
-
-    S_magnetic = [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03,
-                  0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
-
-    name_magnetic = ['1DMCSCL1', '1DMCSCL2', '1DMCSCL3', '1DMCSCL4', '1DMCSCL5', '1DMCSCL6', '1DMCSCU2',
-                     '1DMCSCU3', '1DMCSCU4', '1DMCSCU5', '1DMCSCU6', '1DMCSC2L6', '1DMCSC2L4', '1DMCSC2L2',
-                     '1DMCSC2L1', '1DMCSC2U2', '1DMCSC2U4', '1DMCSC2U6', '2DMCSCL2N', '2DMCSCL2T', '2DMCSCU1N',
-                     '2DMCSCU1T', '2DMCSCL1T', '2DMCSCL1N', '2DMCSCU2T', '2DMCSCU2N', '2DMCSC2L2T',
-                     '2DMCSC2L2N', '2DMCSC2U2T', '2DMCSC2U2N', 'L1DMPPPGL1', 'L1DMPPPGL2', 'L1DMPPPGL3',
-                     'L1DMPPPGU1', 'L1DMPPPGU2', 'L1DMPPPGU3', 'L1DMSPPGL1', 'L1DMSPPGL2', 'L1DMSPPGL3',
-                     'L1DMSPPGU1', 'L1DMSPPGU2', 'L1DMSPPGU3', 'L1DMPPPGL4', 'L1DMPPPGL5', 'L1DMPPPGL6',
-                     'L1DMPPPGL7', 'L1DMPPPGL8', 'L1DMPPPGU4', 'L1DMPPPGU5', 'L1DMPPPGU6', 'L1DMPPPGU7',
-                     'L1DMPPPGU8', 'L1DMSPPGL4', 'L1DMSPPGL5', 'L1DMSPPGL6', 'L1DMSPPGL7', 'L1DMSPPGU4',
-                     'L1DMSPPGU5', 'L1DMSPPGU6', 'L1DMSPPGU7', '2DMIBDHL6T', '2DMIBDHL6N', '2DMIBDHU5T',
-                     '2DMIBDHU5N', '2DMIBDHU6T', '2DMIBDHU6N', '2DMIBDHL5T', '2DMIBDHL5N', '2DMIBDVU1T',
-                     '2DMIBDVU1N', '2DMIBDVU2T', '2DMIBDVU2N', '2DMIBDVU3T', '2DMIBDVU3N', '2DMIBDVL1T',
-                     '2DMIBDVL1N', '2DMIBDVL2T', '2DMIBDVL2N', '2DMIBDVL3T', '2DMIBDVL3N', '2DMIBDV2U2T',
-                     '2DMIBDV2U2N', '2DMIBDV2L2T', '2DMIBDV2L2N', '2DMOBDL1T', '2DMOBDL1N', '2DMOBDL3T',
-                     '2DMOBDL3N', '2DMOBDL5T', '2DMOBDL5N', '2DMOBDU1T', '2DMOBDU1N', '2DMOBDU3T',
-                     '2DMOBDU3N', '2DMOBDU5T', '2DMOBDU5N', '2DMOBDL2T', '2DMOBDL2N', '2DMOBDL4T',
-                     '2DMOBDL4N', '2DMOBDU2T', '2DMOBDU2N', '2DMOBDU4T', '2DMOBDU4N', '2DMIBDH2U6T',
-                     '2DMIBDH2U6N', '2DMIBDH2L6T', '2DMIBDH2L6N']
-    # fmt: on
-
-    with omas_environment(ods, cocosio=1):
-        for k, (r, z, name) in enumerate(zip(R_flux_loop, Z_flux_loop, name_flux_loop)):
-            ods[f'magnetics.flux_loop.{k}.name'] = name
-            ods[f'magnetics.flux_loop.{k}.identifier'] = 'F_' + name
-            ods[f'magnetics.flux_loop.{k}.position[0].r'] = r
-            ods[f'magnetics.flux_loop.{k}.position[0].z'] = z
-            ods[f'magnetics.flux_loop.{k}.type.index'] = 1
-
-        for k, (r, z, a, s, name) in enumerate(zip(R_magnetic, Z_magnetic, A_magnetic, S_magnetic, name_magnetic)):
-            ods[f'magnetics.b_field_pol_probe.{k}.name'] = name
-            ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = 'B_' + name
-            ods[f'magnetics.b_field_pol_probe.{k}.position.r'] = r
-            ods[f'magnetics.b_field_pol_probe.{k}.position.z'] = z
-            ods[f'magnetics.b_field_pol_probe.{k}.length'] = s
-            ods[f'magnetics.b_field_pol_probe.{k}.poloidal_angle'] = -a / 180 * np.pi
-            ods[f'magnetics.b_field_pol_probe.{k}.toroidal_angle'] = 0.0 / 180 * np.pi
-            ods[f'magnetics.b_field_pol_probe.{k}.type.index'] = 1
-            ods[f'magnetics.b_field_pol_probe.{k}.turns'] = 1
+    for k in ods[f'magnetics.b_field_pol_probe']:
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = signals['mappings']['bmc'][k + 1]['mds_name'].strip('\\')
 
 
-@machine_mapping_function(__all__)
-def magnetics_floops_data(ods, pulse=204202):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def magnetics_floops_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak flux loops flux data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -283,15 +163,39 @@ def magnetics_floops_data(ods, pulse=204202):
             data='magnetics.flux_loop.{channel}.flux.data',
             validity='magnetics.flux_loop.{channel}.flux.validity',
             mds_server='nstxu',
-            mds_tree='NSTX',
-            tdi_expression='\{signal}',
+            mds_tree='OPERATIONS',
+            tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0 / 2 / np.pi,
         )
 
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
 
-@machine_mapping_function(__all__)
-def magnetics_probes_data(ods, pulse=204202):
+    # flux loops
+    tfl_signals = signals['mappings']['tfl']
+    for channel in range(len(ods1['magnetics.flux_loop']) - 1):
+        if f'magnetics.flux_loop.{channel}.flux.data' in ods:
+            data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+            rel_error = data * tfl_signals[channel + 1]['rel_error']
+            abs_error = tfl_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
+            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
+
+
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def magnetics_probes_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak magnetic probes field data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
     with omas_environment(ods, cocosio=1):
@@ -305,20 +209,42 @@ def magnetics_probes_data(ods, pulse=204202):
             data='magnetics.b_field_pol_probe.{channel}.field.data',
             validity='magnetics.b_field_pol_probe.{channel}.field.validity',
             mds_server='nstxu',
-            mds_tree='NSTX',
-            tdi_expression='\{signal}',
+            mds_tree='OPERATIONS',
+            tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
         )
 
+    # handle uncertainties
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    bmc_signals = signals['mappings']['bmc']
+    for channel in ods1['magnetics.b_field_pol_probe']:
+        if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
+            data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+            rel_error = data * bmc_signals[channel + 1]['rel_error']
+            abs_error = bmc_signals[channel + 1]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error[data < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
+            ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
-@machine_mapping_function(__all__)
-def MDS_gEQDSK_psi_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
+
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def MDS_gEQDSK_psi_nstx(ods, pulse, EFIT_tree='EFIT01'):
     return MDS_gEQDSK_psi(ods, 'nstxu', pulse, EFIT_tree)
 
 
-@machine_mapping_function(__all__)
-def MDS_gEQDSK_bbbs_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
+    r"""
+    Load NSTX-U EFIT boundary data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+
+    :param EFIT_tree: MDS+ EFIT tree
+    """
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
@@ -331,6 +257,181 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse=204202, EFIT_tree='EFIT01'):
         ods[f'equilibrium.time_slice.{k}.boundary.outline.z'] = res['z'][k, : res['n'][k]]
 
 
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def ip_bt_dflux_data(ods, pulse):
+    r"""
+    Load NSTX-U tokamak Ip, Bt, and diamagnetic flux data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    from omfit_classes.omfit_efund import OMFITnstxMHD
+
+    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
+    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+
+    # F_DIA does not work at least for 204202
+    signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
+    signals['DL'][0]['mds_tree'] = 'operations'
+    signals['DL'][0]['mds_tree_resolved'] = 'operations'
+
+    mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
+
+    TDIs = {}
+    for item in ['PR', 'TF', 'DL']:
+        TDIs[item + '_data'] = '\\' + signals[item][0]['mds_name'].strip('\\')
+        TDIs[item + '_time'] = 'dim_of(\\' + signals[item][0]['mds_name'].strip('\\') + ')'
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+
+    for item in ['PR', 'TF', 'DL']:
+        if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
+            ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
+            ods[mappings[item] + '.time'] = res[item + '_time']
+        else:
+            printe(f'No data for {mappings[item]}')
+            ods[mappings[item] + '.data'] = []
+            ods[mappings[item] + '.time'] = []
+
+    # handle uncertainties
+    for item in ['PR', 'TF', 'DL']:
+        if mappings[item] + '.data' in ods:
+            data = ods[mappings[item] + '.data']
+            rel_error = data * signals[item][0]['rel_error']
+            abs_error = signals[item][0]['abs_error']
+            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error[data < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
+                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
+            )
+            ods[mappings[item] + '.data_error_upper'] = error
+
+
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
+    r"""
+    Load NSTX-U MSE data
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+
+    :param MSE_revision: revision of the data to load
+
+    :param MSE_Er_correction: Use pitch angle corrected data using Er from between-shot EFIT and CHERS
+
+    NOTES:
+    MSE constraint in GA EFIT code follows the description given in Brad Rice RSI Vol. 70 No. 1 (1999)
+    Geometry follows right-handed coordinate system
+
+    Alpha is the angle between a beam directed in +phi and the phi vector at the MSE measurement location
+        Alpha is positive and less than 90 degrees for co-Ip beam, zero for a tangential beam, +90 deg for a radial beam
+    Omega is the angle between the MSE sightline vector and phi vector at the MSE measurement location
+        Omega is zero for tangential sightline that is pointed toward +phi (starting from the measurement, pointing to the MSE collection optics)
+        Omega is +90 degrees for a radial sightline, assuming MSE port is on the outboard midplane
+        Omega is 180 degrees for a tangential sightline that is pointed toward -phi
+
+    NOTE: In this coordinate system, the omega = om_nstx + 180 degrees where om_nstx is the omega recorded in the MDS+ Tree
+    **NOTE: The signs of the A1, A4, A5 and A7 coefficients are reversed compared to DIII-D to reflect the NSTX definition of omega
+
+    In NSTX, standard operation is BT<0 (CCW) and Ip>0 (CW) ... identical to standard DIII-D operation
+    Thus, Bpol>0 in theta dimension. Bz<0 at outboard midplane, Bz>0 at inboard midplane
+
+    Gamma is the pitch of the local electric field relative to the MSE sightline vector (sigma polization component)
+    GA EFIT assumes pitch angle (gamma) is the measured polarization angle
+    NSTX MSE data is saved on the MDS+ tree as the actual field pitch angle = (A2/A1)*tan(gamma)
+    The MSE data from MDS+ is multiplied by A1/A2 to convert the actual field pitch angle into the measured polization angle to be consistent with GA EFIT
+    A2 and A1 are positive in the NSTX geometry
+        For a co-Ip beam (+phi) with CCW BT, EZ = vb x Bphi is positive (+Z), Ephi = vb x Bz is negative (-phi) at outboard midplane
+        Thus, on NSTX, with MSE sightline vectors pointing in -phi, postive R, gamma should be positive outboard of the magnetic axis
+        This is consistent with the tan_alpha recorded in MDS+
+
+    The A coefficients modified from for the NSTX convention are A1>0, A2>0, A5>0 for alpha and omega between 0 and 90 degrees
+    At outboard midplane, BZ<0, Bphi<0, ER>0
+        tan(gamma_cor) ~ [ (A1 Bz) / (A2 Bphi) ] - [ (A5 ER) / (A2 Bphi) ]  (assuming for simplicity that Br ~ 0)
+    making
+        tan(gamma_cor) ~ (big positive) - (small negative)
+    Thus, tan(gamma_cor) is more positive than the reported tan(gamma)
+    """
+    beamline, beam_species, minVolt_keV, usebeam = ('1A', 'D', 40.0, True)
+    geometries = [('ALPHA', f'{np.pi/180.0}', True), ('OMEGA', f'{np.pi/180.0}', True), ('RADIUS', '1', True)]
+
+    if not MSE_Er_correction:
+        # Uncorrected pitch angle from a subset of good channels
+        measurements = ('PA', 'PA_ERR', f'{np.pi / 180.0}', 'tan_alpha', False)
+    else:
+        # Pitch angle corrected using Er uses between-shot EFIT and CHERS
+        measurements = ('PA_CORR_ER', 'PA_ERR', f'{np.pi / 180.0}', 'tan_alpha', False)
+
+    TDIs = {'time': f'\\MSE::TOP.MSE_CIF.{MSE_revision}.TIME'}
+
+    # find average beam voltage
+    voltage = mdsvalue('nstxu', pulse=pulse, treename='NBI', TDI=f'\\NBI::CALC_NB_{beamline}_VACCEL').raw()
+    keep = voltage >= minVolt_keV
+    avg_voltage = np.mean(voltage[keep]) * 1000.0  # Average beam voltage in Volts
+    if beam_species == 'D':
+        ud = 2.014
+    elif beam_species == 'H':
+        ud = 1.0
+    else:
+        raise ValueError('beam_species can only be D or H')
+    vbeam = np.sqrt(2.0 * 1.6022e-19 * avg_voltage / (ud * 1.6605e-27))
+    printd('Beam voltage:', avg_voltage / 1000.0, ' kV', topic='machine')
+    printd('Beam species mass:', ud, ' amu', topic='machine')
+
+    # Geometry for all channels
+    for name, norm, usegeo in geometries:
+        if usegeo:
+            TDIs['geom_' + name] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.GEOMETRY.{name} * {norm}'
+    TDIs['geom_R'] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.RADIUS'
+
+    # pitch angle measurements
+    MDSname, MDSERRname, norm, name, fit = measurements
+    TDIs[name] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.{MDSname} * {norm}'
+    TDIs[name + '_error'] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.{MDSERRname} * {norm}'
+
+    # data fetching
+    res = mdsvalue('nstxu', pulse=pulse, treename='MSE', TDI=TDIs).raw()
+
+    # Er correction coefficients (assumes MSE sight lines are in the same Z plane as the beam line (theta =0)
+    coef_list = {}
+    zero_array = res['geom_ALPHA'] * 0.0
+    one_array = zero_array + 1.0
+    coef_list['beam_velocity'] = vbeam + zero_array
+    coef_list['AA1GAM'] = np.cos(res['geom_ALPHA'] + res['geom_OMEGA'])  # See notes at top on sign convention
+    coef_list['AA2GAM'] = np.sin(res['geom_ALPHA'])
+    coef_list['AA3GAM'] = np.cos(res['geom_ALPHA'])
+    coef_list['AA4GAM'] = zero_array  # Assume theta=0
+    coef_list['AA5GAM'] = np.cos(res['geom_OMEGA']) / coef_list['beam_velocity']  # See notes at top on sign convention
+    coef_list['AA6GAM'] = -1.0 / coef_list['beam_velocity']  # Assume theta=0
+    coef_list['AA7GAM'] = zero_array  # Assume theta=0
+
+    # remap data per individual channel
+    MDSname, MDSERRname, norm, name, fit = measurements
+    if isinstance(res[name], Exception):
+        return
+    for ch in range(res[name].shape[1]):  # Loop through subset of good channels with pitch angle data
+        valid = res[name + '_error'][:, ch] > 0  # uncertainty greater than zero
+        valid &= res[name][:, ch] != 0  # no exact zero values
+        valid &= (res[name][:, ch] * np.min(np.abs(res['geom_RADIUS'] - res['geom_R'][ch]))) < 0.001  # radius of measurement as expected
+
+        if False:
+            norm = 1.0
+        else:
+            # Convert actual pitch angle to measured pitch angle
+            norm = coef_list['AA1GAM'][ch] / coef_list['AA2GAM'][ch]
+
+        ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = (valid != 1).astype(int)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
+
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+
+
 # =====================
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())

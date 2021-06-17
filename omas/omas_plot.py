@@ -542,7 +542,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 def handle_time(ods, time_location, time_index, time):
-    '''
+    """
     Given either time_index or time returns both time_index and time consistent with one another
     NOTE: time takes precedence over time_index
 
@@ -553,7 +553,7 @@ def handle_time(ods, time_location, time_index, time):
     :param time: float or list of floats
 
     :return: time_index, time
-    '''
+    """
     if time is not None:
         tds = ods.time(time_location)
         time_index = []
@@ -1526,7 +1526,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
 
 @add_to__ODS__
 def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot pf_active time traces
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1537,7 +1537,7 @@ def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1569,7 +1569,7 @@ def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot bpol_probe time traces and equilibrium constraints
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1580,7 +1580,7 @@ def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1615,7 +1615,7 @@ def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot flux_loop time traces and equilibrium constraints
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1626,7 +1626,7 @@ def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1661,7 +1661,7 @@ def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot ip time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1672,7 +1672,7 @@ def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'magnetics.ip.0.time',
@@ -1687,7 +1687,7 @@ def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot diamagnetic_flux time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1698,7 +1698,7 @@ def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, 
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'magnetics.diamagnetic_flux.0.time',
@@ -1713,7 +1713,7 @@ def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, 
 
 @add_to__ODS__
 def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot b_field_tor_vacuum_r time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1724,7 +1724,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'tf.b_field_tor_vacuum_r.time',
@@ -1738,7 +1738,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
 
 
 def _plot_signal_eq_constraint(ods, time, data, constraint, equilibrium_constraints, ax, **kw):
-    '''
+    """
     Utility function to plot individual signal and their constraint in equilibrium IDS
 
     :param time: ods location for time
@@ -1752,7 +1752,7 @@ def _plot_signal_eq_constraint(ods, time, data, constraint, equilibrium_constrai
     :param kw: extra arguments passed to
 
     :return:
-    '''
+    """
     from matplotlib import pyplot
 
     if ax is None:
@@ -2244,7 +2244,7 @@ def waves_beam_summary(ods, time_index=None, time=None, fig=None, **kw):
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
-    '''
+    """
     Plot summary of NBI power time traces
 
     :param ods: input ods
@@ -2252,7 +2252,7 @@ def nbi_summary(ods, ax=None):
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     if ax is None:
@@ -2379,7 +2379,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_ov
 
 @add_to__ODS__
 def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
-    '''
+    """
     Plot walls on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
@@ -2393,7 +2393,7 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
     :param unit_index: list of index of units of the component to plot
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
@@ -2648,30 +2648,33 @@ def pf_active_overlay(ods, ax=None, **kw):
         return numpy.array([outline['r'], outline['z']]).T
 
     patches = []
-    for i in range(nc):  # From  iris:/fusion/usc/src/idl/efitview/diagnoses/DIII-D/coils.pro ,  2018 June 08  D. Eldon
-        if mask[i]:
-            try:
-                geometry_type = geo_type_lookup(ods['pf_active.coil'][i]['element.0.geometry.geometry_type'], 'pf_active', ods.imas_version)
-            except (IndexError, ValueError):
-                geometry_type = 'unrecognized'
-            try:
-                path = eval('path_{}'.format(geometry_type))(ods['pf_active.coil'][i]['element.0.geometry'][geometry_type])
-            except NameError:
-                print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(i, geometry_type))
-                continue
-            patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
-            kw.pop('label', None)  # Prevent label from being placed on more than one patch
-            try:
-                pf_id = ods['pf_active.coil'][i]['element.0.identifier']
-            except ValueError:
-                pf_id = None
-            if (labelevery > 0) and ((i % labelevery) == 0) and (pf_id is not None):
+    for c in range(nc):
+        if mask[c]:
+            for e in ods['pf_active.coil'][c]['element']:
+                try:
+                    geometry_type = geo_type_lookup(
+                        ods['pf_active.coil'][c]['element'][e]['geometry.geometry_type'], 'pf_active', ods.imas_version
+                    )
+                except (IndexError, ValueError):
+                    geometry_type = 'unrecognized'
+                try:
+                    path = eval('path_{}'.format(geometry_type))(ods['pf_active.coil'][c]['element'][e]['geometry'][geometry_type])
+                except NameError:
+                    print('Warning: unrecognized geometry type for pf_active coil {}: {}'.format(c, geometry_type))
+                    continue
+                patches.append(matplotlib.patches.Polygon(path, closed=True, **kw))
+                kw.pop('label', None)  # Prevent label from being placed on more than one patch
+                try:
+                    pf_id = ods['pf_active.coil'][c]['element'][e]['identifier']
+                except ValueError:
+                    pf_id = None
+            if labelevery > 0 and c % labelevery == 0 and pf_id is not None:
                 ax.text(
-                    numpy.mean(path[:, 0]) + label_dr[i],
-                    numpy.mean(path[:, 1]) + label_dz[i],
+                    numpy.mean(path[:, 0]) + label_dr[c],
+                    numpy.mean(path[:, 1]) + label_dz[c],
                     pf_id,
-                    ha=label_ha[i],
-                    va=label_va[i],
+                    ha=label_ha[c],
+                    va=label_va[c],
                     fontsize=notesize,
                 )
 
@@ -2696,7 +2699,7 @@ def magnetics_overlay(
     tor_probe_style={'marker': '.'},
     **kw,
 ):
-    '''
+    """
     Plot magnetics on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
@@ -2710,7 +2713,7 @@ def magnetics_overlay(
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     kw0 = copy.copy(kw)
@@ -2732,7 +2735,7 @@ def magnetics_overlay(
         for k, (r, z) in enumerate(zip(ods[f'magnetics.flux_loop.:.position[0].r'], ods[f'magnetics.flux_loop.:.position[0].z'])):
             ax.plot(r, z, **flux_loop_style)
             flux_loop_style.setdefault('color', ax.lines[-1].get_color())
-            if (labelevery > 0) and ((k % labelevery) == 0):
+            if labelevery > 0 and k % labelevery == 0:
                 ax.text(
                     r + label_dr[k],
                     z + label_dz[k],
@@ -2774,7 +2777,7 @@ def magnetics_overlay(
             if show_bpol_probe:
                 ax.plot(px, py, label='_' + ods.get(f'magnetics.b_field_pol_probe[{k}].identifier', str(k)), **pol_probe_style, **kw)
                 pol_probe_style.setdefault('color', ax.lines[-1].get_color())
-                if (labelevery > 0) and ((k % labelevery) == 0):
+                if labelevery > 0 and k % labelevery == 0:
                     ax.text(
                         r + label_dr[k],
                         z + label_dz[k],
@@ -2802,7 +2805,7 @@ def magnetics_overlay(
         for k, (r, z) in enumerate(zip(ods['magnetics.b_field_tor_probe[:].position.r'], ods['magnetics.b_field_tor_probe[:].position.z'])):
             ax.plot(r, z, '.m', label='_' + ods.get(f'magnetics.b_field_tor_probe[{k}].identifier', str(k)), **tor_probe_style, **kw)
             tor_probe_style.setdefault('color', ax.lines[-1].get_color())
-            if (labelevery > 0) and ((k % labelevery) == 0):
+            if labelevery > 0 and k % labelevery == 0:
                 ax.text(
                     r + label_dr[k],
                     z + label_dz[k],

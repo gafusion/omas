@@ -17,8 +17,25 @@ xarray                   # required
 setuptools>=41.2         # required
 tqdm                     # required
 Cython                   # required
+omfit_classes            # required
+pexpect                  # required
+fortranformat            # required
+pygacode                 # required
 
-#bs4                     # build_structures
-#pyhdc                   # hdc
-#imas                    # imas
-#pyuda                   # uda
+# omfit_classes            # machine
+# pexpect                  # machine
+# fortranformat            # machine
+# pygacode                 # machine
+
+# pyhdc                    # hdc
+
+# imas                     # imas
+
+# pyuda                    # uda
+
+# bs4                      # build_structures
+
+# Sphinx                   # build_documentation
+# sphinx-bootstrap-theme   # build_documentation
+# sphinx-gallery           # build_documentation
+# Pillow                   # build_documentation

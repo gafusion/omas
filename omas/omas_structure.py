@@ -143,9 +143,16 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                 if '@doc_identifier' in me:
                     doc_id = xmltodict.parse(open(omas_dir + os.sep + 'data-dictionary' + os.sep + me['@doc_identifier']).read())
                     hlp = doc_id['constants']['int']
-                    doc = []
-                    for row in hlp:
-                        doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
+                    try:
+                        if '@name' in hlp:
+                            doc = ['%s) %s : %s' % (hlp['#text'], hlp['@name'], hlp['@description'])]
+                        else:
+                            doc = []
+                            for row in hlp:
+                                doc.append('%s) %s : %s' % (row['#text'], row['@name'], row['@description']))
+                    except Exception:
+                        print(me['@doc_identifier'], hlp)
+                        raise
                     me['@documentation'] = me['@documentation'].strip() + '\n' + '\n'.join(doc)
 
                 fname = process_path(fname)
@@ -186,8 +193,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
 
                     # if is_leaf:
                     # print(path_propagate)
-        except Exception:
-            pprint(fout)
+        except Exception as _excp:
             raise
         return hout, fout
 
@@ -567,13 +573,13 @@ def symlink_imas_structure_versions(test=True, verbose=True):
 
 
 def add_extra_structures(extra_structures, lifecycle_status='tmp'):
-    '''
+    """
     Function used to extend the IMAS data dictionary with user defined structures
 
     :param extra_structures: dictionary with extra IDS entries to assign
 
     :param lifecycle_status: default lifecycle_status to assign
-    '''
+    """
     from . import omas_utils
 
     # reset structure caches

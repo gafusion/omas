@@ -25,7 +25,7 @@ default_keys_to_ignore = [
 ]
 
 
-def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True):
+def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys=[], ignore_default_keys=True, rtol=1.0e-5, atol=1.0e-8):
     """
     Checks if two ODSs have any difference and returns the string with the cause of the different
 
@@ -41,6 +41,10 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
 
     :param ignore_default_keys: ignores the following keys from the comparison
                             %s
+
+    rtol : The relative tolerance parameter
+
+    atol : The absolute tolerance parameter
 
     :return: string with reason for difference, or False otherwise
     """
@@ -86,7 +90,9 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
                 s2 = v2.shape
                 if s1 != s2:
                     differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
-                elif not numpy.allclose(v1, v2, equal_nan=True) or not numpy.allclose(d1, d2, equal_nan=True):
+                elif not numpy.allclose(v1, v2, equal_nan=True, atol=atol, rtol=rtol) or not numpy.allclose(
+                    d1, d2, equal_nan=True, atol=atol, rtol=rtol
+                ):
                     differences.append(f'DIFF: `{k}` differ in value')
             else:
                 v1 = nominal_values(ods1[k])
@@ -95,7 +101,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
                 s2 = v2.shape
                 if v1.shape != v2.shape:
                     differences.append(f'DIFF: `{k}` differ in shape: {s1} vs {s2}')
-                elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True):
+                elif not numpy.allclose(ods1[k], ods2[k], equal_nan=True, atol=atol, rtol=rtol):
                     differences.append(f'DIFF: `{k}` differ in value')
         except Exception as _excp:
             raise Exception(f'Error comparing {k}: ' + repr(_excp))
@@ -109,7 +115,7 @@ different_ods.__doc__ = different_ods.__doc__ % '\n                            '
 
 
 def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
-    '''
+    """
     Checks if two ODSs have any difference in their attributes
 
     :param ods1: first ods to check
@@ -121,7 +127,7 @@ def different_ods_attrs(ods1, ods2, attrs=None, verbose=False):
     :param verbose: print differences to stdout
 
     :return: dictionary with list of attriibutes that have differences, or False otherwise
-    '''
+    """
 
     if isinstance(attrs, str):
         attrs = [attrs]
@@ -771,7 +777,7 @@ def load_structure(filename, imas_version):
 
 
 def imas_structure(imas_version, location):
-    '''
+    """
     Returns a dictionary with the IMAS structure given a location
 
     :param imas_version: imas version
@@ -779,7 +785,7 @@ def imas_structure(imas_version, location):
     :param location: path in OMAS format
 
     :return: dictionary as loaded by load_structure() at location
-    '''
+    """
     if imas_version not in _ods_structure_cache:
         _ods_structure_cache[imas_version] = {}
     ulocation = o2u(location)

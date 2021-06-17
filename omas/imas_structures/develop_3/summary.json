@@ -1220,6 +1220,9 @@
   "structure_reference": "summary_fusion"
  },
  "summary.fusion.current": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "summary.fusion.current.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
   "documentation": "Parallel current driven by this fusion reactions",
   "full_path": "summary/fusion/current",
@@ -3813,6 +3816,9 @@
   "structure_reference": "summary_global_quantities"
  },
  "summary.global_quantities.b0": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "summary.global_quantities.b0.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Vacuum toroidal field at R0. Positive sign means anti-clockwise when viewed from above. The product R0B0 must be consistent with the b_tor_vacuum_r field of the tf IDS.",
   "full_path": "summary/global_quantities/b0",
@@ -6763,6 +6769,9 @@
   "units": "rad"
  },
  "summary.heating_current_drive.ec[:].angle_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "summary.heating_current_drive.ec{i}.angle_tor.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Toroidal angle of ECRH at resonance",
   "full_path": "summary/heating_current_drive/ec(i1)/angle_tor",
@@ -6821,6 +6830,9 @@
   "units": "rad"
  },
  "summary.heating_current_drive.ec[:].current": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "summary.heating_current_drive.ec{i}.current.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
   "documentation": "Parallel current driven by EC waves",
   "full_path": "summary/heating_current_drive/ec(i1)/current",
@@ -7231,6 +7243,9 @@
   "structure_reference": "summary_h_cd_ic"
  },
  "summary.heating_current_drive.ic[:].current": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "summary.heating_current_drive.ic{i}.current.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
   "documentation": "Parallel current driven by IC waves",
   "full_path": "summary/heating_current_drive/ic(i1)/current",
@@ -7815,6 +7830,9 @@
   "structure_reference": "summary_h_cd_lh"
  },
  "summary.heating_current_drive.lh[:].current": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "summary.heating_current_drive.lh{i}.current.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
   "documentation": "Parallel current driven by LH waves",
   "full_path": "summary/heating_current_drive/lh(i1)/current",
@@ -8401,6 +8419,9 @@
   "units": "-"
  },
  "summary.heating_current_drive.nbi[:].current": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "summary.heating_current_drive.nbi{i}.current.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
   "documentation": "Parallel current driven by this NBI unit",
   "full_path": "summary/heating_current_drive/nbi(i1)/current",
@@ -12444,6 +12465,8 @@
  },
  "summary.local.itb": {
   "catalogue_name": "suffix",
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "summary.local.itb",
   "data_type": "STRUCTURE",
   "documentation": "Parameters at internal transport barrier",
   "full_path": "summary/local/itb",
@@ -12451,8 +12474,11 @@
   "structure_reference": "summary_local_quantities"
  },
  "summary.local.itb.e_field_parallel": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.e_field_parallel.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
-  "documentation": "Component of electric field parallel to magnetic field",
+  "documentation": "Average on the magnetic surface of (e_field.b_field) / B0, where B0 is global_quantities/b0/value",
   "full_path": "summary/local/itb/e_field_parallel",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
@@ -12567,6 +12593,9 @@
   "units": "-"
  },
  "summary.local.itb.momentum_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.momentum_tor.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons",
   "full_path": "summary/local/itb/momentum_tor",
@@ -13668,6 +13697,9 @@
   "structure_reference": "summary_local_position"
  },
  "summary.local.itb.position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -13687,6 +13719,9 @@
   "type": "constant"
  },
  "summary.local.itb.position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -13699,6 +13734,9 @@
   "units": "Wb"
  },
  "summary.local.itb.position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -13797,6 +13835,9 @@
   "units": "-"
  },
  "summary.local.itb.q": {
+  "cocos_label_transformation": "q_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.q.value",
+  "cocos_transformation_expression": ".fact_q",
   "data_type": "STRUCTURE",
   "documentation": "Safety factor",
   "full_path": "summary/local/itb/q",
@@ -13975,10 +14016,13 @@
   "documentation": "Ion toroidal rotation velocity, per species",
   "full_path": "summary/local/itb/velocity_tor",
   "lifecycle_status": "active",
-  "structure_reference": "summary_species",
+  "structure_reference": "summary_species_tor_angle",
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.argon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.argon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Argon (Ar)",
   "full_path": "summary/local/itb/velocity_tor/argon",
@@ -14036,6 +14080,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.beryllium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.beryllium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Beryllium (Be)",
   "full_path": "summary/local/itb/velocity_tor/beryllium",
@@ -14093,6 +14140,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.carbon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.carbon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Carbon (C)",
   "full_path": "summary/local/itb/velocity_tor/carbon",
@@ -14150,6 +14200,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.deuterium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.deuterium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Deuterium (D)",
   "full_path": "summary/local/itb/velocity_tor/deuterium",
@@ -14207,6 +14260,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_3": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_3.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 3 nucleons (3He)",
   "full_path": "summary/local/itb/velocity_tor/helium_3",
@@ -14264,6 +14320,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.helium_4": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_4.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 4 nucleons (4He)",
   "full_path": "summary/local/itb/velocity_tor/helium_4",
@@ -14321,6 +14380,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.hydrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.hydrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Hydrogen (H)",
   "full_path": "summary/local/itb/velocity_tor/hydrogen",
@@ -14378,6 +14440,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.iron": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.iron.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Iron (Fe)",
   "full_path": "summary/local/itb/velocity_tor/iron",
@@ -14435,6 +14500,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.krypton": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.krypton.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Krypton (Kr)",
   "full_path": "summary/local/itb/velocity_tor/krypton",
@@ -14492,6 +14560,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.lithium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.lithium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Lithium (Li)",
   "full_path": "summary/local/itb/velocity_tor/lithium",
@@ -14549,6 +14620,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.neon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.neon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Neon (Ne)",
   "full_path": "summary/local/itb/velocity_tor/neon",
@@ -14606,6 +14680,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.nitrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.nitrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Nitrogen (N)",
   "full_path": "summary/local/itb/velocity_tor/nitrogen",
@@ -14663,6 +14740,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.oxygen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.oxygen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Oxygen (O)",
   "full_path": "summary/local/itb/velocity_tor/oxygen",
@@ -14720,6 +14800,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tritium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tritium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tritium (T)",
   "full_path": "summary/local/itb/velocity_tor/tritium",
@@ -14777,6 +14860,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.tungsten": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tungsten.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tungsten (W)",
   "full_path": "summary/local/itb/velocity_tor/tungsten",
@@ -14834,6 +14920,9 @@
   "units": "m.s^-1"
  },
  "summary.local.itb.velocity_tor.xenon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.xenon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Xenon (Xe)",
   "full_path": "summary/local/itb/velocity_tor/xenon",
@@ -14949,7 +15038,6 @@
   "units": "-"
  },
  "summary.local.limiter": {
-  "catalogue_name": "suffix",
   "data_type": "STRUCTURE",
   "documentation": "Parameters at the limiter tangency point",
   "full_path": "summary/local/limiter",
@@ -16306,6 +16394,8 @@
  },
  "summary.local.magnetic_axis": {
   "catalogue_name": "suffix",
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "summary.local.magnetic_axis",
   "data_type": "STRUCTURE",
   "documentation": "Parameters at magnetic axis",
   "full_path": "summary/local/magnetic_axis",
@@ -16313,6 +16403,9 @@
   "structure_reference": "summary_local_quantities_r_z"
  },
  "summary.local.magnetic_axis.b_field": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.b_field.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Magnetic field",
   "full_path": "summary/local/magnetic_axis/b_field",
@@ -16371,8 +16464,11 @@
   "units": "T"
  },
  "summary.local.magnetic_axis.e_field_parallel": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.e_field_parallel.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
-  "documentation": "Component of electric field parallel to magnetic field",
+  "documentation": "Average on the magnetic surface of (e_field.b_field) / B0, where B0 is global_quantities/b0/value",
   "full_path": "summary/local/magnetic_axis/e_field_parallel",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
@@ -16487,6 +16583,9 @@
   "units": "-"
  },
  "summary.local.magnetic_axis.momentum_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.momentum_tor.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons",
   "full_path": "summary/local/magnetic_axis/momentum_tor",
@@ -17803,6 +17902,9 @@
   "units": "m"
  },
  "summary.local.magnetic_axis.q": {
+  "cocos_label_transformation": "q_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.q.value",
+  "cocos_transformation_expression": ".fact_q",
   "data_type": "STRUCTURE",
   "documentation": "Safety factor (IMAS uses COCOS=11: only positive when toroidal current and magnetic field are in same direction)",
   "full_path": "summary/local/magnetic_axis/q",
@@ -17981,10 +18083,13 @@
   "documentation": "Ion toroidal rotation velocity, per species",
   "full_path": "summary/local/magnetic_axis/velocity_tor",
   "lifecycle_status": "active",
-  "structure_reference": "summary_species",
+  "structure_reference": "summary_species_tor_angle",
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.argon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.argon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Argon (Ar)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/argon",
@@ -18042,6 +18147,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.beryllium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.beryllium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Beryllium (Be)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/beryllium",
@@ -18099,6 +18207,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.carbon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.carbon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Carbon (C)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/carbon",
@@ -18156,6 +18267,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.deuterium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.deuterium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Deuterium (D)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/deuterium",
@@ -18213,6 +18327,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_3": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_3.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 3 nucleons (3He)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_3",
@@ -18270,6 +18387,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.helium_4": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_4.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 4 nucleons (4He)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/helium_4",
@@ -18327,6 +18447,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.hydrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.hydrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Hydrogen (H)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/hydrogen",
@@ -18384,6 +18507,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.iron": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.iron.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Iron (Fe)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/iron",
@@ -18441,6 +18567,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.krypton": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.krypton.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Krypton (Kr)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/krypton",
@@ -18498,6 +18627,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.lithium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.lithium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Lithium (Li)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/lithium",
@@ -18555,6 +18687,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.neon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.neon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Neon (Ne)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/neon",
@@ -18612,6 +18747,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.nitrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.nitrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Nitrogen (N)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/nitrogen",
@@ -18669,6 +18807,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.oxygen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.oxygen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Oxygen (O)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/oxygen",
@@ -18726,6 +18867,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tritium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tritium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tritium (T)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/tritium",
@@ -18783,6 +18927,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.tungsten": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tungsten.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tungsten (W)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/tungsten",
@@ -18840,6 +18987,9 @@
   "units": "m.s^-1"
  },
  "summary.local.magnetic_axis.velocity_tor.xenon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.xenon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Xenon (Xe)",
   "full_path": "summary/local/magnetic_axis/velocity_tor/xenon",
@@ -18956,6 +19106,8 @@
  },
  "summary.local.pedestal": {
   "catalogue_name": "suffix",
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "summary.local.pedestal",
   "data_type": "STRUCTURE",
   "documentation": "Parameters at pedestal top",
   "full_path": "summary/local/pedestal",
@@ -18963,8 +19115,11 @@
   "structure_reference": "summary_local_quantities"
  },
  "summary.local.pedestal.e_field_parallel": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.e_field_parallel.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
-  "documentation": "Component of electric field parallel to magnetic field",
+  "documentation": "Average on the magnetic surface of (e_field.b_field) / B0, where B0 is global_quantities/b0/value",
   "full_path": "summary/local/pedestal/e_field_parallel",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
@@ -19079,6 +19234,9 @@
   "units": "-"
  },
  "summary.local.pedestal.momentum_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.momentum_tor.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons",
   "full_path": "summary/local/pedestal/momentum_tor",
@@ -20180,6 +20338,9 @@
   "structure_reference": "summary_local_position"
  },
  "summary.local.pedestal.position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -20199,6 +20360,9 @@
   "type": "constant"
  },
  "summary.local.pedestal.position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -20211,6 +20375,9 @@
   "units": "Wb"
  },
  "summary.local.pedestal.position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -20309,6 +20476,9 @@
   "units": "-"
  },
  "summary.local.pedestal.q": {
+  "cocos_label_transformation": "q_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.q.value",
+  "cocos_transformation_expression": ".fact_q",
   "data_type": "STRUCTURE",
   "documentation": "Safety factor",
   "full_path": "summary/local/pedestal/q",
@@ -20487,10 +20657,13 @@
   "documentation": "Ion toroidal rotation velocity, per species",
   "full_path": "summary/local/pedestal/velocity_tor",
   "lifecycle_status": "active",
-  "structure_reference": "summary_species",
+  "structure_reference": "summary_species_tor_angle",
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.argon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.argon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Argon (Ar)",
   "full_path": "summary/local/pedestal/velocity_tor/argon",
@@ -20548,6 +20721,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.beryllium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.beryllium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Beryllium (Be)",
   "full_path": "summary/local/pedestal/velocity_tor/beryllium",
@@ -20605,6 +20781,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.carbon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.carbon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Carbon (C)",
   "full_path": "summary/local/pedestal/velocity_tor/carbon",
@@ -20662,6 +20841,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.deuterium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.deuterium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Deuterium (D)",
   "full_path": "summary/local/pedestal/velocity_tor/deuterium",
@@ -20719,6 +20901,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_3": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_3.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 3 nucleons (3He)",
   "full_path": "summary/local/pedestal/velocity_tor/helium_3",
@@ -20776,6 +20961,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.helium_4": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_4.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 4 nucleons (4He)",
   "full_path": "summary/local/pedestal/velocity_tor/helium_4",
@@ -20833,6 +21021,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.hydrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.hydrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Hydrogen (H)",
   "full_path": "summary/local/pedestal/velocity_tor/hydrogen",
@@ -20890,6 +21081,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.iron": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.iron.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Iron (Fe)",
   "full_path": "summary/local/pedestal/velocity_tor/iron",
@@ -20947,6 +21141,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.krypton": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.krypton.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Krypton (Kr)",
   "full_path": "summary/local/pedestal/velocity_tor/krypton",
@@ -21004,6 +21201,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.lithium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.lithium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Lithium (Li)",
   "full_path": "summary/local/pedestal/velocity_tor/lithium",
@@ -21061,6 +21261,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.neon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.neon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Neon (Ne)",
   "full_path": "summary/local/pedestal/velocity_tor/neon",
@@ -21118,6 +21321,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.nitrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.nitrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Nitrogen (N)",
   "full_path": "summary/local/pedestal/velocity_tor/nitrogen",
@@ -21175,6 +21381,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.oxygen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.oxygen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Oxygen (O)",
   "full_path": "summary/local/pedestal/velocity_tor/oxygen",
@@ -21232,6 +21441,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tritium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tritium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tritium (T)",
   "full_path": "summary/local/pedestal/velocity_tor/tritium",
@@ -21289,6 +21501,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.tungsten": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tungsten.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tungsten (W)",
   "full_path": "summary/local/pedestal/velocity_tor/tungsten",
@@ -21346,6 +21561,9 @@
   "units": "m.s^-1"
  },
  "summary.local.pedestal.velocity_tor.xenon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.xenon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Xenon (Xe)",
   "full_path": "summary/local/pedestal/velocity_tor/xenon",
@@ -21643,6 +21861,8 @@
  },
  "summary.local.separatrix": {
   "catalogue_name": "suffix",
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "summary.local.separatrix",
   "data_type": "STRUCTURE",
   "documentation": "Parameters at separatrix (intersection of the separatrix and the outboard midplane)",
   "full_path": "summary/local/separatrix",
@@ -21650,8 +21870,11 @@
   "structure_reference": "summary_local_quantities"
  },
  "summary.local.separatrix.e_field_parallel": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.e_field_parallel.value",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
-  "documentation": "Component of electric field parallel to magnetic field",
+  "documentation": "Average on the magnetic surface of (e_field.b_field) / B0, where B0 is global_quantities/b0/value",
   "full_path": "summary/local/separatrix/e_field_parallel",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_flt_1d_root",
@@ -21766,6 +21989,9 @@
   "units": "-"
  },
  "summary.local.separatrix.momentum_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.momentum_tor.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons",
   "full_path": "summary/local/separatrix/momentum_tor",
@@ -22867,6 +23093,9 @@
   "structure_reference": "summary_local_position"
  },
  "summary.local.separatrix.position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -22886,6 +23115,9 @@
   "type": "constant"
  },
  "summary.local.separatrix.position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -22898,6 +23130,9 @@
   "units": "Wb"
  },
  "summary.local.separatrix.position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.position.psi",
+  "cocos_transformation_expression": ".fact_psi",
   "coordinates": [
    "summary.time"
   ],
@@ -22996,6 +23231,9 @@
   "units": "-"
  },
  "summary.local.separatrix.q": {
+  "cocos_label_transformation": "q_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.q.value",
+  "cocos_transformation_expression": ".fact_q",
   "data_type": "STRUCTURE",
   "documentation": "Safety factor",
   "full_path": "summary/local/separatrix/q",
@@ -23174,10 +23412,13 @@
   "documentation": "Ion toroidal rotation velocity, per species",
   "full_path": "summary/local/separatrix/velocity_tor",
   "lifecycle_status": "active",
-  "structure_reference": "summary_species",
+  "structure_reference": "summary_species_tor_angle",
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.argon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.argon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Argon (Ar)",
   "full_path": "summary/local/separatrix/velocity_tor/argon",
@@ -23235,6 +23476,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.beryllium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.beryllium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Beryllium (Be)",
   "full_path": "summary/local/separatrix/velocity_tor/beryllium",
@@ -23292,6 +23536,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.carbon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.carbon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Carbon (C)",
   "full_path": "summary/local/separatrix/velocity_tor/carbon",
@@ -23349,6 +23596,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.deuterium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.deuterium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Deuterium (D)",
   "full_path": "summary/local/separatrix/velocity_tor/deuterium",
@@ -23406,6 +23656,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.helium_3": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_3.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 3 nucleons (3He)",
   "full_path": "summary/local/separatrix/velocity_tor/helium_3",
@@ -23463,6 +23716,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.helium_4": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.helium_4.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Helium isotope with 4 nucleons (4He)",
   "full_path": "summary/local/separatrix/velocity_tor/helium_4",
@@ -23520,6 +23776,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.hydrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.hydrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Hydrogen (H)",
   "full_path": "summary/local/separatrix/velocity_tor/hydrogen",
@@ -23577,6 +23836,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.iron": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.iron.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Iron (Fe)",
   "full_path": "summary/local/separatrix/velocity_tor/iron",
@@ -23634,6 +23896,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.krypton": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.krypton.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Krypton (Kr)",
   "full_path": "summary/local/separatrix/velocity_tor/krypton",
@@ -23691,6 +23956,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.lithium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.lithium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Lithium (Li)",
   "full_path": "summary/local/separatrix/velocity_tor/lithium",
@@ -23748,6 +24016,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.neon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.neon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Neon (Ne)",
   "full_path": "summary/local/separatrix/velocity_tor/neon",
@@ -23805,6 +24076,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.nitrogen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.nitrogen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Nitrogen (N)",
   "full_path": "summary/local/separatrix/velocity_tor/nitrogen",
@@ -23862,6 +24136,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.oxygen": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.oxygen.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Oxygen (O)",
   "full_path": "summary/local/separatrix/velocity_tor/oxygen",
@@ -23919,6 +24196,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.tritium": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tritium.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tritium (T)",
   "full_path": "summary/local/separatrix/velocity_tor/tritium",
@@ -23976,6 +24256,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.tungsten": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.tungsten.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Tungsten (W)",
   "full_path": "summary/local/separatrix/velocity_tor/tungsten",
@@ -24033,6 +24316,9 @@
   "units": "m.s^-1"
  },
  "summary.local.separatrix.velocity_tor.xenon": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.velocity_tor.xenon.value",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Xenon (Xe)",
   "full_path": "summary/local/separatrix/velocity_tor/xenon",
@@ -24475,6 +24761,9 @@
   "units": "T"
  },
  "summary.pedestal_fits.linear.b_field_tor_pedestal_top_hfs": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "summary.pedestal_fits.linear.b_field_tor_pedestal_top_hfs.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side",
   "full_path": "summary/pedestal_fits/linear/b_field_tor_pedestal_top_hfs",
@@ -24533,6 +24822,9 @@
   "units": "T"
  },
  "summary.pedestal_fits.linear.b_field_tor_pedestal_top_lfs": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "summary.pedestal_fits.linear.b_field_tor_pedestal_top_lfs.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side",
   "full_path": "summary/pedestal_fits/linear/b_field_tor_pedestal_top_lfs",
@@ -26911,6 +27203,9 @@
   "units": "T"
  },
  "summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_hfs": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_hfs.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the high field side",
   "full_path": "summary/pedestal_fits/mtanh/b_field_tor_pedestal_top_hfs",
@@ -26969,6 +27264,9 @@
   "units": "T"
  },
  "summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_lfs": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "summary.pedestal_fits.mtanh.b_field_tor_pedestal_top_lfs.value",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "STRUCTURE",
   "documentation": "Toroidal field calculated at the position of the pressure pedestal top (as determined by the fit) on the low field side",
   "full_path": "summary/pedestal_fits/mtanh/b_field_tor_pedestal_top_lfs",
