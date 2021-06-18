@@ -4,6 +4,7 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+import glob
 
 # NOTES:
 # List of MDS+ signals
@@ -14,9 +15,24 @@ from omas.machine_mappings._common import *
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
+def nstx_filenames(filename, pulse):
+    if pulse >= 200184:# — > (200184 205433)
+        path = '01152015Av1.0'
+    elif pulse >= 112811: # — > (112811 143905)
+        path = '04202005Av1.0'
+    elif pulse >= 115151: #— > (115151 115178)
+        path = '04122005Av1.0'
+    elif pulse >= 106806:# — > (106806 114478)
+        path = '02072002Av1.0'
+    elif pulse >= 101099: # — > (101099 106807)
+        path = '02222000Av1.0'
+    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', path, filename])
+    filename = glob.glob(filename + '*')[0]
+    printd(f'Reading {filename}', topic='machine')
+    return filename
 
-@machine_mapping_function(__regression_arguments__)
-def pf_active_hardware(ods):
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def pf_active_hardware(ods, pulse):
     r"""
     Loads NSTX-U tokamak poloidal field coil hardware geometry
 
@@ -24,12 +40,10 @@ def pf_active_hardware(ods):
     """
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
 
     for c in ods[f'pf_active.coil']:
@@ -44,7 +58,7 @@ def pf_active_hardware(ods):
             ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
 
 
-@machine_mapping_function(__regression_arguments__, pulse=204202)
+@machine_mapping_function(__regression_arguments__, pulse=140001)
 def pf_active_coil_current_data(ods, pulse):
     r"""
     Load NSTX-U tokamak pf_active coil current data
@@ -56,44 +70,28 @@ def pf_active_coil_current_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(pf_active_hardware)(ods1)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels=range(14),
-            identifier='pf_active.coil.{channel}.identifier',
-            time='pf_active.coil.{channel}.current.time',
-            data='pf_active.coil.{channel}.current.data',
-            validity=None,
-            mds_server='nstxu',
-            mds_tree='ENGINEERING',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    unwrap(pf_active_hardware)(ods1, pulse)
 
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
             ods1,
             pulse,
-            channels=range(14, 54),
+            channels='pf_active.coil',
             identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
             mds_server='nstxu',
-            mds_tree='OPERATIONS',
+            mds_tree='NSTX',
             tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
+            homogeneous_time=False
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
@@ -112,31 +110,25 @@ def pf_active_coil_current_data(ods, pulse):
             print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
-@machine_mapping_function(__regression_arguments__)
-def magnetics_hardware(ods):
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def magnetics_hardware(ods, pulse):
     r"""
     Load NSTX-U tokamak flux loops and magnetic probes hardware geometry
 
     :param ods: ODS instance
     """
-    # magnetics signals from
-    #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
-    #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
-
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     for k in ods[f'magnetics.flux_loop']:
-        ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
+        ods[f'magnetics.flux_loop.{k}.identifier'] = str(signals['mappings']['tfl'][k + 1]['mds_name']).strip('\\')
 
     for k in ods[f'magnetics.b_field_pol_probe']:
-        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = signals['mappings']['bmc'][k + 1]['mds_name'].strip('\\')
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = str(signals['mappings']['bmc'][k + 1]['mds_name']).strip('\\')
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -151,7 +143,7 @@ def magnetics_floops_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -166,12 +158,11 @@ def magnetics_floops_data(ods, pulse):
             mds_tree='OPERATIONS',
             tdi_expression='\\{signal}',
             time_norm=1.0,
-            data_norm=1.0 / 2 / np.pi,
+            data_norm=1.0 / 2.0 / np.pi,
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     # flux loops
     tfl_signals = signals['mappings']['tfl']
@@ -179,7 +170,7 @@ def magnetics_floops_data(ods, pulse):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
-            abs_error = tfl_signals[channel + 1]['abs_error']
+            abs_error = tfl_signals[channel + 1]['abs_error'] / 2.0 / np.pi
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
             error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
@@ -197,7 +188,7 @@ def magnetics_probes_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -216,8 +207,7 @@ def magnetics_probes_data(ods, pulse):
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     bmc_signals = signals['mappings']['bmc']
     for channel in ods1['magnetics.b_field_pol_probe']:
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
@@ -268,13 +258,13 @@ def ip_bt_dflux_data(ods, pulse):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     # F_DIA does not work at least for 204202
-    signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
-    signals['DL'][0]['mds_tree'] = 'operations'
-    signals['DL'][0]['mds_tree_resolved'] = 'operations'
+    if pulse > 200000:
+        signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
+        signals['DL'][0]['mds_tree'] = 'operations'
+        signals['DL'][0]['mds_tree_resolved'] = 'operations'
 
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
 

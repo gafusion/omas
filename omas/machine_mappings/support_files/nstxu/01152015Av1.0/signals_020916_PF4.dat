@@ -51,7 +51,6 @@
 ;===
 ;=== NOTE: See notes at end for stated errors, bit noise, etc. as well as definitions
 ;=== 
-;Name   sigltype  mapvar    mapindx  MDStree Read  relError  absError    Signalthreshold Useerr Conversionfactor  Pri Fitwgt  t  Smoothingwin   DataDesignation Description
 ;Name   sigl  map    map  MDS Read      Error    Signal Use Conversion  Pri Fit  t  Smoothing   Designation
 ;       type  var    indx tree sig? rel  abs  threshold err? factor         wgt idx win (s)   Data  Auxiliary
 ;=====================================================================================================================================================================
