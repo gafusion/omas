@@ -71,7 +71,7 @@ PF1BL     SC  icoil    13  e  n  0.005  8.0      20.0     y  1.0       1.0 1.0  
 PF1AL     SC  icoil    14  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1AL -
 IP1       PR  ip        1  e  y  0.005  10.0e3   50.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IP1    -  ;(A) - 0.5%,10e3,50e3 standard
 TF1       TF  none      1  e  y  0.010  30.0     50.0     y  7.2385e-6 1.0 1.0  -1  2.1e-3  \\ITF    -  ;(A -> m*T)
-FDIA      DL  dflux     1  e  n  0.04   0.004    0.004    y  1.0       1.0 1.0  -1  2.1e-3  \\FDIA   -  ;(Wb) error was 2%, 2mWb
+FDIA      DL  dflux     1  o  y  0.04   0.004    0.004    y  1.0       1.0 1.0  -1  2.1e-3  \\F_DIAMAG2   -  ;(Wb) error was 2%, 2mWb
 HHFWPWR   RP  none      1  r  n  0.100  100.0    100.0    y  1.0       1.0 1.0  -1  2.1e-3  \\HHFW_POWER - ;(W) === RF signals
 ;
 VFLOHM    VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOHM    -  ;(V) === Ops signals

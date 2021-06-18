@@ -260,12 +260,6 @@ def ip_bt_dflux_data(ods, pulse):
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
-    # F_DIA does not work at least for 204202
-    if pulse > 200000:
-        signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
-        signals['DL'][0]['mds_tree'] = 'operations'
-        signals['DL'][0]['mds_tree_resolved'] = 'operations'
-
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
 
     TDIs = {}
