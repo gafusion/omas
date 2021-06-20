@@ -345,7 +345,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             if 'coordinates' in info:
                 mappings[location]['COORDINATES'] = list(map(i2o, info['coordinates']))
                 for coordinate in mappings[location]['COORDINATES']:
-                    if coordinate == '1...N':
+                    if '1...' in coordinate:
                         continue
                     elif coordinate not in mappings:
                         text = f'Missing coordinate {coordinate} for {location}'
