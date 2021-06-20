@@ -99,13 +99,14 @@ def pf_active_coil_current_data(ods, pulse):
             rel_error = data * icoil_signals[channel + 1]['rel_error']
             abs_error = icoil_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
+            # error[error < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
             ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
         else:
             print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
@@ -158,23 +159,23 @@ def magnetics_floops_data(ods, pulse):
             mds_tree='OPERATIONS',
             tdi_expression='\\{signal}',
             time_norm=1.0,
-            data_norm=1.0 / 2.0 / np.pi,
+            data_norm=1.0,
         )
 
     # handle uncertainties
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
-
-    # flux loops
     tfl_signals = signals['mappings']['tfl']
     for channel in range(len(ods1['magnetics.flux_loop']) - 1):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
-            abs_error = tfl_signals[channel + 1]['abs_error'] / 2.0 / np.pi
+            abs_error = tfl_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
+            # error[error < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
-
+            # normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
+            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= (2.0 * np.pi)
+            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= (2.0 * np.pi)
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
@@ -215,7 +216,7 @@ def magnetics_probes_data(ods, pulse):
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
+            # error[error < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
 
@@ -270,7 +271,7 @@ def ip_bt_dflux_data(ods, pulse):
 
     for item in ['PR', 'TF', 'DL']:
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
-            ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
+            ods[mappings[item] + '.data'] = res[item + '_data']
             ods[mappings[item] + '.time'] = res[item + '_time']
         else:
             printe(f'No data for {mappings[item]}')
@@ -284,10 +285,11 @@ def ip_bt_dflux_data(ods, pulse):
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
-                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
-            )
+            error[error < signals[item][0]['sig_thresh']] = signals[item][0]['sig_thresh']
             ods[mappings[item] + '.data_error_upper'] = error
+            # normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
+            ods[mappings[item] + '.data'] *= signals[item][0]['scale']
+            ods[mappings[item] + '.data_error_upper'] *= signals[item][0]['scale']
 
 
 @machine_mapping_function(__regression_arguments__, pulse=140001)
