@@ -481,6 +481,52 @@ def equilibrium_form_constraints(
         except Exception as _excp:
             raise _excp.__class__(f'Problem with b_field_tor_vacuum_r: {_excp}')
 
+    # mse
+    if 'mse_polarisation_angle' in constraints and 'mse.channel.0.polarisation_angle.data' in ods:
+        average = averages.get('mse_polarisation_angle', default_average)
+        for channel in ods[f'mse.channel']:
+            printd(f'Working on mse.channel.{channel}', topic='machine')
+
+            try:
+                # get
+                label = ods[f'mse.channel.{channel}.name']
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.source'] = label
+                valid = ods.get(
+                    f'mse.channel.{channel}.polarisation_angle.validity', 1 - int(f'mse.channel.{channel}.polarisation_angle.data' in ods)
+                )
+                if valid == 0:  # 0 means that the data is good
+                    data = ods[f'mse.channel.{channel}.polarisation_angle.data']
+                    time = ods[f'mse.channel.{channel}.polarisation_angle.time']
+                    if f'mse.channel.{channel}.polarisation_angle.data_error_upper' in ods:
+                        error = ods[f'mse.channel.{channel}.polarisation_angle.data_error_upper']
+                    else:
+                        error = None
+                    # process
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured'] = const[
+                            time_index
+                        ]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
+                            ] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
+
     return ods_n
 
 
