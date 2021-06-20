@@ -136,7 +136,22 @@ def pf_coils_to_ods(ods, coil_data):
     return ods
 
 
-def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, mds_server, mds_tree, tdi_expression, time_norm, data_norm, homogeneous_time=True):
+def fetch_assign(
+    ods,
+    ods1,
+    pulse,
+    channels,
+    identifier,
+    time,
+    data,
+    validity,
+    mds_server,
+    mds_tree,
+    tdi_expression,
+    time_norm,
+    data_norm,
+    homogeneous_time=True,
+):
     """
     Utility function to get data from a list of TDI signals which all share the same time basis
 

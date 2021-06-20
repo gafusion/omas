@@ -164,10 +164,10 @@
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "mse.channel.:": {
-  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r})"
  },
  "mse.channel.:.active_spatial_resolution.:": {
-  "PYTHON": "mse_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.centre.phi": {
   "COCOSIO": 11,
@@ -177,6 +177,12 @@
   "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.centre.z": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.geometric_coefficients": {
+  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.time": {
   "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "mse.channel.:.name": {

@@ -15,21 +15,23 @@ import glob
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
+
 def nstx_filenames(filename, pulse):
-    if pulse >= 200184:# — > (200184 205433)
+    if pulse >= 200184:  # — > (200184 205433)
         path = '01152015Av1.0'
-    elif pulse >= 112811: # — > (112811 143905)
+    elif pulse >= 112811:  # — > (112811 143905)
         path = '04202005Av1.0'
-    elif pulse >= 115151: #— > (115151 115178)
+    elif pulse >= 115151:  # — > (115151 115178)
         path = '04122005Av1.0'
-    elif pulse >= 106806:# — > (106806 114478)
+    elif pulse >= 106806:  # — > (106806 114478)
         path = '02072002Av1.0'
-    elif pulse >= 101099: # — > (101099 106807)
+    elif pulse >= 101099:  # — > (101099 106807)
         path = '02222000Av1.0'
     filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', path, filename])
     filename = glob.glob(filename + '*')[0]
     printd(f'Reading {filename}', topic='machine')
     return filename
+
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def pf_active_hardware(ods, pulse):
@@ -87,7 +89,7 @@ def pf_active_coil_current_data(ods, pulse):
             tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
-            homogeneous_time=False
+            homogeneous_time=False,
         )
 
     # handle uncertainties
@@ -174,8 +176,9 @@ def magnetics_floops_data(ods, pulse):
             # error[error < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
             # normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
-            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= (2.0 * np.pi)
-            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= (2.0 * np.pi)
+            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= 2.0 * np.pi
+            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= 2.0 * np.pi
+
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
@@ -413,9 +416,14 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
 
+        # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].time'] = 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
+            coef_list.get(f'AA{k}GAM', [0] * (ch + 1))[ch] for k in range(9)
+        ]
 
 
 # =====================
