@@ -496,7 +496,7 @@ def equilibrium_form_constraints(
                     f'mse.channel.{channel}.polarisation_angle.validity', 1 - int(f'mse.channel.{channel}.polarisation_angle.data' in ods)
                 )
                 if valid == 0:  # 0 means that the data is good
-                    data = ods[f'mse.channel.{channel}.polarisation_angle.data']
+                    data = copy.deepcopy(ods[f'mse.channel.{channel}.polarisation_angle.data'])
                     time = ods[f'mse.channel.{channel}.polarisation_angle.time']
                     if f'mse.channel.{channel}.polarisation_angle.data_error_upper' in ods:
                         error = ods[f'mse.channel.{channel}.polarisation_angle.data_error_upper']
@@ -505,6 +505,9 @@ def equilibrium_form_constraints(
                     # process
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
+                    if f'mse.channel.{channel}.polarisation_angle.validity_timed' in ods:
+                        data[ods[f'mse.channel.{channel}.polarisation_angle.validity_timed'] != 0] = numpy.nan
+                        error[ods[f'mse.channel.{channel}.polarisation_angle.validity_timed'] != 0] = numpy.nan
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
                     if error is not None:
                         const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)

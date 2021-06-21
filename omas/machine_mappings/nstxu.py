@@ -398,6 +398,13 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     MDSname, MDSERRname, norm, name, fit = measurements
     if isinstance(res[name], Exception):
         return
+
+    # mark as invalid points in time that have an error 10 times the median normalized mse error value
+    rr = res[name + '_error'] / np.median(abs(res[name]))
+    mm = np.median(rr) * 10  #
+    validity_timed = np.zeros_like(rr)
+    validity_timed[rr > mm] = 1.0
+
     for ch in range(res[name].shape[1]):  # Loop through subset of good channels with pitch angle data
         valid = res[name + '_error'][:, ch] > 0  # uncertainty greater than zero
         valid &= res[name][:, ch] != 0  # no exact zero values
@@ -412,7 +419,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
         ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = (valid != 1).astype(int)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
 
