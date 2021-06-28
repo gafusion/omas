@@ -467,8 +467,8 @@ def electrpn_cyclotron_emission_hardware(ods, pulse=133221, fast=False):
 
     :param pulse: int
 
-    :param revision: string
-        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+    :param fast: bool
+        Use data sampled at high frequency
     """
     unwrap(electron_cyclotron_emission_data)(ods, pulse, _measurements=False, fast=fast)
 
@@ -476,12 +476,12 @@ def electrpn_cyclotron_emission_hardware(ods, pulse=133221, fast=False):
 @machine_mapping_function(__all__)
 def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast=False):
     """
-    Loads DIII-D Thomson measurement data
+   Loads DIII-D Electron cyclotron emission data
 
     :param pulse: int
 
-    :param revision: string
-        Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
+    :param fast: bool
+            Use data sampled at high frequency
     """
     fast = 'F' if fast else ''
     setup = '\\ECE::TOP.SETUP.'
@@ -503,7 +503,6 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         query['TIME'] = f"dim_of({TECE + '01'})"
     ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
-    # Read the Thomson scattering hardware map to figure out which lens each chord looks through
     # Not in mds+
     points = [{},{}]
     points[0]['r'] = 2.5
