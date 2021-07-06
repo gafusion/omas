@@ -623,9 +623,19 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
+    unwrap(charge_exchange_data)(ods, pulse, revision, _measurements=False)
+
+@machine_mapping_function(__all__)
+def charge_exchange_data(ods, pulse=133221, analysis_type='CERQUICK', _measurements=True):
+    """
+    Gathers DIII-D CER measurement data from MDSplus
+
+    :param analysis_type: string
+        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
+    """
     import MDSplus
 
-    printd('Setting up DIII-D CER locations...', topic='machine')
+    printd('Setting up DIII-D CER data...', topic='machine')
 
     cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
 
@@ -639,7 +649,10 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
         except (TypeError, KeyError):
             continue
         for k, channel in enumerate(channels):
-            for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
+            fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI']
+            if _measurements:
+                fetch_keys.extend([])
+            for pos in :
                 TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
 
