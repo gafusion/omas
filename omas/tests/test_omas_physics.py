@@ -193,10 +193,10 @@ class TestOmasPhysics(UnittestCaseOmas):
         return
 
     def test_line_average_density(self):
-    	ods= ODS().sample()
-    	ods.physics_summary_lineaverage_density(ods, update=True)
-    	assert ods['summary.line_average.n_e.value'] is not None
-    	return
+        ods= ODS().sample()
+        ods.physics_summary_lineaverage_density(ods, update=True)
+        assert ods['summary.line_average.n_e.value'] is not None
+        return
 
     def test_current_from_eq(self):
         ods = ODS().sample_equilibrium()
