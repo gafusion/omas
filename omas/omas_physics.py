@@ -535,7 +535,7 @@ def equilibrium_form_constraints(
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
-def summary_greenwald(ods, time_index=None, update=True):
+def summary_greenwald(ods, update=True):
     """
     Calculates Greenwald Fraction for each time slice and stores them in the summary ods.
 
