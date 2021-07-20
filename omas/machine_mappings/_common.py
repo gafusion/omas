@@ -136,7 +136,22 @@ def pf_coils_to_ods(ods, coil_data):
     return ods
 
 
-def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, mds_server, mds_tree, tdi_expression, time_norm, data_norm):
+def fetch_assign(
+    ods,
+    ods1,
+    pulse,
+    channels,
+    identifier,
+    time,
+    data,
+    validity,
+    mds_server,
+    mds_tree,
+    tdi_expression,
+    time_norm,
+    data_norm,
+    homogeneous_time=True,
+):
     """
     Utility function to get data from a list of TDI signals which all share the same time basis
 
@@ -166,6 +181,8 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
 
     :param data_norm: data normalization
 
+    :param homogeneous_time: data has homogeneous time basis
+
     :return: ODS instance
     """
     t = None
@@ -179,7 +196,9 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
             signal = ods1[identifier.format(**locals())]
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
-            if stage == 'fetch' and t is None:
+            if not homogeneous_time:
+                TDIs.append(f'dim_of({TDI},0)')
+            elif stage == 'fetch' and t is None:
                 try:
                     t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
                     if len(t) <= 1:
@@ -187,10 +206,13 @@ def fetch_assign(ods, ods1, pulse, channels, identifier, time, data, validity, m
                 except Exception:
                     pass
             if stage == 'assign':
-                if time is None:
+                if homogeneous_time and t is None:
                     raise RuntimeError(f'Could not determine time info from {TDI} signals')
                 if not isinstance(tmp[TDI], Exception):
-                    ods[time.format(**locals())] = t * time_norm
+                    if not homogeneous_time:
+                        ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
+                    else:
+                        ods[time.format(**locals())] = t * time_norm
                     ods[data.format(**locals())] = tmp[TDI] * data_norm
                     if validity is not None:
                         if len(ods[time.format(**locals())]) == len(ods[data.format(**locals())]) and len(ods[data.format(**locals())]) > 1:

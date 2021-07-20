@@ -4,6 +4,7 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+import glob
 
 # NOTES:
 # List of MDS+ signals
@@ -15,8 +16,25 @@ __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
 
-@machine_mapping_function(__regression_arguments__)
-def pf_active_hardware(ods):
+def nstx_filenames(filename, pulse):
+    if pulse >= 200184:  # — > (200184 205433)
+        path = '01152015Av1.0'
+    elif pulse >= 112811:  # — > (112811 143905)
+        path = '04202005Av1.0'
+    elif pulse >= 115151:  # — > (115151 115178)
+        path = '04122005Av1.0'
+    elif pulse >= 106806:  # — > (106806 114478)
+        path = '02072002Av1.0'
+    elif pulse >= 101099:  # — > (101099 106807)
+        path = '02222000Av1.0'
+    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', path, filename])
+    filename = glob.glob(filename + '*')[0]
+    printd(f'Reading {filename}', topic='machine')
+    return filename
+
+
+@machine_mapping_function(__regression_arguments__, pulse=204202)
+def pf_active_hardware(ods, pulse):
     r"""
     Loads NSTX-U tokamak poloidal field coil hardware geometry
 
@@ -24,12 +42,10 @@ def pf_active_hardware(ods):
     """
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
 
     for c in ods[f'pf_active.coil']:
@@ -44,7 +60,7 @@ def pf_active_hardware(ods):
             ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
 
 
-@machine_mapping_function(__regression_arguments__, pulse=204202)
+@machine_mapping_function(__regression_arguments__, pulse=140001)
 def pf_active_coil_current_data(ods, pulse):
     r"""
     Load NSTX-U tokamak pf_active coil current data
@@ -56,44 +72,28 @@ def pf_active_coil_current_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(pf_active_hardware)(ods1)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels=range(14),
-            identifier='pf_active.coil.{channel}.identifier',
-            time='pf_active.coil.{channel}.current.time',
-            data='pf_active.coil.{channel}.current.data',
-            validity=None,
-            mds_server='nstxu',
-            mds_tree='ENGINEERING',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    unwrap(pf_active_hardware)(ods1, pulse)
 
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
             ods1,
             pulse,
-            channels=range(14, 54),
+            channels='pf_active.coil',
             identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
             mds_server='nstxu',
-            mds_tree='OPERATIONS',
+            mds_tree='NSTX',
             tdi_expression='\\{signal}',
             time_norm=1.0,
             data_norm=1.0,
+            homogeneous_time=False,
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
@@ -101,42 +101,37 @@ def pf_active_coil_current_data(ods, pulse):
             rel_error = data * icoil_signals[channel + 1]['rel_error']
             abs_error = icoil_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
+            # error[error < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
             ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
         else:
             print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
-@machine_mapping_function(__regression_arguments__)
-def magnetics_hardware(ods):
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def magnetics_hardware(ods, pulse):
     r"""
     Load NSTX-U tokamak flux loops and magnetic probes hardware geometry
 
     :param ods: ODS instance
     """
-    # magnetics signals from
-    #  OMFITnstxMHD('/p/spitfire/s1/common/plasma/phoenix/cdata/signals_020916_PF4.dat' ,serverPicker='portal')
-    #  OMFITnstxMHD('/p/spitfire/s1/common/Greens/NSTX/Jan2015/01152015Av1.0/diagSpec01152015.dat' ,serverPicker='portal')
-
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     for k in ods[f'magnetics.flux_loop']:
-        ods[f'magnetics.flux_loop.{k}.identifier'] = signals['mappings']['tfl'][k + 1]['mds_name'].strip('\\')
+        ods[f'magnetics.flux_loop.{k}.identifier'] = str(signals['mappings']['tfl'][k + 1]['mds_name']).strip('\\')
 
     for k in ods[f'magnetics.b_field_pol_probe']:
-        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = signals['mappings']['bmc'][k + 1]['mds_name'].strip('\\')
+        ods[f'magnetics.b_field_pol_probe.{k}.identifier'] = str(signals['mappings']['bmc'][k + 1]['mds_name']).strip('\\')
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -151,7 +146,7 @@ def magnetics_floops_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -166,14 +161,11 @@ def magnetics_floops_data(ods, pulse):
             mds_tree='OPERATIONS',
             tdi_expression='\\{signal}',
             time_norm=1.0,
-            data_norm=1.0 / 2 / np.pi,
+            data_norm=1.0,
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
-
-    # flux loops
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     tfl_signals = signals['mappings']['tfl']
     for channel in range(len(ods1['magnetics.flux_loop']) - 1):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
@@ -181,8 +173,11 @@ def magnetics_floops_data(ods, pulse):
             rel_error = data * tfl_signals[channel + 1]['rel_error']
             abs_error = tfl_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
+            # error[error < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
+            # normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
+            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= 2.0 * np.pi
+            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= 2.0 * np.pi
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -197,7 +192,7 @@ def magnetics_probes_data(ods, pulse):
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -216,8 +211,7 @@ def magnetics_probes_data(ods, pulse):
         )
 
     # handle uncertainties
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     bmc_signals = signals['mappings']['bmc']
     for channel in ods1['magnetics.b_field_pol_probe']:
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
@@ -225,7 +219,7 @@ def magnetics_probes_data(ods, pulse):
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
+            # error[error < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
 
@@ -268,13 +262,7 @@ def ip_bt_dflux_data(ods, pulse):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
-    signals_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', 'signals.dat'])
-    signals = get_support_file(OMFITnstxMHD, signals_dat_filename)
-
-    # F_DIA does not work at least for 204202
-    signals['DL'][0]['mds_name'] = '\\F_DIAMAG2'
-    signals['DL'][0]['mds_tree'] = 'operations'
-    signals['DL'][0]['mds_tree_resolved'] = 'operations'
+    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
 
@@ -286,7 +274,7 @@ def ip_bt_dflux_data(ods, pulse):
 
     for item in ['PR', 'TF', 'DL']:
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
-            ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
+            ods[mappings[item] + '.data'] = res[item + '_data']
             ods[mappings[item] + '.time'] = res[item + '_time']
         else:
             printe(f'No data for {mappings[item]}')
@@ -300,10 +288,11 @@ def ip_bt_dflux_data(ods, pulse):
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[data < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
-                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
-            )
+            error[error < signals[item][0]['sig_thresh']] = signals[item][0]['sig_thresh']
             ods[mappings[item] + '.data_error_upper'] = error
+            # normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
+            ods[mappings[item] + '.data'] *= signals[item][0]['scale']
+            ods[mappings[item] + '.data_error_upper'] *= signals[item][0]['scale']
 
 
 @machine_mapping_function(__regression_arguments__, pulse=140001)
@@ -409,6 +398,13 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     MDSname, MDSERRname, norm, name, fit = measurements
     if isinstance(res[name], Exception):
         return
+
+    # mark as invalid points in time that have an error 10 times the median normalized mse error value
+    rr = res[name + '_error'] / np.median(abs(res[name]))
+    mm = np.median(rr) * 10  #
+    validity_timed = np.zeros_like(rr)
+    validity_timed[rr > mm] = 1.0
+
     for ch in range(res[name].shape[1]):  # Loop through subset of good channels with pitch angle data
         valid = res[name + '_error'][:, ch] > 0  # uncertainty greater than zero
         valid &= res[name][:, ch] != 0  # no exact zero values
@@ -423,13 +419,18 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
         ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = (valid != 1).astype(int)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
 
+        # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].time'] = 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
+            coef_list.get(f'AA{k}GAM', [0] * (ch + 1))[ch] for k in range(9)
+        ]
 
 
 # =====================
