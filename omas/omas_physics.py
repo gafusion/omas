@@ -587,6 +587,8 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     :param time_index: time slices to process
 
     :param update: operate in place
+    
+    :param doPlot: plots the interferometer lines on top of the equilibrium boundary shape
 
     :return: updated ods
     """
@@ -682,6 +684,15 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_thermal_stored_energy(ods, update=True):
+    """
+    Calculates the stored energy based on the contents of core_profiles for all time-slices
+
+    :param ods: input ods
+
+    :param update: operate in place
+    
+    :return: updated ods
+    """
     ods.physics_core_profiles_pressures()
     thermal_energy = []
     for time_index in ods['core_profiles.profiles_1d']:
@@ -699,6 +710,8 @@ def summary_taue(ods,thermal=True, update=True):
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
     :param ods: input ods
+    
+    :thermal: calculates the thermal part of the energy confinement time from core_profiles if True, otherwise use the stored energy MHD from the equilibrium ods
 
     :param update: operate in place
 
@@ -713,7 +726,6 @@ def summary_taue(ods,thermal=True, update=True):
     # update ODS with stored energy from equilibrium
     ods.physics_equilibrium_stored_energy()
     ods.physics_summary_thermal_stored_energy()
-
 
     tau_e_scaling = []
     tau_e_MHD = []
