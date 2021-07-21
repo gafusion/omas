@@ -558,24 +558,29 @@ def summary_greenwald(ods, update=True):
     for time_index in ods['equilibrium.time_slice']:
         with omas_environment(
             ods,
-            coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]},
+            coordsio={
+                'core_profiles.profiles_1d.%d.grid.rho_tor_norm'
+                % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]
+            },
         ):
             ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
-            ne_vol_avg = (numpy.trapz(ne, x=volume) / volume[-1])
+            ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
                 ods.physics_summary_lineaverage_density()
                 nel.append(ods['interferometer.channel.0.n_e_line_average.data'][time_index])
             else:
-                print("Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel")
+                print(
+                    "Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
+                )
                 nel.append(ne_vol_avg)
     ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
     return ods_n
 
 
 @add_to__ODS__
-@preprocess_ods('core_profiles', 'equilibrium','interferometer')
+@preprocess_ods('core_profiles', 'equilibrium', 'interferometer')
 def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True, doPlot=False):
     """
     Calculates line-average electron density for each time slice and stores them in the summary ods
@@ -587,12 +592,13 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     :param time_index: time slices to process
 
     :param update: operate in place
-    
+
     :param doPlot: plots the interferometer lines on top of the equilibrium boundary shape
 
     :return: updated ods
     """
     import scipy
+
     if doPlot:
         from matplotlib import pyplot as plt
 
@@ -629,7 +635,9 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point']]
 
     if doPlot:
-        plt.plot(ods['equilibrium.time_slice[0].boundary.outline.r'], ods['equilibrium.time_slice[0].boundary.outline.z'] , label='Boundary shape')
+        plt.plot(
+            ods['equilibrium.time_slice[0].boundary.outline.r'], ods['equilibrium.time_slice[0].boundary.outline.z'], label='Boundary shape'
+        )
         plt.xlabel('r [m]')
         plt.ylabel('z [m]')
 
@@ -656,7 +664,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             dist = numpy.zeros(line_grid)
 
             if doPlot:
-                plt.plot(Rline,Zline,label=f'interferometer path : {"-".join(ifpath)} channel:{channel}')
+                plt.plot(Rline, Zline, label=f'interferometer path : {"-".join(ifpath)} channel:{channel}')
                 plt.legend()
 
             for i, Rval in enumerate(Rline):
@@ -690,27 +698,27 @@ def summary_thermal_stored_energy(ods, update=True):
     :param ods: input ods
 
     :param update: operate in place
-    
+
     :return: updated ods
     """
     ods.physics_core_profiles_pressures()
     thermal_energy = []
     for time_index in ods['core_profiles.profiles_1d']:
         eq = ods[f'equilibrium.time_slice[{time_index}].profiles_1d']
-        volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'],xp=eq['rho_tor_norm'],fp=eq['volume'])
-        thermal_energy.append(numpy.trapz(3/2*ods['core_profiles.profiles_1d[0].pressure_thermal'],x=volume))
+        volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'], xp=eq['rho_tor_norm'], fp=eq['volume'])
+        thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
 
     ods['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
 
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
-def summary_taue(ods,thermal=True, update=True):
+def summary_taue(ods, thermal=True, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
     :param ods: input ods
-    
+
     :thermal: calculates the thermal part of the energy confinement time from core_profiles if True, otherwise use the stored energy MHD from the equilibrium ods
 
     :param update: operate in place
@@ -751,7 +759,9 @@ def summary_taue(ods,thermal=True, update=True):
                 ods.physics_summary_lineaverage_density()
                 nel = ods['interferometer.channel.0.n_e_line_average.data'][time_index]
             else:
-                print("Warning: taue calculation used volume average density instead of line average fill in ods['interferometer'] to use nel")
+                print(
+                    "Warning: taue calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
+                )
                 nel = ne_vol_avg
             # Naive weighted isotope average:
             n_deuterium_avg = 0.0
