@@ -461,74 +461,77 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
                 ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], tsdat[f'{system}_TEMP_E'][j])
             i += 1
 
-def electrpn_cyclotron_emission_hardware(ods, pulse=133221, fast=False):
+
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
     """
     Gathers DIII-D Electron cyclotron emission locations
 
     :param pulse: int
 
-    :param fast: bool
+    :param fast_ece: bool
         Use data sampled at high frequency
     """
-    unwrap(electron_cyclotron_emission_data)(ods, pulse, _measurements=False, fast=fast)
+    unwrap(electron_cyclotron_emission_data)(ods, pulse, _measurements=False, fast_ece=fast_ece)
 
 
-@machine_mapping_function(__all__)
-def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast=False):
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast_ece=False):
     """
-   Loads DIII-D Electron cyclotron emission data
+    Loads DIII-D Electron cyclotron emission data
 
     :param pulse: int
 
-    :param fast: bool
+    :param fast_ece: bool
             Use data sampled at high frequency
     """
-    fast = 'F' if fast else ''
+    fast_ece = 'F' if fast_ece else ''
     setup = '\\ECE::TOP.SETUP.'
-    cal = '\\ECE::TOP.CAL%s.' % fast
-    TECE = '\\ECE::TOP.TECE.TECE' + fast
+    cal = '\\ECE::TOP.CAL%s.' % fast_ece
+    TECE = '\\ECE::TOP.TECE.TECE' + fast_ece
+
     query = {}
-    for node, quantities in zip([setup, cal], \
-                             [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ'],\
-                             ['NUMCH']]):
+    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ'], ['NUMCH']]):
         for quantity in quantities:
             query[quantity] = node + quantity
     query['TIME'] = f"dim_of({TECE + '01'})"
     ece_map = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
     N_time = len(ece_map['TIME'])
     N_ch = ece_map['NUMCH'].item()
+
     if _measurements:
         query = {}
-        for ich in range(1,N_ch+1):
+        for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
-        query['TIME'] = f"dim_of({TECE + '01'})"
-    ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+        ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+
     # Not in mds+
-    points = [{},{}]
-    points[0]['r'] = 2.5
-    points[1]['r'] = 0.8
-    points[0]['phi'] = np.deg2rad(ece_map['ECEPHI']) 
-    points[1]['phi'] = np.deg2rad(ece_map['ECEPHI'])
-    dR = points[1]['r'] - points[0]['r']
-    dz = np.sin(np.deg2rad(ece_map['ECETHETA']))
-    points[0]['z'] = ece_map['ECEZH']
-    points[1]['z'] = points[0]['z'] + dz
-    for entry, point in zip([ods['ece']['line_of_sight']['first_point'], \
-                             ods['ece']['line_of_sight']['second_point']], \
-                            points):
-        for key in point:
-            entry[key] = point[key]
-    f = np.zeros(N_time)
+    if not _measurements:
+        points = [{}, {}]
+        points[0]['r'] = 2.5
+        points[1]['r'] = 0.8
+        points[0]['phi'] = np.deg2rad(ece_map['ECEPHI'])
+        points[1]['phi'] = np.deg2rad(ece_map['ECEPHI'])
+        dz = np.sin(np.deg2rad(ece_map['ECETHETA']))
+        points[0]['z'] = ece_map['ECEZH']
+        points[1]['z'] = points[0]['z'] + dz
+        for entry, point in zip([ods['ece.line_of_sight.first_point'], ods['ece.line_of_sight.second_point']], points):
+            for key in point:
+                entry[key] = point[key]
+
     # Assign data to ODS
+    f = np.zeros(N_time)
     for ich in range(N_ch):
         ch = ods['ece']['channel'][ich]
-        ch['name'] = 'ECE' + str(ich + 1)
-        ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
-        f[:] = ece_map['FREQ'][ich]
-        ch['frequency']['data'] = f
-        ch['time'] = ece_map['TIME']
         if _measurements:
-            ch['t_e']['data']  = ece_data[f'T{ich + 1}'] * 1.e3
+            ch['t_e']['data'] = ece_data[f'T{ich + 1}'] * 1.0e3
+        else:
+            ch['name'] = 'ECE' + str(ich + 1)
+            ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
+            ch['time'] = ece_map['TIME']
+            f[:] = ece_map['FREQ'][ich]
+            ch['frequency']['data'] = f
+
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def bolometer_hardware(ods, pulse):
@@ -844,6 +847,7 @@ def magnetics_probes_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
+
 
 if __name__ == '__main__':
     test_machine_mapping_functions(__all__, globals(), locals())
