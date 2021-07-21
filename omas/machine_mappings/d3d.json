@@ -10,6 +10,7 @@
   "PROFILES_tree": "ZIPFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
+  "fast_ece": false,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
@@ -88,6 +89,44 @@
  "core_profiles.profiles_1d.:.time": {
   "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
+ },
+ "ece.channel.:": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.frequency.data": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.identifier": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.name": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.t_e.data": {
+  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.time": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.first_point.r": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.first_point.z": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.second_point.r": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.line_of_sight.second_point.z": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
