@@ -591,10 +591,13 @@ def bolometer_data(ods, pulse):
 
     for ch in ods1['bolometer.channel']:
         ch_name = ods1[f'bolometer.channel[{ch}].identifier']
-        print(f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P')
+        TDI=f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P'
 
-        ods[f'bolometer.channel[{ch}].power.data'] = [0.0]
-        ods[f'bolometer.channel[{ch}].power.time'] = [0.0]
+        data = mdsvalue('d3d', 'BOLOM', pulse, f"data({TDI})").raw()
+        time = mdsvalue('d3d', 'BOLOM', pulse, f"dim_of({TDI},0)").raw()
+
+        ods[f'bolometer.channel[{ch}].power.data'] = data
+        ods[f'bolometer.channel[{ch}].power.time'] = time/1E3
 
 #================================
 @machine_mapping_function(__regression_arguments__, pulse=176235)
