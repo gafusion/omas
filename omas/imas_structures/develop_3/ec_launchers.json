@@ -861,6 +861,9 @@
   "units": "s"
  },
  "ec_launchers.launcher[:].steering_angle_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "ec_launchers.launcher{i}.steering_angle_tor.data",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Steering angle of the EC beam away from the poloidal plane that is increasing towards the positive phi axis, angle_tor=arcsin(k_phi/k), where k_phi is the component of the wave vector in the phi direction and k is the length of the wave vector. Here the term wave vector refers to the mean wave vector in the EC beam",
   "full_path": "ec_launchers/launcher(i1)/steering_angle_tor",

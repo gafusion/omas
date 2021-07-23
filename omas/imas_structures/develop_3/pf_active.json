@@ -2,7 +2,7 @@
  "pf_active": {
   "documentation": "Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems",
   "full_path": "pf_active",
-  "lifecycle_last_change": "3.32.0",
+  "lifecycle_last_change": "3.32.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -398,7 +398,7 @@
   "cocos_leaf_name_aos_indices": "pf_active.coil{i}.current.data",
   "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "STRUCTURE",
-  "documentation": "Current in the coil, positive when counter-clockwise when seen from above",
+  "documentation": "Current fed in the coil (for 1 turn, to be multiplied by the number of turns to obtain the generated magnetic field), positive when flowing from side 1 to side 2 of the coil (inside the coil), this numbering being made consistently with the convention that the current is counter-clockwise when seen from above.",
   "full_path": "pf_active/coil(i1)/current",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -687,18 +687,19 @@
  },
  "pf_active.coil[:].element[:].geometry.oblique": {
   "data_type": "STRUCTURE",
-  "documentation": "Trapezoidal description of the element",
+  "documentation": "Parallelogram description of the element",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique",
   "lifecycle_status": "alpha",
   "structure_reference": "oblique_static"
  },
  "pf_active.coil[:].element[:].geometry.oblique.alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of first angle TBD",
+  "documentation": "Inclination of first angle measured counter-clockwise from horizontal outwardly directed radial vector (grad R).",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.alpha_error_index": {
   "data_type": "INT_TYPE",
@@ -713,7 +714,8 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.alpha_error_upper": {
   "data_type": "FLT_0D",
@@ -721,15 +723,17 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.beta": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of second angle TBD",
+  "documentation": "Inclination of second angle measured counter-clockwise from vertically upwards directed vector (grad Z). If both alpha and beta are zero (rectangle) then the simpler rectangular elements description should be used.",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/beta",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.beta_error_index": {
   "data_type": "INT_TYPE",
@@ -744,7 +748,8 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/beta_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.beta_error_upper": {
   "data_type": "FLT_0D",
@@ -752,46 +757,85 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/beta_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_active.coil[:].element[:].geometry.oblique.length": {
+ "pf_active.coil[:].element[:].geometry.oblique.length_alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Length",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length",
+  "documentation": "Length of the parallelogram side inclined with angle alpha with respect to the major radius axis",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_active.coil[:].element[:].geometry.oblique.length_error_index": {
+ "pf_active.coil[:].element[:].geometry.oblique.length_alpha_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"length\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_error_index",
+  "documentation": "Index in the error_description list for \"length_alpha\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_alpha_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pf_active.coil[:].element[:].geometry.oblique.length_error_lower": {
+ "pf_active.coil[:].element[:].geometry.oblique.length_alpha_error_lower": {
   "data_type": "FLT_0D",
-  "documentation": "Lower error for \"length\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_error_lower",
+  "documentation": "Lower error for \"length_alpha\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_active.coil[:].element[:].geometry.oblique.length_error_upper": {
+ "pf_active.coil[:].element[:].geometry.oblique.length_alpha_error_upper": {
   "data_type": "FLT_0D",
-  "documentation": "Upper error for \"length\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_error_upper",
+  "documentation": "Upper error for \"length_alpha\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_active.coil[:].element[:].geometry.oblique.length_beta": {
+  "data_type": "FLT_0D",
+  "documentation": "Length of the parallelogram side inclined with angle beta with respect to the height axis",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_beta",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_active.coil[:].element[:].geometry.oblique.length_beta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"length_beta\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_beta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.coil[:].element[:].geometry.oblique.length_beta_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length_beta\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_beta_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_active.coil[:].element[:].geometry.oblique.length_beta_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length_beta\"",
+  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/length_beta_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.r": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre R",
+  "documentation": "Major radius of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/r",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.r_error_index": {
   "data_type": "INT_TYPE",
@@ -806,7 +850,8 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/r_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.r_error_upper": {
   "data_type": "FLT_0D",
@@ -814,46 +859,17 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/r_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
- },
- "pf_active.coil[:].element[:].geometry.oblique.thickness": {
-  "data_type": "FLT_0D",
-  "documentation": "Thickness",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/thickness",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "pf_active.coil[:].element[:].geometry.oblique.thickness_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"thickness\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/thickness_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pf_active.coil[:].element[:].geometry.oblique.thickness_error_lower": {
-  "data_type": "FLT_0D",
-  "documentation": "Lower error for \"thickness\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/thickness_error_lower",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "pf_active.coil[:].element[:].geometry.oblique.thickness_error_upper": {
-  "data_type": "FLT_0D",
-  "documentation": "Upper error for \"thickness\"",
-  "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/thickness_error_upper",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.z": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre Z",
+  "documentation": "Height of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/z",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.z_error_index": {
   "data_type": "INT_TYPE",
@@ -868,7 +884,8 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/z_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.oblique.z_error_upper": {
   "data_type": "FLT_0D",
@@ -876,7 +893,8 @@
   "full_path": "pf_active/coil(i1)/element(i2)/geometry/oblique/z_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_active.coil[:].element[:].geometry.outline": {
   "data_type": "STRUCTURE",

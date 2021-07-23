@@ -1,0 +1,401 @@
+;=== Measured signals to be read from NSTX-U diagnostics ===
+;===
+;=== CY 2015 signals (magnetics only)
+;===
+;=== S.A. Sabbagh 01/13/16: From signals_011316_PF4.dat: Switch to /IP1 should have better compensation now
+;=== S.A. Sabbagh 01/13/16: From signals_120115_PF4.dat: B2OBDL4T out
+;=== S.A. Sabbagh 12/01/15: From signals_111115a2.dat, Turn on PF1A, PF2. CSCL3 out; ver '_PF4' turns on PF4 coil
+;=== S.A. Sabbagh 11/11/15: From signals_111115a1.dat, Reff tweaked (final tweaking pre-ISTP; reduce vessel seg current error bars)
+;=== S.A. Sabbagh 11/11/15: From signals_110515a3.dat, Reff tweaked (realized that copper tubing reduced Reff in upper/lower CS)
+;=== S.A. Sabbagh 11/05/15: From signals_110515a2.dat, Reff tweaked, as last step led to a significant improvement
+;=== S.A. Sabbagh 11/05/15: From signals_110515a2.dat, Reff tweaked, as last step led to a significant improvement
+;=== S.A. Sabbagh 11/05/15: From signals_110515a1.dat, Reff changed to have lower CS resistances only in crown and upper/lower sleeves
+;=== S.A. Sabbagh 11/05/15: From signals_081015v3.dat, Reff changed to have lower CS resistance throughout full CS
+;=== S.A. Sabbagh 11/05/15: From signals_081015v2.dat, B1CSC2U6, B2IBDVU1N out
+;=== S.A. Sabbagh 08/10/15: From signals_080715v2.dat, B2IBDVU1N in,B2OBDL1T,B2OBDL3T out; v2: B2OBDL1T,B2OBDL3T back in
+;=== S.A. Sabbagh 08/07/15: Added 7 new probes now available; v2: B2IBDVU1N out
+;=== S.A. Sabbagh 08/06/15: First signals file for NSTX-U EFIT - for ISTP and CD-4 first plasma
+;===                       From "test" signals file "signals_042415a5.dat"
+;===                       NOTE: Magnetics are still being fully calibrated. Signals file will be updated accordingly.
+;===                       NOTE: Only a subset of the PF coils are being used for CD-4 plasmas
+;===
+;=== S.A. Sabbagh 4/24/15: (ver "a5") 2nd iteration of wall effective resistances 
+;=== S.A. Sabbagh 4/24/15: (ver "a4") 2nd iteration of wall effective resistances 
+;=== S.A. Sabbagh 4/24/15: (ver "a3") 1st iteration of wall effective resistances 
+;===
+;=== S.A. Sabbagh 4/24/15: (ver "a2") Further changes:
+;===   - FLPPPU3 taken out
+;===
+;=== S.A. Sabbagh 4/24/15: Further changes:
+;===   - Polarity flip taken out for FLSPPU2
+;===
+;=== S.A. Sabbagh 4/23/15: Continue Taking out signals that are not integrated/digitized (as per C. Myers)
+;===   - Also, disable PF coils that are open loop for CD-4 first plasma operations (except leave PF1C's in the circuit)
+;===   - Also, FLSPPU2 has reversed sign, which will be corrected in subsequent shots
+;===
+;=== S.A. Sabbagh 4/22/15: Taking out signals that are either bad, or not integrated/digitized (as per C. Myers)
+;===
+;=== S.A. Sabbagh 4/17/15: All PF coils switched on, no FDIA, no HHFW power - magnetics NO YET CALIBRATED - for NSTX-U TESTING ONLY
+;===   - 4 flux loops and 8 B probes are returning bad stat, so take them out for now
+;===
+;=== -- Initial test files using NSTX data with NSTX-U model for testing purposes only --
+;=== S.A. Sabbagh x/xx/15: Taken from signals_013015.dat: (full magnetics set), first magnetics calibration 
+;=== S.A. Sabbagh 1/30/15: (new signals file for NSTX-U): (full magnetics set), calibration *not* performed yet - PRELIMINARY for 2015
+;===                                                      NOTE: ERROR SPECIFICATIONS GIVEN ARE NOT ACCURATE FOR NEW DIAGNOSTICS and
+;===                                                      need to be checked for past diagnostics (default values used for new signals)
+;===
+;=== Computed "signals" based on measurements ===
+;===
+;=== NOTE: map index is one greater than the corresponding IDL array index
+;===       (i.e., ioh, map index 1 = ioh[0], etc.)
+;===
+;=== NOTE: See notes at end for stated errors, bit noise, etc. as well as definitions
+;=== 
+;Name   sigl  map    map  MDS Read      Error    Signal Use Conversion  Pri Fit  t  Smoothing   Designation
+;       type  var    indx tree sig? rel  abs  threshold err? factor         wgt idx win (s)   Data  Auxiliary
+;=====================================================================================================================================================================
+OH1       OH  ioh       1  e  y  0.010  20.0     40.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IOH    - ;(A)
+PF1AU     SC  icoil     1  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1AU -
+PF1BU     SC  icoil     2  e  n  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1BU -
+PF1CU     SC  icoil     3  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1CU -
+PF2U      SC  icoil     4  e  y  0.005  20.0     50.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF2U  -
+PF3U      SC  icoil     5  e  y  0.005  80.0     80.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF3U  -
+PF4U      SC  icoil     6  e  y  0.005  20.0     20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF4   -
+PF5U      SC  icoil     7  e  y  0.005  20.0     25.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF5   -
+PF5L      SC  icoil     8  e  y  0.005  20.0     25.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF5   -
+PF4L      SC  icoil     9  e  y  0.005  20.0     20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF4   -
+PF3L      SC  icoil    10  e  y  0.005  80.0     40.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF3L  -
+PF2L      SC  icoil    11  e  y  0.005  20.0     50.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF2L  -
+PF1CL     SC  icoil    12  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1CL -
+PF1BL     SC  icoil    13  e  n  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1BL -
+PF1AL     SC  icoil    14  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1AL -
+IP1       PR  ip        1  e  y  0.005  10.0e3   50.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IP1    -  ;(A) - 0.5%,10e3,50e3 standard
+TF1       TF  none      1  e  y  0.010  30.0     50.0     y  7.2385e-6 1.0 1.0  -1  2.1e-3  \\ITF    -  ;(A -> m*T)
+FDIA      DL  dflux     1  o  y  0.04   0.004    0.004    y  1.0       1.0 1.0  -1  2.1e-3  \\F_DIAMAG2   -  ;(Wb) error was 2%, 2mWb
+HHFWPWR   RP  none      1  r  n  0.100  100.0    100.0    y  1.0       1.0 1.0  -1  2.1e-3  \\HHFW_POWER - ;(W) === RF signals
+;
+VFLOHM    VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOHM    -  ;(V) === Ops signals
+VFLOHU2   VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOHU2   -  ;(V)
+VFLPF1AU2 VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPF1AU2 -  ;(V)
+VFLMDLU1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLMDLU1 -  ; ** NEW ** 
+VFLMDLU2  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLMDLU2 -  ; ** NEW **
+VFLEVVU2  LVA none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU2  -
+VFLOBDU1  LVA none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOBDU1  -
+VFLEVVU4  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU4  -
+VFLEVVU5  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU5  -
+VFLIVVU1  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLIVVU1  -
+VFLEVVU7  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU7  -
+VFLEVVL7  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL7  -
+VFLIVVL1  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLIVVL1  -
+VFLEVVL5  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL5  -
+VFLEVVL4  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL4  -
+VFLOBDL2  LVZ none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOBDL2  -
+VFLEVVL2  LVZ none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL2  -
+VFLMDLL2  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLMDLL2 -  ; ** NEW **
+VFLMDLL1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLMDLL1 -  ; ** NEW **
+VFLPF1AL2 VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPF1AL2 -
+VFLOHL2   VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOHL2   -
+VFLSPPU4  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLSPPU4  -   ;Less sensors in Ip Calculator
+VFLSPPU1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLSPPU1  -   ;Less sensors in Ip Calculator
+VFLPPPU4  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPPPU4  -   ;Less sensors in Ip Calculator
+VFLPPPU1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPPPU1  -   ;Less sensors in Ip Calculator
+VFLPPPL1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPPPL1  -   ;Less sensors in Ip Calculator
+VFLPPPL4  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLPPPL4  -   ;Less sensors in Ip Calculator
+VFLSPPL1  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLSPPL1  -   ;Less sensors in Ip Calculator
+VFLSPPL4  VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLSPPL4  -   ;Less sensors in Ip Calculator
+;
+; *** NEW signals to replace these? ***
+;IVVTOT    IW  iwalltot  1  o  y  0.040  20.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IVV_TOT    -   ;Wall current estimate
+;IVVTOTV   IV  ivvtot    1  o  y  0.040  20.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IVV_TOT    -   ;Vessel current est.
+;REVVUL2   RG  irog2tot  1  o  y  0.015  15.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGEVVUL2 -  ;Total Rogowski current (*)
+;REVVUL1   RG  none      1  o  n  0.030  20.0e3   0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGEVVUL1 -  ;Total Rogowski current
+;RPPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL1 -
+;RPPPSL2   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL2 -
+;RPPPSL3   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL3 -
+;RPPPSL4   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL4 -
+;RSPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGSPPSL1 -
+;
+FLEVVL2   FL  tfl       1  o  y  0.010   3.0e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL2 -    ;(Wb)
+FLEVVL3   FL  tfl       2  o  y  0.045   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL3 -
+FLEVVL4   FL  tfl       3  o  y  0.045   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL4  -   ;Check position
+FLEVVL5   FL  tfl       4  o  y  0.015   4.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL5 -    ;
+FLEVVL6   FL  tfl       5  o  y  0.015  11.0e-3  11.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL6 -    ;
+FLEVVL7   FL  tfl       6  o  y  0.015   7.1e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL7 -    ;
+FLEVVU2   FL  tfl       7  o  y  0.010   3.0e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU2 -
+FLEVVU3   FL  tfl       8  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU3 -
+FLEVVU4   FL  tfl       9  o  y  0.021   4.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU4 -
+FLEVVU5   FL  tfl      10  o  y  0.010   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU5 -    ;
+FLEVVU6   FL  tfl      11  o  y  0.028  10.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU6 -
+FLEVVU7   FL  tfl      12  o  y  0.012   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU7 -   
+FLIVVL1   FL  tfl      13  o  y  0.013   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVL1 -    ;
+FLIVVL2   FL  tfl      14  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVL2 -    ;
+FLIVVU1   FL  tfl      15  o  y  0.015   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVU1 -    ;
+FLIVVU2   FL  tfl      16  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVU2 -    ;
+FLOBDL1   FL  tfl      17  o  y  0.010   3.0e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL1 -    ;
+FLOBDL2   FL  tfl      18  o  y  0.010   3.0e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL2 -    ;
+FLOBDL3   FL  tfl      19  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL3 -    ;
+FLOBDU1   FL  tfl      20  o  y  0.015   4.5e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU1 -    ;
+FLOBDU2   FL  tfl      21  o  y  0.025   3.5e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU2 -    ;
+FLOBDU3   FL  tfl      22  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU3 -    ;
+FLOHL1    FL  tfl      23  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL1  -    ; ** NEW ** Not integrated/digitized
+FLOHL2    FL  tfl      24  o  y  0.008   6.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL2  -    ; ** NEW **
+FLOHL3    FL  tfl      25  o  n  0.024   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL3  -    ; ** NEW ** Integrator/No timing module
+FLOHL4    FL  tfl      26  o  y  0.011   6.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL4  -    ; ** NEW **
+FLOHM     FL  tfl      27  o  y  0.010   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHM   -    ; ** NEW **
+FLOHU1    FL  tfl      28  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU1  -    ; ** NEW ** Not integrated/digitized
+FLOHU2    FL  tfl      29  o  y  0.010   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU2  -    ; ** NEW **
+FLOHU3    FL  tfl      30  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU3  -    ; ** NEW ** Integrator/No timing module
+FLOHU4    FL  tfl      31  o  y  0.010   5.6e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU4  -    ; ** NEW **
+FLPF1AL1  FL  tfl      32  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL1 -   ; ** NEW ** Not integrated/digitized
+FLPF1AL2  FL  tfl      33  o  y  0.010   7.3e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL2 -   ; ** NEW **
+FLPF1AL3  FL  tfl      34  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL3 -   ; ** NEW ** Not integrated/acquired
+FLPF1AL4  FL  tfl      35  o  y  0.007   6.1e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL4 -   ; ** NEW **
+FLPF1AU1  FL  tfl      36  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU1 -   ; ** NEW ** Not integrated/acquired
+FLPF1AU2  FL  tfl      37  o  y  0.010   7.3e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU2 -   ; ** NEW **
+FLPF1AU3  FL  tfl      38  o  n  0.050   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU3 -   ; ** NEW ** Not integrated/acquired
+FLPF1AU4  FL  tfl      39  o  y  0.010   7.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU4 -   ; ** NEW **
+FLPPPL1   FL  tfl      40  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL1 -    ;
+FLPPPL2   FL  tfl      41  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL2 -    ;
+FLPPPL3   FL  tfl      42  o  y  0.100   3.0e-3  20.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL3 -    ;Not connected (CHECK)
+FLPPPL4   FL  tfl      43  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL4 -    ;
+FLPPPU1   FL  tfl      44  o  y  0.014   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU1 -    ;
+FLPPPU2   FL  tfl      45  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU2 -    ;
+FLPPPU3   FL  tfl      46  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU3 -    ; Out 4/24/15
+FLPPPU4   FL  tfl      47  o  y  0.0114  3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU4 -    ;
+FLSPPL1   FL  tfl      48  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL1 -    ;
+FLSPPL2   FL  tfl      49  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL2 -    ;
+FLSPPL3   FL  tfl      50  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL3 -    ;
+FLSPPL4   FL  tfl      51  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL4 -    ;
+FLSPPU1   FL  tfl      52  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU1 -    ;
+FLSPPU2   FL  tfl      53  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU2 -    ;
+FLSPPU3   FL  tfl      54  o  n  0.008   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU3 -    ; Out 4/22/15
+FLSPPU4   FL  tfl      55  o  y  0.008   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU4 -    ;
+FLMDLU2   FL  tfl      56  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLMDLU2 -    ; ** NEW ** Not integrated/digitized
+FLMDLU1   FL  tfl      57  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLMDLU1 -    ; ** NEW ** Not integrated/digitized
+FLPF1BU2  FL  tfl      58  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1BU2 -   ; ** NEW ** Not acquired
+FLPF1BU1  FL  tfl      59  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1BU1 -   ; ** NEW ** Not acquired
+FLCSCU4   FL  tfl      60  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLCSCU4 -    ; ** NEW ** Not integrated/digitized
+FLCSCL4   FL  tfl      61  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLCSCL4 -    ; ** NEW ** Not integrated/digitized
+FLBF1BL1  FL  tfl      62  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLBF1BL1 -   ; ** NEW ** CHECK THIS
+FLBF1BL2  FL  tfl      63  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLBF1BL2 -   ; ** NEW ** CHECK THIS
+FLMDLL1   FL  tfl      64  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLMDLL1 -    ; ** NEW ** Not integrated/digitized
+FLMDLL2   FL  tfl      65  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLMDLL2 -    ; ** NEW ** Not integrated/digitized
+FLEXTRA   FL  tfl      66  o  n  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\None      -    ; ** Extra variable **
+;
+B1CSCL1   MC  bmc       1  o  y  0.060  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL1 -   ;(T) ** NEW **
+B1CSCL2   MC  bmc       2  o  y  0.012  2.50e-3  2.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL2 -   ; ** NEW **
+B1CSCL3   MC  bmc       3  o  n  0.015  3.20e-3  3.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL3 -   ; ** NEW ** OUT 12/01/15
+B1CSCL4   MC  bmc       4  o  y  0.035  3.10e-3  3.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL4 -   ; ** NEW **
+B1CSCL5   MC  bmc       5  o  y  0.026  4.10e-3  4.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL5 -   ; ** NEW **
+B1CSCL6   MC  bmc       6  o  y  0.035  7.10e-3  7.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL6 -   ; ** NEW **
+B1CSCU2   MC  bmc       7  o  y  0.035  5.70e-3  5.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU2 -   ; ** NEW **
+B1CSCU3   MC  bmc       8  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU3 -   ; ** NEW **
+B1CSCU4   MC  bmc       9  o  y  0.040  9.20e-3  9.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU4 -   ; ** NEW **
+B1CSCU5   MC  bmc      10  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU5 -   ; ** NEW **
+B1CSCU6   MC  bmc      11  o  y  0.060  4.40e-3  4.40e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU6 -   ; ** NEW **
+B1CSC2L6  MC  bmc      12  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2L6 -  ; ** NEW ** ADDED 08/07/15
+B1CSC2L4  MC  bmc      13  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2L4 -  ; ** NEW ** Not integrated/digitized 4/22/15
+B1CSC2L2  MC  bmc      14  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2L2 -  ; ** NEW ** Not integrated/digitized 4/22/15
+B1CSC2L1  MC  bmc      15  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2L1 -  ; ** NEW ** ADDED 08/07/15
+B1CSC2U2  MC  bmc      16  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2U2 -  ; ** NEW ** Not integrated/digitized 4/22/15
+B1CSC2U4  MC  bmc      17  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2U4 -  ; ** NEW ** Not integrated/digitized 4/22/15
+B1CSC2U6  MC  bmc      18  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSC2U6 -  ; ** NEW ** ADDED 08/07/15 - out 11/5/15
+B2CSCL2N  MC  bmc      19  o  y  0.025  8.90e-3  8.90e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL2N -  ; ** NEW **
+B2CSCL2T  MC  bmc      20  o  y  0.021  3.20e-3  3.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL2T -  ; ** NEW **
+B2CSCU1N  MC  bmc      21  o  y  0.025  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU1N -  ; ** NEW ** Issue? (4/22/15)
+B2CSCU1T  MC  bmc      22  o  n  0.044  5.80e-3  5.80e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU1T -  ; ** NEW ** SHOULD BE FIXED 4/23/15
+B2CSCL1T  MC  bmc      23  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL1T -  ; ** NEW ** Not integrated/digitized 4/22/15
+B2CSCL1N  MC  bmc      24  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL1N -  ; ** NEW ** Not integrated/digitized 4/22/15
+B2CSCU2T  MC  bmc      25  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU2T -  ; ** NEW ** ADDED 08/07/15
+B2CSCU2N  MC  bmc      26  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU2N -  ; ** NEW ** ADDED 08/07/15
+B2CSC2L2T MC  bmc      27  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSC2L2T - ; ** NEW ** ADDED 08/07/15
+B2CSC2L2N MC  bmc      28  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSC2L2N - ; ** NEW ** ADDED 08/07/15
+B2CSC2U2T MC  bmc      29  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSC2U2T - ; ** NEW ** SHOULD BE FIXED 4/23/15
+B2CSC2U2N MC  bmc      30  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSC2U2N - ; ** NEW ** SHOULD BE FIXED 4/23/15
+BL1PPPGL1 ML  bmc      31  o  y  0.032  8.00e-3  8.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL1_AXEQ - ;
+BL1PPPGL2 ML  bmc      32  o  y  0.033  4.10e-3  4.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL2_AXEQ - ;
+BL1PPPGL3 ML  bmc      33  o  y  0.036  4.20e-3  4.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL3_AXEQ - ;
+BL1PPPGU1 ML  bmc      34  o  y  0.031  7.60e-3  7.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU1_AXEQ - ;
+BL1PPPGU2 ML  bmc      35  o  y  0.015  3.70e-3  3.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU2_AXEQ - ;
+BL1PPPGU3 ML  bmc      36  o  y  0.030  4.30e-3  4.30e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU3_AXEQ - ;
+BL1SPPGL1 ML  bmc      37  o  y  0.010  3.90e-3  3.90e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL1_AXEQ - ;
+BL1SPPGL2 ML  bmc      38  o  y  0.010  3.60e-3  3.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL2_AXEQ - ;
+BL1SPPGL3 ML  bmc      39  o  n  0.012  4.70e-3  4.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL3_AXEQ - ; Out 4/22/15
+BL1SPPGU1 ML  bmc      40  o  y  0.025  4.30e-3  4.30e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU1_AXEQ - ;
+BL1SPPGU2 ML  bmc      41  o  y  0.018  4.20e-3  4.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU2_AXEQ - ;
+BL1SPPGU3 ML  bmc      42  o  y  0.016  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU3_AXEQ - ;
+BL1PPPGL4 ML  bmc      43  o  y  0.030  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL4 - ;
+BL1PPPGL5 ML  bmc      44  o  y  0.015  3.20e-3  3.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL5 - ;
+BL1PPPGL6 ML  bmc      45  o  y  0.040  5.60e-3  5.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL6 - ;
+BL1PPPGL7 ML  bmc      46  o  y  0.025  4.50e-3  4.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL7 - ;
+BL1PPPGL8 ML  bmc      47  o  y  0.035  4.50e-3  4.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL8 - ;
+BL1PPPGU4 ML  bmc      48  o  y  0.040  2.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU4 - ;
+BL1PPPGU5 ML  bmc      49  o  y  0.045  2.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU5 - ;
+BL1PPPGU6 ML  bmc      50  o  y  0.045  3.10e-3  3.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU6 - ;
+BL1PPPGU7 ML  bmc      51  o  y  0.035  2.50e-3  2.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU7 - ;
+BL1PPPGU8 ML  bmc      52  o  y  0.020  3.40e-3  3.40e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU8 - ;
+BL1SPPGL4 ML  bmc      53  o  y  0.038  8.50e-3  8.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL4 - ;
+BL1SPPGL5 ML  bmc      54  o  y  0.040  4.70e-3  4.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL5 - ;
+BL1SPPGL6 ML  bmc      55  o  y  0.020  2.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL6 - ;
+BL1SPPGL7 ML  bmc      56  o  y  0.020  4.60e-3  4.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL7 - ;
+BL1SPPGU4 ML  bmc      57  o  y  0.054  9.30e-3  9.30e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU4 - ;
+BL1SPPGU5 ML  bmc      58  o  n  0.032  4.10e-3  4.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU5 - ; Out 4/22/15
+BL1SPPGU6 ML  bmc      59  o  n  0.025  2.40e-3  2.40e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU6 - ; Out 4/22/15
+BL1SPPGU7 ML  bmc      60  o  y  0.015  5.30e-3  5.30e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU7 - ;
+B2IBDHL6T MC  bmc      61  o  y  0.040  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHL6T - ; ** NEW **
+B2IBDHL6N MC  bmc      62  o  y  0.020  1.60e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHL6N - ; ** NEW **
+B2IBDHU5T MC  bmc      63  o  y  0.035  1.70e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHU5T - ; ** NEW **
+B2IBDHU5N MC  bmc      64  o  y  0.070  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHU5N - ; ** NEW **
+B2IBDHU6T MC  bmc      65  o  y  0.070  2.20e-3  2.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHU6T - ; ** NEW **
+B2IBDHU6N MC  bmc      66  o  y  0.070  2.70e-3  2.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHU6N - ; ** NEW **
+B2IBDHL5T MC  bmc      67  o  y  0.050  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHL5T - ; ** NEW **
+B2IBDHL5N MC  bmc      68  o  y  0.070  4.70e-3  4.70e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDHL5N - ; ** NEW **
+B2IBDVU1T MC  bmc      69  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU1T - ; ** NEW ** Not acquired
+B2IBDVU1N MC  bmc      70  o  n  0.050  8.80e-3  8.80e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU1N - ; ** NEW ** OUT 08/07/15; IN 081015 OUT 11/5/15
+B2IBDVU2T MC  bmc      71  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU2T - ; ** NEW ** Not acquired
+B2IBDVU2N MC  bmc      72  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU2N - ; ** NEW ** Not acquired
+B2IBDVU3T MC  bmc      73  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU3T - ; ** NEW ** Not acquired
+B2IBDVU3N MC  bmc      74  o  y  0.030  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVU3N - ; ** NEW **
+B2IBDVL1T MC  bmc      75  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL1T - ; ** NEW ** Not acquired
+B2IBDVL1N MC  bmc      76  o  y  0.035  2.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL1N - ; ** NEW **
+B2IBDVL2T MC  bmc      77  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL2T - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBDVL2N MC  bmc      78  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL2N - ; ** NEW ** Not acquired
+B2IBDVL3T MC  bmc      79  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL3T - ; ** NEW ** Not acquired
+B2IBDVL3N MC  bmc      80  o  y  0.080  3.00e-3  3.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDVL3N - ; ** NEW **
+B2IBD2U2T MC  bmc      81  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDV2U2T - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBD2U2N MC  bmc      82  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDV2U2N - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBD2L2T MC  bmc      83  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDV2L2T - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBD2L2N MC  bmc      84  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDV2L2N - ; ** NEW ** Not acquired
+B2OBDL1T  ML  bmc      85  o  y  0.070  3.50e-3  3.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL1T -  ; Out, in 8/10/15
+B2OBDL1N  ML  bmc      86  o  y  0.070  2.50e-3  2.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL1N -  ;
+B2OBDL3T  ML  bmc      87  o  y  0.035  6.50e-3  6.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL3T -  ; Out, in 8/10/15
+B2OBDL3N  ML  bmc      88  o  y  0.030  2.50e-3  2.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL3N -  ;
+B2OBDL5T  ML  bmc      89  o  y  0.050  8.00e-3  8.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL5T -  ;
+B2OBDL5N  ML  bmc      90  o  n  0.065  6.80e-3  6.80e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL5N -  ; SHOULD BE FIXED 4/23/15
+B2OBDU1T  ML  bmc      91  o  y  0.045  1.60e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU1T -  ;
+B2OBDU1N  ML  bmc      92  o  y  0.020  1.40e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU1N -  ;
+B2OBDU3T  ML  bmc      93  o  y  0.060  3.00e-3  3.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU3T -  ;
+B2OBDU3N  ML  bmc      94  o  y  0.018  1.50e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU3N -  ;
+B2OBDU5T  ML  bmc      95  o  y  0.045  8.20e-3  8.20e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU5T -  ;
+B2OBDU5N  ML  bmc      96  o  y  0.060  6.10e-3  6.10e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU5N -  ;
+B2OBDL2T  MC  bmc      97  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL2T - ; ** NEW **
+B2OBDL2N  MC  bmc      98  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL2N - ; ** NEW **
+B2OBDL4T  MC  bmc      99  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL4T - ; ** NEW ** OUT 1/13/16
+B2OBDL4N  MC  bmc     100  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDL4N - ; ** NEW ** Not integrated/digitized 4/22/15
+B2OBDU2T  MC  bmc     101  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU2T - ; ** NEW **
+B2OBDU2N  MC  bmc     102  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU2N - ; ** NEW **
+B2OBDU4T  MC  bmc     103  o  y  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU4T - ; ** NEW **
+B2OBDU4N  MC  bmc     104  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMOBDU4N - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBDH2U6T MC bmc     105  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDH2U6T - ; ** NEW ** Integrator/No timing module
+B2IBDH2U6N MC bmc     106  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDH2U6N - ; ** NEW ** Integrator/No timing module
+B2IBDH2L6T MC bmc     107  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDH2L6T - ; ** NEW ** Not integrated/digitized 4/22/15
+B2IBDH2L6N MC bmc     108  o  n  0.015  2.60e-3  2.60e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMIBDH2L6N - ; ** NEW ** Not integrated/digitized 4/22/15
+;
+VS1U      VS  icoil    15  -  c  0.200  1.0e3    1.00e+3  y  6.7617e-4 1.0 1.0   1  2.1e-3  VFLOHU2   - ; CS upper casing #1: *** NOTE: NEED NEW R_eff for these
+VS2U      VS  icoil    16  -  c  0.300  1.0e3    1.00e+3  y  7.4161e-4 1.0 1.0   1  2.1e-3  VFLOHU2   - ; CS upper casing #2: For computed vessel segments,
+VS3U      VS  icoil    17  -  c  0.300  1.0e3    1.00e+3  y  1.9191e-4 1.0 1.0   1  2.1e-3  VFLPF1AU2 - ; CS upper crown    : the conversion factor is an
+VS4U      VS  icoil    18  -  c  0.300  1.0e3    1.00e+3  y  1.5178e-4 1.0 1.0   1  2.1e-3  VFLPF1AU2 - ; CS upper sleeve   : "effective resistance" which
+VS5U      VS  icoil    19  -  c  0.300  1.0e3    1.00e+3  y  5.2655e-4 1.0 1.0   1  2.1e-3  VFLPF1AU2 - ; Upper div. flange : converts Voltage (V) to current (A)
+VS6U      VS  icoil    20  -  c  0.300  1.0e3    1.00e+3  y  6.4519e-4 1.0 1.0   1  2.1e-3  VFLMDLU2  - ; Hardware surrounding PF1CU
+VS7U      VS  icoil    21  -  c  0.300  1.0e3    1.00e+3  y  2.4773e-4 1.0 1.0   1  2.1e-3  VFLMDLU1  - ; PF1AU mandrel
+VS8U      VS  icoil    22  -  c  0.300  1.0e3    1.00e+3  y  2.5800e-4 1.0 1.0   1  2.1e-3  VFLMDLU1  - ; PF1BU mandrel
+VS9U      VS  icoil    23  -  c  0.200  2.0e3    2.00e+3  y  1.8649e-2 1.0 1.0   1  2.1e-3  VFLMDLU2  - ; Upper bellows
+VS10U     VS  icoil    24  -  c  0.200  2.0e3    2.00e+3  y  3.2443e-4 1.0 1.0   1  2.1e-3  VFLEVVU2  - ; Upper dome flange lip/cylinder
+VS11U     VS  icoil    25  -  c  0.200  2.0e3    2.00e+3  y  3.4364e-4 1.0 1.0   1  2.1e-3  VFLOBDU1  - ; Upper divertor rails and vessel dome
+VS12U     VS  icoil    26  -  c  0.200  2.0e3    2.00e+3  y  6.6800e-4 1.0 1.0   1  2.1e-3  VFLEVVU4  - ; Upper dome under PF3 coil
+VS13U     VS  icoil    27  -  c  0.200  2.0e3    2.00e+3  y  6.9000e-4 1.0 1.0   1  2.1e-3  VFLEVVU5  - ; Upper dome and vessel cyl near PF 4
+VS14U     VS  icoil    28  -  c  0.200  2.0e3    2.00e+3  y  1.5000e-3 1.0 1.0   1  2.1e-3  VFLIVVU1  - ; Upper vessel cyl near PF5
+VS15U     VS  icoil    29  -  c  0.200  2.0e3    2.00e+3  y  1.2000e-3 1.0 1.0   1  2.1e-3  VFLEVVU7  - ; Upper vessel cyl near midplane
+VS15L     VS  icoil    30  -  c  0.200  2.0e3    2.00e+3  y  1.2000e-3 1.0 1.0   1  2.1e-3  VFLEVVL7  - ; Lower vessel cyl near midplane
+VS14L     VS  icoil    31  -  c  0.200  2.0e3    2.00e+3  y  1.6102e-3 1.0 1.0   1  2.1e-3  VFLIVVL1  - ; Lower vessel cyl near PF5
+VS13L     VS  icoil    32  -  c  0.200  2.0e3    2.00e+3  y  6.8600e-4 1.0 1.0   1  2.1e-3  VFLEVVL5  - ; Lower dome and vessel cyl near PF 4
+VS12L     VS  icoil    33  -  c  0.200  2.0e3    2.00e+3  y  6.6800e-4 1.0 1.0   1  2.1e-3  VFLEVVL4  - ; Lower dome under PF3 coil
+VS11L     VS  icoil    34  -  c  0.200  2.0e3    2.00e+3  y  4.6650e-4 1.0 1.0   1  2.1e-3  VFLOBDL2  - ; Lower divertor rails and vessel dome
+VS10L     VS  icoil    35  -  c  0.200  2.0e3    2.00e+3  y  1.8354e-4 1.0 1.0   1  2.1e-3  VFLEVVL2  - ; Lower dome flange lip/cylinder
+VS9L      VS  icoil    36  -  c  0.200  2.0e3    2.00e+3  y  1.6590e-2 1.0 1.0   1  2.1e-3  VFLMDLL2  - ; Lower bellows
+VS8L      VS  icoil    37  -  c  0.300  1.0e3    1.00e+3  y  2.7610e-4 1.0 1.0   1  2.1e-3  VFLMDLL1  - ; PF1BL mandrel
+VS7L      VS  icoil    38  -  c  0.300  1.0e3    1.00e+3  y  1.8000e-4 1.0 1.0   1  2.1e-3  VFLMDLL1  - ; PF1AL mandrel
+VS6L      VS  icoil    39  -  c  0.300  1.0e3    1.00e+3  y  5.3118e-4 1.0 1.0   1  2.1e-3  VFLMDLL2  - ; Hardware surrounding PF1CL
+VS5L      VS  icoil    40  -  c  0.300  1.0e3    1.00e+3  y  5.2497e-4 1.0 1.0   1  2.1e-3  VFLPF1AL2 - ; Lower divertor flange section
+VS4L      VS  icoil    41  -  c  0.300  1.0e3    1.00e+3  y  1.5174e-4 1.0 1.0   1  2.1e-3  VFLPF1AL2 - ; CS lower sleeve section
+VS3L      VS  icoil    42  -  c  0.300  1.0e3    1.00e+3  y  1.7265e-4 1.0 1.0   1  2.1e-3  VFLPF1AL2 - ; CS lower crown section
+VS2L      VS  icoil    43  -  c  0.300  1.0e3    1.00e+3  y  7.3538e-4 1.0 1.0   1  2.1e-3  VFLOHL2   - ; CS lower casing #2
+VS1L      VS  icoil    44  -  c  0.200  1.0e3    1.00e+3  y  6.7617e-4 1.0 1.0   1  2.1e-3  VFLOHL2   - ; CS lower casing #1 (near midplane)
+DPU1      DP  icoil    45  -  c  0.200  2.0e3    1.00e+3  y  6.4466e-4 1.0 1.0   1  2.1e-3  VFLOBDU1  - ; Upper divertor plate
+DPL1      DP  icoil    46  -  c  0.200  2.0e3    1.00e+3  y  6.4466e-4 1.0 1.0   1  2.1e-3  VFLOBDL2  - ; Lower divertor plate
+PPSIUU    SP  icoil    47  -  c  0.000 15.0e3   15.00e+3  y  1.0000e+3 1.0 1.0   1  2.1e-3  VFLSPPU4  - ; High R to yield 0 offset for current
+PPSIUL    SP  icoil    48  -  c  0.200  1.0e3    1.00e+3  y  1.6827e-3 1.0 1.0   1  2.1e-3  VFLSPPU1  -
+PPPOUU    SP  icoil    49  -  c  0.000 15.0e3   15.00e+3  y  1.0000e+3 1.0 1.0   1  2.1e-3  VFLPPPU4  - ; High R to yield 0 offset for current
+PPPOUL    SP  icoil    50  -  c  0.200  1.0e3    1.00e+3  y  2.0000e-3 1.0 1.0   1  2.1e-3  VFLPPPU1  -
+PPPOLU    SP  icoil    51  -  c  0.200  1.0e3    1.00e+3  y  2.0803e-3 1.0 1.0   1  2.1e-3  VFLPPPL1  -
+PPPOLL    SP  icoil    52  -  c  0.000 15.0e3   15.00e+3  y  1.0003e+3 1.0 1.0   1  2.1e-3  VFLPPPL4  - ; High R to yield 0 offset for current
+PPSILU    SP  icoil    53  -  c  0.200  1.0e3    1.00e+3  y  1.7738e-3 1.0 1.0   1  2.1e-3  VFLSPPL1  -
+PPSILL    SP  icoil    54  -  c  0.000 15.0e3   15.00e+3  y  1.0000e+3 1.0 1.0   1  2.1e-3  VFLSPPL4  - ; High R to yield 0 offset for current
+P1LEVEL   RL  none     1   -  c  0.000  0.00     0.00     n  1.00      1.0 1.0   1     0    NONE - ; Process 1 run level at each time
+;=====================================================================================================================================================================
+; Stated errors (NSTX values below - NSTX-U information pending)
+;--------------
+; Coil currents: Relative error on transducers = 0.1%, but practically is about 0.5%
+;                Resolution: PF1AL, PF2U, PF2L, PF3U, PF5, CHI = 12A/bit
+;                           all others are = 6A/bit   (As per C. Neumeyer 5/18/00)
+;
+; Flux loops:    General error specs from J. Menard (5/17/00)
+;   CS flux loops: Minimum useful signal: 5 - 10 mWb
+;                  Resolution:            2 mWb
+;                  Relative error:        1.5%
+;   non-CS loops:  Minimum useful signal: 4 mWb
+;                  Resolution:            4 mWb
+;                  Relative error:        1.5%
+;
+; Mirnov coils:  Specific error estimates from J. Menard (1/22/04)
+;  CS normal field Minimum useful signal: 60 G
+;                  Resolution:            40 G
+;                  Relative error:        1.5%
+;
+;Diamagnetic loop: Minimum useful signal: 2 mWb
+;   (M. Bell)      Resolution:            2 mWb (This seems unrealistically low
+;                  Relative error:        2.0%  (  based on apparent noise in signals)
+;
+;Thomson Scattering: Errors read from database
+;
+; NOTE: the values actually used above are taken from fields-only test shots. The
+;       actual error specs in practice can be larger than the stated general values.
+;
+;=========================================================================================
+; Definitions
+;------------
+;Name:        User defined signal name
+;sigl type:   Type of signal - used to determine importance of signal for fit and
+;                              the mathematical definitions of computed signals
+;map var:     compare this signal to the indicated map var when comparing measured and
+;             computed values
+;map indx:    Used to index multiple map vars and two-dimensional signals
+;             - negative value: Interpolate FE data to MD position in time plots
+; *** pending - negative value: Swap X and Y axes of MD data in profile plots
+;MDS tree:    Designation for MDS+ tree name from which to read signal
+;Read sig?:   y: read signal, n: skip signal, c: compute signal
+;             m: read multiple dimensional signal, p: process previous multi-dim signal
+;Error rel:   Relative error
+;Error abs:   absolute error
+;threshold:   When signal value is below threshold value, error = threshold value
+;Use err? :   y: compute error from rel,abs,thresh
+;             r: read error from database
+;Conv. fact:  Conversion factor for signal when read; when computed, a scalar used
+;             in computation
+;Pri:         signal "priority": certain signals are essential for reconstructions.
+;             Certain groups have "thresholds" below which reconstructions can not be
+;             computed. The sum of Pri must be greater than the threshold value for
+;             the reconstruction to occur.
+;Fit wgt:     signal fit weight (presently not used for weighting: If a signal is
+;             requested, Fit wgt is set to 1.0 internally)
+; *** pending - negative value: Normalize the mapped FE value in comparison plots
+;t idx:       index of "time" abscissa. This is equal to 1 by definition in a scalar
+;             signal vs. time. In multidimensional signals, this gives the index of the
+;             array corresponding to the "time" coordinate.
+;             - positive value: offset subtraction is not performed
+;             - negative value: offset subtraction performed on signal using t[0]
+;Smooth win:  Smoothing window for the signal in seconds
+;Designation: For read signals, these are the database designations of the signals.
+;             For computed signals, these are used to define the signal name used
+;             in the computation
+;=========================================================================================

@@ -2,7 +2,7 @@
  "divertors": {
   "documentation": "Description of divertors",
   "full_path": "divertors",
-  "lifecycle_last_change": "3.31.1",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.31.0",
   "maxoccur": "2"
@@ -116,6 +116,69 @@
   "lifecycle_status": "alpha",
   "maxoccur": "8",
   "structure_reference": "divertor"
+ },
+ "divertors.divertor[:].current_incident": {
+  "data_type": "STRUCTURE",
+  "documentation": "Total current incident on this divertor",
+  "full_path": "divertors/divertor(i1)/current_incident",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "divertors.divertor[:].current_incident.data": {
+  "coordinates": [
+   "divertors.divertor[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "divertors/divertor(i1)/current_incident/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].current_incident.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "divertors/divertor(i1)/current_incident/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].current_incident.data_error_lower": {
+  "coordinates": [
+   "divertors.divertor[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "divertors/divertor(i1)/current_incident/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].current_incident.data_error_upper": {
+  "coordinates": [
+   "divertors.divertor[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "divertors/divertor(i1)/current_incident/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].current_incident.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "divertors/divertor(i1)/current_incident/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "divertors.divertor[:].identifier": {
   "data_type": "STR_0D",
@@ -771,6 +834,69 @@
   "lifecycle_status": "alpha",
   "maxoccur": "6",
   "structure_reference": "divertor_target"
+ },
+ "divertors.divertor[:].target[:].current_incident": {
+  "data_type": "STRUCTURE",
+  "documentation": "Total current incident on this target",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].current_incident.data": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].current_incident.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].current_incident.data_error_lower": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].current_incident.data_error_upper": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].current_incident.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "divertors/divertor(i1)/target(i2)/current_incident/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "divertors.divertor[:].target[:].extension_r": {
   "data_type": "FLT_0D",
@@ -1697,6 +1823,252 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "K"
+ },
+ "divertors.divertor[:].target[:].tile": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of divertor tiles belonging to this target",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "100",
+  "structure_reference": "divertor_target_tile"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident": {
+  "data_type": "STRUCTURE",
+  "documentation": "Total current incident on this tile",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident.data": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident.data_error_lower": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident.data_error_upper": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].current_incident.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "divertors.divertor[:].target[:].tile[:].current_incident.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "current_incident/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "divertors.divertor[:].target[:].tile[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Alphanumeric identifier of tile",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/identifier",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "divertors.divertor[:].target[:].tile[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the tile",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of the tile surface facing the plasma",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_area_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"surface_area\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_area_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"surface_area\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"surface_area\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline": {
+  "data_type": "STRUCTURE",
+  "documentation": "Outline of the tile surface facing the plasma",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_static"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.phi": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.phi_error_lower": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.phi_error_upper": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.z": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.z_error_lower": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "divertors.divertor[:].target[:].tile[:].surface_outline.z_error_upper": {
+  "coordinates": [
+   "divertors.divertor[:].target[:].tile[:].surface_outline.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "divertors.divertor[:].target[:].tilt_angle_pol": {
   "data_type": "STRUCTURE",

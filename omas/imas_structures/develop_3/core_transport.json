@@ -335,7 +335,7 @@
  },
  "core_transport.model[:].profiles_1d": {
   "cocos_alias": "IDSPATH",
-  "cocos_replace": "core_transport.model{i}.profile_1d{j}",
+  "cocos_replace": "core_transport.model{i}.profiles_1d{j}",
   "coordinates": [
    "core_transport.model[:].profiles_1d[:].time"
   ],

@@ -2,7 +2,7 @@
  "reflectometer_profile": {
   "documentation": "Profile reflectometer diagnostic. Multiple reflectometers are considered as independent diagnostics to be handled with different occurrence numbers",
   "full_path": "reflectometer_profile",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.32.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.11.0",
   "maxoccur": "2"
@@ -17,6 +17,52 @@
   "lifecycle_status": "alpha",
   "maxoccur": "5",
   "structure_reference": "reflectometer_channel"
+ },
+ "reflectometer_profile.channel[:].cut_off_frequency": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Cut-off frequency as a function of measurement position and time",
+  "full_path": "reflectometer_profile/channel(i1)/cut_off_frequency(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "Hz"
+ },
+ "reflectometer_profile.channel[:].cut_off_frequency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"cut_off_frequency\"",
+  "full_path": "reflectometer_profile/channel(i1)/cut_off_frequency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.channel[:].cut_off_frequency_error_lower": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"cut_off_frequency\"",
+  "full_path": "reflectometer_profile/channel(i1)/cut_off_frequency_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "Hz"
+ },
+ "reflectometer_profile.channel[:].cut_off_frequency_error_upper": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"cut_off_frequency\"",
+  "full_path": "reflectometer_profile/channel(i1)/cut_off_frequency_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "Hz"
  },
  "reflectometer_profile.channel[:].frequencies": {
   "coordinates": [
@@ -1156,6 +1202,395 @@
   "full_path": "reflectometer_profile/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "reflectometer_profile.n_e": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "STRUCTURE",
+  "documentation": "Electron density reconstructed from multiple channels",
+  "full_path": "reflectometer_profile/n_e",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_2d",
+  "units": "m^-3"
+ },
+ "reflectometer_profile.n_e.data": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "reflectometer_profile/n_e/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "reflectometer_profile.n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "reflectometer_profile/n_e/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.n_e.data_error_lower": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "reflectometer_profile/n_e/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "reflectometer_profile.n_e.data_error_upper": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "reflectometer_profile/n_e/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "reflectometer_profile.n_e.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "reflectometer_profile/n_e/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "reflectometer_profile.position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position associated to the density reconstruction from multiple channels",
+  "full_path": "reflectometer_profile/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "reflectometer_profile_position"
+ },
+ "reflectometer_profile.position.phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "phi/data",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "reflectometer_profile/position/phi(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "phi/data_error_index",
+  "change_nbc_version": "3.23.3",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "reflectometer_profile/position/phi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "phi/data_error_lower",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "reflectometer_profile/position/phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "phi/data_error_upper",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "reflectometer_profile/position/phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.psi": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal flux",
+  "full_path": "reflectometer_profile/position/psi(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "reflectometer_profile.position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "reflectometer_profile/position/psi_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.psi_error_lower": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "reflectometer_profile/position/psi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "reflectometer_profile.position.psi_error_upper": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "reflectometer_profile/position/psi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "reflectometer_profile.position.r": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "r/data",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Major radius",
+  "full_path": "reflectometer_profile/position/r(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "reflectometer_profile.position.r_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "r/data_error_index",
+  "change_nbc_version": "3.23.3",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "reflectometer_profile/position/r_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.r_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "r/data_error_lower",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "reflectometer_profile/position/r_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "reflectometer_profile.position.r_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "r/data_error_upper",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "reflectometer_profile/position/r_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "reflectometer_profile.position.rho_tor_norm": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Normalised toroidal flux coordinate",
+  "full_path": "reflectometer_profile/position/rho_tor_norm(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "reflectometer_profile.position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "reflectometer_profile/position/rho_tor_norm_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "reflectometer_profile/position/rho_tor_norm_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "reflectometer_profile.position.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "reflectometer_profile/position/rho_tor_norm_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "reflectometer_profile.position.theta": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)",
+  "full_path": "reflectometer_profile/position/theta(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.theta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"theta\"",
+  "full_path": "reflectometer_profile/position/theta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.theta_error_lower": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"theta\"",
+  "full_path": "reflectometer_profile/position/theta_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.theta_error_upper": {
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"theta\"",
+  "full_path": "reflectometer_profile/position/theta_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "reflectometer_profile.position.z": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "z/data",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Height",
+  "full_path": "reflectometer_profile/position/z(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "reflectometer_profile.position.z_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "z/data_error_index",
+  "change_nbc_version": "3.23.3",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "reflectometer_profile/position/z_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "reflectometer_profile.position.z_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "z/data_error_lower",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "reflectometer_profile/position/z_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "reflectometer_profile.position.z_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "z/data_error_upper",
+  "change_nbc_version": "3.23.3",
+  "coordinates": [
+   "1...N",
+   "reflectometer_profile.n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "reflectometer_profile/position/z_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m"
  },
  "reflectometer_profile.psi_normalization": {
   "data_type": "STRUCTURE",

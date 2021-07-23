@@ -26,7 +26,7 @@ __all__ = [
     'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'latexit'
+    'latexit', 'OmasDynamicException'
 ]
 # fmt: on
 
@@ -169,7 +169,25 @@ def _handle_extension(*args, **kw):
     return ext, args
 
 
-omas_ods_attrs = ['_consistency_check', '_imas_version', '_cocos', '_cocosio', '_coordsio', '_unitsio', '_dynamic', '_parent']
+omas_ods_attrs = [
+    '_consistency_check',
+    '_imas_version',
+    '_cocos',
+    '_cocosio',
+    '_coordsio',
+    '_unitsio',
+    '_uncertainio',
+    '_dynamic',
+    '_parent',
+]
+
+
+class OmasDynamicException(RuntimeError):
+    """
+    Exception raised when dynamic data fetching fails
+    """
+
+    pass
 
 
 class ODS(MutableMapping):
@@ -185,6 +203,7 @@ class ODS(MutableMapping):
         cocosio=None,
         coordsio=None,
         unitsio=None,
+        uncertainio=None,
         dynamic=None,
     ):
         """
@@ -200,6 +219,8 @@ class ODS(MutableMapping):
 
         :param unitsio: ODS will return data with units if True
 
+        :param uncertainio: ODS will return data with uncertainties if True
+
         :param dynamic: internal keyword used for dynamic data loading
         """
         self.omas_data = None
@@ -212,6 +233,7 @@ class ODS(MutableMapping):
         self.cocosio = cocosio
         self.coordsio = coordsio
         self.unitsio = unitsio
+        self.uncertainio = uncertainio
         self.dynamic = dynamic
 
     def homogeneous_time(self, key='', default=True):
@@ -674,6 +696,25 @@ class ODS(MutableMapping):
         self.top._unitsio = unitsio_value
 
     @property
+    def uncertainio(self):
+        """
+        property that if data should be returned with units or not
+        """
+        if not hasattr(self, '_uncertainio'):
+            self._uncertainio = {}
+        top = self.top
+        if top._uncertainio is None:
+            top._uncertainio = {}
+        self._uncertainio = top._uncertainio
+        return self._uncertainio
+
+    @uncertainio.setter
+    def uncertainio(self, uncertainio_value):
+        if uncertainio_value is None:
+            uncertainio_value = {}
+        self.top._uncertainio = uncertainio_value
+
+    @property
     def coordsio(self):
         """
         property that tells in what COCOS format the data will be input/output
@@ -1068,7 +1109,18 @@ class ODS(MutableMapping):
         if isinstance(key, str) or isinstance(self, ODC):
             if self.omas_data is None:
                 self.omas_data = {}
-            self.omas_data[key] = value
+            # handle uncertainty
+            if is_uncertain(value):
+                # scalar
+                if isinstance(value, uncertainties.core.AffineScalarFunc):
+                    self.omas_data[key] = numpy.asarray(nominal_values(value)).item()
+                    self.omas_data[key + '_error_upper'] = numpy.asarray(std_devs(value)).item()
+                # array
+                else:
+                    self.omas_data[key] = nominal_values(value)
+                    self.omas_data[key + '_error_upper'] = std_devs(value)
+            else:
+                self.omas_data[key] = value
 
         # arrays of structures
         else:
@@ -1151,6 +1203,8 @@ class ODS(MutableMapping):
         dynamically_created = False
 
         # data slicing
+        # NOTE: OMAS will try to return numpy arrays if the sliced data can be stacked in a uniform array
+        # otherwise a list will be returned (that's where we do `return data0` below)
         if isinstance(key[0], slice):
             data0 = []
             for k in self.keys(dynamic=1)[key[0]]:
@@ -1201,15 +1255,17 @@ class ODS(MutableMapping):
             else:
                 raise ValueError('Not an IMAS data type %s' % dtype.char)
 
-            # place the data withing the the empty array
+            # place the data in the empty array
             if len(max_shape) == 1:
                 for k, item in enumerate(data0):
-                    data[k] = item
+                    if isinstance(item, list):  # item is [] if a subtree was missing in one of the slices
+                        return data0
+                    data[k] = numpy.asarray(item).item()
             else:
                 for k, item in enumerate(data0):
                     if not sum(numpy.squeeze(item).shape):
                         if len(numpy.atleast_1d(numpy.squeeze(item))):
-                            data[k, 0] = numpy.atleast_1d(numpy.squeeze(item))[0]
+                            data[k, 0] = numpy.asarray(numpy.squeeze(item)).item()
                     else:
                         data[k, : len(item)] = item
 
@@ -1221,7 +1277,10 @@ class ODS(MutableMapping):
                 if self.active_dynamic:
                     location = l2o([self.location, key[0]])
                 if self.active_dynamic and self.dynamic.__contains__(location):
-                    value = self.dynamic.__getitem__(location)
+                    try:
+                        value = self.dynamic.__getitem__(location)
+                    except Exception as _excp:
+                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
@@ -1348,6 +1407,16 @@ class ODS(MutableMapping):
                         ureg[0] = pint.UnitRegistry()
                     value = value * getattr(ureg[0], info['units'])
 
+            # return uncertain array if errors are filled
+            if self.uncertainio and isinstance(key[0], str) and key[0] + '_error_upper' in self:
+                if key[0] + '_error_lower' in self:
+                    raise TypeError(f"Error for {self.location+'.'+key[0]} is not symmetrical")
+                error_upper = self.__getitem__(key[0] + '_error_upper', cocos_and_coords)
+                if isinstance(value, float):
+                    value = ufloat(value, error_upper)
+                else:
+                    value = uarray(value, error_upper)
+
             return value
 
     def __delitem__(self, key):
@@ -1376,7 +1445,7 @@ class ODS(MutableMapping):
         """
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
-        for kid in self.keys(dynamic=dynamic):
+        for kid in sorted(self.keys(dynamic=dynamic)):
             if isinstance(self.getraw(kid), ODS):
                 if include_structures:
                     paths.append(path + [kid])
@@ -1585,7 +1654,7 @@ class ODS(MutableMapping):
         for item in ['omas_data'] + omas_ods_attrs:
             if item in self.__dict__:
                 # we do not want to carry with us this information
-                if item in ['_cocosio', '_coordsio', '_unitsio', '_parent', '_dynamic']:
+                if item in ['_cocosio', '_coordsio', '_unitsio', '_uncertainio', '_parent', '_dynamic']:
                     state[item] = None
                 else:
                     state[item] = self.__dict__[item]
@@ -2338,6 +2407,8 @@ class ODC(ODS):
 
     def keys(self, dynamic=True):
         keys = list(self.omas_data.keys())
+        if keys is None:
+            return []
         for k, item in enumerate(keys):
             try:
                 keys[k] = c(item)

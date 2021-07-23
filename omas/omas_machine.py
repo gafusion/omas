@@ -149,7 +149,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             namespace.update(_namespace_mappings[idm])
             namespace['ods'] = ODS()
             namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            tmp = compile(call, machines(machine, branch)[:-5] + '.py', 'exec')
+            printd(f"Calling `{call}` in {os.path.basename(namespace['__file__'])}", topic='machine')
+            tmp = compile(call, namespace['__file__'], 'exec')
             exec(tmp, namespace)
             ods = namespace[mapped.get('RETURN', 'ods')]
             if isinstance(cache, dict):
@@ -344,7 +345,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
             if 'coordinates' in info:
                 mappings[location]['COORDINATES'] = list(map(i2o, info['coordinates']))
                 for coordinate in mappings[location]['COORDINATES']:
-                    if coordinate == '1...N':
+                    if '1...' in coordinate:
                         continue
                     elif coordinate not in mappings:
                         text = f'Missing coordinate {coordinate} for {location}'
@@ -725,7 +726,8 @@ class mdsvalue(dict):
             else:
                 server = tmp['__mdsserver__']
         self.server = tunnel_mds(server, self.treename)
-        if any([k in ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501'] for k in [server, self.server]]):
+        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
+        if server in old_servers or self.server in old_servers:
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
 
@@ -775,6 +777,8 @@ class mdsvalue(dict):
                 TDI = self.TDI
 
             try:
+                out_results = None
+
                 # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
@@ -790,8 +794,6 @@ class mdsvalue(dict):
                             del _mds_connection_cache[(self.server, self.treename, self.pulse)]
                         if fallback:
                             raise
-
-                out_results = None
 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
@@ -848,7 +850,7 @@ class mdsvalue(dict):
                 if isinstance(out_results, dict):
                     if all(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(not isinstance(out_results[k], Exception) for k in out_results):
+                    elif any(isinstance(out_results[k], Exception) for k in out_results):
                         printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
                     else:
                         printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')

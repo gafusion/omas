@@ -1,0 +1,200 @@
+;=== Measured signals to be read from NSTX diagnostics ===
+;=== 
+;=== Day 1+ Signal designations
+;=== S.A. Sabbagh 11/3/99
+;===
+;=== Computed "signals" based on measurements ===
+;===
+;=== NOTE: map index is one greater than the corresponding IDL array index
+;===       (i.e., ioh, map index 1 = ioh[0], etc.)
+;===
+;=== NOTE: See notes at end for stated errors, bit noise, etc.
+;=== 
+;Name   sigl  map   map  MDS Read       Error     Signal  Use  Conversion Designation
+;       type  var   indx tree sig? rel   abs   threshold  err?  factor
+;===================================================================================================
+OH1       OH  ioh       1  e  y  0.010  20.0     40.0     y  1.0        \IOH     ;(A) === Eng signals
+PF1AU     SC  icoil     1  e  y  0.005  8.0      20.0     y  1.0        \IPF1AU
+PF2U      SC  icoil     2  e  y  0.005  100.0    150.0    y  1.0        \IPF2U
+PF3U      SC  icoil     3  e  y  0.005  80.0     80.0     y  1.0        \IPF3U
+PF4U      SC  icoil     4  e  n  0.005  20.0     20.0     y  1.0        None
+PF5U      SC  icoil     5  e  y  0.005  20.0     25.0     y  1.0        \IPF5
+PF5L      SC  icoil     6  e  y  0.005  20.0     25.0     y  1.0        \IPF5
+PF4L      SC  icoil     7  e  n  0.005  20.0     20.0     y  1.0        None
+PF3L      SC  icoil     8  e  y  0.005  20.0     40.0     y  1.0        \IPF3L
+PF2L      SC  icoil     9  e  y  0.005  100.0    150.0    y  1.0        \IPF2L
+PF1AL     SC  icoil    10  e  y  0.005  20.0     30.0     y  1.0        \IPF1AL
+PF1B      SC  icoil    11  e  y  0.005  12.0     20.0     y  1.0        \IPF1B
+IP1       PR  ip        1  e  y  0.005  10.0e3   50.0e3   y  1.0        \IP1          ;(A) - was 20% error
+TF1       TF  none      1  e  y  0.010  30.0     50.0     y  7.1667e-6  \ITF             ;(A -> m*T)
+HHFWPWR   RP  none      1  r  n  0.100  100.0    100.0    y  1.0        \HHFW_POWER      ;(W) === RF signals
+VFLOHM    VL  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_17_OUTER ;(V) === Ops signals
+; NOTE: This was changed from \V_FLOHM on 12/13/99 to avoid clipping at higher voltage
+VFLEVVU2  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_7_OUTER  ;(V)
+VFLEVVU4  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_5_OUTER
+VFLEVVU5  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_4_OUTER
+VFLEVVU7  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_2_OUTER
+VFLEVVL2  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_27_OUTER
+VFLEVVL4  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_29_OUTER
+VFLEVVL5  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_30_OUTER
+VFLEVVL7  LV  none      1  o  y  0.050  0.10     0.10     y  1.0        \LV_EVV_32_OUTER
+;;;IPPF1B    PR  none      1  o  y  0.200  20.0e+3  50.0e+3  y  1.0        \IP_IPF1B_1   ;(A) must be before IP1
+;;;IP1       PR  ip        1  o  c  0.200  20.0e+3  50.0e+3  y  1.0        IPPF1B        ;(A)
+RCSCL1    RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGCSCL1
+RCSCL2    RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGCSCL2
+RCSCU1    RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGCSCU1
+RCSCU2    RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGCSCU2
+IVVTOT    IW  iwalltot  1  o  y  0.040  20.0e3   40.0e3   y  1.0        \IVV_TOT     ;Wall current estimate
+IVVTOTV   IV  ivvtot    1  o  y  0.040  20.0e3   40.0e3   y  1.0        \IVV_TOT     ;Vessel current est.
+REVVUL2   RG  irog2tot  1  o  y  0.015  15.0e3   40.0e3   y  1.0        \I_ROGEVVUL2 ;Total Rogowski current (*)
+REVVUL1   RG  none      1  o  n  0.030  20.0e3   0.00     y  1.0        \I_ROGEVVUL1 ;Total Rogowski current
+RPPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGPPPSL1
+RPPPSL2   RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGPPPSL2
+RPPPSL3   RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGPPPSL3
+RPPPSL4   RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGPPPSL4
+RSPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0        \I_ROGSPPSL1
+FLEVVL1   FL  tfl       1  o  n  0.050  0.00     0.00     y  1.0        \F_FLEVVL1     ;(Wb) Compute from LV for now
+FLEVVL2   FL  tfl       2  o  y  0.010   3.0e-3   6.0e-3  n  1.0        \F_FLEVVL2     ;Calculate from LV - available all shots? (3.8%)
+FLEVVL3   FL  tfl       3  o  n  0.045   3.0e-3  10.0e-3  y  1.0        \F_FLEVVL3     ;Not available
+FLEVVL4   FL  tfl       4  o  n  0.100   3.0e-3  30.0e-3  n  1.0        VFLEVVL4       ;Calculate from LV
+FLEVVL5   FL  tfl       5  o  y  0.015   4.5e-3  10.0e-3  y  1.0        \F_FLEVVL5     ;Calculate from LV
+FLEVVL6   FL  tfl       6  o  y  0.0248 11.0e-3  11.0e-3  y  1.0        \F_FLEVVL6
+FLEVVL7   FL  tfl       7  o  y  0.015   5.5e-3  10.0e-3  y  1.0        \F_FLEVVL7     ;Calculate from LV
+FLEVVU1   FL  tfl       8  o  n  0.050   0.00     0.00    y  1.0        \F_FLEVVU1     ;Not available
+FLEVVU2   FL  tfl       9  o  y  0.010   3.0e-3   6.0e-3  y  1.0        \F_FLEVVU2
+FLEVVU3   FL  tfl      10  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLEVVU3
+FLEVVU4   FL  tfl      11  o  y  0.021   4.5e-3  10.0e-3  y  1.0        \F_FLEVVU4
+FLEVVU5   FL  tfl      12  o  y  0.010   5.0e-3  10.0e-3  y  1.0        \F_FLEVVU5
+FLEVVU6   FL  tfl      13  o  y  0.028  10.0e-3  10.0e-3  y  1.0        \F_FLEVVU6
+FLEVVU7   FL  tfl      14  o  y  0.012   5.5e-3  10.0e-3  y  1.0        \F_FLEVVU7       ;Calculate from LV
+FLIVVL1   FL  tfl      15  o  y  0.013   5.0e-3  10.0e-3  y  1.0        \F_FLIVVL1     ;Available - need position
+FLIVVL2   FL  tfl      16  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLIVVL2     ;Available - need position
+FLIVVU1   FL  tfl      17  o  y  0.015   5.0e-3  10.0e-3  y  1.0        \F_FLIVVU1     ;Available - need position
+FLIVVU2   FL  tfl      18  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLIVVU2     ;Available - need position
+FLOBDL1   FL  tfl      19  o  y  0.010   3.0e-3   8.0e-3  y  1.0        \F_FLOBDL1     ;OK to 3% - positions from photo - bad on 101421
+FLOBDL2   FL  tfl      20  o  y  0.010   3.0e-3   8.0e-3  y  1.0        \F_FLOBDL2     ;OK to 3% - positions from photo
+FLOBDL3   FL  tfl      21  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLOBDL3     ;OK to 3% - positions from photo
+FLOBDU1   FL  tfl      22  o  y  0.015   4.5e-3   8.0e-3  y  1.0        \F_FLOBDU1     ;OK to 3% - positions from photo
+FLOBDU2   FL  tfl      23  o  n  0.025   3.5e-3   6.0e-3  y  1.0        \F_FLOBDU2     ;Take out for shots 101300+
+FLOBDU3   FL  tfl      24  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLOBDU3     ;OK to 3% - positions from photo
+FLOHL1    FL  tfl      25  o  n  0.050  0.00     0.00     y  1.0        \F_FLOHL1      ;Not available
+FLOHL2    FL  tfl      26  o  y  0.008   6.0e-3  10.0e-3  y  1.0        \F_FLOHL2      ;All OK
+FLOHL3    FL  tfl      27  o  n  0.024  0.00     0.00     y  1.0        \F_FLOHL3      ;Not available
+FLOHL4    FL  tfl      28  o  y  0.011   6.0e-3  10.0e-3  y  1.0        \F_FLOHL4      ;All OK
+FLOHM     FL  tfl      29  o  y  0.010   5.5e-3  10.0e-3  y  1.0        \F_FLOHM       ;All OK
+FLOHU1    FL  tfl      30  o  n  0.050  0.00     0.00     y  1.0        \F_FLOHU1      ;Not available
+FLOHU2    FL  tfl      31  o  y  0.010   5.5e-3  10.0e-3  y  1.0        \F_FLOHU2      ;All OK
+FLOHU3    FL  tfl      32  o  n  0.050  0.00     0.00     y  1.0        \F_FLOHU3      ;Not available
+FLOHU4    FL  tfl      33  o  y  0.010   5.6e-3  10.0e-3  y  1.0        \F_FLOHU4      ;All OK
+FLPF1AL1  FL  tfl      34  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF1AL1    ;Not available
+FLPF1AL2  FL  tfl      35  o  y  0.010   7.3e-3  10.0e-3  y  1.0        \F_FLPF1AL2    ;All OK
+FLPF1AL3  FL  tfl      36  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF1AL3    ;Not available
+FLPF1AL4  FL  tfl      37  o  y  0.007   6.1e-3  10.0e-3  y  1.0        \F_FLPF1AL4    ;All OK ; OUT FOR CHI only
+FLPF1AU1  FL  tfl      38  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF1AU1    ;Not available
+FLPF1AU2  FL  tfl      39  o  y  0.010   7.3e-3  10.0e-3  y  1.0        \F_FLPF1AU2    ;All OK
+FLPF1AU3  FL  tfl      40  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF1AU3    ;Not available
+FLPF1AU4  FL  tfl      41  o  y  0.010   7.0e-3  10.0e-3  y  1.0        \F_FLPF1AU4    ;All OK
+FLPF1BL   FL  tfl      42  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF1BL     ;Not available
+FLPF2L    FL  tfl      43  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF2L      ;Not available
+FLPF2U    FL  tfl      44  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF2U      ;Not available
+FLPF3L    FL  tfl      45  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF3L      ;Not available
+FLPF3U    FL  tfl      46  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF3U      ;Not available
+FLPF4L    FL  tfl      47  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF4L      ;Not available
+FLPF4U    FL  tfl      48  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF4U      ;Not available
+FLPF5L    FL  tfl      49  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF5L      ;Not available
+FLPF5U    FL  tfl      50  o  n  0.050  0.00     0.00     y  1.0        \F_FLPF5U      ;Not available
+FLPPPL1   FL  tfl      51  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLPPPL1     ;Available
+FLPPPL2   FL  tfl      52  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLPPPL2     ;Available
+FLPPPL3   FL  tfl      53  o  n  0.100   3.0e-3  20.0e-3  y  1.0        \F_FLPPPL3     ;Not reliable - might be other signal
+FLPPPL4   FL  tfl      54  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLPPPL4     ;Available
+FLPPPU1   FL  tfl      55  o  y  0.014   3.0e-3  10.0e-3  y  1.0        \F_FLPPPU1     ;Available
+FLPPPU2   FL  tfl      56  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLPPPU2     ;Available
+FLPPPU3   FL  tfl      57  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLPPPU3     ;Available
+FLPPPU4   FL  tfl      58  o  y  0.0114  3.0e-3  10.0e-3  y  1.0        \F_FLPPPU4     ;Available
+FLSPPL1   FL  tfl      59  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPL1     ;Available
+FLSPPL2   FL  tfl      60  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPL2     ;Available
+FLSPPL3   FL  tfl      61  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPL3     ;Available
+FLSPPL4   FL  tfl      62  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPL4     ;Available
+FLSPPU1   FL  tfl      63  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPU1     ;Available
+FLSPPU2   FL  tfl      64  o  y  0.010   3.0e-3  10.0e-3  y  1.0        \F_FLSPPU2     ;Available
+FLSPPU3   FL  tfl      65  o  y  0.008   3.0e-3  10.0e-3  y  1.0        \F_FLSPPU3     ;Available
+FLSPPU4   FL  tfl      66  o  n  0.008   3.0e-3  10.0e-3  y  1.0        \F_FLSPPU4     ;***Taken out 1/7/00
+B1CSCL1   MC  bmc       1  o  n  0.035  1.00e-3  2.00e-3  y  1.0        \B_1DMCSCL1    ;(T) - should be ok unless indicated - ok July 00 - bad on 102470
+B1CSCL2   MC  bmc       2  o  n  0.013  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCL2    ; ok - bad for 102348, 102470
+B1CSCL3   MC  bmc       3  o  y  0.010  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCL3    ; ok OUT - LOW FOR 100840
+B1CSCL4   MC  bmc       4  o  n  0.035  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCL4    ; ok - July 00 - OUT 103223+
+B1CSCL5   MC  bmc       5  o  y  0.035  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCL5    ; ok - July 00
+B1CSCL6   MC  bmc       6  o  y  0.068  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCL6    ; ok - Sep 19/00
+B1CSCU1   MC  bmc       7  o  n  0.500  0.00     0.00     y  1.0       \B_1DMCSCU1    ; dead channel
+B1CSCU2   MC  bmc       8  o  n  0.015  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCU2    ; ok - y - ***BAD ON 102325
+B1CSCU3   MC  bmc       9  o  n  0.035  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCU3    ; ok - July 00 - out 103903+
+B1CSCU4   MC  bmc      10  o  n  0.035  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCU4    ; ok - July 00 - out 102777+
+B1CSCU5   MC  bmc      11  o  y  0.025  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCU5    ; ok - y
+B1CSCU6   MC  bmc      12  o  n  0.045  1.00e-3  2.00e-3  y  1.0       \B_1DMCSCU6    ; ok - out 103006+
+B2CSCL2N  MC  bmc      13  o  n  0.500  0.00     0.00     y  1.0       \B_2DMCSCL2N   ; leave this out
+B2CSCL2T  MC  bmc      14  o  y  0.057  1.00e-3  2.00e-3  y  1.0       \B_2DMCSCL2T   ; ok - Sep 00
+B2CSCU1N  MC  bmc      15  o  n  0.500  0.00     0.00     y  1.0       \B_2DMCSCU1N   ; leave this out
+B2CSCU1T  MC  bmc      16  o  y  0.044  1.00e-3  2.00e-3  y  1.0       \B_2DMCSCU1T   ; ok - y - dead on 101099 series
+BL1PPPGL1 MC  bmc      17  o  n  0.025  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGL1_AXEQ ; out on 103210+
+BL1PPPGL2 MC  bmc      18  o  y  0.040  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGL2_AXEQ ; LOW FOR 100840
+BL1PPPGL3 MC  bmc      19  o  n  0.036  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGL3_AXEQ ; TAKEN out - after bake 11/30
+BL1PPPGU1 MC  bmc      20  o  n  0.025  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGU1_AXEQ ; out at 103342+
+BL1PPPGU2 MC  bmc      21  o  n  0.015  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGU2_AXEQ ; taken out 103063 - RF noise
+BL1PPPGU3 MC  bmc      22  o  y  0.015  1.00e-3  2.00e-3  y  1.0        \B_L1DMPPPGU3_AXEQ ;
+BL1SPPGL1 MC  bmc      23  o  y  0.010  1.00e-3  2.00e-3  y  1.0        \B_L1DMSPPGL1_AXEQ ;
+BL1SPPGL2 MC  bmc      24  o  y  0.010  1.00e-3  1.50e-3  y  1.0        \B_L1DMSPPGL2_AXEQ ;
+BL1SPPGL3 MC  bmc      25  o  y  0.012  1.00e-3  1.50e-3  y  1.0        \B_L1DMSPPGL3_AXEQ ;
+BL1SPPGU1 MC  bmc      26  o  n  0.025  1.00e-3  2.00e-3  y  1.0        \B_L1DMSPPGU1 ; TAKEN out - RF run / after bake
+BL1SPPGU2 MC  bmc      27  o  y  0.020  1.00e-3  2.00e-3  y  1.0        \B_L1DMSPPGU2_AXEQ ;
+BL1SPPGU3 MC  bmc      28  o  y  0.016  1.00e-3  2.00e-3  y  1.0        \B_L1DMSPPGU3_AXEQ ;
+VS1U      VS  icoil    12  -  c  0.200  1.0e3    1.00e3   y  5.90e-4    VFLOHM        ;For computed vessel segments,
+VS2U      VS  icoil    13  -  c  0.300  1.0e3    1.00e+3  y  6.00e-4    VFLOHM        ;For computed vessel segments,
+VS3U      VS  icoil    14  -  c  0.400  1.0e3    1.00e+3  y  3.62e-4    VFLOHM        ; the conversion factor is an
+VS4U      VS  icoil    15  -  c  0.400  1.0e3    1.00e+3  y  12.6e-4    VFLOHM        ; "effective resistance" which
+VS5U      VS  icoil    16  -  c  0.300  1.0e3    1.00e+3  y  2.40e-4    VFLEVVU2      ; converts Voltage (V) to
+VS6U      VS  icoil    17  -  c  0.300  1.0e3    1.00e+3  y  1.10e-4    VFLEVVU2      ; current (A)
+VS7U      VS  icoil    18  -  c  0.200  5.0e3    5.00e+3  y  3.07e-4    VFLEVVU2      ; NOTE: absolute error is in (A)
+VS8U      VS  icoil    19  -  c  0.200  5.0e3    5.00e+3  y  6.60e-4    VFLEVVU4
+VS9U      VS  icoil    20  -  c  0.200  5.0e3    5.00e+3  y  5.34e-4    VFLEVVU5  ; was 8.63, 5.34e-4
+VS10U     VS  icoil    21  -  c  0.200  5.0e3    5.00e+3  y  5.00e-4    VFLEVVU7  ; was 6.67, 5.00e-4
+VS10L     VS  icoil    22  -  c  0.200  5.0e3    5.00e+3  y  5.00e-4    VFLEVVL7  ; was 6.67, 5.00e-4
+VS9L      VS  icoil    23  -  c  0.200  5.0e3    5.00e+3  y  5.34e-4    VFLEVVL5  ; was 8.63, 5.34e-4
+VS8L      VS  icoil    24  -  c  0.200  5.0e3    5.00e+3  y  6.60e-4    VFLEVVL4
+VS7L      VS  icoil    25  -  c  0.200  5.0e3    5.00e+3  y  3.07e-4    VFLEVVL2  ; was U2
+VS6L      VS  icoil    26  -  c  0.300  1.0e3    1.00e+3  y  1.10e-4    VFLEVVL2  ; was U2
+VS5L      VS  icoil    27  -  c  0.300  1.0e3    1.00e+3  y  2.40e-4    VFLEVVL2  ; was U2
+VS4L      VS  icoil    28  -  c  0.400  1.0e3    1.00e+3  y  12.6e-4    VFLOHM
+VS3L      VS  icoil    29  -  c  0.400  1.0e3    1.00e+3  y  3.62e-4    VFLOHM
+VS2L      VS  icoil    30  -  c  0.300  1.0e3    1.00e+3  y  6.00e-4    VFLOHM
+VS1L      VS  icoil    31  -  c  0.200  1.0e3    1.00e+3  y  5.90e-4    VFLOHM
+DPU1      DP  icoil    32  -  c  0.000  4.0e3    4.00e+3  y  1.00e+3    VFLOHM  ; was 0.85 rel err, 0.5e3 abs
+DPL1      DP  icoil    33  -  c  0.000  4.0e3    4.00e+3  y  1.00e+3    VFLOHM
+PPSIUU    SP  icoil    34  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPSIUL    SP  icoil    35  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPPOUU    SP  icoil    36  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPPOUL    SP  icoil    37  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPPOLU    SP  icoil    38  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPPOLL    SP  icoil    39  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPSILU    SP  icoil    40  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+PPSILL    SP  icoil    41  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3    VFLOHM
+;====================================================================================
+; Stated errors
+;--------------
+; Coil currents: Relative error on transducers = 0.1%, but practically is about 0.5%
+;                Resolution: PF1AL, PF2U, PF2L, PF3U, PF5, CHI = 12A/bit
+;                           all others are = 6A/bit   (As per C. Neumeyer 5/18/00)
+;
+; Flux loops:    General error specs from J. Menard (5/17/00)
+;   CS flux loops: Minimum useful signal: 5 - 10 mWb
+;                  Resolution:            2 mWb
+;                  Relative error:        1.5%
+;   non-CS loops:  Minimum useful signal: 4 mWb
+;                  Resolution:            4 mWb
+;                  Relative error:        1.5%
+;
+; NOTE: the values actually used above are taken from fields-only test shots. The
+;       actual error specs in practice can be larger than the stated general values.
+;====================================================================================
+
+
+
