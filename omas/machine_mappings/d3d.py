@@ -578,6 +578,24 @@ def bolometer_hardware(ods, pulse):
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
 
+@machine_mapping_function(__regression_arguments__, pulse=149472)
+def bolometer_data(ods, pulse):
+    """
+    Load DIII-D bolometer data
+
+    """
+    printd('Setting up DIII-D bolometer data...', topic='machine')
+
+    ods1 = ODS()
+    unwrap(bolometer_hardware)(ods1, pulse)
+
+    for ch in ods1['bolometer.channel']:
+        ch_name = ods1[f'bolometer.channel[{ch}].identifier']
+        print(f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P')
+
+        ods[f'bolometer.channel[{ch}].power.data'] = [0.0]
+        ods[f'bolometer.channel[{ch}].power.time'] = [0.0]
+
 #================================
 @machine_mapping_function(__regression_arguments__, pulse=176235)
 def langmuir_probes_hardware(ods, pulse):
@@ -802,4 +820,4 @@ def magnetics_probes_data(ods, pulse):
 
 #================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(["charge_exchange_hardware"], globals(), locals())
+    test_machine_mapping_functions(["bolometer_data"], globals(), locals())

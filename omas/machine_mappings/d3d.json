@@ -41,6 +41,12 @@
  "bolometer.channel.:.name": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
+ "bolometer.channel.:.power.data": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
+ },
+ "bolometer.channel.:.power.time": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
+ },
  "charge_exchange.channel.:": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
