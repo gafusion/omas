@@ -623,10 +623,11 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
-    unwrap(charge_exchange_data)(ods, pulse, revision, _measurements=False)
+    unwrap(charge_exchange_data)(ods, pulse, analysis_type, _measurements=False)
 
-@machine_mapping_function(__all__)
-def charge_exchange_data(ods, pulse=133221, analysis_type='CERQUICK', _measurements=True):
+
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=True):
     """
     Gathers DIII-D CER measurement data from MDSplus
 
@@ -652,7 +653,7 @@ def charge_exchange_data(ods, pulse=133221, analysis_type='CERQUICK', _measureme
             fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI']
             if _measurements:
                 fetch_keys.extend([])
-            for pos in :
+            for pos in [0]:
                 TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
 
@@ -737,4 +738,4 @@ def magnetics_probes_data(ods, pulse):
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(["pf_active_hardware"], globals(), locals())
