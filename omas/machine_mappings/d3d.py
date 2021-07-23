@@ -589,14 +589,25 @@ def bolometer_data(ods, pulse):
     ods1 = ODS()
     unwrap(bolometer_hardware)(ods1, pulse)
 
+    # first get the list of signals that we want to fetch
+    TDIs={}
     for ch in ods1['bolometer.channel']:
         ch_name = ods1[f'bolometer.channel[{ch}].identifier']
         TDI=f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P'
+        TDIs[f'{ch}_data']=f"data({TDI})"
+        TDIs[f'{ch}_time'] = f"dim_of({TDI},0)"
 
-        data = mdsvalue('d3d', 'BOLOM', pulse, f"data({TDI})").raw()
-        time = mdsvalue('d3d', 'BOLOM', pulse, f"dim_of({TDI},0)").raw()
+    # then fetch all the data for all signals
+    all_data = mdsvalue('d3d', 'BOLOM', pulse,TDIs).raw()
 
+    # assign the data to the ods
+    for ch in ods1['bolometer.channel']:
+        data = all_data[f'{ch}_data']
+        error = data * 0.2
+        error[error<1E-5] = 1E-5
+        time = all_data[f'{ch}_time']
         ods[f'bolometer.channel[{ch}].power.data'] = data
+        ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
         ods[f'bolometer.channel[{ch}].power.time'] = time/1E3
 
 #================================
@@ -823,4 +834,4 @@ def magnetics_probes_data(ods, pulse):
 
 #================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(["bolometer_data"], globals(), locals())
+    test_machine_mapping_functions(['bolometer_data'], globals(), locals())

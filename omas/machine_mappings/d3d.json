@@ -44,6 +44,9 @@
  "bolometer.channel.:.power.data": {
   "PYTHON": "bolometer_data(ods, {pulse})"
  },
+ "bolometer.channel.:.power.data_error_upper": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
+ },
  "bolometer.channel.:.power.time": {
   "PYTHON": "bolometer_data(ods, {pulse})"
  },
