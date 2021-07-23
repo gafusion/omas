@@ -39,3 +39,5 @@ omas/examples/gkdb
 
 .coverage
 
+*.ipynb
+ipynb*
