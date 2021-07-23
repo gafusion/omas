@@ -9,6 +9,7 @@ __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def gas_injection_hardware(ods, pulse):
     """
@@ -279,6 +280,7 @@ def gas_injection_hardware(ods, pulse):
     i += 1
 
 
+#================================
 @machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
@@ -326,6 +328,7 @@ def pf_active_coil_current_data(ods, pulse):
         )
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_hardware(ods, pulse):
     """
@@ -388,6 +391,7 @@ def interferometer_data(ods, pulse):
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     """
@@ -462,6 +466,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
             i += 1
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def bolometer_hardware(ods, pulse):
     """
@@ -573,6 +578,23 @@ def bolometer_hardware(ods, pulse):
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
 
+#================================
+@machine_mapping_function(__regression_arguments__, pulse=176235)
+def langmuir_probes_hardware(ods, pulse):
+    """
+    Load DIII-D Langmuir probe locations without the probe's measurements
+
+    :param ods: ODS instance
+
+    :param pulse: int
+        For a workable example, see 176235
+
+    Data are written into ods instead of being returned.
+    """
+
+    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
+
+
 @machine_mapping_function(__regression_arguments__, pulse=176235)
 def langmuir_probes_data(ods, pulse, _get_measurements=True):
     """
@@ -654,22 +676,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 j += 1
 
 
-@machine_mapping_function(__regression_arguments__, pulse=176235)
-def langmuir_probes_hardware(ods, pulse):
-    """
-    Load DIII-D Langmuir probe locations without the probe's measurements
-
-    :param ods: ODS instance
-
-    :param pulse: int
-        For a workable example, see 176235
-
-    Data are written into ods instead of being returned.
-    """
-
-    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
-
-
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     """
@@ -732,6 +739,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
 
 
+#================================
 @machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
@@ -792,5 +800,6 @@ def magnetics_probes_data(ods, pulse):
         )
 
 
+#================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(["pf_active_hardware"], globals(), locals())
+    test_machine_mapping_functions(["charge_exchange_hardware"], globals(), locals())
