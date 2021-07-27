@@ -15,6 +15,9 @@
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
+ "bolometer.channel.:.etendue": {
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
+ },
  "bolometer.channel.:.identifier": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },

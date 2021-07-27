@@ -525,6 +525,7 @@ def bolometer_hardware(ods, pulse):
                 / 180.0
         )  # Converted to rad
 
+
         # Angular full width of the view-chord: calculations assume it's a symmetric cone.
         xangle_width = (
                 np.array(
@@ -535,6 +536,11 @@ def bolometer_hardware(ods, pulse):
                 * np.pi
                 / 180.0
         )
+
+        etendue = [ 3.0206e4, 2.9034e4, 2.8066e4, 2.7273e4, 2.6635e4, 4.0340e4, 3.9855e4, 3.9488e4, 3.9235e4, 3.9091e4, 3.9055e4, 3.9126e4, 0.7972e4,
+                     0.8170e4, 0.8498e4, 0.7549e4, 0.7129e4, 0.6854e4, 1.1162e4, 1.1070e4, 1.1081e4, 1.1196e4, 1.1419e4, 1.1761e4, 2.9321e4, 2.8825e4,
+                     2.8449e4, 2.8187e4, 2.8033e4, 0.7058e4, 0.7140e4, 0.7334e4, 0.7657e4, 0.8136e4, 0.8819e4, 0.7112e4, 0.6654e4, 0.6330e4, 0.6123e4,
+                     2.9621e4, 2.9485e4, 2.9431e4, 2.9458e4, 2.9565e4, 2.9756e4, 3.0032e4, 3.0397e4, 0.6406e4, ]
 
         zxray = (
                 np.array(
@@ -574,6 +580,23 @@ def bolometer_hardware(ods, pulse):
         cls['second_point.r'] = rxray[i] + line_len * np.cos(xangle[i])
         cls['second_point.z'] = zxray[i] + line_len * np.sin(xangle[i])
         cls['second_point.phi'] = cls['first_point.phi']
+        ods['bolometer']['channel'][i]['etendue']= etendue[i]
+
+        '''The etendue is used as follows:
+        The fundamental profile is radiated power in W/cm**3
+        Along a sightline integral this would be int(Prad,dl) W/cm**2
+        However the bolometer collects a wider angle and intgrates
+        over a volume.  The GAprofiles tools use a monte-carlo response
+        grid on 2D R,Z EFIT domain.  This can be approximated by
+        the detector etendue.
+
+        The etendue for each channel defined as 4*pi*L^2/Ad/Aa/cos
+        where L is the distance from detector to aperture,
+        Ad is detector area, Aa is aperture area and cos is the
+        angle between the detector and aperture normal vectors.
+        and has units of cm**-2.  Thus a line integrated radiated
+        power int(Prad,dl) in cm**-2 needs to be divided by the
+        etendue to compare to reported power in Watts.'''
 
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
 
