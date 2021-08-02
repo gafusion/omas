@@ -55,6 +55,7 @@ _cocos_signals['bremsstrahlung_visible.channel.:.line_of_sight.second_point.phi'
 # CALORIMETRY
 
 # CAMERA_IR
+_cocos_signals['camera_ir.frame_analysis.:.power_flux_parallel']='?'                   #[ADD?]# 2.000000 # parallel  [W.m^-2]
 
 # CAMERA_VISIBLE
 _cocos_signals['camera_visible.channel.:.aperture.:.centre.phi']='TOR'                                      # 2.000000 # phi  [rad]
@@ -320,8 +321,12 @@ _cocos_signals['distributions.distribution.:.global_quantities.:.energy_fast_par
 _cocos_signals['distributions.distribution.:.global_quantities.:.thermalisation.torque']='?'                                          #[ADD?]# 1.000000 # torque
 
 # DIVERTORS
+_cocos_signals['divertors.divertor.:.target.:.tile.:.surface_outline.phi']='?'                           #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['divertors.divertor.:.target.:.tile.:.current_incident.data']='?'                         #[ADD?]# 1.875000 # current  [A]
+_cocos_signals['divertors.divertor.:.target.:.current_incident.data']='?'                                #[ADD?]# 1.833333 # current  [A]
 _cocos_signals['divertors.divertor.:.target.:.power_currents.data']='?'                                  #[ADD?]# 1.833333 # current  [W]
 _cocos_signals['divertors.divertor.:.target.:.tilt_angle_pol.data']='?'                                  #[ADD?]# 1.833333 # _pol  [rad]
+_cocos_signals['divertors.divertor.:.current_incident.data']='?'                                         #[ADD?]# 1.750000 # current  [A]
 _cocos_signals['divertors.divertor.:.power_currents.data']='?'                                           #[ADD?]# 1.750000 # current  [W]
 
 # EC_LAUNCHERS
@@ -420,6 +425,10 @@ _cocos_signals['edge_profiles.ggd.:.j_perpendicular_viscosity.:.toroidal']='?'  
 _cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.parallel']=None                                                   # 2.600000 # j  parallel  [A.m^-2]
 _cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.poloidal']='?'                                             #[ADD?]# 2.600000 # j  poloidal  [A.m^-2]
 _cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.toroidal']='?'                                             #[ADD?]# 2.600000 # j  toroidal  [A.m^-2]
+_cocos_signals['edge_profiles.ggd.:.j_total.:.parallel']='?'                                                         #[ADD?]# 2.600000 # j  parallel  [A.m^-2]
+_cocos_signals['edge_profiles.ggd.:.j_total.:.poloidal']='?'                                                         #[ADD?]# 2.600000 # j  poloidal  [A.m^-2]
+_cocos_signals['edge_profiles.ggd.:.j_total.:.toroidal']='?'                                                         #[ADD?]# 2.600000 # j  toroidal  [A.m^-2]
+_cocos_signals['edge_profiles.ggd.:.j_parallel.:.values']='?'                                                        #[ADD?]# 2.200000 # j  parallel  [A.m^-2]
 _cocos_signals['edge_profiles.profiles_1d.:.current_parallel_inside']='?'                                            #[ADD?]# 2.000000 # current  [A]
 _cocos_signals['edge_profiles.profiles_1d.:.grid.psi']='PSI'                                                                # 2.000000 # psi  [Wb]
 _cocos_signals['edge_profiles.profiles_1d.:.grid.psi_boundary']='PSI'                                                       # 2.000000 # psi  [Wb]
@@ -457,6 +466,7 @@ _cocos_signals['edge_profiles.ggd.:.j_ion_neutral_friction.:.diamagnetic']='?'  
 _cocos_signals['edge_profiles.ggd.:.j_parallel_viscosity.:.diamagnetic']='?'                                         #[ADD?]# 1.600000 # j  [A.m^-2]
 _cocos_signals['edge_profiles.ggd.:.j_perpendicular_viscosity.:.diamagnetic']='?'                                    #[ADD?]# 1.600000 # j  [A.m^-2]
 _cocos_signals['edge_profiles.ggd.:.j_pfirsch_schlueter.:.diamagnetic']='?'                                          #[ADD?]# 1.600000 # j  [A.m^-2]
+_cocos_signals['edge_profiles.ggd.:.j_total.:.diamagnetic']='?'                                                      #[ADD?]# 1.600000 # j  [A.m^-2]
 _cocos_signals['edge_profiles.ggd.:.phi_potential.:.values']='?'                                                     #[ADD?]# 1.600000 # phi  [V]
 
 # EDGE_SOURCES
@@ -561,6 +571,10 @@ _cocos_signals['equilibrium.time_slice.:.constraints.pf_passive_current.:.measur
 _cocos_signals['equilibrium.time_slice.:.constraints.pf_passive_current.:.reconstructed']='TOR'                                 # 1.666667 # current  [A]
 _cocos_signals['equilibrium.time_slice.:.constraints.q.:.measured']='Q'                                                         # 1.666667 # q  [-]
 _cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed']='Q'                                                    # 1.666667 # q  [-]
+_cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.measured']='TOR'                                          # 0.000000 # 
+_cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed']='TOR'                                     # 0.000000 # 
+_cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.measured']='PSI'                                               # 0.000000 # 
+_cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed']='PSI'                                          # 0.000000 # 
 
 # GAS_INJECTION
 _cocos_signals['gas_injection.pipe.:.exit_position.phi']='TOR'                                      # 2.000000 # phi  [rad]
@@ -676,12 +690,23 @@ _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.position.ph
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.position_average.phi']='TOR'                                  # 2.000000 # phi  [rad]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.heat_flux_parallel.data']=None                    # 1.875000 # parallel  [W.m^-2]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.ion_saturation_current.data']=None                # 1.875000 # current  [A]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.j_i_kurtosis.data']='?'                    #[ADD?]# 1.875000 # j  [-]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.j_i_saturation.data']='?'                  #[ADD?]# 1.875000 # j  [A.m^-2]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.j_i_sigma.data']='?'                       #[ADD?]# 1.875000 # j  [A.m^-2]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.j_i_skew.data']='?'                        #[ADD?]# 1.875000 # j  [-]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.v_floating.data']=None                            # 1.875000 # v  [V]
+_cocos_signals['langmuir_probes.reciprocating.:.plunge.:.collector.:.v_floating_sigma.data']='?'                #[ADD?]# 1.875000 # v  [V]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.mach_number_parallel.data']=None                              # 1.833333 # parallel  [-]
 _cocos_signals['langmuir_probes.reciprocating.:.plunge.:.v_plasma.data']=None                                          # 1.833333 # v  [V]
 _cocos_signals['langmuir_probes.embedded.:.heat_flux_parallel.data']=None                                              # 1.750000 # parallel  [W.m^-2]
 _cocos_signals['langmuir_probes.embedded.:.ion_saturation_current.data']=None                                          # 1.750000 # current  [A]
+_cocos_signals['langmuir_probes.embedded.:.j_i_parallel_sigma.data']='?'                                        #[ADD?]# 1.750000 # j  [A.m^-2]
+_cocos_signals['langmuir_probes.embedded.:.j_i_saturation.data']='?'                                            #[ADD?]# 1.750000 # j  [A.m^-2]
+_cocos_signals['langmuir_probes.embedded.:.j_i_saturation_kurtosis.data']='?'                                   #[ADD?]# 1.750000 # j  [-]
+_cocos_signals['langmuir_probes.embedded.:.j_i_saturation_sigma.data']='?'                                      #[ADD?]# 1.750000 # j  [A.m^-2]
+_cocos_signals['langmuir_probes.embedded.:.j_i_saturation_skew.data']='?'                                       #[ADD?]# 1.750000 # j  [-]
 _cocos_signals['langmuir_probes.embedded.:.v_floating.data']=None                                                      # 1.750000 # v  [V]
+_cocos_signals['langmuir_probes.embedded.:.v_floating_sigma.data']='?'                                          #[ADD?]# 1.750000 # v  [V]
 _cocos_signals['langmuir_probes.embedded.:.v_plasma.data']=None                                                        # 1.750000 # v  [V]
 
 # LH_ANTENNAS
@@ -942,8 +967,9 @@ _cocos_signals['reflectometer_profile.psi_normalization.psi_boundary']='PSI'    
 _cocos_signals['reflectometer_profile.psi_normalization.psi_magnetic_axis']='PSI'                              # 2.000000 # psi  [Wb]
 
 # REFRACTOMETER
-_cocos_signals['refractometer.channel.:.line_of_sight.first_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['refractometer.channel.:.line_of_sight.second_point.phi']='?'          #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['refractometer.channel.:.bandwidth.:.q_component']='?'                       #[ADD?]# 2.000000 # q  [V]
+_cocos_signals['refractometer.channel.:.line_of_sight.first_point.phi']='?'                 #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['refractometer.channel.:.line_of_sight.second_point.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
 
 # SAWTEETH
 _cocos_signals['sawteeth.profiles_1d.:.e_field_parallel']='?'                      #[ADD?]# 3.000000 # e_field  parallel  [V.m^-1]
@@ -1010,10 +1036,14 @@ _cocos_signals['spectrometer_x_ray_crystal.velocity_tor_proxy.data']='?'        
 
 # SUMMARY
 _cocos_signals['summary.local.itb.e_field_parallel.value']='?'                                                                #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
+_cocos_signals['summary.local.itb.momentum_tor.value']='?'                                                                    #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 _cocos_signals['summary.local.magnetic_axis.b_field.value']='?'                                                               #[ADD?]# 2.500000 # b  b_field  [T]
 _cocos_signals['summary.local.magnetic_axis.e_field_parallel.value']='?'                                                      #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
+_cocos_signals['summary.local.magnetic_axis.momentum_tor.value']='?'                                                          #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 _cocos_signals['summary.local.pedestal.e_field_parallel.value']='?'                                                           #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
+_cocos_signals['summary.local.pedestal.momentum_tor.value']='?'                                                               #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 _cocos_signals['summary.local.separatrix.e_field_parallel.value']='?'                                                         #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
+_cocos_signals['summary.local.separatrix.momentum_tor.value']='?'                                                             #[ADD?]# 2.500000 # momentum  _tor  [kg.m.s^-1]
 _cocos_signals['summary.pedestal_fits.linear.b_field_pedestal_top_hfs.value']='?'                                             #[ADD?]# 2.500000 # b  b_field  [T]
 _cocos_signals['summary.pedestal_fits.linear.b_field_pedestal_top_lfs.value']='?'                                             #[ADD?]# 2.500000 # b  b_field  [T]
 _cocos_signals['summary.pedestal_fits.linear.b_field_pol_pedestal_top_average.value']='?'                                     #[ADD?]# 2.500000 # b  b_field  [T]
@@ -1120,10 +1150,6 @@ _cocos_signals['summary.global_quantities.v_loop.value']='TOR'                  
 _cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_hager.alpha_critical.value']='?'                      #[ADD?]# 1.666667 # current  [-]
 _cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_sauter.alpha_critical.value']='?'                     #[ADD?]# 1.666667 # current  [-]
 _cocos_signals['summary.runaways.current.value']='?'                                                                          #[ADD?]# 1.666667 # current  [A]
-_cocos_signals['summary.local.itb.momentum_tor.value']='?'                                                                    #[ADD?]# 1.500000 # momentum  _tor
-_cocos_signals['summary.local.magnetic_axis.momentum_tor.value']='?'                                                          #[ADD?]# 1.500000 # momentum  _tor
-_cocos_signals['summary.local.pedestal.momentum_tor.value']='?'                                                               #[ADD?]# 1.500000 # momentum  _tor
-_cocos_signals['summary.local.separatrix.momentum_tor.value']='?'                                                             #[ADD?]# 1.500000 # momentum  _tor
 _cocos_signals['summary.global_quantities.energy_b_field_pol.value']='?'                                                      #[ADD?]# 1.333333 # b_field  _pol
 _cocos_signals['summary.global_quantities.energy_fast_parallel.value']='?'                                                    #[ADD?]# 0.666667 # parallel
 _cocos_signals['summary.pedestal_fits.mtanh.stability.bootstrap_current_hager.t_e_pedestal_top_critical.value']='?'           #[ADD?]# 0.666667 # current
@@ -1144,8 +1170,8 @@ _cocos_signals['tf.field_map.:.a_field_tor.:.values']='?'                       
 _cocos_signals['tf.delta_b_field_tor_vacuum_r.data']='TOR'                                                   # 1.500000 # b_field  [T.m]
 
 # THOMSON_SCATTERING
-_cocos_signals['thomson_scattering.channel.:.delta_position.phi']='TOR'                       # 2.000000 # phi  [rad]
-_cocos_signals['thomson_scattering.channel.:.position.phi']='TOR'                             # 2.000000 # phi  [rad]
+_cocos_signals['thomson_scattering.channel.:.delta_position.phi']='TOR'                              # 2.000000 # phi  [rad]
+_cocos_signals['thomson_scattering.channel.:.position.phi']='TOR'                                    # 2.000000 # phi  [rad]
 
 # TRANSPORT_SOLVER_NUMERICS
 _cocos_signals['transport_solver_numerics.derivatives_1d.:.electrons.d2_drho_tor_norm2.velocity_pol']='?'                                  #[ADD?]# 3.000000 # velocity  _pol  [m.s^-1]

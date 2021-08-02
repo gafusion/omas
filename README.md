@@ -1,5 +1,5 @@
 ![OMAS version](https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&color=blue)
-![IMAS version](https://img.shields.io/badge/IMAS-3.32.1-yellow)
+![IMAS version](https://img.shields.io/badge/IMAS-3.33.0-yellow)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue)
 

@@ -2,7 +2,7 @@
  "summary": {
   "documentation": "Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the \"time\" vector) or time-averaged over an interval (in such case the \"time_width\" of the interval is indicated and the \"time\" vector represents the end of each time interval).",
   "full_path": "summary",
-  "lifecycle_last_change": "3.32.0",
+  "lifecycle_last_change": "3.33.1",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "1"
@@ -8252,7 +8252,7 @@
  },
  "summary.heating_current_drive.nbi[:].angle": {
   "data_type": "STRUCTURE",
-  "documentation": "Angle of inclination between a beamlet at the centre of the injection unit surface and the horiontal plane",
+  "documentation": "Angle of inclination between a beamlet at the centre of the injection unit surface and the horizontal plane",
   "full_path": "summary/heating_current_drive/nbi(i1)/angle",
   "lifecycle_status": "active",
   "structure_reference": "summary_static_flt_0d",
@@ -9649,7 +9649,7 @@
  },
  "summary.kicks.occurrence": {
   "data_type": "STRUCTURE",
-  "documentation": "Flag set to 1 if vecrtical kicks of the plasma position are used during the pulse, 0 otherwise",
+  "documentation": "Flag set to 1 if vertical kicks of the plasma position are used during the pulse, 0 otherwise",
   "full_path": "summary/kicks/occurrence",
   "lifecycle_status": "active",
   "structure_reference": "summary_constant_int_0d",
@@ -24451,6 +24451,36 @@
   "data_type": "INT_0D",
   "documentation": "Value",
   "full_path": "summary/magnetic_shear_flag/value",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "summary.midplane": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/midplane_identifier.xml",
+  "documentation": "Choice of midplane definition (use the lowest index number if more than one value is relevant)\n1) magnetic_axis : Midplane defined by the height of magnetic axis equilibrium/time_slice/global_quantities/magnetic_axis/z\n2) dr_dz_zero_sep : Midplane defined by the height of the outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. equilibrium/time_slice/boundary_separatrix/dr_dz_zero_point/z\n3) z_zero : Midplane defined by z = 0\n4) ggd_subset : Midplane location is specified by means of the GGD grid subset for the inner and outer midplanes, if the midplane choice is different from the other available options. If the GGD midplane subset corresponds to one of the other available options, select that particular option to indicate it",
+  "full_path": "summary/midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier_static"
+ },
+ "summary.midplane.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "summary/midplane/description",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "summary.midplane.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "summary/midplane/index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "summary.midplane.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "summary/midplane/name",
   "lifecycle_status": "active",
   "type": "static"
  },
