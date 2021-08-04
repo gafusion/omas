@@ -2361,6 +2361,30 @@ class ODS(MutableMapping):
         """
         return omas_info_node((self.location + '.' + location).lstrip('.'))
 
+    def relax(self, other, alpha=0.5):
+        '''
+        Blend floating point data in this ODS with corresponding floating point in other ODS
+
+        :param other: other ODS
+
+        :param alpha: relaxation coefficient `this_ods * (1.0 - alpha) + other_ods * alpha`
+
+        :return: list of paths that have been blended
+        '''
+
+        self_paths = set(self.pretty_paths())
+        other_paths = set(other.pretty_paths())
+
+        relaxed_paths = []
+        for item in sorted(self_paths.intersection(other_paths)):
+            self_data = self[item]
+            other_data = other[item]
+            if type(self_data) and type(other_data) and numpy.asarray(self_data).dtype.kind == 'f':
+                self[item] = self_data * (1.0 - alpha) + other_data * alpha
+                relaxed_paths.append(item)
+
+        return relaxed_paths
+
     def __enter__(self):
         if self.dynamic:
             return self.dynamic.__enter__()
