@@ -785,10 +785,10 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             if isinstance(postime, Exception):
                 continue
             ch = ods['charge_exchange.channel.+']
+            ch['name'] = 'impCER_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
+            ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
-                ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
-                ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
                 chpos = ch['position'][pos.lower().split('_')[-1]]
                 chpos['time'] = postime / 1000.0  # Convert ms to s
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
