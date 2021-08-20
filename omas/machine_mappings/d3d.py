@@ -9,6 +9,7 @@ __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def gas_injection_hardware(ods, pulse):
     """
@@ -279,6 +280,7 @@ def gas_injection_hardware(ods, pulse):
     i += 1
 
 
+#================================
 @machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
@@ -326,6 +328,7 @@ def pf_active_coil_current_data(ods, pulse):
         )
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_hardware(ods, pulse):
     """
@@ -388,6 +391,7 @@ def interferometer_data(ods, pulse):
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     """
@@ -462,6 +466,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
             i += 1
 
 
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
     """
@@ -591,6 +596,7 @@ def bolometer_hardware(ods, pulse):
                 / 180.0
         )  # Converted to rad
 
+
         # Angular full width of the view-chord: calculations assume it's a symmetric cone.
         xangle_width = (
                 np.array(
@@ -601,6 +607,11 @@ def bolometer_hardware(ods, pulse):
                 * np.pi
                 / 180.0
         )
+
+        etendue = [ 3.0206e4, 2.9034e4, 2.8066e4, 2.7273e4, 2.6635e4, 4.0340e4, 3.9855e4, 3.9488e4, 3.9235e4, 3.9091e4, 3.9055e4, 3.9126e4, 0.7972e4,
+                     0.8170e4, 0.8498e4, 0.7549e4, 0.7129e4, 0.6854e4, 1.1162e4, 1.1070e4, 1.1081e4, 1.1196e4, 1.1419e4, 1.1761e4, 2.9321e4, 2.8825e4,
+                     2.8449e4, 2.8187e4, 2.8033e4, 0.7058e4, 0.7140e4, 0.7334e4, 0.7657e4, 0.8136e4, 0.8819e4, 0.7112e4, 0.6654e4, 0.6330e4, 0.6123e4,
+                     2.9621e4, 2.9485e4, 2.9431e4, 2.9458e4, 2.9565e4, 2.9756e4, 3.0032e4, 3.0397e4, 0.6406e4, ]
 
         zxray = (
                 np.array(
@@ -640,8 +651,74 @@ def bolometer_hardware(ods, pulse):
         cls['second_point.r'] = rxray[i] + line_len * np.cos(xangle[i])
         cls['second_point.z'] = zxray[i] + line_len * np.sin(xangle[i])
         cls['second_point.phi'] = cls['first_point.phi']
+        ods['bolometer']['channel'][i]['etendue']= etendue[i]
+
+        '''The etendue is used as follows:
+        The fundamental profile is radiated power in W/cm**3
+        Along a sightline integral this would be int(Prad,dl) W/cm**2
+        However the bolometer collects a wider angle and intgrates
+        over a volume.  The GAprofiles tools use a monte-carlo response
+        grid on 2D R,Z EFIT domain.  This can be approximated by
+        the detector etendue.
+
+        The etendue for each channel defined as 4*pi*L^2/Ad/Aa/cos
+        where L is the distance from detector to aperture,
+        Ad is detector area, Aa is aperture area and cos is the
+        angle between the detector and aperture normal vectors.
+        and has units of cm**-2.  Thus a line integrated radiated
+        power int(Prad,dl) in cm**-2 needs to be divided by the
+        etendue to compare to reported power in Watts.'''
 
     return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
+
+
+@machine_mapping_function(__regression_arguments__, pulse=149472)
+def bolometer_data(ods, pulse):
+    """
+    Load DIII-D bolometer data
+
+    """
+    printd('Setting up DIII-D bolometer data...', topic='machine')
+
+    ods1 = ODS()
+    unwrap(bolometer_hardware)(ods1, pulse)
+
+    # first get the list of signals that we want to fetch
+    TDIs={}
+    for ch in ods1['bolometer.channel']:
+        ch_name = ods1[f'bolometer.channel[{ch}].identifier']
+        TDI=f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P'
+        TDIs[f'{ch}_data']=f"data({TDI})"
+        TDIs[f'{ch}_time'] = f"dim_of({TDI},0)"
+
+    # then fetch all the data for all signals
+    all_data = mdsvalue('d3d', 'BOLOM', pulse,TDIs).raw()
+
+    # assign the data to the ods
+    for ch in ods1['bolometer.channel']:
+        data = all_data[f'{ch}_data']
+        error = data * 0.2
+        error[error<1E-5] = 1E-5
+        time = all_data[f'{ch}_time']
+        ods[f'bolometer.channel[{ch}].power.data'] = data
+        ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
+        ods[f'bolometer.channel[{ch}].power.time'] = time/1E3
+
+#================================
+@machine_mapping_function(__regression_arguments__, pulse=176235)
+def langmuir_probes_hardware(ods, pulse):
+    """
+    Load DIII-D Langmuir probe locations without the probe's measurements
+
+    :param ods: ODS instance
+
+    :param pulse: int
+        For a workable example, see 176235
+
+    Data are written into ods instead of being returned.
+    """
+
+    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=176235)
@@ -725,22 +802,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 j += 1
 
 
-@machine_mapping_function(__regression_arguments__, pulse=176235)
-def langmuir_probes_hardware(ods, pulse):
-    """
-    Load DIII-D Langmuir probe locations without the probe's measurements
-
-    :param ods: ODS instance
-
-    :param pulse: int
-        For a workable example, see 176235
-
-    Data are written into ods instead of being returned.
-    """
-
-    unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
-
-
+#================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     """
@@ -749,9 +811,20 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
+    unwrap(charge_exchange_data)(ods, pulse, analysis_type, _measurements=False)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=True):
+    """
+    Gathers DIII-D CER measurement data from MDSplus
+
+    :param analysis_type: string
+        CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
+    """
     import MDSplus
 
-    printd('Setting up DIII-D CER locations...', topic='machine')
+    printd('Setting up DIII-D CER data...', topic='machine')
 
     cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
 
@@ -765,7 +838,10 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
         except (TypeError, KeyError):
             continue
         for k, channel in enumerate(channels):
-            for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
+            fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI']
+            if _measurements:
+                fetch_keys.extend([])
+            for pos in [0]:
                 TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
 
@@ -780,15 +856,16 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
             if isinstance(postime, Exception):
                 continue
             ch = ods['charge_exchange.channel.+']
+            ch['name'] = 'impCER_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
+            ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
-                ch['name'] = 'imCERtang_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
-                ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
                 chpos = ch['position'][pos.lower().split('_')[-1]]
                 chpos['time'] = postime / 1000.0  # Convert ms to s
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
 
 
+#================================
 @machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
@@ -849,5 +926,6 @@ def magnetics_probes_data(ods, pulse):
         )
 
 
+#================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(['bolometer_data'], globals(), locals())

@@ -16,6 +16,9 @@
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
+ "bolometer.channel.:.etendue": {
+  "PYTHON": "bolometer_hardware(ods, {pulse})"
+ },
  "bolometer.channel.:.identifier": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
@@ -41,6 +44,15 @@
  },
  "bolometer.channel.:.name": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
+ },
+ "bolometer.channel.:.power.data": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
+ },
+ "bolometer.channel.:.power.data_error_upper": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
+ },
+ "bolometer.channel.:.power.time": {
+  "PYTHON": "bolometer_data(ods, {pulse})"
  },
  "charge_exchange.channel.:": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
