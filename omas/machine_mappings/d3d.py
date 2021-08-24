@@ -535,7 +535,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
             ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
             ch['time'] = ece_map['TIME']
             f[:] = ece_map['FREQ'][ich]
-            ch['frequency']['data'] = f
+            ch['frequency']['data'] = f *1.e9
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
