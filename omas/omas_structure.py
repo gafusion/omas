@@ -216,6 +216,10 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
             elif key == '@data_type':
                 if fout[item][key] == 'flt_type':
                     fout[item][key] = 'FLT_0D'
+                elif fout[item][key] == 'FLT_1D_TYPE':
+                    fout[item][key] = 'FLT_1D'
+                elif fout[item][key] == 'INT_TYPE':
+                    fout[item][key] = 'INT_0D'
                 else:
                     fout[item][key] = fout[item][key].upper()
         if len(coords):
