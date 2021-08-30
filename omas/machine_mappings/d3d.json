@@ -102,6 +102,90 @@
   "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
  },
+ "ec_launchers.:.name": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.phase.angle.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.phase.angle.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.phase.curvature.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.phase.curvature.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.spot.angle.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.spot.angle.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.spot.size.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.beam.spot.size.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.frequency.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.frequency.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.identifier": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.launching_position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.launching_position.r": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.launching_position.r:": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.launching_position.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.launching_position.z": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.mode.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.mode.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.name": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.power_launched.data": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.power_launched.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.steering_angle_pol.data": {
+  "COCOSIO": 11,
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.steering_angle_pol.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.steering_angle_tor.data": {
+  "COCOSIO": 11,
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.launcher.:.steering_angle_tor.time": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
  "ece.channel.:": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
