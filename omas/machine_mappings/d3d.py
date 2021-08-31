@@ -361,6 +361,7 @@ def ec_launcher_active_hardware(ods, pulse):
             if(field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']):
                 query["TIME_" + field + f'_{system_no}'] = ("dim_of("
                         + query[field + f'_{system_no}'] + "+01)")
+    # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyortrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     for system_no in range(1, num_systems + 1):
         system_index = system_no - 1
@@ -403,16 +404,20 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(
                     gyortrons[f'TIME_POLANG_{system_no}']) / 1.e3
-        #TODO check these values
-        print("WARNING:: CURVATURE AND SPOT SIZE ARE ARBITRARY AND ONLY FOR TESTING PURPOSES")
+        # The spot size and radius are computed using the evolution formula for Gaussian beams
+        # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
+        # The beam is divergent because the beam waist is focused on to the final launching mirror.
+        # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
+        # the half angle divergence theta = 2.89 deg.
+        # Notably the ECRH beams are astigmatic in reality so this is just an approximation
         launchers[system_index]['beam.phase.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.phase.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.phase.curvature.time'] = np.array([0.0])
-        launchers[system_index]['beam.phase.curvature.data'] = np.deg2rad([[1.0/-0.83, 1.0/-0.83]])
+        launchers[system_index]['beam.phase.curvature.data'] = np.array([1.0/5.02325881, 1.0/5.02325881])
         launchers[system_index]['beam.spot.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.spot.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.spot.size.time'] = np.array([0.0])
-        launchers[system_index]['beam.spot.size.data'] = np.deg2rad([[0.035, 0.035]])
+        launchers[system_index]['beam.spot.size.data'] = np.array([[0.0172, 0.0172]])
 
 #================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)

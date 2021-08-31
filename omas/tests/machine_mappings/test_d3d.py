@@ -2,8 +2,6 @@ import unittest
 import omas
 import os
 import numpy as np
-from omas.machine_mappings.d3d import ec_launcher_active_hardware
-from omas.omas_machine import tunnel_mds
 
 class TestD3D(unittest.TestCase):
 
@@ -11,11 +9,10 @@ class TestD3D(unittest.TestCase):
         '''
         Test the machine mapping of the DIII-D ECH against the a .json file created with fetchGyrotron from the OMFIT TORAY module
         '''
-        pristine_ods = omas.load_omas_json(os.path.join('tests', 'test_data', 'd3d_ECRH_machine_mapping.json'))
         test_ods = omas.ODS()
-        tunnel_mds('d3d', 'RF')
-        ec_launcher_active_hardware(test_ods, 170325)
-        # test_ods.open('d3d', 170325)
+        test_ods.load('d3d', 170325)
+        pristine_ods = omas.ODS()
+        pristine_ods = pristine_ods.sample(1)
         fields = ['launching_position.r', 'launching_position.z', 'launching_position.phi', 
                   'frequency.data', 'power_launched.data', 'mode.data', 'steering_angle_tor.data',
                   'steering_angle_pol.data']
