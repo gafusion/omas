@@ -1327,6 +1327,8 @@ def core_profiles_currents(
             if isinstance(eval(j), str) and eval(j) == 'default':
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
+                elif (j == 'j_actuator') and 'core_sources' in ods:
+                     data[j] = get_j_actuator_from_core_sources(ods)
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
@@ -1911,6 +1913,17 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     return Jout
 
+@add_to__ODS__
+def get_j_actuator_from_core_sources(ods, time_index=0):
+    rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
+    j_act = np.zeros(len(rho))
+
+    for source in root['STATE'][state + 1]['core_sources.source']:
+        if 'j_parallel' in ods[f'core_sources.source[{source}].profiles_1d.{time_index}']:
+            with omas_environment(ods, coordsio={'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
+                j_act += ods[f'core_sources.source[{source}].profiles_1d[{time_index}].j_parallel']
+
+    return j_act
 
 @add_to__ALL__
 def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True, multiple_matches_raise_error=True):
