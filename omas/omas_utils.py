@@ -70,7 +70,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
     for k in k2.difference(k1):
         if not k.startswith('info.') and not (ignore_empty and isinstance(ods2[k], ODS) and not len(ods2[k])) and not is_ignored(k):
             differences.append(f'DIFF: key `{k}` missing in 1st ods')
-    for k in k1.intersection(k2):
+    for k in sorted(k1.intersection(k2)):
         try:
             if is_ignored(k):
                 pass

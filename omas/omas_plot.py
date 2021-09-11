@@ -2,6 +2,7 @@
 
 -------
 '''
+# NOTEs: https://git.iter.org/projects/IMAS/repos/idstools/browse/bin has some plotting utilities that may be worth checking out
 
 from .omas_utils import *
 from .omas_physics import cocos_transform
