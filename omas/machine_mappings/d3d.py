@@ -9,7 +9,7 @@ __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def gas_injection_hardware(ods, pulse):
     """
@@ -280,7 +280,7 @@ def gas_injection_hardware(ods, pulse):
     i += 1
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__)
 def pf_active_hardware(ods):
     r"""
@@ -328,7 +328,7 @@ def pf_active_coil_current_data(ods, pulse):
         )
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_hardware(ods, pulse):
     """
@@ -391,7 +391,7 @@ def interferometer_data(ods, pulse):
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
     """
@@ -466,7 +466,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
             i += 1
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
     """
@@ -535,7 +535,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast
             ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
             ch['time'] = ece_map['TIME']
             f[:] = ece_map['FREQ'][ich]
-            ch['frequency']['data'] = f *1.e9
+            ch['frequency']['data'] = f * 1.0e9
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -651,7 +651,7 @@ def bolometer_hardware(ods, pulse):
         cls['second_point.r'] = rxray[i] + line_len * np.cos(xangle[i])
         cls['second_point.z'] = zxray[i] + line_len * np.sin(xangle[i])
         cls['second_point.phi'] = cls['first_point.phi']
-        ods['bolometer']['channel'][i]['etendue']= etendue[i]
+        ods['bolometer']['channel'][i]['etendue'] = etendue[i]
 
         '''The etendue is used as follows:
         The fundamental profile is radiated power in W/cm**3
@@ -684,27 +684,28 @@ def bolometer_data(ods, pulse):
     unwrap(bolometer_hardware)(ods1, pulse)
 
     # first get the list of signals that we want to fetch
-    TDIs={}
+    TDIs = {}
     for ch in ods1['bolometer.channel']:
         ch_name = ods1[f'bolometer.channel[{ch}].identifier']
-        TDI=f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P'
-        TDIs[f'{ch}_data']=f"data({TDI})"
+        TDI = f'\\BOLOM::TOP.PRAD_01.POWER.BOL_{ch_name}_P'
+        TDIs[f'{ch}_data'] = f"data({TDI})"
         TDIs[f'{ch}_time'] = f"dim_of({TDI},0)"
 
     # then fetch all the data for all signals
-    all_data = mdsvalue('d3d', 'BOLOM', pulse,TDIs).raw()
+    all_data = mdsvalue('d3d', 'BOLOM', pulse, TDIs).raw()
 
     # assign the data to the ods
     for ch in ods1['bolometer.channel']:
         data = all_data[f'{ch}_data']
         error = data * 0.2
-        error[error<1E-5] = 1E-5
+        error[error < 1e-5] = 1e-5
         time = all_data[f'{ch}_time']
         ods[f'bolometer.channel[{ch}].power.data'] = data
         ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
-        ods[f'bolometer.channel[{ch}].power.time'] = time/1E3
+        ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
 
-#================================
+
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=176235)
 def langmuir_probes_hardware(ods, pulse):
     """
@@ -802,7 +803,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 j += 1
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
     """
@@ -865,7 +866,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
 
 
-#================================
+# ================================
 @machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods):
     r"""
@@ -926,6 +927,6 @@ def magnetics_probes_data(ods, pulse):
         )
 
 
-#================================
+# ================================
 if __name__ == '__main__':
     test_machine_mapping_functions(['bolometer_data'], globals(), locals())

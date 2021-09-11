@@ -15,22 +15,25 @@ import xarray
 from omas.omas_machine import mdstree, mdsvalue
 from omas.omas_core import ODS
 
-def d3d_cer(shot,
-            systems=None,
-            Zeeman_correction= False,
-            Zeeman_NN_loc= "/fusion/projects/results/cer/haskeysr/Zeeman_NN_py3",
-            Zeeman_inc_uncorr=False,
-            fetch_VB = False,
-            ods= None,
-            return_xarray = False,
-            split_CER_by_beam = True,
-            verbose = False,
-            impCERtang_uncor_CER_rotation=False,
-            impCERtang_uncor_fix_geom=True,
-            include_intensity_meas=False,
-            nc_data_loc=None,
-            nc_extra_label=None,
-            get_FIDASIM_corrected=False):
+
+def d3d_cer(
+    shot,
+    systems=None,
+    Zeeman_correction=False,
+    Zeeman_NN_loc="/fusion/projects/results/cer/haskeysr/Zeeman_NN_py3",
+    Zeeman_inc_uncorr=False,
+    fetch_VB=False,
+    ods=None,
+    return_xarray=False,
+    split_CER_by_beam=True,
+    verbose=False,
+    impCERtang_uncor_CER_rotation=False,
+    impCERtang_uncor_fix_geom=True,
+    include_intensity_meas=False,
+    nc_data_loc=None,
+    nc_extra_label=None,
+    get_FIDASIM_corrected=False,
+):
     '''
     Possible CERFIT lines
       1       D I 4-2         4860.00 A
@@ -56,25 +59,34 @@ def d3d_cer(shot,
     '''
 
     elementmass = {'D': 2, 'B': 11, 'Ne': 20, 'N': 14, 'He': 4, 'O': 16, 'C': 12, 'Ar': 40, 'F': 19, 'Ca': 40, 'Li': 7}
-    romancharge = {'I': 1, 'V': 5, 'X': 10, 'VII': 7, 'II': 2, 'VIII': 8, 'VI': 6, 'XVI': 16, 'XVIII': 18, 'IX': 9, 'XX': 20, 'IV': 4, 'III': 3}
+    romancharge = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'VII': 7,
+        'II': 2,
+        'VIII': 8,
+        'VI': 6,
+        'XVI': 16,
+        'XVIII': 18,
+        'IX': 9,
+        'XX': 20,
+        'IV': 4,
+        'III': 3,
+    }
 
-    #os.environ["OMAS_DEBUG_TOPIC"] = 'machine'
+    # os.environ["OMAS_DEBUG_TOPIC"] = 'machine'
 
-    server='DIII-D'
-    treename='IONS'
+    server = 'DIII-D'
+    treename = 'IONS'
 
     if systems is None:
-        systems=(
-            ('miCERtang', None),
-            ('impCERvert', 'best'),
-            ('impCERtang', 'best')
-        )
+        systems = (('miCERtang', None), ('impCERvert', 'best'), ('impCERtang', 'best'))
 
     scratch = {}
     printe = printd = printi = printw = print
 
     print('  * Fetching CER data')
-
 
     def data_valid(shot, chord, meas_name):
         # List of chords with intensity calibraiton errors for FY15, FY16 shots after
@@ -98,11 +110,13 @@ def d3d_cer(shot,
             tmp = mdsvalue('d3d', treename, shot, TDI=mdsstring)
             # Check if the returned data is valid, if not, return None
             try:
-                dat=tmp.data()
-                if get_time: dim_of = tmp.dim_of(0)
+                dat = tmp.data()
+                if get_time:
+                    dim_of = tmp.dim_of(0)
             except Exception:
-                dat=None
-                if get_time: dim_of = None
+                dat = None
+                if get_time:
+                    dim_of = None
             if get_time:
                 output = dat, dim_of
             else:
@@ -151,7 +165,6 @@ def d3d_cer(shot,
                     output = None
         return output
 
-
     def get_measurement(loc, chord, mds_name, err, mult, time_axis):
         node = '{}.channel{:02d}:{}'.format(loc, chord, mds_name)
         dat = get_data('\IONS::TOP{}'.format(node), verbose)
@@ -167,7 +180,9 @@ def d3d_cer(shot,
             mask = dat < -1.0e15
             dat[mask] = np.nan
             if (np.sum(mask) >= 1) and (mds_name in ['ROTC', 'ROT']):
-                printe(' ' * 6 + 'Problem with {} on {}, {} of {} < -1e15'.format(mds_name, ch_format.format(chord), np.sum(mask), len(mask)))
+                printe(
+                    ' ' * 6 + 'Problem with {} on {}, {} of {} < -1e15'.format(mds_name, ch_format.format(chord), np.sum(mask), len(mask))
+                )
                 check_fiducial()
             if err != None:
                 node_err = '{}.channel{:02d}:{}'.format(loc, chord, err)
@@ -184,7 +199,6 @@ def d3d_cer(shot,
             if mds_name in ['ROTC', 'ROT']:
                 check_fiducial()
         return uar2
-
 
     def imp_dens(time, stime, analysis_type, chord):
         """
@@ -216,7 +230,6 @@ def d3d_cer(shot,
             warnings.filterwarnings('ignore', message='invalid value encountered in *')
             ni_data_w_err = uarray(ni_data_out, ni_data_out * 0.1)
         return ni_data_w_err
-
 
     def calculate_pinj(beam_geometry, beam_order, times, stimes, tssub_times, tssub_stimes, beam_dat_dict):
         # This calculates the energy from each beam during the time slice and subtraction time slice
@@ -266,7 +279,6 @@ def d3d_cer(shot,
                     cur_output[cur_beam + '_tssub'] = np.zeros(times.shape, dtype=float)
         return cur_output
 
-
     def use_zeeman_NN(
         Ti_obs_vals,
         modB_vals,
@@ -303,6 +315,7 @@ def d3d_cer(shot,
         Ti_real = Y_NN + Ti_obs_vals
         if plot:
             from matplotlib import pyplot
+
             fig, ax = pyplot.subplots(nrows=2, sharex=True)
             ax[0].plot(Ti_obs_vals, Ti_real, ',')
             ax[0].set_ylabel('Ti real')
@@ -310,7 +323,6 @@ def d3d_cer(shot,
             ax[1].set_ylabel('Ti_real - Ti_obs')
             ax[-1].set_xlabel('Ti obs')
         return Ti_real
-
 
     def single_chord_zeeman_corr(in_dat, NN, X_scaler, Y_scaler, species='2H1'):
         """
@@ -388,7 +400,6 @@ def d3d_cer(shot,
             )
             in_dat[corr_name].values[0, mask] = uarray(Ti_real, Ti_err[mask])
 
-
     def fetch_system():
         output_list = []
         output_list_ni = []
@@ -408,7 +419,7 @@ def d3d_cer(shot,
                 printe('Skipping %s because no lineid' % chord)
                 continue
             if isinstance(lineid, bytes):
-                lineid=lineid.decode("utf-8")
+                lineid = lineid.decode("utf-8")
             wavelength = [get_data(wavelength_loc.format(chord), verbose)]
 
             # Time of measurement is actually the time recorded plus half the integration time
@@ -513,7 +524,9 @@ def d3d_cer(shot,
                 )
                 power_array = np.zeros((attrs['beam_order'].shape[0], len(t)), dtype=float)
                 count = 0
-                beam_order2 = np.array([i.lower().replace('330', '33').replace('150', '15').replace('210', '21') for i in attrs['beam_order']])
+                beam_order2 = np.array(
+                    [i.lower().replace('330', '33').replace('150', '15').replace('210', '21') for i in attrs['beam_order']]
+                )
                 # This goes through all beams, (not just the ones that the chord sees) and
                 # adds power information for ts and tssub. If the beam is not in pinj_output_dat for this chord
                 # i.e it has no beamgeometry, then zero values are used
@@ -560,9 +573,9 @@ def d3d_cer(shot,
                 for iii in [jjj.format(line_str=line_str) for jjj in measurements]:
                     if iii in meas_dict:
                         # really, we should have not fetched any deselected measurements to save time
-                        #if root['SETTINGS']['PHYSICS']['DIII-D']['FETCH'].get(sys_name, {}).get(iii, True):
-                            attrs['measurements'].append(iii)
-                            attrs['measurements_to_fit'].append(iii)
+                        # if root['SETTINGS']['PHYSICS']['DIII-D']['FETCH'].get(sys_name, {}).get(iii, True):
+                        attrs['measurements'].append(iii)
+                        attrs['measurements_to_fit'].append(iii)
 
                 # Generate omega_tor if possible
                 # Allow the option to use the uncorrected rotation data
@@ -575,7 +588,9 @@ def d3d_cer(shot,
                         # Note: phi stored in MDSplus for CER is zero at N, and +ve going clockwise when viewed from above ('DIII-D machine coords')
                         phi_tmp = meas_dict['phi'][1][0, :]
                         Z_tmp = meas_dict['Z'][1][0, :]
-                        lens_rzphi = np.array([coords['LOS_pt1_R'][1][0], coords['LOS_pt1_Z'][1][0], coords['LOS_pt1_phi'][1][0]], dtype=float)
+                        lens_rzphi = np.array(
+                            [coords['LOS_pt1_R'][1][0], coords['LOS_pt1_Z'][1][0], coords['LOS_pt1_phi'][1][0]], dtype=float
+                        )
                         # lens_xyz shape is 3
                         lens_xyz = np.array(
                             [
@@ -622,7 +637,7 @@ def d3d_cer(shot,
 
                 # Get the impurity density data
                 n_key = 'n_{line_str}'.format(line_str=line_str)
-                get_imp_dens = True #sys_name in ['impCERtang', 'impCERvert'] and root['SETTINGS']['PHYSICS']['DIII-D']['FETCH'].get(sys_name, {}).get(n_key, True)
+                get_imp_dens = True  # sys_name in ['impCERtang', 'impCERvert'] and root['SETTINGS']['PHYSICS']['DIII-D']['FETCH'].get(sys_name, {}).get(n_key, True)
                 tmp_name = '{}_{}'.format(sys_name, ch_format.format(chord))
                 if get_imp_dens and data_valid(shot, tmp_name, n_key):
                     uar = imp_dens(coords['time'], coords['stime'][1], analysis_type, chord)
@@ -667,7 +682,6 @@ def d3d_cer(shot,
                     ds = ds.isel(time=indices)
                     output_list.append(ds)
         return output_list, pinj_output_dat
-
 
     # Get the beam powers as a function of time
     # Here we are using pinjf which is power in watts
@@ -742,7 +756,10 @@ def d3d_cer(shot,
 
         elif sys_name == 'impCERvert':
             tree_name, orientation, id_letter = 'cer', 'vertical', 'v'
-            data_to_get = [('TEMP', 'TEMP_ERR', 'T_{line_str}', 1, 'var', 'eV'), ('ROT', 'ROT_ERR', 'V_vert_{line_str}', 1000, 'var', 'm/s')]
+            data_to_get = [
+                ('TEMP', 'TEMP_ERR', 'T_{line_str}', 1, 'var', 'eV'),
+                ('ROT', 'ROT_ERR', 'V_vert_{line_str}', 1000, 'var', 'm/s'),
+            ]
             if fetch_VB:
                 data_to_get.append(('VB', 'VB_ERR', VB_name, 1, 'var', 'photons/m^2/sr/s'))
             imp_ch_format = 'v{:d}'
@@ -778,7 +795,7 @@ def d3d_cer(shot,
         beam_order_node = '{}.calibration:beam_order'.format(tree_name)
         beam_order = get_data(beam_order_node, verbose)
         beam_order = list(beam_order)
-        if isinstance(beam_order[0],bytes):
+        if isinstance(beam_order[0], bytes):
             beam_order = [beam.decode('utf-8') for beam in beam_order]
 
         attrs_list = [
@@ -881,7 +898,9 @@ def d3d_cer(shot,
             for tmp_subsys_name, tmp_subsys in output_ds_list.items():
                 for tmp_cur_channel in tmp_subsys:
                     if 'T_{}'.format(Zeeman_NN_species) in tmp_cur_channel:
-                        single_chord_zeeman_corr(tmp_cur_channel, Zeeman_NN, Zeeman_NN_X_scaler, Zeeman_NN_Y_scaler, species=Zeeman_NN_species)
+                        single_chord_zeeman_corr(
+                            tmp_cur_channel, Zeeman_NN, Zeeman_NN_X_scaler, Zeeman_NN_Y_scaler, species=Zeeman_NN_species
+                        )
                         if Zeeman_inc_uncorr:
                             tmp_cur_channel.attrs['measurements'].append('T_orig_{}'.format(Zeeman_NN_species))
                             tmp_cur_channel.attrs['measurements_to_fit'].append('T_orig_{}'.format(Zeeman_NN_species))
@@ -895,7 +914,7 @@ def d3d_cer(shot,
     if return_xarray:
         return RAW
 
-    #Mapping to OMAS
+    # Mapping to OMAS
 
     def get_species(derived):
         """
@@ -971,6 +990,7 @@ def d3d_cer(shot,
                 chan['ion.0.z_ion'] = z  # Ionized state
     return ods
 
+
 if __name__ == '__main__':
-    d3d_cer(161409, systems=None, return_xarray= False)
+    d3d_cer(161409, systems=None, return_xarray=False)
     d3d_cer(161409, systems=None, return_xarray=True)
