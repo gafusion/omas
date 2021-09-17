@@ -1914,7 +1914,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
     return Jout
 
 @add_to__ODS__
-def get_j_actuator_from_core_sources(ods, time_index=0):
+def core_sources_j_parallel_sum(ods, time_index=0):
     rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
     j_act = np.zeros(len(rho))
 
