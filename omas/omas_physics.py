@@ -1916,7 +1916,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 @add_to__ODS__
 def core_sources_j_parallel_sum(ods, time_index=0):
     rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
-    j_act = np.zeros(len(rho))
+    j_act = numpy.zeros(len(rho))
 
     for source in ods:
         if 'j_parallel' in ods[f'core_sources.source[{source}].profiles_1d.{time_index}']:
