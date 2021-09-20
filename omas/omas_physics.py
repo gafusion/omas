@@ -1916,11 +1916,11 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 @add_to__ODS__
 def get_j_actuator_from_core_sources(ods, time_index=0):
     rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
-    j_act = np.zeros(len(rho))
+    j_act = numpy.zeros(len(rho))
 
-    for source in root['STATE'][state + 1]['core_sources.source']:
+    for source in ods['core_sources.source']:
         if 'j_parallel' in ods[f'core_sources.source[{source}].profiles_1d.{time_index}']:
-            with omas_environment(ods, coordsio={'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
+            with omas_environment(ods, coordsio={f'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
                 j_act += ods[f'core_sources.source[{source}].profiles_1d[{time_index}].j_parallel']
 
     return j_act
