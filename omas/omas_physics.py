@@ -1915,6 +1915,16 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
 @add_to__ODS__
 def core_sources_j_parallel_sum(ods, time_index=0):
+    """
+    ods function used to summate all j_parallel contributions from core_sources (j_actuator)
+
+    :param ods: input ods
+
+    :param time_index: time slice to process
+
+    :return: sum of j_parallel in [A/m^2]
+	"""
+
     rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
     j_act = numpy.zeros(len(rho))
 
