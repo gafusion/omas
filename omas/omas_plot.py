@@ -1041,7 +1041,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     return {'ax': axs}
 
 @add_to__ODS__
-def core_currents_summary(ods, time_index=None, time=None, fig=None, **kw):
+def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **kw):
     """
     Plot currents in core_profiles_1d
 
@@ -1072,7 +1072,7 @@ def core_currents_summary(ods, time_index=None, time=None, fig=None, **kw):
             time_index = time_index[0]
         else:
             return ods_time_plot(
-                core_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
+                core_profiles_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
             )
 
     assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
