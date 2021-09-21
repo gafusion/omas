@@ -1040,6 +1040,52 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     return {'ax': axs}
 
+@add_to__ODS__
+def core_currents_summary(ods, time_index=None, time=None, fig=None, **kw):
+    """
+    Plot currents in core_profiles_1d
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    """
+    from matplotlib import pyplot
+
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
+
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
+    if isinstance(time_index, (list, numpy.ndarray)):
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(
+                core_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
+            )
+
+    assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
+    pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
+
+    for item in ods['core_profiles.profiles_1d'][time_index]:
+        if 'j_' in item and item != 'j_tor' and item != 'j_total':
+            pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
+
+    pyplot.legend()
+    pyplot.ylabel(r'Parallel current density $[A\,m^-{2}]$')
+    pyplot.xlabel(r'$\rho_{tor}$')
+
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
