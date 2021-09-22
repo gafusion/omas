@@ -1923,7 +1923,7 @@ def core_sources_j_parallel_sum(ods, time_index=0):
     :param time_index: time slice to process
 
     :return: sum of j_parallel in [A/m^2]
-	"""
+    """
 
     rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
     j_act = numpy.zeros(len(rho))
