@@ -1930,7 +1930,7 @@ def core_sources_j_parallel_sum(ods, time_index=0):
 
     for source in ods:
         if 'j_parallel' in ods[f'core_sources.source[{source}].profiles_1d.{time_index}']:
-            with omas_environment(ods, coordsio={'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
+            with omas_environment(ods, coordsio={f'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
                 j_act += ods[f'core_sources.source[{source}].profiles_1d[{time_index}].j_parallel']
 
     return j_act
