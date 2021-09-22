@@ -1085,7 +1085,7 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **
     pyplot.legend()
     pyplot.ylabel(r'Parallel current density $[A\,m^-{2}]$')
     pyplot.xlabel(r'$\rho_{tor}$')
-
+    return {'ax': ax}
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
