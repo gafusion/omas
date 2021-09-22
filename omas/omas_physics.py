@@ -1916,7 +1916,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 @add_to__ODS__
 def core_sources_j_parallel_sum(ods, time_index=0):
     """
-    ods function used to summate all j_parallel contributions from core_sources (j_actuator)
+    ods function used to sum all j_parallel contributions from core_sources (j_actuator)
 
     :param ods: input ods
 
