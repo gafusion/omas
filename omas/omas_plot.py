@@ -1041,7 +1041,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     return {'ax': axs}
 
 @add_to__ODS__
-def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **kw):
+def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **kw):
     """
     Plot currents in core_profiles_1d
 
@@ -1059,11 +1059,8 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **
     """
     from matplotlib import pyplot
 
-    axs = kw.pop('ax', {})
-    if axs is None:
-        axs = {}
-    if not len(axs) and fig is None:
-        fig = pyplot.figure()
+    if ax is None:
+        ax = pyplot.gca()
 
     # time animation
     time_index, time = handle_time(ods, 'core_profiles', time_index, time)
@@ -1076,15 +1073,15 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **
             )
 
     assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
-    pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
+    ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
 
     for item in ods['core_profiles.profiles_1d'][time_index]:
         if 'j_' in item and item not in ['j_tor', 'j_total']:
-            pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
+            ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
 
-    pyplot.legend(loc=0)
-    pyplot.ylabel(r'Parallel current density $[A\,m^-{2}]$')
-    pyplot.xlabel(r'$\rho_{tor}$')
+    ax.legend(loc=0)
+    ax.set_ylabel(r'Parallel current density $[A\,m^-{2}]$')
+    ax.set_xlabel(r'$\rho_{tor}$')
     return {'ax': ax}
 
 @add_to__ODS__
