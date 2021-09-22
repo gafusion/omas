@@ -1079,7 +1079,7 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, fig=None, **
     pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
 
     for item in ods['core_profiles.profiles_1d'][time_index]:
-        if 'j_' in item and item != 'j_tor' and item != 'j_total':
+        if 'j_' in item and item not in ['j_tor', 'j_total']:
             pyplot.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
 
     pyplot.legend()
