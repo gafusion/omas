@@ -292,7 +292,7 @@ def ip_bt_dflux_data(ods, pulse):
 
     for item in ['PR', 'TF', 'DL']:
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
-            ods[mappings[item] + '.data'] = res[item + '_data']
+            ods[mappings[item] + '.data'] = res[item + '_data'] * signals[item][0]['scale']
             ods[mappings[item] + '.time'] = res[item + '_time']
         else:
             printe(f'No data for {mappings[item]}')
@@ -302,12 +302,13 @@ def ip_bt_dflux_data(ods, pulse):
     # handle uncertainties
     for item in ['PR', 'TF', 'DL']:
         if mappings[item] + '.data' in ods:
-            data = ods[mappings[item] + '.data'] * signals[item][0]['scale']
+            data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
-            abs_error = signals[item][0]['abs_error']
+            abs_error = signals[item][0]['abs_error'] * signals[item][0]['scale']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[np.abs(data) < signals[item][0]['sig_thresh']] = signals[item][0]['sig_thresh']
-            ods[mappings[item] + '.data_error_upper'] = error
+            error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
+                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
+            )
 
 
 @machine_mapping_function(__regression_arguments__, pulse=140001)
