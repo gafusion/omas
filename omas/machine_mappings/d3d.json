@@ -420,28 +420,34 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.n_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.n_e.data_error_upper": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.n_e.time": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.t_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
+ },
+ "thomson_scattering.channel.:.t_e.data_error_upper": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.t_e.time": {
