@@ -1041,6 +1041,49 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     return {'ax': axs}
 
+@add_to__ODS__
+def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **kw):
+    """
+    Plot currents in core_profiles_1d
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    """
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
+    if isinstance(time_index, (list, numpy.ndarray)):
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(
+                core_profiles_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
+            )
+
+    assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
+    ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
+
+    for item in ods['core_profiles.profiles_1d'][time_index]:
+        if 'j_' in item and item not in ['j_tor', 'j_total']:
+            ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
+
+    ax.legend(loc=0)
+    ax.set_ylabel(r'Parallel current density $[A\,m^-{2}]$')
+    ax.set_xlabel(r'$\rho_{tor}$')
+    return {'ax': ax}
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):

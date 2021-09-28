@@ -229,6 +229,7 @@ class TestOmasPlot(UnittestCaseOmas):
         ods2.plot_core_profiles_summary(
             fig=pyplot.figure(), quantities=['temperature', 'density_thermal', 'j_tor', 'zeff'], ods_species=[-1, 0], lw=3, ls='--'
         )
+        ods2.plot_core_profiles_currents_summary()
 
     def test_core_sources(self):
         ods2 = copy.deepcopy(self.ods)
