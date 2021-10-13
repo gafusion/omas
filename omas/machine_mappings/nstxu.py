@@ -309,6 +309,7 @@ def ip_bt_dflux_data(ods, pulse):
             error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
                 signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )
+            ods[mappings[item] + '.data_error_upper'] = error
 
 
 @machine_mapping_function(__regression_arguments__, pulse=140001)
