@@ -13,16 +13,14 @@ class TestD3D(unittest.TestCase):
         test_ods = omas.ODS()
         test_ods.open('d3d', 170325)
         pristine_ods = omas.ODS()
-        pr = load_omas_json(os.path.join('omas','samples', 'd3d_ECRH_machine_mapping.json'))['ec_launchers']
-        pristine_ods['ec_launchers'].update(pr)
-        # pristine_ods = omas.ODS()
-        # pristine_ods = pristine_ods.sample()
+        pristine_ods = omas.ODS()
+        pristine_ods = pristine_ods.sample()
         fields = ['launching_position.r', 'launching_position.z', 'launching_position.phi', 
                   'frequency.data', 'power_launched.data', 'mode.data', 'steering_angle_tor.data',
                   'steering_angle_pol.data']
         prefix = 'ec_launchers.launcher'
+        pristine_time = pristine_ods["ec_launchers"].time()[0]
         for launch in pristine_ods[prefix]:
-            pristine_time = pristine_ods[prefix + f'[{launch}]'].time()[0]
             for field in fields:
                 full_field = prefix + f'[{launch}].' + field
                 time_field = full_field.rsplit('.', 1)[0] + ".time"
