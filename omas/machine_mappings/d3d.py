@@ -1,6 +1,8 @@
 import os
 import numpy as np
 from inspect import unwrap
+
+from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, unumpy
 from omas.machine_mappings._common import *
@@ -408,16 +410,18 @@ def ec_launcher_active_hardware(ods, pulse):
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
         # The beam is divergent because the beam waist is focused on to the final launching mirror.
         # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
-        # the half angle divergence theta = 2.89 deg.
+        # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
+        # Hence, the inverse curvature radius is zero
         # Notably the ECRH beams are astigmatic in reality so this is just an approximation
         launchers[system_index]['beam.phase.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.phase.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.phase.curvature.time'] = np.array([0.0])
-        launchers[system_index]['beam.phase.curvature.data'] = np.array([1.0/5.02325881, 1.0/5.02325881])
+        launchers[system_index]['beam.phase.curvature.data'] = np.array([np.atleast_1d(0.0),
+                                                                         np.atleast_1d(0.0)])
         launchers[system_index]['beam.spot.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.spot.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.spot.size.time'] = np.array([0.0])
-        launchers[system_index]['beam.spot.size.data'] = np.array([[0.0172, 0.0172]])
+        launchers[system_index]['beam.spot.size.data'] = np.array([np.atleast_1d(0.0172), np.atleast_1d(0.0172)])
 
 #================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
