@@ -22,7 +22,7 @@ class TestD3D(unittest.TestCase):
                   'steering_angle_pol.data']
         prefix = 'ec_launchers.launcher'
         for launch in pristine_ods[prefix]:
-            pristine_time = pristine_ods[prefix + f'[{launch}]'].time()[0] / 1.e3
+            pristine_time = pristine_ods[prefix + f'[{launch}]'].time()[0]
             for field in fields:
                 full_field = prefix + f'[{launch}].' + field
                 time_field = full_field.rsplit('.', 1)[0] + ".time"
