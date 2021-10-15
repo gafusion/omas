@@ -1465,7 +1465,7 @@ def core_profiles_currents(
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
                 elif (j == 'j_actuator') and 'core_sources' in ods:
-                     data[j] = get_j_actuator_from_core_sources(ods)
+                    data[j] = get_j_actuator_from_core_sources(ods)
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
@@ -2106,6 +2106,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     return Jout
 
+
 @add_to__ODS__
 def core_sources_j_parallel_sum(ods, time_index=0):
     """
@@ -2118,7 +2119,7 @@ def core_sources_j_parallel_sum(ods, time_index=0):
     :return: sum of j_parallel in [A/m^2]
     """
 
-    rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
+    rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm']
     j_act = numpy.zeros(len(rho))
 
     for source in ods['core_sources.source']:
@@ -2127,6 +2128,7 @@ def core_sources_j_parallel_sum(ods, time_index=0):
                 j_act += ods[f'core_sources.source[{source}].profiles_1d[{time_index}].j_parallel']
 
     return j_act
+
 
 @add_to__ALL__
 def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True, multiple_matches_raise_error=True):
