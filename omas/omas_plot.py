@@ -1041,6 +1041,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     return {'ax': axs}
 
+
 @add_to__ODS__
 def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **kw):
     """
@@ -1069,21 +1070,29 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(
-                core_profiles_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
-            )
+            return ods_time_plot(core_profiles_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw)
 
     assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
-    ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
+    ax.plot(
+        ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],
+        ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],
+        label='total current',
+        ls='--',
+    )
 
     for item in ods['core_profiles.profiles_1d'][time_index]:
         if 'j_' in item and item not in ['j_tor', 'j_total']:
-            ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
+            ax.plot(
+                ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],
+                ods[f'core_profiles.profiles_1d[{time_index}]'][item],
+                label=' '.join(item[2:].split(sep='_')),
+            )
 
     ax.legend(loc=0)
     ax.set_ylabel(r'Parallel current density $[A\,m^-{2}]$')
     ax.set_xlabel(r'$\rho_{tor}$')
     return {'ax': ax}
+
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):

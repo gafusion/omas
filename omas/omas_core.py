@@ -440,6 +440,21 @@ class ODS(MutableMapping):
 
         return self
 
+    def time_index(self, time, key=''):
+        """
+        Return the index of the closest time-slice for a given ODS location
+
+        :param time: time in second
+
+        :param key: ods location
+
+        :return: index (integer) of the closest time-slice
+        """
+        time_array = self.time(key=key)
+        if not isinstance(time_array, numpy.ndarray):
+            raise ValueError(l2i(p2l(self.location + '.' + key)) + " does not have a array of times")
+        return numpy.argmin(abs(time - numpy.atleast_1d(time_array)))
+
     @property
     def parent(self):
         try:
