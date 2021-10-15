@@ -215,59 +215,139 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
 
 @add_to__ODS__
 @preprocess_ods('equilibrium')
-def compute_equilibrium_profiles_2d_quantity(ods, time_index, quantity):
-    from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
-    if quantity == "rho_poloidal":
-        return numpy.sqrt((ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
-                           ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.psi']) /
-                          (ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_axis'] - 
-                           ods[f'equilibrium.time_slice.{time_index}.global_quantities.psi_boundary']))
-    elif quantity in ["b_field_r","b_field_tor", "b_field_z"]:
-        r, z = numpy.meshgrid(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], indexing="ij")
-        psi_spl = RectBivariateSpline(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.psi'])
-        if quantity == "b_field_r": 
-            return psi_spl(r,z,dy=1,grid=False) / (2.0 * numpy.pi * r)
-        elif quantity == "b_field_z":
-            return -psi_spl(r,z,dx=1,grid=False) / (2.0 * numpy.pi * r)
-        else:
-            f_spl = InterpolatedUnivariateSpline(
-                'equilibrium.time_slice.{time_index}.profiles_1d.psi',
-                'equilibrium.time_slice.{time_index}.profiles_1d.f')
-            return f_spl(psi_spl(r,z,grid=False)) / r
+def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity):
+    """
+        Functions dervies values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
+        Currently only the magnetic field components are supported
 
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d to be derived
+
+        :return: updated ods
+    """
+    from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
+    r, z = numpy.meshgrid(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'], indexing="ij")
+    psi_spl = RectBivariateSpline(
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
+    if[quantity == "b_r"]:
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+                psi_spl(r,z,dy=1,grid=False) / (2.0 * numpy.pi * r))
+        return ods
+    elif quantity == "b_z":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+                -psi_spl(r,z,dx=1,grid=False) / (2.0 * numpy.pi * r))
+        return ods
+    elif quantity == "b_r":
+        f_spl = InterpolatedUnivariateSpline(
+            'equilibrium.time_slice.{time_index}.profiles_1d.psi',
+            'equilibrium.time_slice.{time_index}.profiles_1d.f')
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+                     f_spl(psi_spl(r,z,grid=False)) / r)
+        return ods
+    raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
+
+
+def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
+    """
+        Utility function for equilibrium_profiles_2d_map. Creates a tree dictionary structure to store interpolators.
+
+        :param cache: cache object to add tree entry to
+
+        :param time_index: time slices to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d[:]
+
+        :param interpolator: Interpolator to store
+
+        :return: updated cache
+
+    """
+    if cache is None:
+        cache = {}
+    if time_index not in cache:
+        cache[time_index] = {}
+    if grid_index not in cache:
+        cache[time_index][grid_index] = {}
+    cache[time_index][quantity] = True
+    
 @add_to__ODS__
 @preprocess_ods('equilibrium')
-def equilibrium_rect_grid_map(ods, time_index, quantity, r=None, z=None, cache=None):
-    # This routines creates rectangular spline of quantities and stores them in the cache for future use
-    if(r is None or z is None):
-        r = ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1']
-        z = ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2']
-    if(cache is not None):
-        if(time_index in cache):
-            if(quantity in cache[time_index]):
-                return cache[time_index][quantity](r,z,grid=False), cache
-    if(cache is None):
-        cache = {}
-    if(time_index not in cache):
-        cache[time_index] = {}
-    try:
-        cache[time_index][quantity] = RectBivariateSpline(
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
-            )
-    except:
-        cache[time_index][quantity] = RectBivariateSpline(
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
-                compute_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
-            )  
-    return cache[time_index][quantity](r,z,grid=False), cache
+def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None, dim2=None, cache=None, return_cache=False):
+    """
+        This routines creates interpolators for quantities and stores them in the cache for future use.
+        It can also be used to just return the current profile_2d quantity by omitting dim1 and dim2
+
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d[:] to map
+
+        :param dim1: First coordinate of the points to map to
+
+        :param dim2: Second coordinate of the points to map to
+
+        :param cache: Cache to store interpolants in
+
+        :param return_cache: Toggles return of cache
+
+        :return: updated ods (and cahce if return_cache)
+    """
+    if dim1 is None or dim2 is None:
+        try:
+            return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
+        except:
+            derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
+            return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
+    # Try to use an interpolator from the cache
+    if cache is not None:
+        try:
+            if return_cache:
+                return cache[time_index][quantity](dim1, dim2, grid=False), cache
+            else:
+                return cache[time_index][quantity](dim1, dim2, grid=False)
+        except KeyError:
+            pass
+    if ods[f'equilibrium.time_slice[{time_index}].profiles_2d{grid_index}.grid_type'] == 91:
+        try:
+            interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], 
+                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'], 
+                                        method='cubic', return_cache=False)
+        except:
+            derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
+            interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], 
+                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'], 
+                                        method='cubic', return_cache=False)
+    else:
+        try:
+            interpolator = RectBivariateSpline(
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'])
+        except:
+            interpolator = RectBivariateSpline(
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
+                    derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity))
+        if(return_cache):
+            cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
+            return cache[time_index][grid_index][quantity](dim1, dim2,grid=False), cache
+    return interpolator(dim1, dim2, grid=False)
 
 
 @add_to__ODS__
@@ -1795,6 +1875,79 @@ def grids_ggd_points_triangles(grid):
     triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
     return points, triangles
 
+class ScatterInterpolator(object):
+    """
+    Interface class for a unified call function for the scipy interpolators:
+        - NearestNDInterpolator
+        - LinearNDInterpolator
+        - CloughTocher2DInterpolator
+        - Rbf
+    Created by factory create_scatter_interpolator
+    """
+    def __init__(self, interpolant, method):
+        """
+        Constructor
+
+        :param interpolant: Instance of the scipy interpolator
+
+        :param method: Interpolation method
+        """
+        self.interpolant = interpolant
+        self.method = method
+
+    def __call__(self, R, Z, **kwargs):
+        """
+        Call the interpolator
+
+        :param interpolant: Instance of the scipy interpolator
+
+        :param method: Interpolation method
+
+        :param kwargs: Catch extra arguments (needed for polymorphism in equilibrium_profiles_2d_map)
+        """
+        if(self.method == 'extrapolate'):
+            return numpy.reshape(self.interpolant(R.flat, Z.flat), R.shape)
+        else:
+            return numpy.reshape(self.interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
+
+def create_scatter_interpolator(r, z, data, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], return_cache=False):
+    """
+    Create an interpolator for scattered data points. Utility function for scatter_to_rectangular and equilibrium_profiles_2d_map
+
+    :param r: r coordinate of data points
+
+    :param z: z coordinate of data points
+
+    :param data: data
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
+    :param sanitize: avoid NaNs in regions where data is missing
+
+    :return: interpolator(R,Z) -> interpolated data (and cache if return_cache)
+    """
+    import scipy
+    from scipy import interpolate
+    cache = None
+    if method == 'nearest':
+        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
+    elif method == 'linear':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
+    elif method == 'cubic':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
+    elif method == 'extrapolate':
+        if cache is None:
+            cache = True
+        interpolant = scipy.interpolate.Rbf(r, z, data)
+    else:
+        raise ValueError('Interpolation method %s is not recognized' % method)
+    if return_cache:
+        return ScatterInterpolator(interpolant, method), cache
+    return ScatterInterpolator(interpolant, method)
 
 def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], sanitize=True, return_cache=False):
     """
@@ -1819,7 +1972,6 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     :return: R, Z, interpolated_data (and cache if return_cache)
     """
     import scipy
-    from scipy import interpolate
 
     if isinstance(R, int) and isinstance(Z, int):
         R, Z = numpy.meshgrid(numpy.linspace(numpy.min(r), numpy.max(r), R), numpy.linspace(numpy.min(z), numpy.max(z), Z))
@@ -1831,27 +1983,11 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
         raise ValueError('R and Z must both be either scalars, 1D arrays, or 2D arrays')
 
     cache = None
-    if method == 'nearest':
-        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'linear':
-        if cache is None:
-            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
-        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'cubic':
-        if cache is None:
-            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
-        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'extrapolate':
-        if cache is None:
-            cache = True
-        interpolant = scipy.interpolate.Rbf(r, z, data)
-        intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
+    if return_cache:
+        scatter_interpolator, cache  = create_scatter_interpolator(r, z, data, method=method, return_cache=return_cache)
     else:
-        raise ValueError('Interpolation method %s is not recognized' % method)
-
+        scatter_interpolator = create_scatter_interpolator(r, z, data, method=method, return_cache=return_cache)
+    intepolated_data = scatter_interpolator(R, Z)
     # remove any NaNs using a rough nearest interpolation
     index = ~numpy.isnan(intepolated_data.flat)
     if sanitize and sum(1 - index):
