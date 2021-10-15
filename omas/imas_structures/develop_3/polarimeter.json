@@ -2,7 +2,7 @@
  "polarimeter": {
   "documentation": "Polarimeter diagnostic",
   "full_path": "polarimeter",
-  "lifecycle_last_change": "3.21.1",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.15.0",
   "maxoccur": "2"
@@ -767,6 +767,40 @@
   "full_path": "polarimeter/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "polarimeter.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "polarimeter/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "polarimeter.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "polarimeter/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "polarimeter.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "polarimeter/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "polarimeter.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "polarimeter/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
  },
  "polarimeter.time": {
   "coordinates": [

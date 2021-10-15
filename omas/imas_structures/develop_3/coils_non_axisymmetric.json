@@ -2,10 +2,109 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "5"
+ },
+ "coils_non_axisymmetric.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "coils_non_axisymmetric/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "coils_non_axisymmetric.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "coils_non_axisymmetric/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "coils_non_axisymmetric/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "coils_non_axisymmetric.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "coils_non_axisymmetric/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.output_flag": {
+  "coordinates": [
+   "coils_non_axisymmetric.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "coils_non_axisymmetric/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "coils_non_axisymmetric.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "coils_non_axisymmetric/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "coils_non_axisymmetric/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "coils_non_axisymmetric/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "coils_non_axisymmetric.coil": {
   "coordinates": [
@@ -852,7 +951,7 @@
  },
  "coils_non_axisymmetric.coil[:].current": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in the coil",
+  "documentation": "Current in one turn of the coil (to be multiplied by the number of turns to calculate the magnetic field generated)",
   "full_path": "coils_non_axisymmetric/coil(i1)/current",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1126,6 +1225,40 @@
   "full_path": "coils_non_axisymmetric/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "coils_non_axisymmetric.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between input command received from the RT network and actuator starting to react. Applies globally to the system described by this IDS unless specific latencies (e.g. channel-specific or antenna-specific) are provided at a deeper level in the IDS structure.",
+  "full_path": "coils_non_axisymmetric/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "coils_non_axisymmetric.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "coils_non_axisymmetric/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "coils_non_axisymmetric/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "coils_non_axisymmetric.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "coils_non_axisymmetric/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
  },
  "coils_non_axisymmetric.time": {
   "coordinates": [

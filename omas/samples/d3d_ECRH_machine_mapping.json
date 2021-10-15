@@ -1,0 +1,312 @@
+{
+"ec_launchers": {
+"code": {
+"parameters": {
+"launcher": {
+"0": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+},
+"1": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+},
+"2": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+},
+"3": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+},
+"4": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+},
+"5": {
+"ON": [
+1
+],
+"mharm": [
+2
+]
+}
+}
+}
+},
+"launcher": [
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "Leia",
+"launching_position": {
+"phi": [
+-5.784021141109208
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3.8600
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+577742.875
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5585495691122808
+]
+},
+"steering_angle_tor": {
+"data": [
+0.38400519232016045
+]
+}
+},
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "Luke",
+"launching_position": {
+"phi": [
+-5.735151922053367
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3860.0
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+534630.9375
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5583836541763688
+]
+},
+"steering_angle_tor": {
+"data": [
+0.3839926754630371
+]
+}
+},
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "Scarecrow",
+"launching_position": {
+"phi": [
+-5.996951309852516
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3860.0
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+549743.0
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5584467710942037
+]
+},
+"steering_angle_tor": {
+"data": [
+0.38401797549339284
+]
+}
+},
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "Tinman",
+"launching_position": {
+"phi": [
+-6.307619916707506
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3860.0
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+457826.40625
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5585787307262171
+]
+},
+"steering_angle_tor": {
+"data": [
+0.3839524617305769
+]
+}
+},
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "Chewbacca",
+"launching_position": {
+"phi": [
+-6.569419304506656
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3860.0
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+541747.25
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5585980386441202
+]
+},
+"steering_angle_tor": {
+"data": [
+0.3839814901864588
+]
+}
+},
+{
+"frequency": {
+"data": [
+109999996928.0
+]
+},
+"identifier": "NASA",
+"launching_position": {
+"phi": [
+-6.258750697651666
+],
+"r": [
+2.399899959564209
+],
+"time": [
+3860.0
+],
+"z": [
+0.6794000267982483
+]
+},
+"mode": {
+"data": [
+-1
+]
+},
+"power_launched": {
+"data": [
+712322.875
+]
+},
+"steering_angle_pol": {
+"data": [
+0.5585975060119022
+]
+},
+"steering_angle_tor": {
+"data": [
+0.38393355328683737
+]
+}
+}
+]
+}
+}

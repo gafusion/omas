@@ -2,7 +2,7 @@
  "wall": {
   "documentation": "Description of the torus wall and its interaction with the plasma",
   "full_path": "wall",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.1.0",
   "maxoccur": "5"
@@ -3798,6 +3798,52 @@
   "full_path": "wall/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "wall.temperature_reference": {
+  "data_type": "STRUCTURE",
+  "documentation": "Reference temperature for which the machine description data is given in this IDS",
+  "full_path": "wall/temperature_reference",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "temperature_reference"
+ },
+ "wall.temperature_reference.data": {
+  "data_type": "FLT_0D",
+  "documentation": "Reference temperature",
+  "full_path": "wall/temperature_reference/data",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "K"
+ },
+ "wall.temperature_reference.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "wall/temperature_reference/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.temperature_reference.data_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "wall/temperature_reference/data_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "K"
+ },
+ "wall.temperature_reference.data_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "wall/temperature_reference/data_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "K"
+ },
+ "wall.temperature_reference.description": {
+  "data_type": "STR_0D",
+  "documentation": "Description of how the reference temperature is defined : for which object, at which location, ...",
+  "full_path": "wall/temperature_reference/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "wall.time": {
   "coordinates": [

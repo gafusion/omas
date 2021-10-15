@@ -420,18 +420,19 @@
  },
  "pf_passive.loop[:].element[:].geometry.oblique": {
   "data_type": "STRUCTURE",
-  "documentation": "Trapezoidal description of the element",
+  "documentation": "Parallelogram description of the element",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique",
   "lifecycle_status": "alpha",
   "structure_reference": "oblique_static"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of first angle TBD",
+  "documentation": "Inclination of first angle measured counter-clockwise from horizontal outwardly directed radial vector (grad R).",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_index": {
   "data_type": "INT_TYPE",
@@ -446,7 +447,8 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_upper": {
   "data_type": "FLT_0D",
@@ -454,15 +456,17 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.beta": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of second angle TBD",
+  "documentation": "Inclination of second angle measured counter-clockwise from vertically upwards directed vector (grad Z). If both alpha and beta are zero (rectangle) then the simpler rectangular elements description should be used.",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.beta_error_index": {
   "data_type": "INT_TYPE",
@@ -477,7 +481,8 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.beta_error_upper": {
   "data_type": "FLT_0D",
@@ -485,46 +490,85 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_passive.loop[:].element[:].geometry.oblique.length": {
+ "pf_passive.loop[:].element[:].geometry.oblique.length_alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Length",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length",
+  "documentation": "Length of the parallelogram side inclined with angle alpha with respect to the major radius axis",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_passive.loop[:].element[:].geometry.oblique.length_error_index": {
+ "pf_passive.loop[:].element[:].geometry.oblique.length_alpha_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"length\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_index",
+  "documentation": "Index in the error_description list for \"length_alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_alpha_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "pf_passive.loop[:].element[:].geometry.oblique.length_error_lower": {
+ "pf_passive.loop[:].element[:].geometry.oblique.length_alpha_error_lower": {
   "data_type": "FLT_0D",
-  "documentation": "Lower error for \"length\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_lower",
+  "documentation": "Lower error for \"length_alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "pf_passive.loop[:].element[:].geometry.oblique.length_error_upper": {
+ "pf_passive.loop[:].element[:].geometry.oblique.length_alpha_error_upper": {
   "data_type": "FLT_0D",
-  "documentation": "Upper error for \"length\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_error_upper",
+  "documentation": "Upper error for \"length_alpha\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_beta": {
+  "data_type": "FLT_0D",
+  "documentation": "Length of the parallelogram side inclined with angle beta with respect to the height axis",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_beta",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_beta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"length_beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_beta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_beta_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length_beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_beta_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "pf_passive.loop[:].element[:].geometry.oblique.length_beta_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length_beta\"",
+  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_beta_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.r": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre R",
+  "documentation": "Major radius of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.r_error_index": {
   "data_type": "INT_TYPE",
@@ -539,7 +583,8 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.r_error_upper": {
   "data_type": "FLT_0D",
@@ -547,46 +592,17 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
- },
- "pf_passive.loop[:].element[:].geometry.oblique.thickness": {
-  "data_type": "FLT_0D",
-  "documentation": "Thickness",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"thickness\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_lower": {
-  "data_type": "FLT_0D",
-  "documentation": "Lower error for \"thickness\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_lower",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "pf_passive.loop[:].element[:].geometry.oblique.thickness_error_upper": {
-  "data_type": "FLT_0D",
-  "documentation": "Upper error for \"thickness\"",
-  "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/thickness_error_upper",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.z": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre Z",
+  "documentation": "Height of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.z_error_index": {
   "data_type": "INT_TYPE",
@@ -601,7 +617,8 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.z_error_upper": {
   "data_type": "FLT_0D",
@@ -609,7 +626,8 @@
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "pf_passive.loop[:].element[:].geometry.outline": {
   "data_type": "STRUCTURE",

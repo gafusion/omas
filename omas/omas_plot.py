@@ -2,6 +2,7 @@
 
 -------
 '''
+# NOTEs: https://git.iter.org/projects/IMAS/repos/idstools/browse/bin has some plotting utilities that may be worth checking out
 
 from .omas_utils import *
 from .omas_physics import cocos_transform
@@ -542,7 +543,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 # ODSs' plotting methods
 # ================================
 def handle_time(ods, time_location, time_index, time):
-    '''
+    """
     Given either time_index or time returns both time_index and time consistent with one another
     NOTE: time takes precedence over time_index
 
@@ -553,7 +554,7 @@ def handle_time(ods, time_location, time_index, time):
     :param time: float or list of floats
 
     :return: time_index, time
-    '''
+    """
     if time is not None:
         tds = ods.time(time_location)
         time_index = []
@@ -1040,6 +1041,49 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     return {'ax': axs}
 
+@add_to__ODS__
+def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **kw):
+    """
+    Plot currents in core_profiles_1d
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+
+    :param time_index: int, list of ints, or None
+        time slice to plot. If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    """
+    from matplotlib import pyplot
+
+    if ax is None:
+        ax = pyplot.gca()
+
+    # time animation
+    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
+    if isinstance(time_index, (list, numpy.ndarray)):
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(
+                core_profiles_currents_summary, ods, time_index, time, fig=fig, ax=axs, **kw
+            )
+
+    assert 'j_total' in ods['core_profiles.profiles_1d'][time_index], "j_total not in core profiles"
+    ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]']['j_total'],label='total current',ls='--')
+
+    for item in ods['core_profiles.profiles_1d'][time_index]:
+        if 'j_' in item and item not in ['j_tor', 'j_total']:
+            ax.plot(ods[f'core_profiles.profiles_1d[{time_index}].grid.rho_tor_norm'],ods[f'core_profiles.profiles_1d[{time_index}]'][item],label=' '.join(item[2:].split(sep='_')))
+
+    ax.legend(loc=0)
+    ax.set_ylabel(r'Parallel current density $[A\,m^-{2}]$')
+    ax.set_xlabel(r'$\rho_{tor}$')
+    return {'ax': ax}
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
@@ -1526,7 +1570,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
 
 @add_to__ODS__
 def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot pf_active time traces
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1537,7 +1581,7 @@ def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1569,7 +1613,7 @@ def pf_active_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot bpol_probe time traces and equilibrium constraints
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1580,7 +1624,7 @@ def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1615,7 +1659,7 @@ def magnetics_bpol_probe_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot flux_loop time traces and equilibrium constraints
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1626,7 +1670,7 @@ def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
 
     from matplotlib import pyplot
 
@@ -1661,7 +1705,7 @@ def magnetics_flux_loop_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot ip time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1672,7 +1716,7 @@ def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'magnetics.ip.0.time',
@@ -1687,7 +1731,7 @@ def magnetics_ip_data(ods, equilibrium_constraints=True, ax=None, **kw):
 
 @add_to__ODS__
 def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot diamagnetic_flux time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1698,7 +1742,7 @@ def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, 
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'magnetics.diamagnetic_flux.0.time',
@@ -1713,7 +1757,7 @@ def magnetics_diamagnetic_flux_data(ods, equilibrium_constraints=True, ax=None, 
 
 @add_to__ODS__
 def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **kw):
-    '''
+    """
     plot b_field_tor_vacuum_r time trace and equilibrium constraint
 
     :param equilibrium_constraints: plot equilibrium constraints if present
@@ -1724,7 +1768,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
     :param \**kw: Additional keywords for plot
 
     :return: axes instance
-    '''
+    """
     return _plot_signal_eq_constraint(
         ods,
         'tf.b_field_tor_vacuum_r.time',
@@ -1738,7 +1782,7 @@ def tf_b_field_tor_vacuum_r_data(ods, equilibrium_constraints=True, ax=None, **k
 
 
 def _plot_signal_eq_constraint(ods, time, data, constraint, equilibrium_constraints, ax, **kw):
-    '''
+    """
     Utility function to plot individual signal and their constraint in equilibrium IDS
 
     :param time: ods location for time
@@ -1752,7 +1796,7 @@ def _plot_signal_eq_constraint(ods, time, data, constraint, equilibrium_constrai
     :param kw: extra arguments passed to
 
     :return:
-    '''
+    """
     from matplotlib import pyplot
 
     if ax is None:
@@ -2244,7 +2288,7 @@ def waves_beam_summary(ods, time_index=None, time=None, fig=None, **kw):
 
 @add_to__ODS__
 def nbi_summary(ods, ax=None):
-    '''
+    """
     Plot summary of NBI power time traces
 
     :param ods: input ods
@@ -2252,7 +2296,7 @@ def nbi_summary(ods, ax=None):
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     if ax is None:
@@ -2379,7 +2423,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_ov
 
 @add_to__ODS__
 def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
-    '''
+    """
     Plot walls on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
@@ -2393,7 +2437,7 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
     :param unit_index: list of index of units of the component to plot
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     for k in ['mask', 'labelevery', 'notesize', 'label_ha', 'label_va', 'label_r_shift', 'label_z_shift']:
@@ -2699,7 +2743,7 @@ def magnetics_overlay(
     tor_probe_style={'marker': '.'},
     **kw,
 ):
-    '''
+    """
     Plot magnetics on a tokamak cross section plot
 
     :param ods: OMAS ODS instance
@@ -2713,7 +2757,7 @@ def magnetics_overlay(
     :param ax: axes to plot in (active axes is generated if `ax is None`)
 
     :return: axes handler
-    '''
+    """
     from matplotlib import pyplot
 
     kw0 = copy.copy(kw)

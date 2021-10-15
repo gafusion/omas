@@ -2,7 +2,7 @@
  "camera_ir": {
   "documentation": "Infrared camera for monitoring of Plasma Facing Components",
   "full_path": "camera_ir",
-  "lifecycle_last_change": "3.23.4",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.23.4",
   "maxoccur": "10"
@@ -199,6 +199,138 @@
   "type": "dynamic",
   "units": "s"
  },
+ "camera_ir.frame_analysis": {
+  "coordinates": [
+   "camera_ir.frame_analysis[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Quantities deduced from frame analysis for a set of time slices",
+  "full_path": "camera_ir/frame_analysis(itime)",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "camera_ir_frame_analysis",
+  "type": "dynamic"
+ },
+ "camera_ir.frame_analysis[:].distance_separatrix_midplane": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Distance between the measurement position and the separatrix, mapped along flux surfaces to the outboard midplane, in the major radius direction. Positive value means the measurement is outside of the separatrix.",
+  "full_path": "camera_ir/frame_analysis(itime)/distance_separatrix_midplane(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].distance_separatrix_midplane_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"distance_separatrix_midplane\"",
+  "full_path": "camera_ir/frame_analysis(itime)/distance_separatrix_midplane_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_ir.frame_analysis[:].distance_separatrix_midplane_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"distance_separatrix_midplane\"",
+  "full_path": "camera_ir/frame_analysis(itime)/distance_separatrix_midplane_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].distance_separatrix_midplane_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"distance_separatrix_midplane\"",
+  "full_path": "camera_ir/frame_analysis(itime)/distance_separatrix_midplane_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].power_flux_parallel": {
+  "coordinates": [
+   "camera_ir.frame_analysis[:].distance_separatrix_midplane"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Parallel heat flux received by the element monitored by the camera, along the distance_separatrix_midplane coordinate",
+  "full_path": "camera_ir/frame_analysis(itime)/power_flux_parallel(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "camera_ir.frame_analysis[:].power_flux_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_flux_parallel\"",
+  "full_path": "camera_ir/frame_analysis(itime)/power_flux_parallel_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_ir.frame_analysis[:].power_flux_parallel_error_lower": {
+  "coordinates": [
+   "camera_ir.frame_analysis[:].distance_separatrix_midplane"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_flux_parallel\"",
+  "full_path": "camera_ir/frame_analysis(itime)/power_flux_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "camera_ir.frame_analysis[:].power_flux_parallel_error_upper": {
+  "coordinates": [
+   "camera_ir.frame_analysis[:].distance_separatrix_midplane"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_flux_parallel\"",
+  "full_path": "camera_ir/frame_analysis(itime)/power_flux_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-2"
+ },
+ "camera_ir.frame_analysis[:].sol_heat_decay_length": {
+  "data_type": "FLT_0D",
+  "documentation": "Heat flux decay length in SOL at divertor entrance, mapped to the mid-plane, this is the lambda_q parameter defined in reference T. Eich et al, Nucl. Fusion 53 (2013) 093031",
+  "full_path": "camera_ir/frame_analysis(itime)/sol_heat_decay_length",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].sol_heat_decay_length_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"sol_heat_decay_length\"",
+  "full_path": "camera_ir/frame_analysis(itime)/sol_heat_decay_length_error_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "camera_ir.frame_analysis[:].sol_heat_decay_length_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"sol_heat_decay_length\"",
+  "full_path": "camera_ir/frame_analysis(itime)/sol_heat_decay_length_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].sol_heat_decay_length_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"sol_heat_decay_length\"",
+  "full_path": "camera_ir/frame_analysis(itime)/sol_heat_decay_length_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "camera_ir.frame_analysis[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "camera_ir/frame_analysis(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
  "camera_ir.ids_properties": {
   "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
@@ -273,6 +405,70 @@
   "full_path": "camera_ir/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "camera_ir.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "camera_ir/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_ir.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "camera_ir/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "camera_ir.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "camera_ir/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_ir.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "camera_ir/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "camera_ir.midplane": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/midplane_identifier.xml",
+  "documentation": "Choice of midplane definition for the mapping of measurements on an equilibrium\n1) magnetic_axis : Midplane defined by the height of magnetic axis equilibrium/time_slice/global_quantities/magnetic_axis/z\n2) dr_dz_zero_sep : Midplane defined by the height of the outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. equilibrium/time_slice/boundary_separatrix/dr_dz_zero_point/z\n3) z_zero : Midplane defined by z = 0\n4) ggd_subset : Midplane location is specified by means of the GGD grid subset for the inner and outer midplanes, if the midplane choice is different from the other available options. If the GGD midplane subset corresponds to one of the other available options, select that particular option to indicate it",
+  "full_path": "camera_ir/midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "camera_ir.midplane.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "camera_ir/midplane/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.midplane.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "camera_ir/midplane/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "camera_ir.midplane.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "camera_ir/midplane/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "camera_ir.name": {
   "data_type": "STR_0D",

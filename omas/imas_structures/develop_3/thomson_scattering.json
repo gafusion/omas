@@ -2,7 +2,7 @@
  "thomson_scattering": {
   "documentation": "Thomson scattering diagnostic",
   "full_path": "thomson_scattering",
-  "lifecycle_last_change": "3.29.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -165,6 +165,70 @@
   "timebasepath": "delta_position/time",
   "type": "dynamic",
   "units": "m"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane": {
+  "data_type": "STRUCTURE",
+  "documentation": "Distance between the measurement position and the separatrix, mapped along flux surfaces to the outboard midplane, in the major radius direction. Positive value means the measurement is outside of the separatrix.",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane.data": {
+  "coordinates": [
+   "thomson_scattering.channel[:].distance_separatrix_midplane.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "distance_separatrix_midplane/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane.data_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].distance_separatrix_midplane.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "distance_separatrix_midplane/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane.data_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].distance_separatrix_midplane.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "distance_separatrix_midplane/time",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].distance_separatrix_midplane.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "thomson_scattering/channel(i1)/distance_separatrix_midplane/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "distance_separatrix_midplane/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "thomson_scattering.channel[:].identifier": {
   "data_type": "STR_0D",
@@ -505,6 +569,70 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "thomson_scattering.equilibrium_id": {
+  "data_type": "STRUCTURE",
+  "documentation": "ID of the IDS equilibrium used to map measurements - we may decide that this is superseeded when the systematic documentation of input provenance is adopted",
+  "full_path": "thomson_scattering/equilibrium_id",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_identification"
+ },
+ "thomson_scattering.equilibrium_id.data_entry": {
+  "data_type": "STRUCTURE",
+  "documentation": "Data entry to which this IDS belongs",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry",
+  "lifecycle_status": "alpha",
+  "structure_reference": "data_entry"
+ },
+ "thomson_scattering.equilibrium_id.data_entry.machine": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the experimental device to which this data is related",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry/machine",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.data_entry.pulse": {
+  "data_type": "INT_0D",
+  "documentation": "Pulse number",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry/pulse",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.data_entry.pulse_type": {
+  "data_type": "STR_0D",
+  "documentation": "Type of the data entry, e.g. \"pulse\", \"simulation\", ...",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry/pulse_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.data_entry.run": {
+  "data_type": "INT_0D",
+  "documentation": "Run number",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry/run",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.data_entry.user": {
+  "data_type": "STR_0D",
+  "documentation": "Username",
+  "full_path": "thomson_scattering/equilibrium_id/data_entry/user",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.name": {
+  "data_type": "STR_0D",
+  "documentation": "IDS name",
+  "full_path": "thomson_scattering/equilibrium_id/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.equilibrium_id.occurrence": {
+  "data_type": "INT_0D",
+  "documentation": "IDS occurrence",
+  "full_path": "thomson_scattering/equilibrium_id/occurrence",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "thomson_scattering.ids_properties": {
   "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
@@ -579,6 +707,70 @@
   "full_path": "thomson_scattering/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "thomson_scattering.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "thomson_scattering/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "thomson_scattering.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "thomson_scattering/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "thomson_scattering/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "thomson_scattering.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "thomson_scattering/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "thomson_scattering.midplane": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/midplane_identifier.xml",
+  "documentation": "Choice of midplane definition for the mapping of measurements on an equilibrium\n1) magnetic_axis : Midplane defined by the height of magnetic axis equilibrium/time_slice/global_quantities/magnetic_axis/z\n2) dr_dz_zero_sep : Midplane defined by the height of the outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. equilibrium/time_slice/boundary_separatrix/dr_dz_zero_point/z\n3) z_zero : Midplane defined by z = 0\n4) ggd_subset : Midplane location is specified by means of the GGD grid subset for the inner and outer midplanes, if the midplane choice is different from the other available options. If the GGD midplane subset corresponds to one of the other available options, select that particular option to indicate it",
+  "full_path": "thomson_scattering/midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "thomson_scattering.midplane.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "thomson_scattering/midplane/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.midplane.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "thomson_scattering/midplane/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.midplane.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "thomson_scattering/midplane/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "thomson_scattering.time": {
   "coordinates": [

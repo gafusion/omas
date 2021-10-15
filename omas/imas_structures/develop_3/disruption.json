@@ -1018,7 +1018,7 @@
  },
  "disruption.profiles_1d": {
   "cocos_alias": "IDSPATH",
-  "cocos_replace": "disruption.profile_1d{i}",
+  "cocos_replace": "disruption.profiles_1d{i}",
   "coordinates": [
    "disruption.profiles_1d[:].time"
   ],

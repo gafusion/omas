@@ -2,7 +2,7 @@
  "nbi": {
   "documentation": "Neutral Beam Injection systems and description of the fast neutrals that arrive into the torus",
   "full_path": "nbi",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -180,6 +180,40 @@
   "full_path": "nbi/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "nbi.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between input command received from the RT network and actuator starting to react. Applies globally to the system described by this IDS unless specific latencies (e.g. channel-specific or antenna-specific) are provided at a deeper level in the IDS structure.",
+  "full_path": "nbi/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "nbi.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "nbi/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "nbi/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "nbi.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "nbi/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
  },
  "nbi.time": {
   "coordinates": [
@@ -476,7 +510,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "nbi/unit(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -607,7 +642,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "nbi/unit(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -738,7 +774,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "nbi/unit(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].aperture[:].x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1273,7 +1310,7 @@
   "units": "m"
  },
  "nbi.unit[:].beamlets_group[:].direction": {
-  "cocos_label_transformation": "phi_like",
+  "cocos_label_transformation": "tor_angle_like",
   "cocos_leaf_name_aos_indices": "nbi.unit{i}.beamlets_group{j}.direction",
   "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "INT_0D",
@@ -2303,7 +2340,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "nbi/unit(i1)/source/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -2434,7 +2472,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "nbi/unit(i1)/source/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -2565,7 +2604,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "nbi/unit(i1)/source/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "nbi.unit[:].source.x3_unit_vector.x": {
   "data_type": "FLT_0D",

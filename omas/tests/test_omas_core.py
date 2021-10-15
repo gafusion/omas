@@ -557,6 +557,23 @@ class TestOmasCore(UnittestCaseOmas):
         assert ods.imas_version == 'test'
         assert ods['equilibrium.time_slice.0.global_quantities'].imas_version == 'test'
 
+    def test_relax(self):
+        ods1 = ODS()
+        ods1['core_profiles.profiles_1d.0.ion.0.element[0].atoms_n'] = 1
+        ods1['core_profiles.profiles_1d.0.ion.0.element[0].z_n'] = 1.0
+        ods1['equilibrium.time_slice[0].profiles_2d[0].psi'] = numpy.array([[0, 1], [0, 1]])
+
+        ods2 = ODS()
+        ods2['core_profiles.profiles_1d.0.ion.0.element[0].atoms_n'] = 2
+        ods2['core_profiles.profiles_1d[0].ion[0].element[0].z_n'] = 2.0
+        ods2['equilibrium.time_slice[0].profiles_2d[0].psi'] = numpy.array([[0, 2], [0, 2]])
+
+        ods1.relax(ods2, alpha=0.5)
+
+        assert ods1['core_profiles.profiles_1d.0.ion.0.element[0].atoms_n'] == 1
+        assert ods1['core_profiles.profiles_1d.0.ion.0.element[0].z_n'] == 1.5
+        assert ods1['equilibrium.time_slice[0].profiles_2d[0].psi'][0, 1] == 1.5
+
     # End of TestOmasCore class
 
 

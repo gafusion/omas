@@ -19,19 +19,24 @@ install_requires = [
     'setuptools>=41.2',
     'tqdm',
     'Cython',
-    'omfit_classes',
-    'pexpect',
-    'fortranformat',
-    'pygacode'
 ]
 
 extras_require = {
+    'machine': [
+        'omfit_classes',
+        'pexpect',
+        'fortranformat',
+        'pygacode',
+    ],
     'hdc': ['pyhdc'],
     'imas': ['imas'],
     'uda': ['pyuda'],
     'build_structures': ['bs4'],
     'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow'],
 }
+
+# make machines a "required extra"
+install_requires += extras_require['machine']
 
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep
@@ -43,12 +48,10 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
         f.write('# usage: pip install -r requirements.txt\n\n')
         for item in install_requires:
             f.write(item.ljust(25) + '# required\n')
-        f.write('\n')
-        for requirement in sorted(list(extras_require.keys()), key=lambda x: x.lower()):
-            for item in sorted(extras_require[requirement], key=lambda x: x.lower()):
-                if requirement in ['imas', 'hdc', 'uda', 'build_structures']:
-                    item = '#' + item
-                    f.write(item.ljust(25) + '# %s\n' % requirement)
+        for requirement in extras_require:
+            f.write('\n')
+            for item in extras_require[requirement]:
+                f.write('# ' + item.ljust(25) + '# %s\n' % requirement)
 
 packages = ['omas', 'omas.examples', 'omas.samples', 'omas.tests', 'omas.utilities']
 package_data = {
@@ -74,7 +77,14 @@ OMAS is a Python library designed to simplify the interface of third-party codes
 Mapping the physics codes I/O to the IMAS data model is done in third party Python codes such as the `OMFIT framework <https://omfit.io>`_.
 '''
 
-print('INFO: run the `imports_check.py` script to quickly verify that all Python dependencies for OMAS are installed\n')
+print()
+print('INFO: optional dependencies:')
+from pprint import pprint
+
+pprint(extras_require)
+print()
+print('INFO: run the `imports_check.py` script to quickly verify that all Python dependencies for OMAS are installed')
+print()
 
 from setuptools import setup
 

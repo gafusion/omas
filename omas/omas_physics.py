@@ -112,11 +112,11 @@ def consistent_times(ods, attempt_fix=True, raise_errors=True):
 
 @add_to__ODS__
 def imas_info(ods):
-    '''
+    """
     add ids_properties.version_put... information
 
     :return: updated ods
-    '''
+    """
     # if called at top level, loop over all data structures
     if not len(ods.location):
         for ds in ods:
@@ -271,8 +271,10 @@ def equilibrium_rect_grid_map(ods, time_index, quantity, r=None, z=None, cache=N
 
 
 @add_to__ODS__
-def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=None, averages=None, update=True):
-    '''
+def equilibrium_form_constraints(
+    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True, **nuconv_kw
+):
+    """
     generate equilibrium constraints from experimental data in ODS
 
     :param ods: input ODS
@@ -303,39 +305,72 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
 
     :param averages: dictionary with average times for individual constraints
 
+    :param cutoff_hz: a list of two elements with low and high cutoff frequencies [lowFreq, highFreq]
+
     :param update: operate in place
 
     :return: updated ods
-    '''
-    from omfit_classes.utils_math import smooth_by_convolution
+    """
+    from omfit_classes.utils_math import smooth_by_convolution, firFilter
 
     if averages is None:
         averages = {}
 
+    # identify possible constraints
+    possible_constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
     if constraints is None:
-        constraints = omas_info('equilibrium')['equilibrium.time_slice.0.constraints'].keys()
+        constraints = possible_constraints
+    else:
+        for constraint in constraints:
+            if constraint not in possible_constraints:
+                raise ValueError(f'Constraint `{constraint}` not recognized: possible options are {possible_constraints}')
 
+    # instantiate new ODS if not operating in place
     ods_n = ods
     if not update:
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
 
+    if times is None:
+        if 'equilibrium.time' in ods:
+            times = ods['equilibrium.time']
+        else:
+            raise ValueError('Must specify times at which to apply equilibrium constraint')
+
     times = numpy.atleast_1d(times)
-    ods_n[f'equilibrium.time'] = times
+    ods_n['equilibrium.time'] = times
+
+    nuconv_kw.setdefault('window_function', 'boxcar')
 
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
+            printd(f'Working on pf_active.coil.{channel}', topic='machine')
             try:
+                # get
                 label = ods[f'pf_active.coil.{channel}.element[0].identifier']
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
                 data = ods[f'pf_active.coil.{channel}.current.data']
                 time = ods[f'pf_active.coil.{channel}.current.time']
-                const = smooth_by_convolution(data * turns, time, times, average, window_function='boxcar')
+                if f'pf_active.coil.{channel}.current.data_error_upper' in ods:
+                    error = ods[f'pf_active.coil.{channel}.current.data_error_upper']
+                else:
+                    error = None
+                # process
+                if cutoff_hz is not None:
+                    data = firFilter(time, data, cutoff_hz)
+                const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
+                if error is not None:
+                    const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                # assign
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
+                    if error is not None:
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured_error_upper'] = const_error[
+                            time_index
+                        ]
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.source'] = label
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with pf_current channel {channel} :' + str(_excp))
@@ -344,20 +379,41 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
     if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
         average = averages.get('bpol_probe', default_average)
         for channel in ods[f'magnetics.b_field_pol_probe']:
+            printd(f'Working on magnetics.b_field_pol_probe.{channel}', topic='machine')
             try:
-                valid = ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']
+                # get
+                label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.source'] = label
-                if valid == 0:
-                    label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
+                valid = ods.get(
+                    f'magnetics.b_field_pol_probe.{channel}.field.validity',
+                    1 - int(f'magnetics.b_field_pol_probe.{channel}.field.data' in ods),
+                )
+                if valid == 0:  # 0 means that the data is good
                     data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
-                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    if f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper' in ods:
+                        error = ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper']
+                    else:
+                        error = None
+                    # process
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = const[time_index]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
                 else:
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{channel}.measured_error_upper'] = numpy.nan
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with bpol_probe channel {channel}: ' + str(_excp))
 
@@ -365,58 +421,171 @@ def equilibrium_form_constraints(ods, times, default_average=0.005, constraints=
     if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
         average = averages.get('flux_loop', default_average)
         for channel in ods[f'magnetics.flux_loop']:
+            printd(f'Working on magnetics.flux_loop.{channel}', topic='machine')
             try:
-                valid = ods[f'magnetics.flux_loop.{channel}.flux.validity']
+                # get
+                label = ods[f'magnetics.flux_loop.{channel}.identifier']
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.source'] = label
-                if valid == 0:
-                    label = ods[f'magnetics.flux_loop.{channel}.identifier']
+                valid = ods.get(f'magnetics.flux_loop.{channel}.flux.validity', 1 - int(f'magnetics.flux_loop.{channel}.flux.data' in ods))
+                if valid == 0:  # 0 means that the data is good
                     data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+                    if f'magnetics.flux_loop.{channel}.flux.data_error_upper' in ods:
+                        error = ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper']
+                    else:
+                        error = None
+                    # process
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = const[time_index]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
                 else:
                     for time_index in range(len(times)):
                         ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{channel}.measured_error_upper'] = numpy.nan
             except Exception as _excp:
-                raise _excp.__class__(f'Problem with flux_loop channel {channel}: ' + str(_excp))
+                raise _excp.__class__(f'Problem with flux_loop channel {channel}: {_excp}')
 
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
+        average = averages.get('ip', default_average)
+        printd(f'Working on magnetics.ip', topic='machine')
         try:
-            average = averages.get('ip', default_average)
-            time = ods['magnetics.ip.0.time']
+            # get
             data = ods['magnetics.ip.0.data']
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            time = ods['magnetics.ip.0.time']
+            if 'magnetics.ip.0.data_error_upper' in ods:
+                error = ods['magnetics.ip.0.data_error_upper']
+            else:
+                error = None
+            # process
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.ip.measured_error_upper'] = const_error[time_index]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with ip')
+            raise _excp.__class__(f'Problem with ip: {_excp}')
 
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
+        average = averages.get('diamagnetic_flux', default_average)
+        printd(f'Working on magnetics.diamagnetic_flux', topic='machine')
         try:
-            average = averages.get('diamagnetic_flux', default_average)
-            time = ods['magnetics.diamagnetic_flux.0.time']
+            # get
             data = ods['magnetics.diamagnetic_flux.0.data']
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            time = ods['magnetics.diamagnetic_flux.0.time']
+            if 'magnetics.diamagnetic_flux.0.data_error_upper' in ods:
+                error = ods['magnetics.diamagnetic_flux.0.data_error_upper']
+            else:
+                error = None
+            # process
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.diamagnetic_flux.measured_error_upper'] = const_error[
+                        time_index
+                    ]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with diamagnetic_flux')
+            raise _excp.__class__(f'Problem with diamagnetic_flux: {_excp}')
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
+        printd(f'Working on tf.b_field_tor_vacuum_r', topic='machine')
+        average = averages.get('b_field_tor_vacuum_r', default_average)
         try:
-            average = averages.get('b_field_tor_vacuum_r', default_average)
-            time = ods['tf.b_field_tor_vacuum_r.time']
+            # get
             data = ods['tf.b_field_tor_vacuum_r.data']
-            const = smooth_by_convolution(data, time, times, average, window_function='boxcar')
+            time = ods['tf.b_field_tor_vacuum_r.time']
+            if 'tf.b_field_tor_vacuum_r.data_error_upper' in ods:
+                error = ods['tf.b_field_tor_vacuum_r.data_error_upper']
+            else:
+                error = None
+            # process
+            if cutoff_hz is not None:
+                data = firFilter(time, data, cutoff_hz)
+            const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+            if error is not None:
+                const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+            # assign
             for time_index in range(len(times)):
                 ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured'] = const[time_index]
+                if error is not None:
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.b_field_tor_vacuum_r.measured_error_upper'] = const_error[
+                        time_index
+                    ]
         except Exception as _excp:
-            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r')
+            raise _excp.__class__(f'Problem with b_field_tor_vacuum_r: {_excp}')
+
+    # mse
+    if 'mse_polarisation_angle' in constraints and 'mse.channel.0.polarisation_angle.data' in ods:
+        average = averages.get('mse_polarisation_angle', default_average)
+        for channel in ods[f'mse.channel']:
+            printd(f'Working on mse.channel.{channel}', topic='machine')
+
+            try:
+                # get
+                label = ods[f'mse.channel.{channel}.name']
+                for time_index in range(len(times)):
+                    ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.source'] = label
+                valid = ods.get(
+                    f'mse.channel.{channel}.polarisation_angle.validity', 1 - int(f'mse.channel.{channel}.polarisation_angle.data' in ods)
+                )
+                if valid == 0:  # 0 means that the data is good
+                    data = copy.deepcopy(ods[f'mse.channel.{channel}.polarisation_angle.data'])
+                    time = ods[f'mse.channel.{channel}.polarisation_angle.time']
+                    if f'mse.channel.{channel}.polarisation_angle.data_error_upper' in ods:
+                        error = ods[f'mse.channel.{channel}.polarisation_angle.data_error_upper']
+                    else:
+                        error = None
+                    # process
+                    if cutoff_hz is not None:
+                        data = firFilter(time, data, cutoff_hz)
+                    if f'mse.channel.{channel}.polarisation_angle.validity_timed' in ods:
+                        data[ods[f'mse.channel.{channel}.polarisation_angle.validity_timed'] != 0] = numpy.nan
+                        error[ods[f'mse.channel.{channel}.polarisation_angle.validity_timed'] != 0] = numpy.nan
+                    const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error, time, times, average, **nuconv_kw)
+                    # assign
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured'] = const[
+                            time_index
+                        ]
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
+                            ] = const_error[time_index]
+                else:
+                    for time_index in range(len(times)):
+                        ods_n[f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured'] = numpy.nan
+                        if error is not None:
+                            ods_n[
+                                f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
+                            ] = numpy.nan
+            except Exception as _excp:
+                raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
 
     return ods_n
 
@@ -442,36 +611,53 @@ def summary_greenwald(ods, update=True):
 
     a = (ods['equilibrium.time_slice.:.profiles_1d.r_outboard'][:, -1] - ods['equilibrium.time_slice.:.profiles_1d.r_inboard'][:, -1]) / 2
     ip = ods['equilibrium.time_slice.:.global_quantities.ip']
-    ne_vol_avg = []
-    for k in ods['equilibrium.time_slice']:
+    nel = []
+    for time_index in ods['equilibrium.time_slice']:
         with omas_environment(
             ods,
-            coordsio={'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % k: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % k]},
+            coordsio={
+                'core_profiles.profiles_1d.%d.grid.rho_tor_norm'
+                % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]
+            },
         ):
-            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % k]
-            volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % k]
-            ne_vol_avg.append(numpy.trapz(ne, x=volume) / volume[-1])
-    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(ne_vol_avg) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
+            volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
+            ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
+
+            if 'interferometer' in ods:
+                ods.physics_summary_lineaverage_density()
+                nel.append(ods['interferometer.channel.0.n_e_line_average.data'][time_index])
+            else:
+                print(
+                    "Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
+                )
+                nel.append(ne_vol_avg)
+    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
     return ods_n
 
 
 @add_to__ODS__
-@preprocess_ods('core_profiles', 'equilibrium')
-def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True):
+@preprocess_ods('core_profiles', 'equilibrium', 'interferometer')
+def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=True, doPlot=False):
     """
     Calculates line-average electron density for each time slice and stores them in the summary ods
 
     :param ods: input ods
-    
+
     :param line_grid: number of points to calculate line average density over (includes point outside of boundary)
-    
+
     :param time_index: time slices to process
 
     :param update: operate in place
 
+    :param doPlot: plots the interferometer lines on top of the equilibrium boundary shape
+
     :return: updated ods
     """
     import scipy
+
+    if doPlot:
+        from matplotlib import pyplot as plt
 
     ods_n = ods
     if not update:
@@ -481,7 +667,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 
     if time_index is None:
         for time_index in range(len(ods['core_profiles']['profiles_1d'])):
-            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=False)
+            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
@@ -504,6 +690,14 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
         ods_n['interferometer']['time'] = copy.copy(ods['core_profiles']['time'])
 
     ifpaths = [['first_point', 'second_point'], ['second_point', 'third_point']]
+
+    if doPlot:
+        plt.plot(
+            ods['equilibrium.time_slice[0].boundary.outline.r'], ods['equilibrium.time_slice[0].boundary.outline.z'], label='Boundary shape'
+        )
+        plt.xlabel('r [m]')
+        plt.ylabel('z [m]')
+
     for channel in ods['interferometer']['channel']:
         ne_line_paths = []
         dist_paths = []
@@ -526,6 +720,10 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             Zline = numpy.linspace(Z1, Z2, line_grid)
             dist = numpy.zeros(line_grid)
 
+            if doPlot:
+                plt.plot(Rline, Zline, label=f'interferometer path : {"-".join(ifpath)} channel:{channel}')
+                plt.legend()
+
             for i, Rval in enumerate(Rline):
                 dist[i] = numpy.min((Rline[i] - Rb) ** 2 + (Zline[i] - Zb) ** 2)
 
@@ -541,20 +739,44 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             dist_paths.append(numpy.sqrt((xline[i2] - xline[i1]) ** 2 + (yline[i2] - yline[i1]) ** 2 + (Zline[i2] - Zline[i1]) ** 2))
 
         ne_line = numpy.average(ne_line_paths, weights=dist_paths)
-        if F'interferometer.channel.{channel}.n_e_line_average.data' not in ods_n:
-            ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods_n['interferometer']['time']))
+        if f'interferometer.channel.{channel}.n_e_line_average.data' not in ods_n:
+            ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods['interferometer']['time']))
 
         ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
     return ods_n
 
 
 @add_to__ODS__
+@preprocess_ods('core_profiles', 'equilibrium')
+def summary_thermal_stored_energy(ods, update=True):
+    """
+    Calculates the stored energy based on the contents of core_profiles for all time-slices
+
+    :param ods: input ods
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+    ods.physics_core_profiles_pressures()
+    thermal_energy = []
+    for time_index in ods['core_profiles.profiles_1d']:
+        eq = ods[f'equilibrium.time_slice[{time_index}].profiles_1d']
+        volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'], xp=eq['rho_tor_norm'], fp=eq['volume'])
+        thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
+
+    ods['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
+
+
+@add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
-def summary_taue(ods, update=True):
+def summary_taue(ods, thermal=True, update=True):
     """
     Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods
 
     :param ods: input ods
+
+    :thermal: calculates the thermal part of the energy confinement time from core_profiles if True, otherwise use the stored energy MHD from the equilibrium ods
 
     :param update: operate in place
 
@@ -568,6 +790,7 @@ def summary_taue(ods, update=True):
 
     # update ODS with stored energy from equilibrium
     ods.physics_equilibrium_stored_energy()
+    ods.physics_summary_thermal_stored_energy()
 
     tau_e_scaling = []
     tau_e_MHD = []
@@ -589,6 +812,14 @@ def summary_taue(ods, update=True):
             ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
+            if 'interferometer' in ods:
+                ods.physics_summary_lineaverage_density()
+                nel = ods['interferometer.channel.0.n_e_line_average.data'][time_index]
+            else:
+                print(
+                    "Warning: taue calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
+                )
+                nel = ne_vol_avg
             # Naive weighted isotope average:
             n_deuterium_avg = 0.0
             n_tritium_avg = 0.0
@@ -606,16 +837,18 @@ def summary_taue(ods, update=True):
                 power_loss = ods['summary.global_quantities.power_loss.value'][time_index]
                 info_string += "Power from: summary.global_quantities.power_loss.value,  "
             else:
-                print("Warning: taue calculation radiation losses not subtracted from auxiliary power")
+                print("Warning: taue calculation used power steady instead of power_loss")
                 ods.physics_summary_heating_power()
                 power_loss = ods['summary.global_quantities.power_steady.value'][time_index]
                 info_string += "INACCURATE Power from: summary.global_quantities.power_steady.value,  "
 
             # Stored energy from profiles or equilibrium
-            if 'summary.global_quantities.energy_thermal' in ods:
+            if 'summary.global_quantities.energy_thermal' in ods and thermal:
                 stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
                 info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
             else:
+                if thermal:
+                    print("Warning, tau_e calculated with stored energy MHD")
                 stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
                 info_string += "Stored energy from: 'global_quantities']['energy_mhd"
 
@@ -624,14 +857,14 @@ def summary_taue(ods, update=True):
                 56.2e-3
                 * (abs(ip) / 1e6) ** 0.93
                 * abs(bt) ** 0.15
-                * (ne_vol_avg / 1e19) ** 0.41
+                * (nel / 1e19) ** 0.41
                 * (power_loss / 1e6) ** -0.69
                 * r_major ** 1.97
                 * kappa ** 0.78
                 * aspect ** -0.58
                 * isotope_factor ** 0.19
             )  # [s]
-            for k in ['kappa', 'bt', 'ip', 'ne_vol_avg', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
+            for k in ['kappa', 'bt', 'ip', 'nel', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
             tau_e_scaling.append(tau_e)
             tau_e_MHD.append(stored_energy / power_loss)
@@ -1151,6 +1384,8 @@ def core_profiles_currents(
             if isinstance(eval(j), str) and eval(j) == 'default':
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
+                elif (j == 'j_actuator') and 'core_sources' in ods:
+                     data[j] = get_j_actuator_from_core_sources(ods)
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
@@ -1480,13 +1715,13 @@ def equilibrium_transpose_RZ(ods, flip_dims=False):
 @add_to__ODS__
 @preprocess_ods('magnetics')
 def magnetics_sanitize(ods, remove_bpol_probe=True):
-    '''
+    """
     Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe
 
     :param ods: ODS to update in-place
 
     :return: updated ods
-    '''
+    """
     if 'magnetics.bpol_probe' not in ods:
         return ods
 
@@ -1631,11 +1866,11 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
 
 @add_to__ODS__
 def check_iter_scenario_requirements(ods):
-    '''
+    """
     Check that the current ODS satisfies the ITER scenario database requirements as defined in https://confluence.iter.org/x/kQqOE
 
     :return: list of elements that are missing to satisfy the ITER scenario requirements
-    '''
+    """
     from .omas_imas import iter_scenario_requirements
 
     fail = []
@@ -1649,7 +1884,7 @@ def check_iter_scenario_requirements(ods):
 
 @add_to__ALL__
 def probe_endpoints(r0, z0, a0, l0, cocos):
-    '''
+    """
     Transform r,z,a,l arrays commonly used to describe poloidal magnetic
     probes geometry to actual r,z coordinates of the end-points of the probes.
     This is useful for plotting purposes.
@@ -1665,7 +1900,7 @@ def probe_endpoints(r0, z0, a0, l0, cocos):
     :param cocos: cocos convention
 
     :return: list of 2-points r and z coordinates of individual probes
-    '''
+    """
     theta_convention = 1
     if cocos in [1, 4, 6, 7, 11, 14, 16, 17]:
         theta_convention = -1
@@ -1735,6 +1970,27 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
 
     return Jout
 
+@add_to__ODS__
+def core_sources_j_parallel_sum(ods, time_index=0):
+    """
+    ods function used to sum all j_parallel contributions from core_sources (j_actuator)
+
+    :param ods: input ods
+
+    :param time_index: time slice to process
+
+    :return: sum of j_parallel in [A/m^2]
+    """
+
+    rho = ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'] 
+    j_act = numpy.zeros(len(rho))
+
+    for source in ods['core_sources.source']:
+        if 'j_parallel' in ods[f'core_sources.source[{source}].profiles_1d.{time_index}']:
+            with omas_environment(ods, coordsio={f'core_sources.source.{source}.profiles_1d.{time_index}.grid.rho_tor_norm': rho}):
+                j_act += ods[f'core_sources.source[{source}].profiles_1d[{time_index}].j_parallel']
+
+    return j_act
 
 @add_to__ALL__
 def search_ion(ion_ods, label=None, Z=None, A=None, no_matches_raise_error=True, multiple_matches_raise_error=True):
@@ -2024,9 +2280,9 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
     if clockwise_phi is None:
         sigma_rpz = clockwise_phi
     elif clockwise_phi:
-        sigma_rpz = +1
-    else:
         sigma_rpz = -1
+    else:
+        sigma_rpz = +1
 
     # return both even and odd COCOS if clockwise_phi is not provided
     if sigma_rpz is None:
@@ -2074,7 +2330,15 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
 @add_to__ALL__
 @contextmanager
 def omas_environment(
-    ods, cocosio=None, coordsio=None, unitsio=None, input_data_process_functions=None, xmlcodeparams=False, dynamic_path_creation=None, **kw
+    ods,
+    cocosio=None,
+    coordsio=None,
+    unitsio=None,
+    uncertainio=None,
+    input_data_process_functions=None,
+    xmlcodeparams=False,
+    dynamic_path_creation=None,
+    **kw,
 ):
     """
     Provides environment for data input/output to/from OMAS
@@ -2086,6 +2350,8 @@ def omas_environment(
     :param coordsio: dictionary/ODS with coordinates for data interpolation
 
     :param unitsio: True/False whether data read from OMAS should have units
+
+    :param uncertainio: True/False whether data read from OMAS should have uncertainties
 
     :param input_data_process_functions: list of functions that are used to process data that is passed to the ODS
 
@@ -2118,6 +2384,7 @@ def omas_environment(
     bkp_cocosio = ods.cocosio
     bkp_coordsio = ods.coordsio
     bkp_unitsio = ods.unitsio
+    bkp_uncertainio = ods.uncertainio
     bkp_args = {}
     for item in kw:
         bkp_args[item] = getattr(ods, item)
@@ -2131,6 +2398,8 @@ def omas_environment(
         ods.coordsio = coordsio
     if unitsio is not None:
         ods.unitsio = unitsio
+    if uncertainio is not None:
+        ods.uncertainio = uncertainio
     if dynamic_path_creation is not None:
         omas_rcparams['dynamic_path_creation'] = dynamic_path_creation
 
@@ -2161,6 +2430,7 @@ def omas_environment(
         ods.cocosio = bkp_cocosio
         ods.coordsio = bkp_coordsio
         ods.unitsio = bkp_unitsio
+        ods.uncertainio = bkp_uncertainio
         for item in kw:
             try:
                 setattr(ods, item, bkp_args[item])

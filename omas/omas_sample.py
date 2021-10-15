@@ -344,6 +344,13 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
 
     return ods
 
+@add_to_ODS
+def ec_launchers(ods):
+    from omas import load_omas_json
+
+    pr = load_omas_json(os.path.join('omas','samples', 'd3d_ECRH_machine_mapping.json'))['ec_launchers']
+    ods['ec_launchers'].update(pr)
+    return ods
 
 @add_to_ODS
 def magnetics(ods):
@@ -356,10 +363,10 @@ def magnetics(ods):
     :return: ODS instance with fake magnetics hardware information added
     """
 
-    from omas.machine_mappings.d3d import magnetics_hardware
+    from omas import load_omas_json
 
-    magnetics_hardware(ods)
-    ods['magnetics.time'] = [0.0]
+    pr = load_omas_json(omas_dir + 'samples/sample_magnetics_ods.json', consistency_check=False)['magnetics']
+    ods['magnetics'].update(pr)
     return ods
 
 

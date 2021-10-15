@@ -110,9 +110,9 @@ class IMAS_versions(OrderedDict):
     """
 
     def __init__(self, mode='all'):
-        '''
+        """
         :param mode: `all`, `named`, `tagged`
-        '''
+        """
         OrderedDict.__init__(self)
         if mode in ['all', 'named']:
             # first `develop/3` and other branches

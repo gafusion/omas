@@ -2,7 +2,7 @@
  "edge_transport": {
   "documentation": "Edge plasma transport. Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)",
   "full_path": "edge_transport",
-  "lifecycle_last_change": "3.30.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -811,6 +811,36 @@
   "full_path": "edge_transport/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "active",
   "type": "constant"
+ },
+ "edge_transport.midplane": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/midplane_identifier.xml",
+  "documentation": "Choice of midplane definition (use the lowest index number if more than one value is relevant)\n1) magnetic_axis : Midplane defined by the height of magnetic axis equilibrium/time_slice/global_quantities/magnetic_axis/z\n2) dr_dz_zero_sep : Midplane defined by the height of the outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. equilibrium/time_slice/boundary_separatrix/dr_dz_zero_point/z\n3) z_zero : Midplane defined by z = 0\n4) ggd_subset : Midplane location is specified by means of the GGD grid subset for the inner and outer midplanes, if the midplane choice is different from the other available options. If the GGD midplane subset corresponds to one of the other available options, select that particular option to indicate it",
+  "full_path": "edge_transport/midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier_static"
+ },
+ "edge_transport.midplane.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "edge_transport/midplane/description",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "edge_transport.midplane.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "edge_transport/midplane/index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "edge_transport.midplane.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "edge_transport/midplane/name",
+  "lifecycle_status": "active",
+  "type": "static"
  },
  "edge_transport.model": {
   "coordinates": [

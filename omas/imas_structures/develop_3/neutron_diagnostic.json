@@ -2,7 +2,7 @@
  "neutron_diagnostic": {
   "documentation": "Neutron diagnostic such as DNFM, NFM or MFC",
   "full_path": "neutron_diagnostic",
-  "lifecycle_last_change": "3.31.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.6.0",
   "maxoccur": "3"
@@ -144,56 +144,10 @@
   "type": "static",
   "units": "cps"
  },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"count_limit_max\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_lower": {
-  "data_type": "FLT_0D",
-  "documentation": "Lower error for \"count_limit_max\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_lower",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "cps"
- },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_max_error_upper": {
-  "data_type": "FLT_0D",
-  "documentation": "Upper error for \"count_limit_max\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_max_error_upper",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "cps"
- },
  "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min": {
   "data_type": "FLT_0D",
   "documentation": "Minimum count limit of recent Measuring Mode and plasma reaction",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "cps"
- },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"count_limit_min\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_lower": {
-  "data_type": "FLT_0D",
-  "documentation": "Lower error for \"count_limit_min\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_lower",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "cps"
- },
- "neutron_diagnostic.characteristics.reaction[:].mode[:].count_limit_min_error_upper": {
-  "data_type": "FLT_0D",
-  "documentation": "Upper error for \"count_limit_min\"",
-  "full_path": "neutron_diagnostic/characteristics/reaction(i1)/mode(i2)/count_limit_min_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "cps"
@@ -879,7 +833,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1010,7 +965,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1141,7 +1097,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1734,7 +1691,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].detector.x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1865,7 +1823,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].detector.x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1996,7 +1955,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "neutron_diagnostic.detectors[:].detector.x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -4068,6 +4028,40 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "neutron_diagnostic/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "neutron_diagnostic.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "neutron_diagnostic/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "neutron_diagnostic/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "neutron_diagnostic.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "neutron_diagnostic/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
  "neutron_diagnostic.synthetic_signals": {
   "data_type": "STRUCTURE",
   "documentation": "Output Data from Neutron Diagnostic's Module",
@@ -4181,7 +4175,7 @@
   "documentation": "Unit ring sources description",
   "full_path": "neutron_diagnostic/unit_source(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "50",
+  "maxoccur": "2500",
   "structure_reference": "neutron_diagnostic_unit_source"
  },
  "neutron_diagnostic.unit_source[:].position": {
@@ -4263,13 +4257,6 @@
   "lifecycle_status": "alpha",
   "maxoccur": "2",
   "structure_reference": "neutron_diagnostic_unit_source_radiation"
- },
- "neutron_diagnostic.unit_source[:].radiation[:].index": {
-  "data_type": "INT_0D",
-  "documentation": "Index of radiation type. TO BE REMOVED, since it is given by the index of the radiation array above.",
-  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/index",
-  "lifecycle_status": "alpha",
-  "type": "static"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction": {
   "coordinates": [
@@ -4407,13 +4394,6 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m^-2"
- },
- "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].index": {
-  "data_type": "INT_0D",
-  "documentation": "Index of plasma reaction type. To be removed, since it is given by the index of the reaction array above.",
-  "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/index",
-  "lifecycle_status": "alpha",
-  "type": "static"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate": {
   "coordinates": [

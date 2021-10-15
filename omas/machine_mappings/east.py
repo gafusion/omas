@@ -5,6 +5,7 @@ from omas.omas_utils import printd
 from omas.machine_mappings._common import *
 
 __all__ = []
+__regression_arguments__ = {'__all__': __all__}
 
 # Reference information
 east_divertor_corners = {  # Upper, Lower, Outer, Inner
@@ -15,7 +16,7 @@ east_divertor_corners = {  # Upper, Lower, Outer, Inner
 }
 
 # Hardware descriptor functions
-@machine_mapping_function(__all__)
+@machine_mapping_function(__regression_arguments__)
 def setup_pf_active_hardware_description_east(ods):
     r"""
     Adds EAST tokamak poloidal field coil hardware geometry to ODS
@@ -106,8 +107,8 @@ def east_coords_along_wall(s, rlim, zlim, surface):
     return r, z, slim2
 
 
-@machine_mapping_function(__all__)
-def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
+@machine_mapping_function(__regression_arguments__, pulse=85282)
+def setup_langmuir_probes_hardware_description_east(ods, pulse):
     """
     Load EAST Langmuir probe locations into an ODS
 
@@ -156,8 +157,8 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse=85282):
                     j += 1
 
 
-@machine_mapping_function(__all__)
-def setup_gas_injection_hardware_description_east(ods, pulse=85282):
+@machine_mapping_function(__regression_arguments__, pulse=85282)
+def setup_gas_injection_hardware_description_east(ods, pulse):
     """
     Sets up APPROXIMATE EAST gas injector data for some systems.
 
@@ -215,4 +216,4 @@ def setup_gas_injection_hardware_description_east(ods, pulse=85282):
 
 
 if __name__ == '__main__':
-    run_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())

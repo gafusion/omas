@@ -2,7 +2,7 @@
  "edge_profiles": {
   "documentation": "Edge plasma profiles (includes the scrape-off layer and possibly part of the confined plasma)",
   "full_path": "edge_profiles",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -8004,6 +8004,116 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_parallel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Current due to parallel electric and thermo-electric conductivity and potential and electron temperature gradients along the field line, differences away from ambipolar flow in the parallel direction between ions and electrons (this is not the parallel component of j_total)",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].coefficients": {
+  "coordinates": [
+   "edge_profiles.ggd[:].j_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].coefficients_error_lower": {
+  "coordinates": [
+   "edge_profiles.ggd[:].j_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].coefficients_error_upper": {
+  "coordinates": [
+   "edge_profiles.ggd[:].j_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/grid_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/grid_subset_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/values(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/values_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/values_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/values_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_parallel_viscosity": {
   "coordinates": [
    "1...N"
@@ -9323,6 +9433,448 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Total current density, given on various grid subsets",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_vector_components",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Diamagnetic component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the diamagnetic component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"diamagnetic_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"diamagnetic_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].diamagnetic_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/diamagnetic_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/grid_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/grid_subset_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Parallel component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the parallel component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"parallel_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"parallel_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"parallel_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].parallel_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/parallel_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the poloidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"poloidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"poloidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"poloidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].poloidal_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"poloidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Radial component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the radial component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radial_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"radial_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"radial_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radial\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"radial\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].radial_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"radial\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/radial_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"toroidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"toroidal_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].toroidal_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "A.m^-2"
@@ -14977,6 +15529,36 @@
   "full_path": "edge_profiles/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "active",
   "type": "constant"
+ },
+ "edge_profiles.midplane": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/midplane_identifier.xml",
+  "documentation": "Choice of midplane definition (use the lowest index number if more than one value is relevant)\n1) magnetic_axis : Midplane defined by the height of magnetic axis equilibrium/time_slice/global_quantities/magnetic_axis/z\n2) dr_dz_zero_sep : Midplane defined by the height of the outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. equilibrium/time_slice/boundary_separatrix/dr_dz_zero_point/z\n3) z_zero : Midplane defined by z = 0\n4) ggd_subset : Midplane location is specified by means of the GGD grid subset for the inner and outer midplanes, if the midplane choice is different from the other available options. If the GGD midplane subset corresponds to one of the other available options, select that particular option to indicate it",
+  "full_path": "edge_profiles/midplane",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier_static"
+ },
+ "edge_profiles.midplane.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "edge_profiles/midplane/description",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "edge_profiles.midplane.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "edge_profiles/midplane/index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "edge_profiles.midplane.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "edge_profiles/midplane/name",
+  "lifecycle_status": "active",
+  "type": "static"
  },
  "edge_profiles.profiles_1d": {
   "coordinates": [

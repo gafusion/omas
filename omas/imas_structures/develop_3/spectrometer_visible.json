@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.30.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -510,7 +510,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -641,7 +642,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -772,7 +774,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1135,7 +1138,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1266,7 +1270,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -1397,7 +1402,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -2728,6 +2734,227 @@
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix": {
+  "data_type": "STRUCTURE",
+  "documentation": "Description of geometry matrix (ray transfer matrix)",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_geometry_matrix"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.data": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. The three dimensions correspond to the light emission grid.",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.data_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.data_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid": {
+  "data_type": "STRUCTURE",
+  "documentation": "Grid defining the light emission cells",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_geometry_matrix_emission"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim1(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim1_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim2(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim2_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Third dimension values",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim3(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim3\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim3_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim3\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim3_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim3\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim3_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.grid_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "spectrometer_visible/spectrometer_visible_emissivity_grid_identifier.xml",
+  "documentation": "Grid type\n1) r_z_phi : Cylindrical r,z,phi grid : r=dim1, z=dim2, phi=dim3",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/grid_type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.grid_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/grid_type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.grid_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/grid_type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.emission_grid.grid_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/grid_type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.voxel_map": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
+   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
+  ],
+  "data_type": "INT_3D",
+  "documentation": "Voxel map for geometry matrix. The cells with same number are merged in the computation into a single emission source meta-cell. Cells with number -1 are excluded. Count starts from 0.",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/voxel_map(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "spectrometer_visible.channel[:].grating_spectrometer": {
   "data_type": "STRUCTURE",
@@ -4844,7 +5071,8 @@
   "documentation": "Components of the X1 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X1 vector is horizontal and oriented in the positive phi direction (counter-clockwise when viewing from above). ",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -4975,7 +5203,8 @@
   "documentation": "Components of the X2 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X2 axis is orthonormal so that uX2 = uX3 x uX1.",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -5106,7 +5335,8 @@
   "documentation": "Components of the X3 direction unit vector in the (X,Y,Z) coordinate system, where X is the major radius axis for phi = 0, Y is the major radius axis for phi = pi/2, and Z is the height axis. The X3 axis is normal to the detector/aperture plane and oriented towards the plasma.",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "xyz0d_static"
+  "structure_reference": "xyz0d_static",
+  "url": "utilities/detector_aperture_coordinates.svg"
  },
  "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x": {
   "data_type": "FLT_0D",
@@ -5453,6 +5683,40 @@
   "full_path": "spectrometer_visible/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "spectrometer_visible.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "spectrometer_visible/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "spectrometer_visible.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "spectrometer_visible/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_visible.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "spectrometer_visible/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "spectrometer_visible.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "spectrometer_visible/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
  },
  "spectrometer_visible.time": {
   "coordinates": [

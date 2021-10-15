@@ -45,7 +45,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 if os.path.exists('../source/schema/'):
     shutil.rmtree('../source/schema/')
 os.makedirs('../source/schema/')
-filename = os.path.abspath(os.sep.join([imas_json_dir, imas_versions[omas_rcparams['default_imas_version']], 'omas_doc.html']))
+filename = os.path.abspath(
+    os.sep.join([omas_dir, 'imas_structures', imas_versions[omas_rcparams['default_imas_version']], 'omas_doc.html'])
+)
 lines = open(filename).readlines()
 
 f = None

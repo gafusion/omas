@@ -69,13 +69,13 @@ class ODX(MutableMapping):
         return self
 
     def to_ods(self, consistency_check=True):
-        '''
+        """
         Generate a ODS from current ODX
 
         :param consistency_check: use consistency_check flag in ODS
 
         :return: ODS
-        '''
+        """
         return odx_2_ods(self, consistency_check=consistency_check)
 
 
@@ -88,7 +88,7 @@ def save_omas_ds(ods, filename):
     :param filename: filename or file descriptor to save to
     """
     DS = ods.dataset()
-    return DS.to_netcdf(filename)
+    return DS.to_netcdf(filename, format="NETCDF4")
 
 
 def load_omas_dx(filename, consistency_check=True):
@@ -103,7 +103,7 @@ def load_omas_dx(filename, consistency_check=True):
     """
     import xarray
 
-    DS = xarray.open_dataset(filename)
+    DS = xarray.open_dataset(filename, engine="netcdf4")
     DS.load()
     DS.close()
     return ODX(DS)
@@ -117,7 +117,7 @@ def save_omas_dx(odx, filename):
 
     :param filename: filename or file descriptor to save to
     """
-    return odx.omas_data.to_netcdf(filename)
+    return odx.omas_data.to_netcdf(filename, format="NETCDF4")
 
 
 def ods_2_odx(ods, homogeneous=None):
@@ -183,7 +183,7 @@ def load_omas_ds(filename, consistency_check=True):
     """
     import xarray
 
-    DS = xarray.open_dataset(filename)
+    DS = xarray.open_dataset(filename, engine="netcdf4")
     DS.load()
     DS.close()
     odx = ODX(DS)

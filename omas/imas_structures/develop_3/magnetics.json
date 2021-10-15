@@ -2,7 +2,7 @@
  "magnetics": {
   "documentation": "Magnetic diagnostics for equilibrium identification and plasma shape control.",
   "full_path": "magnetics",
-  "lifecycle_last_change": "3.30.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.24.0",
   "maxoccur": "3"
@@ -322,7 +322,7 @@
   "cocos_leaf_name_aos_indices": "magnetics.bpol_probe{i}.poloidal_angle",
   "cocos_transformation_expression": ".fact_dtheta",
   "data_type": "FLT_0D",
-  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
+  "documentation": "Angle of the sensor normal vector (vector parallel to the the axis of the coil, n on the diagram) with respect to horizontal plane (clockwise theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/b_field_pol_probe(i1)/poloidal_angle",
   "lifecycle_status": "active",
   "type": "static",
@@ -935,7 +935,7 @@
   "cocos_leaf_name_aos_indices": "magnetics.bpol_probe{i}.poloidal_angle",
   "cocos_transformation_expression": ".fact_dtheta",
   "data_type": "FLT_0D",
-  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
+  "documentation": "Angle of the sensor normal vector (vector parallel to the the axis of the coil, n on the diagram) with respect to horizontal plane (clockwise theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/b_field_tor_probe(i1)/poloidal_angle",
   "lifecycle_status": "active",
   "type": "static",
@@ -1547,7 +1547,7 @@
   "cocos_leaf_name_aos_indices": "magnetics.bpol_probe{i}.poloidal_angle",
   "cocos_transformation_expression": ".fact_dtheta",
   "data_type": "FLT_0D",
-  "documentation": "Angle of the sensor normal vector (n) with respect to horizontal plane (clockwise as in cocos=11 theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
+  "documentation": "Angle of the sensor normal vector (vector parallel to the the axis of the coil, n on the diagram) with respect to horizontal plane (clockwise theta-like angle). Zero if sensor normal vector fully in the horizontal plane and oriented towards increasing major radius. Values in [0 , 2Pi]",
   "full_path": "magnetics/bpol_probe(i1)/poloidal_angle",
   "lifecycle_status": "obsolescent",
   "type": "static",
@@ -2569,6 +2569,40 @@
   "type": "dynamic",
   "units": "s"
  },
+ "magnetics.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between physical information received by the detector and data available on the real-time (RT) network.",
+  "full_path": "magnetics/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "s"
+ },
+ "magnetics.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "magnetics/latency_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "magnetics/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "s"
+ },
+ "magnetics.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "magnetics/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "s"
+ },
  "magnetics.method": {
   "coordinates": [
    "1...N"
@@ -2965,6 +2999,310 @@
   "lifecycle_status": "active",
   "type": "static",
   "units": "m^-1"
+ },
+ "magnetics.shunt": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of shunt resistances through which currents in the divertor structure are measured. Shunts are modelled as piecewise straight line segments in the poloidal plane.",
+  "full_path": "magnetics/shunt(i1)",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "maxoccur": "50",
+  "structure_reference": "magnetics_shunt"
+ },
+ "magnetics.shunt[:].divertor_index": {
+  "data_type": "INT_0D",
+  "documentation": "If the shunt is located on a given divertor, index of that divertor in the divertors IDS",
+  "full_path": "magnetics/shunt(i1)/divertor_index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.shunt[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Alphanumeric identifier of the shunt",
+  "full_path": "magnetics/shunt(i1)/identifier",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.shunt[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the shunt",
+  "full_path": "magnetics/shunt(i1)/name",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.shunt[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of shunt terminals",
+  "full_path": "magnetics/shunt(i1)/position",
+  "lifecycle_status": "active",
+  "structure_reference": "line_of_sight_2points_rz"
+ },
+ "magnetics.shunt[:].position.first_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the first point",
+  "full_path": "magnetics/shunt(i1)/position/first_point",
+  "lifecycle_status": "active",
+  "structure_reference": "rz0d_static"
+ },
+ "magnetics.shunt[:].position.first_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "magnetics/shunt(i1)/position/first_point/r",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.first_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/r_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].position.first_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.first_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.first_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "magnetics/shunt(i1)/position/first_point/z",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.first_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/z_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].position.first_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.first_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/first_point/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the second point",
+  "full_path": "magnetics/shunt(i1)/position/second_point",
+  "lifecycle_status": "active",
+  "structure_reference": "rz0d_static"
+ },
+ "magnetics.shunt[:].position.second_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "magnetics/shunt(i1)/position/second_point/r",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/r_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].position.second_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "magnetics/shunt(i1)/position/second_point/z",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/z_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].position.second_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].position.second_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "magnetics/shunt(i1)/position/second_point/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "m"
+ },
+ "magnetics.shunt[:].resistance": {
+  "data_type": "FLT_0D",
+  "documentation": "Shunt resistance",
+  "full_path": "magnetics/shunt(i1)/resistance",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "magnetics.shunt[:].resistance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"resistance\"",
+  "full_path": "magnetics/shunt(i1)/resistance_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].resistance_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"resistance\"",
+  "full_path": "magnetics/shunt(i1)/resistance_error_lower",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "magnetics.shunt[:].resistance_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"resistance\"",
+  "full_path": "magnetics/shunt(i1)/resistance_error_upper",
+  "lifecycle_status": "active",
+  "type": "static",
+  "units": "Ohm"
+ },
+ "magnetics.shunt[:].target_index": {
+  "data_type": "INT_0D",
+  "documentation": "If the shunt is located on a divertor target, index of that target in the divertors IDS",
+  "full_path": "magnetics/shunt(i1)/target_index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.shunt[:].tile_index": {
+  "data_type": "INT_0D",
+  "documentation": "If the shunt is located on a divertor tile, index of that tile in the divertors IDS",
+  "full_path": "magnetics/shunt(i1)/tile_index",
+  "lifecycle_status": "active",
+  "type": "static"
+ },
+ "magnetics.shunt[:].voltage": {
+  "data_type": "STRUCTURE",
+  "documentation": "Voltage on the shunt terminals (Vfirst_point-Vsecond_point)",
+  "full_path": "magnetics/shunt(i1)/voltage",
+  "lifecycle_status": "active",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "V"
+ },
+ "magnetics.shunt[:].voltage.data": {
+  "coordinates": [
+   "magnetics.shunt[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "magnetics/shunt(i1)/voltage/data(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.shunt[:].voltage.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "magnetics/shunt(i1)/voltage/data_error_index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].voltage.data_error_lower": {
+  "coordinates": [
+   "magnetics.shunt[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "magnetics/shunt(i1)/voltage/data_error_lower(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.shunt[:].voltage.data_error_upper": {
+  "coordinates": [
+   "magnetics.shunt[:].voltage.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "magnetics/shunt(i1)/voltage/data_error_upper(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "magnetics.shunt[:].voltage.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "magnetics/shunt(i1)/voltage/time(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "magnetics.shunt[:].voltage.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/shunt(i1)/voltage/validity",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "magnetics.shunt[:].voltage.validity_timed": {
+  "coordinates": [
+   "magnetics.shunt[:].voltage.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "magnetics/shunt(i1)/voltage/validity_timed(:)",
+  "lifecycle_status": "active",
+  "timebasepath": "voltage/time",
+  "type": "dynamic"
  },
  "magnetics.time": {
   "coordinates": [

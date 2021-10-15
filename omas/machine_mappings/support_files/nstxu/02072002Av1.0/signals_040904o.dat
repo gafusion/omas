@@ -1,0 +1,459 @@
+;=== Measured signals to be read from NSTX diagnostics ===
+;===
+;=== CY 2004 signals
+;=== S.A. Sabbagh 4/09/04: CY2003 signals hence 'o' suffix: take out PPPGU2
+;=== S.A. Sabbagh 2/24/04: NUSL1DE neutron signal added to detect fast collapses since HXR1 is out
+;=== S.A. Sabbagh 2/16/04: BL1SPPGU3 taken out during RF run
+;=== S.A. Sabbagh 1/30/04: Temporarily take out B1CSCU2 and switch to IP2 for plasma current
+;===                       (shots 111069 - 111071)
+;=== S.A. Sabbagh 1/23/04: Added B2CSCL2T
+;=== S.A. Sabbagh 1/22/04: Issue with READ_ASCII escape character '\' solved in software. A common signals
+;===                       file is again being used for interactive and auto run versions of PHOENIX
+;===                       - added back FLSPPPU1, BL1PPPGL3, B1CSCU2 as per J. Menard
+;=== S.A. Sabbagh 1/21/04: Measured plasma current changed from \\IP2 to \\IP1 as suggested by J. Menard
+;=== S.A. Sabbagh 1/20/04: Testing: comment out PI, PT, PO, PW signal types, and set DFLUX to not be read.
+;=== S.A. Sabbagh 9/3/03 : Taken from signals_051002nmK2_FDIA4.dat, with several numbers
+;===                      revised to work with PHOENIX version 0.970b code upgrades.
+;===
+;=== Version 'K2': 20 point TS profiles used for Ptot calculation
+;=== S.A. Sabbagh 9/17/02
+;===
+;=== CY 2002 signals - essentially new magnetics hardware for CY02 run 
+;=== S.A. Sabbagh 2/06/02
+;===
+;=== Day 1+ Signal designations
+;=== S.A. Sabbagh 11/3/99
+;===
+;=== Computed "signals" based on measurements ===
+;===
+;=== NOTE: map index is one greater than the corresponding IDL array index
+;===       (i.e., ioh, map index 1 = ioh[0], etc.)
+;===
+;=== NOTE: See notes at end for stated errors, bit noise, etc. as well as definitions
+;=== 
+;Name   sigl  map    map  MDS Read      Error    Signal Use Conversion  Pri Fit  t  Smoothing   Designation
+;       type  var    indx tree sig? rel  abs  threshold err? factor         wgt idx win (s)   Data  Auxiliary
+;=====================================================================================================================================================================
+TSPE1     PE  none      1  a  m  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; kPa -> Pa
+TSPE2     PE  none      2  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; These data
+TSPE3     PE  none      3  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; need to
+TSPE4     PE  none      4  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; preceed
+TSPE5     PE  none      5  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; calculated
+TSPE6     PE  none      6  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; PTOT
+TSPE7     PE  none      7  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR ; results
+TSPE8     PE  none      8  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE9     PE  none      9  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE10    PE  none     10  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE11    PE  none     11  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE12    PE  none     12  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE13    PE  none     13  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE14    PE  none     14  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE15    PE  none     15  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE16    PE  none     16  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE17    PE  none     17  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE18    PE  none     18  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE19    PE  none     19  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+TSPE20    PE  none     20  a  p  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_PE \\ACTIVESPEC::TS_BEST:FIT_PE_ERR
+HXR1      HX  none      1  p  y  0.020  0.02      0.02    y  1.0       1.0 1.0   1     0    \\TOP.HARD_XRAY.RAWDATA:XH_H908_01:INPUT_01
+NUSL1DE   NU  none      1  pr y  0.020  0.02      0.02    y  1.0       1.0 1.0   1     0    \\PARTICLES::NEUT_FLUCT_SLW_1DE_ZNS
+;CHPI1     PI  none      1  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI2     PI  none      2  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI3     PI  none      3  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI4     PI  none      4  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI5     PI  none      5  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI6     PI  none      6  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI7     PI  none      7  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI8     PI  none      8  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI9     PI  none      9  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI10    PI  none     10  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI11    PI  none     11  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI12    PI  none     12  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI13    PI  none     13  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI14    PI  none     14  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI15    PI  none     15  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPI16    PI  none     16  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PI \\ACTIVESPEC::CHERS_BEST:FIT_PI_ERR
+;CHPD1     PD  pdvsrz0  -1  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD2     PD  pdvsrz0  -2  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD3     PD  pdvsrz0  -3  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD4     PD  pdvsrz0  -4  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD5     PD  pdvsrz0  -5  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD6     PD  pdvsrz0  -6  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD7     PD  pdvsrz0  -7  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD8     PD  pdvsrz0  -8  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD9     PD  pdvsrz0  -9  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD10    PD  pdvsrz0 -10  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD11    PD  pdvsrz0 -11  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD12    PD  pdvsrz0 -12  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD13    PD  pdvsrz0 -13  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD14    PD  pdvsrz0 -14  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD15    PD  pdvsrz0 -15  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;CHPD16    PD  pdvsrz0 -16  a  c  0.000  0.000    0.000    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::CHERS_BEST:FIT_PT \\ACTIVESPEC::CHERS_BEST:FIT_PT_ERR
+;PTOT1     PT  ptvsrz0  -3  -  c  0.830  0.1e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE1   CHPI1  ; These PTOT calculations (kPa -> Pa)
+;PTOT2     PT  ptvsrz0  -4  -  c  0.830  0.1e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE2   CHPI2  ; need to preceed the diamagnetic
+;PTOT3     PT  ptvsrz0  -5  -  c  0.830  0.1e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE3   CHPI3  ; loop signal given the present 
+;PTOT4     PT  ptvsrz0  -6  -  c  0.830  0.1e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE4   CHPI4  ; way that the APPENDK routine
+;PTOT5     PT  ptvsrz0  -7  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE5   CHPI5  ; writes the diamagnetic loop data
+;PTOT6     PT  ptvsrz0  -8  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE6   CHPI6  ; 
+;PTOT7     PT  ptvsrz0  -9  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE7   CHPI7  ; 
+;PTOT8     PT  ptvsrz0 -10  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE8   CHPI8  ; 
+;PTOT9     PT  ptvsrz0 -11  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE9   CHPI9  ; NOTE: When using more than one group to
+;PTOT10    PT  ptvsrz0 -12  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE10  CHPI10 ; ****  to compute PT, the radii for the
+;PTOT11    PT  ptvsrz0 -13  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE11  CHPI11 ;       channels in each group used need
+;PTOT12    PT  ptvsrz0 -14  -  c  1.000  0.2e3    0.50e3   c  1.00      1.0 1.0   1     0    TSPE12  CHPI12 ;        need to be increasing with
+;PTOT13    PT  ptvsrz0 -15  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE13  CHPI13 ;        increasing position on the list.
+;PTOT14    PT  ptvsrz0 -16  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE14  CHPI14
+;PTOT15    PT  ptvsrz0 -17  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE15  CHPI15
+;PTOT16    PT  ptvsrz0 -18  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE16  CHPI16
+;PTOT17    PT  ptvsrz0 -19  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE17  -
+;PTOT18    PT  ptvsrz0 -20  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE18  -
+;PTOT19    PT  ptvsrz0 -21  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE19  -
+;PTOT20    PT  ptvsrz0 -22  -  c  1.000  0.2e3    1.6e3    c  1.00      1.0 1.0   1     0    TSPE20  -
+;PTOT21    PT  ptvsrz0 -23  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT22    PT  ptvsrz0 -24  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT23    PT  ptvsrz0 -25  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT24    PT  ptvsrz0 -26  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT25    PT  ptvsrz0 -27  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT26    PT  ptvsrz0 -28  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT27    PT  ptvsrz0 -29  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT28    PT  ptvsrz0 -30  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT29    PT  ptvsrz0 -31  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT30    PT  ptvsrz0 -32  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT31    PT  ptvsrz0 -33  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT32    PT  ptvsrz0 -34  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT33    PT  ptvsrz0 -35  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT34    PT  ptvsrz0 -36  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT35    PT  ptvsrz0 -37  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PTOT36    PT  ptvsrz0 -38  -  c  1.000  0.2e3    0.5e3    c  1.00      1.0 1.0   1     0    -       -
+;PO1       PO  pvsrz0   -3  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT8   CHPD1
+;PO2       PO  pvsrz0   -4  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT9   CHPD2
+;PO3       PO  pvsrz0   -5  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT11  CHPD3
+;PO4       PO  pvsrz0   -6  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT12  CHPD4
+;PO5       PO  pvsrz0   -7  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT14  CHPD5
+;PO6       PO  pvsrz0   -8  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT15  CHPD6
+;PO7       PO  pvsrz0   -9  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT17  CHPD7
+;PO8       PO  pvsrz0  -10  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT19  CHPD8
+;PO9       PO  pvsrz0  -11  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT20  CHPD9
+;PO10      PO  pvsrz0  -12  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT22  CHPD10
+;PO11      PO  pvsrz0  -13  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT24  CHPD11
+;PO12      PO  pvsrz0  -14  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT26  CHPD12
+;PO13      PO  pvsrz0  -15  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT28  CHPD13
+;PO14      PO  pvsrz0  -16  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT30  CHPD14
+;PO15      PO  pvsrz0  -17  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT32  CHPD15
+;PO16      PO  pvsrz0  -18  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    PTOT35  CHPD16
+;PW1       PW  pwvsrz0  -1  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD1   PTOT8
+;PW2       PW  pwvsrz0  -2  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD2   PTOT9
+;PW3       PW  pwvsrz0  -3  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD3   PTOT11
+;PW4       PW  pwvsrz0  -4  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD4   PTOT12
+;PW5       PW  pwvsrz0  -5  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD5   PTOT14
+;PW6       PW  pwvsrz0  -6  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD6   PTOT15
+;PW7       PW  pwvsrz0  -7  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD7   PTOT17
+;PW8       PW  pwvsrz0  -8  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD8   PTOT19
+;PW9       PW  pwvsrz0  -9  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD9   PTOT20
+;PW10      PW  pwvsrz0 -10  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD10  PTOT22
+;PW11      PW  pwvsrz0 -11  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD11  PTOT24
+;PW12      PW  pwvsrz0 -12  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD12  PTOT26
+;PW13      PW  pwvsrz0 -13  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD13  PTOT28
+;PW14      PW  pwvsrz0 -14  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD14  PTOT30
+;PW15      PW  pwvsrz0 -15  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD15  PTOT32
+;PW16      PW  pwvsrz0 -16  a  c  0.000  0.000    0.000    r  1.00      1.0 1.0   1     0    CHPD16  PTOT35
+OH1       OH  ioh       1  e  y  0.010  20.0     40.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IOH   - ;(A)
+PF1AU     SC  icoil     1  e  y  0.005  8.0      20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1AU -
+PF2U      SC  icoil     2  e  y  0.005  100.0    150.0    y  1.0       1.0 1.0  -1  2.1e-3  \\IPF2U  -
+PF3U      SC  icoil     3  e  y  0.005  80.0     80.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF3U  -
+PF4U      SC  icoil     4  e  n  0.005  20.0     20.0     y  1.0       1.0 1.0  -1  2.1e-3  None    -
+PF5U      SC  icoil     5  e  y  0.005  20.0     25.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF5   -
+PF5L      SC  icoil     6  e  y  0.005  20.0     25.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF5   -
+PF4L      SC  icoil     7  e  n  0.005  20.0     20.0     y  1.0       1.0 1.0  -1  2.1e-3  None    -
+PF3L      SC  icoil     8  e  y  0.005  20.0     40.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF3L  -
+PF2L      SC  icoil     9  e  y  0.005  100.0    150.0    y  1.0       1.0 1.0  -1  2.1e-3  \\IPF2L  -
+PF1AL     SC  icoil    10  e  y  0.005  20.0     30.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1AL -
+PF1B      SC  icoil    11  e  y  0.005  12.0     20.0     y  1.0       1.0 1.0  -1  2.1e-3  \\IPF1B  -
+IP1       PR  ip        1  e  y  0.005  10.0e3   50.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IP2    -  ;(A) - 0.5%,10e3,50e3 standard
+TF1       TF  none      1  e  y  0.010  30.0     50.0     y  7.1667e-6 1.0 1.0  -1  2.1e-3  \\ITF    -  ;(A -> m*T)
+FDIA      DL  dflux     1  e  n  0.04   0.004    0.004    y  1.0       1.0 1.0  -1  2.1e-3  \\FDIA   -  ;(Wb) error was 2%, 2mWb
+HHFWPWR   RP  none      1  r  y  0.100  100.0    100.0    y  1.0       1.0 1.0  -1  2.1e-3  \\HHFW_POWER - ;(W) === RF signals
+VFLOHM    VL  none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLOHM -    ;(V) === Ops signals
+VFLEVVU2  LVA none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU2 -  ;(V)
+VFLEVVU4  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU4 -
+VFLEVVU5  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU5 -
+VFLEVVU7  LVB none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVU7 -
+VFLEVVL2  LVZ none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL2 -
+VFLEVVL4  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL4 -
+VFLEVVL5  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL5 -
+VFLEVVL7  LVY none      1  o  y  0.050  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  \\V_FLEVVL7 -
+RCSCL1    RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGCSCL1 -
+RCSCL2    RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGCSCL2 -
+RCSCU1    RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGCSCU1 -
+RCSCU2    RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGCSCU2 -
+IVVTOT    IW  iwalltot  1  o  y  0.040  20.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IVV_TOT    -   ;Wall current estimate
+IVVTOTV   IV  ivvtot    1  o  y  0.040  20.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\IVV_TOT    -   ;Vessel current est.
+REVVUL2   RG  irog2tot  1  o  y  0.015  15.0e3   40.0e3   y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGEVVUL2 -  ;Total Rogowski current (*)
+REVVUL1   RG  none      1  o  n  0.030  20.0e3   0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGEVVUL1 -  ;Total Rogowski current
+RPPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL1 -
+RPPPSL2   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL2 -
+RPPPSL3   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL3 -
+RPPPSL4   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGPPPSL4 -
+RSPPSL1   RG  none      1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\I_ROGSPPSL1 -
+FLEVVL1   FL  tfl       1  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL1 -    ;(Wb)
+FLEVVL2   FL  tfl       2  o  y  0.010   3.0e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL2 -    ;
+FLEVVL3   FL  tfl       3  o  y  0.045   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL3 -    ;
+FLEVVL4   FL  tfl       4  o  n  0.045   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL4  -   ;Unsure of position
+FLEVVL5   FL  tfl       5  o  y  0.015   4.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL5 -    ;
+FLEVVL6   FL  tfl       6  o  y  0.0248 11.0e-3  11.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL6 -
+FLEVVL7   FL  tfl       7  o  y  0.015   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVL7 -    ;
+FLEVVU1   FL  tfl       8  o  n  0.050   0.00     0.00    y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU1 -    ;Not available
+FLEVVU2   FL  tfl       9  o  y  0.010   3.0e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU2 -
+FLEVVU3   FL  tfl      10  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU3 -
+FLEVVU4   FL  tfl      11  o  y  0.021   4.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU4 -
+FLEVVU5   FL  tfl      12  o  y  0.010   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU5 -
+FLEVVU6   FL  tfl      13  o  y  0.028  10.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU6 -
+FLEVVU7   FL  tfl      14  o  y  0.012   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLEVVU7 -   
+FLIVVL1   FL  tfl      15  o  y  0.013   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVL1 -    ;
+FLIVVL2   FL  tfl      16  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVL2 -    ;
+FLIVVU1   FL  tfl      17  o  y  0.015   5.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVU1 -    ;
+FLIVVU2   FL  tfl      18  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLIVVU2 -    ;
+FLOBDL1   FL  tfl      19  o  y  0.010   3.0e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL1 -    ;
+FLOBDL2   FL  tfl      20  o  y  0.010   3.0e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL2 -    ;
+FLOBDL3   FL  tfl      21  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDL3 -    ;
+FLOBDU1   FL  tfl      22  o  y  0.015   4.5e-3   8.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU1 -    ;
+FLOBDU2   FL  tfl      23  o  y  0.025   3.5e-3   6.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU2 -    ;
+FLOBDU3   FL  tfl      24  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOBDU3 -    ;
+FLOHL1    FL  tfl      25  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL1  -    ;Not available
+FLOHL2    FL  tfl      26  o  y  0.008   6.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL2  -    ;
+FLOHL3    FL  tfl      27  o  n  0.024  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL3  -    ;Not available
+FLOHL4    FL  tfl      28  o  y  0.011   6.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHL4  -    ;
+FLOHM     FL  tfl      29  o  y  0.010   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHM   -    ;
+FLOHU1    FL  tfl      30  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU1  -    ;Not available
+FLOHU2    FL  tfl      31  o  y  0.010   5.5e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU2  -    ;
+FLOHU3    FL  tfl      32  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU3  -    ;Not available
+FLOHU4    FL  tfl      33  o  y  0.010   5.6e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLOHU4  -    ;
+FLPF1AL1  FL  tfl      34  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL1 -   ;Not available
+FLPF1AL2  FL  tfl      35  o  y  0.010   7.3e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL2 -   ;
+FLPF1AL3  FL  tfl      36  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL3 -   ;Not available
+FLPF1AL4  FL  tfl      37  o  y  0.007   6.1e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AL4 -   ;
+FLPF1AU1  FL  tfl      38  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU1 -   ;Not available
+FLPF1AU2  FL  tfl      39  o  y  0.010   7.3e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU2 -   ;
+FLPF1AU3  FL  tfl      40  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU3 -   ;Not available
+FLPF1AU4  FL  tfl      41  o  y  0.010   7.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1AU4 -   ;
+FLPF1BL   FL  tfl      42  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF1BL -    ;Not available
+FLPF2L    FL  tfl      43  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF2L  -    ;Not available
+FLPF2U    FL  tfl      44  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF2U  -    ;Not available
+FLPF3L    FL  tfl      45  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF3L  -    ;Not available
+FLPF3U    FL  tfl      46  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF3U  -    ;Not available
+FLPF4L    FL  tfl      47  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF4L  -    ;Not available
+FLPF4U    FL  tfl      48  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF4U  -    ;Not available
+FLPF5L    FL  tfl      49  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF5L  -    ;Not available
+FLPF5U    FL  tfl      50  o  n  0.050  0.00     0.00     y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPF5U  -    ;Not available
+FLPPPL1   FL  tfl      51  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL1 -    ;
+FLPPPL2   FL  tfl      52  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL2 -    ;
+FLPPPL3   FL  tfl      53  o  n  0.100   3.0e-3  20.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL3 -    ;Not connected
+FLPPPL4   FL  tfl      54  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPL4 -    ;
+FLPPPU1   FL  tfl      55  o  y  0.014   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU1 -    ;
+FLPPPU2   FL  tfl      56  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU2 -    ;
+FLPPPU3   FL  tfl      57  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU3 -    ;
+FLPPPU4   FL  tfl      58  o  y  0.0114  3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLPPPU4 -    ;
+FLSPPL1   FL  tfl      59  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL1 -    ;
+FLSPPL2   FL  tfl      60  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL2 -    ;
+FLSPPL3   FL  tfl      61  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL3 -    ;
+FLSPPL4   FL  tfl      62  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPL4 -    ;
+FLSPPU1   FL  tfl      63  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU1 -    ;
+FLSPPU2   FL  tfl      64  o  y  0.010   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU2 -    ;
+FLSPPU3   FL  tfl      65  o  y  0.008   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU3 -    ;
+FLSPPU4   FL  tfl      66  o  y  0.008   3.0e-3  10.0e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\F_FLSPPU4 -    ;
+B1CSCL1   MC  bmc       1  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL1 -   ;(T) was 1.3%
+B1CSCL2   MC  bmc       2  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL2 -   ; was 1.3%
+B1CSCL3   MC  bmc       3  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL3 -   ; was 1.0%
+B1CSCL4   MC  bmc       4  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL4 -   ; was 3.5%
+B1CSCL5   MC  bmc       5  o  y  0.035  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL5 -   ;
+B1CSCL6   MC  bmc       6  o  y  0.068  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCL6 -   ;
+B1CSCU1   MC  bmc       7  o  y  0.050  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU1 -   ;
+B1CSCU2   MC  bmc       8  o  n  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU2 -   ; temp. out 1/30/04
+B1CSCU3   MC  bmc       9  o  y  0.035  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU3 -   ;
+B1CSCU4   MC  bmc      10  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU4 -   ; was 3.5%
+B1CSCU5   MC  bmc      11  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU5 -   ; was 2.5%
+B1CSCU6   MC  bmc      12  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_1DMCSCU6 -   ;
+B2CSCL2N  MC  bmc      13  o  n  0.025  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL2N -  ;
+B2CSCL2T  MC  bmc      14  o  y  0.045  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCL2T -  ;
+B2CSCU1N  MC  bmc      15  o  n  0.025  4.00e-3  4.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU1N -  ;
+B2CSCU1T  MC  bmc      16  o  n  0.044  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_2DMCSCU1T -  ; Put back after calibration
+BL1PPPGL1 ML  bmc      17  o  y  0.025  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL1_AXEQ -;
+BL1PPPGL2 ML  bmc      18  o  y  0.040  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL2_AXEQ -;
+BL1PPPGL3 ML  bmc      19  o  y  0.036  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGL3_AXEQ -;
+BL1PPPGU1 ML  bmc      20  o  y  0.025  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU1_AXEQ -;
+BL1PPPGU2 ML  bmc      21  o  n  0.015  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU2_AXEQ -; taken out 4/9/04
+BL1PPPGU3 ML  bmc      22  o  y  0.015  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMPPPGU3_AXEQ -;
+BL1SPPGL1 ML  bmc      23  o  y  0.010  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL1_AXEQ -;
+BL1SPPGL2 ML  bmc      24  o  y  0.010  1.00e-3  1.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL2_AXEQ -;
+BL1SPPGL3 ML  bmc      25  o  y  0.012  1.00e-3  1.50e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGL3_AXEQ -;
+BL1SPPGU1 ML  bmc      26  o  y  0.025  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU1_AXEQ -;
+BL1SPPGU2 ML  bmc      27  o  y  0.020  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU2_AXEQ -;
+BL1SPPGU3 ML  bmc      28  o  n  0.016  1.00e-3  2.00e-3  y  1.0       1.0 1.0  -1  2.1e-3  \\B_L1DMSPPGU3_AXEQ -; Taken out RF run 2/16/04
+VS1U      VS  icoil    12  -  c  0.200  1.0e3    1.00e3   y  5.90e-4   1.0 1.0   1  2.1e-3  VFLOHM  -      ;For computed vessel segments,
+VS2U      VS  icoil    13  -  c  0.300  1.0e3    1.00e+3  y  6.00e-4   1.0 1.0   1  2.1e-3  VFLOHM  -      ;For computed vessel segments,
+VS3U      VS  icoil    14  -  c  0.400  1.0e3    1.00e+3  y  3.62e-4   1.0 1.0   1  2.1e-3  VFLOHM  -      ; the conversion factor is an
+VS4U      VS  icoil    15  -  c  0.400  1.0e3    1.00e+3  y  12.6e-4   1.0 1.0   1  2.1e-3  VFLOHM  -      ; "effective resistance" which
+VS5U      VS  icoil    16  -  c  0.300  1.0e3    1.00e+3  y  2.40e-4   1.0 1.0   1  2.1e-3  VFLEVVU2 -     ; converts Voltage (V) to
+VS6U      VS  icoil    17  -  c  0.300  1.0e3    1.00e+3  y  1.10e-4   1.0 1.0   1  2.1e-3  VFLEVVU2 -     ; current (A)
+VS7U      VS  icoil    18  -  c  0.200  5.0e3    5.00e+3  y  3.07e-4   1.0 1.0   1  2.1e-3  VFLEVVU2 -     ; NOTE: absolute error is in (A)
+VS8U      VS  icoil    19  -  c  0.200  5.0e3    5.00e+3  y  6.60e-4   1.0 1.0   1  2.1e-3  VFLEVVU4 - \\TOP.HARD_XRAY.RAWDATA:XH_H908_01:INPUT_01
+VS9U      VS  icoil    20  -  c  0.200  5.0e3    5.00e+3  y  5.34e-4   1.0 1.0   1  2.1e-3  VFLEVVU5 - ; was 8.63, 5.34e-4
+VS10U     VS  icoil    21  -  c  0.200  5.0e3    5.00e+3  y  5.00e-4   1.0 1.0   1  2.1e-3  VFLEVVU7 - ; was 6.67, 5.00e-4
+VS10L     VS  icoil    22  -  c  0.200  5.0e3    5.00e+3  y  5.00e-4   1.0 1.0   1  2.1e-3  VFLEVVL7 - ; was 6.67, 5.00e-4
+VS9L      VS  icoil    23  -  c  0.200  5.0e3    5.00e+3  y  5.34e-4   1.0 1.0   1  2.1e-3  VFLEVVL5 - ; was 8.63, 5.34e-4
+VS8L      VS  icoil    24  -  c  0.200  5.0e3    5.00e+3  y  6.60e-4   1.0 1.0   1  2.1e-3  VFLEVVL4 -
+VS7L      VS  icoil    25  -  c  0.200  5.0e3    5.00e+3  y  3.07e-4   1.0 1.0   1  2.1e-3  VFLEVVL2 - ; was U2
+VS6L      VS  icoil    26  -  c  0.300  1.0e3    1.00e+3  y  1.10e-4   1.0 1.0   1  2.1e-3  VFLEVVL2 - ; was U2
+VS5L      VS  icoil    27  -  c  0.300  1.0e3    1.00e+3  y  2.40e-4   1.0 1.0   1  2.1e-3  VFLEVVL2 - ; was U2
+VS4L      VS  icoil    28  -  c  0.400  1.0e3    1.00e+3  y  12.6e-4   1.0 1.0   1  2.1e-3  VFLOHM -
+VS3L      VS  icoil    29  -  c  0.400  1.0e3    1.00e+3  y  3.62e-4   1.0 1.0   1  2.1e-3  VFLOHM -
+VS2L      VS  icoil    30  -  c  0.300  1.0e3    1.00e+3  y  6.00e-4   1.0 1.0   1  2.1e-3  VFLOHM -
+VS1L      VS  icoil    31  -  c  0.200  1.0e3    1.00e+3  y  5.90e-4   1.0 1.0   1  2.1e-3  VFLOHM -
+DPU1      DP  icoil    32  -  c  0.000  4.0e3    4.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -   ; was 0.85 rel err, 0.5e3 abs
+DPL1      DP  icoil    33  -  c  0.000  4.0e3    4.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPSIUU    SP  icoil    34  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPSIUL    SP  icoil    35  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPPOUU    SP  icoil    36  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPPOUL    SP  icoil    37  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPPOLU    SP  icoil    38  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPPOLL    SP  icoil    39  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPSILU    SP  icoil    40  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+PPSILL    SP  icoil    41  -  c  0.000  3.0e3    3.00e+3  y  1.00e+3   1.0 1.0   1  2.1e-3  VFLOHM -
+TSTELBL   TE  none     1   a  L  0.020  1.0e3    1.00e+3  r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:FIT_TE \\ACTIVESPEC::TS_BEST:FIT_TE_ERR
+TSTESPL   TE  none     1   a  L  0.020  1.0e3    1.0e3    r  1.00e+3   1.0 1.0   1     0    \\ACTIVESPEC::TS_BEST:SPLINE_TE \\ACTIVESPEC::TS_BEST:FIT_TE_ERR
+RTE0      RT  none     1   -  n  0.000  0.050    0.020    c  1.00      1.0 1.0   1     0    TSTESPL - ; *** NOTE: Signal factor not used here yet
+RTEP1     RT  none     2   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM1     RT  none     2   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP2     RT  none     3   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM2     RT  none     3   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP3     RT  none     4   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM3     RT  none     4   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP4     RT  none     5   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM4     RT  none     5   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP5     RT  none     6   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM5     RT  none     6   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP6     RT  none     7   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM6     RT  none     7   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP7     RT  none     8   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM7     RT  none     8   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP8     RT  none     9   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM8     RT  none     9   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP9     RT  none    10   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM9     RT  none    10   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP10    RT  none    11   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM10    RT  none    11   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP11    RT  none    12   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM11    RT  none    12   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP12    RT  none    13   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM12    RT  none    13   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP13    RT  none    14   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM13    RT  none    14   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP14    RT  none    15   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM14    RT  none    15   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP15    RT  none    16   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM15    RT  none    16   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP16    RT  none    17   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM16    RT  none    17   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP17    RT  none    18   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM17    RT  none    18   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP18    RT  none    19   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM18    RT  none    19   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEP19    RT  none    20   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+RTEM19    RT  none    20   -  n  0.000  0.000    0.000    n  1.0       1.0 1.0   1     0    TSTESPL -
+MSCPA1    PA  pabzz0   -1  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 - ; deg => rad
+MSCPA2    PA  pabzz0   -2  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA3    PA  pabzz0   -3  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA4    PA  pabzz0   -4  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA5    PA  pabzz0   -5  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA6    PA  pabzz0   -6  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA7    PA  pabzz0   -7  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA8    PA  pabzz0   -8  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA9    PA  pabzz0   -9  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+MSCPA10   PA  pabzz0  -10  E2 n  0.050  5.0e-3   1.0e-3   y  1.7453e-2 1.0 1.0   1     0    \\PABZBTZ0 -
+P1LEVEL   RL  none     1   -  c  0.000  0.00     0.00     n  1.00      1.0 1.0   1     0    NONE - ; Process 1 run level at each time
+;TRPT1     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT2     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT3     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT4     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT5     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT6     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT7     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT8     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT9     TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT10    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT11    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT12    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT13    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT14    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT15    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT16    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT17    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT18    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT19    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;TRPT20    TP ptvsrz0   -3  -   n  0.000  0.000    0.000    y  1.0       1.0 1.0   1     0    \\TRANSP-MDS+-TREE-PATH-GOES-HERE -
+;=====================================================================================================================================================================
+; Stated errors
+;--------------
+; Coil currents: Relative error on transducers = 0.1%, but practically is about 0.5%
+;                Resolution: PF1AL, PF2U, PF2L, PF3U, PF5, CHI = 12A/bit
+;                           all others are = 6A/bit   (As per C. Neumeyer 5/18/00)
+;
+; Flux loops:    General error specs from J. Menard (5/17/00)
+;   CS flux loops: Minimum useful signal: 5 - 10 mWb
+;                  Resolution:            2 mWb
+;                  Relative error:        1.5%
+;   non-CS loops:  Minimum useful signal: 4 mWb
+;                  Resolution:            4 mWb
+;                  Relative error:        1.5%
+;
+; Mirnov coils:  Specific error estimates from J. Menard (1/22/04)
+;  CS normal field Minimum useful signal: 60 G
+;                  Resolution:            40 G
+;                  Relative error:        1.5%
+;
+;Diamagnetic loop: Minimum useful signal: 2 mWb
+;   (M. Bell)      Resolution:            2 mWb (This seems unrealistically low
+;                  Relative error:        2.0%  (  based on apparent noise in signals)
+;
+;Thomson Scattering: Errors read from database
+;
+; NOTE: the values actually used above are taken from fields-only test shots. The
+;       actual error specs in practice can be larger than the stated general values.
+;
+;=========================================================================================
+; Definitions
+;------------
+;Name:        User defined signal name
+;sigl type:   Type of signal - used to determine importance of signal for fit and
+;                              the mathematical definitions of computed signals
+;map var:     compare this signal to the indicated map var when comparing measured and
+;             computed values
+;map indx:    Used to index multiple map vars and two-dimensional signals
+;             - negative value: Interpolate FE data to MD position in time plots
+; *** pending - negative value: Swap X and Y axes of MD data in profile plots
+;MDS tree:    Designation for MDS+ tree name from which to read signal
+;Read sig?:   y: read signal, n: skip signal, c: compute signal
+;             m: read multiple dimensional signal, p: process previous multi-dim signal
+;Error rel:   Relative error
+;Error abs:   absolute error
+;threshold:   When signal value is below threshold value, error = threshold value
+;Use err? :   y: compute error from rel,abs,thresh
+;             r: read error from database
+;Conv. fact:  Conversion factor for signal when read; when computed, a scalar used
+;             in computation
+;Pri:         signal "priority": certain signals are essential for reconstructions.
+;             Certain groups have "thresholds" below which reconstructions can not be
+;             computed. The sum of Pri must be greater than the threshold value for
+;             the reconstruction to occur.
+;Fit wgt:     signal fit weight (presently not used for weighting: If a signal is
+;             requested, Fit wgt is set to 1.0 internally)
+; *** pending - negative value: Normalize the mapped FE value in comparison plots
+;t idx:       index of "time" abscissa. This is equal to 1 by definition in a scalar
+;             signal vs. time. In multidimensional signals, this gives the index of the
+;             array corresponding to the "time" coordinate.
+;             - positive value: offset subtraction is not performed
+;             - negative value: offset subtraction performed on signal using t[0]
+;Smooth win:  Smoothing window for the signal in seconds
+;Designation: For read signals, these are the database designations of the signals.
+;             For computed signals, these are used to define the signal name used
+;             in the computation
+;=========================================================================================

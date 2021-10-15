@@ -375,18 +375,19 @@
  },
  "iron_core.segment[:].geometry.oblique": {
   "data_type": "STRUCTURE",
-  "documentation": "Trapezoidal description of the element",
+  "documentation": "Parallelogram description of the element",
   "full_path": "iron_core/segment(i1)/geometry/oblique",
   "lifecycle_status": "alpha",
   "structure_reference": "oblique_static"
  },
  "iron_core.segment[:].geometry.oblique.alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of first angle TBD",
+  "documentation": "Inclination of first angle measured counter-clockwise from horizontal outwardly directed radial vector (grad R).",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.alpha_error_index": {
   "data_type": "INT_TYPE",
@@ -401,7 +402,8 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.alpha_error_upper": {
   "data_type": "FLT_0D",
@@ -409,15 +411,17 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.beta": {
   "data_type": "FLT_0D",
-  "documentation": "Inclination of second angle TBD",
+  "documentation": "Inclination of second angle measured counter-clockwise from vertically upwards directed vector (grad Z). If both alpha and beta are zero (rectangle) then the simpler rectangular elements description should be used.",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.beta_error_index": {
   "data_type": "INT_TYPE",
@@ -432,7 +436,8 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.beta_error_upper": {
   "data_type": "FLT_0D",
@@ -440,46 +445,85 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "rad",
+  "url": "utilities/parallelogram.svg"
  },
- "iron_core.segment[:].geometry.oblique.length": {
+ "iron_core.segment[:].geometry.oblique.length_alpha": {
   "data_type": "FLT_0D",
-  "documentation": "Length",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/length",
+  "documentation": "Length of the parallelogram side inclined with angle alpha with respect to the major radius axis",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_alpha",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "iron_core.segment[:].geometry.oblique.length_error_index": {
+ "iron_core.segment[:].geometry.oblique.length_alpha_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"length\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_index",
+  "documentation": "Index in the error_description list for \"length_alpha\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_alpha_error_index",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "iron_core.segment[:].geometry.oblique.length_error_lower": {
+ "iron_core.segment[:].geometry.oblique.length_alpha_error_lower": {
   "data_type": "FLT_0D",
-  "documentation": "Lower error for \"length\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_lower",
+  "documentation": "Lower error for \"length_alpha\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_alpha_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
- "iron_core.segment[:].geometry.oblique.length_error_upper": {
+ "iron_core.segment[:].geometry.oblique.length_alpha_error_upper": {
   "data_type": "FLT_0D",
-  "documentation": "Upper error for \"length\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/length_error_upper",
+  "documentation": "Upper error for \"length_alpha\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_alpha_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "iron_core.segment[:].geometry.oblique.length_beta": {
+  "data_type": "FLT_0D",
+  "documentation": "Length of the parallelogram side inclined with angle beta with respect to the height axis",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_beta",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "iron_core.segment[:].geometry.oblique.length_beta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"length_beta\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_beta_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "iron_core.segment[:].geometry.oblique.length_beta_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"length_beta\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_beta_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
+ },
+ "iron_core.segment[:].geometry.oblique.length_beta_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"length_beta\"",
+  "full_path": "iron_core/segment(i1)/geometry/oblique/length_beta_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.r": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre R",
+  "documentation": "Major radius of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.r_error_index": {
   "data_type": "INT_TYPE",
@@ -494,7 +538,8 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.r_error_upper": {
   "data_type": "FLT_0D",
@@ -502,46 +547,17 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
- },
- "iron_core.segment[:].geometry.oblique.thickness": {
-  "data_type": "FLT_0D",
-  "documentation": "Thickness",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/thickness",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "iron_core.segment[:].geometry.oblique.thickness_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"thickness\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "iron_core.segment[:].geometry.oblique.thickness_error_lower": {
-  "data_type": "FLT_0D",
-  "documentation": "Lower error for \"thickness\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_lower",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "iron_core.segment[:].geometry.oblique.thickness_error_upper": {
-  "data_type": "FLT_0D",
-  "documentation": "Upper error for \"thickness\"",
-  "full_path": "iron_core/segment(i1)/geometry/oblique/thickness_error_upper",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.z": {
   "data_type": "FLT_0D",
-  "documentation": "Geometric centre Z",
+  "documentation": "Height of the reference point (from which the alpha and beta angles are defined, marked by a + on the diagram)",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.z_error_index": {
   "data_type": "INT_TYPE",
@@ -556,7 +572,8 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.oblique.z_error_upper": {
   "data_type": "FLT_0D",
@@ -564,7 +581,8 @@
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "m"
+  "units": "m",
+  "url": "utilities/parallelogram.svg"
  },
  "iron_core.segment[:].geometry.outline": {
   "data_type": "STRUCTURE",

@@ -2,7 +2,7 @@
  "equilibrium": {
   "documentation": "Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.",
   "full_path": "equilibrium",
-  "lifecycle_last_change": "3.32.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "3"
@@ -1794,6 +1794,40 @@
   "lifecycle_status": "active",
   "structure_reference": "equilibrium_boundary_second_separatrix"
  },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.distance_inner_outer": {
+  "data_type": "FLT_0D",
+  "documentation": "Distance between the inner and outer separatrices, in the major radius direction, at the plasma outboard and at the height corresponding to the maximum R for the inner separatrix.",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/distance_inner_outer",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.distance_inner_outer_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"distance_inner_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/distance_inner_outer_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.distance_inner_outer_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"distance_inner_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/distance_inner_outer_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.distance_inner_outer_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"distance_inner_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/distance_inner_outer_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.outline": {
   "data_type": "STRUCTURE",
   "documentation": "RZ outline of the plasma boundary",
@@ -1911,6 +1945,80 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Array of strike points, for each of them the RZ position is given",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "maxoccur": "unbounded",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/r",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point": {
   "coordinates": [
@@ -2063,10 +2171,44 @@
  },
  "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point": {
   "data_type": "STRUCTURE",
-  "documentation": "(R, Z) position of the point of the first wall which is the closest to plasma boundary",
+  "documentation": "Position and distance to the plasma boundary of the point of the first wall which is the closest to plasma boundary",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point",
   "lifecycle_status": "active",
-  "structure_reference": "rz0d_dynamic_aos"
+  "structure_reference": "equilibrium_boundary_closest"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.distance": {
+  "data_type": "FLT_0D",
+  "documentation": "Distance to the plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/distance",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.distance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"distance\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/distance_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.distance_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"distance\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/distance_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.distance_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"distance\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/distance_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
  },
  "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r": {
   "data_type": "FLT_0D",
@@ -2126,6 +2268,76 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Outboard point on the separatrix on which dr/dz = 0 (local maximum of the major radius of the separatrix). In case of multiple local maxima, the closest one from z=z_magnetic_axis is chosen. ",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "active",
+  "structure_reference": "rz0d_dynamic_aos"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/r",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/r_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/r_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/r_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/z",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/z_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/z_error_lower",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/z_error_upper",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m"
@@ -3176,6 +3388,8 @@
   "units": "-"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "equilibrium.time_slice{i}.constraints.bpol_probe{j}",
   "coordinates": [
    "magnetics.bpol_probe"
   ],
@@ -3184,7 +3398,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_one_like",
   "units": "T"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].chi_squared": {
@@ -3226,6 +3440,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].measured": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Measured value",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/measured",
@@ -3241,6 +3458,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].measured_error_lower": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/measured_error_lower",
@@ -3249,6 +3469,9 @@
   "units": "T"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].measured_error_upper": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/measured_error_upper",
@@ -3257,6 +3480,9 @@
   "units": "T"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].reconstructed": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/reconstructed",
@@ -3272,6 +3498,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].reconstructed_error_lower": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/reconstructed_error_lower",
@@ -3280,6 +3509,9 @@
   "units": "T"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].reconstructed_error_upper": {
+  "cocos_label_transformation": "one_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": "'1'",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/reconstructed_error_upper",
@@ -3357,11 +3589,13 @@
   "units": "-"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "equilibrium.time_slice{i}.constraints.diamagnetic_flux",
   "data_type": "STRUCTURE",
   "documentation": "Diamagnetic flux",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux",
   "lifecycle_status": "alpha",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_b0_like",
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.chi_squared": {
@@ -3403,6 +3637,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.measured": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Measured value",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/measured",
@@ -3418,6 +3655,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.measured_error_lower": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/measured_error_lower",
@@ -3426,6 +3666,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.measured_error_upper": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/measured_error_upper",
@@ -3434,6 +3677,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.reconstructed": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/reconstructed",
@@ -3449,6 +3695,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.reconstructed_error_lower": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/reconstructed_error_lower",
@@ -3457,6 +3706,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.reconstructed_error_upper": {
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_b0_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/reconstructed_error_upper",
@@ -3715,6 +3967,8 @@
   "units": "-"
  },
  "equilibrium.time_slice[:].constraints.flux_loop": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "equilibrium.time_slice{i}.constraints.flux_loop{j}",
   "coordinates": [
    "magnetics.flux_loop"
   ],
@@ -3723,7 +3977,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_psi_like",
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].chi_squared": {
@@ -3765,6 +4019,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].measured": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Measured value",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/measured",
@@ -3780,6 +4037,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].measured_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/measured_error_lower",
@@ -3788,6 +4048,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].measured_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/measured_error_upper",
@@ -3796,6 +4059,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].reconstructed": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/reconstructed",
@@ -3811,6 +4077,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].reconstructed_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/reconstructed_error_lower",
@@ -3819,6 +4088,9 @@
   "units": "Wb"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].reconstructed_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".fact_psi",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/reconstructed_error_upper",
@@ -3896,11 +4168,13 @@
   "units": "-"
  },
  "equilibrium.time_slice[:].constraints.ip": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "equilibrium.time_slice{i}.constraints.ip",
   "data_type": "STRUCTURE",
   "documentation": "Plasma current. Positive sign means anti-clockwise when viewed from above",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip",
   "lifecycle_status": "alpha",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_ip_like",
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.ip.chi_squared": {
@@ -3942,6 +4216,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.measured": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Measured value",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/measured",
@@ -3957,6 +4234,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.measured_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/measured_error_lower",
@@ -3965,6 +4245,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.ip.measured_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/measured_error_upper",
@@ -3973,6 +4256,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.ip.reconstructed": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/reconstructed",
@@ -3988,6 +4274,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.reconstructed_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/reconstructed_error_lower",
@@ -3996,6 +4285,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.ip.reconstructed_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/reconstructed_error_upper",
@@ -4982,6 +5274,8 @@
   "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_current": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "equilibrium.time_slice{i}.constraints.pf_current{j}",
   "coordinates": [
    "pf_active.coil"
   ],
@@ -4990,7 +5284,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_ip_like",
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].chi_squared": {
@@ -5032,6 +5326,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].measured": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Measured value",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/measured",
@@ -5047,6 +5344,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].measured_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/measured_error_lower",
@@ -5055,6 +5355,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].measured_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.measured",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/measured_error_upper",
@@ -5063,6 +5366,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].reconstructed": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/reconstructed",
@@ -5078,6 +5384,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].reconstructed_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/reconstructed_error_lower",
@@ -5086,6 +5395,9 @@
   "units": "A"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].reconstructed_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.reconstructed",
+  "cocos_transformation_expression": ".sigma_ip_eff",
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/reconstructed_error_upper",
@@ -6403,12 +6715,15 @@
   "structure_reference": "equilibrium_coordinate_system"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_contravariant": {
+  "cocos_label_transformation": "grid_type_dim1_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g11_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g11,  contravariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g11, contravariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g11_contravariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6423,6 +6738,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim1_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g11_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6436,6 +6754,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim1_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g11_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6449,9 +6770,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_covariant": {
-  "cocos_label_transformation": "grid_type_dim1_dim1_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g11",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6472,9 +6790,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim1_dim1_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g11",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6488,9 +6803,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim1_dim1_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g11",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim1",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6504,12 +6816,15 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_contravariant": {
+  "cocos_label_transformation": "grid_type_dim1_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g12_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g12,  contravariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g12, contravariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g12_contravariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6524,6 +6839,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim1_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g12_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6537,6 +6855,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim1_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g12_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6550,15 +6871,12 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_covariant": {
-  "cocos_label_transformation": "grid_type_dim1_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g12",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g12,  covariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g12, covariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g12_covariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6573,9 +6891,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim1_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g12",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6589,9 +6904,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim1_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g12",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6605,6 +6917,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_contravariant": {
+  "cocos_label_transformation": "grid_type_dim1_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g13_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6625,6 +6940,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim1_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g13_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6638,6 +6956,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim1_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g13_contravariant",
+  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6651,15 +6972,12 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_covariant": {
-  "cocos_label_transformation": "grid_type_dim1_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g13",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g13,  covariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g13, covariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g13_covariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6674,9 +6992,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim1_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g13",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6690,9 +7005,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim1_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g13",
-  "cocos_transformation_expression": ".fact_dim1*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6706,6 +7018,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_contravariant": {
+  "cocos_label_transformation": "grid_type_dim2_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g22_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6726,6 +7041,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim2_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g22_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6739,6 +7057,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim2_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g22_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6752,15 +7073,12 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_covariant": {
-  "cocos_label_transformation": "grid_type_dim2_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g22",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g22,  covariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g22, covariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g22_covariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6775,9 +7093,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim2_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g22",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6791,9 +7106,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim2_dim2_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g22",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim2",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6807,12 +7119,15 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_contravariant": {
+  "cocos_label_transformation": "grid_type_dim2_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g23_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g23,  contravariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g23, contravariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g23_contravariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6827,6 +7142,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim2_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g23_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6840,6 +7158,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim2_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g23_contravariant",
+  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6853,9 +7174,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_covariant": {
-  "cocos_label_transformation": "grid_type_dim2_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g23",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6876,9 +7194,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim2_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g23",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6892,9 +7207,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim2_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g23",
-  "cocos_transformation_expression": ".fact_dim2*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6908,6 +7220,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_contravariant": {
+  "cocos_label_transformation": "grid_type_dim3_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g33_contravariant",
+  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6928,6 +7243,9 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_contravariant_error_lower": {
+  "cocos_label_transformation": "grid_type_dim3_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g33_contravariant",
+  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6941,6 +7259,9 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_contravariant_error_upper": {
+  "cocos_label_transformation": "grid_type_dim3_dim3_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.g33_contravariant",
+  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6954,15 +7275,12 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_covariant": {
-  "cocos_label_transformation": "grid_type_dim3_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g33",
-  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
   ],
   "data_type": "FLT_2D",
-  "documentation": "metric coefficients g33,  covariant metric tensor for the grid described by grid_type",
+  "documentation": "metric coefficients g33, covariant metric tensor for the grid described by grid_type",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g33_covariant(:,:)",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.4.0",
@@ -6977,9 +7295,6 @@
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_covariant_error_lower": {
-  "cocos_label_transformation": "grid_type_dim3_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g33",
-  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"
@@ -6993,9 +7308,6 @@
   "units": "mixed"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_covariant_error_upper": {
-  "cocos_label_transformation": "grid_type_dim3_dim3_like",
-  "cocos_leaf_name_aos_indices": "IDSPATH.g33",
-  "cocos_transformation_expression": ".fact_dim3*.fact_dim3",
   "coordinates": [
    "equilibrium.time_slice[:].coordinate_system.grid.dim1",
    "equilibrium.time_slice[:].coordinate_system.grid.dim2"

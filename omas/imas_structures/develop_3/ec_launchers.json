@@ -2,7 +2,7 @@
  "ec_launchers": {
   "documentation": "Launchers for heating and current drive in the electron cyclotron (EC) frequencies.",
   "full_path": "ec_launchers",
-  "lifecycle_last_change": "3.30.0",
+  "lifecycle_last_change": "3.33.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -180,6 +180,40 @@
   "full_path": "ec_launchers/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "ec_launchers.latency": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the delay between input command received from the RT network and actuator starting to react. Applies globally to the system described by this IDS unless specific latencies (e.g. channel-specific or antenna-specific) are provided at a deeper level in the IDS structure.",
+  "full_path": "ec_launchers/latency",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "ec_launchers.latency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"latency\"",
+  "full_path": "ec_launchers/latency_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.latency_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"latency\"",
+  "full_path": "ec_launchers/latency_error_lower",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
+ },
+ "ec_launchers.latency_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"latency\"",
+  "full_path": "ec_launchers/latency_error_upper",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "s"
  },
  "ec_launchers.launcher": {
   "coordinates": [
@@ -554,7 +588,7 @@
   "documentation": "Launching position of the beam",
   "full_path": "ec_launchers/launcher(i1)/launching_position",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_dynamic_aos1_common_time"
+  "structure_reference": "ec_launchers_launching_position"
  },
  "ec_launchers.launcher[:].launching_position.phi": {
   "coordinates": [
@@ -640,6 +674,24 @@
   "lifecycle_status": "alpha",
   "timebasepath": "launching_position/time",
   "type": "dynamic",
+  "units": "m"
+ },
+ "ec_launchers.launcher[:].launching_position.r_limit_max": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius upper limit for the system",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/r_limit_max",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ec_launchers.launcher[:].launching_position.r_limit_min": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius lower limit for the system",
+  "full_path": "ec_launchers/launcher(i1)/launching_position/r_limit_min",
+  "introduced_after_version": "3.32.1",
+  "lifecycle_status": "alpha",
+  "type": "static",
   "units": "m"
  },
  "ec_launchers.launcher[:].launching_position.time": {
@@ -861,6 +913,9 @@
   "units": "s"
  },
  "ec_launchers.launcher[:].steering_angle_tor": {
+  "cocos_label_transformation": "tor_angle_like",
+  "cocos_leaf_name_aos_indices": "ec_launchers.launcher{i}.steering_angle_tor.data",
+  "cocos_transformation_expression": ".sigma_rphiz_eff",
   "data_type": "STRUCTURE",
   "documentation": "Steering angle of the EC beam away from the poloidal plane that is increasing towards the positive phi axis, angle_tor=arcsin(k_phi/k), where k_phi is the component of the wave vector in the phi direction and k is the length of the wave vector. Here the term wave vector refers to the mean wave vector in the EC beam",
   "full_path": "ec_launchers/launcher(i1)/steering_angle_tor",
