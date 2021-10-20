@@ -577,8 +577,8 @@ _cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.measured']='PSI
 _cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed']='PSI'                                          # 0.000000 # 
 
 # GAS_INJECTION
-_cocos_signals['gas_injection.pipe.:.exit_position.phi']='TOR'                                      # 2.000000 # phi  [rad]
-_cocos_signals['gas_injection.pipe.:.second_point.phi']='TOR'                                       # 2.000000 # phi  [rad]
+_cocos_signals['gas_injection.pipe.:.exit_position.phi']='TOR'                               # 2.000000 # phi  [rad]
+_cocos_signals['gas_injection.pipe.:.second_point.phi']='TOR'                                # 2.000000 # phi  [rad]
 
 # GAS_PUMPING
 
@@ -913,8 +913,6 @@ _cocos_signals['ntms.vacuum_toroidal_field.b0']='TOR'                           
 _cocos_signals['ntms.time_slice.:.mode.:.detailed_evolution.torque.:.value']='TOR'               # 1.750000 # torque  [kg.m^2.s^-2]
 _cocos_signals['ntms.time_slice.:.mode.:.torque.:.value']='TOR'                                  # 1.714286 # torque  [kg.m^2.s^-2]
 
-# NUMERICS
-
 # PELLETS
 _cocos_signals['pellets.time_slice.:.pellet.:.path_geometry.first_point.phi']='TOR'                       # 2.000000 # phi  [rad]
 _cocos_signals['pellets.time_slice.:.pellet.:.path_geometry.second_point.phi']='TOR'                      # 2.000000 # phi  [rad]
@@ -954,6 +952,8 @@ _cocos_signals['radiation.process.:.profiles_1d.:.grid.psi_boundary']='PSI'     
 _cocos_signals['radiation.process.:.profiles_1d.:.grid.psi_magnetic_axis']='PSI'                                # 2.000000 # psi  [Wb]
 _cocos_signals['radiation.vacuum_toroidal_field.b0']='TOR'                                                      # 2.000000 # b0  [T]
 
+# REAL_TIME_DATA
+
 # REFLECTOMETER_PROFILE
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.first_point.phi']='TOR'                # 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_detection.second_point.phi']='TOR'               # 2.000000 # phi  [rad]
@@ -989,8 +989,6 @@ _cocos_signals['sawteeth.profiles_1d.:.q']='?'                                  
 _cocos_signals['sawteeth.vacuum_toroidal_field.b0']='TOR'                                 # 2.000000 # b0  [T]
 _cocos_signals['sawteeth.profiles_1d.:.p_e_fast_parallel']='?'                     #[ADD?]# 1.000000 # parallel
 _cocos_signals['sawteeth.profiles_1d.:.p_i_total_fast_parallel']='?'               #[ADD?]# 1.000000 # parallel
-
-# SDN
 
 # SOFT_X_RAYS
 _cocos_signals['soft_x_rays.channel.:.aperture.:.centre.phi']='TOR'                            # 2.000000 # phi  [rad]
@@ -1030,9 +1028,11 @@ _cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocit
 _cocos_signals['spectrometer_visible.channel.:.polarizer.centre.phi']='TOR'                                                   # 2.000000 # phi  [rad]
 
 # SPECTROMETER_X_RAY_CRYSTAL
-_cocos_signals['spectrometer_x_ray_crystal.camera.centre.phi']='TOR'                                  # 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.crystal.summit.phi']='TOR'                                 # 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.velocity_tor_proxy.data']='?'                       #[ADD?]# 1.500000 # velocity  [m.s^-1]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.aperture.centre.phi']='?'                   #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.centre.phi']='?'                     #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.crystal.centre.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.reflector.:.centre.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.velocity_tor_proxy.data']='?'               #[ADD?]# 1.750000 # velocity  [m.s^-1]
 
 # SUMMARY
 _cocos_signals['summary.local.itb.e_field_parallel.value']='?'                                                                #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
@@ -1285,3 +1285,5 @@ _cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.power_density_thermal_
 _cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_fast_n_tor']='?'                         #[ADD?]# 1.000000 # _tor
 _cocos_signals['waves.coherent_wave.:.profiles_2d.:.ion.:.state.:.power_density_thermal_n_tor']='?'                      #[ADD?]# 1.000000 # _tor
 _cocos_signals['waves.coherent_wave.:.profiles_2d.:.power_density_n_tor']='?'                                            #[ADD?]# 1.000000 # _tor
+
+# WORKFLOW

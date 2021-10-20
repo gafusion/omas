@@ -1,0 +1,372 @@
+{
+ "real_time_data": {
+  "documentation": "Description of the data bus circulating on the real time data network of the machine. This is typically used (but not only) as an interface to the Plasma Control System (PCS)",
+  "full_path": "real_time_data",
+  "lifecycle_last_change": "3.34.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.34.0",
+  "maxoccur": "3"
+ },
+ "real_time_data.code": {
+  "data_type": "STRUCTURE",
+  "documentation": "Generic decription of the code-specific parameters for the code that has produced this IDS",
+  "full_path": "real_time_data/code",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code"
+ },
+ "real_time_data.code.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "real_time_data/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of external libraries used by the code that has produced this IDS",
+  "full_path": "real_time_data/code/library(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "library"
+ },
+ "real_time_data.code.library[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "real_time_data/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software",
+  "full_path": "real_time_data/code/library(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "real_time_data/code/library(i1)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "real_time_data/code/library(i1)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "real_time_data/code/library(i1)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software generating IDS",
+  "full_path": "real_time_data/code/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.output_flag": {
+  "coordinates": [
+   "real_time_data.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Output flag : 0 means the run is successful, other values mean some difficulty has been encountered, the exact meaning is then code specific. Negative values mean the result shall not be used.",
+  "full_path": "real_time_data/code/output_flag(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "/time",
+  "type": "dynamic"
+ },
+ "real_time_data.code.parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "real_time_data/code/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "real_time_data/code/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "real_time_data/code/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
+  "full_path": "real_time_data/ids_properties",
+  "lifecycle_status": "alpha",
+  "structure_reference": "ids_properties"
+ },
+ "real_time_data.ids_properties.comment": {
+  "data_type": "STR_0D",
+  "documentation": "Any comment describing the content of this IDS",
+  "full_path": "real_time_data/ids_properties/comment",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.creation_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which this data has been produced",
+  "full_path": "real_time_data/ids_properties/creation_date",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.homogeneous_time": {
+  "data_type": "INT_0D",
+  "documentation": "This node must be filled (with 0, 1, or 2) for the IDS to be valid. If 1, the time of this IDS is homogeneous, i.e. the time values for this IDS are stored in the time node just below the root of this IDS. If 0, the time values are stored in the various time fields at lower levels in the tree. In the case only constant or static nodes are filled within the IDS, homogeneous_time must be set to 2",
+  "full_path": "real_time_data/ids_properties/homogeneous_time",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.provenance": {
+  "data_type": "STRUCTURE",
+  "documentation": "Provenance information about this IDS",
+  "full_path": "real_time_data/ids_properties/provenance",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.34.0",
+  "structure_reference": "ids_provenance"
+ },
+ "real_time_data.ids_properties.provenance.node": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "full_path": "real_time_data/ids_properties/provenance/node(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "ids_provenance_node",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.provenance.node[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "full_path": "real_time_data/ids_properties/provenance/node(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.provenance.node[:].sources": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "full_path": "real_time_data/ids_properties/provenance/node(i1)/sources(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.provider": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the person in charge of producing this data",
+  "full_path": "real_time_data/ids_properties/provider",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...). Superseeded by the new provenance structure.",
+  "full_path": "real_time_data/ids_properties/source",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.34.0",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.version_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Version of the access layer package used to PUT this IDS",
+  "full_path": "real_time_data/ids_properties/version_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "version_dd_al"
+ },
+ "real_time_data.ids_properties.version_put.access_layer": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Access Layer used to PUT this IDS",
+  "full_path": "real_time_data/ids_properties/version_put/access_layer",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.version_put.access_layer_language": {
+  "data_type": "STR_0D",
+  "documentation": "Programming language of the Access Layer high level API used to PUT this IDS",
+  "full_path": "real_time_data/ids_properties/version_put/access_layer_language",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.version_put.data_dictionary": {
+  "data_type": "STR_0D",
+  "documentation": "Version of Data Dictionary used to PUT this IDS",
+  "full_path": "real_time_data/ids_properties/version_put/data_dictionary",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Generic time",
+  "full_path": "real_time_data/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "real_time_data.topic": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of topics. Signals are grouped by topic",
+  "full_path": "real_time_data/topic(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "rtd_topic"
+ },
+ "real_time_data.topic[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Topic name",
+  "full_path": "real_time_data/topic(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of signals that are allocated to the PCS interface",
+  "full_path": "real_time_data/topic(i1)/signal(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "100",
+  "structure_reference": "rtd_allocatable_signals"
+ },
+ "real_time_data.topic[:].signal[:].allocated_position": {
+  "data_type": "INT_0D",
+  "documentation": "Allocation of signal to a position in the SDN (1..N); this will be implementation specific",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/allocated_position",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal[:].definition": {
+  "data_type": "STR_0D",
+  "documentation": "Signal definition",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/definition",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Signal name",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal[:].quality": {
+  "data_type": "STRUCTURE",
+  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/quality",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_int_1d"
+ },
+ "real_time_data.topic[:].signal[:].quality.data": {
+  "coordinates": [
+   "real_time_data.topic[:].signal[:].quality.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Data",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/quality/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "quality/time",
+  "type": "dynamic"
+ },
+ "real_time_data.topic[:].signal[:].quality.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/quality/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "quality/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "real_time_data.topic[:].signal[:].value": {
+  "data_type": "STRUCTURE",
+  "documentation": "Signal value",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "mixed"
+ },
+ "real_time_data.topic[:].signal[:].value.data": {
+  "coordinates": [
+   "real_time_data.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "real_time_data.topic[:].signal[:].value.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal[:].value.data_error_lower": {
+  "coordinates": [
+   "real_time_data.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "real_time_data.topic[:].signal[:].value.data_error_upper": {
+  "coordinates": [
+   "real_time_data.topic[:].signal[:].value.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "real_time_data.topic[:].signal[:].value.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/value/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "value/time",
+  "type": "dynamic",
+  "units": "s"
+ }
+}
