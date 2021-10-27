@@ -344,13 +344,15 @@ def pf_active(ods, nc_weird=0, nc_undefined=0):
 
     return ods
 
+
 @add_to_ODS
 def ec_launchers(ods):
     from omas import load_omas_json
 
-    pr = load_omas_json(os.path.join('omas','samples', 'd3d_ECRH_machine_mapping.json'))['ec_launchers']
+    pr = load_omas_json(os.path.join('omas', 'samples', 'd3d_ECRH_machine_mapping.json'))['ec_launchers']
     ods['ec_launchers'].update(pr)
     return ods
+
 
 @add_to_ODS
 def magnetics(ods):

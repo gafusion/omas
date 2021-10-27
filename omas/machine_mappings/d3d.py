@@ -329,13 +329,14 @@ def pf_active_coil_current_data(ods, pulse):
             data_norm=1.0,
         )
 
-#================================   
+
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
     setup = '.ECH.'
     # We need three queries in order to retrieve only the fields we need
     # First the amount of systems in use
-    query = {'NUM_SYSTEMS' : setup + 'NUM_SYSTEMS'}
+    query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
     num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
     query = {}
     # Second query the used systems to resolve the gyrotron names
@@ -349,7 +350,7 @@ def ec_launcher_active_hardware(ods, pulse):
     query = {}
     gyrotron_names = []
     for system_no in range(1, num_systems + 1):
-        if(len(systems[f'GYROTRON_{system_no}']) == 0):
+        if len(systems[f'GYROTRON_{system_no}']) == 0:
             """
             If nothing is connected to this system the gyrotron name is blank.
             """
@@ -360,9 +361,8 @@ def ec_launcher_active_hardware(ods, pulse):
         gyr = gyr[:3]
         for field in ['STAT', 'XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
-            if(field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']):
-                query["TIME_" + field + f'_{system_no}'] = ("dim_of("
-                        + query[field + f'_{system_no}'] + "+01)")
+            if field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
+                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyortrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     for system_no in range(1, num_systems + 1):
@@ -373,39 +373,31 @@ def ec_launcher_active_hardware(ods, pulse):
         launchers[system_index]['identifier'] = launchers[system_index]['name'] = gyrotron_names[system_index]
         launchers[system_index]['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])
         launchers[system_index]['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])
-        launchers[system_index]['launching_position.time'] = np.zeros(
-            launchers[system_index]['launching_position.r'].shape)
+        launchers[system_index]['launching_position.time'] = np.zeros(launchers[system_index]['launching_position.r'].shape)
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
         phi = -phi - np.pi / 2.0
         launchers[system_index]['launching_position.phi'] = np.atleast_1d(phi)
         launchers[system_index]['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
         launchers[system_index]['frequency.time'] = np.atleast_1d(0)
-        launchers[system_index]['power_launched.time'] = np.atleast_1d(gyortrons[f'TIME_FPWRC_{system_no}']) / 1.e3
+        launchers[system_index]['power_launched.time'] = np.atleast_1d(gyortrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
         launchers[system_index]['power_launched.data'] = np.atleast_1d(gyortrons[f'FPWRC_{system_no}'])
         xfrac = gyortrons[f'XMFRAC_{system_no}']
-        if iterable(xfrac) :
-            launchers[system_index]['mode.data'] = np.atleast_1d(np.array(
-                    np.round(1.0 - 2.0 * xfrac), dtype=np.int))
-            launchers[system_index]['mode.time'] = np.atleast_1d(
-                    gyortrons[f'TIME_XMFRAC_{system_no}']) / 1.e3
+        if iterable(xfrac):
+            launchers[system_index]['mode.data'] = np.atleast_1d(np.array(np.round(1.0 - 2.0 * xfrac), dtype=np.int))
+            launchers[system_index]['mode.time'] = np.atleast_1d(gyortrons[f'TIME_XMFRAC_{system_no}']) / 1.0e3
         else:
-            launchers[system_index]['mode.data'] = np.atleast_1d(
-                    [np.round(1.0 - 2.0 * xfrac)], dtype=np.int)
+            launchers[system_index]['mode.data'] = np.atleast_1d([np.round(1.0 - 2.0 * xfrac)], dtype=np.int)
             launchers[system_index]['mode.time'] = np.atleast_1d(0)
-        launchers[system_index]['steering_angle_tor.data'] = np.atleast_1d(np.deg2rad(
-                (gyortrons[f'AZIANG_{system_no}'] - 180.0)))
-        if len(launchers[system_index]['steering_angle_tor.data']) == 1 :
+        launchers[system_index]['steering_angle_tor.data'] = np.atleast_1d(np.deg2rad((gyortrons[f'AZIANG_{system_no}'] - 180.0)))
+        if len(launchers[system_index]['steering_angle_tor.data']) == 1:
             launchers[system_index]['steering_angle_tor.time'] = np.atleast_1d(0)
         else:
-            launchers[system_index]['steering_angle_tor.time'] = np.atleast_1d(
-                    gyortrons[f'TIME_AZIANG_{system_no}']) / 1.e3
-        launchers[system_index]['steering_angle_pol.data'] = np.atleast_1d(np.deg2rad(
-                (gyortrons[f'POLANG_{system_no}'] - 90.0)))
-        if len(launchers[system_index]['steering_angle_pol.data']) == 1 :
+            launchers[system_index]['steering_angle_tor.time'] = np.atleast_1d(gyortrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        launchers[system_index]['steering_angle_pol.data'] = np.atleast_1d(np.deg2rad((gyortrons[f'POLANG_{system_no}'] - 90.0)))
+        if len(launchers[system_index]['steering_angle_pol.data']) == 1:
             launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(0)
         else:
-            launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(
-                    gyortrons[f'TIME_POLANG_{system_no}']) / 1.e3
+            launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(gyortrons[f'TIME_POLANG_{system_no}']) / 1.0e3
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
         # The beam is divergent because the beam waist is focused on to the final launching mirror.
@@ -416,12 +408,12 @@ def ec_launcher_active_hardware(ods, pulse):
         launchers[system_index]['beam.phase.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.phase.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.phase.curvature.time'] = np.array([0.0])
-        launchers[system_index]['beam.phase.curvature.data'] = np.array([np.atleast_1d(0.0),
-                                                                         np.atleast_1d(0.0)])
+        launchers[system_index]['beam.phase.curvature.data'] = np.array([np.atleast_1d(0.0), np.atleast_1d(0.0)])
         launchers[system_index]['beam.spot.angle.time'] = np.array([0.0])
         launchers[system_index]['beam.spot.angle.data'] = np.deg2rad([0.0])
         launchers[system_index]['beam.spot.size.time'] = np.array([0.0])
         launchers[system_index]['beam.spot.size.data'] = np.array([np.atleast_1d(0.0172), np.atleast_1d(0.0172)])
+
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
