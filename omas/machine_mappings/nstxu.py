@@ -43,16 +43,28 @@ def pf_active_hardware(ods, pulse):
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
     mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
-    mhdin.to_omas(ods, update='pf_active')
+    mhdin.to_omas(ods, update=['oh', 'pf_active'])
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
+    oh_signals = signals['mappings']['ioh']
 
+    c_pf = 0
+    c_oh = 0
     for c in ods[f'pf_active.coil']:
+        if 'OH' in ods[f'pf_active.coil'][c]['name']:
+            c_oh += 1
+            cname = oh_signals[c_oh]['name']
+            cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
+        else:
+            c_pf += 1
+            cname = icoil_signals[c_pf]['name']
+            cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
         for e in ods[f'pf_active.coil'][c]['element']:
-            cname = icoil_signals[c + 1]['name']
-            cid = icoil_signals[c + 1]['mds_name_resolved'].strip('\\')
-            ename = icoil_signals[c + 1]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            if 'OH' in ods[f'pf_active.coil'][c]['name']:
+                ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            else:
+                ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
             eid = ename
             ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
@@ -95,6 +107,7 @@ def pf_active_coil_current_data(ods, pulse):
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
+    oh_signals = signals['mappings']['ioh']
 
     # filter data with default smoothing
     for channel in ods1['pf_active.coil']:
@@ -105,13 +118,21 @@ def pf_active_coil_current_data(ods, pulse):
             ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
 
     # handle uncertainties
+    oh_channel = 0
+    pf_channel = 0
     for channel in ods1['pf_active.coil']:
+        if 'OH' in ods1[f'pf_active.coil.{channel}.name']:
+            oh_channel += 1
+            sig = oh_signals[oh_channel]
+        else:
+            pf_channel += 1
+            sig = icoil_signals[pf_channel]
         if f'pf_active.coil.{channel}.current.data' in ods:
             data = ods[f'pf_active.coil.{channel}.current.data']
-            rel_error = data * icoil_signals[channel + 1]['rel_error']
-            abs_error = icoil_signals[channel + 1]['abs_error']
+            rel_error = data * sig['rel_error']
+            abs_error = sig['abs_error']
             error = np.sqrt(rel_error ** 2 + abs_error ** 2)
-            error[np.abs(data) < icoil_signals[channel + 1]['sig_thresh']] = icoil_signals[channel + 1]['sig_thresh']
+            error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
     # For NSTX coils 4U, 4L, AB1, AB2 currents are set to 0.0 and error to 1E-3
@@ -359,7 +380,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     Thus, tan(gamma_cor) is more positive than the reported tan(gamma)
     """
     beamline, beam_species, minVolt_keV, usebeam = ('1A', 'D', 40.0, True)
-    geometries = [('ALPHA', f'{np.pi/180.0}', True), ('OMEGA', f'{np.pi/180.0}', True), ('RADIUS', '1', True)]
+    geometries = [('ALPHA', f'{np.pi / 180.0}', True), ('OMEGA', f'{np.pi / 180.0}', True), ('RADIUS', '1', True)]
 
     if not MSE_Er_correction:
         # Uncorrected pitch angle from a subset of good channels
@@ -438,7 +459,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
-        ods[f'mse.channel[{ch}].name'] = f'{ch+1}'
+        ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
 
         # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].time'] = 0.0
