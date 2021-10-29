@@ -331,8 +331,8 @@ _cocos_signals['divertors.divertor.:.power_currents.data']='?'                  
 
 # EC_LAUNCHERS
 _cocos_signals['ec_launchers.launcher.:.launching_position.phi']='TOR'                  # 2.000000 # phi  [rad]
-_cocos_signals['ec_launchers.launcher.:.steering_angle_pol.data']='?'            #[ADD?]# 1.750000 # _pol  [rad]
-_cocos_signals['ec_launchers.launcher.:.steering_angle_tor.data']='?'            #[ADD?]# 1.750000 # _tor  [rad]
+_cocos_signals['ec_launchers.launcher.:.steering_angle_pol.data']='POL'                 # 1.750000 # _pol  [rad]
+_cocos_signals['ec_launchers.launcher.:.steering_angle_tor.data']='TOR'                 # 1.750000 # _tor  [rad]
 
 # ECE
 _cocos_signals['ece.channel.:.delta_position_suprathermal.phi']='TOR'                        # 2.000000 # phi  [rad]
@@ -341,7 +341,7 @@ _cocos_signals['ece.channel.:.position.phi']='TOR'                              
 _cocos_signals['ece.channel.:.position.psi']='PSI'                                           # 2.000000 # psi  [W]
 _cocos_signals['ece.line_of_sight.first_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
 _cocos_signals['ece.line_of_sight.second_point.phi']='TOR'                                   # 2.000000 # phi  [rad]
-_cocos_signals['ece.polarizer.:.centre.phi']='?'                                      #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['ece.polarizer.:.centre.phi']='TOR'                                           # 2.000000 # phi  [rad]
 _cocos_signals['ece.psi_normalization.psi_boundary']='PSI'                                   # 2.000000 # psi  [Wb]
 _cocos_signals['ece.psi_normalization.psi_magnetic_axis']='PSI'                              # 2.000000 # psi  [Wb]
 
