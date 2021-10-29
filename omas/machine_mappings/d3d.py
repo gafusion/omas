@@ -540,12 +540,13 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         # Assign data to ODS
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
-            ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
-            ch['identifier'] = f'{system[0]}{j:02d}'
-            ch['position']['r'] = tsdat[f'{system}_R'][j]
-            ch['position']['z'] = tsdat[f'{system}_Z'][j]
-            ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
-            if _get_measurements:
+            if not _get_measurements:
+                ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
+                ch['identifier'] = f'{system[0]}{j:02d}'
+                ch['position']['r'] = tsdat[f'{system}_R'][j]
+                ch['position']['z'] = tsdat[f'{system}_Z'][j]
+                ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
+            else:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
                 ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
@@ -1016,4 +1017,4 @@ def magnetics_probes_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(['bolometer_data'], globals(), locals())
+    test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())
