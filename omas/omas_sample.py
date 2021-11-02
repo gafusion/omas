@@ -505,6 +505,7 @@ def gas_injection(ods):
     :return: ODS instance with fake gas injection hardware information added
     """
 
+    ods.imas_version = "3.33.0" # WARNING: the structure of gas_injection IDS changed with 3.34.0
     ods['gas_injection.time'] = [0]
 
     ods['gas_injection.pipe.0.name'] = 'FAKE_GAS_A'
