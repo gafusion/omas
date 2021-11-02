@@ -541,7 +541,9 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
             if not _get_measurements:
-                ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9)
+                ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
+                    system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
+                )
                 ch['identifier'] = f'{system[0]}{j:02d}'
                 ch['position']['r'] = tsdat[f'{system}_R'][j]
                 ch['position']['z'] = tsdat[f'{system}_Z'][j]
