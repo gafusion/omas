@@ -231,14 +231,15 @@ def get_channel_count(ods, hw_sys, check_loc=None, test_checker=None, channels_n
 def gas_filter(label, which_gas):
     """
     Utility: processes the mask / which_gas selector for gas_injection_overlay
+
     :param label: string
-        Label for a gas valve to be tested
+        Label for a gas pipe / inlet to be tested
 
     :param which_gas: string or list
         See gas_injection_overlay docstring
 
     :return: bool
-        Flag indicating whether or not a valve with this label should be shown
+        Flag indicating whether or not a pipe with this label should be shown
     """
     include = False
     if isinstance(which_gas, str):
@@ -251,7 +252,8 @@ def gas_filter(label, which_gas):
 
 def gas_arrow(ods, r, z, direction=None, r2=None, z2=None, snap_to=numpy.pi / 4.0, ax=None, color=None, pad=1.0, **kw):
     """
-    Draws an arrow pointing in from the gas valve
+    Draws an arrow pointing in from the gas inlet
+
     :param ods: ODS instance
 
     :param r: float
@@ -2507,17 +2509,17 @@ def gas_injection_overlay(
     :param ax: axes instance into which to plot (default: gca())
 
     :param angle_not_in_pipe_name: bool
-        Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already include
-        angles in them.
+        Set this to include (Angle) at the end of injector labels. Useful if injector/pipe names don't already
+        include angles in them.
 
     :param which_gas: string or list
-        Filter for selecting which gas valves to display.
+        Filter for selecting which gas pipes to display.
 
         - If string: get a preset group, like 'all'.
 
-        - If list: only valves in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
-          GASA_300. One abbreviation can turn on several valves. There are several valve names starting with
-          RF_ on DIII-D, for example.
+        - If list: only pipes in the list will be shown. Abbreviations are tolerated; e.g. GASA is recognized as
+          GASA_300. One abbreviation can turn on several pipes. There are several injection location names
+          starting with RF_ on DIII-D, for example.
 
     :param show_all_pipes_in_group: bool
         Some pipes have the same R,Z coordinates of their exit positions (but different phi locations) and will
@@ -2537,7 +2539,7 @@ def gas_injection_overlay(
         is None.
 
     :param draw_arrow: bool or dict
-        Draw an arrow toward the machine at the location of the gas valve. If dict, pass keywords to arrow drawing func.
+        Draw an arrow toward the machine at the location of the gas inlet. If dict, pass keywords to arrow drawing func.
 
     :param \**kw: Additional keywords for gas plot:
 
@@ -2570,7 +2572,7 @@ def gas_injection_overlay(
             pipe = pipes[i]
             label = pipe['name']
             if not gas_filter(label, which_gas):
-                continue  # Skip this valve because it's not active
+                continue  # Skip this pipe because it's not active
 
             r, z = pipe['exit_position']['r'], pipe['exit_position']['z']
             location_name = f'{r:0.3f}_{z:0.3f}'
