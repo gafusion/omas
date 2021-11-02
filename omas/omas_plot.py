@@ -687,6 +687,8 @@ def equilibrium_CX(
     label = kw.pop('label', '')
     kw1 = copy.deepcopy(kw)
     kw1['linewidth'] = kw['linewidth'] + 1
+    for contour_only_keyword in ['linestyles', 'linewidths', 'colors']:
+        kw1.pop(contour_only_keyword, None)  # Remove keywords that only affect contours so they don't offend plot
 
     # Boundary
     ax.plot(eq['boundary.outline.r'], eq['boundary.outline.z'], label=label, **kw1)
