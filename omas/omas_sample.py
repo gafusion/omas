@@ -505,37 +505,73 @@ def gas_injection(ods):
     :return: ODS instance with fake gas injection hardware information added
     """
 
-    ods.imas_version = "3.33.0" # WARNING: the structure of gas_injection IDS changed with 3.34.0
+    imas_version = getattr(ods, 'imas_version', None)
+    separate_valves = imas_version is not None and compare_version(imas_version, "3.34.0") >= 0
     ods['gas_injection.time'] = [0]
 
-    ods['gas_injection.pipe.0.name'] = 'FAKE_GAS_A'
-    ods['gas_injection.pipe.0.exit_position.r'] = 2.25
-    ods['gas_injection.pipe.0.exit_position.z'] = 0.0
-    ods['gas_injection.pipe.0.exit_position.phi'] = 6.5
-    ods['gas_injection.pipe.0.valve.0.identifier'] = 'FAKE_GAS_VALVE_A'
+    ip = 0
+    iv = 0
+    ods[f'gas_injection.pipe.{ip}.name'] = 'FAKE_GAS_A'
+    ods[f'gas_injection.pipe.{ip}.exit_position.r'] = 2.25
+    ods[f'gas_injection.pipe.{ip}.exit_position.z'] = 0.0
+    ods[f'gas_injection.pipe.{ip}.exit_position.phi'] = 6.5
+    if separate_valves:
+        ods[f'gas_injection.pipe.{ip}.valve_indices'] = [iv]
+        ods[f'gas_injection.valve.{iv}.name'] ='FAKE_GAS_VALVE_A'
+        ods[f'gas_injection.valve.{iv}.identifier'] = 'FAKE_GAS_VALVE_A'
+        ods[f'gas_injection.valve.{iv}.pipe_indices'] = [ip]
+    else:
+        ods[f'gas_injection.pipe.{ip}.valve.0.identifier'] = 'FAKE_GAS_VALVE_A'
 
     ods['gas_injection.pipe.1.name'] = 'FAKE_GAS_B'
     ods['gas_injection.pipe.1.exit_position.r'] = 1.65
     ods['gas_injection.pipe.1.exit_position.z'] = 1.1
     ods['gas_injection.pipe.1.exit_position.phi'] = 6.5
-    ods['gas_injection.pipe.1.valve.0.identifier'] = 'FAKE_GAS_VALVE_B'
     ods['gas_injection.pipe.1.second_point.r'] = 1.63
     ods['gas_injection.pipe.1.second_point.z'] = 1.08
     ods['gas_injection.pipe.1.second_point.phi'] = 6.5
+    if separate_valves:
+        ods['gas_injection.pipe.1.valve_indices'] = [1]
+        ods['gas_injection.valve.1.name'] ='FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.1.identifier'] = 'FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.1.pipe_indices'] = [1]
+    else:
+        ods['gas_injection.pipe.1.valve.0.identifier'] = 'FAKE_GAS_VALVE_B'
 
     ods['gas_injection.pipe.2.name'] = 'FAKE_GAS_C'
     ods['gas_injection.pipe.2.exit_position.r'] = 1.65
     ods['gas_injection.pipe.2.exit_position.z'] = 1.1
     ods['gas_injection.pipe.2.exit_position.phi'] = 6.5
-    ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
     ods['gas_injection.pipe.2.second_point.phi'] = 6.5
+    if separate_valves:
+        ods['gas_injection.pipe.2.valve_indices'] = [2]
+        ods['gas_injection.valve.2.name'] ='FAKE_GAS_VALVE_C'
+        ods['gas_injection.valve.2.identifier'] = 'FAKE_GAS_VALVE_C'
+        ods['gas_injection.valve.2.pipe_indices'] = [2]
+    else:
+        ods['gas_injection.pipe.2.valve.0.identifier'] = 'FAKE_GAS_VALVE_C'
     # This one is at the same R,Z as FAKE_GAS_B, but it doesn't have a second point defined; this supports testing.
 
     ods['gas_injection.pipe.3.name'] = 'FAKE_GAS_D'
     ods['gas_injection.pipe.3.exit_position.r'] = 2.1
     ods['gas_injection.pipe.3.exit_position.z'] = -0.6
-    ods['gas_injection.pipe.3.valve.0.identifier'] = 'FAKE_GAS_VALVE_D'
+    if separate_valves:
+        ods['gas_injection.pipe.3.valve_indices'] = [3, 4]
+        ods['gas_injection.valve.3.name'] ='FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.3.identifier'] = 'FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.3.pipe_indices'] = [3]
+    else:
+        ods['gas_injection.pipe.3.valve.0.identifier'] = 'FAKE_GAS_VALVE_D'
     # This one deliberately doesn't have a phi angle defined, for testing purposes.
+
+    # Add a second inlet to GASD; let's pretend that there is a branch after the valve
+    ods['gas_injection.pipe.4.name'] = 'FAKE_GAS_D_SECOND_INLET'
+    ods['gas_injection.pipe.4.exit_position.r'] = 2.15
+    ods['gas_injection.pipe.4.exit_position.z'] = -0.65
+    if separate_valves:
+        ods['gas_injection.pipe.4.valve_indices'] = [3]
+    else:
+        ods['gas_injection.pipe.3.valve.0.identifier'] = 'FAKE_GAS_VALVE_D'
 
     return ods
 
