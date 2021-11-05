@@ -567,6 +567,7 @@ def machine_mapping_function(__regression_arguments__, **regression_args):
                 # call signature
                 argspec = inspect.getfullargspec(f)
                 f_args_str = ", ".join('{%s!r}' % item for item in argspec.args if not item.startswith('_'))
+                # f_args_str = ", ".join(item + '={%s!r}' % item for item in argspec.args if not item.startswith('_')) # to use keywords arguments
                 call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
                 default_options = None
                 if argspec.defaults:
