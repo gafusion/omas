@@ -18,16 +18,16 @@ __regression_arguments__ = {'__all__': __all__}
 
 def nstx_filenames(filename, pulse):
     if pulse >= 200184:  # — > (200184 205433)
-        path = '01152015Av1.0'
+        path = 'nstxu' + os.sep + '01152015Av1.0'
     elif pulse >= 112811:  # — > (112811 143905)
-        path = '04202005Av1.0'
+        path = 'nstx' + os.sep + '04202005Av1.0'
     elif pulse >= 115151:  # — > (115151 115178)
-        path = '04122005Av1.0'
+        path = 'nstx' + os.sep + '04122005Av1.0'
     elif pulse >= 106806:  # — > (106806 114478)
-        path = '02072002Av1.0'
+        path = 'nstx' + os.sep + '02072002Av1.0'
     elif pulse >= 101099:  # — > (101099 106807)
-        path = '02222000Av1.0'
-    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'nstxu', path, filename])
+        path = 'nstx' + os.sep + '02222000Av1.0'
+    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', path, filename])
     filename = glob.glob(filename + '*')[0]
     printd(f'Reading {filename}', topic='machine')
     return filename
