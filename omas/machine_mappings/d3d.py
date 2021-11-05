@@ -572,11 +572,11 @@ def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
     :param fast_ece: bool
         Use data sampled at high frequency
     """
-    unwrap(electron_cyclotron_emission_data)(ods, pulse, _measurements=False, fast_ece=fast_ece)
+    unwrap(electron_cyclotron_emission_data)(ods, pulse, fast_ece=fast_ece, _measurements=False)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def electron_cyclotron_emission_data(ods, pulse=133221, _measurements=True, fast_ece=False):
+def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measurements=True):
     """
     Loads DIII-D Electron cyclotron emission data
 
