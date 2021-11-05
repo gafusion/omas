@@ -103,9 +103,9 @@
   "TRANSPOSE": [1,0,2]
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
-  "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+    "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
+    "treename": "{EFIT_tree}",
+    "TRANSPOSE": [1,0]
  },
  "equilibrium.time_slice.:.profiles_2d.:.psi": {
   "TDI": "[data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIRZ)]",

@@ -213,16 +213,108 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
+    """
+        Maps from one magnetic coordinate system to psi
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param origin: Specifier for original coordinate system
+
+        :param values: Values to transform to poloidal flux
+
+        :return: Transformed values
+    """
+    if origin == "rho_pol":
+        return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_sep"]
+                - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+    else:
+        raise NotImplementedError(f"Conversion from {origin} not yet implemented.")
+
+def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
+    import numpy as np
+    """
+        Maps from one magnetic coordinate system to psi
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param destination: Target coordinate system for output
+
+        :param values: Values to transform to poloidal flux
+
+        :return: Transformed values
+    """
+    if destination == "rho_pol":
+        return np.sqrt((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]) /
+                       (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                        - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+    else:
+        raise NotImplementedError(f"Conversion to {destination} not yet implemented.")
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def remap_flux_coordinates(ods, time_index, origin, destination, values):
+    """
+        Maps from one magnetic coordinate system to another. At the moment only supports
+        psi <-> rho_pol 
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param origin: Specifier for original coordinate system
+
+        :param destination: Target coordinate system for output
+
+        :param values: Values to transform
+
+        :return: Transformed values
+    """
+    if origin != "psi":
+        psi = map_flux_coordinate_to_pol_flux(ods, time_index, origin, values)
+    else:
+        psi = values
+    if destination != "psi":
+        return  map_pol_flux_to_flux_coordinate(ods, time_index, destination, psi)
+    return psi
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def resolve_equilibrium_profiles_2d_grid_index(ods, time_index, grid_identifier):
+    """
+        Convenience function to identify which of profiles_2d[:].grid_type.index 
+        matches the specified grid_identifier
+
+        :param ods: input ods
+
+        :param time_index: time index to search
+
+        :param grid_identifier: grid type to be resolved
+
+        :return: Index of grid the requested grid, not to be confused with
+            profiles_2d[:].grid_type.index 
+    """
+    grid_type = {'grid_type.index': grid_identifier}
+    try:
+        grid_index = search_in_array_structure(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d'], 
+                grid_type, no_matches_raise_error=True)[0]
+    except IndexError:
+        raise ValueError("Requested equilibrium.profiles_2d_grid_type not present")
+    return grid_index
+
 @add_to__ODS__
 @preprocess_ods('equilibrium')
 def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity):
     """
-        Functions dervies values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
+        This function derives values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
         Currently only the magnetic field components are supported
 
         :param ods: input ods
 
-        :param time_index: time slices to process
+        :param time_index: time slice to process
 
         :param grid_index: Index of grid to map
 
@@ -238,19 +330,19 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
-    if[quantity == "b_r"]:
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+    if quantity == "b_r":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
                 psi_spl(r,z,dy=1,grid=False) / (2.0 * numpy.pi * r))
         return ods
     elif quantity == "b_z":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
                 -psi_spl(r,z,dx=1,grid=False) / (2.0 * numpy.pi * r))
         return ods
-    elif quantity == "b_r":
+    elif quantity == "b_tor":
         f_spl = InterpolatedUnivariateSpline(
-            'equilibrium.time_slice.{time_index}.profiles_1d.psi',
-            'equilibrium.time_slice.{time_index}.profiles_1d.f')
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'] = (
+            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'],
+            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'])
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = (
                      f_spl(psi_spl(r,z,grid=False)) / r)
         return ods
     raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
@@ -286,7 +378,8 @@ def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
 def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None, dim2=None, cache=None, return_cache=False):
     """
         This routines creates interpolators for quantities and stores them in the cache for future use.
-        It can also be used to just return the current profile_2d quantity by omitting dim1 and dim2
+        It can also be used to just return the current profile_2d quantity by omitting dim1 and dim2.
+        At the moment this routine always extrapolates for data outside the defined grid range.
 
         :param ods: input ods
 
@@ -306,12 +399,10 @@ def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None
 
         :return: updated ods (and cahce if return_cache)
     """
+    if(quantity not in ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}']):
+        ods.physics_derive_equilibrium_profiles_2d_quantity(time_index, grid_index, quantity)
     if dim1 is None or dim2 is None:
-        try:
-            return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
-        except:
-            derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
-            return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
+        return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
     # Try to use an interpolator from the cache
     if cache is not None:
         try:
@@ -321,32 +412,19 @@ def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None
                 return cache[time_index][quantity](dim1, dim2, grid=False)
         except KeyError:
             pass
-    if ods[f'equilibrium.time_slice[{time_index}].profiles_2d{grid_index}.grid_type'] == 91:
-        try:
-            interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
-                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], 
-                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'], 
-                                        method='cubic', return_cache=False)
-        except:
-            derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity)
-            interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
-                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'], 
-                                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'], 
-                                        method='cubic', return_cache=False)
+    if ods[f'equilibrium.time_slice[{time_index}].profiles_2d[{grid_index}].grid_type.index'] == 91:
+        interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+                                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'], 
+                                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'], 
+                                    method='cubic', return_cache=False)
     else:
-        try:
-            interpolator = RectBivariateSpline(
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}'])
-        except:
-            interpolator = RectBivariateSpline(
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim2'],
-                    derive_equilibrium_profiles_2d_quantity(ods, time_index, quantity))
-        if(return_cache):
-            cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
-            return cache[time_index][grid_index][quantity](dim1, dim2,grid=False), cache
+        interpolator = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'])
+    if(return_cache):
+        cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
+        return cache[time_index][grid_index][quantity](dim1, dim2,grid=False), cache
     return interpolator(dim1, dim2, grid=False)
 
 
