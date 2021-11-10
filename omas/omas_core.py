@@ -2157,6 +2157,7 @@ class ODS(MutableMapping):
         # figure out format used
         ext, args = _handle_extension(*args)
 
+        storage_options = ['nc', 'imas']
         if ext in ['nc', 'imas', 'machine']:
             # apply consistency checks
             if consistency_check != self.consistency_check:
@@ -2178,7 +2179,9 @@ class ODS(MutableMapping):
             self.dynamic.open()
             return self
         else:
-            raise ValueError(ext + ' OMAS storage does not support dynamic loading')
+            options = storage_options + list(machines(None).keys())
+            options.pop(options.index('sample'))
+            raise ValueError(ext + ' : dynamic loading not supported. Supported options are: ' + str(options))
 
     def close(self):
         if self.dynamic:
