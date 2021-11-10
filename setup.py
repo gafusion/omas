@@ -61,9 +61,29 @@ package_data = {
     'omas.tests': ['*.py'],
     'omas.utilities': ['*.py'],
 }
+
+machine_mappings_dir = here + os.sep + 'omas' + os.sep + 'machine_mappings'
 for item in glob.glob(os.sep.join([here, 'omas', 'imas_structures', '*'])):
     packages.append('omas.imas_structures.' + os.path.split(item)[1])
     package_data['omas.imas_structures.' + os.path.split(item)[1]] = ['*.json']
+if os.path.exists(here + os.sep + '.gitignore'):
+    import subprocess
+
+    tmp = f'pushd {machine_mappings_dir}; git ls-files; popd'
+    machine_mappings_files = subprocess.check_output(tmp, shell=True).decode("utf-8").strip().split('\n')[2:-1]
+    machine_mappings_files = ['omas' + os.sep + 'machine_mappings' + os.sep + k for k in machine_mappings_files]
+else:
+    machine_mappings_files = []
+    for root, subdirs, files in os.walk(machine_mappings_dir):
+        root = root[len(machine_mappings_dir) + 1 :]
+        for file in reversed(files):
+            machine_mappings_files.append('omas' + os.sep + 'machine_mappings' + os.sep + root + os.sep + file)
+dirs = {os.path.dirname(file): [] for file in sorted(machine_mappings_files)}
+for file in machine_mappings_files:
+    dirs[os.path.dirname(file)].append(os.path.basename(file))
+for dir in dirs:
+    packages.append(dir.replace('/', '.'))
+    package_data[dir.replace('/', '.')] = dirs[dir]
 
 long_description = '''
 OMAS is a Python library designed to simplify the interface of third-party codes with the `ITER <http://iter.org>`_ Integrated Modeling and Analysis Suite (`IMAS <https://confluence.iter.org/display/IMP>`_).
