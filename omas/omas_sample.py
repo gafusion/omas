@@ -517,7 +517,7 @@ def gas_injection(ods):
     ods[f'gas_injection.pipe.{ip}.exit_position.phi'] = 6.5
     if separate_valves:
         ods[f'gas_injection.pipe.{ip}.valve_indices'] = [iv]
-        ods[f'gas_injection.valve.{iv}.name'] ='FAKE_GAS_VALVE_A'
+        ods[f'gas_injection.valve.{iv}.name'] = 'FAKE_GAS_VALVE_A'
         ods[f'gas_injection.valve.{iv}.identifier'] = 'FAKE_GAS_VALVE_A'
         ods[f'gas_injection.valve.{iv}.pipe_indices'] = [ip]
     else:
@@ -532,7 +532,7 @@ def gas_injection(ods):
     ods['gas_injection.pipe.1.second_point.phi'] = 6.5
     if separate_valves:
         ods['gas_injection.pipe.1.valve_indices'] = [1]
-        ods['gas_injection.valve.1.name'] ='FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.1.name'] = 'FAKE_GAS_VALVE_B'
         ods['gas_injection.valve.1.identifier'] = 'FAKE_GAS_VALVE_B'
         ods['gas_injection.valve.1.pipe_indices'] = [1]
     else:
@@ -545,7 +545,7 @@ def gas_injection(ods):
     ods['gas_injection.pipe.2.second_point.phi'] = 6.5
     if separate_valves:
         ods['gas_injection.pipe.2.valve_indices'] = [2]
-        ods['gas_injection.valve.2.name'] ='FAKE_GAS_VALVE_C'
+        ods['gas_injection.valve.2.name'] = 'FAKE_GAS_VALVE_C'
         ods['gas_injection.valve.2.identifier'] = 'FAKE_GAS_VALVE_C'
         ods['gas_injection.valve.2.pipe_indices'] = [2]
     else:
@@ -557,7 +557,7 @@ def gas_injection(ods):
     ods['gas_injection.pipe.3.exit_position.z'] = -0.6
     if separate_valves:
         ods['gas_injection.pipe.3.valve_indices'] = [3, 4]
-        ods['gas_injection.valve.3.name'] ='FAKE_GAS_VALVE_B'
+        ods['gas_injection.valve.3.name'] = 'FAKE_GAS_VALVE_B'
         ods['gas_injection.valve.3.identifier'] = 'FAKE_GAS_VALVE_B'
         ods['gas_injection.valve.3.pipe_indices'] = [3]
     else:
