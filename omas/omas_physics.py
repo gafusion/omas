@@ -330,20 +330,32 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
+    cocos = define_cocos(11)
     if quantity == "b_r":
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
-                psi_spl(r,z,dy=1,grid=False) / (2.0 * numpy.pi * r))
+                psi_spl(r,z,dy=1,grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] 
+                / ((2.0 * numpy.pi)** cocos['exp_Bp'] * r))
         return ods
     elif quantity == "b_z":
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
-                -psi_spl(r,z,dx=1,grid=False) / (2.0 * numpy.pi * r))
+                -psi_spl(r,z,dx=1,grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] 
+                / ((2.0 * numpy.pi)** cocos['exp_Bp'] * r))
         return ods
     elif quantity == "b_tor":
+        mask = numpy.logical_and(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']))
         f_spl = InterpolatedUnivariateSpline(
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'],
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'])
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = (
-                     f_spl(psi_spl(r,z,grid=False)) / r)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
+                     f_spl(psi_spl(r[mask],z[mask],grid=False)) / r[mask])
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask==False] =(
+                ods[f'equilibrium.vacuum_toroidal_field.b0'] 
+                * ods[f'equilibrium.vacuum_toroidal_field.magnetic_axis.r0']  
+                / r[mask==False])
         return ods
     raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
 
