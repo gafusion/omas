@@ -1167,7 +1167,7 @@ def core_profiles_densities(ods, update=True, enforce_quasineutrality=False):
             ne_q = copy.deepcopy(__zeros__)
             for k in range(len(prof1d_n['ion'])):
                 ne_q += prof1d_n[f'ion[{k}].element[0].z_n'] * prof1d_n[f'ion[{k}].density']
-            qnfac = ne_q / (prof1d_n[f'electrons.density'] + np.finfo(np.float64).tiny)
+            qnfac = ne_q / (prof1d_n[f'electrons.density'] + numpy.finfo(numpy.float64).tiny)
             for den in ['density', 'density_fast', 'density_thermal']:
                prof1d_n['electrons'][den] *= qnfac
 
