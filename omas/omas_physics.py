@@ -1105,13 +1105,15 @@ def core_profiles_pressures(ods, update=True):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles')
-def core_profiles_densities(ods, update=True):
+def core_profiles_densities(ods, update=True, enforce_quasineutrality=False):
     """
     Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent
 
     :param ods: input ods
 
     :param update: operate in place
+
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
 
     :return: updated ods
     """
@@ -1160,6 +1162,14 @@ def core_profiles_densities(ods, update=True):
         # ions
         for k in range(len(prof1d['ion'])):
             consistent_density(prof1d_n['ion'][k])
+
+        if enforce_quasineutrality:
+            ne_q = copy.deepcopy(__zeros__)
+            for k in range(len(prof1d_n['ion'])):
+                ne_q += prof1d_n[f'ion[{k}].element[0].z_n'] * prof1d_n[f'ion[{k}].density']
+            qnfac = ne_q / (prof1d_n[f'electrons.density'] + np.finfo(np.float64).tiny)
+            for den in ['density', 'density_fast', 'density_thermal']:
+               prof1d_n['electrons'][den] *= qnfac
 
     return ods_n
 
