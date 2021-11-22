@@ -961,7 +961,7 @@ def summary_consistent_global_quantities(ods, ds=None, update=True):
 
 @add_to__ODS__
 @preprocess_ods()
-def core_profiles_consistent(ods, update=True, use_electrons_density=False):
+def core_profiles_consistent(ods, update=True, use_electrons_density=False, enforce_quasineutrality=False):
     """
     Calls all core_profiles consistency functions including
       - core_profiles_densities
@@ -976,11 +976,13 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
             denominator is core_profiles.profiles_1d.:.electrons.density
             instead of sum Z*n_i in Z_eff calculation
 
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
+
     :return: updated ods
     """
-    ods = core_profiles_densities(ods, update=update)
+    ods = core_profiles_densities(ods, update=update, enforce_quasineutrality=enforce_quasineutrality)
     core_profiles_pressures(ods)
-    core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
+    core_profiles_zeff(ods, use_electrons_density=use_electrons_density, enforce_quasineutrality=enforce_quasineutrality)
     return ods
 
 
@@ -1176,7 +1178,7 @@ def core_profiles_densities(ods, update=True, enforce_quasineutrality=False):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles')
-def core_profiles_zeff(ods, update=True, use_electrons_density=False):
+def core_profiles_zeff(ods, update=True, use_electrons_density=False, enforce_quasineutrality=False):
     """
     calculates effective charge
 
@@ -1188,10 +1190,12 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
             denominator core_profiles.profiles_1d.:.electrons.density
             instead of sum Z*n_i
 
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
+
     :return: updated ods
     """
 
-    ods_z = core_profiles_densities(ods, update=update)
+    ods_z = core_profiles_densities(ods, update=update, enforce_quasineutrality=enforce_quasineutrality)
 
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
