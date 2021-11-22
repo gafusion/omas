@@ -879,6 +879,7 @@ def summary_heating_power(ods, update=True):
                 continue
             elif key == 'fusion':
                 ods_n['summary.fusion.power.value'] = numpy.array(value)
+                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
