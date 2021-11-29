@@ -352,8 +352,10 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
                      f_spl(psi_spl(r[mask],z[mask],grid=False)) / r[mask])
+        itime_eq = numpy.argmin(numpy.abs(ods[f'equilibrium.time']
+                                - ods[f'equilibrium.time_slice.{time_index}.time']))
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask==False] =(
-                ods[f'equilibrium.vacuum_toroidal_field.b0'] 
+                ods[f'equilibrium.vacuum_toroidal_field.b0.{itime_eq}'] 
                 * ods[f'equilibrium.vacuum_toroidal_field.magnetic_axis.r0']  
                 / r[mask==False])
         return ods
