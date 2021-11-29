@@ -1328,7 +1328,7 @@ def core_profiles_currents(
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
                 elif (j == 'j_actuator') and 'core_sources' in ods:
-                    data[j] = get_j_actuator_from_core_sources(ods)
+                    data[j] = core_sources_j_parallel_sum(ods)
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:
