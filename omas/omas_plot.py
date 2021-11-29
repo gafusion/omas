@@ -1355,7 +1355,6 @@ def core_transport_fluxes(ods, time_index=None, time=None, fig=None, show_total_
     ncols = 2
 
     if "core_profiles" in ods:
-        ods.physics_core_profiles_densities()
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
         equilibrium = ods['equilibrium']['time_slice'][time_index]
         rho_core_prof = prof1d['grid.rho_tor_norm']
