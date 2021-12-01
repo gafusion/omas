@@ -515,10 +515,10 @@ def equilibrium_form_constraints(
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
         for channel in ods['pf_active.coil']:
-            printd(f'Working on pf_active.coil.{channel}', topic='machine')
+            printd(f'Processing pf_active.coil.{channel}', topic='machine')
             try:
                 # get
-                label = ods[f'pf_active.coil.{channel}.element[0].identifier']
+                label = ods[f'pf_active.coil.{channel}.name']
                 turns = ods[f'pf_active.coil.{channel}.element[0].turns_with_sign']
                 data = ods[f'pf_active.coil.{channel}.current.data']
                 time = ods[f'pf_active.coil.{channel}.current.time']
@@ -547,7 +547,7 @@ def equilibrium_form_constraints(
     if 'bpol_probe' in constraints and 'magnetics.b_field_pol_probe' in ods:
         average = averages.get('bpol_probe', default_average)
         for channel in ods[f'magnetics.b_field_pol_probe']:
-            printd(f'Working on magnetics.b_field_pol_probe.{channel}', topic='machine')
+            printd(f'Processing magnetics.b_field_pol_probe.{channel}', topic='machine')
             try:
                 # get
                 label = ods[f'magnetics.b_field_pol_probe.{channel}.identifier']
@@ -589,7 +589,7 @@ def equilibrium_form_constraints(
     if 'flux_loop' in constraints and 'magnetics.flux_loop' in ods:
         average = averages.get('flux_loop', default_average)
         for channel in ods[f'magnetics.flux_loop']:
-            printd(f'Working on magnetics.flux_loop.{channel}', topic='machine')
+            printd(f'Processing magnetics.flux_loop.{channel}', topic='machine')
             try:
                 # get
                 label = ods[f'magnetics.flux_loop.{channel}.identifier']
@@ -627,7 +627,7 @@ def equilibrium_form_constraints(
     # ip
     if 'ip' in constraints and 'magnetics.ip.0.data' in ods:
         average = averages.get('ip', default_average)
-        printd(f'Working on magnetics.ip', topic='machine')
+        printd(f'Processing magnetics.ip', topic='machine')
         try:
             # get
             data = ods['magnetics.ip.0.data']
@@ -653,7 +653,7 @@ def equilibrium_form_constraints(
     # diamagnetic_flux
     if 'diamagnetic_flux' in constraints and 'magnetics.diamagnetic_flux.0.data' in ods:
         average = averages.get('diamagnetic_flux', default_average)
-        printd(f'Working on magnetics.diamagnetic_flux', topic='machine')
+        printd(f'Processing magnetics.diamagnetic_flux', topic='machine')
         try:
             # get
             data = ods['magnetics.diamagnetic_flux.0.data']
@@ -680,7 +680,7 @@ def equilibrium_form_constraints(
 
     # b_field_tor_vacuum_r
     if 'b_field_tor_vacuum_r' in constraints and 'tf.b_field_tor_vacuum_r.data' in ods:
-        printd(f'Working on tf.b_field_tor_vacuum_r', topic='machine')
+        printd(f'Processing tf.b_field_tor_vacuum_r', topic='machine')
         average = averages.get('b_field_tor_vacuum_r', default_average)
         try:
             # get
@@ -710,7 +710,7 @@ def equilibrium_form_constraints(
     if 'mse_polarisation_angle' in constraints and 'mse.channel.0.polarisation_angle.data' in ods:
         average = averages.get('mse_polarisation_angle', default_average)
         for channel in ods[f'mse.channel']:
-            printd(f'Working on mse.channel.{channel}', topic='machine')
+            printd(f'Processing mse.channel.{channel}', topic='machine')
 
             try:
                 # get
@@ -1553,7 +1553,7 @@ def core_profiles_currents(
                 if j in prof1d:
                     data[j] = copy.deepcopy(prof1d[j])
                 elif (j == 'j_actuator') and 'core_sources' in ods:
-                    data[j] = get_j_actuator_from_core_sources(ods)
+                    data[j] = core_sources_j_parallel_sum(ods)
                 elif (j == 'j_actuator') and (('j_bootstrap' in prof1d) and ('j_non_inductive' in prof1d)):
                     data['j_actuator'] = prof1d['j_non_inductive'] - prof1d['j_bootstrap']
                 else:

@@ -102,9 +102,6 @@
   "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
  },
- "ec_launchers.:.name": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
  "ec_launchers.launcher.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
