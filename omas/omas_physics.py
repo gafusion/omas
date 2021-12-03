@@ -379,13 +379,16 @@ def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
         cache = {}
     if time_index not in cache:
         cache[time_index] = {}
-    if grid_index not in cache:
+    if grid_index not in cache[time_index]:
         cache[time_index][grid_index] = {}
-    cache[time_index][quantity] = True
+    cache[time_index][grid_index][quantity] = interpolator
+    return cache
     
 @add_to__ODS__
 @preprocess_ods('equilibrium')
-def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None, dim2=None, cache=None, return_cache=False):
+def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, 
+        dim1=None, dim2=None, cache=None, return_cache=False,
+        out_of_bounds_value = numpy.nan):
     """
         This routines creates interpolators for quantities and stores them in the cache for future use.
         It can also be used to just return the current profile_2d quantity by omitting dim1 and dim2.
@@ -407,7 +410,7 @@ def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None
 
         :param return_cache: Toggles return of cache
 
-        :return: updated ods (and cahce if return_cache)
+        :return: mapped positions (and cahce if return_cache)
     """
     if(quantity not in ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}']):
         ods.physics_derive_equilibrium_profiles_2d_quantity(time_index, grid_index, quantity)
@@ -432,10 +435,19 @@ def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, dim1=None
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'])
+    mapped_values = numpy.zeros(dim1.shape)
+    mapped_values[:] = numpy.nan
+    mask = numpy.logical_and(
+            numpy.logical_and(dim1 > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1']), 
+                              dim1 < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'])),
+            numpy.logical_and(dim2 > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2']), 
+                              dim2 < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'])))
     if(return_cache):
-        cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
-        return cache[time_index][grid_index][quantity](dim1, dim2,grid=False), cache
-    return interpolator(dim1, dim2, grid=False)
+        cache = cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
+        mapped_values[mask] = cache[time_index][grid_index][quantity](dim1[mask], dim2[mask], grid=False)
+        return mapped_values, cache
+    mapped_values[mask] = interpolator(dim1[mask], dim2[mask], grid=False)
+    return mapped_values
 
 
 @add_to__ODS__
