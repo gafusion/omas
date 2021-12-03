@@ -473,7 +473,7 @@ def interferometer_data(ods, pulse):
     # assign
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']
+        ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']/1.e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
 
