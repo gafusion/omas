@@ -458,6 +458,7 @@ def interferometer_data(ods, pulse):
 
     :param pulse: int
     """
+    from scipy.interpolate import interp1d
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
@@ -468,14 +469,17 @@ def interferometer_data(ods, pulse):
         TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
         TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
+    TDIs['time_valid'] =  f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
-
     # assign
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']/1.e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
-        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = -data[f'{identifier}_validity']
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(data['time_valid'] / 1.e3, 
+                -data[f'{identifier}_validity'], kind='nearest', bounds_error=False,
+                fill_value = (-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]), assume_sorted=True)(
+                 ods[f'interferometer.channel.{k}.n_e_line.time'])
 
 
 # ================================
