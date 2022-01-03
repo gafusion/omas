@@ -455,7 +455,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
             norm = coef_list['AA1GAM'][ch] / coef_list['AA2GAM'][ch]
 
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
-        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]*norm
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
