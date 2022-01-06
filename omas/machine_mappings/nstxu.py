@@ -378,6 +378,29 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     making
         tan(gamma_cor) ~ (big positive) - (small negative)
     Thus, tan(gamma_cor) is more positive than the reported tan(gamma)
+
+
+    mapping between IMAS geometric_coefficients and EFIT AAxGAM
+    coeffs0: AA1
+    coeffs1: AA8
+    coeffs2: AA2
+    coeffs3: AA5
+    coeffs4: AA4
+    coeffs5: AA3
+    coeffs6: 0
+    coeffs7: AA7
+    coeffs8: AA6
+
+    mapping between EFIT AAxGAM and IMAS geometric_coefficients
+    AA1: coeffs0
+    AA2: coeffs2
+    AA3: coeffs5
+    AA4: coeffs4
+    AA5: coeffs3
+    AA6: coeffs8
+    AA7: coeffs7
+    AA8: coeffs1
+    AA9: does not exist
     """
     beamline, beam_species, minVolt_keV, usebeam = ('1A', 'D', 40.0, True)
     geometries = [('ALPHA', f'{np.pi / 180.0}', True), ('OMEGA', f'{np.pi / 180.0}', True), ('RADIUS', '1', True)]
@@ -431,6 +454,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     coef_list['AA5GAM'] = np.cos(res['geom_OMEGA']) / coef_list['beam_velocity']  # See notes at top on sign convention
     coef_list['AA6GAM'] = -1.0 / coef_list['beam_velocity']  # Assume theta=0
     coef_list['AA7GAM'] = zero_array  # Assume theta=0
+    coef_list['AA8GAM'] = zero_array
 
     # remap data per individual channel
     MDSname, MDSERRname, norm, name, fit = measurements
@@ -466,8 +490,9 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+        IMAS2GAM = [1, 8, 2, 5, 4, 3, 9, 7, 6]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
-            coef_list.get(f'AA{k}GAM', [0] * (ch + 1))[ch] for k in range(9)
+            coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
 
 
