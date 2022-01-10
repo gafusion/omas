@@ -865,7 +865,7 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
 
 
 # only attempt cython if user owns this copy of omas
-if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
+if os.environ['USER']: # != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
     with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
         exec(f.read(), globals())
 else:
