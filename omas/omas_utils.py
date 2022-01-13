@@ -865,10 +865,14 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
 
 
 # only attempt cython if user owns this copy of omas
-if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:
-    with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
-        exec(f.read(), globals())
-else:
+_userowned = True   #Create boolean to check for user-owned status
+if os.name != 'nt': #i.e. make sure OS is NOT Windows
+    if os.environ['USER'] != pwd.getpwuid(os.stat(__file__).st_uid).pw_name:    #If user is NOT owner
+        with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
+            exec(f.read(), globals())
+        _userowned = False  #Set _userowned to False
+                
+if _userowned:
     try:
         import pyximport
 
