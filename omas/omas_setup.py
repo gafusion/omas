@@ -47,7 +47,7 @@ import weakref
 import unittest
 import itertools
 
-if os.name != 'nt': #If OS is not Windows, import pwd package
+if os.name != 'nt':  # If OS is not Windows, import pwd package
     import pwd
 
 try:
