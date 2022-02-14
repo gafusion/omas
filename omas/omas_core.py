@@ -1295,7 +1295,7 @@ class ODS(MutableMapping):
                     try:
                         value = self.dynamic.__getitem__(location)
                     except Exception as _excp:
-                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}')
+                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}: {repr(_excp)}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
