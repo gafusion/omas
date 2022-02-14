@@ -1022,5 +1022,27 @@ def magnetics_probes_data(ods, pulse):
 
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def core_profiles_global_quantities_data(ods, pulse):
+    from scipy.interpolate import interp1d
+
+    ods1 = ODS()
+    unwrap(magnetics_hardware)(ods1)
+
+    with omas_environment(ods, cocosio=1):
+        cp = ods['core_profiles']
+        gq = ods['core_profiles.global_quantities']
+        if 'time' not in cp:
+            m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
+            cp['time'] = m.dim_of(1) * 1e-3
+        t = cp['time']
+
+        m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
+
+        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.NaN)(t)
+
+
+
+# ================================
 if __name__ == '__main__':
     test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())
