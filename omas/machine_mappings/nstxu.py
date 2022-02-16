@@ -17,20 +17,10 @@ __regression_arguments__ = {'__all__': __all__}
 
 
 def nstx_filenames(filename, pulse):
-    if pulse >= 200184:  # — > (200184 205433)
-        path = 'nstxu' + os.sep + '01152015Av1_0'
-    elif pulse >= 112811:  # — > (112811 143905)
-        path = 'nstx' + os.sep + '04202005Av1_0'
-    elif pulse >= 115151:  # — > (115151 115178)
-        path = 'nstx' + os.sep + '04122005Av1_0'
-    elif pulse >= 106806:  # — > (106806 114478)
-        path = 'nstx' + os.sep + '02072002Av1_0'
-    elif pulse >= 101099:  # — > (101099 106807)
-        path = 'nstx' + os.sep + '02222000Av1_0'
-    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', path, filename])
-    filename = glob.glob(filename + '*')[0]
-    printd(f'Reading {filename}', topic='machine')
-    return filename
+    if pulse < 200000:
+        return support_filenames('nstx', filename, pulse)
+    else:
+        return support_filenames('nstxu', filename, pulse)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -455,8 +445,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
             norm = coef_list['AA1GAM'][ch] / coef_list['AA2GAM'][ch]
 
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
-        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]*norm
-        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]*norm
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch] * norm
+        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch] * norm
         ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'

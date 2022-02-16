@@ -10,7 +10,6 @@ from omas.machine_mappings._common import *
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
-
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def gas_injection_hardware(ods, pulse):
@@ -284,7 +283,7 @@ def gas_injection_hardware(ods, pulse):
 
 # ================================
 @machine_mapping_function(__regression_arguments__)
-def pf_active_hardware(ods):
+def pf_active_hardware(ods, pulse):
     r"""
     Loads DIII-D tokamak poloidal field coil hardware geometry
 
@@ -292,8 +291,7 @@ def pf_active_hardware(ods):
     """
     from omfit_classes.omfit_efund import OMFITmhdin
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
     for k in range(len(ods['pf_active.coil'])):
@@ -309,7 +307,7 @@ def pf_active_coil_current_data(ods, pulse):
     # get pf_active hardware description --without-- placing the data in this ods
     # use `unwrap` to avoid calling `@machine_mapping_function` of `pf_active_hardware`
     ods1 = ODS()
-    unwrap(pf_active_hardware)(ods1)
+    unwrap(pf_active_hardware)(ods1, pulse)
 
     # fetch the actual pf_active currents data
     with omas_environment(ods, cocosio=1):
@@ -459,6 +457,7 @@ def interferometer_data(ods, pulse):
     :param pulse: int
     """
     from scipy.interpolate import interp1d
+
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
@@ -469,17 +468,21 @@ def interferometer_data(ods, pulse):
         TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
         TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
-    TDIs['time_valid'] =  f"dim_of({TDIs['R0_validity']})"
+    TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
     # assign
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time']/1.e3
+        ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
-        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(data['time_valid'] / 1.e3, 
-                -data[f'{identifier}_validity'], kind='nearest', bounds_error=False,
-                fill_value = (-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]), assume_sorted=True)(
-                 ods[f'interferometer.channel.{k}.n_e_line.time'])
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(
+            data['time_valid'] / 1.0e3,
+            -data[f'{identifier}_validity'],
+            kind='nearest',
+            bounds_error=False,
+            fill_value=(-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]),
+            assume_sorted=True,
+        )(ods[f'interferometer.channel.{k}.n_e_line.time'])
 
 
 # ================================
@@ -962,7 +965,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
 # ================================
 @machine_mapping_function(__regression_arguments__)
-def magnetics_hardware(ods):
+def magnetics_hardware(ods, pulse):
     r"""
     Load DIII-D tokamak flux loops and magnetic probes hardware geometry
 
@@ -970,15 +973,14 @@ def magnetics_hardware(ods):
     """
     from omfit_classes.omfit_efund import OMFITmhdin
 
-    mhdin_dat_filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', 'd3d', 'mhdin.dat'])
-    mhdin = get_support_file(OMFITmhdin, mhdin_dat_filename)
+    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_floops_data(ods, pulse):
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
 
     with omas_environment(ods, cocosio=1):
         fetch_assign(
