@@ -61,6 +61,14 @@ _cocos_signals['camera_ir.frame_analysis.:.power_flux_parallel']='?'            
 _cocos_signals['camera_visible.channel.:.aperture.:.centre.phi']='TOR'                                      # 2.000000 # phi  [rad]
 _cocos_signals['camera_visible.channel.:.detector.:.geometry_matrix.emission_grid.phi']='TOR'               # 2.000000 # phi  [rad]
 
+# CAMERA_X_RAYS
+_cocos_signals['camera_x_rays.aperture.centre.phi']='?'                            #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_x_rays.camera.centre.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_x_rays.camera.line_of_sight.first_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_x_rays.camera.line_of_sight.second_point.phi']='?'          #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_x_rays.camera.pixel_position.phi']='?'                      #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['camera_x_rays.filter_window.centre.phi']='?'                       #[ADD?]# 2.000000 # phi  [rad]
+
 # CHARGE_EXCHANGE
 _cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='?'                                 #[ADD?]# 2.666667 # velocity  _pol  [m.s^-1]
 _cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='?'                                 #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
@@ -659,6 +667,7 @@ _cocos_signals['gyrokinetics.wavevector.:.eigenmode.:.poloidal_angle']='?'      
 # HARD_X_RAYS
 _cocos_signals['hard_x_rays.channel.:.aperture.:.centre.phi']='TOR'                            # 2.000000 # phi  [rad]
 _cocos_signals['hard_x_rays.channel.:.detector.centre.phi']='TOR'                              # 2.000000 # phi  [rad]
+_cocos_signals['hard_x_rays.channel.:.filter_window.:.centre.phi']='?'                  #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['hard_x_rays.channel.:.line_of_sight.first_point.phi']='TOR'                    # 2.000000 # phi  [rad]
 _cocos_signals['hard_x_rays.channel.:.line_of_sight.second_point.phi']='TOR'                   # 2.000000 # phi  [rad]
 
@@ -941,6 +950,12 @@ _cocos_signals['polarimeter.channel.:.line_of_sight.second_point.phi']='TOR'    
 _cocos_signals['polarimeter.channel.:.line_of_sight.third_point.phi']='TOR'                # 2.000000 # phi  [rad]
 
 # PULSE_SCHEDULE
+_cocos_signals['pulse_schedule.density_control.n_e_line_of_sight.first_point.phi']='?'                 #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['pulse_schedule.density_control.n_e_line_of_sight.second_point.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['pulse_schedule.density_control.n_e_line_of_sight.third_point.phi']='?'                 #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['pulse_schedule.density_control.zeff_line_of_sight.first_point.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['pulse_schedule.density_control.zeff_line_of_sight.second_point.phi']='?'               #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['pulse_schedule.density_control.zeff_line_of_sight.third_point.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['pulse_schedule.tf.b_field_tor_vacuum_r.reference.data']='?'                            #[ADD?]# 1.000000 # b  b_field
 _cocos_signals['pulse_schedule.ec.launcher.:.steering_angle_pol.reference.data']='?'                   #[ADD?]# 0.666667 # _pol
 _cocos_signals['pulse_schedule.ec.launcher.:.steering_angle_tor.reference.data']='?'                   #[ADD?]# 0.666667 # _tor
@@ -993,6 +1008,7 @@ _cocos_signals['sawteeth.profiles_1d.:.p_i_total_fast_parallel']='?'            
 # SOFT_X_RAYS
 _cocos_signals['soft_x_rays.channel.:.aperture.:.centre.phi']='TOR'                            # 2.000000 # phi  [rad]
 _cocos_signals['soft_x_rays.channel.:.detector.centre.phi']='TOR'                              # 2.000000 # phi  [rad]
+_cocos_signals['soft_x_rays.channel.:.filter_window.:.centre.phi']='?'                  #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['soft_x_rays.channel.:.line_of_sight.first_point.phi']='TOR'                    # 2.000000 # phi  [rad]
 _cocos_signals['soft_x_rays.channel.:.line_of_sight.second_point.phi']='TOR'                   # 2.000000 # phi  [rad]
 
@@ -1028,11 +1044,16 @@ _cocos_signals['spectrometer_visible.channel.:.polarization_spectroscopy.velocit
 _cocos_signals['spectrometer_visible.channel.:.polarizer.centre.phi']='TOR'                                                   # 2.000000 # phi  [rad]
 
 # SPECTROMETER_X_RAY_CRYSTAL
-_cocos_signals['spectrometer_x_ray_crystal.channel.:.aperture.centre.phi']='?'                   #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.centre.phi']='?'                     #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.channel.:.crystal.centre.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.channel.:.reflector.:.centre.phi']='?'                #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['spectrometer_x_ray_crystal.channel.:.velocity_tor_proxy.data']='?'               #[ADD?]# 1.750000 # velocity  [m.s^-1]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.profiles_line_integrated.velocity_tor.data']='?'                         #[ADD?]# 2.600000 # velocity  _tor  [m.s^-1]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.aperture.centre.phi']='?'                                                #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.centre.phi']='?'                                                  #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.line_of_sight.first_point.phi']='?'                               #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.line_of_sight.second_point.phi']='?'                              #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.camera.pixel_position.phi']='?'                                          #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.crystal.centre.phi']='?'                                                 #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.filter_window.:.centre.phi']='?'                                         #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.profiles_line_integrated.lines_of_sight_second_point.phi']='?'           #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['spectrometer_x_ray_crystal.channel.:.reflector.:.centre.phi']='?'                                             #[ADD?]# 2.000000 # phi  [rad]
 
 # SUMMARY
 _cocos_signals['summary.local.itb.e_field_parallel.value']='?'                                                                #[ADD?]# 2.500000 # e_field  parallel  [V.m^-1]
