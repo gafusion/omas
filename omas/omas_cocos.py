@@ -32,7 +32,6 @@
 #        transforms['BP'] = transforms['POL']
 #        transforms[None] = 1
 #
-import numpy
 
 _cocos_signals = {}
 
@@ -892,7 +891,7 @@ _cocos_signals['mse.channel.:.aperture.:.centre.phi']='TOR'                     
 _cocos_signals['mse.channel.:.detector.centre.phi']='TOR'                                              # 2.000000 # phi  [rad]
 _cocos_signals['mse.channel.:.line_of_sight.first_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
 _cocos_signals['mse.channel.:.line_of_sight.second_point.phi']='TOR'                                   # 2.000000 # phi  [rad]
-_cocos_signals['mse.channel.:.active_spatial_resolution.:.geometric_coefficients'] = numpy.array([None,None,'TOR',None,None,None,'TOR',None,None]) # 0.000000 # 1/b_field  [1/T] or 1/e_field  [m/V]
+_cocos_signals['mse.channel.:.active_spatial_resolution.:.geometric_coefficients'] = [None,None,'TOR',None,None,None,'TOR',None,None] # 0.000000 # 1/b_field  [1/T] or 1/e_field  [m/V]
 
 # NBI
 _cocos_signals['nbi.unit.:.aperture.:.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]

@@ -935,7 +935,7 @@ class ODS(MutableMapping):
                     and not isinstance(value, ODS)
                 ):
                     transform = omas_physics.cocos_signals[ulocation]
-                    if isinstance(transform,numpy.ndarray):
+                    if isinstance(transform, list):
                         norm = np.ones(len(transform))
                         for itf,tf in enumerate(transform):
                             norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
@@ -1336,8 +1336,7 @@ class ODS(MutableMapping):
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     transform = omas_physics.cocos_signals[ulocation]
-                    if isinstance(transform,numpy.ndarray):
-
+                    if isinstance(transform, list):
                         norm = numpy.ones(len(transform))
                         for itf,tf in enumerate(transform):
                             norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
