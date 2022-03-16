@@ -2648,7 +2648,7 @@ class CocosSignals(dict):
 
     def __getitem__(self, key):
         value = dict.__getitem__(self, key)
-        if value == '?':
+        if not isinstance(value, list) and value == '?':
             warnings.warn(
                 f'''
 `{key}` may require defining its COCOS transform in {os.path.split(__file__)[0] + os.sep}omas_cocos.py
