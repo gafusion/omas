@@ -935,12 +935,17 @@ class ODS(MutableMapping):
                     and not isinstance(value, ODS)
                 ):
                     transform = omas_physics.cocos_signals[ulocation]
-                    if transform == '?':
+                    if isinstance(transform,numpy.ndarray):
+                        norm = np.ones(len(transform))
+                        for itf,tf in enumerate(transform):
+                            norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
+                    elif transform == '?':
                         if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
                             raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+
                     else:
                         norm = omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
                     value = value * norm
@@ -1331,12 +1336,18 @@ class ODS(MutableMapping):
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     transform = omas_physics.cocos_signals[ulocation]
-                    if transform == '?':
+                    if isinstance(transform,numpy.ndarray):
+
+                        norm = numpy.ones(len(transform))
+                        for itf,tf in enumerate(transform):
+                            norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
+                    elif transform == '?':
                         if self.consistency_check == 'warn':
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
                             raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+
                     else:
                         norm = omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
                     value = value * norm
