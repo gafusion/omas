@@ -358,6 +358,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
         printe(repr(_excp))
         return None
 
+    doc = doc.replace("circle,", "circle',") # handle typo in IMAS documentation
     geo_map = eval('{%s}' % doc.split('(')[-1][:-2])
     if 3 not in geo_map:
         geo_map[3] = 'oblique'  # For backward compatibility
