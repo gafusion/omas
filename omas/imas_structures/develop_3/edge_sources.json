@@ -326,7 +326,7 @@
  "edge_sources.grid_ggd[:].grid_subset[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
-  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
+  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All wall edges\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier",
   "lifecycle_status": "active",
   "structure_reference": "identifier_dynamic_aos3"
@@ -529,7 +529,8 @@
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
-  "structure_reference": "generic_grid_dynamic_space"
+  "structure_reference": "generic_grid_dynamic_space",
+  "url_protected": "https://confluence.iter.org/download/attachments/178133297/GGDguide.pdf"
  },
  "edge_sources.grid_ggd[:].space[:].coordinates_type": {
   "coordinates": [
@@ -539,11 +540,12 @@
   "documentation": "Type of coordinates describing the physical space, for every coordinate of the space. The size of this node therefore defines the dimension of the space. The meaning of these predefined integer constants can be found in the Data Dictionary under utilities/coordinate_identifier.xml",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/coordinates_type(:)",
   "lifecycle_status": "active",
-  "type": "dynamic"
+  "type": "dynamic",
+  "url": "utilities/coordinate_identifier.xml"
  },
  "edge_sources.grid_ggd[:].space[:].geometry_type": {
   "data_type": "STRUCTURE",
-  "documentation": "Type of space geometry (0: standard, 1:Fourier)",
+  "documentation": "Type of space geometry (0: standard, 1:Fourier, >1: Fourier with periodicity)",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/geometry_type",
   "lifecycle_status": "active",
   "structure_reference": "identifier_dynamic_aos3"
@@ -572,7 +574,7 @@
  "edge_sources.grid_ggd[:].space[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_space_identifier.xml",
-  "documentation": "Space identifier\n0) unspecified : unspecified\n1) primary_standard : Primary space defining the standard grid\n2) primary_staggered : Primary space defining a grid staggered with respect to the primary standard space",
+  "documentation": "Space identifier\n0) unspecified : unspecified\n1) primary_standard : Primary space defining the standard grid\n2) primary_staggered : Primary space defining a grid staggered with respect to the primary standard space\n3) secondary_structured : Secondary space defining additional dimensions that extend the primary standard space in a structured way",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/identifier",
   "lifecycle_status": "active",
   "structure_reference": "identifier_dynamic_aos3"
@@ -685,6 +687,52 @@
   "data_type": "FLT_1D",
   "documentation": "Geometry data associated with the object, its detailed content is defined by ../../geometry_content. Its dimension depends on the type of object, geometry and coordinate considered. ",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_2d": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "2D geometry data associated with the object. Its dimension depends on the type of object, geometry and coordinate considered. Typically, the first dimension represents the object coordinates, while the second dimension would represent the values of the various degrees of freedom of the finite element attached to the object.",
+  "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_2d(:,:)",
+  "introduced_after_version": "3.35.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_2d_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"geometry_2d\"",
+  "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_2d_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_2d_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"geometry_2d\"",
+  "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_2d_error_lower(:,:)",
+  "introduced_after_version": "3.35.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_2d_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"geometry_2d\"",
+  "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_2d_error_upper(:,:)",
+  "introduced_after_version": "3.35.0",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "mixed"
