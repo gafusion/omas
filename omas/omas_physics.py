@@ -2623,7 +2623,8 @@ _cocos_signals = {}
                         message = '#[DEL?]'
 
                     transform = _cocos_signals.get(item, '?')
-                    transform = None if transform is None else "'%s'" % transform
+                    if isinstance(transform, str):
+                        transform = repr(transform)
                     txt = ("_cocos_signals['%s']=%s" % (item, transform)).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
                     text.append(txt)
                     if score > threshold or (item in _cocos_signals and _cocos_signals[item] != '?'):
