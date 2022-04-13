@@ -143,7 +143,7 @@ def get_mongo_credentials(server='', database='', collection=''):
     if no matching server is found, the `default` is returned
 
     :param server: server to look credentials for
-        * server can have `{user}:{pass}` placeholders: mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net
+        * server can have `{user}:{pass}` placeholders: mongodb+srv://{user}:{pass}@omasdb.xymmt.mongodb.net
 
     :param database: database name in server to look credentials for
 
