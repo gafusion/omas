@@ -900,7 +900,7 @@ _cocos_signals['mse.channel.:.aperture.:.centre.phi']='TOR'                     
 _cocos_signals['mse.channel.:.detector.centre.phi']='TOR'                                              # 2.000000 # phi  [rad]
 _cocos_signals['mse.channel.:.line_of_sight.first_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
 _cocos_signals['mse.channel.:.line_of_sight.second_point.phi']='TOR'                                   # 2.000000 # phi  [rad]
-_cocos_signals['mse.channel.:.active_spatial_resolution.:.geometric_coefficients']='[None, None, 'TOR', None, None, None, 'TOR', None, None]'#[DEL?]# -1.000000 # geometric_coefficients
+_cocos_signals['mse.channel.:.active_spatial_resolution.:.geometric_coefficients']=[None, None, 'TOR', None, None, None, 'TOR', None, None] # geometric_coefficients
 
 # NBI
 _cocos_signals['nbi.unit.:.aperture.:.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]
