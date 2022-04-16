@@ -82,6 +82,10 @@
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
+ "core_profiles.global_quantities.v_loop": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
+ },
  "core_profiles.profiles_1d.:": {
   "TDI": "size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)",
   "treename": "{PROFILES_tree}"
@@ -101,6 +105,9 @@
  "core_profiles.profiles_1d.:.time": {
   "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
   "treename": "{PROFILES_tree}"
+ },
+ "core_profiles.time": {
+  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
  "ec_launchers.launcher.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
