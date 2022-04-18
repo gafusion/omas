@@ -1199,9 +1199,9 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
 
         uband(rho, y, ax=ax, **kw)
         if "Temp" in label_name[index]:
-            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
+            ax.set_ylabel(r'$T_{{{}}}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
+            ax.set_ylabel(r'$n_{{{}}}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
