@@ -1097,8 +1097,8 @@ def core_profiles_pressures(ods, update=True):
                 prof1d_p['ion'][k]['pressure'] += __p__
                 prof1d_p['pressure_parallel'] += __p__
 
-        # extra pressure information that is not within IMAS structure is set only if consistency_check is not True
-        if ods_p.consistency_check is not True:
+        # extra pressure information that is not within IMAS structure is set only if consistency_check is False
+        if ods_p.consistency_check is False:
             prof1d_p['pressure'] = prof1d_p['pressure_perpendicular'] * 2 + prof1d_p['pressure_parallel']
             prof1d_p['pressure_electron_total'] = prof1d_p['pressure_thermal'] - prof1d_p['pressure_ion_total']
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
