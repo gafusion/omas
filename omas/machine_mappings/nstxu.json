@@ -180,6 +180,7 @@
   "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.geometric_coefficients": {
+  "COCOSIO": 11,
   "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.time": {

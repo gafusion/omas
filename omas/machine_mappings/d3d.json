@@ -82,6 +82,22 @@
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
+ "coils_non_axisymmetric.coil.:": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.time": {
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+  "coils_non_axisymmetric.coil.:.identifier": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.name": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
  "core_profiles.global_quantities.v_loop": {
   "COCOSIO": 11,
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
@@ -494,22 +510,6 @@
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
-  "coils_non_axisymmetric.coil.:": {
-  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
- },
- "coils_non_axisymmetric.coil.:.current.data": {
-  "COCOSIO": 11,
-  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
- },
- "coils_non_axisymmetric.coil.:.current.time": {
-  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
- },
-  "coils_non_axisymmetric.coil.:.identifier": {
-  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
- },
- "coils_non_axisymmetric.coil.:.name": {
-  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
- },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 1,
   "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
@@ -519,6 +519,12 @@
  },
  "tf.r0": {
   "VALUE": 1.6955
+ },
+  "magnetics.diamagnetic_flux.0.data": {
+  "TDI": "ptdata2(\"DIAMAG3\",{pulse})"
+ },
+ "magnetics.diamagnetic_flux.0.time": {
+  "TDI": "dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000."
  },
  "thomson_scattering.channel.:": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"

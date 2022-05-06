@@ -1043,7 +1043,7 @@ def magnetics_floops_data(ods, pulse):
 def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1)
-
+    
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -1061,6 +1061,23 @@ def magnetics_probes_data(ods, pulse):
             data_norm=1.0,
         )
 
+    
+    for compfile in ['btcomp','ccomp','icomp']
+        comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
+        for shot in comp:
+            if pulse > compshot:
+                compshot = shot
+        for compsig in comp[compshot]:
+            compsig_data = ptdata2(f"{compsig}",{pulse})
+            compsig_time = dim_of(ptdata2(f"{compsig}",{pulse}),0)/1000
+            for channel in 'magnetics.b_field_pol_probe':
+                if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods:
+                    sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
+                    sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+                    sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+
+                    compsig_data_interp = np.interp(sigraw_time,compsig_time,compsig_data)
+                    ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
