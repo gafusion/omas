@@ -494,6 +494,22 @@
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
+  "coils_non_axisymmetric.coil.:": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.time": {
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+  "coils_non_axisymmetric.coil.:.identifier": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.name": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 1,
   "TDI": "ptdata2(\"BT\",{pulse})*1.6955"

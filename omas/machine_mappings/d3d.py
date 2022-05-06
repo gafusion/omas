@@ -294,13 +294,14 @@ def pf_active_hardware(ods, pulse):
     mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
-    for k in range(len(ods['pf_active.coil'])):
-        fcid = 'F{}{}'.format((k % 9) + 1, 'AB'[int(mhdin['FC'][k, 1] < 0)])
+    coil_names=  ['F1A','F2A','F3A','F4A','F5A','F6A','F7A','F8A','F9A',
+                   'F2B','F2B','F3B','F4B','F5B','F6B','F7B','F8B','F9B',
+                   'ECOILA','ECOILB','E567UP','E567DN','E89DN', 'E89UP']
+    for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
         ods['pf_active.coil'][k]['identifier'] = fcid
         ods['pf_active.coil'][k]['element.0.name'] = fcid
         ods['pf_active.coil'][k]['element.0.identifier'] = fcid
-
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
@@ -327,6 +328,44 @@ def pf_active_coil_current_data(ods, pulse):
             data_norm=1.0,
         )
 
+# ================================
+@machine_mapping_function(__regression_arguments__)
+def coils_non_axisymmetric_hardware(ods, pulse):
+    r"""
+    Loads DIII-D tokamak non_axisymmetric field coil hardware geometry
+
+    :param ods: ODS instance
+    """
+
+    coil_names=  ['NICOIL','C79','C139']
+    for k, fcid in enumerate(coil_names):
+        ods['coils_non_axisymmetric.coil'][k]['name'] = fcid
+        ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
+
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def coils_non_axisymmetric_current_data(ods, pulse):
+    # get pf_active hardware description --without-- placing the data in this ods
+    # use `unwrap` to avoid calling `@machine_mapping_function` of `pf_active_hardware`
+    ods1 = ODS()
+    unwrap(coils_non_axisymmetric_hardware)(ods1, pulse)
+
+    # fetch the actual pf_active currents data
+    with omas_environment(ods, cocosio=1):
+        fetch_assign(
+            ods,
+            ods1,
+            pulse,
+            channels='coils_non_axisymmetric.coil',
+            identifier='coils_non_axisymmetric.coil.{channel}.identifier',
+            time='coils_non_axisymmetric.coil.{channel}.current.time',
+            data='coils_non_axisymmetric.coil.{channel}.current.data',
+            validity=None,
+            mds_server='d3d',
+            mds_tree='D3D',
+            tdi_expression='ptdata2("{signal}",{pulse})',
+            time_norm=0.001,
+            data_norm=1.0,
+        )
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
