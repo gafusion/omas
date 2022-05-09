@@ -609,8 +609,10 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
         ods_n = ODS().copy_attrs_from(ods)
 
     if time_index is None:
+        ods_n['summary.line_average.n_e.value'] = numpy.zeros(len(ods['core_profiles']['profiles_1d']))
         for time_index in range(len(ods['core_profiles']['profiles_1d'])):
-            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)
+            line_average_ne = summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)['interferometer']['channel'][0]['n_e_line_average']['data'][time_index]
+            ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
