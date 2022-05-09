@@ -1037,6 +1037,27 @@ def magnetics_floops_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
+    
+    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
+    for compfile in ['btcomp','ccomp','icomp']:
+        comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
+        compshot=-1
+        for shot in comp:
+            if pulse > compshot:
+                compshot = shot
+        for compsig in comp[compshot]:
+            m = mdsvalue('d3d', pulse=pulse, TDI=f"[ptdata2(\"{compsig}\",{pulse})]", treename=None)
+            compsig_data = m.data()
+            compsig_time = m.dim_of(1)/1000
+            for channel in 'magnetics.flux_loop':
+                if 'magnetics.flux_loop.{channel}.identifier' in ods:
+                    sig = 'magnetics.flux_loop.{channel}.identifier'
+                    sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.data']
+
+                    compsig_data_interp = np.interp(sigraw_time,compsig_time,compsig_data)
+                    ods[f'magnetics.flux_loop.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
