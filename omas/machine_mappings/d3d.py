@@ -889,7 +889,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                         area=1e-4,  # cm^2 --> m^2
                         pot=1,  # V --> V
                         angle=np.pi / 180,  # degrees --> radians
-                        heatflux=1e3 * 1e-4,  # kW cm^-2 --> W m^-2
+                        heatflux=1e3 * 1e4,  # kW cm^-2 --> W m^-2
                     )
                     for tdi_part, imas_part in nodes.items():
                         mds_dat = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
