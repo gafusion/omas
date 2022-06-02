@@ -76,7 +76,7 @@ def pf_active_coil_current_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1, pulse)
-
+    print('before omas env')
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -94,11 +94,11 @@ def pf_active_coil_current_data(ods, pulse):
             data_norm=1.0,
             homogeneous_time=False,
         )
-
+    print('before signals')
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     oh_signals = signals['mappings']['ioh']
-
+    print('before channels')
     # filter data with default smoothing
     for channel in ods1['pf_active.coil']:
         if f'pf_active.coil.{channel}.current.data' in ods:
@@ -106,10 +106,11 @@ def pf_active_coil_current_data(ods, pulse):
             time = ods[f'pf_active.coil.{channel}.current.time']
             data = ods[f'pf_active.coil.{channel}.current.data']
             ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
-
+            print('inside channels', channel)
     # handle uncertainties
     oh_channel = 0
     pf_channel = 0
+    print('line 113')
     for channel in ods1['pf_active.coil']:
         if 'OH' in ods1[f'pf_active.coil.{channel}.name']:
             oh_channel += 1

@@ -211,12 +211,13 @@ def fetch_assign(
     """
     t = None
     TDIs = []
-
+    
     if isinstance(channels, str):
         channels = ods1[channels]
 
     for stage in ['fetch', 'assign']:
         for channel in channels:
+            
             signal = ods1[identifier.format(**locals())]
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
@@ -229,22 +230,42 @@ def fetch_assign(
                         t = None
                 except Exception:
                     pass
+            print('line 234')
+            print(time.format(**locals()))
             if stage == 'assign':
                 if homogeneous_time and t is None:
                     raise RuntimeError(f'Could not determine time info from {TDI} signals')
-                if not isinstance(tmp[TDI], Exception):
+                print(isinstance(tmp[TDI], Exception))
+                if not isinstance(tmp[TDI], Exception) and tmp[TDI] is not None:
                     if not homogeneous_time:
-                        ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
+                       ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
                     else:
                         ods[time.format(**locals())] = t * time_norm
+                    
                     ods[data.format(**locals())] = tmp[TDI] * data_norm
+                    #print()
                     if validity is not None:
                         if len(ods[time.format(**locals())]) == len(ods[data.format(**locals())]) and len(ods[data.format(**locals())]) > 1:
                             ods[validity.format(**locals())] = 0
                         else:
                             ods[validity.format(**locals())] = -2
+                
                 elif validity is not None:
                     ods[validity.format(**locals())] = -2
+                else:
+                   # 
+                    if  homogeneous_time:
+                      
+                       ods[time.format(**locals())] = t * time_norm
+                       
+                    else:
+                       
+                        #ods[time.format(**locals())] = np.ndarray([-1e+6,1e+6]) * time_norm
+                        ods[time.format(**locals())] =[-1e+6,1e+6] 
+                        
+                    ods[data.format(**locals())] = np.zeros(2) * data_norm
+        print('line 251')
         if stage == 'fetch':
             tmp = mdsvalue(mds_server, mds_tree, pulse, TDI=TDIs).raw()
+        print('line 253')
     return ods
