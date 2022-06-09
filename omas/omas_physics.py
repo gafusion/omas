@@ -1425,9 +1425,9 @@ def core_profiles_currents(
     # CONSISTENCY?
     # ===============
 
-    if (j_actuator is not None) and (j_bootstrap is None):
-        err = "Cannot set j_actuator without j_bootstrap provided or calculable"
-        raise RuntimeError(err)
+    err = "Cannot set j_actuator without j_bootstrap provided or calculable"
+    if (j_actuator is not None):
+        assert j_bootstrap is not None, err
 
     # j_non_inductive
     err = 'j_non_inductive inconsistent with j_actuator and j_bootstrap'
