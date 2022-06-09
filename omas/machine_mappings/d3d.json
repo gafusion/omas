@@ -92,7 +92,7 @@
  "coils_non_axisymmetric.coil.:.current.time": {
   "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
  },
-  "coils_non_axisymmetric.coil.:.identifier": {
+ "coils_non_axisymmetric.coil.:.identifier": {
   "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
  },
  "coils_non_axisymmetric.coil.:.name": {
@@ -243,6 +243,9 @@
  },
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
+  "PYTHON": "magnetics_hardware(ods, {pulse},{time_index})"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
@@ -412,6 +415,12 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
+ "magnetics.diamagnetic_flux.0.data": {
+  "TDI": "ptdata2(\"DIAMAG3\",{pulse})"
+ },
+ "magnetics.diamagnetic_flux.0.time": {
+  "TDI": "dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000."
+ },
  "magnetics.diamagnetic_flux.:": {
   "VALUE": 1
  },
@@ -425,6 +434,9 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper": {
   "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.time": {
@@ -466,6 +478,9 @@
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.data_error_upper": {
   "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.current.time": {
@@ -519,12 +534,6 @@
  },
  "tf.r0": {
   "VALUE": 1.6955
- },
-  "magnetics.diamagnetic_flux.0.data": {
-  "TDI": "ptdata2(\"DIAMAG3\",{pulse})"
- },
- "magnetics.diamagnetic_flux.0.time": {
-  "TDI": "dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000."
  },
  "thomson_scattering.channel.:": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
