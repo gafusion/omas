@@ -119,7 +119,7 @@ class TestOmasPhysics(UnittestCaseOmas):
                     and (isinstance(kw['j_bootstrap'], str) and kw['j_bootstrap'] == 'default')
                     and (isinstance(kw['j_non_inductive'], str) and kw['j_non_inductive'] == 'default')
                 )
-                CPC(ODS(), kw=kw, should_RE=should_RE)
+                CPC(ODS(), kw=kw, should_AE=should_AE)
 
         # Try setting three
         for keys in list(itertools.combinations(Js, 3)):
