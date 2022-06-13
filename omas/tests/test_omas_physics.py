@@ -107,19 +107,19 @@ class TestOmasPhysics(UnittestCaseOmas):
         for i, J1 in enumerate(Js):
             kw = copy.deepcopy(jdef)
             kw[J1] = Jval
-            CPC(ODS(), kw=kw, should_RE=(J1 == 'j_actuator'))
+            CPC(ODS(), kw=kw, should_AE=(J1 == 'j_actuator'))
 
             # Now try setting two
             for J2 in Js[i + 1 :]:
                 kw = copy.deepcopy(jdef)
                 kw[J1] = Jval
                 kw[J2] = Jval
-                should_RE = (
+                should_AE = (
                     (not isinstance(kw['j_actuator'], str) or kw['j_actuator'] != 'default')
                     and (isinstance(kw['j_bootstrap'], str) and kw['j_bootstrap'] == 'default')
                     and (isinstance(kw['j_non_inductive'], str) and kw['j_non_inductive'] == 'default')
                 )
-                CPC(ODS(), kw=kw, should_RE=should_RE)
+                CPC(ODS(), kw=kw, should_AE=should_AE)
 
         # Try setting three
         for keys in list(itertools.combinations(Js, 3)):
