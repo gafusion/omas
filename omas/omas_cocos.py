@@ -81,8 +81,8 @@ _cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.elements.centres.phi']
 _cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.elements.end_points.phi']='TOR'                        # 2.000000 # phi  [rad]
 _cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.elements.intermediate_points.phi']='TOR'               # 2.000000 # phi  [rad]
 _cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.elements.start_points.phi']='TOR'                      # 2.000000 # phi  [rad]
-_cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.current.data']='?'                              #[ADD?]# 1.833333 # current  [A]
-_cocos_signals['coils_non_axisymmetric.coil.:.current.data']='?'                                          #[ADD?]# 1.750000 # current  [A]
+_cocos_signals['coils_non_axisymmetric.coil.:.conductor.:.current.data']=None                                    # 1.833333 # current  [A]
+_cocos_signals['coils_non_axisymmetric.coil.:.current.data']=None                                                # 1.750000 # current  [A]
 
 # CONTROLLERS
 
