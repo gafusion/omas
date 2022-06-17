@@ -380,6 +380,9 @@
   "COCOSIO": 11,
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
  "magnetics.b_field_pol_probe.:.field.time": {
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
@@ -415,20 +418,17 @@
  "magnetics.b_field_pol_probe.:.type.index": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
- "magnetics.diamagnetic_flux.0.data": {
-  "TDI": "ptdata2(\"DIAMAG3\",{pulse})"
- },
- "magnetics.diamagnetic_flux.0.time": {
-  "TDI": "dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000."
- },
  "magnetics.diamagnetic_flux.:": {
   "VALUE": 1
  },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[ptdata2(\"DIAMAG3\",{pulse}) * 1E-3]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.diamagnetic_flux.:.time": {
-  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -467,11 +467,14 @@
   "VALUE": 1
  },
  "magnetics.ip.:.data": {
-  "COCOSIO": 1,
-  "TDI": "[ptdata2(\"IP\",{pulse})]"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.ip.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"IP\",{pulse}),0)/1000.]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
@@ -526,11 +529,14 @@
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.data": {
-  "COCOSIO": 1,
-  "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)/1000."
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.r0": {
   "VALUE": 1.6955
