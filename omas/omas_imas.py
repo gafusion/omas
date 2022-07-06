@@ -452,7 +452,7 @@ def infer_fetch_paths(ids, occurrence, paths, time, imas_version, verbose=True):
                     print(f'* {ds.ljust(ndss)} IDS has data ({len(getattr(ids, ds).time)} times)')
                 except Exception as _excp:
                     print(f'* {ds.ljust(ndss)} IDS')
-                fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
+            fetch_paths += filled_paths_in_ids(ids, load_structure(ds, imas_version=imas_version)[1], [], [], requested_paths)
 
         else:
             if verbose:
