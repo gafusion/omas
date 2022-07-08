@@ -609,8 +609,10 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
         ods_n = ODS().copy_attrs_from(ods)
 
     if time_index is None:
+        ods_n['summary.line_average.n_e.value'] = numpy.zeros(len(ods['core_profiles']['profiles_1d']))
         for time_index in range(len(ods['core_profiles']['profiles_1d'])):
-            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)
+            line_average_ne = summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)['interferometer']['channel'][0]['n_e_line_average']['data'][time_index]
+            ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
@@ -1097,8 +1099,8 @@ def core_profiles_pressures(ods, update=True):
                 prof1d_p['ion'][k]['pressure'] += __p__
                 prof1d_p['pressure_parallel'] += __p__
 
-        # extra pressure information that is not within IMAS structure is set only if consistency_check is not True
-        if ods_p.consistency_check is not True:
+        # extra pressure information that is not within IMAS structure is set only if consistency_check is False
+        if ods_p.consistency_check is False:
             prof1d_p['pressure'] = prof1d_p['pressure_perpendicular'] * 2 + prof1d_p['pressure_parallel']
             prof1d_p['pressure_electron_total'] = prof1d_p['pressure_thermal'] - prof1d_p['pressure_ion_total']
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
@@ -1423,9 +1425,9 @@ def core_profiles_currents(
     # CONSISTENCY?
     # ===============
 
-    if (j_actuator is not None) and (j_bootstrap is None):
-        err = "Cannot set j_actuator without j_bootstrap provided or calculable"
-        raise RuntimeError(err)
+    err = "Cannot set j_actuator without j_bootstrap provided or calculable"
+    if (j_actuator is not None):
+        assert j_bootstrap is not None, err
 
     # j_non_inductive
     err = 'j_non_inductive inconsistent with j_actuator and j_bootstrap'
