@@ -45,16 +45,23 @@ def pf_active_hardware(ods, pulse):
         if 'OH' in ods[f'pf_active.coil'][c]['name']:
             c_oh += 1
             cname = oh_signals[c_oh]['name']
-            cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
+            if oh_signals[c_oh]['mds_name_resolved'] is None:
+                cid = 'None'
+            else:
+                cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
         else:
             c_pf += 1
             cname = icoil_signals[c_pf]['name']
-            cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
-        for e in ods[f'pf_active.coil'][c]['element']:
-            if 'OH' in ods[f'pf_active.coil'][c]['name']:
-                ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            if icoil_signals[c_pf]['mds_name_resolved'] is None:
+                cid = 'None'
             else:
-                ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+                cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
+        for e in ods[f'pf_active.coil'][c]['element']:
+            #if 'OH' in ods[f'pf_active.coil'][c]['name']:
+            #    ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            #else:
+            #    ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            ename = cid + f'_element_{e}'
             eid = ename
             ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
