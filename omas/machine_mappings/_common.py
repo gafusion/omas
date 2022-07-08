@@ -220,7 +220,6 @@ def fetch_assign(
             signal = ods1[identifier.format(**locals())]
             TDI = tdi_expression.format(**locals())
             TDIs.append(TDI)
-            print(TDI)
             if not homogeneous_time:
                 TDIs.append(f'dim_of({TDI},0)')
             elif stage == 'fetch' and t is None:
@@ -234,21 +233,16 @@ def fetch_assign(
                 if homogeneous_time and t is None:
                     raise RuntimeError(f'Could not determine time info from {TDI} signals')
                 time_loc  = str(time.format(**locals()))
-                print(time.format(**locals()))
                 if 'None' in TDI and validity is None:
                     
-                    print(time.format(**locals()))
                     time_loc = time.format(**locals())
-                    #ods[time_loc[:-5]] = ODS()
                     if not homogeneous_time:
                         ods[time_loc] =[0.,1e10]
                     else:
                         ods[time.format(**locals())] = t * time_norm
-                    print(TDI)
                     ods[data.format(**locals())] = np.zeros(len(ods[time.format(**locals())] ))
                     ods[data.format(**locals())][:] = np.nan 
                 elif not isinstance(tmp[TDI], Exception):
-                    print(TDI) 
                     if not homogeneous_time:
                         ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
                     else:
