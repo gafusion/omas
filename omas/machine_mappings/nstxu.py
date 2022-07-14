@@ -57,9 +57,9 @@ def pf_active_hardware(ods, pulse):
             else:
                 cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
         for e in ods[f'pf_active.coil'][c]['element']:
-            #if 'OH' in ods[f'pf_active.coil'][c]['name']:
+            # if 'OH' in ods[f'pf_active.coil'][c]['name']:
             #    ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
-            #else:
+            # else:
             #    ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
             ename = cid + f'_element_{e}'
             eid = ename

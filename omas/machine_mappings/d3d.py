@@ -303,6 +303,7 @@ def pf_active_hardware(ods, pulse):
         ods['pf_active.coil'][k]['element.0.name'] = fcid
         ods['pf_active.coil'][k]['element.0.identifier'] = fcid
 
+
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
     # get pf_active hardware description --without-- placing the data in this ods
@@ -326,7 +327,7 @@ def pf_active_coil_current_data(ods, pulse):
             tdi_expression='ptdata2("{signal}",{pulse})',
             time_norm=0.001,
             data_norm=1.0,
-            homogeneous_time=False
+            homogeneous_time=False,
         )
 
         # fetch uncertainties
@@ -339,8 +340,9 @@ def pf_active_coil_current_data(ods, pulse):
         for k in ods1['pf_active.coil']:
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
-            ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4])*np.ones(nt)*10.
-            
+            ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+
+
 # ================================
 @machine_mapping_function(__regression_arguments__)
 def coils_non_axisymmetric_hardware(ods, pulse):
@@ -351,19 +353,21 @@ def coils_non_axisymmetric_hardware(ods, pulse):
     """
 
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
+
     coil_names = []
-    for compfile in ['ccomp','icomp']:
+    for compfile in ['ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
-        compshot=-1
+        compshot = -1
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
-                
-        coil_names+= list(comp[compshot].keys())
+
+        coil_names += list(comp[compshot].keys())
 
     for k, fcid in enumerate(coil_names):
         ods['coils_non_axisymmetric.coil'][k]['name'] = fcid
         ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
+
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_current_data(ods, pulse):
@@ -389,6 +393,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
+
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
@@ -1038,10 +1043,11 @@ def magnetics_weights(ods, pulse, time_index):
     fitweight = get_support_file(OMFITd3dfitweight, support_filenames('d3d', 'fitweight', pulse))
     weight_ishot = -1
     for ishot in fitweight:
-        if (pulse > ishot and ishot > weight_ishot):
+        if pulse > ishot and ishot > weight_ishot:
             weight_ishot = ishot
     ods['equilibrium.time_slice.{time_index}.constraints.bpol_probe.:.weight'] = fitweight[weight_ishot]['fwtmp2']
-    ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']        
+    ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
+
 
 @machine_mapping_function(__regression_arguments__)
 def magnetics_hardware(ods, pulse):
@@ -1057,8 +1063,9 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse,nref = 0):
+def magnetics_floops_data(ods, pulse, nref=0):
     from scipy.interpolate import interp1d
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
@@ -1078,29 +1085,30 @@ def magnetics_floops_data(ods, pulse,nref = 0):
             time_norm=0.001,
             data_norm=1.0,
         )
- 
-    # Set reference flux loop to zero before 
-    ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.
+
+    # Set reference flux loop to zero before
+    ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.0
 
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
-    for compfile in ['btcomp','ccomp','icomp']:
+
+    for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
-        compshot=-1
+        compshot = -1
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
         for compsig in comp[compshot]:
-            if compsig == 'N1COIL' and pulse>112962:
-                continue 
+            if compsig == 'N1COIL' and pulse > 112962:
+                continue
             m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
             compsig_data = m.data()
-            compsig_time = m.dim_of(0)/1000.0
+            compsig_time = m.dim_of(0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
                 if f'magnetics.flux_loop.{channel}.identifier' in ods1:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
                     sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    compsig_data_interp = interp1d(compsig_time,compsig_data,bounds_error=False,fill_value=(0,0))(sigraw_time)
+                    compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
                     ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
     # fetch uncertainties
@@ -1113,15 +1121,14 @@ def magnetics_floops_data(ods, pulse,nref = 0):
     for k in ods1['magnetics.flux_loop']:
         identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
-        ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10*abs(data[identifier][3] * data[identifier][4])*np.ones(nt)
-        
+        ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    
+
     with omas_environment(ods, cocosio=1):
         fetch_assign(
             ods,
@@ -1139,30 +1146,29 @@ def magnetics_probes_data(ods, pulse):
             data_norm=1.0,
         )
 
-
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
-    for compfile in ['btcomp','ccomp','icomp']:
+
+    for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
-        compshot=-1
+        compshot = -1
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
         for compsig in comp[compshot]:
-            if compsig == 'N1COIL' and pulse>112962:
-                continue 
+            if compsig == 'N1COIL' and pulse > 112962:
+                continue
             m = mdsvalue('d3d', pulse=pulse, TDI=f"[ptdata2(\"{compsig}\",{pulse})]", treename=None)
             compsig_data = m.data()
-         
-            compsig_time = m.dim_of(0)/1000
+
+            compsig_time = m.dim_of(0) / 1000
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods1:
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
                     sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
 
-                    compsig_data_interp = np.interp(sigraw_time,compsig_time,compsig_data)
+                    compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
-
 
     # fetch uncertainties
     TDIs = {}
@@ -1171,13 +1177,13 @@ def magnetics_probes_data(ods, pulse):
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
 
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
-    
+
     for k in ods1['magnetics.b_field_pol_probe']:
 
         identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
 
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
-        ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4])*np.ones(nt)*10.
+        ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1190,31 +1196,29 @@ def ip_bt_dflux_data(ods, pulse):
     :param pulse: shot number
     """
 
-
-    mappings = { 'magnetics.ip.0':'IP',
-                 'tf.b_field_tor_vacuum_r':'BT',
-                 'magnetics.diamagnetic_flux.0':'DIAMAG3'}
+    mappings = {'magnetics.ip.0': 'IP', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
 
     with omas_environment(ods, cocosio=1):
         TDIs = {}
-        for key,val in mappings.items():
-            TDIs[key+'.data'] = f'ptdata("{val}",{pulse})'
-            TDIs[key+'.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
-            TDIs[key+'.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
-            
+        for key, val in mappings.items():
+            TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
+            TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
+            TDIs[key + '.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
+
         data = mdsvalue('d3d', None, pulse, TDIs).raw()
         for key in TDIs.keys():
             if 'data_error_upper' in key:
                 nt = len(ods[key[:-12]])
-                ods[key] = abs(data[key][3] * data[key][4])*np.ones(nt)*10.
+                ods[key] = abs(data[key][3] * data[key][4]) * np.ones(nt) * 10.0
             else:
                 ods[key] = data[key]
-                
-            if 'magnetics.diamagnetic_flux.0.data' in key:
-               ods[key]*=1e-3 
 
-        ods['tf.b_field_tor_vacuum_r.data']*=1.6955
-            
+            if 'magnetics.diamagnetic_flux.0.data' in key:
+                ods[key] *= 1e-3
+
+        ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
+
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):
@@ -1234,7 +1238,6 @@ def core_profiles_global_quantities_data(ods, pulse):
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
 
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.NaN)(t)
-
 
 
 # ================================

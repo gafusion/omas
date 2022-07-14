@@ -8,7 +8,7 @@ OMAS at ITER
 
 2. Load the IMAS and OMAS unix modules::
 
-       >> module load IMAS OMAS
+       >> module load OMAS IMAS
 
 Access ITER data
 ================
