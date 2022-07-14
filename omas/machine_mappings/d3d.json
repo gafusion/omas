@@ -11,6 +11,7 @@
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
   "fast_ece": false,
+  "nref": 0,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
@@ -434,16 +435,16 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"

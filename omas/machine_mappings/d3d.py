@@ -373,7 +373,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
     unwrap(coils_non_axisymmetric_hardware)(ods1, pulse)
 
     # fetch the actual pf_active currents data
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods):
         fetch_assign(
             ods,
             ods1,
@@ -1057,7 +1057,8 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse):
+def magnetics_floops_data(ods, pulse,nref = 0):
+    from scipy.interpolate import interp1d
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
@@ -1077,7 +1078,10 @@ def magnetics_floops_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
-    
+ 
+    # Set reference flux loop to zero before 
+    ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.
+
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
     for compfile in ['btcomp','ccomp','icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
@@ -1086,16 +1090,17 @@ def magnetics_floops_data(ods, pulse):
             if pulse > compshot:
                 compshot = shot
         for compsig in comp[compshot]:
-            m = mdsvalue('d3d', pulse=pulse, TDI=f"[ptdata2(\"{compsig}\",{pulse})]", treename=None)
+            if compsig == 'N1COIL' and pulse>112962:
+                continue 
+            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
             compsig_data = m.data()
-            compsig_time = m.dim_of(1)/1000
-            for channel in ods1['magnetics.flux_loop']:
-                if 'magnetics.flux_loop.{channel}.identifier' in ods:
-                    sig = 'magnetics.flux_loop.{channel}.identifier'
-                    sigraw_data = ods1[f'magnetics.flux_loop.{channel}.flux.data']
-                    sigraw_time = ods1[f'magnetics.flux_loop.{channel}.flux.time']
-
-                    compsig_data_interp = np.interp(sigraw_time,compsig_time,compsig_data)
+            compsig_time = m.dim_of(0)/1000.0
+            for channel in ods['magnetics.flux_loop']:
+                if f'magnetics.flux_loop.{channel}.identifier' in ods1:
+                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                    sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
+                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                    compsig_data_interp = interp1d(compsig_time,compsig_data,bounds_error=False,fill_value=(0,0))(sigraw_time)
                     ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
     # fetch uncertainties
@@ -1134,7 +1139,7 @@ def magnetics_probes_data(ods, pulse):
             data_norm=1.0,
         )
 
-    
+
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
     for compfile in ['btcomp','ccomp','icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
@@ -1143,17 +1148,21 @@ def magnetics_probes_data(ods, pulse):
             if pulse > compshot:
                 compshot = shot
         for compsig in comp[compshot]:
+            if compsig == 'N1COIL' and pulse>112962:
+                continue 
             m = mdsvalue('d3d', pulse=pulse, TDI=f"[ptdata2(\"{compsig}\",{pulse})]", treename=None)
             compsig_data = m.data()
-            compsig_time = m.dim_of(1)/1000
+         
+            compsig_time = m.dim_of(0)/1000
             for channel in ods1['magnetics.b_field_pol_probe']:
-                if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods:
+                if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods1:
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
-                    sigraw_data = ods1[f'magnetics.b_field_pol_probe.{channel}.field.data']
-                    sigraw_time = ods1[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                    sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
+                    sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
 
                     compsig_data_interp = np.interp(sigraw_time,compsig_time,compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+
 
     # fetch uncertainties
     TDIs = {}
