@@ -11,6 +11,7 @@
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
   "fast_ece": false,
+  "nref": 0,
   "revision": "BLESSED"
  },
  "bolometer.channel.:": {
@@ -81,6 +82,22 @@
  },
  "charge_exchange.channel.:.position.z.time": {
   "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+ },
+ "coils_non_axisymmetric.coil.:": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.current.time": {
+  "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.identifier": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
+ },
+ "coils_non_axisymmetric.coil.:.name": {
+  "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
  },
  "core_profiles.global_quantities.v_loop": {
   "COCOSIO": 11,
@@ -228,6 +245,9 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
+  "PYTHON": "magnetics_hardware(ods, {pulse},{time_index})"
+ },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
@@ -361,6 +381,9 @@
   "COCOSIO": 11,
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+ },
  "magnetics.b_field_pol_probe.:.field.time": {
   "PYTHON": "magnetics_probes_data(ods, {pulse})"
  },
@@ -400,22 +423,28 @@
   "VALUE": 1
  },
  "magnetics.diamagnetic_flux.:.data": {
-  "TDI": "[ptdata2(\"DIAMAG3\",{pulse}) * 1E-3]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.diamagnetic_flux.:.time": {
-  "TDI": "[dim_of(ptdata2(\"DIAMAG3\",{pulse}),0)/1000.]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -439,17 +468,23 @@
   "VALUE": 1
  },
  "magnetics.ip.:.data": {
-  "COCOSIO": 1,
-  "TDI": "[ptdata2(\"IP\",{pulse})]"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.ip.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "magnetics.ip.:.time": {
-  "TDI": "[dim_of(ptdata2(\"IP\",{pulse}),0)/1000.]"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.data_error_upper": {
   "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
  },
  "pf_active.coil.:.current.time": {
@@ -495,11 +530,14 @@
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.data": {
-  "COCOSIO": 1,
-  "TDI": "ptdata2(\"BT\",{pulse})*1.6955"
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "TDI": "dim_of(ptdata2(\"BT\",{pulse}),0)/1000."
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
  "tf.r0": {
   "VALUE": 1.6955

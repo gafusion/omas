@@ -611,7 +611,9 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     if time_index is None:
         ods_n['summary.line_average.n_e.value'] = numpy.zeros(len(ods['core_profiles']['profiles_1d']))
         for time_index in range(len(ods['core_profiles']['profiles_1d'])):
-            line_average_ne = summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)['interferometer']['channel'][0]['n_e_line_average']['data'][time_index]
+            line_average_ne = summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)[
+                'interferometer'
+            ]['channel'][0]['n_e_line_average']['data'][time_index]
             ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
         return ods_n
 
@@ -1426,7 +1428,7 @@ def core_profiles_currents(
     # ===============
 
     err = "Cannot set j_actuator without j_bootstrap provided or calculable"
-    if (j_actuator is not None):
+    if j_actuator is not None:
         assert j_bootstrap is not None, err
 
     # j_non_inductive

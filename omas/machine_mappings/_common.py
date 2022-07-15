@@ -232,7 +232,16 @@ def fetch_assign(
             if stage == 'assign':
                 if homogeneous_time and t is None:
                     raise RuntimeError(f'Could not determine time info from {TDI} signals')
-                if not isinstance(tmp[TDI], Exception):
+                time_loc = str(time.format(**locals()))
+                if 'None' in TDI and validity is None:
+                    time_loc = time.format(**locals())
+                    if not homogeneous_time:
+                        ods[time_loc] = [0.0, 1e10]
+                    else:
+                        ods[time.format(**locals())] = t * time_norm
+                    ods[data.format(**locals())] = np.zeros(len(ods[time.format(**locals())]))
+                    ods[data.format(**locals())][:] = np.nan
+                elif not isinstance(tmp[TDI], Exception):
                     if not homogeneous_time:
                         ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
                     else:
