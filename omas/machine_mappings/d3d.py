@@ -1065,6 +1065,7 @@ def magnetics_hardware(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_floops_data(ods, pulse, nref=0):
     from scipy.interpolate import interp1d
+    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
@@ -1088,8 +1089,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
 
     # Set reference flux loop to zero before
     ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.0
-
-    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
@@ -1126,6 +1125,8 @@ def magnetics_floops_data(ods, pulse, nref=0):
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_probes_data(ods, pulse):
+    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
+
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
@@ -1146,8 +1147,6 @@ def magnetics_probes_data(ods, pulse):
             data_norm=1.0,
         )
 
-    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
-
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
@@ -1166,7 +1165,6 @@ def magnetics_probes_data(ods, pulse):
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
                     sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
-
                     compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
@@ -1179,9 +1177,7 @@ def magnetics_probes_data(ods, pulse):
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
 
     for k in ods1['magnetics.b_field_pol_probe']:
-
         identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
-
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
