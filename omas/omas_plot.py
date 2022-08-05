@@ -2495,20 +2495,25 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                     for vessel_type in ods[f'wall.description_2d[{component}].{type}.unit.{unit}']:
                         if vessel_type == "annular":
                             for line in ["centreline", "outline_inner", "outline_outer"]:
-                                _plot_outline_closed_if_exist(ods[
-                                                                  f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}.{line}'],
-                                                              ax, **kw)
+                                _plot_outline_closed_if_exist(
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}.{line}'],
+                                    ax,
+                                    **kw
+                                )
                         elif vessel_type == "element":
                             for element in ods[f'wall.description_2d[{component}].{type}.unit.{unit}.{vessel_type}']:
-                                _plot_outline_closed_if_exist(ods[
-                                                                  f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}[{element}].outline'],
-                                                              ax, **kw)
+                                _plot_outline_closed_if_exist(
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}[{element}].outline'],
+                                    ax,
+                                    **kw
+                                )
 
                 else:
-                    _plot_outline_closed_if_exist(ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline'],
-                                                  ax,
-                                                  **kw
-                                                  )
+                    _plot_outline_closed_if_exist(
+                        ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline'],
+                        ax,
+                        **kw
+                    )
 
     ax.set_aspect('equal')
 
