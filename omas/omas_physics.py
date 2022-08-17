@@ -212,6 +212,13 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+
+def remove_integrator_drift(data, time, time_after_shot):
+    #assume that the drift is zero at time[0]
+    ind = time > time_after_shot    
+    return data-(time-time[0])/(time[ind].mean()-time[0])*data[ind].mean(0)
+    
+    
 @add_to__ODS__
 def equilibrium_form_constraints(
     ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None,rm_integr_drift_after=None, update=True, **nuconv_kw
