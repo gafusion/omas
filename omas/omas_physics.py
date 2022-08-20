@@ -213,7 +213,7 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
     return ods_n
 
 
-def remove_integrator_drift(data, time, time_after_shot):
+def remove_integrator_drift(time, data, time_after_shot):
     #assume that the drift is zero at time[0]
     ind = time > time_after_shot    
     return data-(time-time[0])/(time[ind].mean()-time[0])*data[ind].mean(0)
