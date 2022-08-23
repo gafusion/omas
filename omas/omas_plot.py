@@ -1536,7 +1536,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs ** kw)
+            return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs**kw)
 
     colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
     lss = ['-', '--', 'dotted']
@@ -1978,8 +1978,8 @@ def lh_antennas_CX(ods, time_index=None, time=None, ax=None, antenna_trajectory=
         Rvec = Raxis - R
         Zvec = Zaxis - Z
 
-        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
-        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
+        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec**2 + Zvec**2)
+        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec**2 + Zvec**2)
 
         ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
@@ -2433,6 +2433,7 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_ov
 
     return {'ax': ax}
 
+
 def _plot_outline_closed_if_exist(ods, ax, **kw):
     if ods:
         closed = ods.get("closed", "True")
@@ -2445,6 +2446,7 @@ def _plot_outline_closed_if_exist(ods, ax, **kw):
             y = ods["z"]
 
         ax.plot(x, y, **kw)
+
 
 @add_to__ODS__
 def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
@@ -2496,24 +2498,16 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                         if vessel_type == "annular":
                             for line in ["centreline", "outline_inner", "outline_outer"]:
                                 _plot_outline_closed_if_exist(
-                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}.{line}'],
-                                    ax,
-                                    **kw
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}.{line}'], ax, **kw
                                 )
                         elif vessel_type == "element":
                             for element in ods[f'wall.description_2d[{component}].{type}.unit.{unit}.{vessel_type}']:
                                 _plot_outline_closed_if_exist(
-                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}[{element}].outline'],
-                                    ax,
-                                    **kw
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}[{element}].outline'], ax, **kw
                                 )
 
                 else:
-                    _plot_outline_closed_if_exist(
-                        ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline'],
-                        ax,
-                        **kw
-                    )
+                    _plot_outline_closed_if_exist(ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline'], ax, **kw)
 
     ax.set_aspect('equal')
 

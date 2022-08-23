@@ -128,7 +128,7 @@ def pf_active_coil_current_data(ods, pulse):
             data = ods[f'pf_active.coil.{channel}.current.data']
             rel_error = data * sig['rel_error']
             abs_error = sig['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
@@ -208,7 +208,7 @@ def magnetics_floops_data(ods, pulse):
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
             abs_error = tfl_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
             # 2*pi normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
@@ -254,7 +254,7 @@ def magnetics_probes_data(ods, pulse):
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
@@ -323,7 +323,7 @@ def ip_bt_dflux_data(ods, pulse):
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error'] * signals[item][0]['scale']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
                 signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )

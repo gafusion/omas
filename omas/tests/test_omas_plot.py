@@ -101,7 +101,7 @@ class TestOmasPlot(UnittestCaseOmas):
         xe = (x[1] - x[0]) * 0.75 + x * 0
         ux = unumpy.uarray(x, xe)
 
-        y = 2 * x ** 2
+        y = 2 * x**2
         e = 0.1 + y * 0.01 + x * 0.01
         u = unumpy.uarray(y, e)
 
