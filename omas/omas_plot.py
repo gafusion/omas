@@ -2042,7 +2042,7 @@ def lh_antennas_CX_topview(ods, time_index=None, time=None, ax=None, antenna_tra
 
 
 @add_to__ODS__
-def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX(ods, time_index=None, time=None, ax=None, beam_trajectory=None, **kw):
     """
     Plot EC launchers in poloidal cross-section
 
@@ -2059,7 +2059,7 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_trajectory: length of launcher on plot
+    :param beam_trajectory: length of launcher on plot
 
     :return: axes handler
     """
@@ -2069,7 +2069,7 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, beam_trajectory=beam_trajectory, **kw)
 
     from matplotlib import pyplot
 
@@ -2100,7 +2100,7 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
 
 
 @add_to__ODS__
-def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, beam_trajectory=None, **kw):
     """
     Plot EC launchers in toroidal cross-section
 
@@ -2117,7 +2117,7 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_trajectory: length of launcher on plot
+    :param beam_trajectory: length of launcher on plot
 
     :return: axes handler
     """
@@ -2127,7 +2127,7 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, beam_trajectory=beam_trajectory, **kw)
 
     from matplotlib import pyplot
 
