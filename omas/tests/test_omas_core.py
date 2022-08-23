@@ -480,20 +480,20 @@ class TestOmasCore(UnittestCaseOmas):
         # test loading CodeParameters from a json
         ods = ODS().load(omas_dir + 'samples/ods_w_code_parameters.json')
         # test traversing ODS and code parameters with OMAS syntax
-        assert ods['ec_launchers.code.parameters.launcher.0.mharm'] == 2
+        assert ods['ec_launchers.code.parameters.beam.0.mharm'] == 2
         # test that sub-tree elements of code parameters are also of CodeParameters class
-        assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
+        assert isinstance(ods['ec_launchers.code.parameters.beam'], CodeParameters)
         # test to_string and from_string methods
         with omas_environment(ods, xmlcodeparams=True):
             code_parameters_string = ods['ec_launchers.code.parameters']
             tmp = CodeParameters().from_string(code_parameters_string)
-            assert isinstance(tmp['launcher'], CodeParameters)
-            assert tmp['launcher.0.mharm'] == 2
+            assert isinstance(tmp['beam'], CodeParameters)
+            assert tmp['beam.0.mharm'] == 2
         # test that CodeParameters are restored after xmlcodeparams=True environment
         assert isinstance(ods['ec_launchers.code.parameters'], CodeParameters)
-        assert isinstance(ods['ec_launchers.code.parameters.launcher'], CodeParameters)
-        assert isinstance(ods['ec_launchers.code.parameters.launcher.0'], CodeParameters)
-        assert len(ods['ec_launchers.code.parameters.launcher.0']) == 2
+        assert isinstance(ods['ec_launchers.code.parameters.beam'], CodeParameters)
+        assert isinstance(ods['ec_launchers.code.parameters.beam.0'], CodeParameters)
+        assert len(ods['ec_launchers.code.parameters.beam.0']) == 2
 
     def test_latexit(self):
         assert latexit['somewhere.:.sublocation.n_e'] == '$n_e$'

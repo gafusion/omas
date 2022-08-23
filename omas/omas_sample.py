@@ -753,19 +753,17 @@ def ec_launchers(ods, ngyros=2, ntimes=6):
     ods['ec_launchers.ids_properties.homogeneous_time'] = 1
     for gyro in range(ngyros):
         ods['ec_launchers']['time'] = times
-        ods['ec_launchers']['launcher'][gyro]['identifier'] = 'GYRO_' + str(gyro)
-        ods['ec_launchers']['launcher'][gyro]['frequency']['data'] = ones * 110e9
+        ods['ec_launchers']['beam'][gyro]['identifier'] = 'GYRO_' + str(gyro)
+        ods['ec_launchers']['beam'][gyro]['frequency']['data'] = ones * 110e9
 
-        ods['ec_launchers']['launcher'][gyro]['launching_position']['phi'] = 0.0 * ones
-        ods['ec_launchers']['launcher'][gyro]['launching_position']['r'] = 2.4 * ones
-        ods['ec_launchers']['launcher'][gyro]['launching_position']['z'] = 0.68 * ones
-        ods['ec_launchers']['launcher'][gyro]['mode']['data'] = -1.0 * ones
-        ods['ec_launchers']['launcher'][gyro]['power_launched']['data'] = 0.5e6 * (
-            ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros)
-        )
+        ods['ec_launchers']['beam'][gyro]['launching_position']['phi'] = 0.0 * ones
+        ods['ec_launchers']['beam'][gyro]['launching_position']['r'] = 2.4 * ones
+        ods['ec_launchers']['beam'][gyro]['launching_position']['z'] = 0.68 * ones
+        ods['ec_launchers']['beam'][gyro]['mode'] = -1
+        ods['ec_launchers']['beam'][gyro]['power_launched']['data'] = 0.5e6 * (ones - 0.5 * numpy.cos(2 * numpy.pi * times + gyro / ngyros))
 
-        ods['ec_launchers']['launcher'][gyro]['steering_angle_pol']['data'] = 0.61 * ones
-        ods['ec_launchers']['launcher'][gyro]['steering_angle_tor']['data'] = 0.0 * ones
+        ods['ec_launchers']['beam'][gyro]['steering_angle_pol'] = 0.61 * ones
+        ods['ec_launchers']['beam'][gyro]['steering_angle_tor'] = 0.0 * ones
 
     return ods
 
