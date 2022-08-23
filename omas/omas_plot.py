@@ -2077,23 +2077,23 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
         ax = pyplot.gca()
 
     equilibrium = ods['equilibrium']
-    launchers = ods['ec_launchers.launcher']
-    if launcher_trajectory is None:
-        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    beams = ods['ec_launchers']['beam']
+    if beam_trajectory is None:
+        beam_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
-    for launcher in launchers:
-        R0 = launchers[launcher]['launching_position.r']
-        Z0 = launchers[launcher]['launching_position.z']
-        ang_tor = launchers[launcher]['steering_angle_tor.data']
-        ang_pol = launchers[launcher]['steering_angle_pol.data']
+    for beam in beams:
+        R0 = beams[beam]['launching_position.r']
+        Z0 = beams[beam]['launching_position.z']
+        ang_tor = beams[beam]['steering_angle_tor']
+        ang_pol = beams[beam]['steering_angle_pol']
         ang_pol_proj = 0.5 * numpy.pi - numpy.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
 
-        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol_proj)
-        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol_proj)
+        R1 = R0 - beam_trajectory * numpy.cos(ang_pol_proj)
+        Z1 = Z0 - beam_trajectory * numpy.sin(ang_pol_proj)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
-        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol)
-        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol)
+        R1 = R0 - beam_trajectory * numpy.cos(ang_pol)
+        Z1 = Z0 - beam_trajectory * numpy.sin(ang_pol)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
     return {'ax': ax}
@@ -2135,19 +2135,19 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
         ax = pyplot.gca()
 
     equilibrium = ods['equilibrium']
-    launchers = ods['ec_launchers.launcher']
-    if launcher_trajectory is None:
-        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    beams = ods['ec_launchers']['beam']
+    if beam_trajectory is None:
+        beam_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
-    for launcher in launchers:
-        R = launchers[launcher]['launching_position.r']
-        phi = launchers[launcher]['launching_position.phi']
-        ang_tor = launchers[launcher]['steering_angle_tor.data']
+    for beam in beams:
+        R = beams[beam]['launching_position.r']
+        phi = beams[beam]['launching_position.phi']
+        ang_tor = beams[beam]['steering_angle_tor']
 
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
-        x1 = x0 - launcher_trajectory * numpy.cos(ang_tor + phi)
-        y1 = y0 - launcher_trajectory * numpy.sin(ang_tor + phi)
+        x1 = x0 - beam_trajectory * numpy.cos(ang_tor + phi)
+        y1 = y0 - beam_trajectory * numpy.sin(ang_tor + phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return {'ax': ax}
