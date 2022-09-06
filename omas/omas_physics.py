@@ -602,7 +602,7 @@ def summary_greenwald(ods, update=True):
                     "Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
                 )
                 nel.append(ne_vol_avg)
-    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a**2)
     return ods_n
 
 
@@ -833,10 +833,10 @@ def summary_taue(ods, thermal=True, update=True):
                 * abs(bt) ** 0.15
                 * (nel / 1e19) ** 0.41
                 * (power_loss / 1e6) ** -0.69
-                * r_major ** 1.97
-                * kappa ** 0.78
-                * aspect ** -0.58
-                * isotope_factor ** 0.19
+                * r_major**1.97
+                * kappa**0.78
+                * aspect**-0.58
+                * isotope_factor**0.19
             )  # [s]
             for k in ['kappa', 'bt', 'ip', 'nel', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
@@ -1239,7 +1239,7 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False, enforce_qu
         for k in range(len(prof1d['ion'])):
             Z = prof1d['ion'][k]['element'][0]['z_n']  # from old ODS
             n = prof1d_z['ion'][k]['density']  # from new ODS
-            Z2n += n * Z ** 2
+            Z2n += n * Z**2
             Zn += n * Z
         if use_electrons_density:
             prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
@@ -1949,7 +1949,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
     dpdpsi = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
 
     # diamagnetic term to get included with bootstrap currrent
-    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f ** 2 / fsa_B2)
+    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f**2 / fsa_B2)
     JtoR_dia *= cocos['sigma_Bp'] * (2.0 * numpy.pi) ** cocos['exp_Bp']
 
     if JtoR is not None:
