@@ -492,6 +492,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
 
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=140001)
 def thomson_scattering_hardware(ods, pulse):
@@ -511,29 +512,29 @@ def thomson_scattering_data(ods, pulse):
 
     :param pulse: int
     """
-    
 
-    signals = ['FIT_NE', 'FIT_NE_ERR','FIT_TE','FIT_TE_ERR','FIT_RADII','TS_TIMES']
-    signals_norm = {'FIT_NE':1.0,'FIT_NE_ERR':1.0,'FIT_TE':1e3,'FIT_TE_ERR':1e3,'FIT_RADII':1e-2,'TS_TIMES':1.0}
+    signals = ['FIT_NE', 'FIT_NE_ERR', 'FIT_TE', 'FIT_TE_ERR', 'FIT_RADII', 'TS_TIMES']
+    signals_norm = {'FIT_NE': 1.0, 'FIT_NE_ERR': 1.0, 'FIT_TE': 1e3, 'FIT_TE_ERR': 1e3, 'FIT_RADII': 1e-2, 'TS_TIMES': 1.0}
 
     TDIs = {}
     for item in signals:
         TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
-        TDIs[item] = '\\'+TDI.strip('\\')
+        TDIs[item] = '\\' + TDI.strip('\\')
     res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
-    print(res)
-    for i,R in enumerate(res['FIT_RADII']):
+
+    for i, R in enumerate(res['FIT_RADII']):
         ch = ods['thomson_scattering']['channel'][i]
-        ch['name'] =  'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST'+str(i)
-        ch['identifier'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST'+str(i)
+        ch['name'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
+        ch['identifier'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
         ch['position']['r'] = R * signals_norm['FIT_RADII']
         ch['position']['z'] = 0.0
         ch['n_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
-        ch['n_e.data'] = res['FIT_NE'][i,:] * signals_norm['FIT_NE']
-        ch['n_e.data_error_upper'] = res['FIT_NE_ERR'][i,:] * signals_norm['FIT_NE_ERR']
+        ch['n_e.data'] = res['FIT_NE'][i, :] * signals_norm['FIT_NE']
+        ch['n_e.data_error_upper'] = res['FIT_NE_ERR'][i, :] * signals_norm['FIT_NE_ERR']
         ch['t_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
-        ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i,:] * signals_norm['FIT_TE_ERR']
-        ch['t_e.data'] = res['FIT_TE'][i,:] * signals_norm['FIT_TE']
+        ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i, :] * signals_norm['FIT_TE_ERR']
+        ch['t_e.data'] = res['FIT_TE'][i, :] * signals_norm['FIT_TE']
+
 
 # =====================
 if __name__ == '__main__':

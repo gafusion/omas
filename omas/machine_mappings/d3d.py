@@ -294,9 +294,32 @@ def pf_active_hardware(ods, pulse):
     mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
-    coil_names=  ['F1A','F2A','F3A','F4A','F5A','F6A','F7A','F8A','F9A',
-                   'F2B','F2B','F3B','F4B','F5B','F6B','F7B','F8B','F9B',
-                   'ECOILA','ECOILB','E567UP','E567DN','E89DN', 'E89UP']
+    coil_names = [
+        'F1A',
+        'F2A',
+        'F3A',
+        'F4A',
+        'F5A',
+        'F6A',
+        'F7A',
+        'F8A',
+        'F9A',
+        'F2B',
+        'F2B',
+        'F3B',
+        'F4B',
+        'F5B',
+        'F6B',
+        'F7B',
+        'F8B',
+        'F9B',
+        'ECOILA',
+        'ECOILB',
+        'E567UP',
+        'E567DN',
+        'E89DN',
+        'E89UP',
+    ]
     for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
         ods['pf_active.coil'][k]['identifier'] = fcid
