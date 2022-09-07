@@ -496,7 +496,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
 @machine_mapping_function(__regression_arguments__, pulse=140001)
 def thomson_scattering_hardware(ods, pulse):
     """
-    Gathers DIII-D Thomson measurement locations
+    Gathers NSTX(-U) Thomson measurement locations
 
     :param pulse: int
 
