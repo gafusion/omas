@@ -87,7 +87,6 @@
   "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
  },
  "coils_non_axisymmetric.coil.:.current.data": {
-  "COCOSIO": 11,
   "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
  },
  "coils_non_axisymmetric.coil.:.current.time": {
@@ -126,85 +125,61 @@
  "core_profiles.time": {
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
- "ec_launchers.launcher.:": {
+ "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.beam.phase.angle.data": {
+ "ec_launchers.beam.:.frequency.data": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.beam.phase.angle.time": {
+ "ec_launchers.beam.:.frequency.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.beam.phase.curvature.data": {
+ "ec_launchers.beam.:.identifier": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.beam.phase.curvature.time": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.beam.spot.angle.data": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.beam.spot.angle.time": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.beam.spot.size.data": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.beam.spot.size.time": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.frequency.data": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.frequency.time": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.identifier": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.launching_position.phi": {
+ "ec_launchers.beam.:.launching_position.phi": {
   "COCOSIO": 11,
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.launching_position.r": {
+ "ec_launchers.beam.:.launching_position.r": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.launching_position.r:": {
+ "ec_launchers.beam.:.launching_position.z": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.launching_position.time": {
+ "ec_launchers.beam.:.mode": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.launching_position.z": {
+ "ec_launchers.beam.:.name": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.mode.data": {
+ "ec_launchers.beam.:.phase.angle": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.mode.time": {
+ "ec_launchers.beam.:.phase.curvature": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.name": {
+ "ec_launchers.beam.:.power_launched.data": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.power_launched.data": {
+ "ec_launchers.beam.:.power_launched.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.power_launched.time": {
+ "ec_launchers.beam.:.spot.angle": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.steering_angle_pol.data": {
+ "ec_launchers.beam.:.spot.size": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.beam.:.steering_angle_pol": {
   "COCOSIO": 11,
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.steering_angle_pol.time": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.launcher.:.steering_angle_tor.data": {
+ "ec_launchers.beam.:.steering_angle_tor": {
   "COCOSIO": 11,
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.launcher.:.steering_angle_tor.time": {
+ "ec_launchers.beam.:.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ece.channel.:": {
