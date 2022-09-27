@@ -497,7 +497,6 @@ def ec_launcher_active_hardware(ods, pulse):
         # Hence, the inverse curvature radius is zero
         # Notably the ECRH beams are astigmatic in reality so this is just an approximation
         beams[system_index]['phase.angle'] = np.zeros(ntime)
-
         beams[system_index]['phase.curvature'] = np.zeros([2, ntime])
         beams[system_index]['spot.angle'] = np.zeros(ntime)
         beams[system_index]['spot.size'] = 0.0172 * np.ones([2, ntime])
@@ -1261,4 +1260,5 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
+    test_machine_mapping_functions(['ec_launcher_active_hardware'], globals(), locals())
     test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())
