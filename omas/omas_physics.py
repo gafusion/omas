@@ -213,9 +213,15 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
     return ods_n
 
 
+def remove_integrator_drift(time, data, time_after_shot):
+    #assume that the drift is zero at time[0]
+    ind = time > time_after_shot    
+    return data-(time-time[0])/(time[ind].mean()-time[0])*data[ind].mean(0)
+    
+    
 @add_to__ODS__
 def equilibrium_form_constraints(
-    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True, **nuconv_kw
+    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None,rm_integr_drift_after=None, update=True, **nuconv_kw
 ):
     """
     generate equilibrium constraints from experimental data in ODS
@@ -247,8 +253,11 @@ def equilibrium_form_constraints(
                           * x_point
 
     :param averages: dictionary with average times for individual constraints
+               Smoothed using Gaussian, sigma=averages/4. and the convolution is integrated across +/-4.*sigma.
 
     :param cutoff_hz: a list of two elements with low and high cutoff frequencies [lowFreq, highFreq]
+    
+    :param rm_integr_drift_after: time in ms after which is assumed thet all currents are zero and signal should be equal to zero. Used for removing of the integrators drift
 
     :param update: operate in place
 
@@ -285,7 +294,11 @@ def equilibrium_form_constraints(
     ods_n['equilibrium.time'] = times
 
     nuconv_kw.setdefault('window_function', 'boxcar')
-
+    # pf_current
+    if 'pressure' in constraints and 'thompson' in ods:
+        raise Exception('Not implemented yet!!')
+        
+        
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
@@ -301,7 +314,9 @@ def equilibrium_form_constraints(
                     error = ods[f'pf_active.coil.{channel}.current.data_error_upper']
                 else:
                     error = None
-                # process
+                # process                
+                if rm_integr_drift_after is not None:
+                    data = remove_integrator_drift(time, data, rm_integr_drift_after)  
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
                 const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
@@ -340,6 +355,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -379,6 +396,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -412,6 +431,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -438,6 +459,9 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            #if rm_integr_drift_after is not None: 
+                #drift is already removed?
+                #data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -466,6 +490,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -531,6 +557,7 @@ def equilibrium_form_constraints(
                 raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
 
     return ods_n
+
 
 
 @add_to__ODS__
