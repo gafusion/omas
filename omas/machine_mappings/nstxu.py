@@ -17,20 +17,10 @@ __regression_arguments__ = {'__all__': __all__}
 
 
 def nstx_filenames(filename, pulse):
-    if pulse >= 200184:  # — > (200184 205433)
-        path = 'nstxu' + os.sep + '01152015Av1_0'
-    elif pulse >= 112811:  # — > (112811 143905)
-        path = 'nstx' + os.sep + '04202005Av1_0'
-    elif pulse >= 115151:  # — > (115151 115178)
-        path = 'nstx' + os.sep + '04122005Av1_0'
-    elif pulse >= 106806:  # — > (106806 114478)
-        path = 'nstx' + os.sep + '02072002Av1_0'
-    elif pulse >= 101099:  # — > (101099 106807)
-        path = 'nstx' + os.sep + '02222000Av1_0'
-    filename = os.sep.join([omas_dir, 'machine_mappings', 'support_files', path, filename])
-    filename = glob.glob(filename + '*')[0]
-    printd(f'Reading {filename}', topic='machine')
-    return filename
+    if pulse < 200000:
+        return support_filenames('nstx', filename, pulse)
+    else:
+        return support_filenames('nstxu', filename, pulse)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -55,16 +45,23 @@ def pf_active_hardware(ods, pulse):
         if 'OH' in ods[f'pf_active.coil'][c]['name']:
             c_oh += 1
             cname = oh_signals[c_oh]['name']
-            cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
+            if oh_signals[c_oh]['mds_name_resolved'] is None:
+                cid = 'None'
+            else:
+                cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
         else:
             c_pf += 1
             cname = icoil_signals[c_pf]['name']
-            cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
-        for e in ods[f'pf_active.coil'][c]['element']:
-            if 'OH' in ods[f'pf_active.coil'][c]['name']:
-                ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            if icoil_signals[c_pf]['mds_name_resolved'] is None:
+                cid = 'None'
             else:
-                ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+                cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
+        for e in ods[f'pf_active.coil'][c]['element']:
+            # if 'OH' in ods[f'pf_active.coil'][c]['name']:
+            #    ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            # else:
+            #    ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
+            ename = cid + f'_element_{e}'
             eid = ename
             ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
@@ -131,7 +128,7 @@ def pf_active_coil_current_data(ods, pulse):
             data = ods[f'pf_active.coil.{channel}.current.data']
             rel_error = data * sig['rel_error']
             abs_error = sig['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
@@ -211,7 +208,7 @@ def magnetics_floops_data(ods, pulse):
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
             abs_error = tfl_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
             # 2*pi normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
@@ -257,7 +254,7 @@ def magnetics_probes_data(ods, pulse):
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
@@ -326,7 +323,7 @@ def ip_bt_dflux_data(ods, pulse):
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error'] * signals[item][0]['scale']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
                 signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )
@@ -378,6 +375,29 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     making
         tan(gamma_cor) ~ (big positive) - (small negative)
     Thus, tan(gamma_cor) is more positive than the reported tan(gamma)
+
+
+    mapping between IMAS geometric_coefficients and EFIT AAxGAM
+    coeffs0: AA1
+    coeffs1: AA8
+    coeffs2: AA2
+    coeffs3: AA5
+    coeffs4: AA4
+    coeffs5: AA3
+    coeffs6: 0
+    coeffs7: AA7
+    coeffs8: AA6
+
+    mapping between EFIT AAxGAM and IMAS geometric_coefficients
+    AA1: coeffs0
+    AA2: coeffs2
+    AA3: coeffs5
+    AA4: coeffs4
+    AA5: coeffs3
+    AA6: coeffs8
+    AA7: coeffs7
+    AA8: coeffs1
+    AA9: does not exist
     """
     beamline, beam_species, minVolt_keV, usebeam = ('1A', 'D', 40.0, True)
     geometries = [('ALPHA', f'{np.pi / 180.0}', True), ('OMEGA', f'{np.pi / 180.0}', True), ('RADIUS', '1', True)]
@@ -431,6 +451,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     coef_list['AA5GAM'] = np.cos(res['geom_OMEGA']) / coef_list['beam_velocity']  # See notes at top on sign convention
     coef_list['AA6GAM'] = -1.0 / coef_list['beam_velocity']  # Assume theta=0
     coef_list['AA7GAM'] = zero_array  # Assume theta=0
+    coef_list['AA8GAM'] = zero_array
 
     # remap data per individual channel
     MDSname, MDSERRname, norm, name, fit = measurements
@@ -455,8 +476,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
             norm = coef_list['AA1GAM'][ch] / coef_list['AA2GAM'][ch]
 
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
-        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch] * norm
+        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch] * norm
         ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
         ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
@@ -466,9 +487,53 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
+        IMAS2GAM = [1, 8, 2, 5, 4, 3, 9, 7, 6]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
-            coef_list.get(f'AA{k}GAM', [0] * (ch + 1))[ch] for k in range(9)
+            coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
+
+
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def thomson_scattering_hardware(ods, pulse):
+    """
+    Gathers NSTX(-U) Thomson measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(thomson_scattering_data)(ods, pulse)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def thomson_scattering_data(ods, pulse):
+    """
+    Loads DIII-D Thomson measurement data
+
+    :param pulse: int
+    """
+
+    signals = ['FIT_NE', 'FIT_NE_ERR', 'FIT_TE', 'FIT_TE_ERR', 'FIT_RADII', 'TS_TIMES']
+    signals_norm = {'FIT_NE': 1.0, 'FIT_NE_ERR': 1.0, 'FIT_TE': 1e3, 'FIT_TE_ERR': 1e3, 'FIT_RADII': 1e-2, 'TS_TIMES': 1.0}
+
+    TDIs = {}
+    for item in signals:
+        TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
+        TDIs[item] = '\\' + TDI.strip('\\')
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+
+    for i, R in enumerate(res['FIT_RADII']):
+        ch = ods['thomson_scattering']['channel'][i]
+        ch['name'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
+        ch['identifier'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
+        ch['position']['r'] = R * signals_norm['FIT_RADII']
+        ch['position']['z'] = 0.0
+        ch['n_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
+        ch['n_e.data'] = res['FIT_NE'][i, :] * signals_norm['FIT_NE']
+        ch['n_e.data_error_upper'] = res['FIT_NE_ERR'][i, :] * signals_norm['FIT_NE_ERR']
+        ch['t_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
+        ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i, :] * signals_norm['FIT_TE_ERR']
+        ch['t_e.data'] = res['FIT_TE'][i, :] * signals_norm['FIT_TE']
 
 
 # =====================

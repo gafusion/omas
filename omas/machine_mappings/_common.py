@@ -1,7 +1,31 @@
 import numpy as np
 from omas import *
+from omas.omas_utils import printd
+import os
+import glob
 
 __support_files_cache__ = {}
+
+
+def support_filenames(device, filename, pulse):
+    topdir = os.sep.join([omas_dir, 'machine_mappings', 'support_files', device])
+    for rangefile in glob.glob(os.sep.join([topdir, '*', 'ranges.dat'])):
+        with open(rangefile) as f:
+            start, stop = map(int, f.read().split())
+            if start < pulse < stop:
+                dir = os.path.dirname(rangefile)
+                filenames = glob.glob(os.sep.join([dir, filename]) + '*')
+                if len(filenames):
+                    filename = filenames[0]
+                    printd(f'Reading {filename}', topic='machine')
+                    return filename
+
+    filenames = glob.glob(os.sep.join([topdir, filename]) + '*')
+    if len(filenames):
+        filename = filenames[0]
+        printd(f'Reading {filename}', topic='machine')
+        return filename
+    raise FileNotFoundError(f"Could not find `{filename}` in {topdir} or any of its subdirectories.")
 
 
 def get_support_file(object_type, filename):
@@ -208,7 +232,16 @@ def fetch_assign(
             if stage == 'assign':
                 if homogeneous_time and t is None:
                     raise RuntimeError(f'Could not determine time info from {TDI} signals')
-                if not isinstance(tmp[TDI], Exception):
+                time_loc = str(time.format(**locals()))
+                if 'None' in TDI and validity is None:
+                    time_loc = time.format(**locals())
+                    if not homogeneous_time:
+                        ods[time_loc] = [0.0, 1e10]
+                    else:
+                        ods[time.format(**locals())] = t * time_norm
+                    ods[data.format(**locals())] = np.zeros(len(ods[time.format(**locals())]))
+                    ods[data.format(**locals())][:] = np.nan
+                elif not isinstance(tmp[TDI], Exception):
                     if not homogeneous_time:
                         ods[time.format(**locals())] = tmp[f'dim_of({TDI},0)'] * time_norm
                     else:

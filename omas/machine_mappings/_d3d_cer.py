@@ -345,7 +345,7 @@ def d3d_cer(
         Bz_vals_time = np.interp(times, mag_field['time'], mag_field['Bz_arr'][R_inds, Z_inds, t_inds])
         Bp_vals_time = np.interp(times, mag_field['time'], mag_field['Bp_arr'][R_inds, Z_inds, t_inds])
         # Now we have the magnetic field strength
-        modB = np.sqrt(Bt_vals_time ** 2 + Bp_vals_time ** 2)
+        modB = np.sqrt(Bt_vals_time**2 + Bp_vals_time**2)
         # Next we want to find the angle between the view and the magnetic field (theta)
         # Assemble time varying beam direction vectors
         # Note we use 90-phi because CER phi coords are stored in DIII-D machine coordinates which is clockwise starting at North when viewed from above
@@ -355,7 +355,7 @@ def d3d_cer(
         B[:, 0] = -Bt_vals_time * np.sin(tor_angle)  # x component (east)
         B[:, 1] = Bt_vals_time * np.cos(tor_angle)  # y component (north)
         B[:, 2] = Bz_vals_time  # z component (up)
-        B_hat = B / np.sqrt(np.sum(B ** 2, axis=1))[:, np.newaxis]
+        B_hat = B / np.sqrt(np.sum(B**2, axis=1))[:, np.newaxis]
         # Chord viewing direction
         # Note we use 90-phi because LOS_pt1/2_phi are stored in DIII-D machine coordinates which is clockwise starting at North when viewed from above
         # This changes to anti-clockwise, starting from East when viewed from above
@@ -370,7 +370,7 @@ def d3d_cer(
         )
         # Unit vector pointing from lens to chord-beam intersection
         chord_hat = c_pt1_xyz - c_pt2_xyz
-        chord_hat = chord_hat / np.sqrt(np.sum(chord_hat ** 2))
+        chord_hat = chord_hat / np.sqrt(np.sum(chord_hat**2))
         # Put into 2D array for easier dot product, time x {xyz}
         chord_hat_2D = B_hat * 0 + chord_hat[np.newaxis, :]
         # Angle between unit vectors using: a dot b = |a||b| cos(theta)
@@ -603,7 +603,7 @@ def d3d_cer(
                         plasma_xyz = np.array([R_tmp * np.sin(np.deg2rad(phi_tmp)), R_tmp * np.cos(np.deg2rad(phi_tmp)), Z_tmp])
                         # Calculate time varying angle between chord and phi_hat to correct LOS velocity for geometry
                         s = plasma_xyz - lens_xyz[:, np.newaxis]
-                        mod_s = np.sqrt(np.sum(s ** 2, axis=0))
+                        mod_s = np.sqrt(np.sum(s**2, axis=0))
                         s_hat = s / mod_s[np.newaxis, :]
                         # Cannot just use phi stored in MDSplus for CER because it has zero pointing North, and +ve going clockwise when viewed from above
                         # tor_angle  below is CCW when viewed from above, and zero is at east (standard definition)

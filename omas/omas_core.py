@@ -935,12 +935,17 @@ class ODS(MutableMapping):
                     and not isinstance(value, ODS)
                 ):
                     transform = omas_physics.cocos_signals[ulocation]
-                    if transform == '?':
+                    if isinstance(transform, list):
+                        norm = np.ones(len(transform))
+                        for itf, tf in enumerate(transform):
+                            norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
+                    elif transform == '?':
                         if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
                             raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+
                     else:
                         norm = omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
                     value = value * norm
@@ -1295,7 +1300,7 @@ class ODS(MutableMapping):
                     try:
                         value = self.dynamic.__getitem__(location)
                     except Exception as _excp:
-                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}')
+                        raise OmasDynamicException(f'Error dynamic fetching of `{location}` for {self.dynamic.kw}: {repr(_excp)}')
                     self.__setitem__(key[0], value)
                 elif self.active_dynamic and o2u(location).endswith(':'):
                     dynamically_created = True
@@ -1331,12 +1336,17 @@ class ODS(MutableMapping):
                 # handle cocos transformations going out
                 if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
                     transform = omas_physics.cocos_signals[ulocation]
-                    if transform == '?':
+                    if isinstance(transform, list):
+                        norm = numpy.ones(len(transform))
+                        for itf, tf in enumerate(transform):
+                            norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
+                    elif transform == '?':
                         if self.consistency_check == 'warn':
                             printe('COCOS translation has not been setup: %s' % ulocation)
                             norm = 1.0
                         else:
                             raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+
                     else:
                         norm = omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
                     value = value * norm

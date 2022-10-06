@@ -450,9 +450,15 @@ def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity,
     return mapped_values
 
 
+def remove_integrator_drift(time, data, time_after_shot):
+    #assume that the drift is zero at time[0]
+    ind = time > time_after_shot    
+    return data-(time-time[0])/(time[ind].mean()-time[0])*data[ind].mean(0)
+    
+    
 @add_to__ODS__
 def equilibrium_form_constraints(
-    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True, **nuconv_kw
+    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None,rm_integr_drift_after=None, update=True, **nuconv_kw
 ):
     """
     generate equilibrium constraints from experimental data in ODS
@@ -484,8 +490,11 @@ def equilibrium_form_constraints(
                           * x_point
 
     :param averages: dictionary with average times for individual constraints
+               Smoothed using Gaussian, sigma=averages/4. and the convolution is integrated across +/-4.*sigma.
 
     :param cutoff_hz: a list of two elements with low and high cutoff frequencies [lowFreq, highFreq]
+    
+    :param rm_integr_drift_after: time in ms after which is assumed thet all currents are zero and signal should be equal to zero. Used for removing of the integrators drift
 
     :param update: operate in place
 
@@ -522,7 +531,11 @@ def equilibrium_form_constraints(
     ods_n['equilibrium.time'] = times
 
     nuconv_kw.setdefault('window_function', 'boxcar')
-
+    # pf_current
+    if 'pressure' in constraints and 'thompson' in ods:
+        raise Exception('Not implemented yet!!')
+        
+        
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
@@ -538,7 +551,9 @@ def equilibrium_form_constraints(
                     error = ods[f'pf_active.coil.{channel}.current.data_error_upper']
                 else:
                     error = None
-                # process
+                # process                
+                if rm_integr_drift_after is not None:
+                    data = remove_integrator_drift(time, data, rm_integr_drift_after)  
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
                 const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
@@ -577,6 +592,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -616,6 +633,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -649,6 +668,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -675,6 +696,9 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            #if rm_integr_drift_after is not None: 
+                #drift is already removed?
+                #data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -703,6 +727,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -770,6 +796,7 @@ def equilibrium_form_constraints(
     return ods_n
 
 
+
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_greenwald(ods, update=True):
@@ -812,7 +839,7 @@ def summary_greenwald(ods, update=True):
                     "Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
                 )
                 nel.append(ne_vol_avg)
-    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a**2)
     return ods_n
 
 
@@ -846,8 +873,12 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
         ods_n = ODS().copy_attrs_from(ods)
 
     if time_index is None:
+        ods_n['summary.line_average.n_e.value'] = numpy.zeros(len(ods['core_profiles']['profiles_1d']))
         for time_index in range(len(ods['core_profiles']['profiles_1d'])):
-            summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)
+            line_average_ne = summary_lineaverage_density(ods_n, line_grid=line_grid, time_index=time_index, update=update, doPlot=doPlot)[
+                'interferometer'
+            ]['channel'][0]['n_e_line_average']['data'][time_index]
+            ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
@@ -1039,10 +1070,10 @@ def summary_taue(ods, thermal=True, update=True):
                 * abs(bt) ** 0.15
                 * (nel / 1e19) ** 0.41
                 * (power_loss / 1e6) ** -0.69
-                * r_major ** 1.97
-                * kappa ** 0.78
-                * aspect ** -0.58
-                * isotope_factor ** 0.19
+                * r_major**1.97
+                * kappa**0.78
+                * aspect**-0.58
+                * isotope_factor**0.19
             )  # [s]
             for k in ['kappa', 'bt', 'ip', 'nel', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
@@ -1116,6 +1147,7 @@ def summary_heating_power(ods, update=True):
                 continue
             elif key == 'fusion':
                 ods_n['summary.fusion.power.value'] = numpy.array(value)
+                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(value)
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
@@ -1198,7 +1230,7 @@ def summary_consistent_global_quantities(ods, ds=None, update=True):
 
 @add_to__ODS__
 @preprocess_ods()
-def core_profiles_consistent(ods, update=True, use_electrons_density=False):
+def core_profiles_consistent(ods, update=True, use_electrons_density=False, enforce_quasineutrality=False):
     """
     Calls all core_profiles consistency functions including
       - core_profiles_densities
@@ -1213,11 +1245,13 @@ def core_profiles_consistent(ods, update=True, use_electrons_density=False):
             denominator is core_profiles.profiles_1d.:.electrons.density
             instead of sum Z*n_i in Z_eff calculation
 
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
+
     :return: updated ods
     """
-    ods = core_profiles_densities(ods, update=update)
+    ods = core_profiles_densities(ods, update=update, enforce_quasineutrality=enforce_quasineutrality)
     core_profiles_pressures(ods)
-    core_profiles_zeff(ods, use_electrons_density=use_electrons_density)
+    core_profiles_zeff(ods, use_electrons_density=use_electrons_density, enforce_quasineutrality=enforce_quasineutrality)
     return ods
 
 
@@ -1331,8 +1365,8 @@ def core_profiles_pressures(ods, update=True):
                 prof1d_p['ion'][k]['pressure'] += __p__
                 prof1d_p['pressure_parallel'] += __p__
 
-        # extra pressure information that is not within IMAS structure is set only if consistency_check is not True
-        if ods_p.consistency_check is not True:
+        # extra pressure information that is not within IMAS structure is set only if consistency_check is False
+        if ods_p.consistency_check is False:
             prof1d_p['pressure'] = prof1d_p['pressure_perpendicular'] * 2 + prof1d_p['pressure_parallel']
             prof1d_p['pressure_electron_total'] = prof1d_p['pressure_thermal'] - prof1d_p['pressure_ion_total']
             prof1d_p['pressure_fast'] = prof1d_p['pressure'] - prof1d_p['pressure_thermal']
@@ -1342,13 +1376,15 @@ def core_profiles_pressures(ods, update=True):
 
 @add_to__ODS__
 @preprocess_ods('core_profiles')
-def core_profiles_densities(ods, update=True):
+def core_profiles_densities(ods, update=True, enforce_quasineutrality=False):
     """
     Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent
 
     :param ods: input ods
 
     :param update: operate in place
+
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
 
     :return: updated ods
     """
@@ -1398,12 +1434,20 @@ def core_profiles_densities(ods, update=True):
         for k in range(len(prof1d['ion'])):
             consistent_density(prof1d_n['ion'][k])
 
+        if enforce_quasineutrality:
+            ne_q = copy.deepcopy(__zeros__)
+            for k in range(len(prof1d_n['ion'])):
+                ne_q += prof1d_n[f'ion[{k}].element[0].z_n'] * prof1d_n[f'ion[{k}].density']
+            qnfac = ne_q / (prof1d_n[f'electrons.density'] + numpy.finfo(numpy.float64).tiny)
+            for den in ['density', 'density_fast', 'density_thermal']:
+                prof1d_n['electrons'][den] *= qnfac
+
     return ods_n
 
 
 @add_to__ODS__
 @preprocess_ods('core_profiles')
-def core_profiles_zeff(ods, update=True, use_electrons_density=False):
+def core_profiles_zeff(ods, update=True, use_electrons_density=False, enforce_quasineutrality=False):
     """
     calculates effective charge
 
@@ -1415,10 +1459,12 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
             denominator core_profiles.profiles_1d.:.electrons.density
             instead of sum Z*n_i
 
+    :param enforce_quasineutrality: update electron density to be quasineutral with ions
+
     :return: updated ods
     """
 
-    ods_z = core_profiles_densities(ods, update=update)
+    ods_z = core_profiles_densities(ods, update=update, enforce_quasineutrality=enforce_quasineutrality)
 
     for time_index in ods['core_profiles']['profiles_1d']:
         prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1430,7 +1476,7 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False):
         for k in range(len(prof1d['ion'])):
             Z = prof1d['ion'][k]['element'][0]['z_n']  # from old ODS
             n = prof1d_z['ion'][k]['density']  # from new ODS
-            Z2n += n * Z ** 2
+            Z2n += n * Z**2
             Zn += n * Z
         if use_electrons_density:
             prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
@@ -1645,9 +1691,9 @@ def core_profiles_currents(
     # CONSISTENCY?
     # ===============
 
-    if (j_actuator is not None) and (j_bootstrap is None):
-        err = "Cannot set j_actuator without j_bootstrap provided or calculable"
-        raise RuntimeError(err)
+    err = "Cannot set j_actuator without j_bootstrap provided or calculable"
+    if j_actuator is not None:
+        assert j_bootstrap is not None, err
 
     # j_non_inductive
     err = 'j_non_inductive inconsistent with j_actuator and j_bootstrap'
@@ -2196,7 +2242,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
     dpdpsi = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
 
     # diamagnetic term to get included with bootstrap currrent
-    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f ** 2 / fsa_B2)
+    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f**2 / fsa_B2)
     JtoR_dia *= cocos['sigma_Bp'] * (2.0 * numpy.pi) ** cocos['exp_Bp']
 
     if JtoR is not None:
@@ -2901,7 +2947,8 @@ _cocos_signals = {}
                         message = '#[DEL?]'
 
                     transform = _cocos_signals.get(item, '?')
-                    transform = None if transform is None else "'%s'" % transform
+                    if isinstance(transform, str):
+                        transform = repr(transform)
                     txt = ("_cocos_signals['%s']=%s" % (item, transform)).ljust(m + 20) + message + '# %f # %s' % (score, rationale)
                     text.append(txt)
                     if score > threshold or (item in _cocos_signals and _cocos_signals[item] != '?'):
@@ -2941,7 +2988,7 @@ class CocosSignals(dict):
 
     def __getitem__(self, key):
         value = dict.__getitem__(self, key)
-        if value == '?':
+        if not isinstance(value, list) and value == '?':
             warnings.warn(
                 f'''
 `{key}` may require defining its COCOS transform in {os.path.split(__file__)[0] + os.sep}omas_cocos.py

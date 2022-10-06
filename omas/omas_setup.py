@@ -27,7 +27,6 @@ OMAS v%s only runs with Python 3.6+ and you are running Python %s
         % (__version__, '.'.join(map(str, sys.version_info[:2])))
     )
 
-import pwd
 import glob
 import json
 import copy
@@ -47,6 +46,9 @@ import difflib
 import weakref
 import unittest
 import itertools
+
+if os.name != 'nt':  # If OS is not Windows, import pwd package
+    import pwd
 
 try:
     import tqdm
@@ -169,7 +171,7 @@ omas_rcparams.update(
         ),
         'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
         'default_imas_version': _default_imas_version,
-        'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb-xymmt.mongodb.net',
+        'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb.xymmt.mongodb.net',
         'pickle_protocol': 4,
     }
 )

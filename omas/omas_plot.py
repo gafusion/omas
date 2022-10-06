@@ -358,6 +358,7 @@ def geo_type_lookup(geometry_type, subsys, imas_version=omas_rcparams['default_i
         printe(repr(_excp))
         return None
 
+    doc = doc.replace("circle,", "circle',")  # handle typo in IMAS documentation
     geo_map = eval('{%s}' % doc.split('(')[-1][:-2])
     if 3 not in geo_map:
         geo_map[3] = 'oblique'  # For backward compatibility
@@ -1198,9 +1199,9 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
 
         uband(rho, y, ax=ax, **kw)
         if "Temp" in label_name[index]:
-            ax.set_ylabel(r'$T_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]))
+            ax.set_ylabel(r'$T_{{{}}}$'.format(label_name[index].split()[0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{}$'.format(label_name[index][0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
+            ax.set_ylabel(r'$n_{{{}}}$'.format(label_name[index].split()[0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
@@ -1535,7 +1536,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs ** kw)
+            return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs**kw)
 
     colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
     lss = ['-', '--', 'dotted']
@@ -1977,8 +1978,8 @@ def lh_antennas_CX(ods, time_index=None, time=None, ax=None, antenna_trajectory=
         Rvec = Raxis - R
         Zvec = Zaxis - Z
 
-        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
-        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec ** 2 + Zvec ** 2)
+        R1 = R + Rvec * antenna_trajectory / numpy.sqrt(Rvec**2 + Zvec**2)
+        Z1 = Z + Zvec * antenna_trajectory / numpy.sqrt(Rvec**2 + Zvec**2)
 
         ax.plot([R, R1], [Z, Z1], 's-', markevery=2, **kw)
 
@@ -2041,7 +2042,7 @@ def lh_antennas_CX_topview(ods, time_index=None, time=None, ax=None, antenna_tra
 
 
 @add_to__ODS__
-def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX(ods, time_index=None, time=None, ax=None, beam_trajectory=None, **kw):
     """
     Plot EC launchers in poloidal cross-section
 
@@ -2058,7 +2059,7 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_trajectory: length of launcher on plot
+    :param beam_trajectory: length of launcher on plot
 
     :return: axes handler
     """
@@ -2068,7 +2069,7 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX, ods, time_index, time, ax=ax, beam_trajectory=beam_trajectory, **kw)
 
     from matplotlib import pyplot
 
@@ -2076,30 +2077,30 @@ def ec_launchers_CX(ods, time_index=None, time=None, ax=None, launcher_trajector
         ax = pyplot.gca()
 
     equilibrium = ods['equilibrium']
-    launchers = ods['ec_launchers.launcher']
-    if launcher_trajectory is None:
-        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    beams = ods['ec_launchers']['beam']
+    if beam_trajectory is None:
+        beam_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
-    for launcher in launchers:
-        R0 = launchers[launcher]['launching_position.r']
-        Z0 = launchers[launcher]['launching_position.z']
-        ang_tor = launchers[launcher]['steering_angle_tor.data']
-        ang_pol = launchers[launcher]['steering_angle_pol.data']
+    for beam in beams:
+        R0 = beams[beam]['launching_position.r']
+        Z0 = beams[beam]['launching_position.z']
+        ang_tor = beams[beam]['steering_angle_tor']
+        ang_pol = beams[beam]['steering_angle_pol']
         ang_pol_proj = 0.5 * numpy.pi - numpy.arctan2(numpy.tan(ang_pol), numpy.cos(ang_tor))
 
-        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol_proj)
-        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol_proj)
+        R1 = R0 - beam_trajectory * numpy.cos(ang_pol_proj)
+        Z1 = Z0 - beam_trajectory * numpy.sin(ang_pol_proj)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
-        R1 = R0 - launcher_trajectory * numpy.cos(ang_pol)
-        Z1 = Z0 - launcher_trajectory * numpy.sin(ang_pol)
+        R1 = R0 - beam_trajectory * numpy.cos(ang_pol)
+        Z1 = Z0 - beam_trajectory * numpy.sin(ang_pol)
         ax.plot([R0, R1], [Z0, Z1], 'o-', markevery=2, **kw)
 
     return {'ax': ax}
 
 
 @add_to__ODS__
-def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_trajectory=None, **kw):
+def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, beam_trajectory=None, **kw):
     """
     Plot EC launchers in toroidal cross-section
 
@@ -2116,7 +2117,7 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
 
     :param kw: arguments passed to matplotlib plot statements
 
-    :param launcher_trajectory: length of launcher on plot
+    :param beam_trajectory: length of launcher on plot
 
     :return: axes handler
     """
@@ -2126,7 +2127,7 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
         if len(time) == 1:
             time_index = time_index[0]
         else:
-            return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, launcher_trajectory=launcher_trajectory, **kw)
+            return ods_time_plot(ec_launchers_CX_topview, ods, time_index, time, ax=ax, beam_trajectory=beam_trajectory, **kw)
 
     from matplotlib import pyplot
 
@@ -2134,19 +2135,19 @@ def ec_launchers_CX_topview(ods, time_index=None, time=None, ax=None, launcher_t
         ax = pyplot.gca()
 
     equilibrium = ods['equilibrium']
-    launchers = ods['ec_launchers.launcher']
-    if launcher_trajectory is None:
-        launcher_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
+    beams = ods['ec_launchers']['beam']
+    if beam_trajectory is None:
+        beam_trajectory = 0.1 * equilibrium['vacuum_toroidal_field.r0']
 
-    for launcher in launchers:
-        R = launchers[launcher]['launching_position.r']
-        phi = launchers[launcher]['launching_position.phi']
-        ang_tor = launchers[launcher]['steering_angle_tor.data']
+    for beam in beams:
+        R = beams[beam]['launching_position.r']
+        phi = beams[beam]['launching_position.phi']
+        ang_tor = beams[beam]['steering_angle_tor']
 
         x0 = R * numpy.cos(phi)
         y0 = R * numpy.sin(phi)
-        x1 = x0 - launcher_trajectory * numpy.cos(ang_tor + phi)
-        y1 = y0 - launcher_trajectory * numpy.sin(ang_tor + phi)
+        x1 = x0 - beam_trajectory * numpy.cos(ang_tor + phi)
+        y1 = y0 - beam_trajectory * numpy.sin(ang_tor + phi)
         ax.plot([x0, x1], [y0, y1], 'o-', markevery=2, **kw)
 
     return {'ax': ax}
@@ -2433,6 +2434,20 @@ def overlay(ods, ax=None, allow_autoscale=True, debug_all_plots=False, return_ov
     return {'ax': ax}
 
 
+def _plot_outline_closed_if_exist(ods, ax, **kw):
+    if ods:
+        closed = ods.get("closed", "True")
+
+        if closed and not numpy.allclose([ods["r"][0], ods["z"][0]], [ods["r"][-1], ods["z"][-1]]):
+            x = numpy.concatenate((ods["r"], [ods["r"][0]]))
+            y = numpy.concatenate((ods["z"], [ods["z"][0]]))
+        else:
+            x = ods["r"]
+            y = ods["z"]
+
+        ax.plot(x, y, **kw)
+
+
 @add_to__ODS__
 def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile', 'vessel'], unit_index=None, **kw):
     """
@@ -2478,11 +2493,21 @@ def wall_overlay(ods, ax=None, component_index=None, types=['limiter', 'mobile',
                 component_index = [ods[f'wall.description_2d[{component}].{type}.unit[{unit}].type.name'].index(component_index)]
 
             for unit in ods[f'wall.description_2d[{component}].{type}.unit']:
-                ax.plot(
-                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.r'],
-                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline.z'],
-                    **kw,
-                )
+                if type == "vessel":
+                    for vessel_type in ods[f'wall.description_2d[{component}].{type}.unit.{unit}']:
+                        if vessel_type == "annular":
+                            for line in ["centreline", "outline_inner", "outline_outer"]:
+                                _plot_outline_closed_if_exist(
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}.{line}'], ax, **kw
+                                )
+                        elif vessel_type == "element":
+                            for element in ods[f'wall.description_2d[{component}].{type}.unit.{unit}.{vessel_type}']:
+                                _plot_outline_closed_if_exist(
+                                    ods[f'wall.description_2d[{component}].{type}.unit[{unit}].{vessel_type}[{element}].outline'], ax, **kw
+                                )
+
+                else:
+                    _plot_outline_closed_if_exist(ods[f'wall.description_2d[{component}].{type}.unit[{unit}].outline'], ax, **kw)
 
     ax.set_aspect('equal')
 
