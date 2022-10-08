@@ -508,7 +508,8 @@ def interferometer_hardware(ods, pulse):
     """
     Loads DIII-D CO2 interferometer chord locations
 
-    The chord endpoints ARE NOT RIGHT. Only the R for vertical lines or Z for horizontal lines is right.
+    The chord endpoints are approximative. They do not take into account 
+    the vessel wall contour of the shot. The values have been taken from OMFITprofiles.
 
     Data sources:
     DIII-D webpage: https://diii-d.gat.com/diii-d/Mci accessed 2018 June 07 by D. Eldon
