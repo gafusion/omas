@@ -508,7 +508,8 @@ def interferometer_hardware(ods, pulse):
     """
     Loads DIII-D CO2 interferometer chord locations
 
-    The chord endpoints ARE NOT RIGHT. Only the R for vertical lines or Z for horizontal lines is right.
+    The chord endpoints are approximative. They do not take into account 
+    the vessel wall contour of the shot. The values have been taken from OMFITprofiles.
 
     Data sources:
     DIII-D webpage: https://diii-d.gat.com/diii-d/Mci accessed 2018 June 07 by D. Eldon
@@ -523,15 +524,16 @@ def interferometer_hardware(ods, pulse):
     ods['interferometer.channel.0.identifier'] = ods['interferometer.channel.0.name'] = 'r0'
     r0 = ods['interferometer.channel.0.line_of_sight']
     r0['first_point.phi'] = r0['second_point.phi'] = 225 * (-np.pi / 180.0)
-    r0['first_point.r'], r0['second_point.r'] = 3.0, 0.8  # These are not the real endpoints
+    r0['first_point.r'], r0['second_point.r'] = 2.36, 1.01  # End points from OMFITprofiles
     r0['first_point.z'] = r0['second_point.z'] = 0.0
-
+    Z_top = 1.24
+    Z_bottom = -1.375
     for i, r in enumerate([1.48, 1.94, 2.10]):
         ods['interferometer.channel'][i + 1]['identifier'] = ods['interferometer.channel'][i + 1]['name'] = 'v{}'.format(i + 1)
         los = ods['interferometer.channel'][i + 1]['line_of_sight']
         los['first_point.phi'] = los['second_point.phi'] = 240 * (-np.pi / 180.0)
         los['first_point.r'] = los['second_point.r'] = r
-        los['first_point.z'], los['second_point.z'] = -1.8, 1.8  # These are not the real points
+        los['first_point.z'], los['second_point.z'] = Z_top, Z_bottom  # End points from OMFITprofiles
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
