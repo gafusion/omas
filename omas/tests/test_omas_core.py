@@ -415,6 +415,9 @@ class TestOmasCore(UnittestCaseOmas):
         ods = ODS()
         ods.sample_equilibrium()
         ods.save('test.pkl')
+    
+    def test_load_error_upper(self):
+        ods = load_omas_h5(f'{imas_json_dir}/../samples/ods_with_error_upper.h5')
 
     def test_input_data_process_functions(self):
         def robust_eval(string):
