@@ -840,6 +840,8 @@ def summary_greenwald(ods, update=True):
                 )
                 nel.append(ne_vol_avg)
     ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a**2)
+    ods_n['summary.time'] = ods['equilibrium.time']
+
     return ods_n
 
 
@@ -879,6 +881,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
                 'interferometer'
             ]['channel'][0]['n_e_line_average']['data'][time_index]
             ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
+        ods_n['summary.time'] = ods['equilibrium.time']
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
@@ -954,6 +957,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods['interferometer']['time']))
 
         ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
+
     return ods_n
 
 
@@ -969,6 +973,12 @@ def summary_thermal_stored_energy(ods, update=True):
 
     :return: updated ods
     """
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
     ods.physics_core_profiles_pressures()
     thermal_energy = []
     for time_index in ods['core_profiles.profiles_1d']:
@@ -976,8 +986,10 @@ def summary_thermal_stored_energy(ods, update=True):
         volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'], xp=eq['rho_tor_norm'], fp=eq['volume'])
         thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
 
-    ods['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
+    ods_n['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
+    ods_n['summary.time'] = ods['equilibrium.time']
 
+    return ods_n
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
@@ -1087,6 +1099,8 @@ def summary_taue(ods, thermal=True, update=True):
     ods_n['summary.global_quantities.tau_energy.source'] = info_string
     ods_n['summary.global_quantities.tau_energy_98.source'] = "h98y2 scaling law"
 
+    ods_n['summary.time'] = ods['equilibrium.time']
+
     return ods_n
 
 
@@ -1094,7 +1108,6 @@ def summary_taue(ods, thermal=True, update=True):
 @preprocess_ods('core_sources')
 def summary_heating_power(ods, update=True):
     """
-
     Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities
 
     :param ods: input ods
@@ -1151,6 +1164,7 @@ def summary_heating_power(ods, update=True):
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
+    ods_n['summary.time'] = ods['equilibrium.time']
     return ods_n
 
 
