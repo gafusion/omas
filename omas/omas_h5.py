@@ -137,7 +137,7 @@ def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['d
     return ods
 
 
-def through_omas_h5(ods, method=['function', 'class_method'][1]):
+def through_omas_h5(ods, method=['function', 'class_method'][1], consistency_check=True):
     """
     Test save and load OMAS HDF5
 
@@ -149,8 +149,8 @@ def through_omas_h5(ods, method=['function', 'class_method'][1]):
     ods = copy.deepcopy(ods)  # make a copy to make sure save does not alter entering ODS
     if method == 'function':
         save_omas_h5(ods, filename)
-        ods1 = load_omas_h5(filename)
+        ods1 = load_omas_h5(filename, consistency_check=consistency_check)
     else:
         ods.save(filename)
-        ods1 = ODS().load(filename)
+        ods1 = ODS(consistency_check=consistency_check).load(filename)
     return ods1

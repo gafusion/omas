@@ -48,11 +48,12 @@ class TestOmasSuite(UnittestCaseOmas):
 
     def test_omas_h5(self):
         ods = ODS().sample()
-        ods1 = through_omas_h5(ods)
-        diff = ods.diff(ods1)
-        if diff:
-            print('\n'.join(diff))
-            raise AssertionError('h5 through difference')
+        for consistency_check in [True, False]:
+            ods1 = through_omas_h5(ods, consistency_check=consistency_check)
+            diff = ods.diff(ods1)
+            if diff:
+                print('\n'.join(diff))
+                raise AssertionError(f'h5 through difference, consistency_check: {consistency_check}')
 
     def test_omas_ds(self):
         ods = ODS().sample(homogeneous_time=True)
