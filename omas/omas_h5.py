@@ -107,7 +107,10 @@ def convertDataset(ods, data):
             continue
         if isinstance(data[item], h5py.Dataset):
             if item + '_error_upper' in data:
-                ods.setraw(item, uarray(data[item][()], data[item + '_error_upper'][()]))
+                if isinstance(data[item][()], (float, numpy.floating)):
+                    ods.setraw(item, ufloat(data[item][()], data[item + '_error_upper'][()]))
+                else:
+                    ods.setraw(item, uarray(data[item][()], data[item + '_error_upper'][()]))
             else:
                 ods.setraw(item, data[item][()])
         elif isinstance(data[item], h5py.Group):
