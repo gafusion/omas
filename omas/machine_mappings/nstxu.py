@@ -520,8 +520,7 @@ def thomson_scattering_data(ods, pulse):
     for item in signals:
         TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
         TDIs[item] = '\\' + TDI.strip('\\')
-    res = mdsvalue('nstx', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
-    print(res['FIT_RADII'])
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
     for i, R in enumerate(res['FIT_RADII']):
 
         ch = ods['thomson_scattering']['channel'][i]
