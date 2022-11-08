@@ -514,15 +514,16 @@ def thomson_scattering_data(ods, pulse):
     """
 
     signals = ['FIT_NE', 'FIT_NE_ERR', 'FIT_TE', 'FIT_TE_ERR', 'FIT_RADII', 'TS_TIMES']
-    signals_norm = {'FIT_NE': 1.0, 'FIT_NE_ERR': 1.0, 'FIT_TE': 1e3, 'FIT_TE_ERR': 1e3, 'FIT_RADII': 1e-2, 'TS_TIMES': 1.0}
+    signals_norm = {'FIT_NE': 1.0e6, 'FIT_NE_ERR': 1.0e6, 'FIT_TE': 1e3, 'FIT_TE_ERR': 1e3, 'FIT_RADII': 1e-2, 'TS_TIMES': 1.0}
 
     TDIs = {}
     for item in signals:
         TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
         TDIs[item] = '\\' + TDI.strip('\\')
-    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
-
+    res = mdsvalue('nstx', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+    print(res['FIT_RADII'])
     for i, R in enumerate(res['FIT_RADII']):
+
         ch = ods['thomson_scattering']['channel'][i]
         ch['name'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
         ch['identifier'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
