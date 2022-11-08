@@ -6814,6 +6814,70 @@
   "lifecycle_status": "active",
   "structure_reference": "equilibrium_convergence"
  },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_expression": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "equilibrium/equilibrium_gs_deviation.xml",
+  "documentation": "Expression for calculating the residual deviation between the left and right hand side of the Grad Shafranov equation\n1) absolute_gs_difference : Average absolute difference of the Grad-Shafranov equation, <|Del* psi - j_tor*R|>, averaged over the plasma poloidal cross-section\n2) root_mean_square_gs_difference : Root mean square difference of the Grad-Shafranov equation, sqrt(<(Del* psi - j_tor*R)^2 >), averaged over the plasma poloidal cross-section\n3) max_absolute_psi_residual : Maximum absolute difference over the plasma poloidal cross-section of the poloidal flux between the current and preceding iteration, on fixed grid points\n4) max_absolute_gs_difference_norm : Maximum absolute difference of the Grad-Shafranov equation, normalised, max(|Del* psi - j_tor*R|) / max(|Del* psi|), over the plasma poloidal cross-section\n5) max_root_mean_square_gs_difference_norm : Root maximum square difference of the Grad-Shafranov equation, normalised, sqrt(max((Del* psi - j_tor*R)^2) / max((Del* psi)^2)), over the plasma poloidal cross-section",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_expression",
+  "introduced_after_version": "3.36.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_expression.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_expression/description",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_expression.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_expression/index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_expression.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_expression/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value of the residual deviation between the left and right hand side of the Grad Shafranov equation, evaluated as per grad_shafranov_deviation_expression",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_value",
+  "introduced_after_version": "3.36.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"grad_shafranov_deviation_value\"",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_value_error_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"grad_shafranov_deviation_value\"",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_value_error_lower",
+  "introduced_after_version": "3.36.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"grad_shafranov_deviation_value\"",
+  "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_value_error_upper",
+  "introduced_after_version": "3.36.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "mixed"
+ },
  "equilibrium.time_slice[:].convergence.iterations_n": {
   "data_type": "INT_0D",
   "documentation": "Number of iterations carried out in the convergence loop",

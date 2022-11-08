@@ -128,7 +128,7 @@ def pf_active_coil_current_data(ods, pulse):
             data = ods[f'pf_active.coil.{channel}.current.data']
             rel_error = data * sig['rel_error']
             abs_error = sig['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
@@ -208,7 +208,7 @@ def magnetics_floops_data(ods, pulse):
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
             abs_error = tfl_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
             # 2*pi normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
@@ -254,7 +254,7 @@ def magnetics_probes_data(ods, pulse):
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
             rel_error = data * bmc_signals[channel + 1]['rel_error']
             abs_error = bmc_signals[channel + 1]['abs_error']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < bmc_signals[channel + 1]['sig_thresh']] = bmc_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data_error_upper'] = error
 
@@ -323,7 +323,7 @@ def ip_bt_dflux_data(ods, pulse):
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
             abs_error = signals[item][0]['abs_error'] * signals[item][0]['scale']
-            error = np.sqrt(rel_error ** 2 + abs_error ** 2)
+            error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
                 signals[item][0]['sig_thresh'] * signals[item][0]['scale']
             )
@@ -491,6 +491,49 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
+
+
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def thomson_scattering_hardware(ods, pulse):
+    """
+    Gathers NSTX(-U) Thomson measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(thomson_scattering_data)(ods, pulse)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def thomson_scattering_data(ods, pulse):
+    """
+    Loads DIII-D Thomson measurement data
+
+    :param pulse: int
+    """
+
+    signals = ['FIT_NE', 'FIT_NE_ERR', 'FIT_TE', 'FIT_TE_ERR', 'FIT_RADII', 'TS_TIMES']
+    signals_norm = {'FIT_NE': 1.0, 'FIT_NE_ERR': 1.0, 'FIT_TE': 1e3, 'FIT_TE_ERR': 1e3, 'FIT_RADII': 1e-2, 'TS_TIMES': 1.0}
+
+    TDIs = {}
+    for item in signals:
+        TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
+        TDIs[item] = '\\' + TDI.strip('\\')
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+
+    for i, R in enumerate(res['FIT_RADII']):
+        ch = ods['thomson_scattering']['channel'][i]
+        ch['name'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
+        ch['identifier'] = 'ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST' + str(i)
+        ch['position']['r'] = R * signals_norm['FIT_RADII']
+        ch['position']['z'] = 0.0
+        ch['n_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
+        ch['n_e.data'] = res['FIT_NE'][i, :] * signals_norm['FIT_NE']
+        ch['n_e.data_error_upper'] = res['FIT_NE_ERR'][i, :] * signals_norm['FIT_NE_ERR']
+        ch['t_e.time'] = res['TS_TIMES'] * signals_norm['TS_TIMES']
+        ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i, :] * signals_norm['FIT_TE_ERR']
+        ch['t_e.data'] = res['FIT_TE'][i, :] * signals_norm['FIT_TE']
 
 
 # =====================

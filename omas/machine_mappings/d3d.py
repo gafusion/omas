@@ -294,9 +294,32 @@ def pf_active_hardware(ods, pulse):
     mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='pf_active')
 
-    coil_names=  ['F1A','F2A','F3A','F4A','F5A','F6A','F7A','F8A','F9A',
-                   'F2B','F2B','F3B','F4B','F5B','F6B','F7B','F8B','F9B',
-                   'ECOILA','ECOILB','E567UP','E567DN','E89DN', 'E89UP']
+    coil_names = [
+        'F1A',
+        'F2A',
+        'F3A',
+        'F4A',
+        'F5A',
+        'F6A',
+        'F7A',
+        'F8A',
+        'F9A',
+        'F2B',
+        'F2B',
+        'F3B',
+        'F4B',
+        'F5B',
+        'F6B',
+        'F7B',
+        'F8B',
+        'F9B',
+        'ECOILA',
+        'ECOILB',
+        'E567UP',
+        'E567DN',
+        'E89DN',
+        'E89UP',
+    ]
     for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
         ods['pf_active.coil'][k]['identifier'] = fcid
@@ -429,40 +452,43 @@ def ec_launcher_active_hardware(ods, pulse):
             if field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
-    gyortrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+    gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     for system_no in range(1, num_systems + 1):
         system_index = system_no - 1
-        if gyortrons[f'STAT_{system_no}'] == 0:
+        if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
-        launchers = ods['ec_launchers.launcher']
-        launchers[system_index]['identifier'] = launchers[system_index]['name'] = gyrotron_names[system_index]
-        launchers[system_index]['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])
-        launchers[system_index]['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])
-        launchers[system_index]['launching_position.time'] = np.zeros(launchers[system_index]['launching_position.r'].shape)
+        beams = ods['ec_launchers.beam']
+        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        if len(time) == 1:
+            beams[system_index]['time'] = np.atleast_1d(0)
+        else:
+            beams[system_index]['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        ntime = len(beams[system_index]['time'])
+        beams[system_index]['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
+        beams[system_index]['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+
+        beams[system_index]['identifier'] = beams[system_index]['name'] = gyrotron_names[system_index]
+
+        beams[system_index]['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
+        beams[system_index]['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
+
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
         phi = -phi - np.pi / 2.0
-        launchers[system_index]['launching_position.phi'] = np.atleast_1d(phi)
-        launchers[system_index]['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
-        launchers[system_index]['frequency.time'] = np.atleast_1d(0)
-        launchers[system_index]['power_launched.time'] = np.atleast_1d(gyortrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        launchers[system_index]['power_launched.data'] = np.atleast_1d(gyortrons[f'FPWRC_{system_no}'])
-        xfrac = gyortrons[f'XMFRAC_{system_no}']
+        beams[system_index]['launching_position.phi'] = phi * np.ones(ntime)
+
+        beams[system_index]['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        beams[system_index]['frequency.time'] = np.atleast_1d(0)
+
+        beams[system_index]['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
+        beams[system_index]['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+
+        xfrac = gyrotrons[f'XMFRAC_{system_no}']
+
         if iterable(xfrac):
-            launchers[system_index]['mode.data'] = np.atleast_1d(np.array(np.round(1.0 - 2.0 * xfrac), dtype=np.int))
-            launchers[system_index]['mode.time'] = np.atleast_1d(gyortrons[f'TIME_XMFRAC_{system_no}']) / 1.0e3
+            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         else:
-            launchers[system_index]['mode.data'] = np.atleast_1d([np.round(1.0 - 2.0 * xfrac)], dtype=np.int)
-            launchers[system_index]['mode.time'] = np.atleast_1d(0)
-        launchers[system_index]['steering_angle_tor.data'] = np.atleast_1d(np.deg2rad((gyortrons[f'AZIANG_{system_no}'] - 180.0)))
-        if len(launchers[system_index]['steering_angle_tor.data']) == 1:
-            launchers[system_index]['steering_angle_tor.time'] = np.atleast_1d(0)
-        else:
-            launchers[system_index]['steering_angle_tor.time'] = np.atleast_1d(gyortrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
-        launchers[system_index]['steering_angle_pol.data'] = np.atleast_1d(np.deg2rad((gyortrons[f'POLANG_{system_no}'] - 90.0)))
-        if len(launchers[system_index]['steering_angle_pol.data']) == 1:
-            launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(0)
-        else:
-            launchers[system_index]['steering_angle_pol.time'] = np.atleast_1d(gyortrons[f'TIME_POLANG_{system_no}']) / 1.0e3
+            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac))
+
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
         # The beam is divergent because the beam waist is focused on to the final launching mirror.
@@ -470,14 +496,10 @@ def ec_launcher_active_hardware(ods, pulse):
         # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
         # Hence, the inverse curvature radius is zero
         # Notably the ECRH beams are astigmatic in reality so this is just an approximation
-        launchers[system_index]['beam.phase.angle.time'] = np.array([0.0])
-        launchers[system_index]['beam.phase.angle.data'] = np.deg2rad([0.0])
-        launchers[system_index]['beam.phase.curvature.time'] = np.array([0.0])
-        launchers[system_index]['beam.phase.curvature.data'] = np.array([np.atleast_1d(0.0), np.atleast_1d(0.0)])
-        launchers[system_index]['beam.spot.angle.time'] = np.array([0.0])
-        launchers[system_index]['beam.spot.angle.data'] = np.deg2rad([0.0])
-        launchers[system_index]['beam.spot.size.time'] = np.array([0.0])
-        launchers[system_index]['beam.spot.size.data'] = np.array([np.atleast_1d(0.0172), np.atleast_1d(0.0172)])
+        beams[system_index]['phase.angle'] = np.zeros(ntime)
+        beams[system_index]['phase.curvature'] = np.zeros([2, ntime])
+        beams[system_index]['spot.angle'] = np.zeros(ntime)
+        beams[system_index]['spot.size'] = 0.0172 * np.ones([2, ntime])
 
 
 # ================================
@@ -486,7 +508,8 @@ def interferometer_hardware(ods, pulse):
     """
     Loads DIII-D CO2 interferometer chord locations
 
-    The chord endpoints ARE NOT RIGHT. Only the R for vertical lines or Z for horizontal lines is right.
+    The chord endpoints are approximative. They do not take into account 
+    the vessel wall contour of the shot. The values have been taken from OMFITprofiles.
 
     Data sources:
     DIII-D webpage: https://diii-d.gat.com/diii-d/Mci accessed 2018 June 07 by D. Eldon
@@ -501,15 +524,16 @@ def interferometer_hardware(ods, pulse):
     ods['interferometer.channel.0.identifier'] = ods['interferometer.channel.0.name'] = 'r0'
     r0 = ods['interferometer.channel.0.line_of_sight']
     r0['first_point.phi'] = r0['second_point.phi'] = 225 * (-np.pi / 180.0)
-    r0['first_point.r'], r0['second_point.r'] = 3.0, 0.8  # These are not the real endpoints
+    r0['first_point.r'], r0['second_point.r'] = 2.36, 1.01  # End points from OMFITprofiles
     r0['first_point.z'] = r0['second_point.z'] = 0.0
-
+    Z_top = 1.24
+    Z_bottom = -1.375
     for i, r in enumerate([1.48, 1.94, 2.10]):
         ods['interferometer.channel'][i + 1]['identifier'] = ods['interferometer.channel'][i + 1]['name'] = 'v{}'.format(i + 1)
         los = ods['interferometer.channel'][i + 1]['line_of_sight']
         los['first_point.phi'] = los['second_point.phi'] = 240 * (-np.pi / 180.0)
         los['first_point.r'] = los['second_point.r'] = r
-        los['first_point.z'], los['second_point.z'] = -1.8, 1.8  # These are not the real points
+        los['first_point.z'], los['second_point.z'] = Z_top, Z_bottom  # End points from OMFITprofiles
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
@@ -1238,4 +1262,5 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
+    test_machine_mapping_functions(['ec_launcher_active_hardware'], globals(), locals())
     test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())

@@ -28,7 +28,7 @@ Learn More:
 .. image:: https://img.shields.io/github/tag-date/gafusion/omas.svg?label=OMAS&color=blue
   :target: https://github.com/gafusion/omas
 
-.. image:: https://img.shields.io/badge/IMAS-3.36.0-yellow
+.. image:: https://img.shields.io/badge/IMAS-3.37.0-yellow
   :target: https://imas.iter.org
 
 .. image:: https://img.shields.io/github/repo-size/gafusion/omas.svg?color=blue
