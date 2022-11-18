@@ -304,7 +304,7 @@ def pf_active_hardware(ods, pulse):
         'F7A',
         'F8A',
         'F9A',
-        'F2B',
+        'F1B',
         'F2B',
         'F3B',
         'F4B',
