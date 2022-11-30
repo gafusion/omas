@@ -213,7 +213,73 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def add_rho_pol_norm_to_equilbrium_profiles_1d_ods(ods, time_index):
+    try:
+        if (len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["rho_pol-norm"]) ==
+            len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])):
+            return
+        else:
+            raise LookupError
+    except LookupError:
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["rho_pol_norm"] = (
+            ods.map_pol_flux_to_flux_coordinate(ods, time_index, "rho_pol_norm", 
+            ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])
+        )
+
+def mask_SOL(ods, time_index, psi_values):
+    """
+        Returns a numpy array of `dtype=bool`/
+        The array is true for all values inside and on the LCFS
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param values: Psi values that need to masked
+
+        :return: mask that is True for values inside and on the LCFS
+    """
+    if (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"] <
+        ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]):
+        return psi_values <= ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+    else:
+        return psi_values >= ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def add_phi_to_equilbrium_profiles_1d_ods(ods, time_index):
+    """
+        Adds `profiles_1d.phi` to an ODS using q
+        :param ods: input ods
+
+        :param time_index: time slices to process
+    """
+    try:
+        if (len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"]) ==
+            len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])):
+            return
+        else:
+            raise LookupError
+    except (LookupError, ValueError):
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        #TODO: 
+        # - Any cocos needed here?
+        psi = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        mask = mask_SOL(ods, time_index, psi)
+        q_spline = InterpolatedUnivariateSpline(
+                ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][mask],
+                ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["q"][mask])
+        phi_spline = q_spline.antiderivative(1)
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"] = numpy.zeros(psi.shape)
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][mask] = (
+            phi_spline(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][mask]))
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][mask==False] = numpy.inf
+
+
+
 def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
+    import numpy as np
     """
         Maps from one magnetic coordinate system to psi
         :param ods: input ods
@@ -226,10 +292,28 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
 
         :return: Transformed values
     """
-    if origin == "rho_pol":
-        return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_sep"]
+    if origin == "rho_pol_norm":
+        return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
                 + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+    elif origin == "rho_tor_norm":
+        phi = values**2
+        phi *= map_pol_flux_to_flux_coordinate(ods, time_index, "psi", 
+                np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_sep"]])) / np.max(phi)
+        return map_flux_coordinate_to_pol_flux(ods, time_index, "phi", phi)
+    elif origin == "phi":
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        psi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        psi_mask = mask_SOL(ods, time_index, psi_grid)
+        phi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][psi_mask]
+        psi_spl = InterpolatedUnivariateSpline(phi_grid, psi_grid[psi_mask])
+        phi_min = np.min(phi_grid)
+        phi_max = np.max(phi_grid)
+        values_mask = np.logical_ant(values > phi_min, values < phi_max)
+        psi = np.zeros(values.shape)
+        psi = np.nan
+        psi[values_mask] = psi_spl(values[values_mask])
+        return psi
     else:
         raise NotImplementedError(f"Conversion from {origin} not yet implemented.")
 
@@ -247,10 +331,37 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
 
         :return: Transformed values
     """
-    if destination == "rho_pol":
+    if destination == "rho_pol_norm":
         return np.sqrt((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]) /
                        (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
                         - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+    elif destination == "rho_tor_norm":
+        mask = mask_SOL(ods, time_index, values)
+        phi = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", values[mask])
+        rho_tor_norm = np.zeros(values.shape)
+        phi_boundary = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", 
+                np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]))
+        rho_tor_norm[mask] = phi**2 / phi_boundary**2
+        rho_tor_norm /= np.max(rho_tor_norm[mask])
+        rho_tor_norm[mask==False] = np.inf
+        return rho_tor_norm
+    elif destination == "phi":
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        psi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        psi_grid_mask = mask_SOL(ods, time_index, psi_grid)
+        try:
+            phi_spl = InterpolatedUnivariateSpline(psi_grid[psi_grid_mask],
+                    ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_grid_mask])
+        except ValueError:
+            add_phi_to_equilbrium_profiles_1d_ods(ods, time_index)
+            phi_spl = InterpolatedUnivariateSpline(psi_grid[psi_grid_mask],
+                    ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_grid_mask])
+        rho_tor_norm = np.zeros(values.shape)
+        mask = mask_SOL(ods, time_index, values)
+        phi = np.zeros(values.shape)
+        phi[mask] = phi_spl(values[mask])
+        phi[mask==False] = np.inf
+        return phi
     else:
         raise NotImplementedError(f"Conversion to {destination} not yet implemented.")
 
