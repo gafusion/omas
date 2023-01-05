@@ -341,8 +341,7 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
         rho_tor_norm = np.zeros(values.shape)
         phi_boundary = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", 
                 np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]))
-        rho_tor_norm[mask] = phi**2 / phi_boundary**2
-        rho_tor_norm /= np.max(rho_tor_norm[mask])
+        rho_tor_norm[mask] = np.sqrt(phi / phi_boundary)
         rho_tor_norm[mask==False] = np.inf
         return rho_tor_norm
     elif destination == "phi":
@@ -356,11 +355,17 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
             add_phi_to_equilbrium_profiles_1d_ods(ods, time_index)
             phi_spl = InterpolatedUnivariateSpline(psi_grid[psi_grid_mask],
                     ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_grid_mask])
-        rho_tor_norm = np.zeros(values.shape)
         mask = mask_SOL(ods, time_index, values)
         phi = np.zeros(values.shape)
         phi[mask] = phi_spl(values[mask])
-        phi[mask==False] = np.inf
+        phi_bound = phi_spl(ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"])
+        phi[mask==False] = np.inf * np.sign(phi_bound)
+        wrong_sign_mask = phi_bound * phi < 0
+        if np.any(wrong_sign_mask):
+            if np.any(np.abs(phi[wrong_sign_mask]/phi_bound) > 1.e-4):
+                raise ValueError("Unphysical phi encountered when mapping to phi")
+            else:
+                phi[wrong_sign_mask] = 0.0
         return phi
     else:
         raise NotImplementedError(f"Conversion to {destination} not yet implemented.")
