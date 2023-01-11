@@ -338,8 +338,8 @@ _cocos_signals['divertors.divertor.:.current_incident.data']='?'                
 _cocos_signals['divertors.divertor.:.power_currents.data']='?'                                           #[ADD?]# 1.750000 # current  [W]
 
 # EC_LAUNCHERS
-_cocos_signals['ec_launchers.beam.:.launching_position.phi']='?'                 #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['ec_launchers.beam.:.steering_angle_pol']='?'                     #[ADD?]# 2.000000 # _pol  [rad]
+_cocos_signals['ec_launchers.beam.:.launching_position.phi']='TOR'                      # 2.000000 # phi  [rad]
+_cocos_signals['ec_launchers.beam.:.steering_angle_pol']=None                           # 2.000000 # _pol  [rad]
 _cocos_signals['ec_launchers.beam.:.steering_angle_tor']='TOR'                          # 2.000000 # _tor  [rad]
 
 # ECE

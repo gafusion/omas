@@ -87,7 +87,6 @@
   "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
  },
  "coils_non_axisymmetric.coil.:.current.data": {
-  "COCOSIO": 11,
   "PYTHON": "coils_non_axisymmetric_current_data(ods, {pulse})"
  },
  "coils_non_axisymmetric.coil.:.current.time": {
@@ -188,7 +187,6 @@
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ec_launchers.beam.:.steering_angle_pol": {
-  "COCOSIO": 11,
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ec_launchers.beam.:.steering_angle_tor": {
