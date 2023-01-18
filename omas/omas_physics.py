@@ -992,14 +992,14 @@ def summary_currents(ods, time_index=None, update=True):
     with omas_environment(ods, coordsio=coordsio):
 
         for (jname_cp, jname_sum) in current_names:
-            if 'core_profiles.profiles_1d{time_index}.{jname_cp}' in ods:
+            if f'core_profiles.profiles_1d.{time_index}.{jname_cp}' in ods:
                 Bt = ods['equilibrium.vacuum_toroidal_field.b0']
                 JtoR = transform_current(rho=rho, JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt, equilibrium=ods['equilibrium.time_slice'][time_index])
-                Ip = np.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/np.pi
+                Ip = numpy.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/numpy.pi
             
                 if f'summary.global_quantities.{jname_sum}' not in ods:
-                   ods_n['summary.global_quantities'][jname_sum] = np.zeros(time_index) 
-                else:
+                   ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index+1) 
+                
                    ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
 
     return ods_n
