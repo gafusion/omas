@@ -56,7 +56,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/beam/phase/angle/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].beam.phase.angle.data_error_lower": {
@@ -124,7 +125,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/beam/phase/curvature/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].beam.phase.curvature.data_error_lower": {
@@ -196,7 +198,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/beam/spot/angle/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].beam.spot.angle.data_error_lower": {
@@ -264,7 +267,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/beam/spot/size/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].beam.spot.size.data_error_lower": {
@@ -335,7 +339,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.phi_error_lower": {
@@ -393,7 +398,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/psi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.psi_error_lower": {
@@ -451,7 +457,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.r_error_lower": {
@@ -509,7 +516,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.rho_tor_norm_error_lower": {
@@ -567,7 +575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/theta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.theta_error_lower": {
@@ -625,7 +634,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/channel(i1)/delta_position_suprathermal/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].delta_position_suprathermal.z_error_lower": {
@@ -685,7 +695,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].frequency.data_error_lower": {
@@ -757,7 +768,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/harmonic/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].harmonic.data_error_lower": {
@@ -824,7 +836,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"if_bandwidth\"",
   "full_path": "ece/channel(i1)/if_bandwidth_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].if_bandwidth_error_lower": {
@@ -875,7 +888,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/optical_depth/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].optical_depth.data_error_lower": {
@@ -953,7 +967,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/channel(i1)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.phi_error_lower": {
@@ -1011,7 +1026,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "ece/channel(i1)/position/psi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.psi_error_lower": {
@@ -1069,7 +1085,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/channel(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.r_error_lower": {
@@ -1127,7 +1144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ece/channel(i1)/position/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.rho_tor_norm_error_lower": {
@@ -1185,7 +1203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "ece/channel(i1)/position/theta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.theta_error_lower": {
@@ -1243,7 +1262,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/channel(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].position.z_error_lower": {
@@ -1303,7 +1323,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/t_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].t_e.data_error_lower": {
@@ -1375,7 +1396,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/channel(i1)/t_e_voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.channel[:].t_e_voltage.data_error_lower": {
@@ -1589,7 +1611,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "ece/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1598,20 +1620,22 @@
  },
  "ece.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "ece/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "ece.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "ece/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "ece.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1669,7 +1693,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "ece/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.latency_error_lower": {
@@ -1716,7 +1741,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.first_point.phi_error_lower": {
@@ -1747,7 +1773,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.first_point.r_error_lower": {
@@ -1778,7 +1805,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.first_point.z_error_lower": {
@@ -1816,7 +1844,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.second_point.phi_error_lower": {
@@ -1847,7 +1876,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.second_point.r_error_lower": {
@@ -1878,7 +1908,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.line_of_sight.second_point.z_error_lower": {
@@ -1927,7 +1958,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ece/polarizer(i1)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].centre.phi_error_lower": {
@@ -1958,7 +1990,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ece/polarizer(i1)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].centre.r_error_lower": {
@@ -1989,7 +2022,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/polarizer(i1)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].centre.z_error_lower": {
@@ -2020,7 +2054,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"polarization_angle\"",
   "full_path": "ece/polarizer(i1)/polarization_angle_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].polarization_angle_error_lower": {
@@ -2051,7 +2086,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "ece/polarizer(i1)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].radius_error_lower": {
@@ -2089,7 +2125,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "ece/polarizer(i1)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x1_unit_vector.x_error_lower": {
@@ -2120,7 +2157,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "ece/polarizer(i1)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x1_unit_vector.y_error_lower": {
@@ -2151,7 +2189,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/polarizer(i1)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x1_unit_vector.z_error_lower": {
@@ -2189,7 +2228,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "ece/polarizer(i1)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x2_unit_vector.x_error_lower": {
@@ -2220,7 +2260,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "ece/polarizer(i1)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x2_unit_vector.y_error_lower": {
@@ -2251,7 +2292,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/polarizer(i1)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x2_unit_vector.z_error_lower": {
@@ -2289,7 +2331,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "ece/polarizer(i1)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x3_unit_vector.x_error_lower": {
@@ -2320,7 +2363,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "ece/polarizer(i1)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x3_unit_vector.y_error_lower": {
@@ -2351,7 +2395,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ece/polarizer(i1)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.polarizer[:].x3_unit_vector.z_error_lower": {
@@ -2393,7 +2438,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "ece/psi_normalization/psi_boundary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.psi_normalization.psi_boundary_error_lower": {
@@ -2436,7 +2482,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "ece/psi_normalization/psi_magnetic_axis_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.psi_normalization.psi_magnetic_axis_error_lower": {
@@ -2499,7 +2546,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ece/t_e_central/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.t_e_central.data_error_lower": {
@@ -2542,7 +2590,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ece/t_e_central/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ece.t_e_central.rho_tor_norm_error_lower": {

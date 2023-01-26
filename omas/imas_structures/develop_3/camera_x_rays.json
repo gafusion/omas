@@ -33,7 +33,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/aperture/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.centre.phi_error_lower": {
@@ -64,7 +65,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/aperture/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.centre.r_error_lower": {
@@ -95,7 +97,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/aperture/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.centre.z_error_lower": {
@@ -143,7 +146,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "camera_x_rays/aperture/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.outline.x1_error_lower": {
@@ -183,7 +187,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "camera_x_rays/aperture/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.outline.x2_error_lower": {
@@ -220,7 +225,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "camera_x_rays/aperture/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.radius_error_lower": {
@@ -251,7 +257,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "camera_x_rays/aperture/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.surface_error_lower": {
@@ -290,7 +297,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/aperture/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x1_unit_vector.x_error_lower": {
@@ -321,7 +329,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/aperture/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x1_unit_vector.y_error_lower": {
@@ -352,7 +361,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/aperture/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x1_unit_vector.z_error_lower": {
@@ -383,7 +393,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "camera_x_rays/aperture/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x1_width_error_lower": {
@@ -422,7 +433,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/aperture/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x2_unit_vector.x_error_lower": {
@@ -453,7 +465,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/aperture/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x2_unit_vector.y_error_lower": {
@@ -484,7 +497,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/aperture/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x2_unit_vector.z_error_lower": {
@@ -515,7 +529,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "camera_x_rays/aperture/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x2_width_error_lower": {
@@ -554,7 +569,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/aperture/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x3_unit_vector.x_error_lower": {
@@ -585,7 +601,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/aperture/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x3_unit_vector.y_error_lower": {
@@ -616,7 +633,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/aperture/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.aperture.x3_unit_vector.z_error_lower": {
@@ -657,7 +675,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"camera_dimensions\"",
   "full_path": "camera_x_rays/camera/camera_dimensions_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.camera_dimensions_error_lower": {
@@ -701,7 +720,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/camera/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.centre.phi_error_lower": {
@@ -732,7 +752,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/camera/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.centre.r_error_lower": {
@@ -763,7 +784,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.centre.z_error_lower": {
@@ -819,7 +841,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/camera/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.first_point.phi_error_lower": {
@@ -862,7 +885,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/camera/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.first_point.r_error_lower": {
@@ -905,7 +929,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.first_point.z_error_lower": {
@@ -955,7 +980,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/camera/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.second_point.phi_error_lower": {
@@ -998,7 +1024,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/camera/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.second_point.r_error_lower": {
@@ -1041,7 +1068,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.line_of_sight.second_point.z_error_lower": {
@@ -1083,7 +1111,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pixel_dimensions\"",
   "full_path": "camera_x_rays/camera/pixel_dimensions_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.pixel_dimensions_error_lower": {
@@ -1131,7 +1160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/camera/pixel_position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.pixel_position.phi_error_lower": {
@@ -1174,7 +1204,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/camera/pixel_position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.pixel_position.r_error_lower": {
@@ -1217,7 +1248,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/pixel_position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.pixel_position.z_error_lower": {
@@ -1274,7 +1306,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/camera/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x1_unit_vector.x_error_lower": {
@@ -1305,7 +1338,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/camera/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x1_unit_vector.y_error_lower": {
@@ -1336,7 +1370,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x1_unit_vector.z_error_lower": {
@@ -1375,7 +1410,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/camera/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x2_unit_vector.x_error_lower": {
@@ -1406,7 +1442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/camera/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x2_unit_vector.y_error_lower": {
@@ -1437,7 +1474,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x2_unit_vector.z_error_lower": {
@@ -1475,7 +1513,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/camera/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x3_unit_vector.x_error_lower": {
@@ -1506,7 +1545,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/camera/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x3_unit_vector.y_error_lower": {
@@ -1537,7 +1577,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/camera/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.camera.x3_unit_vector.z_error_lower": {
@@ -1679,7 +1720,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "camera_x_rays/detector_humidity/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.detector_humidity.data_error_lower": {
@@ -1742,7 +1784,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "camera_x_rays/detector_temperature/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.detector_temperature.data_error_lower": {
@@ -1804,7 +1847,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_threshold_lower\"",
   "full_path": "camera_x_rays/energy_threshold_lower_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.energy_threshold_lower_error_lower": {
@@ -1843,7 +1887,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "camera_x_rays/exposure_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.exposure_time_error_lower": {
@@ -1888,7 +1933,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "camera_x_rays/filter_window/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.centre.phi_error_lower": {
@@ -1919,7 +1965,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "camera_x_rays/filter_window/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.centre.r_error_lower": {
@@ -1950,7 +1997,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/filter_window/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.centre.z_error_lower": {
@@ -2085,7 +2133,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "camera_x_rays/filter_window/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.outline.x1_error_lower": {
@@ -2125,7 +2174,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "camera_x_rays/filter_window/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.outline.x2_error_lower": {
@@ -2165,7 +2215,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"photon_absorption\"",
   "full_path": "camera_x_rays/filter_window/photon_absorption_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.photon_absorption_error_lower": {
@@ -2202,7 +2253,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "camera_x_rays/filter_window/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.radius_error_lower": {
@@ -2233,7 +2285,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "camera_x_rays/filter_window/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.surface_error_lower": {
@@ -2264,7 +2317,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "camera_x_rays/filter_window/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.thickness_error_lower": {
@@ -2295,7 +2349,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_lower\"",
   "full_path": "camera_x_rays/filter_window/wavelength_lower_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.wavelength_lower_error_lower": {
@@ -2326,7 +2381,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_upper\"",
   "full_path": "camera_x_rays/filter_window/wavelength_upper_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.wavelength_upper_error_lower": {
@@ -2360,7 +2416,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "camera_x_rays/filter_window/wavelengths_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.wavelengths_error_lower": {
@@ -2397,7 +2454,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_curvature\"",
   "full_path": "camera_x_rays/filter_window/x1_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x1_curvature_error_lower": {
@@ -2436,7 +2494,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/filter_window/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x1_unit_vector.x_error_lower": {
@@ -2467,7 +2526,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/filter_window/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x1_unit_vector.y_error_lower": {
@@ -2498,7 +2558,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/filter_window/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x1_unit_vector.z_error_lower": {
@@ -2529,7 +2590,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "camera_x_rays/filter_window/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x1_width_error_lower": {
@@ -2560,7 +2622,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_curvature\"",
   "full_path": "camera_x_rays/filter_window/x2_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x2_curvature_error_lower": {
@@ -2599,7 +2662,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/filter_window/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x2_unit_vector.x_error_lower": {
@@ -2630,7 +2694,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/filter_window/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x2_unit_vector.y_error_lower": {
@@ -2661,7 +2726,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/filter_window/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x2_unit_vector.z_error_lower": {
@@ -2692,7 +2758,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "camera_x_rays/filter_window/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x2_width_error_lower": {
@@ -2731,7 +2798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "camera_x_rays/filter_window/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x3_unit_vector.x_error_lower": {
@@ -2762,7 +2830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "camera_x_rays/filter_window/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x3_unit_vector.y_error_lower": {
@@ -2793,7 +2862,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "camera_x_rays/filter_window/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.filter_window.x3_unit_vector.z_error_lower": {
@@ -2889,7 +2959,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "camera_x_rays/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -2898,20 +2968,22 @@
  },
  "camera_x_rays.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "camera_x_rays/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "camera_x_rays.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "camera_x_rays/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "camera_x_rays.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -2968,7 +3040,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "camera_x_rays/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.latency_error_lower": {
@@ -3009,7 +3082,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"photon_energy\"",
   "full_path": "camera_x_rays/photon_energy_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.photon_energy_error_lower": {
@@ -3062,7 +3136,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"quantum_efficiency\"",
   "full_path": "camera_x_rays/quantum_efficiency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.quantum_efficiency_error_lower": {
@@ -3103,7 +3178,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"readout_time\"",
   "full_path": "camera_x_rays/readout_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_x_rays.readout_time_error_lower": {

@@ -33,7 +33,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "charge_exchange/aperture/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.centre.phi_error_lower": {
@@ -64,7 +65,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "charge_exchange/aperture/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.centre.r_error_lower": {
@@ -95,7 +97,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "charge_exchange/aperture/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.centre.z_error_lower": {
@@ -143,7 +146,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "charge_exchange/aperture/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.outline.x1_error_lower": {
@@ -183,7 +187,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "charge_exchange/aperture/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.outline.x2_error_lower": {
@@ -220,7 +225,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "charge_exchange/aperture/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.radius_error_lower": {
@@ -251,7 +257,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "charge_exchange/aperture/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.surface_error_lower": {
@@ -290,7 +297,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "charge_exchange/aperture/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x1_unit_vector.x_error_lower": {
@@ -321,7 +329,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "charge_exchange/aperture/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x1_unit_vector.y_error_lower": {
@@ -352,7 +361,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "charge_exchange/aperture/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x1_unit_vector.z_error_lower": {
@@ -383,7 +393,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "charge_exchange/aperture/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x1_width_error_lower": {
@@ -422,7 +433,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "charge_exchange/aperture/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x2_unit_vector.x_error_lower": {
@@ -453,7 +465,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "charge_exchange/aperture/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x2_unit_vector.y_error_lower": {
@@ -484,7 +497,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "charge_exchange/aperture/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x2_unit_vector.z_error_lower": {
@@ -515,7 +529,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "charge_exchange/aperture/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x2_width_error_lower": {
@@ -554,7 +569,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "charge_exchange/aperture/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x3_unit_vector.x_error_lower": {
@@ -585,7 +601,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "charge_exchange/aperture/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x3_unit_vector.y_error_lower": {
@@ -616,7 +633,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "charge_exchange/aperture/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.aperture.x3_unit_vector.z_error_lower": {
@@ -665,7 +683,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "charge_exchange/channel(i1)/bes/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.a_error_lower": {
@@ -708,7 +727,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/doppler_shift/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.doppler_shift.data_error_lower": {
@@ -778,7 +798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/lorentz_shift/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.lorentz_shift.data_error_lower": {
@@ -846,7 +867,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/bes/radiances/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.radiances.data_error_lower": {
@@ -899,7 +921,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"transition_wavelength\"",
   "full_path": "charge_exchange/channel(i1)/bes/transition_wavelength_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.transition_wavelength_error_lower": {
@@ -930,7 +953,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "charge_exchange/channel(i1)/bes/z_ion_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.z_ion_error_lower": {
@@ -961,7 +985,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "charge_exchange/channel(i1)/bes/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.z_n_error_lower": {
@@ -1010,7 +1035,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].a_error_lower": {
@@ -1060,7 +1086,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/n_i_over_n_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].n_i_over_n_e.data_error_lower": {
@@ -1151,7 +1178,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].t_i.data_error_lower": {
@@ -1242,7 +1270,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_pol/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].velocity_pol.data_error_lower": {
@@ -1333,7 +1362,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor.data_error_lower": {
@@ -1412,7 +1442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].z_ion_error_lower": {
@@ -1443,7 +1474,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].z_n_error_lower": {
@@ -1485,7 +1517,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion_fast[:].a_error_lower": {
@@ -1535,7 +1568,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/radiance/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion_fast[:].radiance.data_error_lower": {
@@ -1614,7 +1648,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"transition_wavelength\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/transition_wavelength_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion_fast[:].transition_wavelength_error_lower": {
@@ -1645,7 +1680,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/z_ion_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion_fast[:].z_ion_error_lower": {
@@ -1676,7 +1712,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion_fast[:].z_n_error_lower": {
@@ -1719,7 +1756,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].momentum_tor.data_error_lower": {
@@ -1824,7 +1862,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/phi/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].position.phi.data_error_lower": {
@@ -1887,7 +1926,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/r/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].position.r.data_error_lower": {
@@ -1950,7 +1990,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/position/z/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].position.z.data_error_lower": {
@@ -2012,7 +2053,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/exposure_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].exposure_time_error_lower": {
@@ -2043,7 +2085,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"grating\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/grating_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].grating_error_lower": {
@@ -2078,7 +2121,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"instrument_function\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/instrument_function_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].instrument_function_error_lower": {
@@ -2134,7 +2178,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/intensity_spectrum/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data_error_lower": {
@@ -2210,7 +2255,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/intensity/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].intensity.data_error_lower": {
@@ -2280,7 +2326,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/radiance/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].radiance.data_error_lower": {
@@ -2343,7 +2390,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/shift/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].shift.data_error_lower": {
@@ -2394,7 +2442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_central\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/wavelength_central_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].wavelength_central_error_lower": {
@@ -2437,7 +2486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/width/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].processed_line[:].width.data_error_lower": {
@@ -2498,7 +2548,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radiance_calibration\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_calibration_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_calibration_error_lower": {
@@ -2552,7 +2603,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_continuum/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_lower": {
@@ -2622,7 +2674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/radiance_spectral/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data_error_lower": {
@@ -2675,7 +2728,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"slit_width\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/slit_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].slit_width_error_lower": {
@@ -2716,7 +2770,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/wavelengths_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].spectrum[:].wavelengths_error_lower": {
@@ -2765,7 +2820,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/t_i_average/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].t_i_average.data_error_lower": {
@@ -2856,7 +2912,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].zeff.data_error_lower": {
@@ -2919,7 +2976,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "charge_exchange/channel(i1)/zeff_line_average/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].zeff_line_average.data_error_lower": {
@@ -3125,7 +3183,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"etendue\"",
   "full_path": "charge_exchange/etendue_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.etendue_error_lower": {
@@ -3218,7 +3277,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "charge_exchange/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -3227,20 +3286,22 @@
  },
  "charge_exchange.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "charge_exchange/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "charge_exchange.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "charge_exchange/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "charge_exchange.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -3298,7 +3359,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "charge_exchange/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "charge_exchange.latency_error_lower": {

@@ -152,7 +152,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "gas_injection/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -161,20 +161,22 @@
  },
  "gas_injection.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "gas_injection/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "gas_injection.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "gas_injection/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "gas_injection.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -232,7 +234,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "gas_injection/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.latency_error_lower": {
@@ -283,7 +286,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "gas_injection/pipe(i1)/exit_position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].exit_position.phi_error_lower": {
@@ -314,7 +318,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "gas_injection/pipe(i1)/exit_position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].exit_position.r_error_lower": {
@@ -345,7 +350,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "gas_injection/pipe(i1)/exit_position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].exit_position.z_error_lower": {
@@ -388,7 +394,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "gas_injection/pipe(i1)/flow_rate/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].flow_rate.data_error_lower": {
@@ -446,7 +453,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "gas_injection/pipe(i1)/length_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].length_error_lower": {
@@ -491,7 +499,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "gas_injection/pipe(i1)/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].second_point.phi_error_lower": {
@@ -522,7 +531,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "gas_injection/pipe(i1)/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].second_point.r_error_lower": {
@@ -553,7 +563,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "gas_injection/pipe(i1)/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].second_point.z_error_lower": {
@@ -606,7 +617,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].species[:].element[:].a_error_lower": {
@@ -645,7 +657,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].species[:].element[:].multiplicity_error_lower": {
@@ -678,7 +691,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "gas_injection/pipe(i1)/species(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].species[:].element[:].z_n_error_lower": {
@@ -709,7 +723,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fraction\"",
   "full_path": "gas_injection/pipe(i1)/species(i2)/fraction_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.pipe[:].species[:].fraction_error_lower": {
@@ -794,7 +809,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "gas_injection/valve(i1)/electron_rate/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].electron_rate.data_error_lower": {
@@ -857,7 +873,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "gas_injection/valve(i1)/flow_rate/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].flow_rate.data_error_lower": {
@@ -908,7 +925,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_rate_max\"",
   "full_path": "gas_injection/valve(i1)/flow_rate_max_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].flow_rate_max_error_lower": {
@@ -939,7 +957,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_rate_min\"",
   "full_path": "gas_injection/valve(i1)/flow_rate_min_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].flow_rate_min_error_lower": {
@@ -1005,7 +1024,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_rate\"",
   "full_path": "gas_injection/valve(i1)/response_curve/flow_rate_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].response_curve.flow_rate_error_lower": {
@@ -1045,7 +1065,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"voltage\"",
   "full_path": "gas_injection/valve(i1)/response_curve/voltage_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].response_curve.voltage_error_lower": {
@@ -1104,7 +1125,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "gas_injection/valve(i1)/species(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].species[:].element[:].a_error_lower": {
@@ -1143,7 +1165,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "gas_injection/valve(i1)/species(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].species[:].element[:].multiplicity_error_lower": {
@@ -1176,7 +1199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "gas_injection/valve(i1)/species(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].species[:].element[:].z_n_error_lower": {
@@ -1207,7 +1231,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fraction\"",
   "full_path": "gas_injection/valve(i1)/species(i2)/fraction_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].species[:].fraction_error_lower": {
@@ -1258,7 +1283,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "gas_injection/valve(i1)/voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gas_injection.valve[:].voltage.data_error_lower": {

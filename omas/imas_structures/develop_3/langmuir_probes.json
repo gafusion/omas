@@ -142,7 +142,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/b_field_angle/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].b_field_angle.data_error_lower": {
@@ -219,7 +220,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/distance_separatrix_midplane/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].distance_separatrix_midplane.data_error_lower": {
@@ -292,7 +294,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/heat_flux_parallel/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].heat_flux_parallel.data_error_lower": {
@@ -375,7 +378,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/ion_saturation_current/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].ion_saturation_current.data_error_lower": {
@@ -451,7 +455,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_parallel/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_parallel.data_error_lower": {
@@ -525,7 +530,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_parallel_sigma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_parallel_sigma.data_error_lower": {
@@ -599,7 +605,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_saturation/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_saturation.data_error_lower": {
@@ -673,7 +680,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_saturation_kurtosis/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_saturation_kurtosis.data_error_lower": {
@@ -747,7 +755,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_saturation_sigma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_saturation_sigma.data_error_lower": {
@@ -821,7 +830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/j_i_saturation_skew/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].j_i_saturation_skew.data_error_lower": {
@@ -905,7 +915,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].multi_temperature_fits[:].t_e.data_error_lower": {
@@ -978,7 +989,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/multi_temperature_fits(i2)/t_i/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].multi_temperature_fits[:].t_i.data_error_lower": {
@@ -1063,7 +1075,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/n_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].n_e.data_error_lower": {
@@ -1137,7 +1150,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "langmuir_probes/embedded(i1)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].position.phi_error_lower": {
@@ -1168,7 +1182,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "langmuir_probes/embedded(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].position.r_error_lower": {
@@ -1199,7 +1214,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "langmuir_probes/embedded(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].position.z_error_lower": {
@@ -1251,7 +1267,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/surface_area_effective/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].surface_area_effective.data_error_lower": {
@@ -1303,7 +1320,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface_area\"",
   "full_path": "langmuir_probes/embedded(i1)/surface_area_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].surface_area_error_lower": {
@@ -1347,7 +1365,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/t_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].t_e.data_error_lower": {
@@ -1420,7 +1439,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/t_i/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].t_i.data_error_lower": {
@@ -1508,7 +1528,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/v_floating/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].v_floating.data_error_lower": {
@@ -1582,7 +1603,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/v_floating_sigma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].v_floating_sigma.data_error_lower": {
@@ -1658,7 +1680,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/embedded(i1)/v_plasma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.embedded[:].v_plasma.data_error_lower": {
@@ -1816,7 +1839,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "langmuir_probes/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1825,20 +1848,22 @@
  },
  "langmuir_probes.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "langmuir_probes/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "langmuir_probes.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "langmuir_probes/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "langmuir_probes.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1896,7 +1921,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "langmuir_probes/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.latency_error_lower": {
@@ -2007,7 +2033,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/b_field_angle/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].b_field_angle.data_error_lower": {
@@ -2083,7 +2110,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/heat_flux_parallel/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].heat_flux_parallel.data_error_lower": {
@@ -2148,7 +2176,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/ion_saturation_current/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].ion_saturation_current.data_error_lower": {
@@ -2214,7 +2243,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/j_i_kurtosis/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].j_i_kurtosis.data_error_lower": {
@@ -2279,7 +2309,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/j_i_parallel/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].j_i_parallel.data_error_lower": {
@@ -2345,7 +2376,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/j_i_saturation/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].j_i_saturation.data_error_lower": {
@@ -2411,7 +2443,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/j_i_sigma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].j_i_sigma.data_error_lower": {
@@ -2477,7 +2510,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/j_i_skew/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].j_i_skew.data_error_lower": {
@@ -2541,7 +2575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].position.phi_error_lower": {
@@ -2581,7 +2616,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].position.r_error_lower": {
@@ -2638,7 +2674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].position.z_error_lower": {
@@ -2686,7 +2723,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/t_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].t_e.data_error_lower": {
@@ -2751,7 +2789,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/t_i/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].t_i.data_error_lower": {
@@ -2816,7 +2855,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/v_floating/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].v_floating.data_error_lower": {
@@ -2882,7 +2922,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/collector(i2)/v_floating_sigma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].collector[:].v_floating_sigma.data_error_lower": {
@@ -2951,7 +2992,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_separatrix_midplane/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].distance_separatrix_midplane.data_error_lower": {
@@ -3017,7 +3059,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/distance_x_point_z/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].distance_x_point_z.data_error_lower": {
@@ -3082,7 +3125,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/mach_number_parallel/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].mach_number_parallel.data_error_lower": {
@@ -3147,7 +3191,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/n_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].n_e.data_error_lower": {
@@ -3211,7 +3256,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position_average/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].position_average.phi_error_lower": {
@@ -3251,7 +3297,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position_average/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].position_average.r_error_lower": {
@@ -3308,7 +3355,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/position_average/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].position_average.z_error_lower": {
@@ -3356,7 +3404,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_e_average/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].t_e_average.data_error_lower": {
@@ -3421,7 +3470,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/t_i_average/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].t_i_average.data_error_lower": {
@@ -3486,7 +3536,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_within_plunge\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/time_within_plunge_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].time_within_plunge_error_lower": {
@@ -3537,7 +3588,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "langmuir_probes/reciprocating(i1)/plunge(itime)/v_plasma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "langmuir_probes.reciprocating[:].plunge[:].v_plasma.data_error_lower": {
@@ -3594,7 +3646,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface_area\"",
   "full_path": "langmuir_probes/reciprocating(i1)/surface_area_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "langmuir_probes.reciprocating[:].surface_area_error_lower": {

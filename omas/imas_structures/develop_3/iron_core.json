@@ -152,7 +152,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "iron_core/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -161,20 +161,22 @@
  },
  "iron_core.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "iron_core/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "iron_core.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "iron_core/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "iron_core.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -245,7 +247,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field\"",
   "full_path": "iron_core/segment(i1)/b_field_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].b_field_error_lower": {
@@ -279,7 +282,7 @@
  },
  "iron_core.segment[:].geometry.annulus": {
   "data_type": "STRUCTURE",
-  "documentation": "The element is an annulus of  center r, z, with inner radius radius_inner and outer radius radius_outer",
+  "documentation": "The element is an annulus of centre R, Z, with inner radius radius_inner and outer radius radius_outer",
   "full_path": "iron_core/segment(i1)/geometry/annulus",
   "introduced_after_version": "3.34.0",
   "lifecycle_status": "alpha",
@@ -297,7 +300,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/annulus/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.annulus.r_error_lower": {
@@ -328,7 +332,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_inner\"",
   "full_path": "iron_core/segment(i1)/geometry/annulus/radius_inner_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.annulus.radius_inner_error_lower": {
@@ -359,7 +364,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_outer\"",
   "full_path": "iron_core/segment(i1)/geometry/annulus/radius_outer_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.annulus.radius_outer_error_lower": {
@@ -390,7 +396,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/annulus/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.annulus.z_error_lower": {
@@ -431,7 +438,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_radii\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/curvature_radii_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.curvature_radii_error_lower": {
@@ -471,7 +479,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.r_error_lower": {
@@ -511,7 +520,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/arcs_of_circle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.arcs_of_circle.z_error_lower": {
@@ -563,7 +573,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.alpha_error_lower": {
@@ -597,7 +608,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.beta_error_lower": {
@@ -631,7 +643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_alpha\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length_alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.length_alpha_error_lower": {
@@ -665,7 +678,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_beta\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/length_beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.length_beta_error_lower": {
@@ -699,7 +713,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.r_error_lower": {
@@ -733,7 +748,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/oblique/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.oblique.z_error_lower": {
@@ -776,7 +792,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.outline.r_error_lower": {
@@ -816,7 +833,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.outline.z_error_lower": {
@@ -860,7 +878,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/height_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.height_error_lower": {
@@ -891,7 +910,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.r_error_lower": {
@@ -922,7 +942,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.width_error_lower": {
@@ -953,7 +974,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/rectangle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.rectangle.z_error_lower": {
@@ -999,7 +1021,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/thick_line/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.thick_line.first_point.r_error_lower": {
@@ -1030,7 +1053,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/thick_line/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.thick_line.first_point.z_error_lower": {
@@ -1068,7 +1092,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "iron_core/segment(i1)/geometry/thick_line/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.thick_line.second_point.r_error_lower": {
@@ -1099,7 +1124,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "iron_core/segment(i1)/geometry/thick_line/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.thick_line.second_point.z_error_lower": {
@@ -1130,7 +1156,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "iron_core/segment(i1)/geometry/thick_line/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].geometry.thick_line.thickness_error_lower": {
@@ -1180,7 +1207,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_r/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].magnetisation_r.data_error_lower": {
@@ -1243,7 +1271,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "iron_core/segment(i1)/magnetisation_z/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].magnetisation_z.data_error_lower": {
@@ -1304,7 +1333,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"permeability_relative\"",
   "full_path": "iron_core/segment(i1)/permeability_relative_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "iron_core.segment[:].permeability_relative_error_lower": {

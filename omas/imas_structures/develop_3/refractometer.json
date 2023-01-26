@@ -41,7 +41,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency_main\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/frequency_main_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].frequency_main_error_lower": {
@@ -78,7 +79,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"i_component\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/i_component_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].i_component_error_lower": {
@@ -136,7 +138,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/n_e_line/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].n_e_line.data_error_lower": {
@@ -192,7 +195,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/phase_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].phase_error_lower": {
@@ -250,7 +254,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/phase_quadrature/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].phase_quadrature.data_error_lower": {
@@ -309,7 +314,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q_component\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/q_component_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].q_component_error_lower": {
@@ -371,7 +377,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_detector\"",
   "full_path": "refractometer/channel(i1)/bandwidth(i2)/time_detector_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].bandwidth[:].time_detector_error_lower": {
@@ -435,7 +442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.first_point.phi_error_lower": {
@@ -466,7 +474,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.first_point.r_error_lower": {
@@ -497,7 +506,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.first_point.z_error_lower": {
@@ -535,7 +545,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.second_point.phi_error_lower": {
@@ -566,7 +577,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.second_point.r_error_lower": {
@@ -597,7 +609,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "refractometer/channel(i1)/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].line_of_sight.second_point.z_error_lower": {
@@ -650,7 +663,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "refractometer/channel(i1)/n_e_line/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].n_e_line.data_error_lower": {
@@ -742,7 +756,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parameters\"",
   "full_path": "refractometer/channel(i1)/n_e_profile_approximation/parameters_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.channel[:].n_e_profile_approximation.parameters_error_lower": {
@@ -923,7 +938,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "refractometer/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -932,20 +947,22 @@
  },
  "refractometer.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "refractometer/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "refractometer.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "refractometer/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "refractometer.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1003,7 +1020,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "refractometer/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "refractometer.latency_error_lower": {

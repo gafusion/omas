@@ -35,7 +35,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"cut_off_frequency\"",
   "full_path": "reflectometer_profile/channel(i1)/cut_off_frequency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].cut_off_frequency_error_lower": {
@@ -79,7 +80,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequencies\"",
   "full_path": "reflectometer_profile/channel(i1)/frequencies_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].frequencies_error_lower": {
@@ -137,7 +139,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.phi_error_lower": {
@@ -168,7 +171,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.r_error_lower": {
@@ -199,7 +203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.first_point.z_error_lower": {
@@ -237,7 +242,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.phi_error_lower": {
@@ -268,7 +274,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.r_error_lower": {
@@ -299,7 +306,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_detection/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_detection.second_point.z_error_lower": {
@@ -344,7 +352,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.phi_error_lower": {
@@ -375,7 +384,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.r_error_lower": {
@@ -406,7 +416,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.first_point.z_error_lower": {
@@ -444,7 +455,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.phi_error_lower": {
@@ -475,7 +487,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.r_error_lower": {
@@ -506,7 +519,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/line_of_sight_emission/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].line_of_sight_emission.second_point.z_error_lower": {
@@ -561,7 +575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/n_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].n_e.data_error_lower": {
@@ -638,7 +653,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/channel(i1)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].phase.data_error_lower": {
@@ -709,7 +725,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/channel(i1)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.phi_error_lower": {
@@ -761,7 +778,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "reflectometer_profile/channel(i1)/position/psi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.psi_error_lower": {
@@ -813,7 +831,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/channel(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.r_error_lower": {
@@ -865,7 +884,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "reflectometer_profile/channel(i1)/position/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.rho_tor_norm_error_lower": {
@@ -911,7 +931,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "reflectometer_profile/channel(i1)/position/theta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.theta_error_lower": {
@@ -963,7 +984,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/channel(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].position.z_error_lower": {
@@ -1010,7 +1032,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sweep_time\"",
   "full_path": "reflectometer_profile/channel(i1)/sweep_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.channel[:].sweep_time_error_lower": {
@@ -1174,7 +1197,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "reflectometer_profile/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1183,20 +1206,22 @@
  },
  "reflectometer_profile.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "reflectometer_profile/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "reflectometer_profile.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "reflectometer_profile/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "reflectometer_profile.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1254,7 +1279,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "reflectometer_profile/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.latency_error_lower": {
@@ -1304,7 +1330,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "reflectometer_profile/n_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.n_e.data_error_lower": {
@@ -1375,7 +1402,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "reflectometer_profile/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.phi_error_lower": {
@@ -1427,7 +1455,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "reflectometer_profile/position/psi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.psi_error_lower": {
@@ -1479,7 +1508,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "reflectometer_profile/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.r_error_lower": {
@@ -1531,7 +1561,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "reflectometer_profile/position/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.rho_tor_norm_error_lower": {
@@ -1577,7 +1608,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "reflectometer_profile/position/theta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.theta_error_lower": {
@@ -1629,7 +1661,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "reflectometer_profile/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.position.z_error_lower": {
@@ -1687,7 +1720,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "reflectometer_profile/psi_normalization/psi_boundary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.psi_normalization.psi_boundary_error_lower": {
@@ -1730,7 +1764,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "reflectometer_profile/psi_normalization/psi_magnetic_axis_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "reflectometer_profile.psi_normalization.psi_magnetic_axis_error_lower": {

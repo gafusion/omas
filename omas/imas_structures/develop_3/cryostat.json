@@ -199,7 +199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/centreline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.centreline.r_error_lower": {
@@ -239,7 +240,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/centreline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.centreline.z_error_lower": {
@@ -293,7 +295,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_inner/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_inner.r_error_lower": {
@@ -333,7 +336,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_inner/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_inner.z_error_lower": {
@@ -387,7 +391,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_outer/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_outer.r_error_lower": {
@@ -427,7 +432,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/outline_outer/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.outline_outer.z_error_lower": {
@@ -464,7 +470,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/resistivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.resistivity_error_lower": {
@@ -498,7 +505,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/annular/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].annular.thickness_error_lower": {
@@ -558,7 +566,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].j_tor.data_error_lower": {
@@ -633,7 +642,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].outline.r_error_lower": {
@@ -673,7 +683,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].outline.z_error_lower": {
@@ -710,7 +721,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/resistance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].resistance_error_lower": {
@@ -741,7 +753,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/resistivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].resistivity_error_lower": {
@@ -856,7 +869,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/centreline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.centreline.r_error_lower": {
@@ -896,7 +910,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/centreline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.centreline.z_error_lower": {
@@ -950,7 +965,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_inner/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_inner.r_error_lower": {
@@ -990,7 +1006,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_inner/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_inner.z_error_lower": {
@@ -1044,7 +1061,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_outer/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_outer.r_error_lower": {
@@ -1084,7 +1102,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/outline_outer/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.outline_outer.z_error_lower": {
@@ -1121,7 +1140,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/resistivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.resistivity_error_lower": {
@@ -1155,7 +1175,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/annular/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].annular.thickness_error_lower": {
@@ -1215,7 +1236,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_tor.data_error_lower": {
@@ -1290,7 +1312,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].outline.r_error_lower": {
@@ -1330,7 +1353,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].outline.z_error_lower": {
@@ -1367,7 +1391,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/resistance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].resistance_error_lower": {
@@ -1398,7 +1423,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/resistivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].resistivity_error_lower": {
@@ -1477,7 +1503,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "cryostat/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1486,20 +1512,22 @@
  },
  "cryostat.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "cryostat/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "cryostat.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "cryostat/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "cryostat.ids_properties.provider": {
   "data_type": "STR_0D",
