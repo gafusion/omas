@@ -1,0 +1,125 @@
+!---------------------------------------------------------------------
+! Default input file for EFUND - PEGASUS equilibria
+!
+!
+!
+! A. Sontag     - 03/17/2021:
+!               Initial setup to use Pegasus parameters. Using Pegasus phase
+!               II diagnostic set at upgraded magnetics have not been defined.
+!               No OH solenoid will be included in this model since no solenoid
+!               will be present in Pegasus III.
+!
+! A. Sontag     - 03/24/2021:
+!               No-wall version for EFIT equilibrium mode calcs to aid in
+!               diagnostic specifications.
+!
+!------------------------------------------------------------------------
+ &machinein
+ device = 'PEGASUS'
+ nfcoil = 154
+ nfsum = 12
+ nsilop = 32
+ magpr2 = 52
+ necoil = 1
+ nesum = 1
+ nvsum = 1
+ nvesel = 1
+ nrogow = 1
+ nacoil = 1
+ mgaus1 = 8
+ mgaus2 = 10
+ /
+ &IN3
+ NH = 129
+ NW = 129
+ IGRID = 1
+ RLEFT = 0.01
+ RRIGHT = 1.15
+ ZBOTTO = -1.21
+ ZTOP = 1.21
+ ISLPFC = 0
+ IFCOIL = 1
+ IECOIL = 0
+ IACOIL = 0
+ IVESEL = 0
+ NSMP2 = 1
+! EF1 specification
+! EF2 specification
+! EF3 specification
+! EF4 specification
+! EF5 specification
+! EF6 specification
+! EF7 specification
+! EF8 specification
+! DIV1U specification
+! DIV2U specification
+! DIV1L specification
+! DIV2L specification
+! FLUX LOOP specifications
+ RSI = 0.247 0.333 0.406 0.479 0.552 0.72 0.77 0.821 0.869 0.924 0.926 0.873 
+ 0.822 0.771 0.722 0.544 0.473 0.401 0.326 0.243 6*0.051 0.737 0.973 2*1.01 
+ 0.973 0.737
+ ZSI = 5*0.851 0.709 0.659 0.609 0.561 0.513 -0.515 -0.566 -0.612 -0.662 
+ -0.702 5*-0.851 0.626 0.373 0.127 -0.127 -0.372 -0.625 0.866 0.655 0.286 
+ -0.286 -0.655 -0.866
+ LPNAME = 'FLIV01' 'FLIV02' 'FLIV03' 'FLIV04' 'FLIV05' 'FLIV06' 'FLIV07' 
+ 'FLIV08' 'FLIV09' 'FLIV10' 'FLIV11' 'FLIV12' 'FLIV13' 'FLIV14' 'FLIV15' 
+ 'FLIV16' 'FLIV17' 'FLIV18' 'FLIV19' 'FLIV20' 'FLCS01' 'FLCS02' 'FLCS03' 
+ 'FLCS04' 'FLCS05' 'FLCS06' 'FLEV01' 'FLEV02' 'FLEV05' 'FLEV06' 'FLEV07' 
+ 'FLEV08'
+ RF = 0.478 0.482 0.486 0.491 0.495 0.499 0.503 0.508 0.512 0.516 0.52 0.525 
+ 0.529 0.533 3*0.90007 20*1.14823 3*0.90007 0.478 0.482 0.486 0.491 0.495 
+ 0.499 0.503 0.508 0.512 0.516 0.52 0.525 0.529 0.533 0.103 0.12 0.137 0.154 
+ 0.171 0.188 0.103 0.12 0.137 0.154 0.171 0.188 0.103 0.12 0.137 0.154 0.171 
+ 0.188 0.103 0.12 0.137 0.154 0.171 0.188 0.103 0.12 0.137 0.154 0.171 0.188 
+ 0.253 0.27 0.286 0.303 0.253 0.27 0.286 0.303 0.253 0.27 0.286 0.303 0.253 
+ 0.27 0.286 0.303 0.253 0.27 0.286 0.303 0.103 0.12 0.137 0.154 0.171 0.188 
+ 0.103 0.12 0.137 0.154 0.171 0.188 0.103 0.12 0.137 0.154 0.171 0.188 0.103 
+ 0.12 0.137 0.154 0.171 0.188 0.103 0.12 0.137 0.154 0.171 0.188 0.253 0.27 
+ 0.286 0.303 0.253 0.27 0.286 0.303 0.253 0.27 0.286 0.303 0.253 0.27 0.286 
+ 0.303 0.253 0.27 0.286 0.303
+ ZF = 14*1.055 1.0807 1.06 1.03943 0.77583 0.75482 0.73382 0.71281 0.69181 
+ 0.35124 0.3306 0.30996 0.28993 0.26869 -0.35123 -0.33059 -0.30996 -0.28992 
+ -0.26868 -0.77583 -0.75482 -0.73382 -0.71281 -0.69181 -1.0807 -1.06 -1.03943 
+ 14*-1.055 6*0.871 6*0.892 6*0.914 6*0.936 6*0.958 4*1.016 4*1.037 4*1.059 
+ 4*1.081 4*1.103 6*-0.871 6*-0.892 6*-0.914 6*-0.936 6*-0.958 4*-1.016 
+ 4*-1.037 4*-1.059 4*-1.081 4*-1.103
+ WF = 14*0.004 26*0.01905 14*0.004 100*0.016
+ HF = 14*0.1 26*0.01905 14*0.1 100*0.021
+ AF = 154*0.0
+ AF2 = 154*0.0
+ FCTURN = 154*1.0
+ FCID = 14*1.0 3*2.0 5*3.0 5*4.0 5*5.0 5*6.0 3*7.0 14*8.0 30*9.0 20*10.0 
+ 30*11.0 20*12.0
+! Magnetic Probe specifications
+ XMP2 = 0.205 0.373 0.547 0.813 5*0.902 0.799 0.531 0.357 0.189 28*0.052 
+ 0.882 0.905 0.892 0.882 0.912 0.902 5*0.052
+ YMP2 = 3*0.803 0.659 0.338 0.193 0.022 -0.233 -0.394 -0.674 3*-0.803 0.597 
+ 0.402 0.201 -0.002 -0.198 -0.398 -0.6 0.698 0.63 0.559 0.489 0.419 0.35 
+ 0.278 0.21 0.138 0.067 0.0 -0.075 -0.14 -0.209 -0.279 -0.348 -0.418 -0.489 
+ -0.559 -0.628 -0.697 -0.17 -0.162 -0.348 -0.173 -0.167 -0.169 5*0.0
+ AMP2 = 3*0.0 315.0 5*270.0 225.0 3*180.0 39*90.0
+ MPNAM2 = 'POLBDOT01' 'POLBDOT02' 'POLBDOT03' 'POLBDOT04' 'POLBDOT05' 
+ 'POLBDOT06' 'POLBDOT07' 'POLBDOT08' 'POLBDOT09' 'POLBDOT10' 'POLBDOT11' 
+ 'POLBDOT12' 'POLBDOT13' 'LRCBDOT01' 'LRCBDOT02' 'LRCBDOT03' 'LRCBDOT04' 
+ 'LRCBDOT05' 'LRCBDOT06' 'LRCBDOT07' 'HRCBDOT01' 'HRCBDOT02' 'HRCBDOT03' 
+ 'HRCBDOT04' 'HRCBDOT05' 'HRCBDOT06' 'HRCBDOT07' 'HRCBDOT08' 'HRCBDOT09' 
+ 'HRCBDOT10' 'HRCBDOT11' 'HRCBDOT12' 'HRCBDOT13' 'HRCBDOT14' 'HRCBDOT15' 
+ 'HRCBDOT16' 'HRCBDOT17' 'HRCBDOT18' 'HRCBDOT19' 'HRCBDOT20' 'HRCBDOT21' 
+ 'OTORBDOT01' 'OTORBDOT02' 'OTORBDOT03' 'OTORBDOT04' 'OTORBDOT05' 
+ 'OTORBDOT06' 'CTORBDOT01' 'CTORBDOT02' 'CTORBDOT03' 'CTORBDOT04' 'CTORBDOT05'
+ SMP2 = 13*0.03 7*0.1 21*0.012 11*0.1
+ PATMP2 = 52*0.0
+ RE(1) = 0.025
+ ZE(1) = 0.0
+ WE(1) = 0.0
+ HE(1) = 0.0
+ RVS(1) = 0.0
+ ZVS(1) = 0.0
+ WVS(1) = 0.0
+ HVS(1) = 0.0
+ AVS(1) = 0.0
+ AVS2(1) = 0.0
+ ECID(1) = 1.0
+ TURNFC = 14.0 3.0 4*5.0 3.0 14.0 30.0 20.0 30.0 20.0
+ /

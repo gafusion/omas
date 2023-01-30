@@ -80,7 +80,7 @@ def different_ods(ods1, ods2, ignore_type=False, ignore_empty=False, ignore_keys
                 if ods1[k] != ods2[k]:
                     differences.append(f'DIFF: `{k}` differ in value')
             elif not ignore_type and type(ods1[k]) != type(ods2[k]):
-                differences.append(f'DIFF: `{f}` differ in type: {type(ods1[k])} vs type(ods2[k])')
+                differences.append(f'DIFF: `{k}` differ in type: {type(ods1[k])} vs type(ods2[k])')
             elif is_uncertain(ods1[k]) or is_uncertain(ods2[k]):
                 v1 = nominal_values(ods1[k])
                 v2 = nominal_values(ods2[k])

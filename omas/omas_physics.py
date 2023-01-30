@@ -3,6 +3,7 @@
 -------
 '''
 
+from scipy.interpolate.fitpack2 import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -212,10 +213,252 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
+    """
+        Maps from one magnetic coordinate system to psi
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param origin: Specifier for original coordinate system
+
+        :param values: Values to transform to poloidal flux
+
+        :return: Transformed values
+    """
+    if origin == "rho_pol":
+        return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_sep"]
+                - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+    else:
+        raise NotImplementedError(f"Conversion from {origin} not yet implemented.")
+
+def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
+    import numpy as np
+    """
+        Maps from one magnetic coordinate system to psi
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param destination: Target coordinate system for output
+
+        :param values: Values to transform to poloidal flux
+
+        :return: Transformed values
+    """
+    if destination == "rho_pol":
+        return np.sqrt((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]) /
+                       (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                        - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+    else:
+        raise NotImplementedError(f"Conversion to {destination} not yet implemented.")
 
 @add_to__ODS__
+@preprocess_ods('equilibrium')
+def remap_flux_coordinates(ods, time_index, origin, destination, values):
+    """
+        Maps from one magnetic coordinate system to another. At the moment only supports
+        psi <-> rho_pol 
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param origin: Specifier for original coordinate system
+
+        :param destination: Target coordinate system for output
+
+        :param values: Values to transform
+
+        :return: Transformed values
+    """
+    if origin != "psi":
+        psi = map_flux_coordinate_to_pol_flux(ods, time_index, origin, values)
+    else:
+        psi = values
+    if destination != "psi":
+        return  map_pol_flux_to_flux_coordinate(ods, time_index, destination, psi)
+    return psi
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def resolve_equilibrium_profiles_2d_grid_index(ods, time_index, grid_identifier):
+    """
+        Convenience function to identify which of profiles_2d[:].grid_type.index 
+        matches the specified grid_identifier
+
+        :param ods: input ods
+
+        :param time_index: time index to search
+
+        :param grid_identifier: grid type to be resolved
+
+        :return: Index of grid the requested grid, not to be confused with
+            profiles_2d[:].grid_type.index 
+    """
+    grid_type = {'grid_type.index': grid_identifier}
+    try:
+        grid_index = search_in_array_structure(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d'], 
+                grid_type, no_matches_raise_error=True)[0]
+    except IndexError:
+        raise ValueError("Requested equilibrium.profiles_2d_grid_type not present")
+    return grid_index
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity):
+    """
+        This function derives values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
+        Currently only the magnetic field components are supported
+
+        :param ods: input ods
+
+        :param time_index: time slice to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d to be derived
+
+        :return: updated ods
+    """
+    from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
+    r, z = numpy.meshgrid(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'], indexing="ij")
+    psi_spl = RectBivariateSpline(
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'], 
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'])
+    cocos = define_cocos(11)
+    if quantity == "b_r":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
+                psi_spl(r,z,dy=1,grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] 
+                / ((2.0 * numpy.pi)** cocos['exp_Bp'] * r))
+        return ods
+    elif quantity == "b_z":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
+                -psi_spl(r,z,dx=1,grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] 
+                / ((2.0 * numpy.pi)** cocos['exp_Bp'] * r))
+        return ods
+    elif quantity == "b_tor":
+        mask = numpy.logical_and(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']))
+        f_spl = InterpolatedUnivariateSpline(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'],
+            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'])
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
+                     f_spl(psi_spl(r[mask],z[mask],grid=False)) / r[mask])
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask==False] = (
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask==False])
+        return ods
+    raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
+
+
+def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
+    """
+        Utility function for equilibrium_profiles_2d_map. Creates a tree dictionary structure to store interpolators.
+
+        :param cache: cache object to add tree entry to
+
+        :param time_index: time slices to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d[:]
+
+        :param interpolator: Interpolator to store
+
+        :return: updated cache
+
+    """
+    if cache is None:
+        cache = {}
+    if time_index not in cache:
+        cache[time_index] = {}
+    if grid_index not in cache[time_index]:
+        cache[time_index][grid_index] = {}
+    cache[time_index][grid_index][quantity] = interpolator
+    return cache
+    
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def equilibrium_profiles_2d_map(ods, time_index, grid_index, quantity, 
+        dim1=None, dim2=None, cache=None, return_cache=False,
+        out_of_bounds_value = numpy.nan):
+    """
+        This routines creates interpolators for quantities and stores them in the cache for future use.
+        It can also be used to just return the current profile_2d quantity by omitting dim1 and dim2.
+        At the moment this routine always extrapolates for data outside the defined grid range.
+
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param grid_index: Index of grid to map
+
+        :param quantity: Member of profiles_2d[:] to map
+
+        :param dim1: First coordinate of the points to map to
+
+        :param dim2: Second coordinate of the points to map to
+
+        :param cache: Cache to store interpolants in
+
+        :param return_cache: Toggles return of cache
+
+        :return: mapped positions (and cahce if return_cache)
+    """
+    if(quantity not in ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}']):
+        ods.physics_derive_equilibrium_profiles_2d_quantity(time_index, grid_index, quantity)
+    if dim1 is None or dim2 is None:
+        return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
+    # Try to use an interpolator from the cache
+    if cache is not None:
+        try:
+            if return_cache:
+                return cache[time_index][quantity](dim1, dim2, grid=False), cache
+            else:
+                return cache[time_index][quantity](dim1, dim2, grid=False)
+        except KeyError:
+            pass
+    if ods[f'equilibrium.time_slice[{time_index}].profiles_2d[{grid_index}].grid_type.index'] == 91:
+        interpolator = create_scatter_interpolator(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'], 
+                                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'], 
+                                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'], 
+                                    method='cubic', return_cache=False)
+    else:
+        interpolator = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'])
+    mapped_values = numpy.zeros(dim1.shape)
+    mapped_values[:] = numpy.nan
+    mask = numpy.logical_and(
+            numpy.logical_and(dim1 > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1']), 
+                              dim1 < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'])),
+            numpy.logical_and(dim2 > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2']), 
+                              dim2 < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'])))
+    if(return_cache):
+        cache = cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
+        mapped_values[mask] = cache[time_index][grid_index][quantity](dim1[mask], dim2[mask], grid=False)
+        return mapped_values, cache
+    mapped_values[mask] = interpolator(dim1[mask], dim2[mask], grid=False)
+    return mapped_values
+
+
+def remove_integrator_drift(time, data, time_after_shot):
+    #assume that the drift is zero at time[0]
+    ind = time > time_after_shot    
+    return data-(time-time[0])/(time[ind].mean()-time[0])*data[ind].mean(0)
+    
+    
+@add_to__ODS__
 def equilibrium_form_constraints(
-    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None, update=True, **nuconv_kw
+    ods, times=None, default_average=0.02, constraints=None, averages=None, cutoff_hz=None,rm_integr_drift_after=None, update=True, **nuconv_kw
 ):
     """
     generate equilibrium constraints from experimental data in ODS
@@ -247,8 +490,11 @@ def equilibrium_form_constraints(
                           * x_point
 
     :param averages: dictionary with average times for individual constraints
+               Smoothed using Gaussian, sigma=averages/4. and the convolution is integrated across +/-4.*sigma.
 
     :param cutoff_hz: a list of two elements with low and high cutoff frequencies [lowFreq, highFreq]
+    
+    :param rm_integr_drift_after: time in ms after which is assumed thet all currents are zero and signal should be equal to zero. Used for removing of the integrators drift
 
     :param update: operate in place
 
@@ -285,7 +531,11 @@ def equilibrium_form_constraints(
     ods_n['equilibrium.time'] = times
 
     nuconv_kw.setdefault('window_function', 'boxcar')
-
+    # pf_current
+    if 'pressure' in constraints and 'thompson' in ods:
+        raise Exception('Not implemented yet!!')
+        
+        
     # pf_current
     if 'pf_current' in constraints and 'pf_active.coil' in ods:
         average = averages.get('pf_active', default_average)
@@ -301,7 +551,9 @@ def equilibrium_form_constraints(
                     error = ods[f'pf_active.coil.{channel}.current.data_error_upper']
                 else:
                     error = None
-                # process
+                # process                
+                if rm_integr_drift_after is not None:
+                    data = remove_integrator_drift(time, data, rm_integr_drift_after)  
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
                 const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
@@ -340,6 +592,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -379,6 +633,8 @@ def equilibrium_form_constraints(
                     else:
                         error = None
                     # process
+                    if rm_integr_drift_after is not None:
+                        data = remove_integrator_drift(time, data, rm_integr_drift_after) 
                     if cutoff_hz is not None:
                         data = firFilter(time, data, cutoff_hz)
                     const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -412,6 +668,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -438,6 +696,9 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            #if rm_integr_drift_after is not None: 
+                #drift is already removed?
+                #data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -466,6 +727,8 @@ def equilibrium_form_constraints(
             else:
                 error = None
             # process
+            if rm_integr_drift_after is not None:
+                data = remove_integrator_drift(time, data, rm_integr_drift_after) 
             if cutoff_hz is not None:
                 data = firFilter(time, data, cutoff_hz)
             const = smooth_by_convolution(data, time, times, average, **nuconv_kw)
@@ -533,6 +796,7 @@ def equilibrium_form_constraints(
     return ods_n
 
 
+
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
 def summary_greenwald(ods, update=True):
@@ -575,7 +839,9 @@ def summary_greenwald(ods, update=True):
                     "Warning: greenwald fraction calculation used volume average density instead of line average fill in ods['interferometer'] to use nel"
                 )
                 nel.append(ne_vol_avg)
-    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a ** 2)
+    ods_n['summary.global_quantities.greenwald_fraction.value'] = abs(numpy.array(nel) / 1e20 / ip * 1e6 * numpy.pi * a**2)
+    ods_n['summary.time'] = ods['equilibrium.time']
+
     return ods_n
 
 
@@ -615,6 +881,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
                 'interferometer'
             ]['channel'][0]['n_e_line_average']['data'][time_index]
             ods_n['summary.line_average.n_e.value'][time_index] = line_average_ne
+        ods_n['summary.time'] = ods['equilibrium.time']
         return ods_n
 
     Rb = ods['equilibrium']['time_slice'][time_index]['boundary']['outline']['r']
@@ -690,6 +957,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'] = numpy.zeros(len(ods['interferometer']['time']))
 
         ods_n['interferometer']['channel'][channel]['n_e_line_average']['data'][time_index] = ne_line
+
     return ods_n
 
 
@@ -724,14 +992,14 @@ def summary_currents(ods, time_index=None, update=True):
     with omas_environment(ods, coordsio=coordsio):
 
         for (jname_cp, jname_sum) in current_names:
-            if 'core_profiles.profiles_1d{time_index}.{jname_cp}' in ods:
+            if f'core_profiles.profiles_1d.{time_index}.{jname_cp}' in ods:
                 Bt = ods['equilibrium.vacuum_toroidal_field.b0']
                 JtoR = transform_current(rho=rho, JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt, equilibrium=ods['equilibrium.time_slice'][time_index])
-                Ip = np.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/np.pi
+                Ip = numpy.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/numpy.pi
             
                 if f'summary.global_quantities.{jname_sum}' not in ods:
-                   ods_n['summary.global_quantities'][jname_sum] = np.zeros(time_index) 
-                else:
+                   ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index+1) 
+                
                    ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
 
     return ods_n
@@ -751,8 +1019,10 @@ def summary_thermal_stored_energy(ods, update=True):
     ods_n = ods
     if not update:
         from omas import ODS
+
         ods_n = ODS().copy_attrs_from(ods)
-    
+
+    ods.physics_core_profiles_pressures()
     thermal_energy = []
     for time_index in ods['core_profiles.profiles_1d']:
         eq = ods[f'equilibrium.time_slice[{time_index}].profiles_1d']
@@ -760,9 +1030,9 @@ def summary_thermal_stored_energy(ods, update=True):
         thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
 
     ods_n['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
+    ods_n['summary.time'] = ods['equilibrium.time']
 
     return ods_n
-
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'core_sources', 'equilibrium')
@@ -854,10 +1124,10 @@ def summary_taue(ods, thermal=True, update=True):
                 * abs(bt) ** 0.15
                 * (nel / 1e19) ** 0.41
                 * (power_loss / 1e6) ** -0.69
-                * r_major ** 1.97
-                * kappa ** 0.78
-                * aspect ** -0.58
-                * isotope_factor ** 0.19
+                * r_major**1.97
+                * kappa**0.78
+                * aspect**-0.58
+                * isotope_factor**0.19
             )  # [s]
             for k in ['kappa', 'bt', 'ip', 'nel', 'power_loss', 'aspect', 'isotope_factor', 'tau_e']:
                 printd(f'{k}: {eval(k)}', topic='summary_taue')
@@ -871,6 +1141,8 @@ def summary_taue(ods, thermal=True, update=True):
     ods_n['summary.global_quantities.tau_energy.source'] = info_string
     ods_n['summary.global_quantities.tau_energy_98.source'] = "h98y2 scaling law"
 
+    ods_n['summary.time'] = ods['equilibrium.time']
+
     return ods_n
 
 
@@ -878,7 +1150,6 @@ def summary_taue(ods, thermal=True, update=True):
 @preprocess_ods('core_sources')
 def summary_heating_power(ods, update=True):
     """
-
     Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities
 
     :param ods: input ods
@@ -937,6 +1208,7 @@ def summary_heating_power(ods, update=True):
                 continue
             ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
 
+    ods_n['summary.time'] = ods['equilibrium.time']
     return ods_n
 
 
@@ -1271,7 +1543,7 @@ def core_profiles_zeff(ods, update=True, use_electrons_density=False, enforce_qu
         for k in range(len(prof1d['ion'])):
             Z = prof1d['ion'][k]['element'][0]['z_n']  # from old ODS
             n = prof1d_z['ion'][k]['density']  # from new ODS
-            Z2n += n * Z ** 2
+            Z2n += n * Z**2
             Zn += n * Z
         if use_electrons_density:
             prof1d_z['zeff'] = Z2n / prof1d_z['electrons']['density']
@@ -1816,6 +2088,79 @@ def grids_ggd_points_triangles(grid):
     triangles = grid['space[0].objects_per_dimension[2].object[:].nodes']
     return points, triangles
 
+class ScatterInterpolator(object):
+    """
+    Interface class for a unified call function for the scipy interpolators:
+        - NearestNDInterpolator
+        - LinearNDInterpolator
+        - CloughTocher2DInterpolator
+        - Rbf
+    Created by factory create_scatter_interpolator
+    """
+    def __init__(self, interpolant, method):
+        """
+        Constructor
+
+        :param interpolant: Instance of the scipy interpolator
+
+        :param method: Interpolation method
+        """
+        self.interpolant = interpolant
+        self.method = method
+
+    def __call__(self, R, Z, **kwargs):
+        """
+        Call the interpolator
+
+        :param interpolant: Instance of the scipy interpolator
+
+        :param method: Interpolation method
+
+        :param kwargs: Catch extra arguments (needed for polymorphism in equilibrium_profiles_2d_map)
+        """
+        if(self.method == 'extrapolate'):
+            return numpy.reshape(self.interpolant(R.flat, Z.flat), R.shape)
+        else:
+            return numpy.reshape(self.interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
+
+def create_scatter_interpolator(r, z, data, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], return_cache=False):
+    """
+    Create an interpolator for scattered data points. Utility function for scatter_to_rectangular and equilibrium_profiles_2d_map
+
+    :param r: r coordinate of data points
+
+    :param z: z coordinate of data points
+
+    :param data: data
+
+    :param method: one of 'nearest', 'linear', 'cubic', 'extrapolate'
+
+    :param sanitize: avoid NaNs in regions where data is missing
+
+    :return: interpolator(R,Z) -> interpolated data (and cache if return_cache)
+    """
+    import scipy
+    from scipy import interpolate
+    cache = None
+    if method == 'nearest':
+        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
+    elif method == 'linear':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
+    elif method == 'cubic':
+        if cache is None:
+            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
+        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
+    elif method == 'extrapolate':
+        if cache is None:
+            cache = True
+        interpolant = scipy.interpolate.Rbf(r, z, data)
+    else:
+        raise ValueError('Interpolation method %s is not recognized' % method)
+    if return_cache:
+        return ScatterInterpolator(interpolant, method), cache
+    return ScatterInterpolator(interpolant, method)
 
 def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic', 'extrapolate'][1], sanitize=True, return_cache=False):
     """
@@ -1840,7 +2185,6 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
     :return: R, Z, interpolated_data (and cache if return_cache)
     """
     import scipy
-    from scipy import interpolate
 
     if isinstance(R, int) and isinstance(Z, int):
         R, Z = numpy.meshgrid(numpy.linspace(numpy.min(r), numpy.max(r), R), numpy.linspace(numpy.min(z), numpy.max(z), Z))
@@ -1852,27 +2196,11 @@ def scatter_to_rectangular(r, z, data, R, Z, method=['nearest', 'linear', 'cubic
         raise ValueError('R and Z must both be either scalars, 1D arrays, or 2D arrays')
 
     cache = None
-    if method == 'nearest':
-        interpolant = scipy.interpolate.NearestNDInterpolator((r, z), data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'linear':
-        if cache is None:
-            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
-        interpolant = scipy.interpolate.LinearNDInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'cubic':
-        if cache is None:
-            cache = scipy.spatial.Delaunay(numpy.vstack((r, z)).T)
-        interpolant = scipy.interpolate.CloughTocher2DInterpolator(cache, data)
-        intepolated_data = numpy.reshape(interpolant(numpy.vstack((R.flat, Z.flat)).T), R.shape)
-    elif method == 'extrapolate':
-        if cache is None:
-            cache = True
-        interpolant = scipy.interpolate.Rbf(r, z, data)
-        intepolated_data = numpy.reshape(interpolant(R.flat, Z.flat), R.shape)
+    if return_cache:
+        scatter_interpolator, cache  = create_scatter_interpolator(r, z, data, method=method, return_cache=return_cache)
     else:
-        raise ValueError('Interpolation method %s is not recognized' % method)
-
+        scatter_interpolator = create_scatter_interpolator(r, z, data, method=method, return_cache=return_cache)
+    intepolated_data = scatter_interpolator(R, Z)
     # remove any NaNs using a rough nearest interpolation
     index = ~numpy.isnan(intepolated_data.flat)
     if sanitize and sum(1 - index):
@@ -1981,7 +2309,7 @@ def transform_current(rho, JtoR=None, JparB=None, equilibrium=None, includes_boo
     dpdpsi = omas_interp1d(rho, rho_eq, equilibrium['profiles_1d.dpressure_dpsi'])
 
     # diamagnetic term to get included with bootstrap currrent
-    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f ** 2 / fsa_B2)
+    JtoR_dia = dpdpsi * (1.0 - fsa_invR2 * f**2 / fsa_B2)
     JtoR_dia *= cocos['sigma_Bp'] * (2.0 * numpy.pi) ** cocos['exp_Bp']
 
     if JtoR is not None:

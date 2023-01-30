@@ -2,7 +2,7 @@
 "ec_launchers": {
 "code": {
 "parameters": {
-"launcher": [
+"beam": [
 {
 "ON": 1,
 "mharm": 2
@@ -10,7 +10,7 @@
 ]
 }
 },
-"launcher": [
+"beam": [
 {
 "frequency": {
 "data": [
@@ -23,26 +23,18 @@
 "r": [2.4],
 "z": [0.68]
 },
-"mode": {
-"data": [
-1
-]
-},
+"mode": 1,
 "power_launched": {
 "data": [
 1000000.0
 ]
 },
-"steering_angle_pol": {
-"data": [
+"steering_angle_pol": [
 1.5707963267948966
-]
-},
-"steering_angle_tor": {
-"data": [
+],
+"steering_angle_tor": [
 3.490658503988659
 ]
-}
 }
 ],
 "time": [
