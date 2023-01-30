@@ -1403,7 +1403,7 @@ def core_transport_fluxes(ods, time_index=None, time=None, fig=None, show_total_
         # Fluxes
         if "core_transport" in ods:
             core_transport = ods['core_transport']['model']
-            rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_flux']['rho_tor']
+            rho_transport_model = core_transport[0]['profiles_1d'][time_index]['grid_flux']['rho_tor_norm']
 
             # Qe
             ax = plot_function(
