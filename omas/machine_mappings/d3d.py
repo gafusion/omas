@@ -4,7 +4,7 @@ from inspect import unwrap
 
 from numpy.lib.function_base import iterable
 from omas import *
-from omas.omas_utils import printd, unumpy
+from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 
 __all__ = []
@@ -551,8 +551,11 @@ def ec_launcher_active_hardware(ods, pulse):
 
         if iterable(xfrac):
             beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
-        else:
+        elif type(xfrac)==int or type(xfrac)==float:
             beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac))
+        else:
+            printe('WARNING: Invalid mode type returned for gyrotron')
+            beams[system_index]['mode'] = 0
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
