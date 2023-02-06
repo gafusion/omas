@@ -347,7 +347,7 @@ def gas_injection_hardware(ods, pulse):
     iv += 1
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_hardware(ods, pulse):
     r"""
     Loads DIII-D tokamak poloidal field coil hardware geometry
@@ -432,7 +432,7 @@ def pf_active_coil_current_data(ods, pulse):
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_hardware(ods, pulse):
     r"""
     Loads DIII-D tokamak non_axisymmetric field coil hardware geometry
@@ -1145,7 +1145,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 ch['zeff.time'] = impdata['TIME'] / 1000.0  # Convert ms to s
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
 def magnetics_weights(ods, pulse, time_index):
     r"""
     Load DIII-D tokamak magnetics equilibrium weights
@@ -1163,7 +1162,7 @@ def magnetics_weights(ods, pulse, time_index):
     ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
 
 
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_hardware(ods, pulse):
     r"""
     Load DIII-D tokamak flux loops and magnetic probes hardware geometry
@@ -1352,5 +1351,4 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(['ec_launcher_active_hardware'], globals(), locals())
-    test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())
