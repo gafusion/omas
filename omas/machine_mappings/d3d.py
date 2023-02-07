@@ -492,9 +492,15 @@ def ec_launcher_active_hardware(ods, pulse):
     # First the amount of systems in use
     query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
     num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
+    try:
+        system_max = num_systems + 1
+    except:
+        printe('No ECH system found')
+        return
+
     query = {}
     # Second query the used systems to resolve the gyrotron names
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         cur_system = f'SYSTEM_{system_no}.'
         query[f'GYROTRON_{system_no}'] = setup + cur_system + 'GYROTRON.NAME'
         query[f'FREQUENCY_{system_no}'] = setup + cur_system + 'GYROTRON.FREQUENCY'
@@ -503,7 +509,7 @@ def ec_launcher_active_hardware(ods, pulse):
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     query = {}
     gyrotron_names = []
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         if len(systems[f'GYROTRON_{system_no}']) == 0:
             """
             If nothing is connected to this system the gyrotron name is blank.
@@ -519,44 +525,44 @@ def ec_launcher_active_hardware(ods, pulse):
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         system_index = system_no - 1
         if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
-        beams = ods['ec_launchers.beam']
+        beam = ods['ec_launchers.beam'][system_index]
         time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
         if len(time) == 1:
-            beams[system_index]['time'] = np.atleast_1d(0)
+            beam['time'] = np.atleast_1d(0)
         else:
-            beams[system_index]['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
-        ntime = len(beams[system_index]['time'])
-        beams[system_index]['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beams[system_index]['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+            beam['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        ntime = len(beam['time'])
+        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
+        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
 
-        beams[system_index]['identifier'] = beams[system_index]['name'] = gyrotron_names[system_index]
+        beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
-        beams[system_index]['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
-        beams[system_index]['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
+        beam['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
+        beam['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
 
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
         phi = -phi - np.pi / 2.0
-        beams[system_index]['launching_position.phi'] = phi * np.ones(ntime)
+        beam['launching_position.phi'] = phi * np.ones(ntime)
 
-        beams[system_index]['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
-        beams[system_index]['frequency.time'] = np.atleast_1d(0)
+        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        beam['frequency.time'] = np.atleast_1d(0)
 
-        beams[system_index]['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        beams[system_index]['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
         if iterable(xfrac):
-            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
+            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         elif type(xfrac) == int or type(xfrac) == float:
-            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac))
+            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
         else:
-            printe('WARNING: Invalid mode type returned for gyrotron')
-            beams[system_index]['mode'] = 0
+            printe(f'Invalid mode type returned for beam {system_index}')
+            beam['mode'] = 0
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
@@ -565,10 +571,10 @@ def ec_launcher_active_hardware(ods, pulse):
         # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
         # Hence, the inverse curvature radius is zero
         # Notably the ECRH beams are astigmatic in reality so this is just an approximation
-        beams[system_index]['phase.angle'] = np.zeros(ntime)
-        beams[system_index]['phase.curvature'] = np.zeros([2, ntime])
-        beams[system_index]['spot.angle'] = np.zeros(ntime)
-        beams[system_index]['spot.size'] = 0.0172 * np.ones([2, ntime])
+        beam['phase.angle'] = np.zeros(ntime)
+        beam['phase.curvature'] = np.zeros([2, ntime])
+        beam['spot.angle'] = np.zeros(ntime)
+        beam['spot.size'] = 0.0172 * np.ones([2, ntime])
 
 
 # ================================
@@ -954,12 +960,15 @@ def bolometer_data(ods, pulse):
     # assign the data to the ods
     for ch in ods1['bolometer.channel']:
         data = all_data[f'{ch}_data']
-        error = data * 0.2
-        error[error < 1e-5] = 1e-5
-        time = all_data[f'{ch}_time']
-        ods[f'bolometer.channel[{ch}].power.data'] = data
-        ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
-        ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
+        try:
+            error = data * 0.2
+            error[error < 1e-5] = 1e-5
+            time = all_data[f'{ch}_time']
+            ods[f'bolometer.channel[{ch}].power.data'] = data
+            ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
+            ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
+        except:
+            printe(f'bolometer data was not found for channel {ch}')
 
 
 # ================================
