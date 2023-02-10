@@ -152,7 +152,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "workflow/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -161,20 +161,22 @@
  },
  "workflow.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "workflow/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "workflow.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "workflow/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "workflow.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -296,7 +298,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_end\"",
   "full_path": "workflow/time_loop/time_end_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "workflow.time_loop.time_end_error_lower": {
@@ -353,7 +356,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"control_float\"",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/control_float_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "workflow.time_loop.workflow_cycle[:].component[:].control_float_error_lower": {
@@ -390,7 +394,7 @@
  },
  "workflow.time_loop.workflow_cycle[:].component[:].execution_mode": {
   "data_type": "INT_0D",
-  "documentation": "Component execution mode for currrent workflow cycle. 0 means the component is not executed and the workflow uses results from previous workflow cycle. 1 means the component is executed for this workflow cycle.",
+  "documentation": "Component execution mode for current workflow cycle. 0 means the component is not executed and the workflow uses results from previous workflow cycle. 1 means the component is executed for this workflow cycle.",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/execution_mode",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -414,7 +418,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_interval\"",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "workflow.time_loop.workflow_cycle[:].component[:].time_interval_error_lower": {

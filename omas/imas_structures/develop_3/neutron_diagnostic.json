@@ -2,7 +2,7 @@
  "neutron_diagnostic": {
   "documentation": "Neutron diagnostic such as DNFM, NFM or MFC",
   "full_path": "neutron_diagnostic",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.38.1",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.6.0",
   "maxoccur": "3"
@@ -26,7 +26,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dead_time\"",
   "full_path": "neutron_diagnostic/characteristics/dead_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.characteristics.dead_time_error_lower": {
@@ -57,7 +58,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pulse_length\"",
   "full_path": "neutron_diagnostic/characteristics/pulse_length_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.characteristics.pulse_length_error_lower": {
@@ -99,7 +101,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"error\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/error_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.characteristics.reaction[:].error_error_lower": {
@@ -178,7 +181,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"probability_overlap\"",
   "full_path": "neutron_diagnostic/characteristics/reaction(i1)/probability_overlap_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.characteristics.reaction[:].probability_overlap_error_lower": {
@@ -326,7 +330,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"bias\"",
   "full_path": "neutron_diagnostic/detectors(i1)/adc/bias_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].adc.bias_error_lower": {
@@ -371,7 +376,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"impedance\"",
   "full_path": "neutron_diagnostic/detectors(i1)/adc/impedance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].adc.impedance_error_lower": {
@@ -402,7 +408,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"input_range\"",
   "full_path": "neutron_diagnostic/detectors(i1)/adc/input_range_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].adc.input_range_error_lower": {
@@ -459,7 +466,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_peak/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].amplitude_peak.data_error_lower": {
@@ -522,7 +530,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/amplitude_raw/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].amplitude_raw.data_error_lower": {
@@ -591,7 +600,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].centre.phi_error_lower": {
@@ -622,7 +632,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].centre.r_error_lower": {
@@ -653,7 +664,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].centre.z_error_lower": {
@@ -701,7 +713,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].outline.x1_error_lower": {
@@ -741,7 +754,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].outline.x2_error_lower": {
@@ -778,7 +792,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].radius_error_lower": {
@@ -809,7 +824,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].surface_error_lower": {
@@ -848,7 +864,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_unit_vector.x_error_lower": {
@@ -879,7 +896,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_unit_vector.y_error_lower": {
@@ -910,7 +928,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_unit_vector.z_error_lower": {
@@ -941,7 +960,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x1_width_error_lower": {
@@ -980,7 +1000,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x2_unit_vector.x_error_lower": {
@@ -1011,7 +1032,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x2_unit_vector.y_error_lower": {
@@ -1042,7 +1064,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x2_unit_vector.z_error_lower": {
@@ -1073,7 +1096,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x2_width_error_lower": {
@@ -1112,7 +1136,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x3_unit_vector.x_error_lower": {
@@ -1143,7 +1168,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x3_unit_vector.y_error_lower": {
@@ -1174,7 +1200,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/aperture(i2)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].aperture[:].x3_unit_vector.z_error_lower": {
@@ -1224,7 +1251,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.amplitude.data_error_lower": {
@@ -1275,7 +1303,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fall_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/fall_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.fall_time_error_lower": {
@@ -1318,7 +1347,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.frequency.data_error_lower": {
@@ -1376,7 +1406,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rise_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/b_field_sensor/rise_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].b_field_sensor.rise_time_error_lower": {
@@ -1449,7 +1480,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.centre.phi_error_lower": {
@@ -1480,7 +1512,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.centre.r_error_lower": {
@@ -1511,7 +1544,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.centre.z_error_lower": {
@@ -1559,7 +1593,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.outline.x1_error_lower": {
@@ -1599,7 +1634,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.outline.x2_error_lower": {
@@ -1636,7 +1672,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.radius_error_lower": {
@@ -1667,7 +1704,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.surface_error_lower": {
@@ -1706,7 +1744,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x1_unit_vector.x_error_lower": {
@@ -1737,7 +1776,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x1_unit_vector.y_error_lower": {
@@ -1768,7 +1808,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x1_unit_vector.z_error_lower": {
@@ -1799,7 +1840,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x1_width_error_lower": {
@@ -1838,7 +1880,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x2_unit_vector.x_error_lower": {
@@ -1869,7 +1912,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x2_unit_vector.y_error_lower": {
@@ -1900,7 +1944,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x2_unit_vector.z_error_lower": {
@@ -1931,7 +1976,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x2_width_error_lower": {
@@ -1970,7 +2016,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x3_unit_vector.x_error_lower": {
@@ -2001,7 +2048,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x3_unit_vector.y_error_lower": {
@@ -2032,7 +2080,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/detector/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].detector.x3_unit_vector.z_error_lower": {
@@ -2063,7 +2112,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"end_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/end_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].end_time_error_lower": {
@@ -2108,7 +2158,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"detection_efficiency\"",
   "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/detection_efficiency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].energy_band[:].detection_efficiency_error_lower": {
@@ -2148,7 +2199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energies\"",
   "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/energies_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].energy_band[:].energies_error_lower": {
@@ -2185,7 +2237,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"lower_bound\"",
   "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/lower_bound_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].energy_band[:].lower_bound_error_lower": {
@@ -2216,7 +2269,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"upper_bound\"",
   "full_path": "neutron_diagnostic/detectors(i1)/energy_band(i2)/upper_bound_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].energy_band[:].upper_bound_error_lower": {
@@ -2266,7 +2320,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/direction_to_detector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.direction_to_detector.x_error_lower": {
@@ -2312,7 +2367,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/direction_to_detector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.direction_to_detector.y_error_lower": {
@@ -2358,7 +2414,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/direction_to_detector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.direction_to_detector.z_error_lower": {
@@ -2409,7 +2466,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/emission_grid/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi_error_lower": {
@@ -2449,7 +2507,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/emission_grid/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.emission_grid.r_error_lower": {
@@ -2489,7 +2548,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/emission_grid/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z_error_lower": {
@@ -2531,7 +2591,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"solid_angle\"",
   "full_path": "neutron_diagnostic/detectors(i1)/field_of_view/solid_angle_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].field_of_view.solid_angle_error_lower": {
@@ -2567,78 +2628,164 @@
   "lifecycle_status": "alpha",
   "structure_reference": "neutron_diagnostic_green"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "event_in_detector",
+  "change_nbc_version": "3.38.1",
   "data_type": "STRUCTURE",
-  "documentation": "5th dimension for the Green functions representing values of events measured in the detector.The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or TOF (defined by type below)",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector",
+  "documentation": "5th dimension for the neutron_flux Green function representing values of events measured in the detector. The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or time of flight ... (defined by type below)",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux",
+  "introduced_after_version": "3.38.0",
   "lifecycle_status": "alpha",
   "structure_reference": "neutron_diagnostic_event"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.type": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.type": {
   "data_type": "STRUCTURE",
   "doc_identifier": "neutron_diagnostic/neutron_event_identifier.xml",
-  "documentation": "Type of the event\n1) energy_neutron : Neutron energy in the detector [eV]\n2) voltage : Voltage in the detector [V]\n3) time_of_flight : Time of flight [s]\n4) trajectory_length : Particle trajectory length [m]\n5) energy_deposited : Deposited energy [eV]\n6) light_yield : Light yield [eVee]",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/type",
+  "documentation": "Type of the event\n1) energy_neutron : Neutron energy in the detector [eV]\n2) voltage : Voltage in the detector [V]\n3) time_of_flight : Time of flight [s]\n4) trajectory_length : Particle trajectory length [m]\n5) energy_deposited : Deposited energy [eV]\n6) light_yield : Light yield [eVee]\n7) count_rate : Number of events/reactions per second [s^-1]",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.type.description": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.type.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/type/description",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/type/description",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.type.index": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.type.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/type/index",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/type/index",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.type.name": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.type.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/type/name",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/type/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Array of values for the event",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/values(:)",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/values(:)",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "mixed"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values_error_index": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/values_error_index",
-  "lifecycle_status": "alpha",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values_error_lower": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values_error_lower": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/values_error_lower(:)",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/values_error_lower(:)",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "mixed"
  },
- "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values_error_upper": {
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values_error_upper": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
-  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector/values_error_upper(:)",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_neutron_flux/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "event_in_detector",
+  "change_nbc_version": "3.38.1",
+  "data_type": "STRUCTURE",
+  "documentation": "5th dimension for the response_function Green function representing values of events measured in the detector. The type of events monitored depends on the detector and can be defined by the user. It can be energy of neutrons, or electrical signal, or time of flight ... (defined by type below)",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function",
+  "introduced_after_version": "3.38.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "neutron_diagnostic_event"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "neutron_diagnostic/neutron_event_identifier.xml",
+  "documentation": "Type of the event\n1) energy_neutron : Neutron energy in the detector [eV]\n2) voltage : Voltage in the detector [V]\n3) time_of_flight : Time of flight [s]\n4) trajectory_length : Particle trajectory length [m]\n5) energy_deposited : Deposited energy [eV]\n6) light_yield : Light yield [eVee]\n7) count_rate : Number of events/reactions per second [s^-1]",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of values for the event",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "mixed"
+ },
+ "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "neutron_diagnostic/detectors(i1)/green_functions/event_in_detector_response_function/values_error_upper(:)",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "mixed"
@@ -2649,7 +2796,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Grouped neutron flux in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector",
@@ -2662,7 +2809,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"neutron_flux\"",
   "full_path": "neutron_diagnostic/detectors(i1)/green_functions/neutron_flux_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].green_functions.neutron_flux_error_lower": {
@@ -2671,7 +2819,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"neutron_flux\"",
@@ -2686,7 +2834,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_neutron_flux.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"neutron_flux\"",
@@ -2701,7 +2849,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Number of events occurring in the detector from one neutron energy bin emitted by the current plasma voxel towards the detector",
@@ -2714,7 +2862,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"response_function\"",
   "full_path": "neutron_diagnostic/detectors(i1)/green_functions/response_function_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].green_functions.response_function_error_lower": {
@@ -2723,7 +2872,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"response_function\"",
@@ -2738,7 +2887,7 @@
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.z",
    "neutron_diagnostic.detectors[:].field_of_view.emission_grid.phi",
    "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies",
-   "neutron_diagnostic.detectors[:].green_functions.event_in_detector.values"
+   "neutron_diagnostic.detectors[:].green_functions.event_in_detector_response_function.values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"response_function\"",
@@ -2762,7 +2911,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"source_neutron_energies\"",
   "full_path": "neutron_diagnostic/detectors(i1)/green_functions/source_neutron_energies_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].green_functions.source_neutron_energies_error_lower": {
@@ -2823,7 +2973,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/mode(i2)/counting/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].mode[:].counting.data_error_lower": {
@@ -2895,7 +3046,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].position.phi_error_lower": {
@@ -2926,7 +3078,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].position.r_error_lower": {
@@ -2957,7 +3110,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/detectors(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].position.z_error_lower": {
@@ -3006,7 +3160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_nuclear_density\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_nuclear_density_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_nuclear_density_error_lower": {
@@ -3041,7 +3196,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_temperature\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_temperature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_temperature_error_lower": {
@@ -3080,7 +3236,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"converter_volume\"",
   "full_path": "neutron_diagnostic/detectors(i1)/radiation(i2)/converter_volume_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].radiation[:].converter_volume_error_lower": {
@@ -3153,7 +3310,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"spectrum_sampling_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/spectrum_sampling_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].spectrum_sampling_time_error_lower": {
@@ -3194,7 +3352,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"start_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/start_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].start_time_error_lower": {
@@ -3251,7 +3410,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_out/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_out.data_error_lower": {
@@ -3314,7 +3474,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_high_voltage/voltage_set/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].supply_high_voltage.voltage_set.data_error_lower": {
@@ -3391,7 +3552,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_out/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_out.data_error_lower": {
@@ -3454,7 +3616,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/supply_low_voltage/voltage_set/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].supply_low_voltage.voltage_set.data_error_lower": {
@@ -3524,7 +3687,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.amplitude.data_error_lower": {
@@ -3575,7 +3739,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fall_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/fall_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.fall_time_error_lower": {
@@ -3618,7 +3783,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.frequency.data_error_lower": {
@@ -3676,7 +3842,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rise_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/temperature_sensor/rise_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].temperature_sensor.rise_time_error_lower": {
@@ -3754,7 +3921,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].test_generator.amplitude.data_error_lower": {
@@ -3805,7 +3973,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fall_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/fall_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].test_generator.fall_time_error_lower": {
@@ -3848,7 +4017,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].test_generator.frequency.data_error_lower": {
@@ -3906,7 +4076,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rise_time\"",
   "full_path": "neutron_diagnostic/detectors(i1)/test_generator/rise_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.detectors[:].test_generator.rise_time_error_lower": {
@@ -3999,7 +4170,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "neutron_diagnostic/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -4008,20 +4179,22 @@
  },
  "neutron_diagnostic.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "neutron_diagnostic/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "neutron_diagnostic.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "neutron_diagnostic/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "neutron_diagnostic.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -4079,7 +4252,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "neutron_diagnostic/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.latency_error_lower": {
@@ -4123,7 +4297,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"fusion_power\"",
   "full_path": "neutron_diagnostic/synthetic_signals/fusion_power_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.synthetic_signals.fusion_power_error_lower": {
@@ -4166,7 +4341,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_neutron_flux\"",
   "full_path": "neutron_diagnostic/synthetic_signals/total_neutron_flux_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.synthetic_signals.total_neutron_flux_error_lower": {
@@ -4235,7 +4411,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].position.r_error_lower": {
@@ -4266,7 +4443,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].position.z_error_lower": {
@@ -4323,7 +4501,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d2flux_drdz\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/d2flux_drdz_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].d2flux_drdz_error_lower": {
@@ -4365,7 +4544,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/energy_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].energy_error_lower": {
@@ -4406,7 +4586,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/flux_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].flux_error_lower": {
@@ -4449,7 +4630,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reaction_rate\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/reaction_rate_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].reaction_rate_error_lower": {
@@ -4492,7 +4674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sensitivity\"",
   "full_path": "neutron_diagnostic/unit_source(i1)/radiation(i2)/reaction(i3)/sensitivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "neutron_diagnostic.unit_source[:].radiation[:].reaction[:].sensitivity_error_lower": {

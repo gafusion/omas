@@ -2,7 +2,7 @@
  "edge_sources": {
   "documentation": "Edge plasma sources. Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)",
   "full_path": "edge_sources",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.38.1",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -156,7 +156,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/jacobian_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].jacobian_error_lower": {
@@ -198,7 +199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_contravariant_error_lower": {
@@ -244,7 +246,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/base(i2)/tensor_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].base[:].tensor_covariant_error_lower": {
@@ -326,10 +329,11 @@
  "edge_sources.grid_ggd[:].grid_subset[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
-  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All wall edges\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
+  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All edges defining walls, baffles, and targets\n45) outer_sf_leg_entrance_1 : y-aligned edges defining the SOL entrance of the first snowflake outer leg\n46) outer_sf_leg_entrance_2 : y-aligned edges defining the SOL entrance of the third snowflake outer leg\n47) outer_sf_pfr_connection_1 : y-aligned edges defining\u00a0the connection between the outer snowflake entrance and third leg\n48) outer_sf_pfr_connection_2 : y-aligned edges defining the connection between the outer snowflake first and second leg\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/identifier",
   "lifecycle_status": "active",
-  "structure_reference": "identifier_dynamic_aos3"
+  "structure_reference": "identifier_dynamic_aos3",
+  "url": "utilities/LFS_snowflake_GGD_subsets.png"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].identifier.description": {
   "data_type": "STR_0D",
@@ -374,7 +378,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/jacobian_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.jacobian_error_lower": {
@@ -416,7 +421,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_contravariant_error_lower": {
@@ -462,7 +468,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "edge_sources/grid_ggd(itime)/grid_subset(i1)/metric/tensor_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset[:].metric.tensor_covariant_error_lower": {
@@ -494,7 +501,7 @@
  "edge_sources.grid_ggd[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
-  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1",
+  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1\n11) LFS_snowflake_minus : Snowflake grid with secondary x point on the low field side, and the secondary separatrix on top of the primary\n12) LFS_snowflake_plus : Snowflake grid with secondary x point to the right of the primary, and the secondary separatrix below the primary\n100) reference : Refers to a GGD described in another IDS indicated by grid_path. In such a case, do not fill the grid_ggd node of this IDS",
   "full_path": "edge_sources/grid_ggd(itime)/identifier",
   "lifecycle_status": "active",
   "structure_reference": "identifier_dynamic_aos3"
@@ -517,6 +524,13 @@
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "edge_sources/grid_ggd(itime)/identifier/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_sources.grid_ggd[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: IDS::wall/0/description_ggd(1)/grid_ggd, means that the grid is located in the wall IDS, occurrence 0, with relative path description_ggd(1)/grid_ggd, using Fortran index convention (here : first index of the array)",
+  "full_path": "edge_sources/grid_ggd(itime)/path",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -708,7 +722,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry_2d\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_2d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_2d_error_lower": {
@@ -741,7 +756,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/geometry_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].geometry_error_lower": {
@@ -778,7 +794,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "edge_sources/grid_ggd(itime)/space(i1)/objects_per_dimension(i2)/object(i3)/measure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].space[:].objects_per_dimension[:].object[:].measure_error_lower": {
@@ -861,7 +878,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "edge_sources/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -870,20 +887,22 @@
  },
  "edge_sources.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "edge_sources/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "edge_sources.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "edge_sources/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "edge_sources.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1009,7 +1028,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].current[:].coefficients_error_lower": {
@@ -1065,7 +1085,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].current[:].values_error_lower": {
@@ -1125,7 +1146,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].coefficients_error_lower": {
@@ -1181,7 +1203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].values_error_lower": {
@@ -1234,7 +1257,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].coefficients_error_lower": {
@@ -1290,7 +1314,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].values_error_lower": {
@@ -1349,7 +1374,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].a_error_lower": {
@@ -1388,7 +1414,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].multiplicity_error_lower": {
@@ -1421,7 +1448,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].element[:].z_n_error_lower": {
@@ -1468,7 +1496,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].coefficients_error_lower": {
@@ -1524,7 +1553,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].values_error_lower": {
@@ -1595,7 +1625,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -1626,7 +1657,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].diamagnetic_error_lower": {
@@ -1692,7 +1724,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].parallel_coefficients_error_lower": {
@@ -1723,7 +1756,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].parallel_error_lower": {
@@ -1775,7 +1809,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -1806,7 +1841,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].poloidal_error_lower": {
@@ -1827,6 +1863,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/r_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -1858,7 +1985,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial_coefficients_error_lower": {
@@ -1889,7 +2017,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].radial_error_lower": {
@@ -1941,7 +2070,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -1972,7 +2102,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].toroidal_error_lower": {
@@ -1993,6 +2124,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].momentum[:].z_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/z_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -2039,7 +2261,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].coefficients_error_lower": {
@@ -2095,7 +2318,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].values_error_lower": {
@@ -2125,7 +2349,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source terms related to the different charge states of the species (ionisation, energy, excitation, ...)",
+  "documentation": "Source terms related to the different states of the species (ionisation, energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -2143,7 +2367,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source terms for the charge state energy transport equation",
+  "documentation": "Source terms for the state energy transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -2166,7 +2390,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].coefficients_error_lower": {
@@ -2222,7 +2447,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].values_error_lower": {
@@ -2249,7 +2475,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].label": {
   "data_type": "STR_0D",
-  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/label",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2293,7 +2519,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -2324,7 +2551,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].diamagnetic_error_lower": {
@@ -2390,7 +2618,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].parallel_coefficients_error_lower": {
@@ -2421,7 +2650,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].parallel_error_lower": {
@@ -2473,7 +2703,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -2504,7 +2735,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].poloidal_error_lower": {
@@ -2525,6 +2757,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/r_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -2556,7 +2879,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial_coefficients_error_lower": {
@@ -2587,7 +2911,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].radial_error_lower": {
@@ -2639,7 +2964,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -2670,7 +2996,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].toroidal_error_lower": {
@@ -2695,12 +3022,103 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].z_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/z_error_upper(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source term for the charge state density transport equation",
+  "documentation": "Source term for the state density transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -2723,7 +3141,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].coefficients_error_lower": {
@@ -2779,7 +3198,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].values_error_lower": {
@@ -2816,7 +3236,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].vibrational_level_error_lower": {
@@ -2844,7 +3265,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_max": {
   "data_type": "FLT_0D",
-  "documentation": "Maximum Z of the charge state bundle",
+  "documentation": "Maximum Z of the state bundle",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -2854,7 +3275,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_max_error_lower": {
@@ -2875,7 +3297,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_min": {
   "data_type": "FLT_0D",
-  "documentation": "Minimum Z of the charge state bundle",
+  "documentation": "Minimum Z of the state bundle",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -2885,7 +3307,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].z_min_error_lower": {
@@ -2916,7 +3339,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].ion[:].z_ion_error_lower": {
@@ -2974,7 +3398,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -3005,7 +3430,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].diamagnetic_error_lower": {
@@ -3071,7 +3497,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].parallel_coefficients_error_lower": {
@@ -3102,7 +3529,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].parallel_error_lower": {
@@ -3154,7 +3582,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -3185,7 +3614,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].poloidal_error_lower": {
@@ -3206,6 +3636,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/r_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -3237,7 +3758,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].radial_coefficients_error_lower": {
@@ -3268,7 +3790,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].radial_error_lower": {
@@ -3320,7 +3843,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -3351,7 +3875,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].momentum[:].toroidal_error_lower": {
@@ -3372,6 +3897,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].momentum[:].z_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/z_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -3410,7 +4026,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].a_error_lower": {
@@ -3449,7 +4066,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -3482,7 +4100,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].element[:].z_n_error_lower": {
@@ -3529,7 +4148,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].coefficients_error_lower": {
@@ -3585,7 +4205,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].values_error_lower": {
@@ -3663,7 +4284,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -3694,7 +4316,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].diamagnetic_error_lower": {
@@ -3760,7 +4383,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].parallel_coefficients_error_lower": {
@@ -3791,7 +4415,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].parallel_error_lower": {
@@ -3843,7 +4468,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -3874,7 +4500,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].poloidal_error_lower": {
@@ -3895,6 +4522,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/r_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -3926,7 +4644,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial_coefficients_error_lower": {
@@ -3957,7 +4676,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].radial_error_lower": {
@@ -4009,7 +4729,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -4040,7 +4761,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].toroidal_error_lower": {
@@ -4061,6 +4783,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].momentum[:].z_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/z_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -4100,7 +4913,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].coefficients_error_lower": {
@@ -4156,7 +4970,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].values_error_lower": {
@@ -4186,7 +5001,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source terms related to the different charge states of the species (energy, excitation, ...)",
+  "documentation": "Source terms related to the different states of the species (energy, excitation, ...)",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -4204,7 +5019,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source terms for the charge state energy transport equation",
+  "documentation": "Source terms for the state energy transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -4227,7 +5042,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].coefficients_error_lower": {
@@ -4283,7 +5099,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].values_error_lower": {
@@ -4354,7 +5171,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].diamagnetic_coefficients_error_lower": {
@@ -4385,7 +5203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].diamagnetic_error_lower": {
@@ -4451,7 +5270,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].parallel_coefficients_error_lower": {
@@ -4482,7 +5302,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].parallel_error_lower": {
@@ -4534,7 +5355,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].poloidal_coefficients_error_lower": {
@@ -4565,7 +5387,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].poloidal_error_lower": {
@@ -4586,6 +5409,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"poloidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/poloidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/r_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -4617,7 +5531,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial_coefficients_error_lower": {
@@ -4648,7 +5563,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].radial_error_lower": {
@@ -4700,7 +5616,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].toroidal_coefficients_error_lower": {
@@ -4731,7 +5648,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].toroidal_error_lower": {
@@ -4752,6 +5670,97 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/toroidal_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_coefficients(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_coefficients_error_lower(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_coefficients_error_upper(:,:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_error_lower(:)",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].z_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/z_error_upper(:)",
+  "introduced_after_version": "3.37.2",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
@@ -4789,7 +5798,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Source term for the charge state density transport equation",
+  "documentation": "Source term for the state density transport equation",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)",
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
@@ -4812,7 +5821,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].coefficients_error_lower": {
@@ -4868,7 +5878,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].values_error_lower": {
@@ -4905,7 +5916,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].vibrational_level_error_lower": {
@@ -4967,7 +5979,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/coefficients_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].coefficients_error_lower": {
@@ -5023,7 +6036,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/values_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].values_error_lower": {
@@ -5094,7 +6108,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].a_error_lower": {
@@ -5133,7 +6148,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].multiplicity_error_lower": {
@@ -5166,7 +6182,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].element[:].z_n_error_lower": {
@@ -5237,7 +6254,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/value_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power[:].value_error_lower": {
@@ -5268,7 +6286,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].z_ion_error_lower": {
@@ -5361,7 +6380,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].a_error_lower": {
@@ -5400,7 +6420,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].multiplicity_error_lower": {
@@ -5433,7 +6454,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.element[:].z_n_error_lower": {
@@ -5492,7 +6514,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.vibrational_level_error_lower": {
@@ -5530,7 +6553,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.z_max_error_lower": {
@@ -5561,7 +6585,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "edge_sources/source(i1)/species/ion/state/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.state.z_min_error_lower": {
@@ -5592,7 +6617,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "edge_sources/source(i1)/species/ion/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.ion.z_ion_error_lower": {
@@ -5641,7 +6667,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].a_error_lower": {
@@ -5680,7 +6707,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].multiplicity_error_lower": {
@@ -5713,7 +6741,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "edge_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.element[:].z_n_error_lower": {
@@ -5801,7 +6830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "edge_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "edge_sources.source[:].species.neutral.state.vibrational_level_error_lower": {

@@ -197,7 +197,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface_temperature\"",
   "full_path": "camera_ir/frame(itime)/surface_temperature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "camera_ir.frame[:].surface_temperature_error_lower": {
@@ -262,7 +263,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"distance_separatrix_midplane\"",
   "full_path": "camera_ir/frame_analysis(itime)/distance_separatrix_midplane_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "camera_ir.frame_analysis[:].distance_separatrix_midplane_error_lower": {
@@ -302,7 +304,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_flux_parallel\"",
   "full_path": "camera_ir/frame_analysis(itime)/power_flux_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "camera_ir.frame_analysis[:].power_flux_parallel_error_lower": {
@@ -339,7 +342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sol_heat_decay_length\"",
   "full_path": "camera_ir/frame_analysis(itime)/sol_heat_decay_length_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "camera_ir.frame_analysis[:].sol_heat_decay_length_error_lower": {
@@ -412,7 +416,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "camera_ir/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -421,20 +425,22 @@
  },
  "camera_ir.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "camera_ir/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "camera_ir.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "camera_ir/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "camera_ir.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -492,7 +498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "camera_ir/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "camera_ir.latency_error_lower": {

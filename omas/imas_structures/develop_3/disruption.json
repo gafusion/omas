@@ -129,7 +129,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_pol\"",
   "full_path": "disruption/global_quantities/current_halo_pol_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.current_halo_pol_error_lower": {
@@ -172,7 +173,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_tor\"",
   "full_path": "disruption/global_quantities/current_halo_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.current_halo_tor_error_lower": {
@@ -215,7 +217,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_ohm\"",
   "full_path": "disruption/global_quantities/energy_ohm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.energy_ohm_error_lower": {
@@ -258,7 +261,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_ohm_halo\"",
   "full_path": "disruption/global_quantities/energy_ohm_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.energy_ohm_halo_error_lower": {
@@ -301,7 +305,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_parallel_halo\"",
   "full_path": "disruption/global_quantities/energy_parallel_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.energy_parallel_halo_error_lower": {
@@ -344,7 +349,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_radiated_electrons_impurities\"",
   "full_path": "disruption/global_quantities/energy_radiated_electrons_impurities_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.energy_radiated_electrons_impurities_error_lower": {
@@ -387,7 +393,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_radiated_electrons_impurities_halo\"",
   "full_path": "disruption/global_quantities/energy_radiated_electrons_impurities_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.energy_radiated_electrons_impurities_halo_error_lower": {
@@ -430,7 +437,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_ohm\"",
   "full_path": "disruption/global_quantities/power_ohm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.power_ohm_error_lower": {
@@ -473,7 +481,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_ohm_halo\"",
   "full_path": "disruption/global_quantities/power_ohm_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.power_ohm_halo_error_lower": {
@@ -516,7 +525,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_parallel_halo\"",
   "full_path": "disruption/global_quantities/power_parallel_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.power_parallel_halo_error_lower": {
@@ -559,7 +569,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_electrons_impurities\"",
   "full_path": "disruption/global_quantities/power_radiated_electrons_impurities_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.power_radiated_electrons_impurities_error_lower": {
@@ -602,7 +613,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_radiated_electrons_impurities_halo\"",
   "full_path": "disruption/global_quantities/power_radiated_electrons_impurities_halo_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.power_radiated_electrons_impurities_halo_error_lower": {
@@ -645,7 +657,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_halo_boundary\"",
   "full_path": "disruption/global_quantities/psi_halo_boundary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.global_quantities.psi_halo_boundary_error_lower": {
@@ -703,7 +716,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/active_wall_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].active_wall_point.r_error_lower": {
@@ -734,7 +748,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/active_wall_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].active_wall_point.z_error_lower": {
@@ -776,7 +791,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_halo_pol\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/current_halo_pol_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].area[:].current_halo_pol_error_lower": {
@@ -814,7 +830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/end_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].area[:].end_point.r_error_lower": {
@@ -845,7 +862,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/end_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].area[:].end_point.z_error_lower": {
@@ -883,7 +901,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/start_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].area[:].start_point.r_error_lower": {
@@ -914,7 +933,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "disruption/halo_currents(itime)/area(i1)/start_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.halo_currents[:].area[:].start_point.z_error_lower": {
@@ -987,7 +1007,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "disruption/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -996,20 +1016,22 @@
  },
  "disruption.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "disruption/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "disruption.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "disruption/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "disruption.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1090,7 +1112,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "disruption/profiles_1d(itime)/grid/area_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.area_error_lower": {
@@ -1141,7 +1164,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_boundary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.psi_boundary_error_lower": {
@@ -1164,7 +1188,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.psi_error_lower": {
@@ -1207,7 +1232,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "disruption/profiles_1d(itime)/grid/psi_magnetic_axis_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.psi_magnetic_axis_error_lower": {
@@ -1241,7 +1267,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_pol_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.rho_pol_norm_error_lower": {
@@ -1281,7 +1308,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.rho_tor_error_lower": {
@@ -1321,7 +1349,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -1361,7 +1390,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "disruption/profiles_1d(itime)/grid/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.surface_error_lower": {
@@ -1401,7 +1431,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "disruption/profiles_1d(itime)/grid/volume_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].grid.volume_error_lower": {
@@ -1441,7 +1472,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_runaways\"",
   "full_path": "disruption/profiles_1d(itime)/j_runaways_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].j_runaways_error_lower": {
@@ -1481,7 +1513,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_conductive_losses\"",
   "full_path": "disruption/profiles_1d(itime)/power_density_conductive_losses_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].power_density_conductive_losses_error_lower": {
@@ -1521,7 +1554,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_density_radiative_losses\"",
   "full_path": "disruption/profiles_1d(itime)/power_density_radiative_losses_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "disruption.profiles_1d[:].power_density_radiative_losses_error_lower": {
@@ -1594,7 +1628,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "disruption/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.vacuum_toroidal_field.b0_error_lower": {
@@ -1639,7 +1674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "disruption/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "disruption.vacuum_toroidal_field.r0_error_lower": {

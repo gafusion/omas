@@ -2,7 +2,7 @@
  "equilibrium": {
   "documentation": "Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.",
   "full_path": "equilibrium",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.38.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "3"
@@ -167,7 +167,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/base(i3)/jacobian_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].jacobian_error_lower": {
@@ -209,7 +210,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_contravariant_error_lower": {
@@ -255,7 +257,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].base[:].tensor_covariant_error_lower": {
@@ -337,10 +340,11 @@
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
-  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All wall edges\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
+  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All edges defining walls, baffles, and targets\n45) outer_sf_leg_entrance_1 : y-aligned edges defining the SOL entrance of the first snowflake outer leg\n46) outer_sf_leg_entrance_2 : y-aligned edges defining the SOL entrance of the third snowflake outer leg\n47) outer_sf_pfr_connection_1 : y-aligned edges defining\u00a0the connection between the outer snowflake entrance and third leg\n48) outer_sf_pfr_connection_2 : y-aligned edges defining the connection between the outer snowflake first and second leg\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/identifier",
   "lifecycle_status": "alpha",
-  "structure_reference": "identifier_dynamic_aos3"
+  "structure_reference": "identifier_dynamic_aos3",
+  "url": "utilities/LFS_snowflake_GGD_subsets.png"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].identifier.description": {
   "data_type": "STR_0D",
@@ -385,7 +389,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/metric/jacobian_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.jacobian_error_lower": {
@@ -427,7 +432,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/metric/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_contravariant_error_lower": {
@@ -473,7 +479,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/grid_subset(i2)/metric/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].grid_subset[:].metric.tensor_covariant_error_lower": {
@@ -505,7 +512,7 @@
  "equilibrium.grids_ggd[:].grid[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
-  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1",
+  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1\n11) LFS_snowflake_minus : Snowflake grid with secondary x point on the low field side, and the secondary separatrix on top of the primary\n12) LFS_snowflake_plus : Snowflake grid with secondary x point to the right of the primary, and the secondary separatrix below the primary\n100) reference : Refers to a GGD described in another IDS indicated by grid_path. In such a case, do not fill the grid_ggd node of this IDS",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/identifier",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3"
@@ -530,6 +537,14 @@
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/identifier/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
+ },
+ "equilibrium.grids_ggd[:].grid[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: 'wall:0/description_ggd(1)/grid_ggd', means that the grid is located in the wall IDS, occurrence 0, with ids path 'description_ggd(1)/grid_ggd'. See the link below for more details about IDS paths",
+  "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "equilibrium.grids_ggd[:].grid[:].space": {
   "coordinates": [
@@ -719,7 +734,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry_2d\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_2d_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].space[:].objects_per_dimension[:].object[:].geometry_2d_error_lower": {
@@ -752,7 +768,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].space[:].objects_per_dimension[:].object[:].geometry_error_lower": {
@@ -789,7 +806,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "equilibrium/grids_ggd(itime)/grid(i1)/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid[:].space[:].objects_per_dimension[:].object[:].measure_error_lower": {
@@ -872,7 +890,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "equilibrium/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -881,20 +899,22 @@
  },
  "equilibrium.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "equilibrium/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "equilibrium.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "equilibrium/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "equilibrium.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -989,7 +1009,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/active_limiter_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.active_limiter_point.r_error_lower": {
@@ -1020,7 +1041,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/active_limiter_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.active_limiter_point.z_error_lower": {
@@ -1052,7 +1074,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_flux_pol_norm\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/b_flux_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.b_flux_pol_norm_error_lower": {
@@ -1086,7 +1109,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/elongation_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.elongation_error_lower": {
@@ -1120,7 +1144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation_lower\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/elongation_lower_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.elongation_lower_error_lower": {
@@ -1154,7 +1179,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation_upper\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/elongation_upper_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.elongation_upper_error_lower": {
@@ -1194,7 +1220,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/geometric_axis/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.geometric_axis.r_error_lower": {
@@ -1225,7 +1252,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/geometric_axis/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.geometric_axis.z_error_lower": {
@@ -1268,6 +1296,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/lcfs/r_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.lcfs.r_error_lower": {
@@ -1308,6 +1337,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/lcfs/z_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.lcfs.z_error_lower": {
@@ -1344,7 +1374,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"minor_radius\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/minor_radius_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.minor_radius_error_lower": {
@@ -1385,7 +1416,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/outline/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.outline.r_error_lower": {
@@ -1425,7 +1457,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/outline/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.outline.z_error_lower": {
@@ -1462,7 +1495,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.psi_error_lower": {
@@ -1493,7 +1527,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_norm\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/psi_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.psi_norm_error_lower": {
@@ -1525,7 +1560,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_inner\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/squareness_lower_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.squareness_lower_inner_error_lower": {
@@ -1559,7 +1595,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_outer\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/squareness_lower_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.squareness_lower_outer_error_lower": {
@@ -1593,7 +1630,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_inner\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/squareness_upper_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.squareness_upper_inner_error_lower": {
@@ -1627,7 +1665,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_outer\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/squareness_upper_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.squareness_upper_outer_error_lower": {
@@ -1671,7 +1710,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/strike_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.strike_point[:].r_error_lower": {
@@ -1702,7 +1742,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/strike_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.strike_point[:].z_error_lower": {
@@ -1734,7 +1775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/triangularity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.triangularity_error_lower": {
@@ -1768,7 +1810,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_lower\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/triangularity_lower_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.triangularity_lower_error_lower": {
@@ -1802,7 +1845,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_upper\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/triangularity_upper_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.triangularity_upper_error_lower": {
@@ -1853,7 +1897,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/x_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.x_point[:].r_error_lower": {
@@ -1884,7 +1929,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary/x_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary.x_point[:].z_error_lower": {
@@ -1923,7 +1969,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"distance_inner_outer\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/distance_inner_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.distance_inner_outer_error_lower": {
@@ -1966,7 +2013,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.r_error_lower": {
@@ -2006,7 +2054,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/outline/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.outline.z_error_lower": {
@@ -2043,7 +2092,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.psi_error_lower": {
@@ -2086,7 +2136,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].r_error_lower": {
@@ -2117,7 +2168,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/strike_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.strike_point[:].z_error_lower": {
@@ -2159,7 +2211,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].r_error_lower": {
@@ -2190,7 +2243,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_secondary_separatrix/x_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_secondary_separatrix.x_point[:].z_error_lower": {
@@ -2235,7 +2289,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/active_limiter_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.active_limiter_point.r_error_lower": {
@@ -2266,7 +2321,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/active_limiter_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.active_limiter_point.z_error_lower": {
@@ -2305,7 +2361,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"distance\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/distance_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.distance_error_lower": {
@@ -2338,7 +2395,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.r_error_lower": {
@@ -2369,7 +2427,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/closest_wall_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.closest_wall_point.z_error_lower": {
@@ -2408,7 +2467,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.r_error_lower": {
@@ -2439,7 +2499,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/dr_dz_zero_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.dr_dz_zero_point.z_error_lower": {
@@ -2471,7 +2532,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/elongation_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.elongation_error_lower": {
@@ -2505,7 +2567,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation_lower\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/elongation_lower_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.elongation_lower_error_lower": {
@@ -2539,7 +2602,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation_upper\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/elongation_upper_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.elongation_upper_error_lower": {
@@ -2583,7 +2647,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angle\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/gap(i1)/angle_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.gap[:].angle_error_lower": {
@@ -2628,7 +2693,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/gap(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.gap[:].r_error_lower": {
@@ -2659,7 +2725,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/gap(i1)/value_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.gap[:].value_error_lower": {
@@ -2690,7 +2757,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/gap(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.gap[:].z_error_lower": {
@@ -2728,7 +2796,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/geometric_axis/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.geometric_axis.r_error_lower": {
@@ -2759,7 +2828,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/geometric_axis/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.geometric_axis.z_error_lower": {
@@ -2790,7 +2860,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"minor_radius\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/minor_radius_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.minor_radius_error_lower": {
@@ -2831,7 +2902,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/outline/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.outline.r_error_lower": {
@@ -2871,7 +2943,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/outline/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.outline.z_error_lower": {
@@ -2908,7 +2981,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.psi_error_lower": {
@@ -2940,7 +3014,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_inner\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/squareness_lower_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.squareness_lower_inner_error_lower": {
@@ -2974,7 +3049,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_outer\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/squareness_lower_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.squareness_lower_outer_error_lower": {
@@ -3008,7 +3084,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_inner\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/squareness_upper_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.squareness_upper_inner_error_lower": {
@@ -3042,7 +3119,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_outer\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/squareness_upper_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.squareness_upper_outer_error_lower": {
@@ -3086,7 +3164,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/strike_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.strike_point[:].r_error_lower": {
@@ -3117,7 +3196,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/strike_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.strike_point[:].z_error_lower": {
@@ -3149,7 +3229,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.triangularity_error_lower": {
@@ -3183,7 +3264,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_lower\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_lower_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.triangularity_lower_error_lower": {
@@ -3217,7 +3299,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_upper\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_upper_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.triangularity_upper_error_lower": {
@@ -3268,7 +3351,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/x_point(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.x_point[:].r_error_lower": {
@@ -3299,7 +3383,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/x_point(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary_separatrix.x_point[:].z_error_lower": {
@@ -3346,7 +3431,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.chi_squared_error_lower": {
@@ -3384,7 +3470,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.measured_error_lower": {
@@ -3415,7 +3502,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.reconstructed_error_lower": {
@@ -3453,7 +3541,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.time_measurement_error_lower": {
@@ -3484,7 +3573,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.weight_error_lower": {
@@ -3529,7 +3619,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].chi_squared_error_lower": {
@@ -3570,7 +3661,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].measured_error_lower": {
@@ -3610,7 +3702,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].reconstructed_error_lower": {
@@ -3654,7 +3747,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].time_measurement_error_lower": {
@@ -3685,7 +3779,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].weight_error_lower": {
@@ -3726,7 +3821,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.chi_squared_error_lower": {
@@ -3767,7 +3863,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.measured_error_lower": {
@@ -3807,7 +3904,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.reconstructed_error_lower": {
@@ -3851,7 +3949,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.time_measurement_error_lower": {
@@ -3882,7 +3981,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.weight_error_lower": {
@@ -3925,7 +4025,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].chi_squared_error_lower": {
@@ -3963,7 +4064,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].measured_error_lower": {
@@ -3994,7 +4096,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].reconstructed_error_lower": {
@@ -4032,7 +4135,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].time_measurement_error_lower": {
@@ -4063,7 +4167,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].weight_error_lower": {
@@ -4108,7 +4213,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].chi_squared_error_lower": {
@@ -4149,7 +4255,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].measured_error_lower": {
@@ -4189,7 +4296,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].reconstructed_error_lower": {
@@ -4233,7 +4341,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].time_measurement_error_lower": {
@@ -4264,7 +4373,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].weight_error_lower": {
@@ -4305,7 +4415,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.chi_squared_error_lower": {
@@ -4346,7 +4457,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.measured_error_lower": {
@@ -4386,7 +4498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.reconstructed_error_lower": {
@@ -4430,7 +4543,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.time_measurement_error_lower": {
@@ -4461,7 +4575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.ip.weight_error_lower": {
@@ -4512,7 +4627,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.chi_squared_error_lower": {
@@ -4550,7 +4666,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.measured_error_lower": {
@@ -4581,7 +4698,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.reconstructed_error_lower": {
@@ -4619,7 +4737,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.time_measurement_error_lower": {
@@ -4650,7 +4769,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.weight_error_lower": {
@@ -4689,7 +4809,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.chi_squared_error_lower": {
@@ -4727,7 +4848,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.measured_error_lower": {
@@ -4758,7 +4880,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.reconstructed_error_lower": {
@@ -4796,7 +4919,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.time_measurement_error_lower": {
@@ -4827,7 +4951,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.weight_error_lower": {
@@ -4870,7 +4995,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].chi_squared_error_lower": {
@@ -4908,7 +5034,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].measured_error_lower": {
@@ -4939,7 +5066,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].reconstructed_error_lower": {
@@ -4977,7 +5105,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].time_measurement_error_lower": {
@@ -5008,7 +5137,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].weight_error_lower": {
@@ -5051,7 +5181,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].chi_squared_error_lower": {
@@ -5089,7 +5220,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].measured_error_lower": {
@@ -5120,7 +5252,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].reconstructed_error_lower": {
@@ -5158,7 +5291,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].time_measurement_error_lower": {
@@ -5189,7 +5323,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].weight_error_lower": {
@@ -5232,7 +5367,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].chi_squared_error_lower": {
@@ -5270,7 +5406,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].measured_error_lower": {
@@ -5301,7 +5438,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].reconstructed_error_lower": {
@@ -5339,7 +5477,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].time_measurement_error_lower": {
@@ -5370,7 +5509,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].weight_error_lower": {
@@ -5415,7 +5555,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].chi_squared_error_lower": {
@@ -5456,7 +5597,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].measured_error_lower": {
@@ -5496,7 +5638,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].reconstructed_error_lower": {
@@ -5540,7 +5683,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].time_measurement_error_lower": {
@@ -5571,7 +5715,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].weight_error_lower": {
@@ -5614,7 +5759,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_lower": {
@@ -5652,7 +5798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].measured_error_lower": {
@@ -5683,7 +5830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].reconstructed_error_lower": {
@@ -5721,7 +5869,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].time_measurement_error_lower": {
@@ -5752,7 +5901,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].weight_error_lower": {
@@ -5795,7 +5945,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].chi_squared_error_lower": {
@@ -5833,7 +5984,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].measured_error_lower": {
@@ -5864,7 +6016,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].reconstructed_error_lower": {
@@ -5902,7 +6055,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].time_measurement_error_lower": {
@@ -5933,7 +6087,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].weight_error_lower": {
@@ -5976,7 +6131,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/chi_squared_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].chi_squared_error_lower": {
@@ -6014,7 +6170,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/measured_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].measured_error_lower": {
@@ -6052,7 +6209,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].position.phi_error_lower": {
@@ -6083,7 +6241,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].position.r_error_lower": {
@@ -6114,7 +6273,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].position.z_error_lower": {
@@ -6145,7 +6305,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/reconstructed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].reconstructed_error_lower": {
@@ -6183,7 +6344,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].time_measurement_error_lower": {
@@ -6214,7 +6376,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.q[:].weight_error_lower": {
@@ -6256,7 +6419,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared_r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_lower": {
@@ -6287,7 +6451,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared_z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_lower": {
@@ -6332,7 +6497,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.r_error_lower": {
@@ -6363,7 +6529,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_measured/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].position_measured.z_error_lower": {
@@ -6401,7 +6568,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.r_error_lower": {
@@ -6432,7 +6600,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/position_reconstructed/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].position_reconstructed.z_error_lower": {
@@ -6470,7 +6639,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].time_measurement_error_lower": {
@@ -6501,7 +6671,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].weight_error_lower": {
@@ -6543,7 +6714,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared_r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_r_error_lower": {
@@ -6574,7 +6746,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared_z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_z_error_lower": {
@@ -6619,7 +6792,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/position_measured/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].position_measured.r_error_lower": {
@@ -6650,7 +6824,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/position_measured/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].position_measured.z_error_lower": {
@@ -6688,7 +6863,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/position_reconstructed/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].position_reconstructed.r_error_lower": {
@@ -6719,7 +6895,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/position_reconstructed/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].position_reconstructed.z_error_lower": {
@@ -6757,7 +6934,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/time_measurement_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].time_measurement_error_lower": {
@@ -6788,7 +6966,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].weight_error_lower": {
@@ -6857,7 +7036,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"grad_shafranov_deviation_value\"",
   "full_path": "equilibrium/time_slice(itime)/convergence/grad_shafranov_deviation_value_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value_error_lower": {
@@ -6914,7 +7094,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g11_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g11_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_contravariant_error_lower": {
@@ -6966,7 +7147,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g11_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g11_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g11_covariant_error_lower": {
@@ -7015,7 +7197,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g12_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g12_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_contravariant_error_lower": {
@@ -7067,7 +7250,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g12_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g12_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g12_covariant_error_lower": {
@@ -7116,7 +7300,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g13_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g13_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_contravariant_error_lower": {
@@ -7168,7 +7353,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g13_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g13_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g13_covariant_error_lower": {
@@ -7217,7 +7403,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g22_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g22_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_contravariant_error_lower": {
@@ -7269,7 +7456,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g22_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g22_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g22_covariant_error_lower": {
@@ -7318,7 +7506,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g23_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g23_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_contravariant_error_lower": {
@@ -7370,7 +7559,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g23_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g23_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g23_covariant_error_lower": {
@@ -7419,7 +7609,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g33_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g33_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_contravariant_error_lower": {
@@ -7471,7 +7662,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"g33_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/g33_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.g33_covariant_error_lower": {
@@ -7525,7 +7717,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/grid/dim1_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.grid.dim1_error_lower": {
@@ -7574,7 +7767,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/grid/dim2_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.grid.dim2_error_lower": {
@@ -7621,7 +7815,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/grid/volume_element_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.grid.volume_element_error_lower": {
@@ -7692,7 +7887,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/jacobian_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.jacobian_error_lower": {
@@ -7735,7 +7931,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.r_error_lower": {
@@ -7783,7 +7980,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/tensor_contravariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_contravariant_error_lower": {
@@ -7841,7 +8039,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/tensor_covariant_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.tensor_covariant_error_lower": {
@@ -7894,7 +8093,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/coordinate_system/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].coordinate_system.z_error_lower": {
@@ -7961,7 +8161,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_r(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_r[:].coefficients_error_lower": {
@@ -8017,7 +8218,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_r(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_r[:].values_error_lower": {
@@ -8070,7 +8272,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_tor(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_tor[:].coefficients_error_lower": {
@@ -8126,7 +8329,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_tor(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_tor[:].values_error_lower": {
@@ -8179,7 +8383,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_z(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_z[:].coefficients_error_lower": {
@@ -8235,7 +8440,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_z(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_z[:].values_error_lower": {
@@ -8306,6 +8512,7 @@
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/base(i3)/jacobian_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].jacobian_error_lower": {
@@ -8348,6 +8555,7 @@
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/base(i3)/tensor_contravariant_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_contravariant_error_lower": {
@@ -8394,6 +8602,7 @@
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/base(i3)/tensor_covariant_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].base[:].tensor_covariant_error_lower": {
@@ -8475,10 +8684,11 @@
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
-  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All wall edges\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
+  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All edges defining walls, baffles, and targets\n45) outer_sf_leg_entrance_1 : y-aligned edges defining the SOL entrance of the first snowflake outer leg\n46) outer_sf_leg_entrance_2 : y-aligned edges defining the SOL entrance of the third snowflake outer leg\n47) outer_sf_pfr_connection_1 : y-aligned edges defining\u00a0the connection between the outer snowflake entrance and third leg\n48) outer_sf_pfr_connection_2 : y-aligned edges defining the connection between the outer snowflake first and second leg\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/identifier",
   "lifecycle_status": "obsolescent",
-  "structure_reference": "identifier_dynamic_aos3"
+  "structure_reference": "identifier_dynamic_aos3",
+  "url": "utilities/LFS_snowflake_GGD_subsets.png"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].identifier.description": {
   "data_type": "STR_0D",
@@ -8524,6 +8734,7 @@
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/metric/jacobian_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.jacobian_error_lower": {
@@ -8566,6 +8777,7 @@
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/metric/tensor_contravariant_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_contravariant_error_lower": {
@@ -8612,6 +8824,7 @@
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/grid_subset(i2)/metric/tensor_covariant_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.grid_subset[:].metric.tensor_covariant_error_lower": {
@@ -8643,7 +8856,7 @@
  "equilibrium.time_slice[:].ggd[:].grid.identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_identifier.xml",
-  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1",
+  "documentation": "Grid identifier\n0) unspecified : unspecified\n1) linear : Linear\n2) cylinder : Cylindrical geometry (straight in axial direction)\n3) limiter : Limiter\n4) SN : Single null\n5) CDN : Connected double null\n6) DDN_bottom : Disconnected double null with inner X-point below the midplane\n7) DDN_top : Disconnected double null with inner X-point above the midplane\n8) annulus : Annular geometry (not necessarily with straight axis)\n9) stellarator_island : Stellarator island geometry\n10) structured_spaces : Structured grid represented with multiple spaces of dimension 1\n11) LFS_snowflake_minus : Snowflake grid with secondary x point on the low field side, and the secondary separatrix on top of the primary\n12) LFS_snowflake_plus : Snowflake grid with secondary x point to the right of the primary, and the secondary separatrix below the primary\n100) reference : Refers to a GGD described in another IDS indicated by grid_path. In such a case, do not fill the grid_ggd node of this IDS",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/identifier",
   "lifecycle_status": "obsolescent",
   "structure_reference": "identifier_dynamic_aos3"
@@ -8668,6 +8881,14 @@
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/identifier/name",
   "lifecycle_status": "obsolescent",
   "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].ggd[:].grid.path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the grid, including the IDS name, in case of implicit reference to a grid_ggd node described in another IDS. To be filled only if the grid is not described explicitly in this grid_ggd structure. Example syntax: 'wall:0/description_ggd(1)/grid_ggd', means that the grid is located in the wall IDS, occurrence 0, with ids path 'description_ggd(1)/grid_ggd'. See the link below for more details about IDS paths",
+  "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/path",
+  "lifecycle_status": "obsolescent",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "equilibrium.time_slice[:].ggd[:].grid.space": {
   "coordinates": [
@@ -8858,6 +9079,7 @@
   "documentation": "Index in the error_description list for \"geometry_2d\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_2d_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_2d_error_lower": {
@@ -8891,6 +9113,7 @@
   "documentation": "Index in the error_description list for \"geometry\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/geometry_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].geometry_error_lower": {
@@ -8928,6 +9151,7 @@
   "documentation": "Index in the error_description list for \"measure\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/measure_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].grid.space[:].objects_per_dimension[:].object[:].measure_error_lower": {
@@ -8984,7 +9208,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_parallel(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].j_parallel[:].coefficients_error_lower": {
@@ -9040,7 +9265,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_parallel(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].j_parallel[:].values_error_lower": {
@@ -9093,7 +9319,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_tor(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].j_tor[:].coefficients_error_lower": {
@@ -9149,7 +9376,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_tor(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].j_tor[:].values_error_lower": {
@@ -9202,7 +9430,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/phi(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].phi[:].coefficients_error_lower": {
@@ -9258,7 +9487,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/phi(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].phi[:].values_error_lower": {
@@ -9311,7 +9541,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/psi(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].psi[:].coefficients_error_lower": {
@@ -9367,7 +9598,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/psi(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].psi[:].values_error_lower": {
@@ -9420,7 +9652,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/r(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].r[:].coefficients_error_lower": {
@@ -9476,7 +9709,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/r(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].r[:].values_error_lower": {
@@ -9529,7 +9763,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/theta(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].theta[:].coefficients_error_lower": {
@@ -9585,7 +9820,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/theta(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].theta[:].values_error_lower": {
@@ -9638,7 +9874,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/z(i2)/coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].z[:].coefficients_error_lower": {
@@ -9694,7 +9931,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/z(i2)/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].ggd[:].z[:].values_error_lower": {
@@ -9738,7 +9976,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.area_error_lower": {
@@ -9769,7 +10008,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_normal\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/beta_normal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.beta_normal_error_lower": {
@@ -9800,7 +10040,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_pol\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/beta_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.beta_pol_error_lower": {
@@ -9831,7 +10072,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_tor\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/beta_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.beta_tor_error_lower": {
@@ -9869,7 +10111,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.current_centre.r_error_lower": {
@@ -9900,7 +10143,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_z\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/velocity_z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.current_centre.velocity_z_error_lower": {
@@ -9931,7 +10175,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/current_centre/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.current_centre.z_error_lower": {
@@ -9962,7 +10207,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_mhd\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/energy_mhd_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.energy_mhd_error_lower": {
@@ -9996,7 +10242,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ip\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/ip_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.ip_error_lower": {
@@ -10033,7 +10280,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_pol\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/length_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.length_pol_error_lower": {
@@ -10064,7 +10312,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"li_3\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/li_3_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.li_3_error_lower": {
@@ -10105,7 +10354,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_tor\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/magnetic_axis/b_field_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.magnetic_axis.b_field_tor_error_lower": {
@@ -10146,7 +10396,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_tor\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/magnetic_axis/b_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.magnetic_axis.b_tor_error_lower": {
@@ -10185,7 +10436,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/magnetic_axis/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.magnetic_axis.r_error_lower": {
@@ -10216,7 +10468,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/magnetic_axis/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.magnetic_axis.z_error_lower": {
@@ -10247,7 +10500,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"plasma_inductance\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_inductance_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.plasma_inductance_error_lower": {
@@ -10266,6 +10520,41 @@
   "type": "dynamic",
   "units": "H"
  },
+ "equilibrium.time_slice[:].global_quantities.plasma_resistance": {
+  "data_type": "FLT_0D",
+  "documentation": "Plasma resistance = int(e_field.j.dV) / Ip^2",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_resistance",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_resistance_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"plasma_resistance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_resistance_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_resistance_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"plasma_resistance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_resistance_error_lower",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm"
+ },
+ "equilibrium.time_slice[:].global_quantities.plasma_resistance_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"plasma_resistance\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/plasma_resistance_error_upper",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm"
+ },
  "equilibrium.time_slice[:].global_quantities.psi_axis": {
   "cocos_label_transformation": "psi_like",
   "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.psi_axis",
@@ -10281,7 +10570,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_axis\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.psi_axis_error_lower": {
@@ -10321,7 +10611,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.psi_boundary_error_lower": {
@@ -10361,7 +10652,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_external_average\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/psi_external_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.psi_external_average_error_lower": {
@@ -10401,7 +10693,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q_95\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/q_95_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.q_95_error_lower": {
@@ -10441,7 +10734,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q_axis\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/q_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.q_axis_error_lower": {
@@ -10485,7 +10779,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.q_min.rho_tor_norm_error_lower": {
@@ -10519,7 +10814,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/value_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.q_min.value_error_lower": {
@@ -10556,7 +10852,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.surface_error_lower": {
@@ -10575,6 +10872,50 @@
   "type": "dynamic",
   "units": "m^2"
  },
+ "equilibrium.time_slice[:].global_quantities.v_external": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.v_external",
+  "cocos_transformation_expression": ".sigma_ip_eff",
+  "data_type": "FLT_0D",
+  "documentation": "External voltage, i.e. time derivative of psi_external_average (with a minus sign : - d_psi_external_average/d_time)",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/v_external",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "equilibrium.time_slice[:].global_quantities.v_external_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"v_external\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/v_external_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.v_external_error_lower": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.v_external",
+  "cocos_transformation_expression": ".sigma_ip_eff",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"v_external\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/v_external_error_lower",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "equilibrium.time_slice[:].global_quantities.v_external_error_upper": {
+  "cocos_label_transformation": "ip_like",
+  "cocos_leaf_name_aos_indices": "equilibrium.time_slice{i}.global_quantities.v_external",
+  "cocos_transformation_expression": ".sigma_ip_eff",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"v_external\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/v_external_error_upper",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V"
+ },
  "equilibrium.time_slice[:].global_quantities.volume": {
   "data_type": "FLT_0D",
   "documentation": "Total plasma volume",
@@ -10587,7 +10928,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.volume_error_lower": {
@@ -10619,7 +10961,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"w_mhd\"",
   "full_path": "equilibrium/time_slice(itime)/global_quantities/w_mhd_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].global_quantities.w_mhd_error_lower": {
@@ -10662,7 +11005,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.area_error_lower": {
@@ -10703,7 +11047,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_average\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_average_error_lower": {
@@ -10745,7 +11090,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_average\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_field_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_field_average_error_lower": {
@@ -10785,7 +11131,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_max\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_field_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_field_max_error_lower": {
@@ -10825,7 +11172,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_min\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_field_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_field_min_error_lower": {
@@ -10866,7 +11214,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_max\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_max_error_lower": {
@@ -10909,7 +11258,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_min\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/b_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.b_min_error_lower": {
@@ -10951,7 +11301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_pol\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/beta_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.beta_pol_error_lower": {
@@ -10994,7 +11345,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"darea_dpsi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/darea_dpsi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.darea_dpsi_error_lower": {
@@ -11040,7 +11392,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"darea_drho_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/darea_drho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.darea_drho_tor_error_lower": {
@@ -11083,7 +11436,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpressure_dpsi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/dpressure_dpsi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.dpressure_dpsi_error_lower": {
@@ -11132,7 +11486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dpsi_drho_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/dpsi_drho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.dpsi_drho_tor_error_lower": {
@@ -11181,7 +11536,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dvolume_dpsi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/dvolume_dpsi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.dvolume_dpsi_error_lower": {
@@ -11227,7 +11583,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dvolume_drho_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/dvolume_drho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.dvolume_drho_tor_error_lower": {
@@ -11268,7 +11625,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/elongation_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.elongation_error_lower": {
@@ -11327,7 +11685,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"f_df_dpsi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/f_df_dpsi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.f_df_dpsi_error_lower": {
@@ -11362,7 +11721,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"f\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/f_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.f_error_lower": {
@@ -11415,7 +11775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/geometric_axis/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.geometric_axis.r_error_lower": {
@@ -11455,7 +11816,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/geometric_axis/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.geometric_axis.z_error_lower": {
@@ -11495,7 +11857,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm1\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm1_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm1_error_lower": {
@@ -11535,7 +11898,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm2\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm2_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm2_error_lower": {
@@ -11575,7 +11939,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm3\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm3_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm3_error_lower": {
@@ -11615,7 +11980,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm4\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm4_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm4_error_lower": {
@@ -11655,7 +12021,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm5\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm5_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm5_error_lower": {
@@ -11695,7 +12062,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm6\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm6_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm6_error_lower": {
@@ -11735,7 +12103,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm7\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm7_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm7_error_lower": {
@@ -11775,7 +12144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm8\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm8_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm8_error_lower": {
@@ -11815,7 +12185,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm9\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/gm9_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.gm9_error_lower": {
@@ -11858,7 +12229,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.j_parallel_error_lower": {
@@ -11907,7 +12279,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.j_tor_error_lower": {
@@ -11953,7 +12326,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"magnetic_shear\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/magnetic_shear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.magnetic_shear_error_lower": {
@@ -11993,7 +12367,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mass_density\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/mass_density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.mass_density_error_lower": {
@@ -12036,7 +12411,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.phi_error_lower": {
@@ -12082,7 +12458,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.pressure_error_lower": {
@@ -12125,7 +12502,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.psi_error_lower": {
@@ -12174,7 +12552,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/q_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.q_error_lower": {
@@ -12220,7 +12599,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r_inboard\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/r_inboard_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.r_inboard_error_lower": {
@@ -12260,7 +12640,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r_outboard\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/r_outboard_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.r_outboard_error_lower": {
@@ -12300,7 +12681,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.rho_tor_error_lower": {
@@ -12340,7 +12722,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.rho_tor_norm_error_lower": {
@@ -12380,7 +12763,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_volume_norm\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/rho_volume_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.rho_volume_norm_error_lower": {
@@ -12421,7 +12805,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_inner\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/squareness_lower_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.squareness_lower_inner_error_lower": {
@@ -12464,7 +12849,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_lower_outer\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/squareness_lower_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.squareness_lower_outer_error_lower": {
@@ -12507,7 +12893,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_inner\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/squareness_upper_inner_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.squareness_upper_inner_error_lower": {
@@ -12550,7 +12937,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"squareness_upper_outer\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/squareness_upper_outer_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.squareness_upper_outer_error_lower": {
@@ -12592,7 +12980,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.surface_error_lower": {
@@ -12632,7 +13021,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"trapped_fraction\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/trapped_fraction_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.trapped_fraction_error_lower": {
@@ -12673,7 +13063,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_lower\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/triangularity_lower_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.triangularity_lower_error_lower": {
@@ -12716,7 +13107,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"triangularity_upper\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/triangularity_upper_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.triangularity_upper_error_lower": {
@@ -12758,7 +13150,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_1d.volume_error_lower": {
@@ -12810,7 +13203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_r\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_field_r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_r_error_lower": {
@@ -12856,7 +13250,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_field_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_tor_error_lower": {
@@ -12905,7 +13300,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_z\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_field_z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_field_z_error_lower": {
@@ -12949,7 +13345,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_r\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_r_error_lower": {
@@ -12995,7 +13392,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_tor_error_lower": {
@@ -13041,7 +13439,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_z\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/b_z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].b_z_error_lower": {
@@ -13097,7 +13496,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/grid/dim1_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].grid.dim1_error_lower": {
@@ -13146,7 +13546,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/grid/dim2_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].grid.dim2_error_lower": {
@@ -13193,7 +13594,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/grid/volume_element_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].grid.volume_element_error_lower": {
@@ -13268,7 +13670,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/j_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_parallel_error_lower": {
@@ -13320,7 +13723,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_tor\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/j_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].j_tor_error_lower": {
@@ -13372,7 +13776,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].phi_error_lower": {
@@ -13424,7 +13829,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].psi_error_lower": {
@@ -13473,7 +13879,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].r_error_lower": {
@@ -13516,7 +13923,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"theta\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/theta_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].theta_error_lower": {
@@ -13543,6 +13951,36 @@
   "type": "dynamic",
   "units": "rad"
  },
+ "equilibrium.time_slice[:].profiles_2d[:].type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "equilibrium/equilibrium_profiles_2d_identifier.xml",
+  "documentation": "Type of profiles (distinguishes contribution from plasma, vaccum fields and total fields)\n0) total : Total fields\n1) vacuum : Vacuum fields (without contribution from plasma)\n2) pf_active : Contribution from active coils only to the fields (pf_active IDS)\n3) pf_passive : Contribution from passive elements only to the fields (pf_passive IDS)\n4) plasma : Plasma contribution to the fields",
+  "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/type",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].profiles_2d[:].type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/type/description",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].profiles_2d[:].type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/type/index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].profiles_2d[:].type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/type/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
  "equilibrium.time_slice[:].profiles_2d[:].z": {
   "coordinates": [
    "equilibrium.time_slice[:].profiles_2d[:].grid.dim1",
@@ -13559,7 +13997,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "equilibrium/time_slice(itime)/profiles_2d(i1)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].profiles_2d[:].z_error_lower": {
@@ -13622,7 +14061,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "equilibrium/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "equilibrium.vacuum_toroidal_field.b0_error_lower": {
@@ -13667,7 +14107,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "equilibrium/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "equilibrium.vacuum_toroidal_field.r0_error_lower": {

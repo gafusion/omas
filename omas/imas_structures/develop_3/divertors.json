@@ -142,7 +142,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/current_incident/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].current_incident.data_error_lower": {
@@ -219,7 +220,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/particle_flux_recycled_total/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].particle_flux_recycled_total.data_error_lower": {
@@ -282,7 +284,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_black_body/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_black_body.data_error_lower": {
@@ -345,7 +348,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_conducted/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_conducted.data_error_lower": {
@@ -408,7 +412,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_convected/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_convected.data_error_lower": {
@@ -471,7 +476,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_currents/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_currents.data_error_lower": {
@@ -534,7 +540,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_incident/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_incident.data_error_lower": {
@@ -597,7 +604,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_neutrals/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_neutrals.data_error_lower": {
@@ -660,7 +668,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_radiated/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_radiated.data_error_lower": {
@@ -723,7 +732,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_recombination_neutrals/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_recombination_neutrals.data_error_lower": {
@@ -786,7 +796,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/power_recombination_plasma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].power_recombination_plasma.data_error_lower": {
@@ -861,7 +872,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/current_incident/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].current_incident.data_error_lower": {
@@ -912,7 +924,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"extension_r\"",
   "full_path": "divertors/divertor(i1)/target(i2)/extension_r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].extension_r_error_lower": {
@@ -943,7 +956,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"extension_z\"",
   "full_path": "divertors/divertor(i1)/target(i2)/extension_z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].extension_z_error_lower": {
@@ -987,7 +1001,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/flux_expansion/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].flux_expansion.data_error_lower": {
@@ -1072,7 +1087,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_black_body/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_black_body.data_error_lower": {
@@ -1135,7 +1151,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_conducted/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_conducted.data_error_lower": {
@@ -1198,7 +1215,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_convected/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_convected.data_error_lower": {
@@ -1261,7 +1279,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_currents/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_currents.data_error_lower": {
@@ -1324,7 +1343,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_flux_peak/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_flux_peak.data_error_lower": {
@@ -1387,7 +1407,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_incident/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_incident.data_error_lower": {
@@ -1450,7 +1471,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_incident_fraction/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_incident_fraction.data_error_lower": {
@@ -1513,7 +1535,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_neutrals/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_neutrals.data_error_lower": {
@@ -1576,7 +1599,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_radiated/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_radiated.data_error_lower": {
@@ -1639,7 +1663,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_recombination_neutrals/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_recombination_neutrals.data_error_lower": {
@@ -1702,7 +1727,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/power_recombination_plasma/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].power_recombination_plasma.data_error_lower": {
@@ -1793,7 +1819,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/current_incident/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tile[:].current_incident.data_error_lower": {
@@ -1865,7 +1892,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface_area\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_area_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tile[:].surface_area_error_lower": {
@@ -1906,7 +1934,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tile[:].surface_outline.phi_error_lower": {
@@ -1946,7 +1975,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tile[:].surface_outline.r_error_lower": {
@@ -1986,7 +2016,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tile(i3)/surface_outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tile[:].surface_outline.z_error_lower": {
@@ -2035,7 +2066,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/tilt_angle_pol/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].tilt_angle_pol.data_error_lower": {
@@ -2098,7 +2130,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e_target\"",
   "full_path": "divertors/divertor(i1)/target(i2)/two_point_model(itime)/n_e_target_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "divertors.divertor[:].target[:].two_point_model[:].n_e_target_error_lower": {
@@ -2129,7 +2162,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sol_heat_decay_length\"",
   "full_path": "divertors/divertor(i1)/target(i2)/two_point_model(itime)/sol_heat_decay_length_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "divertors.divertor[:].target[:].two_point_model[:].sol_heat_decay_length_error_lower": {
@@ -2160,7 +2194,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sol_heat_spreading_length\"",
   "full_path": "divertors/divertor(i1)/target(i2)/two_point_model(itime)/sol_heat_spreading_length_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "divertors.divertor[:].target[:].two_point_model[:].sol_heat_spreading_length_error_lower": {
@@ -2191,7 +2226,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e_target\"",
   "full_path": "divertors/divertor(i1)/target(i2)/two_point_model(itime)/t_e_target_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "divertors.divertor[:].target[:].two_point_model[:].t_e_target_error_lower": {
@@ -2242,7 +2278,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/target(i2)/wetted_area/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].target[:].wetted_area.data_error_lower": {
@@ -2305,7 +2342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "divertors/divertor(i1)/wetted_area/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "divertors.divertor[:].wetted_area.data_error_lower": {
@@ -2390,7 +2428,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "divertors/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -2399,20 +2437,22 @@
  },
  "divertors.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "divertors/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "divertors.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "divertors/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "divertors.ids_properties.provider": {
   "data_type": "STR_0D",

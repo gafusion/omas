@@ -49,7 +49,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.phi_error_lower": {
@@ -80,7 +81,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.r_error_lower": {
@@ -111,7 +113,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].centre.z_error_lower": {
@@ -145,7 +148,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"geometric_coefficients\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/geometric_coefficients_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].geometric_coefficients_error_lower": {
@@ -197,7 +201,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.phi_error_lower": {
@@ -228,7 +233,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.r_error_lower": {
@@ -259,7 +265,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/active_spatial_resolution(itime)/width/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mse.channel[:].active_spatial_resolution[:].width.z_error_lower": {
@@ -308,7 +315,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].centre.phi_error_lower": {
@@ -339,7 +347,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].centre.r_error_lower": {
@@ -370,7 +379,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].centre.z_error_lower": {
@@ -418,7 +428,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "mse/channel(i1)/aperture(i2)/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].outline.x1_error_lower": {
@@ -458,7 +469,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "mse/channel(i1)/aperture(i2)/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].outline.x2_error_lower": {
@@ -495,7 +507,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "mse/channel(i1)/aperture(i2)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].radius_error_lower": {
@@ -526,7 +539,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "mse/channel(i1)/aperture(i2)/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].surface_error_lower": {
@@ -565,7 +579,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
@@ -596,7 +611,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
@@ -627,7 +643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
@@ -658,7 +675,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x1_width_error_lower": {
@@ -697,7 +715,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
@@ -728,7 +747,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
@@ -759,7 +779,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
@@ -790,7 +811,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x2_width_error_lower": {
@@ -829,7 +851,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
@@ -860,7 +883,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
@@ -891,7 +915,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
@@ -936,7 +961,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/detector/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.centre.phi_error_lower": {
@@ -967,7 +993,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/detector/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.centre.r_error_lower": {
@@ -998,7 +1025,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.centre.z_error_lower": {
@@ -1046,7 +1074,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "mse/channel(i1)/detector/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.outline.x1_error_lower": {
@@ -1086,7 +1115,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "mse/channel(i1)/detector/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.outline.x2_error_lower": {
@@ -1123,7 +1153,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "mse/channel(i1)/detector/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.radius_error_lower": {
@@ -1154,7 +1185,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "mse/channel(i1)/detector/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.surface_error_lower": {
@@ -1193,7 +1225,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x1_unit_vector.x_error_lower": {
@@ -1224,7 +1257,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x1_unit_vector.y_error_lower": {
@@ -1255,7 +1289,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x1_unit_vector.z_error_lower": {
@@ -1286,7 +1321,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "mse/channel(i1)/detector/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x1_width_error_lower": {
@@ -1325,7 +1361,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x2_unit_vector.x_error_lower": {
@@ -1356,7 +1393,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x2_unit_vector.y_error_lower": {
@@ -1387,7 +1425,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x2_unit_vector.z_error_lower": {
@@ -1418,7 +1457,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "mse/channel(i1)/detector/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x2_width_error_lower": {
@@ -1457,7 +1497,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x3_unit_vector.x_error_lower": {
@@ -1488,7 +1529,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x3_unit_vector.y_error_lower": {
@@ -1519,7 +1561,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/detector/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].detector.x3_unit_vector.z_error_lower": {
@@ -1564,7 +1607,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.first_point.phi_error_lower": {
@@ -1595,7 +1639,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.first_point.r_error_lower": {
@@ -1626,7 +1671,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.first_point.z_error_lower": {
@@ -1664,7 +1710,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.second_point.phi_error_lower": {
@@ -1695,7 +1742,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.second_point.r_error_lower": {
@@ -1726,7 +1774,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mse/channel(i1)/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].line_of_sight.second_point.z_error_lower": {
@@ -1776,7 +1825,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "mse/channel(i1)/polarisation_angle/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.channel[:].polarisation_angle.data_error_lower": {
@@ -1978,7 +2028,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "mse/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1987,20 +2037,22 @@
  },
  "mse.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "mse/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "mse.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "mse/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "mse.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -2058,7 +2110,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "mse/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mse.latency_error_lower": {

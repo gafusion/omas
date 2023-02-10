@@ -152,7 +152,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "pf_passive/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -161,20 +161,22 @@
  },
  "pf_passive.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "pf_passive/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "pf_passive.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "pf_passive/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "pf_passive.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -246,7 +248,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current\"",
   "full_path": "pf_passive/loop(i1)/current_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].current_error_lower": {
@@ -296,7 +299,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/area_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].area_error_lower": {
@@ -324,7 +328,7 @@
  },
  "pf_passive.loop[:].element[:].geometry.annulus": {
   "data_type": "STRUCTURE",
-  "documentation": "The element is an annulus of  center r, z, with inner radius radius_inner and outer radius radius_outer",
+  "documentation": "The element is an annulus of centre R, Z, with inner radius radius_inner and outer radius radius_outer",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/annulus",
   "introduced_after_version": "3.34.0",
   "lifecycle_status": "alpha",
@@ -342,7 +346,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/annulus/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.annulus.r_error_lower": {
@@ -373,7 +378,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_inner\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/annulus/radius_inner_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.annulus.radius_inner_error_lower": {
@@ -404,7 +410,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_outer\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/annulus/radius_outer_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.annulus.radius_outer_error_lower": {
@@ -435,7 +442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/annulus/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.annulus.z_error_lower": {
@@ -476,7 +484,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_radii\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/curvature_radii_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.arcs_of_circle.curvature_radii_error_lower": {
@@ -516,7 +525,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.arcs_of_circle.r_error_lower": {
@@ -556,7 +566,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/arcs_of_circle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.arcs_of_circle.z_error_lower": {
@@ -608,7 +619,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.alpha_error_lower": {
@@ -642,7 +654,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.beta_error_lower": {
@@ -676,7 +689,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_alpha\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.length_alpha_error_lower": {
@@ -710,7 +724,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_beta\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/length_beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.length_beta_error_lower": {
@@ -744,7 +759,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.r_error_lower": {
@@ -778,7 +794,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/oblique/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.oblique.z_error_lower": {
@@ -821,7 +838,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.outline.r_error_lower": {
@@ -861,7 +879,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.outline.z_error_lower": {
@@ -905,7 +924,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/height_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.rectangle.height_error_lower": {
@@ -936,7 +956,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.rectangle.r_error_lower": {
@@ -967,7 +988,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.rectangle.width_error_lower": {
@@ -998,7 +1020,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/rectangle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.rectangle.z_error_lower": {
@@ -1044,7 +1067,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/thick_line/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.thick_line.first_point.r_error_lower": {
@@ -1075,7 +1099,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/thick_line/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.thick_line.first_point.z_error_lower": {
@@ -1113,7 +1138,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/thick_line/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.thick_line.second_point.r_error_lower": {
@@ -1144,7 +1170,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/thick_line/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.thick_line.second_point.z_error_lower": {
@@ -1175,7 +1202,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/geometry/thick_line/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].geometry.thick_line.thickness_error_lower": {
@@ -1220,7 +1248,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"turns_with_sign\"",
   "full_path": "pf_passive/loop(i1)/element(i2)/turns_with_sign_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].element[:].turns_with_sign_error_lower": {
@@ -1258,7 +1287,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "pf_passive/loop(i1)/resistance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].resistance_error_lower": {
@@ -1289,7 +1319,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistivity\"",
   "full_path": "pf_passive/loop(i1)/resistivity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "pf_passive.loop[:].resistivity_error_lower": {

@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.37.0",
+  "lifecycle_last_change": "3.38.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -49,7 +49,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.phi_error_lower": {
@@ -80,7 +81,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.r_error_lower": {
@@ -111,7 +113,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].centre.z_error_lower": {
@@ -157,7 +160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.phi_error_lower": {
@@ -188,7 +192,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.r_error_lower": {
@@ -219,7 +224,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/active_spatial_resolution(itime)/width/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_visible.channel[:].active_spatial_resolution[:].width.z_error_lower": {
@@ -268,7 +274,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.phi_error_lower": {
@@ -299,7 +306,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.r_error_lower": {
@@ -330,7 +338,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].centre.z_error_lower": {
@@ -378,7 +387,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].outline.x1_error_lower": {
@@ -418,7 +428,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].outline.x2_error_lower": {
@@ -455,7 +466,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].radius_error_lower": {
@@ -486,7 +498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].surface_error_lower": {
@@ -525,7 +538,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.x_error_lower": {
@@ -556,7 +570,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.y_error_lower": {
@@ -587,7 +602,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_unit_vector.z_error_lower": {
@@ -618,7 +634,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x1_width_error_lower": {
@@ -657,7 +674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.x_error_lower": {
@@ -688,7 +706,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.y_error_lower": {
@@ -719,7 +738,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_unit_vector.z_error_lower": {
@@ -750,7 +770,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x2_width_error_lower": {
@@ -789,7 +810,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.x_error_lower": {
@@ -820,7 +842,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.y_error_lower": {
@@ -851,7 +874,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/aperture(i2)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].aperture[:].x3_unit_vector.z_error_lower": {
@@ -896,7 +920,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.centre.phi_error_lower": {
@@ -927,7 +952,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.centre.r_error_lower": {
@@ -958,7 +984,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.centre.z_error_lower": {
@@ -1006,7 +1033,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.outline.x1_error_lower": {
@@ -1046,7 +1074,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.outline.x2_error_lower": {
@@ -1083,7 +1112,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.radius_error_lower": {
@@ -1114,7 +1144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.surface_error_lower": {
@@ -1153,7 +1184,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.x_error_lower": {
@@ -1184,7 +1216,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.y_error_lower": {
@@ -1215,7 +1248,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x1_unit_vector.z_error_lower": {
@@ -1246,7 +1280,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x1_width_error_lower": {
@@ -1285,7 +1320,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.x_error_lower": {
@@ -1316,7 +1352,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.y_error_lower": {
@@ -1347,7 +1384,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x2_unit_vector.z_error_lower": {
@@ -1378,7 +1416,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x2_width_error_lower": {
@@ -1417,7 +1456,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.x_error_lower": {
@@ -1448,7 +1488,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.y_error_lower": {
@@ -1479,7 +1520,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector.x3_unit_vector.z_error_lower": {
@@ -1524,7 +1566,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ellipticity\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/circular/ellipticity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector_image.circular.ellipticity_error_lower": {
@@ -1555,7 +1598,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/circular/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector_image.circular.radius_error_lower": {
@@ -1603,7 +1647,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector_image.outline.phi_error_lower": {
@@ -1643,7 +1688,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector_image.outline.r_error_lower": {
@@ -1683,7 +1729,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/detector_image/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].detector_image.outline.z_error_lower": {
@@ -1720,7 +1767,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"etendue\"",
   "full_path": "spectrometer_visible/channel(i1)/etendue_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].etendue_error_lower": {
@@ -1793,7 +1841,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ellipticity\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/circular/ellipticity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].fibre_image.circular.ellipticity_error_lower": {
@@ -1824,7 +1873,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/circular/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].fibre_image.circular.radius_error_lower": {
@@ -1872,7 +1922,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.phi_error_lower": {
@@ -1912,7 +1963,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.r_error_lower": {
@@ -1952,7 +2004,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/fibre_image/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].fibre_image.outline.z_error_lower": {
@@ -2012,7 +2065,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_line_integrals/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.calibrated_line_integrals.data_error_lower": {
@@ -2068,7 +2122,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"calibrated_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/calibrated_lines_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.calibrated_lines_error_lower": {
@@ -2105,7 +2160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/exposure_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.exposure_time_error_lower": {
@@ -2152,7 +2208,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_intensities/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_intensities.data_error_lower": {
@@ -2231,7 +2288,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_power_radiances/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_power_radiances.data_error_lower": {
@@ -2300,7 +2358,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_radiances.data_error_lower": {
@@ -2369,7 +2428,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/line_radiances_adjusted/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.line_radiances_adjusted.data_error_lower": {
@@ -2438,7 +2498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/output_voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.output_voltage.data_error_lower": {
@@ -2507,7 +2568,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photoelectric_voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.photoelectric_voltage.data_error_lower": {
@@ -2576,7 +2638,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/photon_count/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.photon_count.data_error_lower": {
@@ -2632,7 +2695,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"processed_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/processed_lines_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.processed_lines_error_lower": {
@@ -2676,7 +2740,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radiance_calibration\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/radiance_calibration_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.radiance_calibration_error_lower": {
@@ -2710,7 +2775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"raw_lines\"",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/raw_lines_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].filter_spectrometer.raw_lines_error_lower": {
@@ -2742,58 +2808,12 @@
   "lifecycle_status": "alpha",
   "structure_reference": "spectro_vis_geometry_matrix"
  },
- "spectrometer_visible.channel[:].geometry_matrix.data": {
-  "coordinates": [
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
-  ],
-  "data_type": "FLT_3D",
-  "documentation": "The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. The three dimensions correspond to the light emission grid.",
-  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data(:,:,:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "spectrometer_visible.channel[:].geometry_matrix.data_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_index",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "spectrometer_visible.channel[:].geometry_matrix.data_error_lower": {
-  "coordinates": [
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
-  ],
-  "data_type": "FLT_3D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "spectrometer_visible.channel[:].geometry_matrix.data_error_upper": {
-  "coordinates": [
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2",
-   "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
-  ],
-  "data_type": "FLT_3D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/data_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid": {
   "data_type": "STRUCTURE",
   "documentation": "Grid defining the light emission cells",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid",
   "lifecycle_status": "alpha",
-  "structure_reference": "spectro_vis_geometry_matrix_emission"
+  "structure_reference": "geometry_matrix_emission"
  },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1": {
   "coordinates": [
@@ -2810,7 +2830,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1_error_lower": {
@@ -2850,7 +2871,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim2_error_lower": {
@@ -2890,7 +2912,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim3\"",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/dim3_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3_error_lower": {
@@ -2917,7 +2940,7 @@
  },
  "spectrometer_visible.channel[:].geometry_matrix.emission_grid.grid_type": {
   "data_type": "STRUCTURE",
-  "doc_identifier": "spectrometer_visible/spectrometer_visible_emissivity_grid_identifier.xml",
+  "doc_identifier": "utilities/emission_grid_identifier.xml",
   "documentation": "Grid type\n1) r_z_phi : Cylindrical r,z,phi grid : r=dim1, z=dim2, phi=dim3",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/emission_grid/grid_type",
   "lifecycle_status": "alpha",
@@ -2944,6 +2967,178 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated": {
+  "data_type": "STRUCTURE",
+  "documentation": "Interpolated geometry matrix for reflected light",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_geometry_matrix_interpolated"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.data": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Interpolated Ray Transfer Matrix (RTM, or geometry matrix), which provides transformation of the reflected light from each interpolation knot to the receiver (detector or head of an optic fibre). When convolving with an emission profile, the values must be interpolated to the emission grid and multiplied by the volume of the grid cells. The interpolated matrix is given on an array of interpolation knots of coordinates r, z and phi",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m^-2"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.data_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m^-2"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.data_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m^-2"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.phi": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above) of interpolation knots",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.phi_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.phi_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "rad"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius of interpolation knots",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.z": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height of interpolation knots",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.z_error_lower": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.interpolated.z_error_upper": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.interpolated.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/interpolated/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
  "spectrometer_visible.channel[:].geometry_matrix.voxel_map": {
   "coordinates": [
    "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim1",
@@ -2951,8 +3146,134 @@
    "spectrometer_visible.channel[:].geometry_matrix.emission_grid.dim3"
   ],
   "data_type": "INT_3D",
-  "documentation": "Voxel map for geometry matrix. The cells with same number are merged in the computation into a single emission source meta-cell. Cells with number -1 are excluded. Count starts from 0.",
+  "documentation": "Voxel map for geometry matrix. The cells with same number are merged in the computation into a single emission source meta-cell (the voxel). Cells with number -1 are excluded. Voxel count starts from 0.",
   "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/voxel_map(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.voxels_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of voxels defined in the voxel_map.",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/voxels_n",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections": {
+  "data_type": "STRUCTURE",
+  "documentation": "Geometry matrix with reflections",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_geometry_matrix_step2"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections.data": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. This data is stored in a sparse form, i.e. the array contains only the non-zero element of the Ray transfer matrix. The voxel index corresponding to an element of this array can be found in voxel_indices",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections.data_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections.data_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.with_reflections.voxel_indices": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.with_reflections.data"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "List of voxel indices (defined in the voxel map) used in the sparse data array",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/with_reflections/voxel_indices(:)",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections": {
+  "data_type": "STRUCTURE",
+  "documentation": "Geometry matrix without reflections",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections",
+  "introduced_after_version": "3.37.2",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectro_vis_geometry_matrix_step2"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections.data": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "The Ray Transfer Matrix (RTM, or geometry matrix) here provides transformation of the signal from each individual unit light source (voxel) to the receiver (detector or head of an optic fibre). The emission profile has [photons.m^-3.s^-1.sr^-1] units and radiance signal has [photons.m^-2.s^-1.sr^-1] units. So the RTM has [m] units. This data is stored in a sparse form, i.e. the array contains only the non-zero element of the Ray transfer matrix. The voxel index corresponding to an element of this array can be found in voxel_indices",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections/data(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections.data_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections.data_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_visible.channel[:].geometry_matrix.without_reflections.voxel_indices": {
+  "coordinates": [
+   "spectrometer_visible.channel[:].geometry_matrix.without_reflections.data"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "List of voxel indices (defined in the voxel map) used in the sparse data array",
+  "full_path": "spectrometer_visible/channel(i1)/geometry_matrix/without_reflections/voxel_indices(:)",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -2975,7 +3296,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/exposure_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.exposure_time_error_lower": {
@@ -3006,7 +3328,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"grating\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/grating_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.grating_error_lower": {
@@ -3042,7 +3365,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"instrument_function\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/instrument_function_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.instrument_function_error_lower": {
@@ -3100,7 +3424,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/intensity_spectrum/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.data_error_lower": {
@@ -3176,7 +3501,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/intensity/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].intensity.data_error_lower": {
@@ -3246,7 +3572,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/radiance/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].radiance.data_error_lower": {
@@ -3297,7 +3624,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_central\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/wavelength_central_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].wavelength_central_error_lower": {
@@ -3338,7 +3666,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radiance_calibration\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_calibration_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_calibration_error_lower": {
@@ -3392,7 +3721,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/radiance_spectral/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.data_error_lower": {
@@ -3445,7 +3775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"slit_width\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/slit_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.slit_width_error_lower": {
@@ -3483,7 +3814,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gain\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/gain_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.gain_error_lower": {
@@ -3514,7 +3846,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"offset\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelength_calibration/offset_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelength_calibration.offset_error_lower": {
@@ -3555,7 +3888,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/wavelengths_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].grating_spectrometer.wavelengths_error_lower": {
@@ -3614,7 +3948,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"cold_neutrals_fraction\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_fraction_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_fraction_error_lower": {
@@ -3657,7 +3992,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"cold_neutrals_temperature\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/cold_neutrals_temperature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].cold_neutrals_temperature_error_lower": {
@@ -3700,7 +4036,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_ratio\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/density_ratio_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].density_ratio_error_lower": {
@@ -3750,7 +4087,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].a_error_lower": {
@@ -3789,7 +4127,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].multiplicity_error_lower": {
@@ -3822,7 +4161,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].element[:].z_n_error_lower": {
@@ -3857,7 +4197,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"hot_neutrals_fraction\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_fraction_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_fraction_error_lower": {
@@ -3900,7 +4241,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"hot_neutrals_temperature\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/hot_neutrals_temperature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.isotope[:].hot_neutrals_temperature_error_lower": {
@@ -3991,7 +4333,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"signal_to_noise\"",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/signal_to_noise_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].isotope_ratios.signal_to_noise_error_lower": {
@@ -4077,7 +4420,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.phi_error_lower": {
@@ -4117,7 +4461,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.r_error_lower": {
@@ -4157,7 +4502,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/positions/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.positions.z_error_lower": {
@@ -4197,7 +4543,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "spectrometer_visible/channel(i1)/light_collection_efficiencies/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].light_collection_efficiencies.values_error_lower": {
@@ -4248,7 +4595,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.phi_error_lower": {
@@ -4279,7 +4627,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.r_error_lower": {
@@ -4310,7 +4659,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.first_point.z_error_lower": {
@@ -4348,7 +4698,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.phi_error_lower": {
@@ -4379,7 +4730,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.r_error_lower": {
@@ -4410,7 +4762,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].line_of_sight.second_point.z_error_lower": {
@@ -4466,7 +4819,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_modulus\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/b_field_modulus_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.b_field_modulus_error_lower": {
@@ -4509,7 +4863,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_lh_r\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_r_error_lower": {
@@ -4552,7 +4907,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_lh_tor\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_tor_error_lower": {
@@ -4595,7 +4951,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_lh_z\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/e_field_lh_z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.e_field_lh_z_error_lower": {
@@ -4638,7 +4995,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/n_e_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.n_e_error_lower": {
@@ -4681,7 +5039,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_cold_neutrals\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_cold_neutrals_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_cold_neutrals_error_lower": {
@@ -4724,7 +5083,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_hot_neutrals\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/temperature_hot_neutrals_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.temperature_hot_neutrals_error_lower": {
@@ -4779,7 +5139,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_cold_neutrals\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_cold_neutrals_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_cold_neutrals_error_lower": {
@@ -4822,7 +5183,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_hot_neutrals\"",
   "full_path": "spectrometer_visible/channel(i1)/polarization_spectroscopy/velocity_hot_neutrals_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarization_spectroscopy.velocity_hot_neutrals_error_lower": {
@@ -4875,7 +5237,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.centre.phi_error_lower": {
@@ -4906,7 +5269,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.centre.r_error_lower": {
@@ -4937,7 +5301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.centre.z_error_lower": {
@@ -4985,7 +5350,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.outline.x1_error_lower": {
@@ -5025,7 +5391,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.outline.x2_error_lower": {
@@ -5062,7 +5429,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.radius_error_lower": {
@@ -5093,7 +5461,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.surface_error_lower": {
@@ -5132,7 +5501,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x1_unit_vector.x_error_lower": {
@@ -5163,7 +5533,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x1_unit_vector.y_error_lower": {
@@ -5194,7 +5565,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x1_unit_vector.z_error_lower": {
@@ -5225,7 +5597,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x1_width_error_lower": {
@@ -5264,7 +5637,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x2_unit_vector.x_error_lower": {
@@ -5295,7 +5669,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x2_unit_vector.y_error_lower": {
@@ -5326,7 +5701,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x2_unit_vector.z_error_lower": {
@@ -5357,7 +5733,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x2_width_error_lower": {
@@ -5396,7 +5773,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x3_unit_vector.x_error_lower": {
@@ -5427,7 +5805,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x3_unit_vector.y_error_lower": {
@@ -5458,7 +5837,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_visible/channel(i1)/polarizer/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.channel[:].polarizer.x3_unit_vector.z_error_lower": {
@@ -5701,7 +6081,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "spectrometer_visible/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -5710,20 +6090,22 @@
  },
  "spectrometer_visible.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "spectrometer_visible/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "spectrometer_visible.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "spectrometer_visible/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "spectrometer_visible.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -5781,7 +6163,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "spectrometer_visible/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_visible.latency_error_lower": {

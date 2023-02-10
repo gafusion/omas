@@ -195,7 +195,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "mhd_linear/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -204,20 +204,22 @@
  },
  "mhd_linear.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "mhd_linear/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "mhd_linear.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "mhd_linear/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "mhd_linear.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -346,7 +348,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"amplitude_multiplier\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/amplitude_multiplier_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].amplitude_multiplier_error_lower": {
@@ -406,7 +409,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_perturbed\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/energy_perturbed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].energy_perturbed_error_lower": {
@@ -437,7 +441,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/frequency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].frequency_error_lower": {
@@ -468,7 +473,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growthrate\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/growthrate_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].growthrate_error_lower": {
@@ -499,7 +505,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"m_pol_dominant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/m_pol_dominant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].m_pol_dominant_error_lower": {
@@ -566,7 +573,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/phase_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].phase_error_lower": {
@@ -625,7 +633,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.coefficients_imaginary_error_lower": {
@@ -671,7 +680,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.coefficients_real_error_lower": {
@@ -716,7 +726,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.imaginary_error_lower": {
@@ -759,7 +770,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate1/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate1.real_error_lower": {
@@ -811,7 +823,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.coefficients_imaginary_error_lower": {
@@ -857,7 +870,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.coefficients_real_error_lower": {
@@ -902,7 +916,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.imaginary_error_lower": {
@@ -945,7 +960,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate2/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate2.real_error_lower": {
@@ -997,7 +1013,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.coefficients_imaginary_error_lower": {
@@ -1043,7 +1060,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.coefficients_real_error_lower": {
@@ -1088,7 +1106,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.imaginary_error_lower": {
@@ -1131,7 +1150,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/a_field_perturbed/coordinate3/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.a_field_perturbed.coordinate3.real_error_lower": {
@@ -1184,7 +1204,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/alfven_frequency_spectrum(i2)/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.alfven_frequency_spectrum[:].imaginary_error_lower": {
@@ -1224,7 +1245,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/alfven_frequency_spectrum(i2)/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.alfven_frequency_spectrum[:].real_error_lower": {
@@ -1282,7 +1304,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.coefficients_imaginary_error_lower": {
@@ -1328,7 +1351,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.coefficients_real_error_lower": {
@@ -1373,7 +1397,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.imaginary_error_lower": {
@@ -1416,7 +1441,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate1/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate1.real_error_lower": {
@@ -1468,7 +1494,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.coefficients_imaginary_error_lower": {
@@ -1514,7 +1541,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.coefficients_real_error_lower": {
@@ -1559,7 +1587,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.imaginary_error_lower": {
@@ -1602,7 +1631,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate2/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate2.real_error_lower": {
@@ -1654,7 +1684,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.coefficients_imaginary_error_lower": {
@@ -1700,7 +1731,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.coefficients_real_error_lower": {
@@ -1745,7 +1777,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.imaginary_error_lower": {
@@ -1788,7 +1821,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/b_field_perturbed/coordinate3/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.b_field_perturbed.coordinate3.real_error_lower": {
@@ -1849,7 +1883,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim1_error_lower": {
@@ -1898,7 +1933,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/dim2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.dim2_error_lower": {
@@ -1945,7 +1981,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/grid/volume_element_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.grid.volume_element_error_lower": {
@@ -2017,7 +2054,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/jacobian_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.jacobian_error_lower": {
@@ -2060,7 +2098,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.r_error_lower": {
@@ -2105,7 +2144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_contravariant_error_lower": {
@@ -2154,7 +2194,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.tensor_covariant_error_lower": {
@@ -2201,7 +2242,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/coordinate_system/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.coordinate_system.z_error_lower": {
@@ -2253,7 +2295,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.coefficients_imaginary_error_lower": {
@@ -2299,7 +2342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.coefficients_real_error_lower": {
@@ -2344,7 +2388,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.imaginary_error_lower": {
@@ -2387,7 +2432,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_parallel/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_parallel.real_error_lower": {
@@ -2439,7 +2485,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.coefficients_imaginary_error_lower": {
@@ -2485,7 +2532,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.coefficients_real_error_lower": {
@@ -2530,7 +2578,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.imaginary_error_lower": {
@@ -2573,7 +2622,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/displacement_perpendicular/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.displacement_perpendicular.real_error_lower": {
@@ -2627,7 +2677,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim1_error_lower": {
@@ -2676,7 +2727,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/dim2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.dim2_error_lower": {
@@ -2723,7 +2775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/grid/volume_element_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.grid.volume_element_error_lower": {
@@ -2804,7 +2857,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.coefficients_imaginary_error_lower": {
@@ -2850,7 +2904,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.coefficients_real_error_lower": {
@@ -2895,7 +2950,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.imaginary_error_lower": {
@@ -2938,7 +2994,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/mass_density_perturbed/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.mass_density_perturbed.real_error_lower": {
@@ -2989,7 +3046,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/ntv/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.ntv.imaginary_error_lower": {
@@ -3035,7 +3093,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/ntv/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.ntv.real_error_lower": {
@@ -3089,7 +3148,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/phi_potential_perturbed/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.phi_potential_perturbed.coefficients_imaginary_error_lower": {
@@ -3135,7 +3195,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/phi_potential_perturbed/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.phi_potential_perturbed.coefficients_real_error_lower": {
@@ -3180,7 +3241,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/phi_potential_perturbed/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.phi_potential_perturbed.imaginary_error_lower": {
@@ -3223,7 +3285,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/phi_potential_perturbed/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.phi_potential_perturbed.real_error_lower": {
@@ -3275,7 +3338,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.coefficients_imaginary_error_lower": {
@@ -3321,7 +3385,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.coefficients_real_error_lower": {
@@ -3366,7 +3431,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.imaginary_error_lower": {
@@ -3409,7 +3475,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/pressure_perturbed/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.pressure_perturbed.real_error_lower": {
@@ -3461,7 +3528,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/psi_potential_perturbed/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.psi_potential_perturbed.coefficients_imaginary_error_lower": {
@@ -3507,7 +3575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/psi_potential_perturbed/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.psi_potential_perturbed.coefficients_real_error_lower": {
@@ -3552,7 +3621,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/psi_potential_perturbed/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.psi_potential_perturbed.imaginary_error_lower": {
@@ -3595,7 +3665,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/psi_potential_perturbed/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.psi_potential_perturbed.real_error_lower": {
@@ -3646,7 +3717,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/stress_maxwell/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.stress_maxwell.imaginary_error_lower": {
@@ -3692,7 +3764,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/stress_maxwell/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.stress_maxwell.real_error_lower": {
@@ -3745,7 +3818,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/stress_reynolds/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.stress_reynolds.imaginary_error_lower": {
@@ -3791,7 +3865,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/stress_reynolds/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.stress_reynolds.real_error_lower": {
@@ -3835,7 +3910,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tau_alfven\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_alfven_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_alfven_error_lower": {
@@ -3875,7 +3951,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tau_resistive\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/tau_resistive_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.tau_resistive_error_lower": {
@@ -3925,7 +4002,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.coefficients_imaginary_error_lower": {
@@ -3971,7 +4049,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.coefficients_real_error_lower": {
@@ -4016,7 +4095,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.imaginary_error_lower": {
@@ -4059,7 +4139,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/temperature_perturbed/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.temperature_perturbed.real_error_lower": {
@@ -4119,7 +4200,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.coefficients_imaginary_error_lower": {
@@ -4165,7 +4247,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.coefficients_real_error_lower": {
@@ -4210,7 +4293,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.imaginary_error_lower": {
@@ -4253,7 +4337,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate1/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate1.real_error_lower": {
@@ -4305,7 +4390,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.coefficients_imaginary_error_lower": {
@@ -4351,7 +4437,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.coefficients_real_error_lower": {
@@ -4396,7 +4483,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.imaginary_error_lower": {
@@ -4439,7 +4527,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate2/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate2.real_error_lower": {
@@ -4491,7 +4580,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.coefficients_imaginary_error_lower": {
@@ -4537,7 +4627,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.coefficients_real_error_lower": {
@@ -4582,7 +4673,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.imaginary_error_lower": {
@@ -4625,7 +4717,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/plasma/velocity_perturbed/coordinate3/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].plasma.velocity_perturbed.coordinate3.real_error_lower": {
@@ -4664,7 +4757,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_mode_number\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/radial_mode_number_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].radial_mode_number_error_lower": {
@@ -4723,7 +4817,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.coefficients_imaginary_error_lower": {
@@ -4769,7 +4864,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.coefficients_real_error_lower": {
@@ -4814,7 +4910,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.imaginary_error_lower": {
@@ -4857,7 +4954,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate1/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate1.real_error_lower": {
@@ -4909,7 +5007,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.coefficients_imaginary_error_lower": {
@@ -4955,7 +5054,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.coefficients_real_error_lower": {
@@ -5000,7 +5100,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.imaginary_error_lower": {
@@ -5043,7 +5144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate2/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate2.real_error_lower": {
@@ -5095,7 +5197,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.coefficients_imaginary_error_lower": {
@@ -5141,7 +5244,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.coefficients_real_error_lower": {
@@ -5186,7 +5290,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.imaginary_error_lower": {
@@ -5229,7 +5334,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/a_field_perturbed/coordinate3/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.a_field_perturbed.coordinate3.real_error_lower": {
@@ -5289,7 +5395,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.coefficients_imaginary_error_lower": {
@@ -5335,7 +5442,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.coefficients_real_error_lower": {
@@ -5380,7 +5488,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.imaginary_error_lower": {
@@ -5423,7 +5532,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate1/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate1.real_error_lower": {
@@ -5475,7 +5585,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.coefficients_imaginary_error_lower": {
@@ -5521,7 +5632,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.coefficients_real_error_lower": {
@@ -5566,7 +5678,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.imaginary_error_lower": {
@@ -5609,7 +5722,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate2/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate2.real_error_lower": {
@@ -5661,7 +5775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/coefficients_imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.coefficients_imaginary_error_lower": {
@@ -5707,7 +5822,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"coefficients_real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/coefficients_real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.coefficients_real_error_lower": {
@@ -5752,7 +5868,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"imaginary\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/imaginary_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.imaginary_error_lower": {
@@ -5795,7 +5912,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"real\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/b_field_perturbed/coordinate3/real_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.b_field_perturbed.coordinate3.real_error_lower": {
@@ -5856,7 +5974,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim1_error_lower": {
@@ -5905,7 +6024,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/dim2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.dim2_error_lower": {
@@ -5952,7 +6072,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/grid/volume_element_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.grid.volume_element_error_lower": {
@@ -6024,7 +6145,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"jacobian\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/jacobian_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.jacobian_error_lower": {
@@ -6067,7 +6189,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.r_error_lower": {
@@ -6112,7 +6235,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_contravariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/tensor_contravariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_contravariant_error_lower": {
@@ -6161,7 +6285,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"tensor_covariant\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/tensor_covariant_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.tensor_covariant_error_lower": {
@@ -6208,7 +6333,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/coordinate_system/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.coordinate_system.z_error_lower": {
@@ -6262,7 +6388,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim1\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim1_error_lower": {
@@ -6311,7 +6438,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dim2\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/dim2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.dim2_error_lower": {
@@ -6358,7 +6486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume_element\"",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/vacuum/grid/volume_element_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].vacuum.grid.volume_element_error_lower": {
@@ -6442,7 +6571,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mhd_linear.vacuum_toroidal_field.b0_error_lower": {
@@ -6487,7 +6617,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "mhd_linear/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "mhd_linear.vacuum_toroidal_field.r0_error_lower": {

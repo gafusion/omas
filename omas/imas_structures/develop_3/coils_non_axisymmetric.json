@@ -152,7 +152,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_phi\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_phi_error_lower": {
@@ -192,7 +193,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_r\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r_error_lower": {
@@ -232,7 +234,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_z\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_z_error_lower": {
@@ -281,7 +284,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].current.data_error_lower": {
@@ -349,7 +353,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/centres/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.phi_error_lower": {
@@ -389,7 +394,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/centres/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r_error_lower": {
@@ -429,7 +435,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/centres/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.z_error_lower": {
@@ -476,7 +483,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/end_points/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.phi_error_lower": {
@@ -516,7 +524,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/end_points/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r_error_lower": {
@@ -556,7 +565,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/end_points/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.z_error_lower": {
@@ -603,7 +613,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/intermediate_points/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.phi_error_lower": {
@@ -643,7 +654,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/intermediate_points/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r_error_lower": {
@@ -683,7 +695,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/intermediate_points/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.z_error_lower": {
@@ -740,7 +753,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/start_points/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.phi_error_lower": {
@@ -780,7 +794,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/start_points/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r_error_lower": {
@@ -820,7 +835,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/start_points/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.z_error_lower": {
@@ -867,7 +883,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/resistance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].resistance_error_lower": {
@@ -910,7 +927,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].voltage.data_error_lower": {
@@ -973,7 +991,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/current/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].current.data_error_lower": {
@@ -1038,7 +1057,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/resistance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].resistance_error_lower": {
@@ -1069,7 +1089,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"turns\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/turns_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].turns_error_lower": {
@@ -1112,7 +1133,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.coil[:].voltage.data_error_lower": {
@@ -1197,7 +1219,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "coils_non_axisymmetric/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1206,20 +1228,22 @@
  },
  "coils_non_axisymmetric.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "coils_non_axisymmetric/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "coils_non_axisymmetric.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "coils_non_axisymmetric/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "coils_non_axisymmetric.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1277,7 +1301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "coils_non_axisymmetric/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "coils_non_axisymmetric.latency_error_lower": {

@@ -32,7 +32,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].area_error_lower": {
@@ -66,7 +67,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"bandwidth_3db\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/bandwidth_3db_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].bandwidth_3db_error_lower": {
@@ -118,7 +120,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/field/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].field.data_error_lower": {
@@ -204,7 +207,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/length_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].length_error_lower": {
@@ -252,7 +256,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_linear\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/non_linear_response/b_field_linear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].non_linear_response.b_field_linear_error_lower": {
@@ -292,7 +297,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_non_linear\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/non_linear_response/b_field_non_linear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].non_linear_response.b_field_non_linear_error_lower": {
@@ -333,7 +339,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_angle\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/poloidal_angle_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].poloidal_angle_error_lower": {
@@ -379,7 +386,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/position/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].position.phi_error_lower": {
@@ -410,7 +418,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/position/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].position.r_error_lower": {
@@ -441,7 +450,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/position/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].position.z_error_lower": {
@@ -476,7 +486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_angle\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/toroidal_angle_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].toroidal_angle_error_lower": {
@@ -563,7 +574,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/b_field_pol_probe(i1)/voltage/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_pol_probe[:].voltage.data_error_lower": {
@@ -645,7 +657,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].area_error_lower": {
@@ -679,7 +692,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"bandwidth_3db\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/bandwidth_3db_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].bandwidth_3db_error_lower": {
@@ -731,7 +745,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/field/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].field.data_error_lower": {
@@ -817,7 +832,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/length_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].length_error_lower": {
@@ -865,7 +881,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_linear\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/non_linear_response/b_field_linear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].non_linear_response.b_field_linear_error_lower": {
@@ -905,7 +922,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_non_linear\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/non_linear_response/b_field_non_linear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].non_linear_response.b_field_non_linear_error_lower": {
@@ -946,7 +964,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_angle\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/poloidal_angle_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].poloidal_angle_error_lower": {
@@ -992,7 +1011,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/position/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].position.phi_error_lower": {
@@ -1023,7 +1043,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/position/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].position.r_error_lower": {
@@ -1054,7 +1075,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/position/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].position.z_error_lower": {
@@ -1089,7 +1111,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal_angle\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/toroidal_angle_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].toroidal_angle_error_lower": {
@@ -1176,7 +1199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/b_field_tor_probe(i1)/voltage/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.b_field_tor_probe[:].voltage.data_error_lower": {
@@ -1258,6 +1282,7 @@
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "magnetics/bpol_probe(i1)/area_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].area_error_lower": {
@@ -1292,6 +1317,7 @@
   "documentation": "Index in the error_description list for \"bandwidth_3db\"",
   "full_path": "magnetics/bpol_probe(i1)/bandwidth_3db_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].bandwidth_3db_error_lower": {
@@ -1344,6 +1370,7 @@
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/bpol_probe(i1)/field/data_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].field.data_error_lower": {
@@ -1430,6 +1457,7 @@
   "documentation": "Index in the error_description list for \"length\"",
   "full_path": "magnetics/bpol_probe(i1)/length_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].length_error_lower": {
@@ -1478,6 +1506,7 @@
   "documentation": "Index in the error_description list for \"b_field_linear\"",
   "full_path": "magnetics/bpol_probe(i1)/non_linear_response/b_field_linear_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].non_linear_response.b_field_linear_error_lower": {
@@ -1518,6 +1547,7 @@
   "documentation": "Index in the error_description list for \"b_field_non_linear\"",
   "full_path": "magnetics/bpol_probe(i1)/non_linear_response/b_field_non_linear_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].non_linear_response.b_field_non_linear_error_lower": {
@@ -1559,6 +1589,7 @@
   "documentation": "Index in the error_description list for \"poloidal_angle\"",
   "full_path": "magnetics/bpol_probe(i1)/poloidal_angle_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].poloidal_angle_error_lower": {
@@ -1605,6 +1636,7 @@
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "magnetics/bpol_probe(i1)/position/phi_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].position.phi_error_lower": {
@@ -1636,6 +1668,7 @@
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/bpol_probe(i1)/position/r_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].position.r_error_lower": {
@@ -1667,6 +1700,7 @@
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/bpol_probe(i1)/position/z_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].position.z_error_lower": {
@@ -1702,6 +1736,7 @@
   "documentation": "Index in the error_description list for \"toroidal_angle\"",
   "full_path": "magnetics/bpol_probe(i1)/toroidal_angle_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].toroidal_angle_error_lower": {
@@ -1789,6 +1824,7 @@
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/bpol_probe(i1)/voltage/data_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.bpol_probe[:].voltage.data_error_lower": {
@@ -1975,7 +2011,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/diamagnetic_flux(i1)/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.diamagnetic_flux[:].data_error_lower": {
@@ -2044,7 +2081,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "magnetics/flux_loop(i1)/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].area_error_lower": {
@@ -2090,7 +2128,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/flux_loop(i1)/flux/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].flux.data_error_lower": {
@@ -2159,7 +2198,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"gm9\"",
   "full_path": "magnetics/flux_loop(i1)/gm9_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].gm9_error_lower": {
@@ -2226,7 +2266,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "magnetics/flux_loop(i1)/position(i2)/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].position[:].phi_error_lower": {
@@ -2257,7 +2298,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/flux_loop(i1)/position(i2)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].position[:].r_error_lower": {
@@ -2288,7 +2330,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/flux_loop(i1)/position(i2)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].position[:].z_error_lower": {
@@ -2360,7 +2403,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/flux_loop(i1)/voltage/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.flux_loop[:].voltage.data_error_lower": {
@@ -2463,7 +2507,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "magnetics/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -2472,20 +2516,22 @@
  },
  "magnetics.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "magnetics/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "magnetics.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "magnetics/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "magnetics.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -2561,7 +2607,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/ip(i1)/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.ip[:].data_error_lower": {
@@ -2620,7 +2667,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "magnetics/latency_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.latency_error_lower": {
@@ -2681,6 +2729,7 @@
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/method(i1)/ip/data_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.method[:].ip.data_error_lower": {
@@ -2749,7 +2798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "magnetics/rogowski_coil(i1)/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].area_error_lower": {
@@ -2792,7 +2842,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/rogowski_coil(i1)/current/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].current.data_error_lower": {
@@ -2926,7 +2977,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "magnetics/rogowski_coil(i1)/position(i2)/phi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].position[:].phi_error_lower": {
@@ -2957,7 +3009,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/rogowski_coil(i1)/position(i2)/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].position[:].r_error_lower": {
@@ -2988,7 +3041,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/rogowski_coil(i1)/position(i2)/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].position[:].z_error_lower": {
@@ -3019,7 +3073,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"turns_per_metre\"",
   "full_path": "magnetics/rogowski_coil(i1)/turns_per_metre_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.rogowski_coil[:].turns_per_metre_error_lower": {
@@ -3097,7 +3152,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/shunt(i1)/position/first_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].position.first_point.r_error_lower": {
@@ -3128,7 +3184,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/shunt(i1)/position/first_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].position.first_point.z_error_lower": {
@@ -3166,7 +3223,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "magnetics/shunt(i1)/position/second_point/r_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].position.second_point.r_error_lower": {
@@ -3197,7 +3255,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "magnetics/shunt(i1)/position/second_point/z_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].position.second_point.z_error_lower": {
@@ -3228,7 +3287,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistance\"",
   "full_path": "magnetics/shunt(i1)/resistance_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].resistance_error_lower": {
@@ -3285,7 +3345,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "magnetics/shunt(i1)/voltage/data_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "magnetics.shunt[:].voltage.data_error_lower": {

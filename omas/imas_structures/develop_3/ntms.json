@@ -152,7 +152,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "ntms/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -161,20 +161,22 @@
  },
  "ntms.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "ntms/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "ntms.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "ntms/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "ntms.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -276,7 +278,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/delta_diff_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].delta_diff_error_lower": {
@@ -331,7 +334,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/deltaw(i2)/value_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].deltaw[:].value_error_lower": {
@@ -380,7 +384,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delta_diff\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/delta_diff_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.delta_diff_error_lower": {
@@ -440,7 +445,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/deltaw(i2)/value_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.deltaw[:].value_error_lower": {
@@ -480,7 +486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dfrequency_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dfrequency_dt_error_lower": {
@@ -520,7 +527,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dphase_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dphase_dt_error_lower": {
@@ -560,7 +568,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/dwidth_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.dwidth_dt_error_lower": {
@@ -600,7 +609,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/frequency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.frequency_error_lower": {
@@ -654,7 +664,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/phase_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.phase_error_lower": {
@@ -694,7 +705,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_error_lower": {
@@ -734,7 +746,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.rho_tor_norm_error_lower": {
@@ -774,7 +787,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_detailed\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/time_detailed_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.time_detailed_error_lower": {
@@ -832,7 +846,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/torque(i2)/value_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.torque[:].value_error_lower": {
@@ -872,7 +887,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.width_error_lower": {
@@ -909,7 +925,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dfrequency_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dfrequency_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].dfrequency_dt_error_lower": {
@@ -940,7 +957,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dphase_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dphase_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].dphase_dt_error_lower": {
@@ -971,7 +989,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dwidth_dt\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/dwidth_dt_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].dwidth_dt_error_lower": {
@@ -1002,7 +1021,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/frequency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].frequency_error_lower": {
@@ -1075,7 +1095,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/phase_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.phase_error_lower": {
@@ -1106,7 +1127,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_offset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_offset_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.time_offset_error_lower": {
@@ -1137,7 +1159,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_onset\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/time_onset_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.time_onset_error_lower": {
@@ -1168,7 +1191,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.width_error_lower": {
@@ -1199,7 +1223,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phase\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/phase_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].phase_error_lower": {
@@ -1230,7 +1255,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].rho_tor_error_lower": {
@@ -1261,7 +1287,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/rho_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].rho_tor_norm_error_lower": {
@@ -1310,7 +1337,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"value\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/torque(i2)/value_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].torque[:].value_error_lower": {
@@ -1341,7 +1369,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ntms/time_slice(itime)/mode(i1)/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].width_error_lower": {
@@ -1396,7 +1425,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "ntms/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ntms.vacuum_toroidal_field.b0_error_lower": {
@@ -1441,7 +1471,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "ntms/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ntms.vacuum_toroidal_field.r0_error_lower": {

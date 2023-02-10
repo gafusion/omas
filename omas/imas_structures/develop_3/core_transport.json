@@ -153,7 +153,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "core_transport/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -162,20 +162,22 @@
  },
  "core_transport.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "core_transport/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "core_transport.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "core_transport/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "core_transport.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -323,7 +325,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux_multiplier\"",
   "full_path": "core_transport/model(i1)/flux_multiplier_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_transport.model[:].flux_multiplier_error_lower": {
@@ -400,7 +403,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/conductivity_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].conductivity_parallel_error_lower": {
@@ -440,7 +444,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_radial\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/e_field_radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].e_field_radial_error_lower": {
@@ -494,7 +499,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.d_error_lower": {
@@ -534,7 +540,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.flux_error_lower": {
@@ -574,7 +581,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.energy.v_error_lower": {
@@ -621,7 +629,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.d_error_lower": {
@@ -661,7 +670,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.flux_error_lower": {
@@ -701,7 +711,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/electrons/particles/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].electrons.particles.v_error_lower": {
@@ -748,7 +759,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.area_error_lower": {
@@ -799,7 +811,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_boundary_error_lower": {
@@ -822,7 +835,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_error_lower": {
@@ -865,7 +879,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/psi_magnetic_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.psi_magnetic_axis_error_lower": {
@@ -899,7 +914,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_pol_norm_error_lower": {
@@ -939,7 +955,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_error_lower": {
@@ -979,7 +996,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm_error_lower": {
@@ -1019,7 +1037,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.surface_error_lower": {
@@ -1059,7 +1078,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_d.volume_error_lower": {
@@ -1106,7 +1126,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.area_error_lower": {
@@ -1157,7 +1178,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_boundary_error_lower": {
@@ -1180,7 +1202,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_error_lower": {
@@ -1223,7 +1246,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/psi_magnetic_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.psi_magnetic_axis_error_lower": {
@@ -1257,7 +1281,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_pol_norm_error_lower": {
@@ -1297,7 +1322,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_error_lower": {
@@ -1337,7 +1363,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm_error_lower": {
@@ -1377,7 +1404,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.surface_error_lower": {
@@ -1417,7 +1445,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_flux.volume_error_lower": {
@@ -1464,7 +1493,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.area_error_lower": {
@@ -1515,7 +1545,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_boundary_error_lower": {
@@ -1538,7 +1569,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_error_lower": {
@@ -1581,7 +1613,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/psi_magnetic_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.psi_magnetic_axis_error_lower": {
@@ -1615,7 +1648,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_pol_norm_error_lower": {
@@ -1655,7 +1689,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_error_lower": {
@@ -1695,7 +1730,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm_error_lower": {
@@ -1735,7 +1771,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.surface_error_lower": {
@@ -1775,7 +1812,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].grid_v.volume_error_lower": {
@@ -1834,7 +1872,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].a_error_lower": {
@@ -1873,7 +1912,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -1906,7 +1946,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].element[:].z_n_error_lower": {
@@ -1947,7 +1988,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.d_error_lower": {
@@ -1987,7 +2029,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.flux_error_lower": {
@@ -2027,7 +2070,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].energy.v_error_lower": {
@@ -2088,7 +2132,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.d_error_lower": {
@@ -2128,7 +2173,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.flow_damping_rate_error_lower": {
@@ -2168,7 +2214,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.flux_error_lower": {
@@ -2208,7 +2255,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.diamagnetic.v_error_lower": {
@@ -2255,7 +2303,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.d_error_lower": {
@@ -2295,7 +2344,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.flow_damping_rate_error_lower": {
@@ -2335,7 +2385,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.flux_error_lower": {
@@ -2375,7 +2426,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.parallel.v_error_lower": {
@@ -2422,7 +2474,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.d_error_lower": {
@@ -2462,7 +2515,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.flow_damping_rate_error_lower": {
@@ -2502,7 +2556,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.flux_error_lower": {
@@ -2542,7 +2597,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.poloidal.v_error_lower": {
@@ -2589,7 +2645,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.d_error_lower": {
@@ -2629,7 +2686,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.flow_damping_rate_error_lower": {
@@ -2669,7 +2727,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.flux_error_lower": {
@@ -2709,7 +2768,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/radial/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.radial.v_error_lower": {
@@ -2756,7 +2816,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.d_error_lower": {
@@ -2796,7 +2857,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.flow_damping_rate_error_lower": {
@@ -2836,7 +2898,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.flux_error_lower": {
@@ -2876,7 +2939,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum.toroidal.v_error_lower": {
@@ -2937,7 +3001,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.d_error_lower": {
@@ -2977,7 +3042,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.flux_error_lower": {
@@ -3017,7 +3083,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/particles/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].particles.v_error_lower": {
@@ -3082,7 +3149,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.d_error_lower": {
@@ -3122,7 +3190,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.flux_error_lower": {
@@ -3162,7 +3231,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].energy.v_error_lower": {
@@ -3231,7 +3301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.d_error_lower": {
@@ -3271,7 +3342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.flow_damping_rate_error_lower": {
@@ -3311,7 +3383,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.flux_error_lower": {
@@ -3351,7 +3424,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/diamagnetic/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.diamagnetic.v_error_lower": {
@@ -3398,7 +3472,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.d_error_lower": {
@@ -3438,7 +3513,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.flow_damping_rate_error_lower": {
@@ -3478,7 +3554,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.flux_error_lower": {
@@ -3518,7 +3595,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/parallel/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.parallel.v_error_lower": {
@@ -3565,7 +3643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.d_error_lower": {
@@ -3605,7 +3684,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.flow_damping_rate_error_lower": {
@@ -3645,7 +3725,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.flux_error_lower": {
@@ -3685,7 +3766,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/poloidal/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.poloidal.v_error_lower": {
@@ -3732,7 +3814,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.d_error_lower": {
@@ -3772,7 +3855,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.flow_damping_rate_error_lower": {
@@ -3812,7 +3896,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.flux_error_lower": {
@@ -3852,7 +3937,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/radial/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.radial.v_error_lower": {
@@ -3899,7 +3985,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.d_error_lower": {
@@ -3939,7 +4026,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flow_damping_rate\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/flow_damping_rate_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.flow_damping_rate_error_lower": {
@@ -3979,7 +4067,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.flux_error_lower": {
@@ -4019,7 +4108,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/momentum/toroidal/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum.toroidal.v_error_lower": {
@@ -4095,7 +4185,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.d_error_lower": {
@@ -4135,7 +4226,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.flux_error_lower": {
@@ -4175,7 +4267,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].particles.v_error_lower": {
@@ -4212,7 +4305,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
@@ -4250,7 +4344,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].z_max_error_lower": {
@@ -4281,7 +4376,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].z_min_error_lower": {
@@ -4312,7 +4408,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].z_ion_error_lower": {
@@ -4353,7 +4450,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.d_error_lower": {
@@ -4393,7 +4491,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.flux_error_lower": {
@@ -4433,7 +4532,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.v_error_lower": {
@@ -4492,7 +4592,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].a_error_lower": {
@@ -4531,7 +4632,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -4564,7 +4666,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
@@ -4605,7 +4708,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.d_error_lower": {
@@ -4645,7 +4749,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.flux_error_lower": {
@@ -4685,7 +4790,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].energy.v_error_lower": {
@@ -4753,7 +4859,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.d_error_lower": {
@@ -4793,7 +4900,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.flux_error_lower": {
@@ -4833,7 +4941,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/particles/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].particles.v_error_lower": {
@@ -4898,7 +5007,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.d_error_lower": {
@@ -4938,7 +5048,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.flux_error_lower": {
@@ -4978,7 +5089,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].energy.v_error_lower": {
@@ -5032,7 +5144,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.d_error_lower": {
@@ -5072,7 +5185,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.flux_error_lower": {
@@ -5112,7 +5226,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].particles.v_error_lower": {
@@ -5149,7 +5264,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
@@ -5205,7 +5321,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.d_error_lower": {
@@ -5245,7 +5362,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/flux_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.flux_error_lower": {
@@ -5285,7 +5403,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/total_ion_energy/v_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].total_ion_energy.v_error_lower": {
@@ -5350,7 +5469,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_transport/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_transport.vacuum_toroidal_field.b0_error_lower": {
@@ -5395,7 +5515,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_transport/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_transport.vacuum_toroidal_field.r0_error_lower": {

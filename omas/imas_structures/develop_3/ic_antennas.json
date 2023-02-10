@@ -42,7 +42,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].frequency.data_error_lower": {
@@ -135,7 +136,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/current(i3)/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].current[:].amplitude.data_error_lower": {
@@ -212,7 +214,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/current(i3)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].current[:].phase.data_error_lower": {
@@ -270,7 +273,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/current(i3)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].current[:].position.phi_error_lower": {
@@ -301,7 +305,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/current(i3)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].current[:].position.r_error_lower": {
@@ -332,7 +337,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/current(i3)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].current[:].position.z_error_lower": {
@@ -375,7 +381,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/frequency/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].frequency.data_error_lower": {
@@ -457,7 +464,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/matching_element(i3)/capacitance/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].matching_element[:].capacitance.data_error_lower": {
@@ -527,7 +535,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/matching_element(i3)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].matching_element[:].phase.data_error_lower": {
@@ -625,7 +634,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/phase_forward/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].phase_forward.data_error_lower": {
@@ -688,7 +698,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/phase_reflected/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].phase_reflected.data_error_lower": {
@@ -751,7 +762,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/power_forward/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].power_forward.data_error_lower": {
@@ -814,7 +826,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/power_launched/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].power_launched.data_error_lower": {
@@ -877,7 +890,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/power_reflected/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].power_reflected.data_error_lower": {
@@ -952,7 +966,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/pressure(i3)/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].pressure[:].amplitude.data_error_lower": {
@@ -1029,7 +1044,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/pressure(i3)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].pressure[:].phase.data_error_lower": {
@@ -1087,7 +1103,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/pressure(i3)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].pressure[:].position.phi_error_lower": {
@@ -1118,7 +1135,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/pressure(i3)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].pressure[:].position.r_error_lower": {
@@ -1149,7 +1167,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/pressure(i3)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].pressure[:].position.z_error_lower": {
@@ -1192,7 +1211,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].reflection_coefficient.data_error_lower": {
@@ -1266,7 +1286,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/current/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].current.data_error_lower": {
@@ -1317,7 +1338,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"distance_to_conductor\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/distance_to_conductor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].distance_to_conductor_error_lower": {
@@ -1345,7 +1367,7 @@
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.annulus": {
   "data_type": "STRUCTURE",
-  "documentation": "The element is an annulus of  center r, z, with inner radius radius_inner and outer radius radius_outer",
+  "documentation": "The element is an annulus of centre R, Z, with inner radius radius_inner and outer radius radius_outer",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/annulus",
   "introduced_after_version": "3.34.0",
   "lifecycle_status": "alpha",
@@ -1363,7 +1385,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/annulus/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.annulus.r_error_lower": {
@@ -1394,7 +1417,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_inner\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/annulus/radius_inner_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.annulus.radius_inner_error_lower": {
@@ -1425,7 +1449,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius_outer\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/annulus/radius_outer_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.annulus.radius_outer_error_lower": {
@@ -1456,7 +1481,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/annulus/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.annulus.z_error_lower": {
@@ -1497,7 +1523,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"curvature_radii\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/arcs_of_circle/curvature_radii_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.arcs_of_circle.curvature_radii_error_lower": {
@@ -1537,7 +1564,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/arcs_of_circle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.arcs_of_circle.r_error_lower": {
@@ -1577,7 +1605,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/arcs_of_circle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.arcs_of_circle.z_error_lower": {
@@ -1629,7 +1658,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"alpha\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.alpha_error_lower": {
@@ -1663,7 +1693,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.beta_error_lower": {
@@ -1697,7 +1728,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_alpha\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/length_alpha_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.length_alpha_error_lower": {
@@ -1731,7 +1763,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"length_beta\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/length_beta_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.length_beta_error_lower": {
@@ -1765,7 +1798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.r_error_lower": {
@@ -1799,7 +1833,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/oblique/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.oblique.z_error_lower": {
@@ -1842,7 +1877,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.outline.r_error_lower": {
@@ -1882,7 +1918,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.outline.z_error_lower": {
@@ -1926,7 +1963,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"height\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/rectangle/height_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.rectangle.height_error_lower": {
@@ -1957,7 +1995,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/rectangle/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.rectangle.r_error_lower": {
@@ -1988,7 +2027,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/rectangle/width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.rectangle.width_error_lower": {
@@ -2019,7 +2059,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/rectangle/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.rectangle.z_error_lower": {
@@ -2065,7 +2106,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/thick_line/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.thick_line.first_point.r_error_lower": {
@@ -2096,7 +2138,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/thick_line/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.thick_line.first_point.z_error_lower": {
@@ -2134,7 +2177,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/thick_line/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.thick_line.second_point.r_error_lower": {
@@ -2165,7 +2209,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/thick_line/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.thick_line.second_point.z_error_lower": {
@@ -2196,7 +2241,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/geometry/thick_line/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].geometry.thick_line.thickness_error_lower": {
@@ -2237,7 +2283,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/outline/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].outline.phi_error_lower": {
@@ -2277,7 +2324,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/outline/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].outline.r_error_lower": {
@@ -2317,7 +2365,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/outline/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].outline.z_error_lower": {
@@ -2366,7 +2415,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].phase.data_error_lower": {
@@ -2417,7 +2467,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"width_tor\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].strap[:].width_tor_error_lower": {
@@ -2472,7 +2523,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/voltage(i3)/amplitude/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].voltage[:].amplitude.data_error_lower": {
@@ -2549,7 +2601,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/voltage(i3)/phase/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].voltage[:].phase.data_error_lower": {
@@ -2607,7 +2660,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/voltage(i3)/position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].voltage[:].position.phi_error_lower": {
@@ -2638,7 +2692,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/voltage(i3)/position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].voltage[:].position.r_error_lower": {
@@ -2669,7 +2724,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/voltage(i3)/position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].module[:].voltage[:].position.z_error_lower": {
@@ -2719,7 +2775,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/power_forward/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].power_forward.data_error_lower": {
@@ -2782,7 +2839,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/power_launched/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].power_launched.data_error_lower": {
@@ -2845,7 +2903,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/power_reflected/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.antenna[:].power_reflected.data_error_lower": {
@@ -2932,7 +2991,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"spectrum\"",
   "full_path": "ic_antennas/antenna(i1)/surface_current(itime)/spectrum_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "ic_antennas.antenna[:].surface_current[:].spectrum_error_lower": {
@@ -3112,7 +3172,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "ic_antennas/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -3121,20 +3181,22 @@
  },
  "ic_antennas.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "ic_antennas/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "ic_antennas.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "ic_antennas/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "ic_antennas.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -3192,7 +3254,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "ic_antennas/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.latency_error_lower": {
@@ -3237,7 +3300,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "ic_antennas/power_launched/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.power_launched.data_error_lower": {
@@ -3295,7 +3359,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "ic_antennas/reference_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.reference_point.r_error_lower": {
@@ -3326,7 +3391,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "ic_antennas/reference_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "ic_antennas.reference_point.z_error_lower": {
