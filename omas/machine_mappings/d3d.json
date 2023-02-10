@@ -143,18 +143,6 @@
  "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
- "ec_launchers.beam.:.beam.phase.angle": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.phase.curvature": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.spot.angle": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.spot.size": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
  "ec_launchers.beam.:.frequency": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
