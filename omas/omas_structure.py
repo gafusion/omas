@@ -46,7 +46,7 @@ def generate_xml_schemas(imas_version=None):
         subprocess.Popen(
             f"""
         cd {omas_dir}
-        curl https://iweb.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
+        curl https://cytranet.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
         rm {saxon_version}.zip""",
             shell=True,
@@ -81,7 +81,6 @@ export CLASSPATH={omas_dir}/{saxon_version}/saxon9he.jar;
 cd {dd_folder}
 git checkout {imas_version}
 git pull
-export JAVA_HOME=$(dirname $(dirname `which java`))
 make clean
 make
 rm -rf {imas_json_dir}/{_imas_version}/
