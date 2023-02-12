@@ -955,6 +955,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "plasma_initiation.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "plasma_initiation.ids_properties.occurrence"
+ },
  "plasma_initiation.ids_properties.provenance": {
   "data_type": "STRUCTURE",
   "documentation": "Provenance information about this IDS",

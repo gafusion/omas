@@ -1676,7 +1676,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -1694,7 +1694,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_upper": {
   "coordinates": [
@@ -1705,7 +1705,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.parameters": {
   "data_type": "STR_0D",
@@ -1723,7 +1723,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -1741,7 +1741,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -1752,7 +1752,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.rho_tor_norm": {
   "coordinates": [
@@ -2266,7 +2266,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -2284,7 +2284,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_upper": {
   "coordinates": [
@@ -2295,7 +2295,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.parameters": {
   "data_type": "STR_0D",
@@ -2313,7 +2313,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -2331,7 +2331,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -2342,7 +2342,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.rho_tor_norm": {
   "coordinates": [
@@ -3360,7 +3360,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -3378,7 +3378,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_upper": {
   "coordinates": [
@@ -3389,7 +3389,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.parameters": {
   "data_type": "STR_0D",
@@ -3407,7 +3407,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -3425,7 +3425,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -3436,7 +3436,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.rho_tor_norm": {
   "coordinates": [
@@ -4176,7 +4176,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -4194,7 +4194,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_upper": {
   "coordinates": [
@@ -4205,7 +4205,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.parameters": {
   "data_type": "STR_0D",
@@ -4223,7 +4223,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -4241,7 +4241,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -4252,7 +4252,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.rho_tor_norm": {
   "coordinates": [
@@ -5335,7 +5335,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -5353,7 +5353,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.measured_error_upper": {
   "coordinates": [
@@ -5364,7 +5364,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.parameters": {
   "data_type": "STR_0D",
@@ -5382,7 +5382,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -5400,7 +5400,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -5411,7 +5411,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.rho_tor_norm": {
   "coordinates": [
@@ -8078,7 +8078,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -8096,7 +8096,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_upper": {
   "coordinates": [
@@ -8107,7 +8107,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.parameters": {
   "data_type": "STR_0D",
@@ -8125,7 +8125,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -8143,7 +8143,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -8154,7 +8154,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.rho_tor_norm": {
   "coordinates": [
@@ -8469,7 +8469,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_index": {
   "data_type": "INT_TYPE",
@@ -8487,7 +8487,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_upper": {
   "coordinates": [
@@ -8498,7 +8498,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.parameters": {
   "data_type": "STR_0D",
@@ -8516,7 +8516,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -8534,7 +8534,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -8545,7 +8545,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.rho_tor_norm": {
   "coordinates": [
