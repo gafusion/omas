@@ -1227,7 +1227,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
             compsig_data = m.data()
             compsig_time = m.dim_of(0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity']>=0:
+                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
                     sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
@@ -1285,7 +1285,10 @@ def magnetics_probes_data(ods, pulse):
 
             compsig_time = m.dim_of(0) / 1000
             for channel in ods1['magnetics.b_field_pol_probe']:
-                if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods1 and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity']>=0:
+                if (
+                    'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
+                    and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
+                ):
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
                     sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
