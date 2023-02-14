@@ -916,7 +916,7 @@ class dynamic_omas_machine(dynamic_ODS):
         return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
 
     def keys(self, location):
-        ulocation = o2u(location) + "."
+        ulocation = (o2u(location) + ".").lstrip('.')
         if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
             return list(range(self[ulocation + ':']))
         else:
