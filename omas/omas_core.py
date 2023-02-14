@@ -1453,7 +1453,7 @@ class ODS(MutableMapping):
         else:
             return self.omas_data.__delitem__(key[0])
 
-    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=True, **kw):
+    def paths(self, return_empty_leaves=False, traverse_code_parameters=True, include_structures=False, dynamic=True, verbose=False, **kw):
         """
         Traverse the ods and return paths to its leaves
 
@@ -1468,25 +1468,37 @@ class ODS(MutableMapping):
 
         :return: list of paths that have data
         """
+        if dynamic and self.active_dynamic:
+            get_func = self.__getitem__
+        else:
+            get_func = self.getraw
+
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in sorted(self.keys(dynamic=dynamic)):
-            if isinstance(self.getraw(kid), ODS):
+            try:
+                mykid = get_func(kid)
+            except OmasDynamicException:
+                continue
+            if isinstance(mykid, ODS):
                 if include_structures:
                     paths.append(path + [kid])
-                self.getraw(kid).paths(
+                mykid.paths(
                     return_empty_leaves=return_empty_leaves,
                     traverse_code_parameters=traverse_code_parameters,
                     include_structures=include_structures,
                     dynamic=dynamic,
+                    verbose=verbose,
                     paths=paths,
                     path=path + [kid],
                 )
-            elif traverse_code_parameters and isinstance(self.getraw(kid), CodeParameters):
+            elif traverse_code_parameters and isinstance(mykid, CodeParameters):
                 if include_structures:
                     paths.append(path)
                 self.getraw(kid).paths(paths=paths, path=path + [kid])
             else:
+                if verbose:
+                    print(l2i(path + [kid]))
                 paths.append(path + [kid])
         if not len(self.keys(dynamic=dynamic)) and return_empty_leaves:
             paths.append(path)
@@ -2681,11 +2693,16 @@ class CodeParameters(dict):
 
         :return: list of paths that have data
         """
+        if self.active_dynamic:
+            get_func = self.__getitem__
+        else:
+            get_func = self.getraw
+
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
-            if isinstance(self.getraw(kid), CodeParameters):
-                self.getraw(kid).paths(paths=paths, path=path + [kid])
+            if isinstance(get_func(kid), CodeParameters):
+                get_func(kid).paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
         return paths

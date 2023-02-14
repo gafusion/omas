@@ -56,32 +56,47 @@
   "PYTHON": "bolometer_data(ods, {pulse})"
  },
  "charge_exchange.channel.:": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.identifier": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.t_i.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.t_i.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.data": {
   "COCOSIO": 11,
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.time": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.data": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.time": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.data": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.time": {
-  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.zeff.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.zeff.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "coils_non_axisymmetric.coil.:": {
   "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
@@ -126,18 +141,6 @@
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
  "ec_launchers.beam.:": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.phase.angle": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.phase.curvature": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.spot.angle": {
-  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
- },
- "ec_launchers.beam.:.beam.spot.size": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ec_launchers.beam.:.frequency": {
@@ -234,9 +237,6 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
- "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
-  "PYTHON": "magnetics_hardware(ods, {pulse},{time_index})"
- },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
@@ -263,13 +263,16 @@
  "gas_injection.pipe.:.second_point.z": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
- "gas_injection.pipe.:.valve.:": {
+ "gas_injection.pipe.:.valve_indices": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
- "gas_injection.pipe.:.valve.:.identifier": {
+ "gas_injection.valve.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
- "gas_injection.pipe.:.valve.:.name": {
+ "gas_injection.valve.:.identifier": {
+  "PYTHON": "gas_injection_hardware(ods, {pulse})"
+ },
+ "gas_injection.valve.:.pipe_indices": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "interferometer.channel.:": {

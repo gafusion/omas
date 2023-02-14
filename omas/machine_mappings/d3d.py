@@ -4,7 +4,7 @@ from inspect import unwrap
 
 from numpy.lib.function_base import iterable
 from omas import *
-from omas.omas_utils import printd, unumpy
+from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 
 __all__ = []
@@ -31,258 +31,324 @@ def gas_injection_hardware(ods, pulse):
     if pulse < 100775:
         warnings.warn('DIII-D Gas valve locations not applicable for pulses earlier than 100775 (2000 JAN 17)')
 
-    i = 0
+    ip = 0
+    iv = 0
 
     def pipe_copy(pipe_in):
-        pipe_out = ods['gas_injection']['pipe'][i]
+        pipe_out = ods['gas_injection']['pipe'][ip]
         for field in ['name', 'exit_position.r', 'exit_position.z', 'exit_position.phi']:
             pipe_out[field] = pipe_in[field]
-        vvv = 0
-        while f'valve.{vvv}.identifier' in pipe_in:
-            valve_identifier = pipe_in[f'valve.{vvv}.identifier']
-            vvv += 1
-        return valve_identifier
+        return
 
     # PFX1
+    valve_pfx1 = ods['gas_injection']['valve'][iv]
+    valve_pfx1['identifier'] = 'PFX1'
+    valve_pfx1['pipe_indices'] = []
     for angle in [12, 139, 259]:  # degrees, DIII-D hardware left handed coords
-        pipe_pfx1 = ods['gas_injection']['pipe'][i]
+        pipe_pfx1 = ods['gas_injection']['pipe'][ip]
         pipe_pfx1['name'] = 'PFX1_{:03d}'.format(angle)
         pipe_pfx1['exit_position']['r'] = 1.286  # m
         pipe_pfx1['exit_position']['z'] = 1.279  # m
         pipe_pfx1['exit_position']['phi'] = -np.pi / 180.0 * angle  # radians, right handed
-        pipe_pfx1['valve'][0]['identifier'] = 'PFX1'
+        pipe_pfx1['valve_indices'] = [iv]
+        valve_pfx1['pipe_indices'] = np.append(valve_pfx1['pipe_indices'], [ip])
         dr = -1.116 + 1.286
         dz = -1.38 + 1.279
         # pipea['exit_position']['direction'] = 180/np.pi * tan(dz/dr) if dr != 0 else 90 * sign(dz)
         pipe_pfx1['second_point']['phi'] = pipe_pfx1['exit_position']['phi']
         pipe_pfx1['second_point']['r'] = pipe_pfx1['exit_position']['r'] + dr
         pipe_pfx1['second_point']['z'] = pipe_pfx1['exit_position']['z'] + dz
-        i += 1
+        ip += 1
+    iv += 1
 
     # PFX2 injects at the same poloidal locations as PFX1, but at different toroidal angles
+    valve_pfx2 = ods['gas_injection']['valve'][iv]
+    valve_pfx2['identifier'] = 'PFX2'
+    valve_pfx2['pipe_indices'] = []
     for angle in [79, 199, 319]:  # degrees, DIII-D hardware left handed coords
         pipe_copy(pipe_pfx1)
-        pipe_pfx2 = ods['gas_injection']['pipe'][i]
+        pipe_pfx2 = ods['gas_injection']['pipe'][ip]
         pipe_pfx2['name'] = 'PFX2_{:03d}'.format(angle)
         pipe_pfx2['exit_position']['phi'] = -np.pi / 180.0 * angle  # rad
-        pipe_pfx2['valve'][0]['identifier'] = 'PFX2'
+        pipe_pfx2['valve_indices'] = [iv]
+        valve_pfx2['pipe_indices'] = np.append(valve_pfx2['pipe_indices'], [ip])
         pipe_pfx2['second_point']['phi'] = pipe_pfx2['exit_position']['phi']
-        i += 1
+        ip += 1
+    iv += 1
 
     # GAS A
-    pipea = ods['gas_injection']['pipe'][i]
+    valvea = ods['gas_injection']['valve'][iv]
+    valvea['identifier'] = 'GASA'
+    valvea['pipe_indices'] = [ip]
+    pipea = ods['gas_injection']['pipe'][ip]
     pipea['name'] = 'GASA_300'
     pipea['exit_position']['r'] = 1.941  # m
     pipea['exit_position']['z'] = 1.01  # m
     pipea['exit_position']['phi'] = -np.pi / 180.0 * 300  # rad
-    pipea['valve'][0]['identifier'] = 'GASA'
+    pipea['valve_indices'] = [iv]
     # pipea['exit_position']['direction'] = 270.  # degrees, giving dir of pipe leading towards injector, up is 90
     pipea['second_point']['phi'] = pipea['exit_position']['phi']
     pipea['second_point']['r'] = pipea['exit_position']['r']
     pipea['second_point']['z'] = pipea['exit_position']['z'] - 0.01
-    i += 1
+    ip += 1
+    iv += 1
 
     # GAS B injects in the same place as GAS A
+    valveb = ods['gas_injection']['valve'][iv]
+    valveb['identifier'] = 'GASB'
+    valveb['pipe_indices'] = [ip]
     pipe_copy(pipea)
-    pipeb = ods['gas_injection']['pipe'][i]
+    pipeb = ods['gas_injection']['pipe'][ip]
     pipeb['name'] = 'GASB_300'
-    pipeb['valve'][0]['identifier'] = 'GASB'
-    i += 1
+    pipeb['valve_indices'] = [iv]
+    ip += 1
+    iv += 1
 
     # GAS C
-    pipec = ods['gas_injection']['pipe'][i]
+    valvec = ods['gas_injection']['valve'][iv]
+    valvec['identifier'] = 'GASC'
+    valvec['pipe_indices'] = [ip]
+    pipec = ods['gas_injection']['pipe'][ip]
     pipec['name'] = 'GASC_000'
     pipec['exit_position']['r'] = 1.481  # m
     pipec['exit_position']['z'] = -1.33  # m
     pipec['exit_position']['phi'] = -np.pi / 180.0 * 0
-    pipec['valve'][0]['identifier'] = 'GASC'
-    pipec['valve'][1]['identifier'] = 'GASE'
+    pipec['valve_indices'] = [iv, iv + 5]
     # pipec['exit_position']['direction'] = 90.  # degrees, giving direction of pipe leading towards injector
     pipec['second_point']['phi'] = pipec['exit_position']['phi']
     pipec['second_point']['r'] = pipec['exit_position']['r']
     pipec['second_point']['z'] = pipec['exit_position']['z'] + 0.01
-    i += 1
+    ip += 1
+    iv += 1
 
     # GAS D injects at the same poloidal location as GAS A, but at a different toroidal angle.
     # There is a GASD piezo valve that splits into four injectors, all of which have their own gate valves and can be
     # turned on/off independently. Normally, only one would be used at at a time.
+    valved = ods['gas_injection']['valve'][iv]
+    valved['identifier'] = 'GASD'  # This is the piezo name
+    valved['pipe_indices'] = [ip]
     pipe_copy(pipea)
-    piped = ods['gas_injection']['pipe'][i]
+    piped = ods['gas_injection']['pipe'][ip]
     piped['name'] = 'GASD_225'  # This is the injector name
     piped['exit_position']['phi'] = -np.pi / 180.0 * 225
-    piped['valve'][0]['identifier'] = 'GASD'  # This is the piezo name
+    piped['valve_indices'] = [iv]
     piped['second_point']['phi'] = piped['exit_position']['phi']
-    i += 1
-
+    ip += 1
     # Spare 225 is an extra branch of the GASD line after the GASD piezo
     pipe_copy(piped)
-    pipes225 = ods['gas_injection']['pipe'][i]
+    pipes225 = ods['gas_injection']['pipe'][ip]
     pipes225['name'] = 'Spare_225'  # This is the injector name
-    i += 1
-
+    pipes225['valve_indices'] = [iv]  # Seems right, but previous unset
+    valved['pipe_indices'] = np.append(valved['pipe_indices'], [ip])
+    ip += 1
     # RF_170 and RF_190: gas ports near the 180 degree antenna, on the GASD line
     for angle in [170, 190]:
-        pipe_rf = ods['gas_injection']['pipe'][i]
+        pipe_rf = ods['gas_injection']['pipe'][ip]
         pipe_rf['name'] = 'RF_{:03d}'.format(angle)
         pipe_rf['exit_position']['r'] = 2.38  # m
         pipe_rf['exit_position']['z'] = -0.13  # m
         pipe_rf['exit_position']['phi'] = -np.pi / 180.0 * angle  # rad
-        pipe_rf['valve'][0]['identifier'] = 'GASD'
-        i += 1
+        pipe_rf['valve_indices'] = [iv]
+        valved['pipe_indices'] = np.append(valved['pipe_indices'], [ip])
+        ip += 1
+    iv += 1
+
+    # GAS E
+    valvee = ods['gas_injection']['valve'][iv]
+    valvee['identifier'] = 'GASE'
+    valvee['pipe_indices'] = [ip - 5]
+    iv += 1
 
     # DRDP
+    valved = ods['gas_injection']['valve'][iv]
+    valved['identifier'] = 'DRDP'
+    valved['pipe_indices'] = [ip]
     pipe_copy(piped)
-    piped = ods['gas_injection']['pipe'][i]
+    piped = ods['gas_injection']['pipe'][ip]
     piped['name'] = 'DRDP_225'
-    piped['valve'][0]['identifier'] = 'DRDP'
-    i += 1
+    piped['valve_indices'] = [iv]
+    ip += 1
+    iv += 1
 
     # UOB
+    valve_uob = ods['gas_injection']['valve'][iv]
+    valve_uob['identifier'] = 'UOB'
+    valve_uob['pipe_indices'] = []
     for angle in [45, 165, 285]:
-        pipe_uob = ods['gas_injection']['pipe'][i]
+        pipe_uob = ods['gas_injection']['pipe'][ip]
         pipe_uob['name'] = 'UOB_{:03d}'.format(angle)
         pipe_uob['exit_position']['r'] = 1.517  # m
         pipe_uob['exit_position']['z'] = 1.267  # m
         pipe_uob['exit_position']['phi'] = -np.pi / 180.0 * angle
-        pipe_uob['valve'][0]['identifier'] = 'UOB'
+        pipe_uob['valve_indices'] = [iv]
+        valve_uob['pipe_indices'] = np.append(valve_uob['pipe_indices'], [ip])
         # pipe_uob['exit_position']['direction'] = 270.  # degrees, giving dir of pipe leading to injector, up is 90
-        i += 1
+        ip += 1
+    iv += 1
 
     # LOB1
+    valve_lob1 = ods['gas_injection']['valve'][iv]
+    valve_lob1['identifier'] = 'LOB1'
+    valve_lob1['pipe_indices'] = []
     for angle in [30, 120]:
-        pipe_lob1 = ods['gas_injection']['pipe'][i]
+        pipe_lob1 = ods['gas_injection']['pipe'][ip]
         pipe_lob1['name'] = 'LOB1_{:03d}'.format(angle)
         pipe_lob1['exit_position']['r'] = 1.941  # m
         pipe_lob1['exit_position']['z'] = -1.202  # m
         pipe_lob1['exit_position']['phi'] = -np.pi / 180.0 * angle
-        pipe_lob1['valve'][0]['identifier'] = 'LOB1'
+        pipe_lob1['valve_indices'] = [iv]
+        valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
         # pipe_lob1['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading to injector; up is 90
-        i += 1
-
+        ip += 1
     # Spare 75 is an extra branch of the GASC line after the LOB1 piezo
-    pipes75 = ods['gas_injection']['pipe'][i]
+    pipes75 = ods['gas_injection']['pipe'][ip]
     pipes75['name'] = 'Spare_075'
     pipes75['exit_position']['r'] = 2.249  # m (approximate / estimated from still image)
     pipes75['exit_position']['z'] = -0.797  # m (approximate / estimated from still image)
     pipes75['exit_position']['phi'] = 75  # degrees, DIII-D hardware left handed coords
-    pipes75['valve'][0]['identifier'] = 'LOB1'
+    pipes75['valve_indices'] = [iv]
+    valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
     # pipes75['exit_position']['direction'] = 180.  # degrees, giving direction of pipe leading towards injector
-    i += 1
-
+    ip += 1
     # RF_010 & 350
     for angle in [10, 350]:
-        pipe_rf_lob1 = ods['gas_injection']['pipe'][i]
+        pipe_rf_lob1 = ods['gas_injection']['pipe'][ip]
         pipe_rf_lob1['name'] = 'RF_{:03d}'.format(angle)
         pipe_rf_lob1['exit_position']['r'] = 2.38  # m
         pipe_rf_lob1['exit_position']['z'] = -0.13  # m
         pipe_rf_lob1['exit_position']['phi'] = -np.pi / 180.0 * angle
-        pipe_rf_lob1['valve'][0]['identifier'] = 'LOB1'
+        pipe_rf_lob1['valve_indices'] = [iv]
+        valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
         # pipe_rf10['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading to injector; up is 90
-        i += 1
+        ip += 1
+    iv += 1
 
     # DiMES chimney
-    pipe_dimesc = ods['gas_injection']['pipe'][i]
+    valve_dimesc = ods['gas_injection']['valve'][iv]
+    valve_dimesc['identifier'] = '240R-2'
+    # valve_dimesc['name'] = '240R-2 (PCS use GASD)' # dynamic loading fails when names are not defined for all valves
+    valve_dimesc['pipe_indices'] = [ip, ip + 1]
+    pipe_dimesc = ods['gas_injection']['pipe'][ip]
     pipe_dimesc['name'] = 'DiMES_Chimney_165'
     pipe_dimesc['exit_position']['r'] = 1.481  # m
     pipe_dimesc['exit_position']['z'] = -1.33  # m
     pipe_dimesc['exit_position']['phi'] = -np.pi / 180.0 * 165
-    pipe_dimesc['valve'][0]['identifier'] = '240R-2'
-    pipe_dimesc['valve'][0]['name'] = '240R-2 (PCS use GASD)'
+    pipe_dimesc['valve_indices'] = [iv]
     # pipe_dimesc['exit_position']['direction'] = 90.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
-
+    ip += 1
     # CPBOT
-    pipe_cpbot = ods['gas_injection']['pipe'][i]
+    pipe_cpbot = ods['gas_injection']['pipe'][ip]
     pipe_cpbot['name'] = 'CPBOT_150'
     pipe_cpbot['exit_position']['r'] = 1.11  # m
     pipe_cpbot['exit_position']['z'] = -1.33  # m
     pipe_cpbot['exit_position']['phi'] = -np.pi / 180.0 * 150
-    pipe_cpbot['valve'][0]['identifier'] = '240R-2'
-    pipe_cpbot['valve'][0]['name'] = '240R-2 (PCS use GASD)'
+    pipe_cpbot['valve_indices'] = [iv]
     # pipe_cpbot['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
+    ip += 1
+    iv += 1
 
     # LOB2 injects at the same poloidal locations as LOB1, but at different toroidal angles
+    valve_lob2 = ods['gas_injection']['valve'][iv]
+    valve_lob2['identifier'] = 'LOB2'
+    valve_lob2['pipe_indices'] = []
     for angle in [210, 300]:
         pipe_copy(pipe_lob1)
-        pipe_lob2 = ods['gas_injection']['pipe'][i]
+        pipe_lob2 = ods['gas_injection']['pipe'][ip]
         pipe_lob2['name'] = 'LOB2_{:03d}'.format(angle)
         pipe_lob2['exit_position']['phi'] = -np.pi / 180.0 * angle  # degrees, DIII-D hardware left handed coords
-        pipe_lob2['valve'][0]['identifier'] = 'LOB2'
-        i += 1
-
+        pipe_lob2['valve_indices'] = [iv]
+        valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
+        ip += 1
     # Dimes floor tile 165
     pipe_copy(pipec)
-    pipe_dimesf = ods['gas_injection']['pipe'][i]
+    pipe_dimesf = ods['gas_injection']['pipe'][ip]
     pipe_dimesf['name'] = 'DiMES_Tile_160'
     pipe_dimesf['exit_position']['phi'] = -np.pi / 180.0 * 165
-    pipe_dimesf['valve'][0]['identifier'] = 'LOB2'
-    i += 1
-
+    pipe_dimesf['valve_indices'] = [iv]
+    valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
+    ip += 1
     # RF COMB
-    pipe_rfcomb = ods['gas_injection']['pipe'][i]
+    pipe_rfcomb = ods['gas_injection']['pipe'][ip]
     pipe_rfcomb['name'] = 'RF_COMB_'
     pipe_rfcomb['exit_position']['r'] = 2.38  # m
     pipe_rfcomb['exit_position']['z'] = -0.13  # m
     pipe_rfcomb['exit_position']['phi'] = np.nan  # Unknown, sorry
-    pipe_rfcomb['valve'][0]['identifier'] = 'LOB2'
+    pipe_rfcomb['valve_indices'] = [iv]
+    valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
     # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
-
+    ip += 1
     # RF307
-    pipe_rf307 = ods['gas_injection']['pipe'][i]
+    pipe_rf307 = ods['gas_injection']['pipe'][ip]
     pipe_rf307['name'] = 'RF_307'
     pipe_rf307['exit_position']['r'] = 2.38  # m
     pipe_rf307['exit_position']['z'] = -0.13  # m
     pipe_rf307['exit_position']['phi'] = -np.pi / 180.0 * 307
-    pipe_rf307['valve'][0]['identifier'] = 'LOB2'
+    pipe_rf307['valve_indices'] = [iv]
+    valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
     # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
-
-    # GAS H injects in the same place as GAS C
-    pipe_copy(pipec)
-    pipeh = ods['gas_injection']['pipe'][i]
-    pipeh['name'] = 'GASH_000'
-    pipeh['valve'][0]['identifier'] = '???'  # This one's not on the manifold schematic
-    i += 1
-
-    # GAS I injects in the same place as GAS C
-    pipe_copy(pipec)
-    pipei = ods['gas_injection']['pipe'][i]
-    pipei['name'] = 'GASI_000'
-    pipei['valve'][0]['identifier'] = '???'  # This one's not on the manifold schematic
-    i += 1
-
-    # GAS J injects in the same place as GAS D
-    pipe_copy(piped)
-    pipej = ods['gas_injection']['pipe'][i]
-    pipej['name'] = 'GASJ_225'
-    pipej['valve'][0]['identifier'] = '???'  # This one's not on the manifold schematic
-    i += 1
-
+    ip += 1
     # RF260
-    pipe_rf260 = ods['gas_injection']['pipe'][i]
+    pipe_rf260 = ods['gas_injection']['pipe'][ip]
     pipe_rf260['name'] = 'RF_260'
     pipe_rf260['exit_position']['r'] = 2.38  # m
     pipe_rf260['exit_position']['z'] = 0.14  # m
     pipe_rf260['exit_position']['phi'] = -np.pi / 180.0 * 260
-    pipe_rf260['valve'][0]['identifier'] = 'LOB2?'  # Seems to have been removed. May have been on LOB2, though.
+    pipe_rf260['valve_indices'] = [iv]  # Seems to have been removed. May have been on LOB2, though.
+    valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
     # pipe_rf260['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
+    ip += 1
+    iv += 1
+
+    # GAS H injects in the same place as GAS C
+    valveh = ods['gas_injection']['valve'][iv]
+    valveh['identifier'] = '???'  # This one's not on the manifold schematic
+    valveh['pipe_indices'] = [ip]
+    pipe_copy(pipec)
+    pipeh = ods['gas_injection']['pipe'][ip]
+    pipeh['name'] = 'GASH_000'
+    pipeh['valve_indices'] = [iv]
+    ip += 1
+    iv += 1
+
+    # GAS I injects in the same place as GAS C
+    valvei = ods['gas_injection']['valve'][iv]
+    valvei['identifier'] = '???'  # This one's not on the manifold schematic
+    valvei['pipe_indices'] = [ip]
+    pipe_copy(pipec)
+    pipei = ods['gas_injection']['pipe'][ip]
+    pipei['name'] = 'GASI_000'
+    pipei['valve_indices'] = [iv]
+    ip += 1
+    iv += 1
+
+    # GAS J injects in the same place as GAS D
+    valvej = ods['gas_injection']['valve'][iv]
+    valvej['identifier'] = '???'  # This one's not on the manifold schematic
+    valvej['pipe_indices'] = [ip]
+    pipe_copy(piped)
+    pipej = ods['gas_injection']['pipe'][ip]
+    pipej['name'] = 'GASJ_225'
+    pipej['valve_indices'] = [iv]
+    ip += 1
+    iv += 1
 
     # CPMID
-    pipe_cpmid = ods['gas_injection']['pipe'][i]
+    valve_cpmid = ods['gas_injection']['valve'][iv]
+    valve_cpmid['identifier'] = '???'  # This one's not on the manifold schematic
+    valve_cpmid['pipe_indices'] = [ip]
+    pipe_cpmid = ods['gas_injection']['pipe'][ip]
     pipe_cpmid['name'] = 'CPMID'
     pipe_cpmid['exit_position']['r'] = 0.9  # m
     pipe_cpmid['exit_position']['z'] = -0.2  # m
     pipe_cpmid['exit_position']['phi'] = np.nan  # Unknown, sorry
-    pipe_cpmid['valve'][0]['identifier'] = '???'  # Seems to have been removed. Not on schematic.
+    pipe_cpmid['valve_indices'] = [iv]
     # pipe_cpmid['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
-    i += 1
+    ip += 1
+    iv += 1
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_hardware(ods, pulse):
     r"""
     Loads DIII-D tokamak poloidal field coil hardware geometry
@@ -367,7 +433,7 @@ def pf_active_coil_current_data(ods, pulse):
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_hardware(ods, pulse):
     r"""
     Loads DIII-D tokamak non_axisymmetric field coil hardware geometry
@@ -426,9 +492,15 @@ def ec_launcher_active_hardware(ods, pulse):
     # First the amount of systems in use
     query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
     num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
+    try:
+        system_max = num_systems + 1
+    except:
+        printe('No ECH system found')
+        return
+
     query = {}
     # Second query the used systems to resolve the gyrotron names
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         cur_system = f'SYSTEM_{system_no}.'
         query[f'GYROTRON_{system_no}'] = setup + cur_system + 'GYROTRON.NAME'
         query[f'FREQUENCY_{system_no}'] = setup + cur_system + 'GYROTRON.FREQUENCY'
@@ -437,7 +509,7 @@ def ec_launcher_active_hardware(ods, pulse):
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     query = {}
     gyrotron_names = []
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         if len(systems[f'GYROTRON_{system_no}']) == 0:
             """
             If nothing is connected to this system the gyrotron name is blank.
@@ -453,41 +525,44 @@ def ec_launcher_active_hardware(ods, pulse):
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
-    for system_no in range(1, num_systems + 1):
+    for system_no in range(1, system_max):
         system_index = system_no - 1
         if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
-        beams = ods['ec_launchers.beam']
+        beam = ods['ec_launchers.beam'][system_index]
         time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
         if len(time) == 1:
-            beams[system_index]['time'] = np.atleast_1d(0)
+            beam['time'] = np.atleast_1d(0)
         else:
-            beams[system_index]['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
-        ntime = len(beams[system_index]['time'])
-        beams[system_index]['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beams[system_index]['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+            beam['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        ntime = len(beam['time'])
+        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
+        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
 
-        beams[system_index]['identifier'] = beams[system_index]['name'] = gyrotron_names[system_index]
+        beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
-        beams[system_index]['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
-        beams[system_index]['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
+        beam['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
+        beam['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
 
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
         phi = -phi - np.pi / 2.0
-        beams[system_index]['launching_position.phi'] = phi * np.ones(ntime)
+        beam['launching_position.phi'] = phi * np.ones(ntime)
 
-        beams[system_index]['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
-        beams[system_index]['frequency.time'] = np.atleast_1d(0)
+        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        beam['frequency.time'] = np.atleast_1d(0)
 
-        beams[system_index]['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        beams[system_index]['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
         if iterable(xfrac):
-            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
+            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
+        elif type(xfrac) == int or type(xfrac) == float:
+            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
         else:
-            beams[system_index]['mode'] = int(np.round(1.0 - 2.0 * xfrac))
+            printe(f'Invalid mode type returned for beam {system_index}')
+            beam['mode'] = 0
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
@@ -496,10 +571,10 @@ def ec_launcher_active_hardware(ods, pulse):
         # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
         # Hence, the inverse curvature radius is zero
         # Notably the ECRH beams are astigmatic in reality so this is just an approximation
-        beams[system_index]['phase.angle'] = np.zeros(ntime)
-        beams[system_index]['phase.curvature'] = np.zeros([2, ntime])
-        beams[system_index]['spot.angle'] = np.zeros(ntime)
-        beams[system_index]['spot.size'] = 0.0172 * np.ones([2, ntime])
+        beam['phase.angle'] = np.zeros(ntime)
+        beam['phase.curvature'] = np.zeros([2, ntime])
+        beam['spot.angle'] = np.zeros(ntime)
+        beam['spot.size'] = 0.0172 * np.ones([2, ntime])
 
 
 # ================================
@@ -508,7 +583,7 @@ def interferometer_hardware(ods, pulse):
     """
     Loads DIII-D CO2 interferometer chord locations
 
-    The chord endpoints are approximative. They do not take into account 
+    The chord endpoints are approximative. They do not take into account
     the vessel wall contour of the shot. The values have been taken from OMFITprofiles.
 
     Data sources:
@@ -885,12 +960,15 @@ def bolometer_data(ods, pulse):
     # assign the data to the ods
     for ch in ods1['bolometer.channel']:
         data = all_data[f'{ch}_data']
-        error = data * 0.2
-        error[error < 1e-5] = 1e-5
-        time = all_data[f'{ch}_time']
-        ods[f'bolometer.channel[{ch}].power.data'] = data
-        ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
-        ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
+        try:
+            error = data * 0.2
+            error[error < 1e-5] = 1e-5
+            time = all_data[f'{ch}_time']
+            ods[f'bolometer.channel[{ch}].power.data'] = data
+            ods[f'bolometer.channel[{ch}].power.data_error_upper'] = error
+            ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
+        except:
+            printe(f'bolometer data was not found for channel {ch}')
 
 
 # ================================
@@ -1019,6 +1097,17 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
     subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
 
+    measurements = []
+    if _measurements:
+        measurements.extend(['TEMP', 'ROT'])
+        impdat = mdstree('d3d', 'IONS', pulse=pulse)['IMPDENS'][analysis_type]
+        signals = ['TIME', 'ZEFF', 'ZIMP']
+        TDIs = {}
+        for pos in signals:
+            TDIs[f'{pos}'] = impdat[pos].TDI
+        impdata = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
+    fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI'] + measurements
+
     # fetch
     TDIs = {}
     for sub in subsystems:
@@ -1027,10 +1116,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
         except (TypeError, KeyError):
             continue
         for k, channel in enumerate(channels):
-            fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI']
-            if _measurements:
-                fetch_keys.extend([])
-            for pos in [0]:
+            for pos in fetch_keys:
                 TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
 
@@ -1044,18 +1130,32 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
+            postime = postime / 1000.0  # Convert ms to s
             ch = ods['charge_exchange.channel.+']
             ch['name'] = 'impCER_{sub:}{ch:02d}'.format(sub=sub.lower()[0], ch=k + 1)
             ch['identifier'] = '{}{:02d}'.format(sub[0], k + 1)
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
                 chpos = ch['position'][pos.lower().split('_')[-1]]
-                chpos['time'] = postime / 1000.0  # Convert ms to s
+                chpos['time'] = postime
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
+            if _measurements:
+                ch['ion.0.t_i.data'] = data[f'{sub}_{channel}_TEMP'] * 1e3
+                ch['ion.0.t_i.time'] = postime
+                # ch['ion.0.velocity_pol.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
+                # ch['ion.0.velocity_pol.time'] = postime
+                # ch['ion.0.velocity_tor.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
+                # ch['ion.0.velocity_tor.time'] = postime
+                # ch['ion.0.n_i_over_n_e.data'] = impdata['ZEFF']/(impdata['ZIMP'])^2 # not sure what is required to make this work
+                #                ch['ion.0.n_i_over_n_e.data.time'] = postime
+                # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
+                # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
+                # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
+                ch['zeff.data'] = impdata['ZEFF']
+                ch['zeff.time'] = impdata['TIME'] / 1000.0  # Convert ms to s
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__)
 def magnetics_weights(ods, pulse, time_index):
     r"""
     Load DIII-D tokamak magnetics equilibrium weights
@@ -1073,7 +1173,7 @@ def magnetics_weights(ods, pulse, time_index):
     ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
 
 
-@machine_mapping_function(__regression_arguments__)
+@machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_hardware(ods, pulse):
     r"""
     Load DIII-D tokamak flux loops and magnetic probes hardware geometry
@@ -1127,7 +1227,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
             compsig_data = m.data()
             compsig_time = m.dim_of(0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1:
+                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
                     sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
@@ -1185,7 +1285,10 @@ def magnetics_probes_data(ods, pulse):
 
             compsig_time = m.dim_of(0) / 1000
             for channel in ods1['magnetics.b_field_pol_probe']:
-                if 'magnetics.b_field_pol_probe.{channel}.identifier' in ods1:
+                if (
+                    'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
+                    and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
+                ):
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
                     sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
@@ -1245,7 +1348,7 @@ def core_profiles_global_quantities_data(ods, pulse):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1)
+    unwrap(magnetics_hardware)(ods1, pulse)
 
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
@@ -1262,5 +1365,4 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(['ec_launcher_active_hardware'], globals(), locals())
-    test_machine_mapping_functions(['thomson_scattering_hardware'], globals(), locals())
+    test_machine_mapping_functions(__all__, globals(), locals())
