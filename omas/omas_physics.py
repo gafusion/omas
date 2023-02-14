@@ -1002,6 +1002,49 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
+def summary_currents(ods, time_index=None, update=True):
+    """
+    Calculatess plasma currents from core_profiles for each time slice and stores them in the summary ods
+
+    :param ods: input ods
+
+    :param time_index: time slices to process
+
+    :param update: operate in place
+
+    :return: updated ods
+    """
+
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+
+    current_names = [('j_bootstrap','current_bootstrap.value'),
+    ('j_non_inductive','current_non_inductive.value'),
+    ('j_ohmic','current_ohm.value')]
+    rho = ods['equilibrium.time_slice[0].profiles_1d.rho_tor_norm']
+    time_index = 0
+    coordsio = {'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho}
+
+    with omas_environment(ods, coordsio=coordsio):
+
+        for (jname_cp, jname_sum) in current_names:
+            if f'core_profiles.profiles_1d.{time_index}.{jname_cp}' in ods:
+                Bt = ods['equilibrium.vacuum_toroidal_field.b0']
+                JtoR = transform_current(rho=rho, JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt, equilibrium=ods['equilibrium.time_slice'][time_index])
+                Ip = numpy.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/numpy.pi
+            
+                if f'summary.global_quantities.{jname_sum}' not in ods:
+                   ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index+1) 
+                
+                   ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
+
+    return ods_n
+
+@add_to__ODS__
+@preprocess_ods('core_profiles', 'equilibrium')
 def summary_thermal_stored_energy(ods, update=True):
     """
     Calculates the stored energy based on the contents of core_profiles for all time-slices
@@ -1051,9 +1094,6 @@ def summary_taue(ods, thermal=True, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    # update ODS with stored energy from equilibrium
-    ods.physics_equilibrium_stored_energy()
-    ods.physics_summary_thermal_stored_energy()
 
     tau_e_scaling = []
     tau_e_MHD = []
@@ -1099,22 +1139,24 @@ def summary_taue(ods, thermal=True, update=True):
             if 'power_loss' in ods['summary.global_quantities']:
                 power_loss = ods['summary.global_quantities.power_loss.value'][time_index]
                 info_string += "Power from: summary.global_quantities.power_loss.value,  "
-            else:
+            elif 'power_steady' in ods['summary.global_quantities']:
                 print("Warning: taue calculation used power steady instead of power_loss")
                 ods.physics_summary_heating_power()
                 power_loss = ods['summary.global_quantities.power_steady.value'][time_index]
                 info_string += "INACCURATE Power from: summary.global_quantities.power_steady.value,  "
-
+            else:
+                return ods_n
             # Stored energy from profiles or equilibrium
             if 'summary.global_quantities.energy_thermal' in ods and thermal:
                 stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
                 info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
-            else:
+            elif 'global_quantities.energy_mhd' in  equilibrium_ods:
                 if thermal:
                     print("Warning, tau_e calculated with stored energy MHD")
                 stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
                 info_string += "Stored energy from: 'global_quantities']['energy_mhd"
-
+            else:
+                return ods_n
             # Calculate tau_e
             tau_e = abs(
                 56.2e-3
@@ -1162,6 +1204,8 @@ def summary_heating_power(ods, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
+    if 'core_sources' not in ods:
+        return ods_n
     sources = ods_n['core_sources']['source']
     index_dict = {2: 'nbi', 3: 'ec', 4: 'lh', 5: 'ic', 6: 'fusion', 7: 'ohmic'}
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
@@ -1224,10 +1268,19 @@ def summary_global_quantities(ods, update=True):
 
     :return: updated ods
     """
-    ods_n = ods.physics_summary_greenwald(update=update)
-    ods_n.physics_summary_taue(update=True)
-    ods_n.physics_summary_heating_power(update=True)
-    ods_n.physics_summary_consistent_global_quantities(update=True)
+    ods_n = ods
+    if not update:
+        from omas import ODS
+
+        ods_n = ODS().copy_attrs_from(ods)
+        
+    ods_n.update(ods.physics_summary_greenwald(update=update))
+    ods_n.update(ods.physics_summary_currents(update=update))
+    ods_n.update(ods.physics_summary_thermal_stored_energy(update=update))
+    ods_n.update(ods.physics_summary_heating_power(update=update))
+    ods_n.update(ods.physics_summary_taue(update=update))
+    ods_n.update(ods.physics_summary_consistent_global_quantities(update=update))
+
     return ods_n
 
 
