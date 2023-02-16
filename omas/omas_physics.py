@@ -2710,8 +2710,8 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
         index = numpy.argmin(numpy.abs(q))
         if index == 0:
             index += 1
-        q_estimate = numpy.abs((pi * B0 * (a - a[0]) ** 2) / (psi - psi[0]))
-        if numpy.abs(q_estimate[index] - q[index]) < numpy.abs(q_estimate[index] / (2 * pi) - q[index]):
+        q_estimate = numpy.abs((numpy.pi * B0 * (a - a[0]) ** 2) / (psi - psi[0]))
+        if numpy.abs(q_estimate[index] - q[index]) < numpy.abs(q_estimate[index] / (2 * numpy.pi) - q[index]):
             eBp = 1
         else:
             eBp = 0
