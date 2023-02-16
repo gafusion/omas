@@ -45,7 +45,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.centre.phi_error_lower": {
@@ -76,7 +77,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.centre.r_error_lower": {
@@ -107,7 +109,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.centre.z_error_lower": {
@@ -155,7 +158,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.outline.x1_error_lower": {
@@ -195,7 +199,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.outline.x2_error_lower": {
@@ -232,7 +237,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.radius_error_lower": {
@@ -263,7 +269,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.surface_error_lower": {
@@ -302,7 +309,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x1_unit_vector.x_error_lower": {
@@ -333,7 +341,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x1_unit_vector.y_error_lower": {
@@ -364,7 +373,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x1_unit_vector.z_error_lower": {
@@ -395,7 +405,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x1_width_error_lower": {
@@ -434,7 +445,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x2_unit_vector.x_error_lower": {
@@ -465,7 +477,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x2_unit_vector.y_error_lower": {
@@ -496,7 +509,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x2_unit_vector.z_error_lower": {
@@ -527,7 +541,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x2_width_error_lower": {
@@ -566,7 +581,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x3_unit_vector.x_error_lower": {
@@ -597,7 +613,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x3_unit_vector.y_error_lower": {
@@ -628,7 +645,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/aperture/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].aperture.x3_unit_vector.z_error_lower": {
@@ -685,7 +703,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.first_point.phi_error_lower": {
@@ -716,7 +735,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.first_point.r_error_lower": {
@@ -747,7 +767,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.first_point.z_error_lower": {
@@ -785,7 +806,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.second_point.phi_error_lower": {
@@ -816,7 +838,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.second_point.r_error_lower": {
@@ -847,7 +870,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight.second_point.z_error_lower": {
@@ -881,7 +905,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/wavelength_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].wavelength_error_lower": {
@@ -938,7 +963,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"camera_dimensions\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/camera_dimensions_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.camera_dimensions_error_lower": {
@@ -982,7 +1008,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.centre.phi_error_lower": {
@@ -1013,7 +1040,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.centre.r_error_lower": {
@@ -1044,7 +1072,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.centre.z_error_lower": {
@@ -1100,7 +1129,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/first_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.first_point.phi_error_lower": {
@@ -1143,7 +1173,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/first_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.first_point.r_error_lower": {
@@ -1186,7 +1217,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/first_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.first_point.z_error_lower": {
@@ -1236,7 +1268,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.second_point.phi_error_lower": {
@@ -1279,7 +1312,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.second_point.r_error_lower": {
@@ -1322,7 +1356,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/line_of_sight/second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.line_of_sight.second_point.z_error_lower": {
@@ -1364,7 +1399,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pixel_dimensions\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/pixel_dimensions_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.pixel_dimensions_error_lower": {
@@ -1412,7 +1448,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/pixel_position/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.pixel_position.phi_error_lower": {
@@ -1455,7 +1492,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/pixel_position/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.pixel_position.r_error_lower": {
@@ -1498,7 +1536,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/pixel_position/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.pixel_position.z_error_lower": {
@@ -1555,7 +1594,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x1_unit_vector.x_error_lower": {
@@ -1586,7 +1626,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x1_unit_vector.y_error_lower": {
@@ -1617,7 +1658,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x1_unit_vector.z_error_lower": {
@@ -1656,7 +1698,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x2_unit_vector.x_error_lower": {
@@ -1687,7 +1730,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x2_unit_vector.y_error_lower": {
@@ -1718,7 +1762,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x2_unit_vector.z_error_lower": {
@@ -1756,7 +1801,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x3_unit_vector.x_error_lower": {
@@ -1787,7 +1833,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x3_unit_vector.y_error_lower": {
@@ -1818,7 +1865,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/camera/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].camera.x3_unit_vector.z_error_lower": {
@@ -1856,7 +1904,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"angle_bragg\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/angle_bragg_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.angle_bragg_error_lower": {
@@ -1894,7 +1943,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.centre.phi_error_lower": {
@@ -1925,7 +1975,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.centre.r_error_lower": {
@@ -1956,7 +2007,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.centre.z_error_lower": {
@@ -2132,7 +2184,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.outline.x1_error_lower": {
@@ -2172,7 +2225,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.outline.x2_error_lower": {
@@ -2209,7 +2263,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.radius_error_lower": {
@@ -2240,7 +2295,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.surface_error_lower": {
@@ -2272,7 +2328,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.thickness_error_lower": {
@@ -2305,7 +2362,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_bragg\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/wavelength_bragg_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.wavelength_bragg_error_lower": {
@@ -2336,7 +2394,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x1_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x1_curvature_error_lower": {
@@ -2375,7 +2434,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x1_unit_vector.x_error_lower": {
@@ -2406,7 +2466,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x1_unit_vector.y_error_lower": {
@@ -2437,7 +2498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x1_unit_vector.z_error_lower": {
@@ -2468,7 +2530,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x1_width_error_lower": {
@@ -2499,7 +2562,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x2_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x2_curvature_error_lower": {
@@ -2538,7 +2602,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x2_unit_vector.x_error_lower": {
@@ -2569,7 +2634,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x2_unit_vector.y_error_lower": {
@@ -2600,7 +2666,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x2_unit_vector.z_error_lower": {
@@ -2631,7 +2698,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x2_width_error_lower": {
@@ -2670,7 +2738,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x3_unit_vector.x_error_lower": {
@@ -2701,7 +2770,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x3_unit_vector.y_error_lower": {
@@ -2732,7 +2802,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].crystal.x3_unit_vector.z_error_lower": {
@@ -2767,7 +2838,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"detection_efficiency\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/detection_efficiency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].detection_efficiency_error_lower": {
@@ -2810,7 +2882,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energies\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/energies_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].energies_error_lower": {
@@ -2853,7 +2926,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_bound_lower\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/energy_bound_lower_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].energy_bound_lower_error_lower": {
@@ -2896,7 +2970,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_bound_upper\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/energy_bound_upper_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].energy_bound_upper_error_lower": {
@@ -2935,7 +3010,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"exposure_time\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/exposure_time_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].exposure_time_error_lower": {
@@ -2984,7 +3060,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].centre.phi_error_lower": {
@@ -3015,7 +3092,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].centre.r_error_lower": {
@@ -3046,7 +3124,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].centre.z_error_lower": {
@@ -3181,7 +3260,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].outline.x1_error_lower": {
@@ -3221,7 +3301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].outline.x2_error_lower": {
@@ -3261,7 +3342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"photon_absorption\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/photon_absorption_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].photon_absorption_error_lower": {
@@ -3298,7 +3380,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].radius_error_lower": {
@@ -3329,7 +3412,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].surface_error_lower": {
@@ -3360,7 +3444,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"thickness\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/thickness_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].thickness_error_lower": {
@@ -3391,7 +3476,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_lower\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/wavelength_lower_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].wavelength_lower_error_lower": {
@@ -3422,7 +3508,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_upper\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/wavelength_upper_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].wavelength_upper_error_lower": {
@@ -3456,7 +3543,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/wavelengths_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].wavelengths_error_lower": {
@@ -3493,7 +3581,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x1_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x1_curvature_error_lower": {
@@ -3532,7 +3621,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x1_unit_vector.x_error_lower": {
@@ -3563,7 +3653,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x1_unit_vector.y_error_lower": {
@@ -3594,7 +3685,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x1_unit_vector.z_error_lower": {
@@ -3625,7 +3717,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x1_width_error_lower": {
@@ -3656,7 +3749,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x2_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x2_curvature_error_lower": {
@@ -3695,7 +3789,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x2_unit_vector.x_error_lower": {
@@ -3726,7 +3821,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x2_unit_vector.y_error_lower": {
@@ -3757,7 +3853,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x2_unit_vector.z_error_lower": {
@@ -3788,7 +3885,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x2_width_error_lower": {
@@ -3827,7 +3925,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x3_unit_vector.x_error_lower": {
@@ -3858,7 +3957,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x3_unit_vector.y_error_lower": {
@@ -3889,7 +3989,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].x3_unit_vector.z_error_lower": {
@@ -3937,7 +4038,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"counts_bin_n\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/frame(itime)/counts_bin_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_x_ray_crystal.channel[:].frame[:].counts_bin_n_error_lower": {
@@ -3983,7 +4085,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"counts_n\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/frame(itime)/counts_n_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "spectrometer_x_ray_crystal.channel[:].frame[:].counts_n_error_lower": {
@@ -4044,7 +4147,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"centre\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/centre_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.centre_error_lower": {
@@ -4087,7 +4191,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"intensity\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/intensity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.intensity_error_lower": {
@@ -4130,7 +4235,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"scale\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/scale_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.scale_error_lower": {
@@ -4173,7 +4279,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"sigma\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/sigma_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.sigma_error_lower": {
@@ -4246,7 +4353,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"values\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/values_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.values_error_lower": {
@@ -4290,7 +4398,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelengths\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function/wavelengths_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function.wavelengths_error_lower": {
@@ -4352,7 +4461,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/lines_of_sight_rho_tor_norm/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.lines_of_sight_rho_tor_norm.data_error_lower": {
@@ -4424,7 +4534,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/lines_of_sight_second_point/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.lines_of_sight_second_point.phi_error_lower": {
@@ -4464,7 +4575,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/lines_of_sight_second_point/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.lines_of_sight_second_point.r_error_lower": {
@@ -4504,7 +4616,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/lines_of_sight_second_point/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.lines_of_sight_second_point.z_error_lower": {
@@ -4558,7 +4671,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/t_e/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.t_e.data_error_lower": {
@@ -4637,7 +4751,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/t_i/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.t_i.data_error_lower": {
@@ -4728,7 +4843,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"data\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/profiles_line_integrated/velocity_tor/data_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].profiles_line_integrated.velocity_tor.data_error_lower": {
@@ -4808,7 +4924,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/centre/phi_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].centre.phi_error_lower": {
@@ -4839,7 +4956,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/centre/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].centre.r_error_lower": {
@@ -4870,7 +4988,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/centre/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].centre.z_error_lower": {
@@ -5005,7 +5124,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/outline/x1_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].outline.x1_error_lower": {
@@ -5045,7 +5165,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/outline/x2_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].outline.x2_error_lower": {
@@ -5082,7 +5203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radius\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/radius_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].radius_error_lower": {
@@ -5113,7 +5235,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/surface_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].surface_error_lower": {
@@ -5144,7 +5267,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x1_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x1_curvature_error_lower": {
@@ -5183,7 +5307,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x1_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x1_unit_vector.x_error_lower": {
@@ -5214,7 +5339,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x1_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x1_unit_vector.y_error_lower": {
@@ -5245,7 +5371,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x1_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x1_unit_vector.z_error_lower": {
@@ -5276,7 +5403,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x1_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x1_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x1_width_error_lower": {
@@ -5307,7 +5435,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_curvature\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x2_curvature_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x2_curvature_error_lower": {
@@ -5346,7 +5475,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x2_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x2_unit_vector.x_error_lower": {
@@ -5377,7 +5507,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x2_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x2_unit_vector.y_error_lower": {
@@ -5408,7 +5539,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x2_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x2_unit_vector.z_error_lower": {
@@ -5439,7 +5571,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x2_width\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x2_width_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x2_width_error_lower": {
@@ -5478,7 +5611,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"x\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x3_unit_vector/x_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x3_unit_vector.x_error_lower": {
@@ -5509,7 +5643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"y\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x3_unit_vector/y_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x3_unit_vector.y_error_lower": {
@@ -5540,7 +5675,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/x3_unit_vector/z_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].reflector[:].x3_unit_vector.z_error_lower": {
@@ -5575,7 +5711,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"wavelength_frames\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/wavelength_frames_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].wavelength_frames_error_lower": {
@@ -5617,7 +5754,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_frames\"",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/z_frames_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.channel[:].z_frames_error_lower": {
@@ -5774,6 +5912,243 @@
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "spectrometer_x_ray_crystal.ids_properties.occurrence"
  },
+ "spectrometer_x_ray_crystal.ids_properties.plugins": {
+  "data_type": "STRUCTURE",
+  "documentation": "Information about the plugins used to write/read this IDS. This structure is filled automatically by the Access Layer at GET/PUT time, no need to fill it via a user program.",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.39.0",
+  "structure_reference": "ids_plugins"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to GET the data",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to PUT the data",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of IDS nodes for which a plugin has been applied",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "ids_plugins_node",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins actually used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application). This information is filled by the plugin infrastructure during the GET operation.",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the plugin applies to the whole IDS.",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins used to PUT a node (potentially, multiple plugins can be applied, if so they are listed by order of application)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins to be used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application) ",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_x_ray_crystal.ids_properties.provenance": {
   "data_type": "STRUCTURE",
   "documentation": "Provenance information about this IDS",
@@ -5787,7 +6162,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -5796,20 +6171,22 @@
  },
  "spectrometer_x_ray_crystal.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "spectrometer_x_ray_crystal.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "spectrometer_x_ray_crystal.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -5867,7 +6244,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"latency\"",
   "full_path": "spectrometer_x_ray_crystal/latency_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "spectrometer_x_ray_crystal.latency_error_lower": {

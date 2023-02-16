@@ -46,7 +46,7 @@ def generate_xml_schemas(imas_version=None):
         subprocess.Popen(
             f"""
         cd {omas_dir}
-        curl https://iweb.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
+        curl https://cytranet.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
         rm {saxon_version}.zip""",
             shell=True,
@@ -81,7 +81,6 @@ export CLASSPATH={omas_dir}/{saxon_version}/saxon9he.jar;
 cd {dd_folder}
 git checkout {imas_version}
 git pull
-export JAVA_HOME=$(dirname $(dirname `which java`))
 make clean
 make
 rm -rf {imas_json_dir}/{_imas_version}/
@@ -171,7 +170,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                     'equilibrium.time_slice[:].profiles_1d.geometric_axis.z',
                 ]:
                     me['@coordinate'] = ['equilibrium.time_slice[:].profiles_1d.psi']
-                if me['@units'] in ['as_parent', 'as parent', 'as_parent_level_2']:
+                if "parent" in me['@units']:
                     me['@units'] = parent['units']
                 parent['units'] = me['@units']
 

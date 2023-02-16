@@ -140,6 +140,243 @@
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "core_sources.ids_properties.occurrence"
  },
+ "core_sources.ids_properties.plugins": {
+  "data_type": "STRUCTURE",
+  "documentation": "Information about the plugins used to write/read this IDS. This structure is filled automatically by the Access Layer at GET/PUT time, no need to fill it via a user program.",
+  "full_path": "core_sources/ids_properties/plugins",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.39.0",
+  "structure_reference": "ids_plugins"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_get": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to GET the data",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_get",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_get.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_get.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_get/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_get.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_get/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_get.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_get/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to PUT the data",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_put.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_put.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_put/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_put.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_put/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.infrastructure_put.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_sources/ids_properties/plugins/infrastructure_put/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of IDS nodes for which a plugin has been applied",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "ids_plugins_node",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins actually used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application). This information is filled by the plugin infrastructure during the GET operation.",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].get_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/get_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the plugin applies to the whole IDS.",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins used to PUT a node (potentially, multiple plugins can be applied, if so they are listed by order of application)",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].put_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/put_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins to be used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application) ",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_sources.ids_properties.plugins.node[:].readback[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_sources/ids_properties/plugins/node(i1)/readback(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "core_sources.ids_properties.provenance": {
   "data_type": "STRUCTURE",
   "documentation": "Provenance information about this IDS",
@@ -153,7 +390,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "core_sources/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -162,20 +399,22 @@
  },
  "core_sources.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "core_sources/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "core_sources.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "core_sources/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "core_sources.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -256,7 +495,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/current_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].current_parallel_error_lower": {
@@ -294,7 +534,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].electrons.particles_error_lower": {
@@ -325,7 +566,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/electrons/power_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].electrons.power_error_lower": {
@@ -356,7 +598,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/power_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].power_error_lower": {
@@ -395,7 +638,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/torque_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].torque_tor_error_lower": {
@@ -426,7 +670,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_particles\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].total_ion_particles_error_lower": {
@@ -457,7 +702,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_power\"",
   "full_path": "core_sources/source(i1)/global_quantities(itime)/total_ion_power_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].global_quantities[:].total_ion_power_error_lower": {
@@ -534,7 +780,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/conductivity_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].conductivity_parallel_error_lower": {
@@ -574,7 +821,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/current_parallel_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].current_parallel_inside_error_lower": {
@@ -639,7 +887,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.explicit_part_error_lower": {
@@ -679,7 +928,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_decomposed.implicit_part_error_lower": {
@@ -708,7 +958,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.energy_error_lower": {
@@ -766,7 +1017,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.explicit_part_error_lower": {
@@ -806,7 +1058,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_decomposed.implicit_part_error_lower": {
@@ -835,7 +1088,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_error_lower": {
@@ -875,7 +1129,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/particles_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.particles_inside_error_lower": {
@@ -915,7 +1170,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/electrons/power_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].electrons.power_inside_error_lower": {
@@ -962,7 +1218,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.area_error_lower": {
@@ -1013,7 +1270,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_boundary_error_lower": {
@@ -1036,7 +1294,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_error_lower": {
@@ -1079,7 +1338,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/psi_magnetic_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.psi_magnetic_axis_error_lower": {
@@ -1113,7 +1373,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_pol_norm_error_lower": {
@@ -1153,7 +1414,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_error_lower": {
@@ -1193,7 +1455,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -1233,7 +1496,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.surface_error_lower": {
@@ -1273,7 +1537,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/grid/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].grid.volume_error_lower": {
@@ -1332,7 +1597,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].a_error_lower": {
@@ -1371,7 +1637,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -1404,7 +1671,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].element[:].z_n_error_lower": {
@@ -1456,7 +1724,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.explicit_part_error_lower": {
@@ -1496,7 +1765,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_decomposed.implicit_part_error_lower": {
@@ -1525,7 +1795,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].energy_error_lower": {
@@ -1579,7 +1850,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.diamagnetic_error_lower": {
@@ -1619,7 +1891,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.parallel_error_lower": {
@@ -1659,7 +1932,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.poloidal_error_lower": {
@@ -1699,7 +1973,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.radial_error_lower": {
@@ -1757,7 +2032,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.explicit_part_error_lower": {
@@ -1797,7 +2073,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_decomposed.implicit_part_error_lower": {
@@ -1826,7 +2103,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/momentum/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].momentum.toroidal_error_lower": {
@@ -1898,7 +2176,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.explicit_part_error_lower": {
@@ -1938,7 +2217,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_decomposed.implicit_part_error_lower": {
@@ -1967,7 +2247,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].particles_error_lower": {
@@ -2043,7 +2324,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.explicit_part_error_lower": {
@@ -2083,7 +2365,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_decomposed.implicit_part_error_lower": {
@@ -2112,7 +2395,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].energy_error_lower": {
@@ -2214,7 +2498,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.explicit_part_error_lower": {
@@ -2254,7 +2539,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_decomposed.implicit_part_error_lower": {
@@ -2283,7 +2569,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_error_lower": {
@@ -2320,7 +2607,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
@@ -2358,7 +2646,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_max_error_lower": {
@@ -2389,7 +2678,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].z_min_error_lower": {
@@ -2420,7 +2710,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].z_ion_error_lower": {
@@ -2454,7 +2745,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/j_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].j_parallel_error_lower": {
@@ -2494,7 +2786,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].momentum_tor_error_lower": {
@@ -2534,7 +2827,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_j_cross_b_field\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/momentum_tor_j_cross_b_field_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].momentum_tor_j_cross_b_field_error_lower": {
@@ -2593,7 +2887,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].a_error_lower": {
@@ -2632,7 +2927,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -2665,7 +2961,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/element(i3)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
@@ -2699,7 +2996,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].energy_error_lower": {
@@ -2760,7 +3058,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].particles_error_lower": {
@@ -2818,7 +3117,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].energy_error_lower": {
@@ -2894,7 +3194,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/particles_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].particles_error_lower": {
@@ -2931,7 +3232,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
@@ -2980,7 +3282,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"torque_tor_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/torque_tor_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].torque_tor_inside_error_lower": {
@@ -3038,7 +3341,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"explicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/explicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.explicit_part_error_lower": {
@@ -3078,7 +3382,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"implicit_part\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_decomposed/implicit_part_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_decomposed.implicit_part_error_lower": {
@@ -3107,7 +3412,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_energy\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_energy_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_energy_error_lower": {
@@ -3147,7 +3453,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"total_ion_power_inside\"",
   "full_path": "core_sources/source(i1)/profiles_1d(itime)/total_ion_power_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_sources.source[:].profiles_1d[:].total_ion_power_inside_error_lower": {
@@ -3209,7 +3516,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].a_error_lower": {
@@ -3248,7 +3556,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].multiplicity_error_lower": {
@@ -3281,7 +3590,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/ion/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.element[:].z_n_error_lower": {
@@ -3340,7 +3650,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/ion/state/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.vibrational_level_error_lower": {
@@ -3378,7 +3689,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.z_max_error_lower": {
@@ -3409,7 +3721,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_sources/source(i1)/species/ion/state/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.state.z_min_error_lower": {
@@ -3440,7 +3753,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_sources/source(i1)/species/ion/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.ion.z_ion_error_lower": {
@@ -3489,7 +3803,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].a_error_lower": {
@@ -3528,7 +3843,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].multiplicity_error_lower": {
@@ -3561,7 +3877,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_sources/source(i1)/species/neutral/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.element[:].z_n_error_lower": {
@@ -3649,7 +3966,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_sources/source(i1)/species/neutral/state/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.source[:].species.neutral.state.vibrational_level_error_lower": {
@@ -3744,7 +4062,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_sources/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.vacuum_toroidal_field.b0_error_lower": {
@@ -3789,7 +4108,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_sources/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_sources.vacuum_toroidal_field.r0_error_lower": {

@@ -130,7 +130,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_pol\"",
   "full_path": "core_profiles/global_quantities/beta_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.beta_pol_error_lower": {
@@ -173,7 +174,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_tor\"",
   "full_path": "core_profiles/global_quantities/beta_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.beta_tor_error_lower": {
@@ -216,7 +218,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_tor_norm\"",
   "full_path": "core_profiles/global_quantities/beta_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.beta_tor_norm_error_lower": {
@@ -262,7 +265,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_bootstrap\"",
   "full_path": "core_profiles/global_quantities/current_bootstrap_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.current_bootstrap_error_lower": {
@@ -314,7 +318,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_non_inductive\"",
   "full_path": "core_profiles/global_quantities/current_non_inductive_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.current_non_inductive_error_lower": {
@@ -363,7 +368,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ejima\"",
   "full_path": "core_profiles/global_quantities/ejima_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.ejima_error_lower": {
@@ -406,7 +412,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_diamagnetic\"",
   "full_path": "core_profiles/global_quantities/energy_diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.energy_diamagnetic_error_lower": {
@@ -461,7 +468,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_volume_average\"",
   "full_path": "core_profiles/global_quantities/ion(i1)/n_i_volume_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.ion[:].n_i_volume_average_error_lower": {
@@ -504,7 +512,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i_volume_average\"",
   "full_path": "core_profiles/global_quantities/ion(i1)/t_i_volume_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.ion[:].t_i_volume_average_error_lower": {
@@ -544,7 +553,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ion_time_slice\"",
   "full_path": "core_profiles/global_quantities/ion_time_slice_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.ion_time_slice_error_lower": {
@@ -584,7 +594,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ip\"",
   "full_path": "core_profiles/global_quantities/ip_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.ip_error_lower": {
@@ -646,7 +657,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"li_3\"",
   "full_path": "core_profiles/global_quantities/li_3_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.li_3_error_lower": {
@@ -677,7 +689,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"li\"",
   "full_path": "core_profiles/global_quantities/li_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.li_error_lower": {
@@ -723,7 +736,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e_volume_average\"",
   "full_path": "core_profiles/global_quantities/n_e_volume_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.n_e_volume_average_error_lower": {
@@ -768,7 +782,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"resistive_psi_losses\"",
   "full_path": "core_profiles/global_quantities/resistive_psi_losses_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.resistive_psi_losses_error_lower": {
@@ -811,7 +826,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e_peaking\"",
   "full_path": "core_profiles/global_quantities/t_e_peaking_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.t_e_peaking_error_lower": {
@@ -855,7 +871,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e_volume_average\"",
   "full_path": "core_profiles/global_quantities/t_e_volume_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.t_e_volume_average_error_lower": {
@@ -900,7 +917,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i_average_peaking\"",
   "full_path": "core_profiles/global_quantities/t_i_average_peaking_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.t_i_average_peaking_error_lower": {
@@ -946,7 +964,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_loop\"",
   "full_path": "core_profiles/global_quantities/v_loop_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.v_loop_error_lower": {
@@ -995,7 +1014,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_eff_resistive\"",
   "full_path": "core_profiles/global_quantities/z_eff_resistive_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.global_quantities.z_eff_resistive_error_lower": {
@@ -1055,6 +1075,243 @@
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "core_profiles.ids_properties.occurrence"
  },
+ "core_profiles.ids_properties.plugins": {
+  "data_type": "STRUCTURE",
+  "documentation": "Information about the plugins used to write/read this IDS. This structure is filled automatically by the Access Layer at GET/PUT time, no need to fill it via a user program.",
+  "full_path": "core_profiles/ids_properties/plugins",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.39.0",
+  "structure_reference": "ids_plugins"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to GET the data",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to PUT the data",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of IDS nodes for which a plugin has been applied",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "ids_plugins_node",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins actually used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application). This information is filled by the plugin infrastructure during the GET operation.",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the plugin applies to the whole IDS.",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins used to PUT a node (potentially, multiple plugins can be applied, if so they are listed by order of application)",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins to be used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application) ",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "core_profiles.ids_properties.provenance": {
   "data_type": "STRUCTURE",
   "documentation": "Provenance information about this IDS",
@@ -1068,7 +1325,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "core_profiles/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1077,20 +1334,22 @@
  },
  "core_profiles.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "core_profiles/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "core_profiles.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "core_profiles/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "core_profiles.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1164,7 +1423,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"conductivity_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/conductivity_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].conductivity_parallel_error_lower": {
@@ -1204,7 +1464,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"current_parallel_inside\"",
   "full_path": "core_profiles/profiles_1d(itime)/current_parallel_inside_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].current_parallel_inside_error_lower": {
@@ -1252,7 +1513,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field.diamagnetic_error_lower": {
@@ -1292,7 +1554,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field.parallel_error_lower": {
@@ -1332,7 +1595,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field.poloidal_error_lower": {
@@ -1372,7 +1636,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field.radial_error_lower": {
@@ -1412,7 +1677,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field.toroidal_error_lower": {
@@ -1453,7 +1719,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"e_field_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/e_field_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].e_field_parallel_error_lower": {
@@ -1502,7 +1769,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"collisionality_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/collisionality_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.collisionality_norm_error_lower": {
@@ -1542,7 +1810,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_error_lower": {
@@ -1582,7 +1851,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fast_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fast_error_lower": {
@@ -1630,7 +1900,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.chi_squared_error_lower": {
@@ -1674,13 +1945,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_lower": {
@@ -1692,7 +1964,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.measured_error_upper": {
   "coordinates": [
@@ -1703,7 +1975,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.parameters": {
   "data_type": "STR_0D",
@@ -1721,13 +1993,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_lower": {
@@ -1739,7 +2012,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -1750,7 +2023,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.rho_tor_norm": {
   "coordinates": [
@@ -1767,7 +2040,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.rho_tor_norm_error_lower": {
@@ -1817,7 +2091,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.time_measurement_error_lower": {
@@ -1885,7 +2160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.time_measurement_width_error_lower": {
@@ -1925,7 +2201,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_fit.weight_error_lower": {
@@ -1965,7 +2242,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/density_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.density_thermal_error_lower": {
@@ -2012,7 +2290,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_error_lower": {
@@ -2052,7 +2331,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_fast_parallel_error_lower": {
@@ -2092,7 +2372,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_fast_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_fast_perpendicular_error_lower": {
@@ -2132,7 +2413,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.pressure_thermal_error_lower": {
@@ -2172,7 +2454,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_error_lower": {
@@ -2220,7 +2503,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.chi_squared_error_lower": {
@@ -2264,13 +2548,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_lower": {
@@ -2282,7 +2567,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.measured_error_upper": {
   "coordinates": [
@@ -2293,7 +2578,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.parameters": {
   "data_type": "STR_0D",
@@ -2311,13 +2596,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_lower": {
@@ -2329,7 +2615,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -2340,7 +2626,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.rho_tor_norm": {
   "coordinates": [
@@ -2357,7 +2643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.rho_tor_norm_error_lower": {
@@ -2407,7 +2694,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.time_measurement_error_lower": {
@@ -2475,7 +2763,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.time_measurement_width_error_lower": {
@@ -2515,7 +2804,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/temperature_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.temperature_fit.weight_error_lower": {
@@ -2572,6 +2862,7 @@
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.diamagnetic_error_lower": {
@@ -2612,6 +2903,7 @@
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.parallel_error_lower": {
@@ -2652,6 +2944,7 @@
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.poloidal_error_lower": {
@@ -2692,6 +2985,7 @@
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.radial_error_lower": {
@@ -2732,6 +3026,7 @@
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity.toroidal_error_lower": {
@@ -2772,7 +3067,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity_pol_error_lower": {
@@ -2815,7 +3111,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/electrons/velocity_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].electrons.velocity_tor_error_lower": {
@@ -2864,7 +3161,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"area\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/area_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.area_error_lower": {
@@ -2915,7 +3213,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_boundary\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/psi_boundary_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.psi_boundary_error_lower": {
@@ -2938,7 +3237,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/psi_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.psi_error_lower": {
@@ -2981,7 +3281,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"psi_magnetic_axis\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/psi_magnetic_axis_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.psi_magnetic_axis_error_lower": {
@@ -3015,7 +3316,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_pol_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/rho_pol_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.rho_pol_norm_error_lower": {
@@ -3055,7 +3357,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.rho_tor_error_lower": {
@@ -3095,7 +3398,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.rho_tor_norm_error_lower": {
@@ -3135,7 +3439,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"surface\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/surface_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.surface_error_lower": {
@@ -3175,7 +3480,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"volume\"",
   "full_path": "core_profiles/profiles_1d(itime)/grid/volume_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].grid.volume_error_lower": {
@@ -3226,7 +3532,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_error_lower": {
@@ -3266,7 +3573,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fast_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fast_error_lower": {
@@ -3314,7 +3622,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.chi_squared_error_lower": {
@@ -3358,13 +3667,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_lower": {
@@ -3376,7 +3686,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.measured_error_upper": {
   "coordinates": [
@@ -3387,7 +3697,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.parameters": {
   "data_type": "STR_0D",
@@ -3405,13 +3715,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_lower": {
@@ -3423,7 +3734,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -3434,7 +3745,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.rho_tor_norm": {
   "coordinates": [
@@ -3451,7 +3762,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.rho_tor_norm_error_lower": {
@@ -3501,7 +3813,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.time_measurement_error_lower": {
@@ -3569,7 +3882,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.time_measurement_width_error_lower": {
@@ -3609,7 +3923,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_fit.weight_error_lower": {
@@ -3649,7 +3964,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/density_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].density_thermal_error_lower": {
@@ -3704,7 +4020,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].a_error_lower": {
@@ -3743,7 +4060,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].multiplicity_error_lower": {
@@ -3776,7 +4094,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].element[:].z_n_error_lower": {
@@ -3831,7 +4150,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_error_lower": {
@@ -3871,7 +4191,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_fast_parallel_error_lower": {
@@ -3911,7 +4232,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_fast_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_fast_perpendicular_error_lower": {
@@ -3951,7 +4273,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].pressure_thermal_error_lower": {
@@ -3991,7 +4314,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/rotation_frequency_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].rotation_frequency_tor_error_lower": {
@@ -4042,7 +4366,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_error_lower": {
@@ -4082,7 +4407,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fast_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fast_error_lower": {
@@ -4130,7 +4456,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.chi_squared_error_lower": {
@@ -4174,13 +4501,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_lower": {
@@ -4192,7 +4520,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.measured_error_upper": {
   "coordinates": [
@@ -4203,7 +4531,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.parameters": {
   "data_type": "STR_0D",
@@ -4221,13 +4549,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_lower": {
@@ -4239,7 +4568,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -4250,7 +4579,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "m^-3"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.rho_tor_norm": {
   "coordinates": [
@@ -4267,7 +4596,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.rho_tor_norm_error_lower": {
@@ -4317,7 +4647,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.time_measurement_error_lower": {
@@ -4385,7 +4716,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.time_measurement_width_error_lower": {
@@ -4425,7 +4757,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_fit.weight_error_lower": {
@@ -4465,7 +4798,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/density_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].density_thermal_error_lower": {
@@ -4509,7 +4843,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ionisation_potential\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/ionisation_potential_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].ionisation_potential_error_lower": {
@@ -4550,7 +4885,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_error_lower": {
@@ -4590,7 +4926,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_parallel_error_lower": {
@@ -4630,7 +4967,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_fast_perpendicular_error_lower": {
@@ -4670,7 +5008,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].pressure_thermal_error_lower": {
@@ -4710,7 +5049,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/rotation_frequency_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].rotation_frequency_tor_error_lower": {
@@ -4750,7 +5090,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/temperature_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].temperature_error_lower": {
@@ -4800,6 +5141,7 @@
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.diamagnetic_error_lower": {
@@ -4840,6 +5182,7 @@
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.parallel_error_lower": {
@@ -4880,6 +5223,7 @@
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.poloidal_error_lower": {
@@ -4920,6 +5264,7 @@
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.radial_error_lower": {
@@ -4960,6 +5305,7 @@
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].velocity.toroidal_error_lower": {
@@ -4996,7 +5342,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].vibrational_level_error_lower": {
@@ -5045,7 +5392,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_1d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_1d_error_lower": {
@@ -5074,7 +5422,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_error_lower": {
@@ -5108,7 +5457,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_average_square_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_average_square_1d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_average_square_1d_error_lower": {
@@ -5145,7 +5495,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_max\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_max_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_max_error_lower": {
@@ -5176,7 +5527,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_min\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_min_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_min_error_lower": {
@@ -5207,7 +5559,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_square_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/state(i2)/z_square_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].state[:].z_square_average_error_lower": {
@@ -5241,7 +5594,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_error_lower": {
@@ -5289,7 +5643,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.chi_squared_error_lower": {
@@ -5333,13 +5688,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.measured_error_lower": {
@@ -5351,7 +5707,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.measured_error_upper": {
   "coordinates": [
@@ -5362,7 +5718,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.parameters": {
   "data_type": "STR_0D",
@@ -5380,13 +5736,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.reconstructed_error_lower": {
@@ -5398,7 +5755,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -5409,7 +5766,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.rho_tor_norm": {
   "coordinates": [
@@ -5426,7 +5783,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.rho_tor_norm_error_lower": {
@@ -5476,7 +5834,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.time_measurement_error_lower": {
@@ -5544,7 +5903,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.time_measurement_width_error_lower": {
@@ -5584,7 +5944,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/temperature_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].temperature_fit.weight_error_lower": {
@@ -5639,7 +6000,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/diamagnetic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.diamagnetic_error_lower": {
@@ -5679,7 +6041,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.parallel_error_lower": {
@@ -5719,7 +6082,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/poloidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.poloidal_error_lower": {
@@ -5759,7 +6123,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/radial_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.radial_error_lower": {
@@ -5799,7 +6164,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity/toroidal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity.toroidal_error_lower": {
@@ -5840,7 +6206,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_pol\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_pol_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity_pol_error_lower": {
@@ -5883,7 +6250,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/velocity_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].velocity_tor_error_lower": {
@@ -5933,7 +6301,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_1d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_1d_error_lower": {
@@ -5962,7 +6331,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_error_lower": {
@@ -5996,7 +6366,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_ion_square_1d\"",
   "full_path": "core_profiles/profiles_1d(itime)/ion(i1)/z_ion_square_1d_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].ion[:].z_ion_square_1d_error_lower": {
@@ -6036,7 +6407,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_bootstrap\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_bootstrap_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].j_bootstrap_error_lower": {
@@ -6076,7 +6448,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_non_inductive\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_non_inductive_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].j_non_inductive_error_lower": {
@@ -6116,7 +6489,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_ohmic\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_ohmic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].j_ohmic_error_lower": {
@@ -6156,7 +6530,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].j_tor_error_lower": {
@@ -6196,7 +6571,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/j_total_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].j_total_error_lower": {
@@ -6236,7 +6612,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"magnetic_shear\"",
   "full_path": "core_profiles/profiles_1d(itime)/magnetic_shear_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].magnetic_shear_error_lower": {
@@ -6276,7 +6653,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor\"",
   "full_path": "core_profiles/profiles_1d(itime)/momentum_tor_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].momentum_tor_error_lower": {
@@ -6316,7 +6694,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_thermal_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/n_i_thermal_total_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].n_i_thermal_total_error_lower": {
@@ -6356,7 +6735,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
   "full_path": "core_profiles/profiles_1d(itime)/n_i_total_over_n_e_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].n_i_total_over_n_e_error_lower": {
@@ -6407,7 +6787,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_error_lower": {
@@ -6447,7 +6828,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_fast_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_fast_error_lower": {
@@ -6487,7 +6869,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/density_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].density_thermal_error_lower": {
@@ -6535,7 +6918,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/a_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].a_error_lower": {
@@ -6574,7 +6958,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"multiplicity\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/multiplicity_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].multiplicity_error_lower": {
@@ -6607,7 +6992,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"z_n\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/element(i2)/z_n_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].element[:].z_n_error_lower": {
@@ -6662,7 +7048,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_error_lower": {
@@ -6702,7 +7089,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_fast_parallel_error_lower": {
@@ -6742,7 +7130,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_fast_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_fast_perpendicular_error_lower": {
@@ -6782,7 +7171,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].pressure_thermal_error_lower": {
@@ -6833,7 +7223,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_error_lower": {
@@ -6873,7 +7264,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_fast\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_fast_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_fast_error_lower": {
@@ -6913,7 +7305,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/density_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].density_thermal_error_lower": {
@@ -6996,7 +7389,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_error_lower": {
@@ -7036,7 +7430,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_parallel_error_lower": {
@@ -7076,7 +7471,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_fast_perpendicular_error_lower": {
@@ -7116,7 +7512,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].pressure_thermal_error_lower": {
@@ -7156,7 +7553,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/temperature_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].temperature_error_lower": {
@@ -7206,6 +7604,7 @@
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.diamagnetic_error_lower": {
@@ -7246,6 +7645,7 @@
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.parallel_error_lower": {
@@ -7286,6 +7686,7 @@
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.poloidal_error_lower": {
@@ -7326,6 +7727,7 @@
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.radial_error_lower": {
@@ -7366,6 +7768,7 @@
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].velocity.toroidal_error_lower": {
@@ -7402,7 +7805,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"vibrational_level\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/vibrational_level_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].state[:].vibrational_level_error_lower": {
@@ -7443,7 +7847,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/temperature_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].temperature_error_lower": {
@@ -7493,6 +7898,7 @@
   "documentation": "Index in the error_description list for \"diamagnetic\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/diamagnetic_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.diamagnetic_error_lower": {
@@ -7533,6 +7939,7 @@
   "documentation": "Index in the error_description list for \"parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/parallel_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.parallel_error_lower": {
@@ -7573,6 +7980,7 @@
   "documentation": "Index in the error_description list for \"poloidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/poloidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.poloidal_error_lower": {
@@ -7613,6 +8021,7 @@
   "documentation": "Index in the error_description list for \"radial\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/radial_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.radial_error_lower": {
@@ -7653,6 +8062,7 @@
   "documentation": "Index in the error_description list for \"toroidal\"",
   "full_path": "core_profiles/profiles_1d(itime)/neutral(i1)/velocity/toroidal_error_index",
   "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].neutral[:].velocity.toroidal_error_lower": {
@@ -7692,7 +8102,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential\"",
   "full_path": "core_profiles/profiles_1d(itime)/phi_potential_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].phi_potential_error_lower": {
@@ -7732,7 +8143,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_ion_total\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_ion_total_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].pressure_ion_total_error_lower": {
@@ -7772,7 +8184,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_parallel\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_parallel_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].pressure_parallel_error_lower": {
@@ -7812,7 +8225,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_perpendicular_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].pressure_perpendicular_error_lower": {
@@ -7852,7 +8266,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_thermal\"",
   "full_path": "core_profiles/profiles_1d(itime)/pressure_thermal_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].pressure_thermal_error_lower": {
@@ -7895,7 +8310,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "core_profiles/profiles_1d(itime)/q_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].q_error_lower": {
@@ -7942,7 +8358,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rotation_frequency_tor_sonic\"",
   "full_path": "core_profiles/profiles_1d(itime)/rotation_frequency_tor_sonic_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].rotation_frequency_tor_sonic_error_lower": {
@@ -7984,7 +8401,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_i_average\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_error_lower": {
@@ -8032,7 +8450,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.chi_squared_error_lower": {
@@ -8076,13 +8495,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_lower": {
@@ -8094,7 +8514,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.measured_error_upper": {
   "coordinates": [
@@ -8105,7 +8525,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.parameters": {
   "data_type": "STR_0D",
@@ -8123,13 +8543,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_lower": {
@@ -8141,7 +8562,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -8152,7 +8573,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "eV"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.rho_tor_norm": {
   "coordinates": [
@@ -8169,7 +8590,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.rho_tor_norm_error_lower": {
@@ -8219,7 +8641,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.time_measurement_error_lower": {
@@ -8287,7 +8710,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.time_measurement_width_error_lower": {
@@ -8327,7 +8751,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/t_i_average_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].t_i_average_fit.weight_error_lower": {
@@ -8375,7 +8800,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"zeff\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_error_lower": {
@@ -8423,7 +8849,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"chi_squared\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/chi_squared_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.chi_squared_error_lower": {
@@ -8467,13 +8894,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"measured\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_lower": {
@@ -8485,7 +8913,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.measured_error_upper": {
   "coordinates": [
@@ -8496,7 +8924,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/measured_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.parameters": {
   "data_type": "STR_0D",
@@ -8514,13 +8942,14 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"reconstructed\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_lower": {
@@ -8532,7 +8961,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.reconstructed_error_upper": {
   "coordinates": [
@@ -8543,7 +8972,7 @@
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/reconstructed_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "as_parent for a local measurement, as_parent.m for a line integrated measurement"
+  "units": "-"
  },
  "core_profiles.profiles_1d[:].zeff_fit.rho_tor_norm": {
   "coordinates": [
@@ -8560,7 +8989,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"rho_tor_norm\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/rho_tor_norm_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.rho_tor_norm_error_lower": {
@@ -8610,7 +9040,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/time_measurement_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.time_measurement_error_lower": {
@@ -8678,7 +9109,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_measurement_width\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/time_measurement_width_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.time_measurement_width_error_lower": {
@@ -8718,7 +9150,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"weight\"",
   "full_path": "core_profiles/profiles_1d(itime)/zeff_fit/weight_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].zeff_fit.weight_error_lower": {
@@ -8783,7 +9216,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b0\"",
   "full_path": "core_profiles/vacuum_toroidal_field/b0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.vacuum_toroidal_field.b0_error_lower": {
@@ -8828,7 +9262,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r0\"",
   "full_path": "core_profiles/vacuum_toroidal_field/r0_error_index",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "core_profiles.vacuum_toroidal_field.r0_error_lower": {

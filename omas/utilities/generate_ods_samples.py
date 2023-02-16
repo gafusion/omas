@@ -16,7 +16,7 @@ omas_rcparams['allow_fake_imas_fallback'] = True
 
 # generate magnetics sample
 ods = ODS()
-magnetics_hardware(ods)
+magnetics_hardware(ods, 145419)
 ods['magnetics.time'] = [0.0]
 ods.save(omas_dir + 'samples/sample_magnetics_ods.json')
 

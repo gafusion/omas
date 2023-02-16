@@ -130,7 +130,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"collisionality_norm\"",
   "full_path": "gyrokinetics/collisions/collisionality_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.collisions.collisionality_norm_error_lower": {
@@ -176,7 +177,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_tor_sign\"",
   "full_path": "gyrokinetics/flux_surface/b_field_tor_sign_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.b_field_tor_sign_error_lower": {
@@ -210,7 +212,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dc_dr_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/dc_dr_minor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.dc_dr_minor_norm_error_lower": {
@@ -248,7 +251,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"delongation_dr_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/delongation_dr_minor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.delongation_dr_minor_norm_error_lower": {
@@ -282,7 +286,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dgeometric_axis_r_dr_minor\"",
   "full_path": "gyrokinetics/flux_surface/dgeometric_axis_r_dr_minor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.dgeometric_axis_r_dr_minor_error_lower": {
@@ -316,7 +321,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"dgeometric_axis_z_dr_minor\"",
   "full_path": "gyrokinetics/flux_surface/dgeometric_axis_z_dr_minor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.dgeometric_axis_z_dr_minor_error_lower": {
@@ -352,7 +358,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ds_dr_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/ds_dr_minor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.ds_dr_minor_norm_error_lower": {
@@ -389,7 +396,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"elongation\"",
   "full_path": "gyrokinetics/flux_surface/elongation_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.elongation_error_lower": {
@@ -420,7 +428,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"ip_sign\"",
   "full_path": "gyrokinetics/flux_surface/ip_sign_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.ip_sign_error_lower": {
@@ -451,7 +460,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"magnetic_shear_r_minor\"",
   "full_path": "gyrokinetics/flux_surface/magnetic_shear_r_minor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.magnetic_shear_r_minor_error_lower": {
@@ -482,7 +492,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_gradient_norm\"",
   "full_path": "gyrokinetics/flux_surface/pressure_gradient_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.pressure_gradient_norm_error_lower": {
@@ -513,7 +524,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"q\"",
   "full_path": "gyrokinetics/flux_surface/q_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.q_error_lower": {
@@ -544,7 +556,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r_minor_norm\"",
   "full_path": "gyrokinetics/flux_surface/r_minor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.r_minor_norm_error_lower": {
@@ -578,7 +591,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shape_coefficients_c\"",
   "full_path": "gyrokinetics/flux_surface/shape_coefficients_c_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.shape_coefficients_c_error_lower": {
@@ -618,7 +632,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shape_coefficients_s\"",
   "full_path": "gyrokinetics/flux_surface/shape_coefficients_s_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.flux_surface.shape_coefficients_s_error_lower": {
@@ -666,7 +681,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_a_field_parallel_error_lower": {
@@ -697,7 +713,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_b_field_parallel_error_lower": {
@@ -728,7 +745,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/energy_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].energy_phi_potential_error_lower": {
@@ -759,7 +777,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_a_field_parallel_error_lower": {
@@ -790,7 +809,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_b_field_parallel_error_lower": {
@@ -821,7 +841,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_parallel_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_parallel_phi_potential_error_lower": {
@@ -852,7 +873,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_a_field_parallel_error_lower": {
@@ -883,7 +905,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_b_field_parallel_error_lower": {
@@ -914,7 +937,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/momentum_tor_perpendicular_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].momentum_tor_perpendicular_phi_potential_error_lower": {
@@ -945,7 +969,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_a_field_parallel_error_lower": {
@@ -976,7 +1001,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_b_field_parallel_error_lower": {
@@ -1007,7 +1033,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/fluxes_integrated_norm(i1)/particles_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.fluxes_integrated_norm[:].particles_phi_potential_error_lower": {
@@ -1059,6 +1086,243 @@
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "gyrokinetics.ids_properties.occurrence"
  },
+ "gyrokinetics.ids_properties.plugins": {
+  "data_type": "STRUCTURE",
+  "documentation": "Information about the plugins used to write/read this IDS. This structure is filled automatically by the Access Layer at GET/PUT time, no need to fill it via a user program.",
+  "full_path": "gyrokinetics/ids_properties/plugins",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.39.0",
+  "structure_reference": "ids_plugins"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_get": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to GET the data",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_get",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_get.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_get.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_get/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_get.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_get/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_get.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_get/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_put": {
+  "data_type": "STRUCTURE",
+  "documentation": "Plugin infrastructure used to PUT the data",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_put",
+  "lifecycle_status": "alpha",
+  "structure_reference": "code_constant_noparam"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_put.commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_put.name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_put/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_put.repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_put/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.infrastructure_put.version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/infrastructure_put/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of IDS nodes for which a plugin has been applied",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "20",
+  "structure_reference": "ids_plugins_node",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins actually used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application). This information is filled by the plugin infrastructure during the GET operation.",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].get_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/get_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the plugin applies to the whole IDS.",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins used to PUT a node (potentially, multiple plugins can be applied, if so they are listed by order of application)",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].put_operation[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/put_operation(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Plugins to be used to read back a node (potentially, multiple plugins can be applied, listed in reverse order of application) ",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "10",
+  "structure_reference": "code_constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback[:].commit": {
+  "data_type": "STR_0D",
+  "documentation": "Unique commit reference of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of software used",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback[:].parameters": {
+  "data_type": "STR_0D",
+  "documentation": "List of the code specific parameters in XML format",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)/parameters",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback[:].repository": {
+  "data_type": "STR_0D",
+  "documentation": "URL of software repository",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)/repository",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "gyrokinetics.ids_properties.plugins.node[:].readback[:].version": {
+  "data_type": "STR_0D",
+  "documentation": "Unique version (tag) of software",
+  "full_path": "gyrokinetics/ids_properties/plugins/node(i1)/readback(i2)/version",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "gyrokinetics.ids_properties.provenance": {
   "data_type": "STRUCTURE",
   "documentation": "Provenance information about this IDS",
@@ -1072,7 +1336,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documentatiing provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
+  "documentation": "Set of IDS nodes for which the provenance is given. The provenance information applies to the whole structure below the IDS node. For documenting provenance information for the whole IDS, set the size of this array of structure to 1 and leave the child \"path\" node empty",
   "full_path": "gyrokinetics/ids_properties/provenance/node(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
@@ -1081,20 +1345,22 @@
  },
  "gyrokinetics.ids_properties.provenance.node[:].path": {
   "data_type": "STR_0D",
-  "documentation": "Path of the node within the IDS. If empty, means the provenance information applies to the whole IDS",
+  "documentation": "Path of the node within the IDS, following the syntax given in the link below. If empty, means the provenance information applies to the whole IDS.",
   "full_path": "gyrokinetics/ids_properties/provenance/node(i1)/path",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "gyrokinetics.ids_properties.provenance.node[:].sources": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources",
+  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
   "full_path": "gyrokinetics/ids_properties/provenance/node(i1)/sources(:)",
   "lifecycle_status": "alpha",
-  "type": "constant"
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "gyrokinetics.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1224,7 +1490,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_interval_norm\"",
   "full_path": "gyrokinetics/model/time_interval_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.model.time_interval_norm_error_lower": {
@@ -1268,7 +1535,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_tor\"",
   "full_path": "gyrokinetics/normalizing_quantities/b_field_tor_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.normalizing_quantities.b_field_tor_error_lower": {
@@ -1299,7 +1567,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"n_e\"",
   "full_path": "gyrokinetics/normalizing_quantities/n_e_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.normalizing_quantities.n_e_error_lower": {
@@ -1330,7 +1599,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"r\"",
   "full_path": "gyrokinetics/normalizing_quantities/r_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.normalizing_quantities.r_error_lower": {
@@ -1361,7 +1631,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"t_e\"",
   "full_path": "gyrokinetics/normalizing_quantities/t_e_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.normalizing_quantities.t_e_error_lower": {
@@ -1403,7 +1674,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"charge_norm\"",
   "full_path": "gyrokinetics/species(i1)/charge_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].charge_norm_error_lower": {
@@ -1434,7 +1706,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_log_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/density_log_gradient_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].density_log_gradient_norm_error_lower": {
@@ -1465,7 +1738,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_norm\"",
   "full_path": "gyrokinetics/species(i1)/density_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].density_norm_error_lower": {
@@ -1496,7 +1770,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"mass_norm\"",
   "full_path": "gyrokinetics/species(i1)/mass_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].mass_norm_error_lower": {
@@ -1527,7 +1802,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_log_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/temperature_log_gradient_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].temperature_log_gradient_norm_error_lower": {
@@ -1558,7 +1834,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"temperature_norm\"",
   "full_path": "gyrokinetics/species(i1)/temperature_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].temperature_norm_error_lower": {
@@ -1589,7 +1866,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor_gradient_norm\"",
   "full_path": "gyrokinetics/species(i1)/velocity_tor_gradient_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species[:].velocity_tor_gradient_norm_error_lower": {
@@ -1627,7 +1905,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"beta_reference\"",
   "full_path": "gyrokinetics/species_all/beta_reference_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species_all.beta_reference_error_lower": {
@@ -1658,7 +1937,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"debye_length_reference\"",
   "full_path": "gyrokinetics/species_all/debye_length_reference_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species_all.debye_length_reference_error_lower": {
@@ -1689,7 +1969,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"shearing_rate_norm\"",
   "full_path": "gyrokinetics/species_all/shearing_rate_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species_all.shearing_rate_norm_error_lower": {
@@ -1720,7 +2001,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"velocity_tor_norm\"",
   "full_path": "gyrokinetics/species_all/velocity_tor_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species_all.velocity_tor_norm_error_lower": {
@@ -1751,7 +2033,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"zeff\"",
   "full_path": "gyrokinetics/species_all/zeff_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.species_all.zeff_error_lower": {
@@ -1830,7 +2113,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"binormal_component_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/binormal_component_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].binormal_component_norm_error_lower": {
@@ -1876,7 +2160,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_norm_error_lower": {
@@ -1918,7 +2203,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_parity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_parity_error_lower": {
@@ -1958,7 +2244,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a_field_parallel_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/a_field_parallel_perturbed_weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].a_field_parallel_perturbed_weight_error_lower": {
@@ -1999,7 +2286,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_norm_error_lower": {
@@ -2041,7 +2329,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_parity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_parity_error_lower": {
@@ -2081,7 +2370,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"b_field_parallel_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/b_field_parallel_perturbed_weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].b_field_parallel_perturbed_weight_error_lower": {
@@ -2158,7 +2448,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/energy_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.energy_a_field_parallel_error_lower": {
@@ -2189,7 +2480,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/energy_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.energy_b_field_parallel_error_lower": {
@@ -2220,7 +2512,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/energy_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.energy_phi_potential_error_lower": {
@@ -2251,7 +2544,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_parallel_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_parallel_a_field_parallel_error_lower": {
@@ -2282,7 +2576,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_parallel_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_parallel_b_field_parallel_error_lower": {
@@ -2313,7 +2608,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_parallel_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_parallel_phi_potential_error_lower": {
@@ -2344,7 +2640,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_perpendicular_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_perpendicular_a_field_parallel_error_lower": {
@@ -2375,7 +2672,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_perpendicular_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_perpendicular_b_field_parallel_error_lower": {
@@ -2406,7 +2704,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/momentum_tor_perpendicular_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.momentum_tor_perpendicular_phi_potential_error_lower": {
@@ -2437,7 +2736,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/particles_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.particles_a_field_parallel_error_lower": {
@@ -2468,7 +2768,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/particles_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.particles_b_field_parallel_error_lower": {
@@ -2499,7 +2800,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter/particles_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter.particles_phi_potential_error_lower": {
@@ -2537,7 +2839,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/energy_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.energy_a_field_parallel_error_lower": {
@@ -2568,7 +2871,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/energy_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.energy_b_field_parallel_error_lower": {
@@ -2599,7 +2903,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/energy_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.energy_phi_potential_error_lower": {
@@ -2630,7 +2935,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_parallel_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_parallel_a_field_parallel_error_lower": {
@@ -2661,7 +2967,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_parallel_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_parallel_b_field_parallel_error_lower": {
@@ -2692,7 +2999,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_parallel_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_parallel_phi_potential_error_lower": {
@@ -2723,7 +3031,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_perpendicular_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_perpendicular_a_field_parallel_error_lower": {
@@ -2754,7 +3063,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_perpendicular_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_perpendicular_b_field_parallel_error_lower": {
@@ -2785,7 +3095,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/momentum_tor_perpendicular_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.momentum_tor_perpendicular_phi_potential_error_lower": {
@@ -2816,7 +3127,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/particles_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.particles_a_field_parallel_error_lower": {
@@ -2847,7 +3159,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/particles_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.particles_b_field_parallel_error_lower": {
@@ -2878,7 +3191,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_gyrocenter_rotating_frame/particles_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_gyrocenter_rotating_frame.particles_phi_potential_error_lower": {
@@ -2916,7 +3230,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/energy_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.energy_a_field_parallel_error_lower": {
@@ -2947,7 +3262,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/energy_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.energy_b_field_parallel_error_lower": {
@@ -2978,7 +3294,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/energy_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.energy_phi_potential_error_lower": {
@@ -3009,7 +3326,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_parallel_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_parallel_a_field_parallel_error_lower": {
@@ -3040,7 +3358,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_parallel_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_parallel_b_field_parallel_error_lower": {
@@ -3071,7 +3390,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_parallel_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_parallel_phi_potential_error_lower": {
@@ -3102,7 +3422,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_perpendicular_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_perpendicular_a_field_parallel_error_lower": {
@@ -3133,7 +3454,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_perpendicular_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_perpendicular_b_field_parallel_error_lower": {
@@ -3164,7 +3486,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/momentum_tor_perpendicular_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.momentum_tor_perpendicular_phi_potential_error_lower": {
@@ -3195,7 +3518,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/particles_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.particles_a_field_parallel_error_lower": {
@@ -3226,7 +3550,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/particles_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.particles_b_field_parallel_error_lower": {
@@ -3257,7 +3582,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle/particles_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle.particles_phi_potential_error_lower": {
@@ -3295,7 +3621,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/energy_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.energy_a_field_parallel_error_lower": {
@@ -3326,7 +3653,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/energy_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.energy_b_field_parallel_error_lower": {
@@ -3357,7 +3685,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"energy_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/energy_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.energy_phi_potential_error_lower": {
@@ -3388,7 +3717,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_parallel_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_parallel_a_field_parallel_error_lower": {
@@ -3419,7 +3749,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_parallel_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_parallel_b_field_parallel_error_lower": {
@@ -3450,7 +3781,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_parallel_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_parallel_phi_potential_error_lower": {
@@ -3481,7 +3813,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_perpendicular_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_perpendicular_a_field_parallel_error_lower": {
@@ -3512,7 +3845,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_perpendicular_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_perpendicular_b_field_parallel_error_lower": {
@@ -3543,7 +3877,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/momentum_tor_perpendicular_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.momentum_tor_perpendicular_phi_potential_error_lower": {
@@ -3574,7 +3909,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/particles_a_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.particles_a_field_parallel_error_lower": {
@@ -3605,7 +3941,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/particles_b_field_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.particles_b_field_parallel_error_lower": {
@@ -3636,7 +3973,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"particles_phi_potential\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/fluxes_norm_particle_rotating_frame/particles_phi_potential_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].fluxes_norm_particle_rotating_frame.particles_phi_potential_error_lower": {
@@ -3678,7 +4016,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/density_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.density_error_lower": {
@@ -3721,7 +4060,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/density_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.density_gyroav_error_lower": {
@@ -3764,7 +4104,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"heat_flux_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/heat_flux_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.heat_flux_parallel_error_lower": {
@@ -3807,7 +4148,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"heat_flux_parallel_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/heat_flux_parallel_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.heat_flux_parallel_gyroav_error_lower": {
@@ -3850,7 +4192,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/j_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.j_parallel_error_lower": {
@@ -3893,7 +4236,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/j_parallel_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.j_parallel_gyroav_error_lower": {
@@ -3936,7 +4280,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/pressure_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.pressure_parallel_error_lower": {
@@ -3979,7 +4324,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_parallel_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/pressure_parallel_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.pressure_parallel_gyroav_error_lower": {
@@ -4022,7 +4368,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/pressure_perpendicular_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.pressure_perpendicular_error_lower": {
@@ -4065,7 +4412,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_perpendicular_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/pressure_perpendicular_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.pressure_perpendicular_gyroav_error_lower": {
@@ -4108,7 +4456,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_parallel_energy_perpendicular\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/v_parallel_energy_perpendicular_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.v_parallel_energy_perpendicular_error_lower": {
@@ -4151,7 +4500,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_parallel_energy_perpendicular_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/v_parallel_energy_perpendicular_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.v_parallel_energy_perpendicular_gyroav_error_lower": {
@@ -4194,7 +4544,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_perpendicular_square_energy\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/v_perpendicular_square_energy_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.v_perpendicular_square_energy_error_lower": {
@@ -4237,7 +4588,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_perpendicular_square_energy_gyroav\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_gyrocenter/v_perpendicular_square_energy_gyroav_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_gyrocenter.v_perpendicular_square_energy_gyroav_error_lower": {
@@ -4287,7 +4639,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"density\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/density_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.density_error_lower": {
@@ -4330,7 +4683,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"heat_flux_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/heat_flux_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.heat_flux_parallel_error_lower": {
@@ -4373,7 +4727,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"j_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/j_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.j_parallel_error_lower": {
@@ -4416,7 +4771,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_parallel\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/pressure_parallel_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.pressure_parallel_error_lower": {
@@ -4459,7 +4815,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/pressure_perpendicular_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.pressure_perpendicular_error_lower": {
@@ -4502,7 +4859,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_parallel_energy_perpendicular\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/v_parallel_energy_perpendicular_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.v_parallel_energy_perpendicular_error_lower": {
@@ -4545,7 +4903,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"v_perpendicular_square_energy\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/fluxes_moments(i3)/moments_norm_particle/v_perpendicular_square_energy_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].fluxes_moments[:].moments_norm_particle.v_perpendicular_square_energy_error_lower": {
@@ -4584,7 +4943,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"frequency_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/frequency_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].frequency_norm_error_lower": {
@@ -4615,7 +4975,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growth_rate_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/growth_rate_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].growth_rate_norm_error_lower": {
@@ -4646,7 +5007,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"growth_rate_tolerance\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/growth_rate_tolerance_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].growth_rate_tolerance_error_lower": {
@@ -4689,7 +5051,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_norm_error_lower": {
@@ -4731,7 +5094,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_parity\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_parity_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_parity_error_lower": {
@@ -4771,7 +5135,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"phi_potential_perturbed_weight\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/phi_potential_perturbed_weight_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].phi_potential_perturbed_weight_error_lower": {
@@ -4811,7 +5176,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"poloidal_angle\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/poloidal_angle_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].poloidal_angle_error_lower": {
@@ -4858,7 +5224,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"time_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/eigenmode(i2)/time_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].eigenmode[:].time_norm_error_lower": {
@@ -4895,7 +5262,8 @@
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"radial_component_norm\"",
   "full_path": "gyrokinetics/wavevector(i1)/radial_component_norm_error_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
   "type": "constant"
  },
  "gyrokinetics.wavevector[:].radial_component_norm_error_lower": {
