@@ -297,7 +297,8 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
                 + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
     elif origin == "rho_tor_norm":
         phi = values**2
-        phi *= np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]) / np.max(phi)
+        phi *= map_pol_flux_to_flux_coordinate(ods, time_index, "phi", 
+                np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]))
         return map_flux_coordinate_to_pol_flux(ods, time_index, "phi", phi)
     elif origin == "phi":
         from scipy.interpolate import InterpolatedUnivariateSpline
@@ -307,9 +308,9 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
         psi_spl = InterpolatedUnivariateSpline(phi_grid, psi_grid[psi_mask])
         phi_min = np.min(phi_grid)
         phi_max = np.max(phi_grid)
-        values_mask = np.logical_ant(values > phi_min, values < phi_max)
+        values_mask = np.logical_and(values > phi_min, values < phi_max)
         psi = np.zeros(values.shape)
-        psi = np.nan
+        psi[:] = np.nan
         psi[values_mask] = psi_spl(values[values_mask])
         return psi
     else:
