@@ -304,11 +304,14 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
         from scipy.interpolate import InterpolatedUnivariateSpline
         psi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
         psi_mask = mask_SOL(ods, time_index, psi_grid)
-        phi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][psi_mask]
-        psi_spl = InterpolatedUnivariateSpline(phi_grid, psi_grid[psi_mask])
+        phi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_mask]
+        if phi_grid[-1] < phi_grid[0]:
+            psi_spl = InterpolatedUnivariateSpline(phi_grid[psi_mask][::-1], psi_grid[psi_mask][::-1])
+        else:
+            psi_spl = InterpolatedUnivariateSpline(phi_grid[psi_mask], psi_grid[psi_mask])
         phi_min = np.min(phi_grid)
         phi_max = np.max(phi_grid)
-        values_mask = np.logical_and(values > phi_min, values < phi_max)
+        values_mask = np.logical_and(values >= phi_min, values <= phi_max)
         psi = np.zeros(values.shape)
         psi[:] = np.nan
         psi[values_mask] = psi_spl(values[values_mask])
