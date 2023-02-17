@@ -2702,16 +2702,17 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
         (+1, +1, -1): 5,  # +Bp, +rpz, -rtp
         (+1, -1, -1): 6,  # +Bp, -rpz, -rtp
         (-1, +1, +1): 7,  # -Bp, +rpz, +rtp
-        (-1, -1, +1): 8,
-    }  # -Bp, -rpz, +rtp
+        (-1, -1, +1): 8,  # -Bp, -rpz, +rtp
+    }
 
     # identify 2*pi term in psi definition based on q estimate
     if a is not None:
         index = numpy.argmin(numpy.abs(q))
         if index == 0:
             index += 1
-        q_estimate = numpy.abs((numpy.pi * B0 * (a - a[0]) ** 2) / (psi - psi[0]))
-        if numpy.abs(q_estimate[index] - q[index]) < numpy.abs(q_estimate[index] / (2 * numpy.pi) - q[index]):
+        q_estimate = abs((numpy.pi * B0 * (a[index] - a[0]) ** 2) / (psi[index] - psi[0]))
+        q_actual = abs(q[index])
+        if abs(q_estimate - q_actual) < abs(q_estimate / (2 * numpy.pi) - q_actual):
             eBp = 1
         else:
             eBp = 0

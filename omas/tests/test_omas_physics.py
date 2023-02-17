@@ -230,6 +230,68 @@ class TestOmasPhysics(UnittestCaseOmas):
                     assert cocos_transform(cocos_ind + cocos_add * 10, cocos_ind + cocos_add * 10)[thing] == 1
         return
 
+    def test_identify_cocos(self):
+        tests = {}
+        # Create test cases for COCOS 1, 3, 5, 7
+        odds = {
+            1: {
+                "B0": 2.5,
+                "Ip": 1e6,
+                "psi": numpy.linspace(0, 2, 3),
+                "q": numpy.linspace(0.5, 1.5, 3),
+                "clockwise_phi": False,
+                "a": numpy.linspace(0, 2, 3),
+            },
+            3: {
+                "B0": 2.5,
+                "Ip": 1e6,
+                "psi": numpy.linspace(2, 0, 3),
+                "q": numpy.linspace(-0.5, -1.5, 3),
+                "clockwise_phi": False,
+                "a": numpy.linspace(0, 2, 3),
+            },
+            5: {
+                "B0": 2.5,
+                "Ip": 1e6,
+                "psi": numpy.linspace(0, 2, 3),
+                "q": numpy.linspace(-0.5, -1.5, 3),
+                "clockwise_phi": False,
+                "a": numpy.linspace(0, 2, 3),
+            },
+            7: {
+                "B0": 2.5,
+                "Ip": 1e6,
+                "psi": numpy.linspace(2, 0, 3),
+                "q": numpy.linspace(0.5, 1.5, 3),
+                "clockwise_phi": False,
+                "a": numpy.linspace(0, 2, 3),
+            },
+        }
+        tests.update(odds)
+        # Set clockwise_phi to True in these to get COCOS 2, 4, 6, 8
+        evens = {}
+        for cocos, kwargs in odds.items():
+            even_kwargs = kwargs.copy()
+            even_kwargs["clockwise_phi"] = True
+            evens[cocos + 1] = even_kwargs
+        tests.update(evens)
+        # Multiply by factor of 2*pi to get COCOS 11 -> 18
+        tens = {}
+        for cocos, kwargs in tests.items():
+            tens_kwargs = kwargs.copy()
+            # Note: can't use *= here, as some references are shared between tests
+            tens_kwargs["psi"] = kwargs["psi"] * (2 * numpy.pi)
+            tens_kwargs["q"] = kwargs["q"] * (2 * numpy.pi)
+            tens[cocos + 10] = tens_kwargs
+        tests.update(tens)
+        # TODO include tests for negative/antiparallel B0 and Ip
+        # Run each test
+        for idx, (expected, kwargs) in enumerate(tests.items()):
+            actual = identify_cocos(**kwargs)[0]
+            err_msg = f"Expected COCOS {expected}, but found {actual} with: \n{kwargs}"
+            with self.subTest(actual=actual, expected=expected, msg=err_msg):
+                self.assertEqual(actual, expected)
+
     def test_coordsio(self):
         data5 = numpy.linspace(0, 1, 5)
         data10 = numpy.linspace(0, 1, 10)
