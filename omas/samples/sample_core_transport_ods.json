@@ -39,8 +39,8 @@
 ]
 }
 },
-"grid_d": {
-"rho_tor": [
+"grid_flux": {
+"rho_tor_norm": [
 0.0,
 0.2,
 0.2857143,
@@ -221,8 +221,8 @@
 ]
 }
 },
-"grid_d": {
-"rho_tor": [
+"grid_flux": {
+"rho_tor_norm": [
 0.0,
 0.2,
 0.2857143,
@@ -403,8 +403,8 @@
 ]
 }
 },
-"grid_d": {
-"rho_tor": [
+"grid_flux": {
+"rho_tor_norm": [
 0.0,
 0.2,
 0.2857143,
@@ -480,8 +480,8 @@
 ]
 }
 },
-"grid_d": {
-"rho_tor": [
+"grid_flux": {
+"rho_tor_norm": [
 0.0,
 0.2,
 0.2857143,
@@ -546,7 +546,7 @@ NaN,
 ]
 }
 },
-"grid_d": {
+"grid_flux": {
 "rho_tor_norm": [
 0.0,
 0.1,
