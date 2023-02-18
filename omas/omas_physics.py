@@ -1021,9 +1021,11 @@ def summary_currents(ods, time_index=None, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    current_names = [('j_bootstrap','current_bootstrap.value'),
-    ('j_non_inductive','current_non_inductive.value'),
-    ('j_ohmic','current_ohm.value')]
+    current_names = [
+        ('j_bootstrap', 'current_bootstrap.value'),
+        ('j_non_inductive', 'current_non_inductive.value'),
+        ('j_ohmic', 'current_ohm.value'),
+    ]
     rho = ods['equilibrium.time_slice[0].profiles_1d.rho_tor_norm']
     time_index = 0
     coordsio = {'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho}
@@ -1033,15 +1035,20 @@ def summary_currents(ods, time_index=None, update=True):
         for (jname_cp, jname_sum) in current_names:
             if f'core_profiles.profiles_1d.{time_index}.{jname_cp}' in ods:
                 Bt = ods['equilibrium.vacuum_toroidal_field.b0']
-                JtoR = transform_current(rho=rho, JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt, equilibrium=ods['equilibrium.time_slice'][time_index])
-                Ip = numpy.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/numpy.pi
-            
+                JtoR = transform_current(
+                    rho=rho,
+                    JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt,
+                    equilibrium=ods['equilibrium.time_slice'][time_index],
+                )
+                Ip = numpy.trapz(JtoR, ods['equilibrium.time_slice[0].profiles_1d.volume']) / 2 / numpy.pi
+
                 if f'summary.global_quantities.{jname_sum}' not in ods:
-                   ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index+1) 
-                
-                   ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
+                    ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index + 1)
+
+                    ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
 
     return ods_n
+
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
@@ -1093,7 +1100,6 @@ def summary_taue(ods, thermal=True, update=True):
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
-
 
     tau_e_scaling = []
     tau_e_MHD = []
@@ -1150,7 +1156,7 @@ def summary_taue(ods, thermal=True, update=True):
             if 'summary.global_quantities.energy_thermal' in ods and thermal:
                 stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
                 info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
-            elif 'global_quantities.energy_mhd' in  equilibrium_ods:
+            elif 'global_quantities.energy_mhd' in equilibrium_ods:
                 if thermal:
                     print("Warning, tau_e calculated with stored energy MHD")
                 stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
@@ -1273,7 +1279,7 @@ def summary_global_quantities(ods, update=True):
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
-        
+
     ods_n.update(ods.physics_summary_greenwald(update=update))
     ods_n.update(ods.physics_summary_currents(update=update))
     ods_n.update(ods.physics_summary_thermal_stored_energy(update=update))
