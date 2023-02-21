@@ -35,9 +35,6 @@ extras_require = {
     'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow'],
 }
 
-# make machines a "required extra"
-install_requires += extras_require['machine']
-
 # Add .json IMAS structure files to the package
 here = os.path.abspath(os.path.split(__file__)[0]) + os.sep
 
