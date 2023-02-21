@@ -34,7 +34,7 @@ jobs:
 
     - name: Install OMAS
       run: |
-        python3 -m pip install .
+        python3 -m pip install .[machine]
 
     - name: Move to root and try importing OMAS
       run: |
