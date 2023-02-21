@@ -2557,7 +2557,6 @@ class CodeParameters(dict):
     """
     Class used to interface with IMAS code-parameters XML files
     """
-
     def __init__(self, string=None):
         if isinstance(string, str):
             if os.path.exists(string):
@@ -2693,16 +2692,11 @@ class CodeParameters(dict):
 
         :return: list of paths that have data
         """
-        if self.active_dynamic:
-            get_func = self.__getitem__
-        else:
-            get_func = self.getraw
-
         paths = kw.setdefault('paths', [])
         path = kw.setdefault('path', [])
         for kid in self.keys():
-            if isinstance(get_func(kid), CodeParameters):
-                get_func(kid).paths(paths=paths, path=path + [kid])
+            if isinstance(self[kid], CodeParameters):
+                self[kid].paths(paths=paths, path=path + [kid])
             else:
                 paths.append(path + [kid])
         return paths
