@@ -17,10 +17,6 @@ xarray                   # required
 setuptools>=41.2         # required
 tqdm                     # required
 Cython                   # required
-omfit_classes            # required
-pexpect                  # required
-fortranformat            # required
-pygacode                 # required
 
 # omfit_classes            # machine
 # pexpect                  # machine
