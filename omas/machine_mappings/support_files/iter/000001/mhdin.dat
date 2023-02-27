@@ -922,6 +922,8 @@
  -252.54999999999976 -162.54999999999984
  MPNAM2 = 180*'55.A3 Tang' 180*'55.A4 Norm' 144*'55.AA Tang' 72*'55.AB Norm' 
  207*'55.AJ HF S' 12*'55.AL Dive'
+ VSNAME = 135*'Inner SS s' 151*'Outer SS s' 'Triangular' 'Divertor i' 
+ 15*'Cryostat a' 4*'Cryostat t' 2*'Upper CTS'
  /
  LPNAME = 131*'55.AD Part' 40*'55.AE Cont' 3*'55.AF Diam' 6*'55.AH Diam' 
  81*'55.AI MHD'
