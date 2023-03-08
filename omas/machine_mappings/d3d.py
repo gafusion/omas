@@ -1341,6 +1341,35 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
+@machine_mapping_function(__regression_arguments__, pulse=194455001)
+def core_profiles_profile_1d(ods, pulse):
+    omfit_profiles_node = '\\TOP.'
+    query = {
+        "grid.rho_tor_norm": "rho",
+        "electrons.density": "n_e",
+        "electrons.temperature": "T_e",
+        "ion[0].density": "n_D",
+        "ion[0].temperature": "T_i",
+        "ion[0].velocity.toroidal": "V_tor_C",
+        "ion[0].density": "n_C"
+    }
+    for entry in query:
+        query[entry] = omfit_profiles_node + query[entry]
+    data = mdsvalue('d3d', treename='OMFIT_PROFS', pulse=pulse, TDI=query).raw()
+    dim_info = mdsvalue('d3d', treename='OMFIT_PROFS', pulse=pulse, TDI="\\TOP.n_e")
+    data['time'] = dim_info.dim_of(1) * 1.e-3
+    psi_n = dim_info.dim_of(0)
+    data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
+    data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
+    data["ion[1].temperature"] = data["ion[0].temperature"]
+    data["ion[1].velocity.toroidal"] = data["ion[0].velocity.toroidal"]
+    ods[f"core_profiles.time"] = data['time']
+    for entry in data:
+        for i_time, time in enumerate(data["time"]):
+            ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+
+    
+
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
