@@ -6,6 +6,7 @@ from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from uncertainties import unumpy
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1346,32 +1347,43 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
-            "grid.rho_tor_norm": "rho",
             "electrons.density": "n_e",
             "electrons.temperature": "T_e",
             "ion[0].density": "n_D",
             "ion[0].temperature": "T_i",
             "ion[0].velocity.toroidal": "V_tor_C",
-            "ion[0].density": "n_C"
+            "ion[1].density": "n_C"
         }
+        uncertain_entries = list(query.keys())
+        query["grid.rho_tor_norm"] = "rho"
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
+        for entry in uncertain_entries:
+            query[entry + ".data_error_upper"] = "error_of(" + query[entry] + ")"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
-        data["ion[1].temperature"] = data["ion[0].temperature"]
-        data["ion[1].velocity.toroidal"] = data["ion[0].velocity.toroidal"]
-        ods[f"core_profiles.time"] = data['time']
-        for entry in data:
-            for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
-        ods[f"core_profiles.profiles_1d[:].ion[0].element[0].z_n"] = 1
-        ods[f"core_profiles.profiles_1d[:].ion[0].element[0].a"] = 2.0141
-        ods[f"core_profiles.profiles_1d[:].ion[0].element[1].z_n"] = 6
-        ods[f"core_profiles.profiles_1d[:].ion[0].element[1].a"] = 12.011
+        for unc in ["", ".data_error_upper"]:
+            data["ion[1].temperature" + unc] = data["ion[0].temperature" + unc]
+            data["ion[1].velocity.toroidal" + unc] = data["ion[0].velocity.toroidal" + unc]
+        ods["core_profiles.time"] = data['time']
+        sh = "core_profiles.profiles_1d"
+        for i_time, time in enumerate(data["time"]):
+            print("time", i_time)
+            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
+            ods[f"{sh}[{i_time}].grid.rho_tor_norm"] = data['grid.rho_tor_norm'][i_time]
+            for entry in uncertain_entries:
+                print(entry)
+                ods[f"{sh}[{i_time}]."+entry] = unumpy.uarray(
+                    data[entry][i_time],
+                    data[entry + ".data_error_upper"][i_time])
+            ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+            ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+            ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+            ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
@@ -1389,7 +1401,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         data['grid.rho_tor_norm'][:] = rho_tor_norm
         ods[f"core_profiles.time"] = data['time']
         for entry in data:
-            print(entry)
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
 

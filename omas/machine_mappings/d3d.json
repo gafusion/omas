@@ -123,10 +123,16 @@
  "core_profiles.profiles_1d.:.electrons.density": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
+ "core_profiles.profiles_1d.:.electrons.density_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
  "core_profiles.profiles_1d.:.electrons.density_thermal": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.grid.rho_pol_norm": {
@@ -141,6 +147,9 @@
  "core_profiles.profiles_1d.:.ion.:.density": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
+ "core_profiles.profiles_1d.:.ion.:.density_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
  "core_profiles.profiles_1d.:.ion.:.element.:": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
@@ -153,8 +162,14 @@
  "core_profiles.profiles_1d.:.ion.:.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
+ "core_profiles.profiles_1d.:.ion.:.temperature_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
  "core_profiles.profiles_1d.:.ion.:.velocity.toroidal": {
   "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.time": {
