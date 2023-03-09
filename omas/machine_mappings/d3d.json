@@ -12,8 +12,7 @@
   "default_tree": "D3D",
   "fast_ece": false,
   "nref": 0,
-  "revision": "BLESSED",
-  "tree": "OMFIT_PROFS"
+  "revision": "BLESSED"
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -119,7 +118,50 @@
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
  "core_profiles.profiles_1d.:": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree})"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.rho_pol_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:.a": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:.z_n": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"

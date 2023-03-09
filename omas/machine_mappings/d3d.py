@@ -1341,9 +1341,9 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
-@machine_mapping_function(__regression_arguments__, pulse=194455001, tree="OMFIT_PROFS")
-def core_profiles_profile_1d(ods, pulse, tree="OMFIT_PROFS"):
-    if "OMFIT_PROFS" in tree:
+@machine_mapping_function(__regression_arguments__, pulse=194455001, PROFILES_tree="OMFIT_PROFS")
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+    if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
             "grid.rho_tor_norm": "rho",
@@ -1356,8 +1356,8 @@ def core_profiles_profile_1d(ods, pulse, tree="OMFIT_PROFS"):
         }
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
-        data = mdsvalue('d3d', treename='OMFIT_PROFS', pulse=pulse, TDI=query).raw()
-        dim_info = mdsvalue('d3d', treename='OMFIT_PROFS', pulse=pulse, TDI="\\TOP.n_e")
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
@@ -1368,6 +1368,10 @@ def core_profiles_profile_1d(ods, pulse, tree="OMFIT_PROFS"):
         for entry in data:
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+        ods[f"core_profiles.profiles_1d[:].ion[0].element[0].z_n"] = 1
+        ods[f"core_profiles.profiles_1d[:].ion[0].element[0].a"] = 2.0141
+        ods[f"core_profiles.profiles_1d[:].ion[0].element[1].z_n"] = 6
+        ods[f"core_profiles.profiles_1d[:].ion[0].element[1].a"] = 12.011
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
@@ -1377,8 +1381,8 @@ def core_profiles_profile_1d(ods, pulse, tree="OMFIT_PROFS"):
         }
         for entry in query:
             query[entry] = profiles_node + query[entry]
-        data = mdsvalue('d3d', treename=tree, pulse=pulse, TDI=query).raw()
-        dim_info = mdsvalue('d3d', treename=tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         rho_tor_norm = dim_info.dim_of(0)
         data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
