@@ -939,7 +939,7 @@ nice_names = {
 
 
 @add_to__ODS__
-def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_triangles=None, **kw):
+def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_triangles=None, omas_viewer=False, **kw):
     """
     Plot equilibrium cross-section and P, q, P', FF' profiles
     as per `ods['equilibrium']['time_slice'][time_index]`
@@ -986,8 +986,10 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
             return ods_time_plot(
                 equilibrium_summary, ods, time_index, time, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, **kw
             )
-
-    ax = cached_add_subplot(fig, axs, 1, 3, 1)
+    if omas_viewer:
+        ax = cached_add_subplot(fig, axs, 1, 4, 1)
+    else:
+        ax = cached_add_subplot(fig, axs, 1, 3, 1)
     contour_quantity = kw.pop('contour_quantity', 'rho_tor_norm')
     tmp = equilibrium_CX(
         ods, time_index=time_index, ax=ax, contour_quantity=contour_quantity, ggd_points_triangles=ggd_points_triangles, **kw
@@ -1005,17 +1007,28 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     xName = nice_names.get(raw_xName, raw_xName)
 
     # pressure
-    ax = cached_add_subplot(fig, axs, 2, 3, 2)
-    ax.plot(x, eq['profiles_1d']['pressure'], **kw)
+    if omas_viewer:
+        ax = cached_add_subplot(fig, axs, 2, 4, 2)
+    else:
+        ax = cached_add_subplot(fig, axs, 2, 3, 2)
+    ax.plot(x, eq['profiles_1d']['pressure'] * 1.e-3, **kw)
+    ax.set_ylabel("$p$ [kPa]")
+    ax.set_xlabel(xName)
+    ax.set_xlim(0,1)
     kw.setdefault('color', ax.lines[-1].get_color())
     ax.set_title(r'$\,$ Pressure')
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-    pyplot.setp(ax.get_xticklabels(), visible=False)
-
+    # ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+    if not omas_viewer:
+        pyplot.setp(ax.get_xticklabels(), visible=False)
     # q
-    ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+    if omas_viewer:
+        ax = cached_add_subplot(fig, axs, 2, 4, 3, sharex=ax)
+    else:
+        ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
     ax.plot(x, eq['profiles_1d']['q'], **kw)
     ax.set_title('$q$ Safety factor')
+    ax.set_ylabel("$q$")
+    ax.set_xlabel(xName)
     ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
         leg = ax.legend(loc=0)
@@ -1025,25 +1038,52 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
             leg.set_draggable(True)
         else:
             leg.draggable(True)
-    pyplot.setp(ax.get_xticklabels(), visible=False)
+    if not omas_viewer:
+        pyplot.setp(ax.get_xticklabels(), visible=False)
+    if omas_viewer:
+        # j_tor,j_parallel have no data
+        ax = cached_add_subplot(fig, axs, 2, 4, 4, sharex=ax)
+        # ax.plot(x, eq['profiles_1d']['j_parallel'], **kw)
+        ax.set_title(r"$j_\mathrm{tor}$")
+        # ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        # pyplot.xlabel(xName)
+    else:
+        # dP_dpsi
+        ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
+        ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
+        ax.set_title(r"$P\,^\prime$ source function")
+        ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        pyplot.xlabel(xName)
+    if omas_viewer:
+        ax = cached_add_subplot(fig, axs, 2, 4, 6)
+        # ax.plot(eq['profiles_1d']['convergence']['iteration'], 
+        #         eq['profiles_1d']['convergence']['grad_shafranov_deviation_value'], **kw)
+        ax.set_title(r"GS Convergence")
+        ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        pyplot.xlabel(xName)
+    else:
+        # FdF_dpsi
+        ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
+        ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
+        ax.set_title(r"$FF\,^\prime$ source function")
+        ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        pyplot.xlabel(xName)
 
-    # dP_dpsi
-    ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
-    ax.plot(x, eq['profiles_1d']['dpressure_dpsi'], **kw)
-    ax.set_title(r"$P\,^\prime$ source function")
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-    pyplot.xlabel(xName)
-
-    # FdF_dpsi
-    ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
-    ax.plot(x, eq['profiles_1d']['f_df_dpsi'], **kw)
-    ax.set_title(r"$FF\,^\prime$ source function")
-    ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-    pyplot.xlabel(xName)
-
+    if omas_viewer:
+        # Problems loading fields and no data
+        ax = cached_add_subplot(fig, axs, 2, 4, 7)
+        # ax.plot(range(len(eq['constraints.flux_loop'])) + 1, eq['constraints.flux_loop'][:]["chi_squared"], **kw)
+        ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        ax.set_title(r"$\chi^2$ convergence")
+        pyplot.xlabel("Flux loop \#")
+        ax = cached_add_subplot(fig, axs, 2, 4, 8)
+        # ax.plot(range(len(eq['constraints.flux_loop'])) + 1, eq['constraints.flux_loop'][:]["chi_squared"], **kw)
+        ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
+        ax.set_title(r"???")
+        pyplot.xlabel("???")
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
-
+    fig.tight_layout()
     return {'ax': axs}
 
 
