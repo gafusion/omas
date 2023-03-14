@@ -1348,15 +1348,20 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
-            "electrons.density": "n_e",
-            "electrons.temperature": "T_e",
-            "ion[0].density": "n_D",
-            "ion[0].temperature": "T_i",
-            "ion[0].velocity.toroidal": "V_tor_C",
-            "ion[1].density": "n_C"
+            "electrons.density": "N_E",
+            "electrons.temperature": "T_E",
+            "ion[0].density": "N_D",
+            "ion[0].temperature": "T_D",
+            "ion[0].velocity.toroidal": "V_TOR_C",
+            "ion[1].density": "N_C",
+            "ion[1].temperature": "T_C"
         }
         uncertain_entries = list(query.keys())
+        query["j_total"] = "J_TOT"
+        query["pressure_perpendicular"] = "P_TOT"
+        #query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
+        normal_entries = set(query.keys()) - set(uncertain_entries)
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
@@ -1368,18 +1373,29 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
         for unc in ["", ".data_error_upper"]:
-            data["ion[1].temperature" + unc] = data["ion[0].temperature" + unc]
-            data["ion[1].velocity.toroidal" + unc] = data["ion[0].velocity.toroidal" + unc]
+            data[f"ion[1].velocity.toroidal{unc}"] = data[f"ion[0].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
-            ods[f"{sh}[{i_time}].grid.rho_tor_norm"] = data['grid.rho_tor_norm'][i_time]
             for entry in uncertain_entries:
-                print(entry)
-                ods[f"{sh}[{i_time}]."+entry] = unumpy.uarray(
-                    data[entry][i_time],
-                    data[entry + ".data_error_upper"][i_time])
+                try:
+                    print("Uncertain entry", entry)
+                    ods[f"{sh}[{i_time}]."+entry] = unumpy.uarray(
+                        data[entry][i_time],
+                        data[entry + ".data_error_upper"][i_time])
+                except:
+                    print("================ DATA =================")
+                    print(data[entry][i_time])
+                    print("================ ERROR =================")
+                    print(data[entry + ".data_error_upper"][i_time])
+            for entry in normal_entries:
+                try:
+                    print("Normal entry", entry)
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                except:
+                    print("================ DATA =================")
+                    print(data[entry][i_time])
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
             ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
