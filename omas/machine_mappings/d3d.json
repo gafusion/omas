@@ -117,6 +117,9 @@
   "COCOSIO": 11,
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
+ "core_profiles.ids_properties.homogeneous_time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
  "core_profiles.profiles_1d.:": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },

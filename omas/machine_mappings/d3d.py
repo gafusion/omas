@@ -1344,6 +1344,7 @@ def ip_bt_dflux_data(ods, pulse):
 
 @machine_mapping_function(__regression_arguments__, pulse=194455001, PROFILES_tree="OMFIT_PROFS")
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+    ods["core_profiles.ids_properties.homogeneous_time"] = 1
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
