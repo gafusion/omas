@@ -1373,7 +1373,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
         for i_time, time in enumerate(data["time"]):
-            print("time", i_time)
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
             ods[f"{sh}[{i_time}].grid.rho_tor_norm"] = data['grid.rho_tor_norm'][i_time]
             for entry in uncertain_entries:
@@ -1385,6 +1384,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
             ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+            ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
