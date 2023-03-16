@@ -85,6 +85,9 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :return: updated ODS and data before being assigned to the ODS
     """
+
+    pulse = int(pulse)
+
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -687,6 +690,7 @@ class mdstree(dict):
     """
 
     def __init__(self, server, treename, pulse):
+        pulse = int(pulse)
         for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
             try:
                 TDI = TDI.decode('utf8')
@@ -710,7 +714,7 @@ class mdsvalue(dict):
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
         self.treename = treename
-        self.pulse = pulse
+        self.pulse = int(pulse)
         self.TDI = TDI
         if 'nstx' in server:
             old_MDS_server = True
@@ -871,7 +875,7 @@ class dynamic_omas_machine(dynamic_ODS):
     """
 
     def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
-        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
+        self.kw = {'machine': machine, 'pulse': int(pulse), 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
         self.active = False
         self.cache = {}
 
