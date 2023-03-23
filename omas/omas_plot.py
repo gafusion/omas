@@ -1008,22 +1008,26 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         x = eq['profiles_1d'][raw_xName]
     else:
         raw_xName = 'psi'
-        x = eq['profiles_1d']['psi_norm']
-        x = (x - min(x)) / (max(x) - min(x))
+        x = ((eq['profiles_1d']['psi'] - eq['global_quantities']['psi_axis']) 
+            / (  eq['global_quantities']['psi_boundary'] - eq['global_quantities']['psi_axis']))
     xName = nice_names.get(raw_xName, raw_xName)
 
     # pressure
     ax = cached_add_subplot(fig, axs, 2, 3, 2)
+    if omas_viewer:
+        ax.plot(-ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.rpress"],
+                ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.pressr"]/1.e3, ".r")
     plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['pressure'] * 1.e-3, 
                                 xName, r"$p$ [kPa]", r'$\,$ Pressure', 
                                 visible_x=omas_viewer, **kw)
     kw.setdefault('color', ax.lines[-1].get_color())
+
     # q
     if omas_viewer:
         ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
-    plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['q'],
+    plot_1d_equilbrium_quantity(ax, x, numpy.abs(eq['profiles_1d']['q']),
                                 xName, r'$q$ Safety factor', r'$q$ Safety factor', 
                                 visible_x=omas_viewer, **kw)
     #ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
@@ -1039,11 +1043,12 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         pyplot.setp(ax.get_xticklabels(), visible=False)
     if omas_viewer:
         ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
-        # j_tor,j_parallel have no data
-        # ax.plot(x, eq['profiles_1d']['j_parallel'], **kw)
-        ax.set_title(r"$j_\mathrm{tor}$")
-        # ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
-        # pyplot.xlabel(xName)
+        ax.plot(ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.sizeroj"],
+                ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] / 1.e6, ".r")
+        plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
+                                    xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
+                                    r"$j_\mathrm{tor}$", 
+                                    visible_x=omas_viewer, **kw)
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['dpressure_dpsi'] * 1.e-3,
@@ -1052,16 +1057,39 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
                                 visible_x=True, **kw)
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
-    ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
     if omas_viewer:
+        ax = cached_add_subplot(fig, axs, 2, 3, 6)
         ax = cached_add_subplot(fig, axs, 2, 3, 6)
         # ax.plot(eq['profiles_1d']['convergence']['iteration'], 
         #         eq['profiles_1d']['convergence']['grad_shafranov_deviation_value'], **kw)
-        ax.set_title(r"$\chi^2$ convergence")
-
-        ax.set_xlabel(r"Flux loop \#")
-        ax.set_ylabel(r"Residiaul [std. dev.]")
+        diag_chi_2 = []
+        labels = []
+        try:
+            diag_chi_2.append(eq[f'constraints.pf_current[:].chi_squared'])
+            for i in range(len(diag_chi_2)):
+                labels.append("PF coil " + ods[f'pf_active.coil[[{i}].identifier'])
+        except:
+            printd("Failed to find pf_active chi^2. Skipping pf_active in chi^2 plot.")
+        for constraint, imas_mangetics_id, nice_label in zip(["flux_loop", "bpol_probe"],
+                                           ["flux_loop", "b_field_pol_probe"], 
+                                            ["Flux loop ", r"$B_\mathrm{pol}$ Probe "]):
+            chi_2 = list(eq[f'constraints.{constraint}[:].chi_squared'])
+            for i in range(len(chi_2)):
+                labels.append(nice_label + ods[f'magnetics.{imas_mangetics_id}[{i}].identifier'])
+            diag_chi_2 += chi_2
+        indices = numpy.array(range(len(diag_chi_2))) + 1
+        plot_1d_equilbrium_quantity(ax, indices, diag_chi_2,
+                                    r"Diagnostic #", r"$\chi^2$ convergence", 
+                                    r"Magnetics $\chi^2$", 
+                                    visible_x=True, marker="+", linestyle='', **kw)
+        for i_label, label in enumerate(labels):
+            annot = ax.annotate(label, xy=(indices[i_label],diag_chi_2[i_label]), 
+                                xytext=(20,20),textcoords="offset points",
+                                bbox=dict(boxstyle="round", fc="w"),
+                                arrowprops=dict(arrowstyle="->"))
+            annot.set_visible(False)
     else:
+        ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
         ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
         # FdF_dpsi
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['f_df_dpsi'],
@@ -1124,7 +1152,8 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
 
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
+def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
+                          ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -1151,7 +1180,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
     """
 
     from matplotlib import pyplot
-
+    from omas.omas_physics import get_plot_scale_and_unit
     axs = kw.pop('ax', {})
     if axs is None:
         axs = {}
@@ -1190,20 +1219,26 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
     label_name_z = []
     unit_list = []
     for q in quantities:
-        if 'density' in q or 'temperature' in q:
+        if 'density' in q or 'temperature' in q or "velocity.toroidal" in q or "e_field.radial" in q:
             for index, specie in enumerate(species_in_tree):
-                unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
+                #unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
+                scale, unit = get_plot_scale_and_unit(q)
+                unit_list.append(unit)
                 if q in prof1d[specie]:
-                    if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.0:
-                        plotting_list.append(prof1d[specie][q] * prof1d[specie]['element[0].z_n'])
-                        label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
+                    # if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.0:
+                    #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
+                    #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
+                    # else:
+                    if len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
+                        plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
+                                             prof1d[specie][q + "_error_upper"]*scale))
                     else:
-                        plotting_list.append(prof1d[specie][q])
-                        label_name_z.append("")
+                        plotting_list.append(prof1d[specie][q]*scale)
+                    label_name_z.append("")
                     label_name.append(f'{names[index]} {q.capitalize()}')
 
-                else:
-                    plotting_list.append(numpy.zeros(len(rho)))
+                # else:
+                #     plotting_list.append(numpy.zeros(len(rho)))
 
         else:
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
@@ -1211,14 +1246,27 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
             label_name.append(q.capitalize())
 
     for index, y in enumerate(plotting_list):
+        if index >= len(label_name):
+            break
         plot = index + 1
 
-        if index % ncols == 0:
+        # if index % ncols == 0:
+        #     sharey = None
+        #     sharex = None
+        # el
+        if index == 0:
             sharey = None
             sharex = None
-        elif 'Density' in label_name[index] or 'Temperature' in label_name[index]:
-            sharey = ax
-            sharex = ax
+        try:
+            if 'Density' in label_name[index] or 'Temperature' in label_name[index]:
+                sharex = ax
+                sharey = ax
+            elif "Velocity" in label_name[index]:
+                sharex = ax
+                sharey = None
+        except:
+            sharex = None
+            sharey = None
         ax = cached_add_subplot(fig, axs, nrows, ncols, plot, sharex=sharex, sharey=sharey)
 
         uband(rho, y, ax=ax, **kw)
@@ -1232,8 +1280,8 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None, ods_species
             ax.set_xlabel('$\\rho$')
     if 'label' in kw:
         ax.legend(loc='lower center')
-    ax.set_xlim([0, 1])
-
+    ax.set_xlim(0, 1)
+    fig.tight_layout()
     return {'ax': axs, 'fig': fig}
 
 

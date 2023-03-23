@@ -2493,6 +2493,24 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
 
     return match
 
+@add_to__ALL__
+def get_plot_scale_and_unit(phys_quant):
+    """
+    Returns normalizing scale for a physical quantity.
+    E.g. "temprerature" returns 1.e-3 and keV
+    :param phys_qaunt: str with a physical quantity. Uses IMAS scheme names where possible
+    :return: scale, unit
+    """
+    print(phys_quant)
+    if "temperature" in phys_quant:
+        return 1.e-3, r"\mathrm{keV}"
+    elif "density" in phys_quant :
+        return 1.e-19, r"\times 10^{19}\,\mathrm{m}^{-3}"
+    elif "velocity" in  phys_quant:
+        return 1.e-6, r"\mathrm{Mm}\,\mathrm{s}^{-1}"
+    elif "e_field" in phys_quant:
+        return 1.e-3, r"\mathrm{kV}\,\mathrm{m}^{-1}"
+    
 
 @add_to__ALL__
 def define_cocos(cocos_ind):

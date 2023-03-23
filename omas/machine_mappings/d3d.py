@@ -7,6 +7,9 @@ from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
+from omas.omas_core import ODS
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1342,6 +1345,31 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
+@machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT")
+def equilibrium_special(ods, pulse, EFIT_tree="EFIT"):
+    from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
+    from scipy.interpolate import InterpolatedUnivariateSpline
+    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
+    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS.KTIME").raw() #
+    ods["equilibrium.ids_properties.homogeneous_time"] = 1
+    ods["equilibrium.time"]= times / 1.e3
+    # for i_time, time in enumerate(times):
+    #     ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
+    eq = from_mds_plus(device="d3d", shot=pulse, times=times,
+                       exact=True, snap_file=EFIT_tree, get_afile=False, get_mfile=True,
+                       show_missing_data_warnings=None, close=True)
+    for time_index, time in enumerate(times):
+        kstrstr = '\n'.join(list(kfiles[time_index]))
+        kEQDSK = OMFITkeqdsk(f'k{pulse}.{time_index}',fromString=kstrstr)
+        kEQDSK.to_omas(ods, time_index=time_index)
+        eq['gEQDSK'][time].to_omas(ods, time_index=time_index)
+        ods = eq['mEQDSK'][time].to_omas(ods, time_index=time_index)
+        if (np.abs(ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] - 
+                   ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.plasma"]) > 
+            np.abs(0.08*ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"])):
+            raise ValueError("Cannot reconstruct contraints, current constraints not met.")
+        ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"]
+
 @machine_mapping_function(__regression_arguments__, pulse=194455001, PROFILES_tree="OMFIT_PROFS")
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
@@ -1352,50 +1380,59 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             "electrons.temperature": "T_E",
             "ion[0].density": "N_D",
             "ion[0].temperature": "T_D",
-            "ion[0].velocity.toroidal": "V_TOR_C",
+            "ion[1].velocity.toroidal": "V_TOR_C",
             "ion[1].density": "N_C",
             "ion[1].temperature": "T_C"
         }
         uncertain_entries = list(query.keys())
         query["j_total"] = "J_TOT"
         query["pressure_perpendicular"] = "P_TOT"
-        #query["e_field.radial"] = "ER_C"
+        # query["e_field.radial"] = "Er_12C6"
         query["grid.rho_tor_norm"] = "rho"
         normal_entries = set(query.keys()) - set(uncertain_entries)
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
-            query[entry + ".data_error_upper"] = "error_of(" + query[entry] + ")"
+            query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
-        for unc in ["", ".data_error_upper"]:
-            data[f"ion[1].velocity.toroidal{unc}"] = data[f"ion[0].velocity.toroidal{unc}"]
+        # for density in densities:
+        #     data[density] *= 1.e6
+        for unc in ["", "_error_upper"]:
+            data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
-            for entry in uncertain_entries:
+        for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
+            # print(entry)
+            for i_time, time in enumerate(data["time"]):
                 try:
+                    ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
+                    ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                except Exception as e:
                     print("Uncertain entry", entry)
-                    ods[f"{sh}[{i_time}]."+entry] = unumpy.uarray(
-                        data[entry][i_time],
-                        data[entry + ".data_error_upper"][i_time])
-                except:
                     print("================ DATA =================")
                     print(data[entry][i_time])
                     print("================ ERROR =================")
-                    print(data[entry + ".data_error_upper"][i_time])
-            for entry in normal_entries:
+                    print(data[entry + "_error_upper"][i_time])
+                    print(data[entry][i_time].shape, 
+                            data[entry + "_error_upper"][i_time].shape)
+                    print(e)
+        for entry in normal_entries:
+            # print(entry)
+            for i_time, time in enumerate(data["time"]):
                 try:
-                    print("Normal entry", entry)
                     ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
                 except:
+                    print("Normal entry", entry)
                     print("================ DATA =================")
                     print(data[entry][i_time])
+        for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
             ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
@@ -1445,4 +1482,4 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions(["equilibrium_special"], globals(), locals())

@@ -117,10 +117,19 @@
   "COCOSIO": 11,
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
+ "core_profiles": {
+    "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+},
  "core_profiles.ids_properties.homogeneous_time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.e_field.radial": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.e_field.radial_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.electrons.density": {
@@ -187,6 +196,9 @@
  },
  "core_profiles.time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "dataset_description.data_entry.pulse": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
  },
  "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
@@ -284,6 +296,1030 @@
  },
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "equilibrium.code": {
+    "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+},
+"equilibrium.code.parameters": {
+    "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+},
+ "equilibrium.code.parameters.time_slice.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.auxquantities.degrees_of_freedom": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.auxquantities.num_fit_variables": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.auxquantities.num_hard_constraints": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.auxquantities.num_input_data": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.auxquantities.sigxxj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.alphafp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.bitec": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.bitfc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.bitip": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.bitmpi": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.brsp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.btor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.calpa": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.cgama": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.coils": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.currn1": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.denr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.denv": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.dflux": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.dmass": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.dnbeam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.dpsiecn": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ecurrt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.efitversion": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.elomin": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.errmag": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.errmagb": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.errmin": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.error": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.expmp2": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fcurbd": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ff2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ffbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ffknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fftens": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fitfcsum": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fitsiref": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fitzts": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtbp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtcur": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtdlc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtec": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtfc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtfcsum": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtmp2": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtpre": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtqa": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.fwtsi": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iavem": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iaveus": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ibtcomp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iconvr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.icprof": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.icutfp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iecurr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ierchk": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ifcurr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ifindopt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ifitvs": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.imagsigma": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.input_dir": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iout": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iplcout": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.iplim": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ishot": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.isolve": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.itek": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.itime": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.itimeu": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.itrace": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ixray": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kbound": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kcalpa": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kcgama": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kedgef": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kedgep": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.keehord": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.keqdsk": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kersil": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kff2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kffbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kffcur": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kfffnc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kffhord": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kffknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kframe": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kpp2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kppbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kppcur": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kppfnc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kpphord": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kppknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kprfit": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kskipvs": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ktear": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kwripre": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kww2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kwwbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kwwfnc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kwwknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.kzeroj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.limitr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.mxiter": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.n1coil": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.nbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.nbdrymx": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.nbeam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ndokin": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.nextra": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.nmass": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.npress": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pbeam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pcurbd": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.plasma": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pnbeam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pp2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ppbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ppknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pptens": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.pressr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.psibit": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.psiecn": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.qvfit": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.rbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.rcentr": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.relax": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.req_valid": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.rpress": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.rzeroj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.saicon": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.saimin": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.scrape": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.serror": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.sibeam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.sigdlc": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.sigpre": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.siloplim": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.siref": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.store_dir": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.table_dir": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.tolbndpsi": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.use_previous": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.vbit": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.vloop": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.vsdamp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.ww2bdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.wwbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.wwknt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.wwtens": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.xalpa": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.xgama": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.xltype": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.xltype_180": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.zbdry": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.in1.zelip": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa1gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa2gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa3gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa4gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa5gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa6gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.aa7gam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.dtmsefull": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.fwtgam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.kwaitmse": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_certree": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_quiet": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_spave_on": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_strict": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_use_cer210": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_use_cer330": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.mse_usecer": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.msebkp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.msefitfun": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.ok_210lt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.ok_30rt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.rrrgam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.sgamma": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.t_max_beam_off": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.tgamma": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.tgammauncor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.v210lt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.v210rt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.v30lt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.v30rt": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.ins.zzzgam": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.currc139": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.currc199": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.currc79": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curril150": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curril30": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curril90": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curriu150": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curriu30": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.curriu90": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.errdelz": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.fitdelz": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.fwtxxj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.ifitdelz": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.nccoil": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.nicoil": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.oldccomp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.oldcomp": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.psiwant": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.relaxdz": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.rexpan": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.scaledz": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.sizeroj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.vzeroj": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.code.parameters.time_slice.:.inwant.znose": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.ids_properties.comment": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.ids_properties.homogeneous_time": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.outline.r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.outline.z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.:.r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.:.z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.chi_squared": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.measured": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.reconstructed": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.weight": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.chi_squared_total": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured_error_upper": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.chi_squared": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.measured": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.ip.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.ip.measured": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.ip.reconstructed": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.chi_squared": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured_error_upper": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.reconstructed": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.weight": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.reconstructed": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.weight": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.exact": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.measured": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.description": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.index": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.name": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.convergence.iterations_n": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_normal": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_pol": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_tor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.ip": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.li_3": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.psi_axis": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.psi_boundary": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_95": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_axis": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_min.rho_tor_norm": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_min.value": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.area": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.b_field_average": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.b_field_max": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.b_field_min": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.centroid.r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.centroid.r_max": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.centroid.r_min": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.centroid.z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.darea_dpsi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.darea_drho_tor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dpressure_dpsi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dpsi_drho_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dvolume_dpsi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dvolume_drho_tor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.elongation": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.f": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.f_df_dpsi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.geometric_axis.r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.geometric_axis.z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.gm1": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.gm2": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.gm5": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.gm8": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.gm9": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.j_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.pressure": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.psi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.q": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.r_inboard": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.r_outboard": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.rho_tor": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.squareness_lower_inner": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.squareness_lower_outer": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.squareness_upper_inner": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.squareness_upper_outer": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.surface": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.trapped_fraction": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.triangularity_lower": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.triangularity_upper": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.volume": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.b_field_r": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.b_field_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.b_field_z": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.psi": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.time_slice.:.time": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.vacuum_toroidal_field.b0": {
+  "COCOSIO": 11,
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "equilibrium.vacuum_toroidal_field.r0": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
@@ -622,25 +1658,25 @@
  "wall.description_2d.:": {
   "VALUE": 1
  },
+ "wall.description_2d.:.limiter.type.description": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "wall.description_2d.:.limiter.type.index": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "wall.description_2d.:.limiter.type.name": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
  "wall.description_2d.:.limiter.unit.:": {
   "VALUE": 1
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
-  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
-  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[1,])",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "wall.time": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
  }
 }
