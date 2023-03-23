@@ -1028,6 +1028,8 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
         if data_present[i]:
             try:
                 r = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i)).data()
+                if r is None:
+                    raise ValueError()
             except Exception:
                 continue
             if r > 0:

@@ -2910,4 +2910,6 @@ from .omas_ascii import *
 from .omas_mongo import *
 from .omas_symbols import *
 from .omas_machine import *
+from .utilities.machine_mapping_decorator import *
+from .utilities.omas_mds import *
 from . import omas_structure

@@ -566,6 +566,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
             func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
+                    regression_kw["update_callback"] = update_mapping
                     func(ods, **regression_kw)
                 except Exception:
                     raise
