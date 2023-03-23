@@ -8,6 +8,7 @@ from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_
 from .omas_physics import cocos_signals
 from omas.machine_mappings import d3d
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
 
 __all__ = [
     'machine_expression_types',
@@ -84,6 +85,9 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :return: updated ODS and data before being assigned to the ODS
     """
+
+    pulse = int(pulse)
+
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
@@ -532,7 +536,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 
 
 
-def test_machine_mapping_functions(__all__, global_namespace, local_namespace, break_schema=False):
+def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
     """
     Function used to test python mapping functions
 
@@ -563,6 +567,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace, b
             func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
+                    regression_kw["update_callback"] = update_mapping
                     func(ods, **regression_kw)
                 except Exception:
                     raise
@@ -604,7 +609,7 @@ class dynamic_omas_machine(dynamic_ODS):
     """
 
     def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
-        self.kw = {'machine': machine, 'pulse': pulse, 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
+        self.kw = {'machine': machine, 'pulse': int(pulse), 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
         self.active = False
         self.cache = {}
 

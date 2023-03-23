@@ -454,7 +454,7 @@ def coils_non_axisymmetric_hardware(ods, pulse):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
-
+                break
         coil_names += list(comp[compshot].keys())
 
     for k, fcid in enumerate(coil_names):
@@ -1028,6 +1028,8 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
         if data_present[i]:
             try:
                 r = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i)).data()
+                if r is None:
+                    raise ValueError()
             except Exception:
                 continue
             if r > 0:
@@ -1224,6 +1226,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
+                break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
@@ -1281,6 +1284,7 @@ def magnetics_probes_data(ods, pulse):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
+                break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
