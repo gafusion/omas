@@ -1357,6 +1357,9 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT"):
     from scipy.interpolate import InterpolatedUnivariateSpline
     kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
     times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS.KTIME").raw() #
+    if times is None:
+            print("No mds+ data")
+            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
     ods["equilibrium.ids_properties.homogeneous_time"] = 1
     ods["equilibrium.time"]= times / 1.e3
     # for i_time, time in enumerate(times):
@@ -1400,7 +1403,7 @@ def add_extra_profile_structures():
     add_extra_structures(extra_structures)
     
 
-@machine_mapping_function(__regression_arguments__, pulse=194455001, PROFILES_tree="OMFIT_PROFS")
+@machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
@@ -1429,7 +1432,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
         #query["j_total"] = "J_TOT"
         #query["pressure_perpendicular"] = "P_TOT"
-        # query["e_field.radial"] = "Er_12C6"
+        query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
         normal_entries = set(query.keys()) - set(uncertain_entries)
         for entry in query:
@@ -1437,6 +1440,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        if data is None:
+            print("No mds+ data")
+            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
@@ -1526,7 +1532,3 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 
 # ================================
-if __name__ == '__main__':
-    ods = ODS()
-    core_profiles_profile_1d(ods, 174082001, "OMFIT_PROFS")
-    # test_machine_mapping_functions(["equilibrium_special"], globals(), locals())
