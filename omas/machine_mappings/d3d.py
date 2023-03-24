@@ -1451,6 +1451,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
+            if isinstance(data[entry], Exception):
+                continue
             for i_time, time in enumerate(data["time"]):
                 try:
                     ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
@@ -1465,6 +1467,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                             data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
+            if isinstance(data[entry], Exception):
+                continue
             for i_time, time in enumerate(data["time"]):
                 try:
                     ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
@@ -1523,4 +1527,6 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 # ================================
 if __name__ == '__main__':
-    test_machine_mapping_functions(["equilibrium_special"], globals(), locals())
+    ods = ODS()
+    core_profiles_profile_1d(ods, 174082001, "OMFIT_PROFS")
+    # test_machine_mapping_functions(["equilibrium_special"], globals(), locals())
