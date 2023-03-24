@@ -1250,7 +1250,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
     unit_list = []
     data_list = []
     for q in quantities:
-        if 'density' in q or 'temperature' in q or "velocity.toroidal" in q or "e_field.radial" in q:
+        if 'density' in q or 'temperature' in q or "velocity.toroidal" in q :
             for index, specie in enumerate(species_in_tree):
                 #unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
                 scale, unit = get_plot_scale_and_unit(q)
@@ -1282,7 +1282,16 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
             label_name.append(q.capitalize())
-
+    if "e_field.radial" in quantities:
+        try:
+            scale, unit = get_plot_scale_and_unit("e_field.radial")
+            unit_list.append(unit)
+            plotting_list.append(unumpy.uarray(prof1d["e_field.radial"]*scale,
+                                               prof1d["e_field.radial" + "_error_upper"]*scale))
+            label_name_z.append("")
+            label_name.append(r'$E_\mathrm{r}$')
+        except:
+            pass
     for index, y in enumerate(plotting_list):
         if index >= len(label_name):
             break
@@ -1322,10 +1331,12 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             if numpy.any(mask):
                 ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask], 
                             linestyle='', marker="+", color='red', **kw)
+        species_label = label_name[index].split()[0]
+        species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:
-            ax.set_ylabel(r'$T_{{{}}}$'.format(label_name[index].split()[0]) + imas_units_to_latex(unit_list[index]))
+            ax.set_ylabel(r'$T_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
-            ax.set_ylabel(r'$n_{{{}}}$'.format(label_name[index].split()[0]) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
+            ax.set_ylabel(r'$n_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:

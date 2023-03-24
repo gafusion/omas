@@ -3,10 +3,11 @@
 import subprocess
 import functools
 import shutil
-from .omas_utils import *
-from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
-from .omas_physics import cocos_signals
+from omas.omas_utils import *
+from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
+from omas.omas_physics import cocos_signals
 from omas.machine_mappings import d3d
+from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue
 
@@ -536,7 +537,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 
 
 
-def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace):
     """
     Function used to test python mapping functions
 
@@ -550,7 +551,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
     os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
     # call machine mapping to make sure the json file is properly formatted
-    machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
+    # machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
     machine_mappings(machine, '', raise_errors=True)
     print('OK')
@@ -564,7 +565,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
             pprint(regression_kw)
             print('=' * len(func_name))
             ods = ODS() #consistency_check= not break_schema
-            func = eval(func_name, global_namespace, local_namespace)
+            func = eval(machine + "." + func_name, global_namespace, local_namespace)
             try:
                 try:
                     regression_kw["update_callback"] = update_mapping
@@ -688,3 +689,6 @@ def load_omas_machine(
         print(location)
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
+
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
