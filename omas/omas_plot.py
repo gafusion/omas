@@ -946,6 +946,28 @@ def plot_1d_equilbrium_quantity(ax, x, y, xlabel, ylabel, title, visible_x = Tru
     ax.set_ylabel(ylabel)
     ax.set_title(title)
 
+@add_to__ODS__
+def equilibrium_quality(ods, fig=None, **kw):
+    """
+    Plot equilibrium convergence error and total Chi-squared as a function of time
+
+    :param ods: input ods
+
+    :param fig: figure to plot in (a new figure is generated if `fig is None`)
+    """    
+    from matplotlib import pyplot
+
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
+
+    ax1 = cached_add_subplot(fig, axs, 1, 2, 1)
+    ax2 = cached_add_subplot(fig, axs, 1, 2, 2, sharex=ax1)
+
+    ax1.plot(ods['equilibrium.time'], ods['equilibrium.time_slice[:].constraints.chi_squared_total'])
+    ax2.plot(ods['equilibrium.time'], ods['equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value'])
 
 @add_to__ODS__
 def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_triangles=None, omas_viewer=False, **kw):
@@ -1314,7 +1336,6 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
     ax.set_xlim(0, 1)
     fig.tight_layout()
     return {'ax': axs, 'fig': fig}
-
 
 @add_to__ODS__
 def core_profiles_pressures(ods, time_index=None, time=None, ax=None, **kw):
