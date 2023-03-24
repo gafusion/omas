@@ -1153,7 +1153,8 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
-                          ods_species=None, quantities=['density_thermal', 'temperature'], **kw):
+                          ods_species=None, quantities=['density_thermal', 'temperature'], 
+                          x_axis = "rho_tor_norm", **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
     as per `ods['core_profiles']['profiles_1d'][time_index]`
@@ -1198,8 +1199,15 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             )
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
-    rho = prof1d['grid.rho_tor_norm']
-
+    if x_axis == "psi_norm":
+        x = prof1d['grid.rho_pol_norm']**2
+        x_label = r"$\Psi$"
+    else:
+        x = prof1d[f'grid.{x_axis}']
+        if "tor" in x_axis:
+            x_label = r'$\rho$'
+        elif "pol" in x_axis:
+            x_label = r'$\rho_\mathrm{pol}$'
     # Determine subplot rows x colls
     if ods_species is None:
         ncols = len(prof1d['ion']) + 1
@@ -1218,6 +1226,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
     label_name = []
     label_name_z = []
     unit_list = []
+    data_list = []
     for q in quantities:
         if 'density' in q or 'temperature' in q or "velocity.toroidal" in q or "e_field.radial" in q:
             for index, specie in enumerate(species_in_tree):
@@ -1234,6 +1243,13 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                                              prof1d[specie][q + "_error_upper"]*scale))
                     else:
                         plotting_list.append(prof1d[specie][q]*scale)
+                    if x_axis == "psi_norm":
+                        try:
+                            data_list.append([prof1d[specie][q + "_fit.psi_norm"],
+                                              prof1d[specie][q + "_fit.measured"]*scale,
+                                              prof1d[specie][q + "_fit.measured_error_upper"]*scale])
+                        except Exception as e:
+                            data_list.append(None)
                     label_name_z.append("")
                     label_name.append(f'{names[index]} {q.capitalize()}')
 
@@ -1269,7 +1285,21 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             sharey = None
         ax = cached_add_subplot(fig, axs, nrows, ncols, plot, sharex=sharex, sharey=sharey)
 
-        uband(rho, y, ax=ax, **kw)
+        uband(x, y, ax=ax, **kw)
+        if data_list[index] is not None:
+            mask = numpy.ones(data_list[index][0].shape, dtype=bool)
+            # Remove NaNs
+            for j in range(3):
+                mask[numpy.isnan(data_list[index][j])] = False
+            # Remove measuremetns with 100% or more uncertainty
+            x_data = data_list[index][0][mask]
+            y_data = data_list[index][1][mask]
+            y_data_err = data_list[index][2][mask]
+            mask = mask[mask]                    
+            mask[numpy.abs(y_data_err[mask]) > numpy.abs(y_data[mask])] = False
+            if numpy.any(mask):
+                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask], 
+                            linestyle='', marker="+", color='red', **kw)
         if "Temp" in label_name[index]:
             ax.set_ylabel(r'$T_{{{}}}$'.format(label_name[index].split()[0]) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
@@ -1277,7 +1307,8 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
-            ax.set_xlabel('$\\rho$')
+            ax.set_xlabel(x_label)
+    
     if 'label' in kw:
         ax.legend(loc='lower center')
     ax.set_xlim(0, 1)

@@ -10,6 +10,8 @@ from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
+from omas.omas_structure import add_extra_structures
+# from omas.omas_structure import add_extra_structures
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1374,23 +1376,59 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT"):
             raise ValueError("Cannot reconstruct contraints, current constraints not met.")
         ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"]
 
+def add_extra_profile_structures():
+    extra_structures = {}
+    extra_structures["core_profiles"] = {}
+    sh = "core_profiles.profiles_1d"
+    for quant in ["ion.:.density_fit.psi_norm", "electrons.density_fit.psi_norm",
+                  "ion.:.temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
+                  "ion.:.velocity.toroidal_fit.psi_norm"]:
+        if "velocity" in quant:
+            psi_struct = {"coordinates": "1- 1...N"}
+        else:
+            psi_struct = {"coordinates": sh + ".:." + quant.replace("psi_norm", "rho_tor_norm")}
+        psi_struct["documentation"] = "Normalized Psi for fit data."
+        psi_struct["data_type"] =  "FLT_1D"
+        psi_struct["units"] = ""
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.{quant}"] = psi_struct
+    velo_struct = {"coordinates": sh + ".:." + "ion.:.velocity.toroidal_fit.psi_norm"}
+    velo_struct["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
+    velo_struct["data_type"] =  "FLT_1D"
+    velo_struct["units"] = "m.s^-1"
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    add_extra_structures(extra_structures)
+    
+
 @machine_mapping_function(__regression_arguments__, pulse=194455001, PROFILES_tree="OMFIT_PROFS")
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+    add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
             "electrons.density": "N_E",
+            "electrons.density_fit.measured": "RW_N_E",
             "electrons.temperature": "T_E",
+            "electrons.temperature_fit.measured": "RW_T_E",
             "ion[0].density": "N_D",
             "ion[0].temperature": "T_D",
             "ion[1].velocity.toroidal": "V_TOR_C",
+            "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
             "ion[1].density": "N_C",
-            "ion[1].temperature": "T_C"
+            "ion[1].density_fit.measured": "RW_N_C",
+            "ion[1].temperature": "T_C",
+            "ion[1].temperature_fit.measured": "RW_T_C",
         }
         uncertain_entries = list(query.keys())
-        query["j_total"] = "J_TOT"
-        query["pressure_perpendicular"] = "P_TOT"
+        query["electrons.density_fit.psi_norm"] = "PS_N_E"
+        query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
+        query["ion[1].density_fit.psi_norm"] = "PS_N_C"
+        query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
+        query["ion[1].density_fit.psi_norm"] = "PS_T_C"
+        query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
+        #query["j_total"] = "J_TOT"
+        #query["pressure_perpendicular"] = "P_TOT"
         # query["e_field.radial"] = "Er_12C6"
         query["grid.rho_tor_norm"] = "rho"
         normal_entries = set(query.keys()) - set(uncertain_entries)
@@ -1413,7 +1451,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
-            # print(entry)
             for i_time, time in enumerate(data["time"]):
                 try:
                     ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
@@ -1428,7 +1465,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                             data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
-            # print(entry)
             for i_time, time in enumerate(data["time"]):
                 try:
                     ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
@@ -1460,9 +1496,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         data['grid.rho_tor_norm'][:] = rho_tor_norm
         ods[f"core_profiles.time"] = data['time']
         for entry in data:
+            if isinstance(data[entry], Exception):
+                continue
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
-
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):

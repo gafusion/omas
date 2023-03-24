@@ -563,7 +563,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
             print(func_name)
             pprint(regression_kw)
             print('=' * len(func_name))
-            ods = ODS(consistency_check= not break_schema)
+            ods = ODS() #consistency_check= not break_schema
             func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:

@@ -2501,7 +2501,6 @@ def get_plot_scale_and_unit(phys_quant):
     :param phys_qaunt: str with a physical quantity. Uses IMAS scheme names where possible
     :return: scale, unit
     """
-    print(phys_quant)
     if "temperature" in phys_quant:
         return 1.e-3, r"\mathrm{keV}"
     elif "density" in phys_quant :
