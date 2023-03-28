@@ -1352,18 +1352,24 @@ def ip_bt_dflux_data(ods, pulse):
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
 @machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT")
-def equilibrium_special(ods, pulse, EFIT_tree="EFIT"):
+def equilibirum_time(ods, pulse, EFIT_tree="EFIT"):
+    unwrap(equilibrium_special)(ods, pulse, EFIT_tree, False)
+    
+
+@machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT", get_all=True)
+def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
     from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
-    from scipy.interpolate import InterpolatedUnivariateSpline
-    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
-    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS.KTIME").raw() #
+    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS.KTIME").raw()
     if times is None:
-            print("No mds+ data")
-            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
+        print("No mds+ data")
+        raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
     ods["equilibrium.ids_properties.homogeneous_time"] = 1
     ods["equilibrium.time"]= times / 1.e3
-    # for i_time, time in enumerate(times):
-    #     ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
+    for i_time, time in enumerate(times):
+        ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
+    if get_all == False:
+        return
+    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
     eq = from_mds_plus(device="d3d", shot=pulse, times=times,
                        exact=True, snap_file=EFIT_tree, get_afile=False, get_mfile=True,
                        show_missing_data_warnings=None, close=True)
