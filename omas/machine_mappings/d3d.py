@@ -1383,7 +1383,9 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
                    ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.plasma"]) > 
             np.abs(0.08*ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"])):
             raise ValueError("Cannot reconstruct contraints, current constraints not met.")
-        ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"]
+        ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  \
+            ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] /\
+            ods[f"equilibrium.time_slice[{time_index}].global_quantities.area"]
 
 def add_extra_profile_structures():
     extra_structures = {}

@@ -1142,6 +1142,9 @@
  "equilibrium.time_slice.:.convergence.iterations_n": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },
+ "equilibrium.time_slice.:.global_quantities.area": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
+ },
  "equilibrium.time_slice.:.global_quantities.beta_normal": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },

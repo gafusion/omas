@@ -1028,11 +1028,12 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     if tmp['contour_quantity'] in eq['profiles_1d']:
         raw_xName = tmp['contour_quantity']
         x = eq['profiles_1d'][raw_xName]
+        xName = nice_names.get(raw_xName, raw_xName)
     else:
         raw_xName = 'psi'
         x = ((eq['profiles_1d']['psi'] - eq['global_quantities']['psi_axis']) 
             / (  eq['global_quantities']['psi_boundary'] - eq['global_quantities']['psi_axis']))
-    xName = nice_names.get(raw_xName, raw_xName)
+        xName = r"$\Psi_\mathrm{n}$"
 
     # pressure
     ax = cached_add_subplot(fig, axs, 2, 3, 2)
@@ -1118,7 +1119,6 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
                                     xName, r'$FF\,^\prime$ [T$^2$ m$^2$ Wb$^{-1}$]', 
                                     r"$FF\,^\prime$ source function", 
                                     visible_x=True, **kw)
-    fig.tight_layout()
     return {'ax': axs}
 
 @add_to__ODS__
@@ -1172,7 +1172,6 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
     ax.set_xlabel(r'$\rho_{tor}$')
     return {'ax': ax}
 
-
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
                           ods_species=None, quantities=['density_thermal', 'temperature'], 
@@ -1223,7 +1222,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
     if x_axis == "psi_norm":
         x = prof1d['grid.rho_pol_norm']**2
-        x_label = r"$\Psi$"
+        x_label = r"$\Psi_\mathrm{n}$"
     else:
         x = prof1d[f'grid.{x_axis}']
         if "tor" in x_axis:
@@ -1236,8 +1235,14 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
         ods_species = [-1] + list(prof1d['ion'])
     else:
         ncols = len(ods_species)
-
-    nplots = sum([ncols if 'density' in i or 'temperature' in i else 1 for i in quantities])
+    nplots = 0
+    for quant in quantities:
+        if 'density' in quant or 'temperature' in quant:
+            nplots += ncols
+        elif 'velocity' in quant:
+            nplots += ncols - 1
+        else:
+            nplots += 1
     nrows = int(numpy.ceil(nplots / ncols))
 
     # Generate species with corresponding name
@@ -1253,9 +1258,12 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
         if 'density' in q or 'temperature' in q or "velocity.toroidal" in q :
             for index, specie in enumerate(species_in_tree):
                 #unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
-                scale, unit = get_plot_scale_and_unit(q)
-                unit_list.append(unit)
                 if q in prof1d[specie]:
+                    if "label" in prof1d[specie]:
+                        scale, unit = get_plot_scale_and_unit(q, prof1d[specie]["label"])
+                    else:
+                        scale, unit = get_plot_scale_and_unit(q)
+                    unit_list.append(unit)
                     # if 'density' in q and 'ion' in specie and prof1d[specie]['element[0].z_n'] != 1.0:
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
@@ -1278,20 +1286,22 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                 # else:
                 #     plotting_list.append(numpy.zeros(len(rho)))
 
-        else:
+        elif "e_field.radial" not in q:
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
             label_name.append(q.capitalize())
+            data_list.append(None)
     if "e_field.radial" in quantities:
         try:
             scale, unit = get_plot_scale_and_unit("e_field.radial")
             unit_list.append(unit)
-            plotting_list.append(unumpy.uarray(prof1d["e_field.radial"]*scale,
-                                               prof1d["e_field.radial" + "_error_upper"]*scale))
+            plotting_list.append(prof1d["e_field.radial"]*scale)
             label_name_z.append("")
-            label_name.append(r'$E_\mathrm{r}$')
+            label_name.append('e_field.radial')
+            data_list.append(None)
         except:
             pass
+    last_quant = None
     for index, y in enumerate(plotting_list):
         if index >= len(label_name):
             break
@@ -1305,18 +1315,17 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             sharey = None
             sharex = None
         try:
-            if 'Density' in label_name[index] or 'Temperature' in label_name[index]:
+            if last_quant.split(" ")[-1] == label_name[index].split(" ")[-1]:
                 sharex = ax
                 sharey = ax
-            elif "Velocity" in label_name[index]:
+            else:
                 sharex = ax
                 sharey = None
         except:
             sharex = None
             sharey = None
+        last_quant = label_name[index]
         ax = cached_add_subplot(fig, axs, nrows, ncols, plot, sharex=sharex, sharey=sharey)
-
-        uband(x, y, ax=ax, **kw)
         if data_list[index] is not None:
             mask = numpy.ones(data_list[index][0].shape, dtype=bool)
             # Remove NaNs
@@ -1330,13 +1339,19 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             mask[numpy.abs(y_data_err[mask]) > numpy.abs(y_data[mask])] = False
             if numpy.any(mask):
                 ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask], 
-                            linestyle='', marker="+", color='red', **kw)
+                            linestyle='', marker=".", color=(1.0, 0.0, 0.0, 0.3), zorder=-10, **kw)
+        uband(x, y, ax=ax, **kw)
+        
         species_label = label_name[index].split()[0]
         species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:
             ax.set_ylabel(r'$T_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index]))
         elif "Density" in label_name[index]:
             ax.set_ylabel(r'$n_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index]) + label_name_z[index])
+        elif "e_field" in label_name[index].lower():
+            ax.set_ylabel(r'$E_\mathrm{r}$' + imas_units_to_latex(unit_list[index]))
+        elif "Velocity" in label_name[index]:
+            ax.set_ylabel(r"$v_\mathrm{" + species_label[0] + r"}$" + imas_units_to_latex(unit_list[index]))
         else:
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
@@ -1345,7 +1360,6 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
     if 'label' in kw:
         ax.legend(loc='lower center')
     ax.set_xlim(0, 1)
-    fig.tight_layout()
     return {'ax': axs, 'fig': fig}
 
 @add_to__ODS__
