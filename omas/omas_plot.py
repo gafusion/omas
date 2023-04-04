@@ -1088,7 +1088,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         diag_chi_2 = []
         labels = []
         try:
-            diag_chi_2.append(eq[f'constraints.pf_current[:].chi_squared'])
+            diag_chi_2 += list(eq[f'constraints.pf_current[:].chi_squared'].flatten())
             for i in range(len(diag_chi_2)):
                 labels.append("PF coil " + ods[f'pf_active.coil[[{i}].identifier'])
         except:

@@ -1365,10 +1365,10 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
         raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
     ods["equilibrium.ids_properties.homogeneous_time"] = 1
     ods["equilibrium.time"]= times / 1.e3
-    for i_time, time in enumerate(times):
-        ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
     if get_all == False:
         return
+    for i_time, time in enumerate(times):
+        ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
     kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
     eq = from_mds_plus(device="d3d", shot=pulse, times=times,
                        exact=True, snap_file=EFIT_tree, get_afile=False, get_mfile=True,

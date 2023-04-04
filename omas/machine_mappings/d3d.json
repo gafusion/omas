@@ -343,6 +343,9 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "equilibrium": {
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
+ },
  "equilibrium.code": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r})"
  },
@@ -992,7 +995,7 @@
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },
  "equilibrium.time_slice.:": {
-  "PYTHON": "equilibirum_time(ods, {pulse}, {EFIT_tree!r})"
+  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },
  "equilibrium.time_slice.:.boundary.outline.r": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
