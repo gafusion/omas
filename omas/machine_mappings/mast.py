@@ -9,18 +9,29 @@ import glob
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
+def get_pyuda_client(server=None, port=None):
+    if server is not None:
+        pyuda.Client.server = server
+    elif not os.environ['UDA_HOST']:
+        raise pyuda.UDAException('Must set UDA_HOST environmental variable')
+
+    if port is not None:
+        pyuda.Client.port = port
+    elif not os.environ['UDA_PORT']:
+        raise pyuda.UDAException('Must set UDA_PORT environmental variable')
+
+    return pyuda.Client()
 
 def nstx_filenames(filename, pulse):
-    if pulse < 200000:
-        return support_filenames('nstx', filename, pulse)
-    else:
-        return support_filenames('nstxu', filename, pulse)
+
+    return support_filenames('mast', filename, pulse)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=204202)
+
+@machine_mapping_function(__regression_arguments__, pulse=44653)
 def pf_active_hardware(ods, pulse):
     r"""
-    Loads NSTX-U tokamak poloidal field coil hardware geometry
+    Loads MAST tokamak poloidal field coil hardware geometry
 
     :param ods: ODS instance
     """
@@ -63,10 +74,10 @@ def pf_active_hardware(ods, pulse):
             ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
 
 
-@machine_mapping_function(__regression_arguments__, pulse=140001)
-def pf_active_coil_current_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def pf_active_coil_current_data(ods, pulse, server=None, port=None):
     r"""
-    Load NSTX-U tokamak pf_active coil current data
+    Load MAST tokamak pf_active coil current data
 
     :param ods: ODS instance
 
@@ -77,24 +88,6 @@ def pf_active_coil_current_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1, pulse)
-
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.identifier',
-            time='pf_active.coil.{channel}.current.time',
-            data='pf_active.coil.{channel}.current.data',
-            validity=None,
-            mds_server='nstxu',
-            mds_tree='NSTX',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-            homogeneous_time=False,
-        )
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
@@ -111,6 +104,9 @@ def pf_active_coil_current_data(ods, pulse):
     # handle uncertainties
     oh_channel = 0
     pf_channel = 0
+
+    client = get_pyuda_client(server=server, port=port)
+
     for channel in ods1['pf_active.coil']:
         if 'OH' in ods1[f'pf_active.coil.{channel}.name']:
             oh_channel += 1
@@ -118,21 +114,26 @@ def pf_active_coil_current_data(ods, pulse):
         else:
             pf_channel += 1
             sig = icoil_signals[pf_channel]
-        if f'pf_active.coil.{channel}.current.data' in ods:
-            data = ods[f'pf_active.coil.{channel}.current.data']
+
+        try:
+            sig_name = sig['mds_name']
+            sig_scale = sig['scale'
+            tmp = client.get(sig_name,pulse)
+            ods[f'pf_active.coil.{channel}.current.data'] = data = tmp.data * scale
+            ods[f'pf_active.coil.{channel}.current.time'] = tmp.time.data
+
             rel_error = data * sig['rel_error']
             abs_error = sig['abs_error']
             error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
-    # For NSTX coils 4U, 4L, AB1, AB2 currents are set to 0.0 and error to 1E-3
-    # For NSTX-U the same thing but for coils PF1BU, PF1BL
-    for channel in ods1['pf_active.coil']:
-        identifier = ods1[f'pf_active.coil.{channel}.element[0].identifier']
-        if any([sub in identifier for sub in [['PF4U', 'PF4L', 'PFAB1', 'PFAB2'], ['PF1BU', 'PF1BL']][pulse >= 200000]]):
-            ods[f'pf_active.coil.{channel}.current.data'][:] = 0.0
-            ods[f'pf_active.coil.{channel}.current.data_error_upper'][:] = 1e-3 * 10
+        except pyuda.UDAException:
+            tmp = None
+            ods[f'pf_active.coil.{channel}.current.data'] = []
+            ods[f'pf_active.coil.{channel}.current.time'] = []   
+
+
 
     # IMAS stores the current in the coil not multiplied by the number of turns
     for channel in ods1['pf_active.coil']:
@@ -143,10 +144,10 @@ def pf_active_coil_current_data(ods, pulse):
             print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
-@machine_mapping_function(__regression_arguments__, pulse=140001)
+@machine_mapping_function(__regression_arguments__, pulse=44653)
 def magnetics_hardware(ods, pulse):
     r"""
-    Load NSTX-U tokamak flux loops and magnetic probes hardware geometry
+    Load MAST tokamak flux loops and magnetic probes hardware geometry
 
     :param ods: ODS instance
     """
@@ -165,9 +166,9 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=44653)
-def magnetics_floops_data(ods, pulse):
+def magnetics_floops_data(ods, pulse, server=None, port=None):
     r"""
-    Load NSTX-U tokamak flux loops flux data
+    Load MAST tokamak flux loops flux data
 
     :param ods: ODS instance
 
@@ -177,6 +178,8 @@ def magnetics_floops_data(ods, pulse):
     
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     tfl_signals = signals['mappings']['tfl']
+
+    client = get_pyuda_client(server=server, port=port)
 
     for channel in signals['FL']:
         sig = signals['FL'][channel]['mds_name']
@@ -206,8 +209,8 @@ def magnetics_floops_data(ods, pulse):
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= 2.0 * np.pi
 
 
-@machine_mapping_function(__regression_arguments__, pulse=204202)
-def magnetics_probes_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def magnetics_probes_data(ods, pulse, server=None, port=None):
     r"""
     Load NSTX-U tokamak magnetic probes field data
 
@@ -219,6 +222,7 @@ def magnetics_probes_data(ods, pulse):
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
+    client = get_pyuda_client(server=server, port=port)
     for channel in signals['MC']:
         sig = signals['MC'][isig]['mds_name']
         scale = signals['MC'][channel]['scale']     
@@ -243,10 +247,10 @@ def magnetics_probes_data(ods, pulse):
 
 
 
-@machine_mapping_function(__regression_arguments__, pulse=204202)
-def ip_bt_dflux_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def ip_bt_dflux_data(ods, pulse, server=None, port=None):
     r"""
-    Load NSTX-U tokamak Ip, Bt, and diamagnetic flux data
+    Load MAST tokamak Ip, Bt, and diamagnetic flux data
 
     :param ods: ODS instance
 
@@ -257,6 +261,8 @@ def ip_bt_dflux_data(ods, pulse):
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
+
+    client = get_pyuda_client(server=server, port=port)
 
     for item in ['PR', 'TF', 'DL']:
         sig = signals['MC'][isig]['mds_name']
@@ -285,10 +291,10 @@ def ip_bt_dflux_data(ods, pulse):
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=140001)
+@machine_mapping_function(__regression_arguments__, pulse=44653)
 def thomson_scattering_hardware(ods, pulse):
     """
-    Gathers NSTX(-U) Thomson measurement locations
+    Gathers MAST(-U) Thomson measurement locations
 
     :param pulse: int
 
@@ -296,10 +302,10 @@ def thomson_scattering_hardware(ods, pulse):
     unwrap(thomson_scattering_data)(ods, pulse)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=140001)
+@machine_mapping_function(__regression_arguments__, pulse=44653)
 def thomson_scattering_data(ods, pulse):
     """
-    Loads DIII-D Thomson measurement data
+    Loads MAST Thomson measurement data
 
     :param pulse: int
     """
