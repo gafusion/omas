@@ -5,6 +5,7 @@ from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 import glob
+import pyuda
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -50,17 +51,17 @@ def pf_active_hardware(ods, pulse):
         if 'OH' in ods[f'pf_active.coil'][c]['name']:
             c_oh += 1
             cname = oh_signals[c_oh]['name']
-            if oh_signals[c_oh]['mds_name_resolved'] is None:
+            if oh_signals[c_oh]['mds_name'] is None:
                 cid = 'None'
             else:
-                cid = oh_signals[c_oh]['mds_name_resolved'].strip('\\')
+                cid = oh_signals[c_oh]['mds_name'].strip('\\').replace("~", " ")
         else:
             c_pf += 1
             cname = icoil_signals[c_pf]['name']
-            if icoil_signals[c_pf]['mds_name_resolved'] is None:
+            if icoil_signals[c_pf]['mds_name'] is None:
                 cid = 'None'
             else:
-                cid = icoil_signals[c_pf]['mds_name_resolved'].strip('\\')
+                cid = icoil_signals[c_pf]['mds_name'].strip('\\').replace("~", " ")
         for e in ods[f'pf_active.coil'][c]['element']:
             # if 'OH' in ods[f'pf_active.coil'][c]['name']:
             #    ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
@@ -68,7 +69,7 @@ def pf_active_hardware(ods, pulse):
             #    ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
             ename = cid + f'_element_{e}'
             eid = ename
-            ods[f'pf_active.coil'][c]['name'] = cname
+            #ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
             ods[f'pf_active.coil'][c]['element'][e]['name'] = ename
             ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
@@ -85,28 +86,18 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
     from omfit_classes.utils_math import firFilter
-
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1, pulse)
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     oh_signals = signals['mappings']['ioh']
-
-    # filter data with default smoothing
-    for channel in ods1['pf_active.coil']:
-        if f'pf_active.coil.{channel}.current.data' in ods:
-            printd(f'Smooth PF coil {channel} data', topic='machine')
-            time = ods[f'pf_active.coil.{channel}.current.time']
-            data = ods[f'pf_active.coil.{channel}.current.data']
-            ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
-
-    # handle uncertainties
+    print(len(icoil_signals),len(oh_signals))
+    # filter data with default smoothing & handle uncertainties
     oh_channel = 0
     pf_channel = 0
 
     client = get_pyuda_client(server=server, port=port)
-
     for channel in ods1['pf_active.coil']:
         if 'OH' in ods1[f'pf_active.coil.{channel}.name']:
             oh_channel += 1
@@ -114,13 +105,20 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
         else:
             pf_channel += 1
             sig = icoil_signals[pf_channel]
-
         try:
-            sig_name = sig['mds_name']
-            sig_scale = sig['scale'
-            tmp = client.get(sig_name,pulse)
-            ods[f'pf_active.coil.{channel}.current.data'] = data = tmp.data * scale
-            ods[f'pf_active.coil.{channel}.current.time'] = tmp.time.data
+            sig_name = sig['mds_name_resolved'].replace('~',' ')
+            if '/' in sig_name:
+               tmp = ''
+               for i in sig_name.split('/')[:-1]:
+                   tmp +=i+'/'
+               sig_name=tmp[:-1]
+            print(sig_name)
+            sig_scale = sig['scale']
+            tmp = client.get(sig_name, pulse)
+            printd(f'Smooth PF coil {channel} data', topic='machine')
+            data = tmp.data * sig_scale
+            ods[f'pf_active.coil.{channel}.current.time'] = time = tmp.time.data
+            ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
 
             rel_error = data * sig['rel_error']
             abs_error = sig['abs_error']
@@ -130,9 +128,9 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
 
         except pyuda.UDAException:
             tmp = None
-            ods[f'pf_active.coil.{channel}.current.data'] = []
-            ods[f'pf_active.coil.{channel}.current.time'] = []   
-
+            ods[f'pf_active.coil.{channel}.current.data'] = np.array([])
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = np.array([])
+            ods[f'pf_active.coil.{channel}.current.time'] = np.array([])   
 
 
     # IMAS stores the current in the coil not multiplied by the number of turns
@@ -196,7 +194,7 @@ def magnetics_floops_data(ods, pulse, server=None, port=None):
 
     # handle uncertainties
     tfl_signals = signals['mappings']['tfl']
-    for channel in range(len(ods1['magnetics.flux_loop']) - 1):
+    for channel in range(len(ods['magnetics.flux_loop']) - 1):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
@@ -224,7 +222,7 @@ def magnetics_probes_data(ods, pulse, server=None, port=None):
 
     client = get_pyuda_client(server=server, port=port)
     for channel in signals['MC']:
-        sig = signals['MC'][isig]['mds_name']
+        sig = signals['MC'][channel]['mds_name']
         scale = signals['MC'][channel]['scale']     
         try:
             tmp = client.get(sig,pulse)
@@ -236,7 +234,7 @@ def magnetics_probes_data(ods, pulse, server=None, port=None):
 
     # handle uncertainties
     bmc_signals = signals['mappings']['bmc']
-    for channel in ods1['magnetics.b_field_pol_probe']:
+    for channel in ods['magnetics.b_field_pol_probe']:
         if f'magnetics.b_field_pol_probe.{channel}.field.data' in ods:
             data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
             rel_error = data * bmc_signals[channel + 1]['rel_error']
@@ -260,12 +258,12 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
 
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
 
-    mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r', 'DL': 'magnetics.diamagnetic_flux.0'}
+    mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r'}
 
     client = get_pyuda_client(server=server, port=port)
 
-    for item in ['PR', 'TF', 'DL']:
-        sig = signals['MC'][isig]['mds_name']
+    for item in ['PR', 'TF']:
+        sig = signals[item][0]['mds_name'].replace('~',' ')
         scale = signals[item][0]['scale']
         try:
             tmp = client.get(sig,pulse)
@@ -278,7 +276,7 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
             ods[mappings[item] + '.time'] = []
 
     # handle uncertainties
-    for item in ['PR', 'TF', 'DL']:
+    for item in ['PR', 'TF']:
         if mappings[item] + '.data' in ods:
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
@@ -310,7 +308,7 @@ def thomson_scattering_data(ods, pulse):
     :param pulse: int
     """
 
-   return
+    return
 
 
 # =====================
