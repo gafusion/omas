@@ -174,7 +174,7 @@
   "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "tf.r0": {
-  "VALUE": 0.941
+  "VALUE": 0.8
  },
  "thomson_scattering.channel.:": {
   "PYTHON": "thomson_scattering_hardware(ods, {pulse} )"

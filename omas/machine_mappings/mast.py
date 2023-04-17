@@ -112,8 +112,10 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
                for i in sig_name.split('/')[:-1]:
                    tmp +=i+'/'
                sig_name=tmp[:-1]
-            print(sig_name)
+            
             sig_scale = sig['scale']
+            if sig_scale<1:
+               sig_scale = 1./sig_scale
             tmp = client.get(sig_name, pulse)
             printd(f'Smooth PF coil {channel} data', topic='machine')
             data = tmp.data * sig_scale
@@ -187,7 +189,7 @@ def magnetics_floops_data(ods, pulse, server=None, port=None):
             tmp = client.get(sig,pulse)
             ods[f'magnetics.flux_loop.{channel}.flux.data'] = tmp.data * scale
             ods[f'magnetics.flux_loop.{channel}.flux.time'] = tmp.time.data
-
+            ods[f'magnetics.flux_loop.{channel}.flux.validity'] = 0
         except pyuda.UDAException:
             ods[f'magnetics.flux_loop.{channel}.flux.validity'] = -2
 
@@ -228,7 +230,7 @@ def magnetics_probes_data(ods, pulse, server=None, port=None):
             tmp = client.get(sig,pulse)
             ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] = tmp.data * scale
             ods[f'magnetics.b_field_pol_probe.{channel}.field.time'] = tmp.time.data
-
+            ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] = 0
         except pyuda.UDAException:
             ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] = -2
 
@@ -265,6 +267,8 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
     for item in ['PR', 'TF']:
         sig = signals[item][0]['mds_name'].replace('~',' ')
         scale = signals[item][0]['scale']
+        if item =='TF':
+            scale *=1e3 / 0.8 # ods['tf.r0']
         try:
             tmp = client.get(sig,pulse)
 
