@@ -1,4 +1,4 @@
- &IN3
+ &IN5
  IGRID = 1
  RLEFT = 1.65
  RRIGHT = 4.05
@@ -9,10 +9,12 @@
  NSMP2 = 25
  IECOIL = 0
  IVESEL = 0
- vsid = 1
+ VSID = 1
  IACOIL = 0
- NW = 65
- NH = 65
+ mgaus1 = 8
+ mgaus2 = 12
+ /
+ &IN3
  RF = 2*0.897 2.024 2.318 2.024 2.318 2*2.024 4*3.9935 2*3.8455 2*5.302 2.098 
  2.508 2.841 3.39575
  ZF = 2*0.0 3.9429999999999996 3.8455 -3.9429999999999996 -3.8455 3.6995 
@@ -53,12 +55,10 @@
  nfcoil = 20
  nfsum = 20
  nsilop = 1
- magpr2 = 1
+ magpri = 1
  necoil = 1
  nesum = 1
  nvesel = 1
  nvsum = 1
  nacoil = 1
- mgaus1 = 8
- mgaus2 = 12
  /
