@@ -547,7 +547,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
     if args in ax_cache:
         return ax_cache[args]
     else:
-        ax = use_subplot(*args, **kw)
+        ax = use_subplot(fig, *args, **kw)
         ax_cache[args] = ax
         return ax
 
