@@ -305,6 +305,9 @@
  "ec_launchers.beam.:.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
+ "ece": {
+    "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+},
  "ece.channel.:": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
