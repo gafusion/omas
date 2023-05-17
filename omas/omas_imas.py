@@ -116,7 +116,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
         debug_path += '%s' % ds
         m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
-            m.time.resize(1)
+            m.time= numpy.resize(m.time, 1)
             m.time[0] = -1.0
     elif l2i(path) == 'ids_properties.occurrence':  # IMAS does not store occurrence info as part of the IDSs
         return
@@ -274,7 +274,8 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, new=False, imas_version=None, verbose=True):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, 
+                   new=False, imas_version=None, verbose=True, backend='MDSPLUS'):
     """
     Save OMAS data to IMAS
 
@@ -334,7 +335,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose, backend=backend)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -475,6 +476,7 @@ def load_omas_imas(
     skip_uncertainties=False,
     consistency_check=True,
     verbose=True,
+    backend='MDSPLUS'
 ):
     """
     Load OMAS data from IMAS
@@ -512,7 +514,7 @@ def load_omas_imas(
     )
 
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose, backend=backend)
 
         if imas_version is None:
             try:
