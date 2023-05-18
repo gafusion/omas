@@ -297,6 +297,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
 
     :param verbose: whether the process should be verbose
 
+    :param backend: Which backend to use, can be one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
+
     :return: paths that have been written to IMAS
     """
 
@@ -502,6 +504,8 @@ def load_omas_imas(
     :param consistency_check: perform consistency_check
 
     :param verbose: print loading progress
+
+    :param backend: Which backend to use, can be one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
     :return: OMAS data set
     """
