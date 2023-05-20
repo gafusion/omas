@@ -274,7 +274,7 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
 # save and load OMAS to IMAS
 # --------------------------------------------
 @codeparams_xml_save
-def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, new=False, imas_version=None, verbose=True):
+def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrence={}, new=False, imas_version=None, backend="MDSPLUS", verbose=True):
     """
     Save OMAS data to IMAS
 
@@ -295,6 +295,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     :param imas_version: IMAS version
 
     :param verbose: whether the process should be verbose
+
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
 
     :return: paths that have been written to IMAS
     """
@@ -324,7 +326,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     if imas_version is not None and 'dataset_description.imas_version' not in ods:
         ods['dataset_description.imas_version'] = ods.imas_version
 
-    printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas')
+    printd('Saving to IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s, backend:%s)' % (user, machine, pulse, run, imas_version, backend), topic='imas')
 
     # ensure requirements for writing data to IMAS are satisfied
     ods.satisfy_imas_requirements()
@@ -334,7 +336,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, backend=backend, verbose=verbose)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -474,6 +476,7 @@ def load_omas_imas(
     imas_version=None,
     skip_uncertainties=False,
     consistency_check=True,
+    backend="MDSPLUS",
     verbose=True,
 ):
     """
@@ -499,6 +502,8 @@ def load_omas_imas(
 
     :param consistency_check: perform consistency_check
 
+    :param backend: one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
+
     :param verbose: print loading progress
 
     :return: OMAS data set
@@ -508,11 +513,11 @@ def load_omas_imas(
         raise Exception('`pulse` and `run` must be specified')
 
     printd(
-        'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
+        'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s, backend:%s)' % (user, machine, pulse, run, imas_version, backend), topic='imas'
     )
 
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, backend=backend, verbose=verbose)
 
         if imas_version is None:
             try:
@@ -616,8 +621,8 @@ class dynamic_omas_imas(dynamic_ODS):
     This class is not to be used by itself, but via the ODS.open() method.
     """
 
-    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, verbose=True):
-        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence': occurrence}
+    def __init__(self, user=os.environ.get('USER', 'dummy_user'), machine=None, pulse=None, run=0, occurrence={}, backend="MDSPLUS", verbose=True):
+        self.kw = {'user': user, 'machine': machine, 'pulse': pulse, 'run': run, 'verbose': verbose, 'occurrence': occurrence, 'backend':backend}
         self.ids = None
         self.active = False
         self.open_ids = []
