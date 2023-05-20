@@ -424,7 +424,7 @@ class baseODS(MutableMapping):
     def backend(self):
         raise RuntimeError('ODS backend property can only be set at initialization')
 
-    def time(self, key='', extra_info=None):
+    def get_time(self, key='', extra_info=None):
         """
         Return the time information for a given ODS location
 
@@ -619,7 +619,7 @@ class baseODS(MutableMapping):
 
         :return: index (integer) of the closest time-slice
         """
-        time_array = self.time(key=key)
+        time_array = self.get_time(key=key)
         if not isinstance(time_array, numpy.ndarray):
             raise ValueError(l2i(p2l(self.location + '.' + key)) + " does not have a array of times")
         return numpy.argmin(abs(time - numpy.atleast_1d(time_array)))
@@ -2792,7 +2792,7 @@ class ODS(baseODS):
         if not len(self.location) and not len(key):
             raise ValueError('homogeneous_time() can not be called on a top-level ODS')
         extra_info = {}
-        self.time(key=key, extra_info=extra_info)
+        self.get_time(key=key, extra_info=extra_info)
         homogeneous_time = extra_info['homogeneous_time']
         if homogeneous_time is None:
             return default
