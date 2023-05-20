@@ -166,10 +166,9 @@ omas_rcparams.update(
         'tmp_omas_dir': os.environ.get(
             'OMAS_TMP_DIR', os.sep.join([tempfile.gettempdir(), os.environ.get('USER', 'dummy_user'), 'OMAS_TMP_DIR'])
         ),
-        'fake_imas_dir': os.environ.get(
+        'fakeimas_dir': os.environ.get(
             'OMAS_FAKE_IMAS_DIR', os.sep.join([os.environ.get('HOME', tempfile.gettempdir()), 'tmp', 'OMAS_FAKE_IMAS_DIR'])
         ),
-        'allow_fake_imas_fallback': bool(int(os.environ.get('OMAS_ALLOW_FAKE_IMAS_FALLBACK', '0'))),
         'default_imas_version': _default_imas_version,
         'default_mongo_server': 'mongodb+srv://{user}:{pass}@omasdb.xymmt.mongodb.net',
         'pickle_protocol': 4,

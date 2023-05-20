@@ -2987,7 +2987,7 @@ _cocos_signals = {}
             ods[structure]
             m = 0
             # generate score and add reason for scoring
-            for item in sorted(list(load_structure(structure, omas_rcparams['default_imas_version'])[0].keys())):
+            for item in sorted(list(load_structure(structure, omas_rcparams['default_imas_version'], include_extra_structures=False)[0].keys())):
                 item = i2o(item)
                 item_ = item
                 if any(item.endswith(k) for k in [':.values', ':.value', ':.data']):

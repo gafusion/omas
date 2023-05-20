@@ -26,7 +26,7 @@ __all__ = [
     'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
-    'latexit', 'OmasDynamicException'
+    'latexit', 'OmasDynamicException','fakeimas'
 ]
 # fmt: on
 
@@ -2437,6 +2437,93 @@ class ODS(MutableMapping):
         else:
             raise RuntimeError('Missing call to .open() ?')
 
+    def to_builtin(self, dynamic=True):
+        '''
+        return ODS hierarchy with pure Python dictionary and lists in lieu of ODSs
+
+        :param dynamic: traverse also paths that are not loaded in a dynamic ODS
+        '''
+        out = None
+        if self.omas_data.isinstance(dict):
+            out = {}
+        elif self.omas_data.isinstance(list):
+            out = []
+        if not self.omas_data.isinstance(None):
+            for item in self:
+                if isinstance(self[item], baseODS):
+                    if self[item].omas_data.isinstance(dict):
+                        out[item] = self[item].to_builtin()
+                    elif self[item].omas_data.isinstance(dict):
+                        out.append(self[item].to_builtin())
+                else:
+                    out[item] = self[item]
+        return out
+
+    def resize(self, n):
+        '''
+        Add empty ODSs to an array of ODSs
+
+        :param n: total lenght of the array of structures
+        '''
+        if self.omas_data.isinstance(dict):
+            raise ValueError('Can only resize arrays of structures')
+        if self.omas_data.isinstance(None):
+            self.omas_data = OMAS_DATA_factory(self._backend, list, self.omas_data.store_dd)
+        for k in range(len(self.omas_data), n):
+            self.setraw(k, self.same_init_ods())
+
+    def slice_at_time(self, time=None, time_index=None):
+        """
+        method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)
+
+        :param time: time value to select
+
+        :param time_index: time index to select (NOTE: time_index has precedence over time)
+
+        :return: modified ODS
+        """
+
+        # set time_index for parent and children
+        if 'time' in self and isinstance(self['time'], numpy.ndarray):
+            if time_index is None:
+                time_index = numpy.argmin(abs(self['time'] - time))
+                if (time - self['time'][time_index]) != 0.0:
+                    printe('%s sliced at %s instead of requested time %s' % (self.location, self['time'][time_index], time))
+                time = self['time'][time_index]
+            if time is None:
+                time = self['time'][time_index]
+
+        # loop over items
+        for item in self.keys():
+            # time (if present) is treated last
+            if item == 'time':
+                continue
+
+            # identify time-dependent data
+            info = omas_info_node(o2u(self.ulocation + '.' + str(item)))
+            if 'coordinates' in info and any(k.endswith('.time') for k in info['coordinates']):
+
+                # time-dependent arrays
+                if not isinstance(self.getraw(item), baseODS):
+                    self[item] = numpy.atleast_1d(self[item][time_index])
+
+                # time-depentend list of ODSs
+                elif self[item].omas_data.isinstance(list) and len(self[item]) and 'time' in self[item][0]:
+                    if time_index is None:
+                        raise ValueError('`time` array is not set for `%s` ODS' % self.ulocation)
+                    tmp = self[item][time_index]
+                    self.getraw(item).clear()
+                    self.getraw(item)[0] = tmp
+
+            # go deeper inside ODSs that do not have time info
+            elif isinstance(self.getraw(item), baseODS):
+                self.getraw(item).slice_at_time(time=time, time_index=time_index)
+
+        # treat time
+        if 'time' in self:
+            self['time'] = numpy.atleast_1d(self['time'][time_index])
+
+        return self
 
 ODS.diff.__doc__ = ODS.diff.__doc__ % '\n                            '.join(default_keys_to_ignore)
 
@@ -2911,3 +2998,4 @@ from .omas_mongo import *
 from .omas_symbols import *
 from .omas_machine import *
 from . import omas_structure
+from . import fakeimas

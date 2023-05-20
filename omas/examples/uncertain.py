@@ -47,8 +47,9 @@ ods = load_omas_nc(omas_testdir(__file__) + '/test.nc')
 print(ods)
 
 # save/load from imas
+# allow fallback on fake IMAS environment in OMAS in case real IMAS installation is not present
 print('== IMAS ==')
-omas_rcparams['allow_fake_imas_fallback'] = True
-save_omas_imas(ods, user=os.environ.get('USER', 'dummy_user'), machine='test', pulse=10, run=1, new=True)
-ods = load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine='test', pulse=10, run=1, verbose=False)
+with fakeimas.fake_environment('fallback'):
+    save_omas_imas(ods, user=os.environ.get('USER', 'dummy_user'), machine='test', pulse=10, run=1, new=True)
+    ods = load_omas_imas(user=os.environ.get('USER', 'dummy_user'), machine='test', pulse=10, run=1, verbose=False)
 print(ods)

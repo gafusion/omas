@@ -12,7 +12,6 @@ from omas import *
 
 # settings
 os.environ['OMAS_DEBUG_TOPIC'] = 'imas'
-omas_rcparams['allow_fake_imas_fallback'] = True
 
 # generate magnetics sample
 ods = ODS()

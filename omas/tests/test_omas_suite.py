@@ -106,14 +106,14 @@ class TestOmasSuite(UnittestCaseOmas):
             print('\n'.join(diff))
             raise AssertionError('s3 through difference')
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     def test_omas_imas(self):
-        ods = ODS().sample()
-        ods1 = through_omas_imas(ods)
-        diff = ods.diff(ods1)
-        if diff:
-            print('\n'.join(diff))
-            raise AssertionError('hdc through difference')
+        with fakeimas.fake_environment('fallback'):
+            ods = ODS().sample()
+            ods1 = through_omas_imas(ods)
+            diff = ods.diff(ods1)
+            if diff:
+                print('\n'.join(diff))
+                raise AssertionError('imas through difference')
 
     @unittest.skipIf(failed_HDC, str(failed_HDC))
     def test_omas_hdc(self):
