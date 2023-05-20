@@ -19,7 +19,7 @@ class IDSs:
 # --------------------------------------------
 # IMAS convenience functions
 # --------------------------------------------
-def imas_open(user, machine, pulse, run, new=False, imas_major_version='3', backend='MDSPLUS', verbose=True):
+def imas_open(user, machine, pulse, run, occurrence={}, new=False, imas_major_version='3', backend='MDSPLUS', verbose=True):
     """
     function to open an IMAS
 
@@ -105,8 +105,8 @@ def imas_set(idss, path, value, skip_missing_nodes=False, allocate=False):
     debug_path = ''
     if hasattr(idss, ds):
         debug_path += '%s' % ds
-        m = getattr(ids, ds)
-        if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
+        m = getattr(idss, ds)
+        if hasattr(m, 'time') and not isinstance(m.time, float) and not numpy.size(m.time):
             m.time= numpy.resize(m.time, 1)
             m.time[0] = -1.0
     elif l2i(path) == 'ids_properties.occurrence':  # IMAS does not store occurrence info as part of the IDSs
@@ -329,7 +329,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose, backend=backend)
+        DB = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose, backend=backend)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
