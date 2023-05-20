@@ -6,7 +6,7 @@ Test script for omas saving/loading data in different formats
 
 .. code-block:: none
 
-   python3 -m unittest omas/tests/test_omas_suite
+   python3 -m unittest omas/tests/test_omas_suite.py
 
 -------
 """

@@ -47,6 +47,7 @@ class IDS(baseODS):
             'cocosio',
             'coordsio',
             'unitsio',
+            'uncertainio',
             'dynamic',
             'consistency_check',
         ] or attr.startswith('_'):

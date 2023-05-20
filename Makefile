@@ -22,42 +22,44 @@ all:
 
 TEST_FLAGS=-f -b -v -c -s omas/tests
 
+OMAS_PYTHON ?= python3
+
 test:
-	python3 -m unittest discover --pattern="*.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*.py" ${TEST_FLAGS}
 
 test_core:
-	python3 -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_core.py" ${TEST_FLAGS}
 
 test_plot:
-	python3 -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_plot.py" ${TEST_FLAGS}
 
 test_physics:
-	python3 -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_physics.py" ${TEST_FLAGS}
 
 test_fakeimas:
-	python3 -m unittest discover --pattern="*_fakeimas.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_fakeimas.py" ${TEST_FLAGS}
 
 test_machine:
-	python3 -m unittest discover --pattern="*_machine.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_machine.py" ${TEST_FLAGS}
 
 test_utils:
-	python3 -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_utils.py" ${TEST_FLAGS}
 
 test_examples:
-	python3 -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_examples.py" ${TEST_FLAGS}
 
 test_suite:
-	python3 -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
+	${OMAS_PYTHON} -m unittest discover --pattern="*_suite.py" ${TEST_FLAGS}
 
 test_no_munittest:
 	omas/tests/run_tests.sh
 
 requirements:
 	rm -f requirements.txt
-	python3 setup.py --name
+	${OMAS_PYTHON} setup.py --name
 
 omfit:
-	cd omas/utilities && python3 generate_to_from_omas.py
+	cd omas/utilities && ${OMAS_PYTHON} generate_to_from_omas.py
 
 html:
 	cd sphinx && make html
@@ -66,23 +68,23 @@ examples:
 	cd sphinx && make examples
 
 samples:
-	cd omas/utilities && python3 generate_ods_samples.py
+	cd omas/utilities && ${OMAS_PYTHON} generate_ods_samples.py
 
 docs: html
 	cd sphinx && make commit && make push && rm -rf build
 
 json:
-	cd omas/utilities && python3 build_json_structures.py
+	cd omas/utilities && ${OMAS_PYTHON} build_json_structures.py
 	make cocos
 
 cocos: symbols
-	cd omas/utilities && python3 generate_cocos_signals.py
+	cd omas/utilities && ${OMAS_PYTHON} generate_cocos_signals.py
 
 machines:
-	cd omas/utilities && python3 format_machine_mappings.py
+	cd omas/utilities && ${OMAS_PYTHON} format_machine_mappings.py
 
 symbols:
-	cd omas/utilities && python3 sort_symbols.py
+	cd omas/utilities && ${OMAS_PYTHON} sort_symbols.py
 
 tag:
 	git tag -a v$(VERSION) $$(git log --pretty=format:"%h" --grep="^version $(VERSION)") -m "version $(VERSION)"
@@ -90,13 +92,13 @@ tag:
 
 sdist:
 	rm -rf dist
-	python3 setup.py sdist
+	${OMAS_PYTHON} setup.py sdist
 
 pypi: sdist
-	python3 -m twine upload --repository pypi dist/omas-$(VERSION).tar.gz
+	${OMAS_PYTHON} -m twine upload --repository pypi dist/omas-$(VERSION).tar.gz
 
 testpypi:
-	python3 -m twine upload --repository testpypi dist/omas-$(VERSION).tar.gz
+	${OMAS_PYTHON} -m twine upload --repository testpypi dist/omas-$(VERSION).tar.gz
 	@echo install with:
 	@echo pip install --index-url https://test.pypi.org/simple/ omas
 
