@@ -52,14 +52,15 @@ class TestOmasExamples(UnittestCaseOmas):
     def test_parse_codeparameters(self):
         from omas.examples import parse_codeparameters
 
-    @unittest.skipIf(failed_IMAS, str(failed_IMAS))
     @unittest.skipIf(not_running_on_iter_cluster, str(not_running_on_iter_cluster))
     def test_solps_imas(self):
-        from omas.examples import solps_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import solps_imas
 
-    @unittest.skipIf((failed_IMAS or failed_OMFIT), str(failed_IMAS) + str(failed_OMFIT))
+    @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_geqdsk_to_from_imas(self):
-        from omas.examples import geqdsk_to_from_imas
+        with fakeimas.fake_environment('fallback'):
+            from omas.examples import geqdsk_to_from_imas
 
     def test_showcase_paths(self):
         from omas.examples import showcase_paths

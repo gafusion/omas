@@ -459,7 +459,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
         m = os.path.splitext(os.path.split(filename)[1])[0]
-        if not m.startswith('_'):
+        if not m.startswith('_') and m != 'sample':
             _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines

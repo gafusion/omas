@@ -30,7 +30,7 @@ def save_omas_hdc(ods):
     :return: HDC container
     """
     # recurrent function - check types
-    if isinstance(ods, ODS):
+    if isinstance(ods, baseODS):
         if isinstance(ods.keys(), Sequence):
             # list type
             # TODO implement a better check

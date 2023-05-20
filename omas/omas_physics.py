@@ -5,7 +5,7 @@
 
 from scipy.interpolate.fitpack2 import RectBivariateSpline
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import baseODS, ODS
 
 __all__ = []
 __ods__ = []
@@ -2459,10 +2459,10 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
     :return: list with indeces matching conditions
     """
 
-    if ods.omas_data is not None and not isinstance(ods.omas_data, list):
+    if not ods.omas_data.isinstance(list):
         raise Exception('ods location must be an array of structures')
 
-    if isinstance(conditions, ODS):
+    if isinstance(conditions, baseODS):
         conditions = conditions.flat()
 
     match = []

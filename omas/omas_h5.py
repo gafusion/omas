@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS
+from .omas_core import baseODS, ODS
 
 
 def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None):
@@ -32,7 +32,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     else:
         parent = filename
 
-    if isinstance(dictin, ODS):
+    if isinstance(dictin, baseODS):
         dictin = dictin.omas_data
 
     if groupname:
@@ -42,8 +42,8 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
     for key, item in list(dictin.items()):
 
-        if isinstance(item, ODS):
-            item = item.omas_data
+        if isinstance(item, baseODS):
+            item = item.omas_data.toJSON()
 
         if isinstance(item, dict):
             if recursive:

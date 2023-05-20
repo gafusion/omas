@@ -4,7 +4,7 @@
 '''
 
 from .omas_utils import *
-from .omas_core import ODS, ODC, force_imas_type
+from .omas_core import baseODS, ODS, ODC, force_imas_type
 
 
 def identify_imas_type(value):
@@ -23,7 +23,7 @@ def identify_imas_type(value):
             dtype = dict(type='51 (INTEGER_DATA)', dim=len(value.shape), size=value.shape)
         else:
             raise ValueError(str(value.dtype.name) + ' is not a valid IMAS data type')
-    elif isinstance(value, ODS):
+    elif isinstance(value, baseODS):
         dtype = dict(dim=len(value))
     else:
         raise ValueError(str(type(value)) + ' is not a valid IMAS data type')
@@ -110,7 +110,7 @@ def save_omas_ascii(ods, filename, machine=None, pulse=None, run=None, dir=None)
     ascii_string = []
     for path in imas_ascii_key_sorter(ods.pretty_paths(include_structures=True), ods.location):
         value = ods[path]
-        if isinstance(value, ODS) and not isinstance(value.omas_data, list):
+        if isinstance(value, baseODS) and not value.omas_data.isinstance(list):
             continue
         value = force_imas_type(value)
         info = identify_imas_type(value)
@@ -125,7 +125,7 @@ def save_omas_ascii(ods, filename, machine=None, pulse=None, run=None, dir=None)
             tokens.append('	dim: %d' % info['dim'])
         if 'size' in info:
             tokens.append('	size: %s' % (' '.join(map(str, info['size']))))
-        if isinstance(value, ODS):
+        if isinstance(value, baseODS):
             pass
         elif not isinstance(value, numpy.ndarray):
             tokens.append(imas_fmt(value))
