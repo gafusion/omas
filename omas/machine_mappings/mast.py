@@ -92,7 +92,6 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     oh_signals = signals['mappings']['ioh']
-    print(len(icoil_signals),len(oh_signals))
     # filter data with default smoothing & handle uncertainties
     oh_channel = 0
     pf_channel = 0
@@ -107,11 +106,13 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
             sig = icoil_signals[pf_channel]
         try:
             sig_name = sig['mds_name_resolved'].replace('~',' ')
-            if '/' in sig_name:
-               tmp = ''
-               for i in sig_name.split('/')[:-1]:
-                   tmp +=i+'/'
-               sig_name=tmp[:-1]
+            if sig['type'] =='VS':
+                if '/' in sig_name:
+               
+                   tmp = ''
+                   for i in sig_name.split('/')[:-1]:
+                       tmp +=i+'/'
+                   sig_name=tmp[:-1]
             
             sig_scale = sig['scale']
             if sig_scale<1:
@@ -196,7 +197,7 @@ def magnetics_floops_data(ods, pulse, server=None, port=None):
 
     # handle uncertainties
     tfl_signals = signals['mappings']['tfl']
-    for channel in range(len(ods['magnetics.flux_loop']) - 1):
+    for channel in range(len(ods['magnetics.flux_loop']) ):
         if f'magnetics.flux_loop.{channel}.flux.data' in ods:
             data = ods[f'magnetics.flux_loop.{channel}.flux.data']
             rel_error = data * tfl_signals[channel + 1]['rel_error']
@@ -282,12 +283,13 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
     # handle uncertainties
     for item in ['PR', 'TF']:
         if mappings[item] + '.data' in ods:
+            scale = 1.0/signals[item][0]['scale']
             data = ods[mappings[item] + '.data']
             rel_error = data * signals[item][0]['rel_error']
-            abs_error = signals[item][0]['abs_error'] * signals[item][0]['scale']
+            abs_error = signals[item][0]['abs_error'] #* scale
             error = np.sqrt(rel_error**2 + abs_error**2)
-            error[np.abs(data) < signals[item][0]['sig_thresh'] * signals[item][0]['scale']] = (
-                signals[item][0]['sig_thresh'] * signals[item][0]['scale']
+            error[np.abs(data) < signals[item][0]['sig_thresh'] * scale] = (
+                signals[item][0]['sig_thresh'] * scale
             )
             ods[mappings[item] + '.data_error_upper'] = error
 
