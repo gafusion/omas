@@ -23,10 +23,9 @@ def get_pyuda_client(server=None, port=None):
 
     return pyuda.Client()
 
-def nstx_filenames(filename, pulse):
+def mast_filenames(filename, pulse):
 
     return support_filenames('mast', filename, pulse)
-
 
 
 @machine_mapping_function(__regression_arguments__, pulse=44653)
@@ -38,10 +37,10 @@ def pf_active_hardware(ods, pulse):
     """
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
+    mhdin = get_support_file(OMFITmhdin, mast_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update=['oh', 'pf_active'])
 
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     oh_signals = signals['mappings']['ioh']
 
@@ -63,13 +62,8 @@ def pf_active_hardware(ods, pulse):
             else:
                 cid = icoil_signals[c_pf]['mds_name'].strip('\\').replace("~", " ")
         for e in ods[f'pf_active.coil'][c]['element']:
-            # if 'OH' in ods[f'pf_active.coil'][c]['name']:
-            #    ename = oh_signals[c_oh]['mds_name_resolved'].strip('\\') + f'_element_{e}'
-            # else:
-            #    ename = icoil_signals[c_pf]['mds_name_resolved'].strip('\\') + f'_element_{e}'
             ename = cid + f'_element_{e}'
             eid = ename
-            #ods[f'pf_active.coil'][c]['name'] = cname
             ods[f'pf_active.coil'][c]['identifier'] = cid
             ods[f'pf_active.coil'][c]['element'][e]['name'] = ename
             ods[f'pf_active.coil'][c]['element'][e]['identifier'] = eid
@@ -89,7 +83,7 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1, pulse)
 
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
     icoil_signals = signals['mappings']['icoil']
     oh_signals = signals['mappings']['ioh']
     # filter data with default smoothing & handle uncertainties
@@ -154,10 +148,10 @@ def magnetics_hardware(ods, pulse):
     """
     from omfit_classes.omfit_efund import OMFITmhdin, OMFITnstxMHD
 
-    mhdin = get_support_file(OMFITmhdin, nstx_filenames('mhdin', pulse))
+    mhdin = get_support_file(OMFITmhdin, mast_filenames('mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
 
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
 
     for k in ods[f'magnetics.flux_loop']:
         ods[f'magnetics.flux_loop.{k}.identifier'] = str(signals['mappings']['tfl'][k + 1]['mds_name'])
@@ -177,7 +171,7 @@ def magnetics_floops_data(ods, pulse, server=None, port=None):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
     
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
     tfl_signals = signals['mappings']['tfl']
 
     client = get_pyuda_client(server=server, port=port)
@@ -221,7 +215,7 @@ def magnetics_probes_data(ods, pulse, server=None, port=None):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
 
     client = get_pyuda_client(server=server, port=port)
     for channel in signals['MC']:
@@ -259,7 +253,7 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
 
-    signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
+    signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
 
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r'}
 
