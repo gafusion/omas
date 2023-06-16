@@ -69,6 +69,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data": {
+  "COCOSIO": 11,
   "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
