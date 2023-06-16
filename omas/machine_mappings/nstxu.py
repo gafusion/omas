@@ -211,10 +211,6 @@ def magnetics_floops_data(ods, pulse):
             error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
-            # 2*pi normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
-            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= 2.0 * np.pi
-            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= 2.0 * np.pi
-
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
