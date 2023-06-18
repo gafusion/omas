@@ -925,29 +925,31 @@ class ODS(MutableMapping):
             # now that all checks are completed we can assign the structure information
             if self.consistency_check and '.code.parameters.' not in location:
                 ulocation = o2u(location)
+                blocation = re.sub(r'_error_(upper|lower)$', '', ulocation)
 
                 # handle cocos transformations coming in
                 if (
                     self.cocosio
                     and self.cocosio != self.cocos
                     and '.' in location
-                    and ulocation in omas_physics.cocos_signals
+                    and blocation in omas_physics.cocos_signals
                     and not isinstance(value, ODS)
                 ):
-                    transform = omas_physics.cocos_signals[ulocation]
+                    transform = omas_physics.cocos_signals[blocation]
                     if isinstance(transform, list):
                         norm = np.ones(len(transform))
                         for itf, tf in enumerate(transform):
                             norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
                     elif transform == '?':
                         if isinstance(self.consistency_check, str) and 'warn' in self.consistency_check:
-                            printe('COCOS translation has not been setup: %s' % ulocation)
+                            printe('COCOS translation has not been setup: %s' % blocation)
                             norm = 1.0
                         else:
-                            raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+                            raise ValueError('COCOS translation has not been setup: %s' % blocation)
 
                     else:
                         norm = omas_physics.cocos_transform(self.cocosio, self.cocos)[transform]
+                    norm = norm if blocation == ulocation else abs(norm)
                     value = value * norm
 
                 # get node information
@@ -1332,23 +1334,25 @@ class ODS(MutableMapping):
 
                 location = l2o([self.location, key[0]])
                 ulocation = o2u(location)
+                blocation = re.sub(r'_error_(upper|lower)$', '', ulocation)
 
                 # handle cocos transformations going out
-                if self.cocosio and self.cocosio != self.cocos and '.' in location and ulocation in omas_physics.cocos_signals:
-                    transform = omas_physics.cocos_signals[ulocation]
+                if self.cocosio and self.cocosio != self.cocos and '.' in location and blocation in omas_physics.cocos_signals:
+                    transform = omas_physics.cocos_signals[blocation]
                     if isinstance(transform, list):
                         norm = numpy.ones(len(transform))
                         for itf, tf in enumerate(transform):
                             norm[itf] = omas_physics.cocos_transform(self.cocosio, self.cocos)[tf]
                     elif transform == '?':
                         if self.consistency_check == 'warn':
-                            printe('COCOS translation has not been setup: %s' % ulocation)
+                            printe('COCOS translation has not been setup: %s' % blocation)
                             norm = 1.0
                         else:
-                            raise ValueError('COCOS translation has not been setup: %s' % ulocation)
+                            raise ValueError('COCOS translation has not been setup: %s' % blocation)
 
                     else:
                         norm = omas_physics.cocos_transform(self.cocos, self.cocosio)[transform]
+                    norm = norm if blocation == ulocation else abs(norm)
                     value = value * norm
 
                 # get node information
