@@ -778,6 +778,11 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+        ece_uncertainty = {}
+        for key in ece_data:
+            # Calculate uncertainties and convert to eV
+            # Assumes 7% calibration error (optimisitic) + Poisson uncertainty
+            ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
 
     # Not in mds+
     if not _measurements:
@@ -798,7 +803,8 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     for ich in range(N_ch):
         ch = ods['ece']['channel'][ich]
         if _measurements:
-            ch['t_e']['data'] = ece_data[f'T{ich + 1}'] * 1.0e3
+            ch['t_e']['data'] = unumpy.uarray(ece_data[f'T{ich + 1}'] * 1.0e3,
+                                              ece_uncertainty[f'T{ich + 1}'] )# Already converted
         else:
             ch['name'] = 'ECE' + str(ich + 1)
             ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
