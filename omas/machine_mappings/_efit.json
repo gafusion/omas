@@ -57,6 +57,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.EXPMPI)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.bpol_probe.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGMPI)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.bpol_probe.weight": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTMP2)",
   "treename": "{EFIT_tree}"
@@ -83,6 +87,10 @@
  },
  "equilibrium.time_slice.:.constraints.flux_loop.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SILOPT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGSIL)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.flux_loop.weight": {
@@ -121,6 +129,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT/FCCURT/ACCURT)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.pf_current.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGECC/SIGFCC)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.pf_current.weight": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTEC/FWTFC)",
   "treename": "{EFIT_tree}"
@@ -151,6 +163,14 @@
  },
  "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.chi_squared_total": {
