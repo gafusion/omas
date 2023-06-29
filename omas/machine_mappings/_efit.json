@@ -173,6 +173,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZMAXIS)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BT0)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.global_quantities.psi_axis": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG)",
   "treename": "{EFIT_tree}"
