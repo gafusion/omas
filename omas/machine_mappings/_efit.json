@@ -175,8 +175,20 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.ip.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPASMA)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.ip.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIPASMA)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.bpol_probe.measured": {
@@ -191,12 +203,12 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTMP2)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.bpol_probe.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIMPI)",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.bpol_probe.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CMPR2)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIMPI)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured": {
@@ -207,8 +219,16 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGDIA)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTDIA)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CDFLUX)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIDFLUX)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.flux_loop.measured": {
@@ -223,12 +243,12 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTSI)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.flux_loop.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISI)",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.flux_loop.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CSILOP)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISI)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.measured": {
@@ -243,12 +263,12 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTGAM)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIGAM)",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CMGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIGAM)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.measured": {
@@ -267,6 +287,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CECURR/CCBRSP)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.pf_current.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIECC/CHIFCC)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS)",
   "treename": "{EFIT_tree}"
@@ -283,12 +307,12 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
