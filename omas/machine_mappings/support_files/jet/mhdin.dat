@@ -9,7 +9,6 @@
  NSMP2 = 25
  IECOIL = 0
  IVESEL = 0
- VSID = 1
  IACOIL = 0
  mgaus1 = 8
  mgaus2 = 12
@@ -32,23 +31,11 @@
  21.000000000000004
  FCTURN = 20*1.0
  FCID = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
- RE = 1.7622790592724384
- ZE = 0
- WE = 0
- HE = 0
- ECTURN = 0
- ECID = 1
- RVS = -1
- ZVS = 0
- WVS = 0
- HVS = 0
  RSI = 1.7622790592724384
  ZSI = 0.0
  MPNAM2 = 'MP_A'
  LPNAME = 'LP_A'
  AF2 = 20*0.0
- AVS(1) = 0
- AVS2(1) = 0.0
  /
  &MACHINEIN
  device = 'device'
