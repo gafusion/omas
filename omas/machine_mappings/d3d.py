@@ -450,7 +450,7 @@ def coils_non_axisymmetric_hardware(ods, pulse):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
-
+                break
         coil_names += list(comp[compshot].keys())
 
     for k, fcid in enumerate(coil_names):
@@ -1220,6 +1220,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
+                break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
@@ -1277,6 +1278,7 @@ def magnetics_probes_data(ods, pulse):
         for shot in comp:
             if pulse > compshot:
                 compshot = shot
+                break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue

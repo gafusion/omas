@@ -59,6 +59,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3.8600
 ]
 },
 "identifier": "Leia",
@@ -101,6 +104,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3860.0
 ]
 },
 "identifier": "Luke",
@@ -143,6 +149,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3860.0
 ]
 },
 "identifier": "Scarecrow",
@@ -185,6 +194,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3860.0
 ]
 },
 "identifier": "Tinman",
@@ -227,6 +239,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3860.0
 ]
 },
 "identifier": "Chewbacca",
@@ -269,6 +284,9 @@
 "frequency": {
 "data": [
 109999996928.0
+],
+"time": [
+3860.0
 ]
 },
 "identifier": "NASA",

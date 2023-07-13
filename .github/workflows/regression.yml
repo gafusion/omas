@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip github]')"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
 
@@ -22,7 +22,7 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: '3.6.15'
+        python-version: '3.6'
 
     - name: Install numpy
       run: |
@@ -34,7 +34,7 @@ jobs:
 
     - name: Install OMAS
       run: |
-        python3 -m pip install .
+        python3 -m pip install .[machine]
 
     - name: Move to root and try importing OMAS
       run: |

@@ -200,6 +200,7 @@ sphinx_gallery_conf = {
     'gallery_dirs': 'auto_examples',
     'download_all_examples': False,
     'min_reported_time': 1000,
+    'only_warn_on_example_error': True,
     'default_thumb_file': os.path.split(__file__)[0] + '/images/sphx_default_thumb.png',
 }
 

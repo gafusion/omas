@@ -519,6 +519,17 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
     return {'stime': (stime, axtime), 'ax': axs}
 
 
+def use_subplot(fig, *args, **kw):
+    """
+    Same as add_subplot, but if the figure already has a subplot
+    with key (*args*, *kwargs*) then it will simply make that subplot
+    current and return it.
+    """
+    from matplotlib import pyplot
+    pyplot.figure(num=fig.number)
+    return pyplot.subplot(*args, **kw)
+
+
 def cached_add_subplot(fig, ax_cache, *args, **kw):
     r"""
     Utility function that works like matplotlib add_subplot
@@ -537,7 +548,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
     if args in ax_cache:
         return ax_cache[args]
     else:
-        ax = fig.add_subplot(*args, **kw)
+        ax = use_subplot(fig, *args, **kw)
         ax_cache[args] = ax
         return ax
 

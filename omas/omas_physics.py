@@ -704,9 +704,16 @@ def equilibrium_form_constraints(
                     data = remove_integrator_drift(time, data, rm_integr_drift_after)
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
-                const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
-                if error is not None:
-                    const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                # Don't average for length=2 arrays or smaller
+                if len(data) >2:
+                    const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                else:
+                    const = smooth_by_convolution(data * turns, time, times)
+                    if error is not None:
+                         const_error = smooth_by_convolution(error * turns, time, times)
+
                 # assign
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
@@ -1129,9 +1136,11 @@ def summary_currents(ods, time_index=None, update=True):
 
         ods_n = ODS().copy_attrs_from(ods)
 
-    current_names = [('j_bootstrap','current_bootstrap.value'),
-    ('j_non_inductive','current_non_inductive.value'),
-    ('j_ohmic','current_ohm.value')]
+    current_names = [
+        ('j_bootstrap', 'current_bootstrap.value'),
+        ('j_non_inductive', 'current_non_inductive.value'),
+        ('j_ohmic', 'current_ohm.value'),
+    ]
     rho = ods['equilibrium.time_slice[0].profiles_1d.rho_tor_norm']
     time_index = 0
     coordsio = {'core_profiles.profiles_1d.%d.grid.rho_tor_norm' % time_index: rho}
@@ -1141,15 +1150,20 @@ def summary_currents(ods, time_index=None, update=True):
         for (jname_cp, jname_sum) in current_names:
             if f'core_profiles.profiles_1d.{time_index}.{jname_cp}' in ods:
                 Bt = ods['equilibrium.vacuum_toroidal_field.b0']
-                JtoR = transform_current(rho=rho, JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt, equilibrium=ods['equilibrium.time_slice'][time_index])
-                Ip = numpy.trapz(JtoR,ods['equilibrium.time_slice[0].profiles_1d.volume'])/2/numpy.pi
-            
+                JtoR = transform_current(
+                    rho=rho,
+                    JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt,
+                    equilibrium=ods['equilibrium.time_slice'][time_index],
+                )
+                Ip = numpy.trapz(JtoR, ods['equilibrium.time_slice[0].profiles_1d.volume']) / 2 / numpy.pi
+
                 if f'summary.global_quantities.{jname_sum}' not in ods:
-                   ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index+1) 
-                
-                   ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
+                    ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index + 1)
+
+                    ods_n['summary.global_quantities'][jname_sum][time_index] = Ip
 
     return ods_n
+
 
 @add_to__ODS__
 @preprocess_ods('core_profiles', 'equilibrium')
@@ -1201,7 +1215,6 @@ def summary_taue(ods, thermal=True, update=True):
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
-
 
     tau_e_scaling = []
     tau_e_MHD = []
@@ -1258,7 +1271,7 @@ def summary_taue(ods, thermal=True, update=True):
             if 'summary.global_quantities.energy_thermal' in ods and thermal:
                 stored_energy = ods['summary.global_quantities.energy_thermal.value'][time_index]
                 info_string += "Stored energy from: summary.global_quantities.energy_thermal.value"
-            elif 'global_quantities.energy_mhd' in  equilibrium_ods:
+            elif 'global_quantities.energy_mhd' in equilibrium_ods:
                 if thermal:
                     print("Warning, tau_e calculated with stored energy MHD")
                 stored_energy = equilibrium_ods['global_quantities']['energy_mhd']
@@ -1319,7 +1332,8 @@ def summary_heating_power(ods, update=True):
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
     if 'core_sources.source.0' not in ods_n:
         return ods_n
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    q_init = numpy.zeros([len(ods['core_sources']['time']),
+                         len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm'])])
 
     q_dict = {
         'total_heating': copy.deepcopy(q_init),
@@ -1336,25 +1350,25 @@ def summary_heating_power(ods, update=True):
             source_1d = sources[source]['profiles_1d'][time_index]
             if sources[source]['identifier.index'] in index_dict:
                 if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
-                    q_dict['total_heating'] += source_1d['electrons']['energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['electrons']['energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:]  += source_1d['electrons']['energy']
                 if 'total_ion_energy' in source_1d:
-                    q_dict['total_heating'] += source_1d['total_ion_energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['total_ion_energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
-        power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
-        if numpy.sum(value) > 0:
+        power_dict[key] = numpy.trapz(q_dict[key], x=vol,axis=1)
+        if numpy.sum(power_dict[key]) > 0:
             if key == 'total_heating':
-                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
+                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(power_dict[key])
                 continue
             elif key == 'fusion':
-                ods_n['summary.fusion.power.value'] = numpy.array(value)
-                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(value)
+                ods_n['summary.fusion.power.value'] = numpy.array(power_dict[key])
+                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(power_dict[key])
                 continue
-            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
+            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(power_dict[key])
 
     ods_n['summary.time'] = ods['equilibrium.time']
     return ods_n
@@ -1381,7 +1395,7 @@ def summary_global_quantities(ods, update=True):
         from omas import ODS
 
         ods_n = ODS().copy_attrs_from(ods)
-        
+
     ods_n.update(ods.physics_summary_greenwald(update=update))
     ods_n.update(ods.physics_summary_currents(update=update))
     ods_n.update(ods.physics_summary_thermal_stored_energy(update=update))
@@ -2810,16 +2824,17 @@ def identify_cocos(B0, Ip, q, psi, clockwise_phi=None, a=None):
         (+1, +1, -1): 5,  # +Bp, +rpz, -rtp
         (+1, -1, -1): 6,  # +Bp, -rpz, -rtp
         (-1, +1, +1): 7,  # -Bp, +rpz, +rtp
-        (-1, -1, +1): 8,
-    }  # -Bp, -rpz, +rtp
+        (-1, -1, +1): 8,  # -Bp, -rpz, +rtp
+    }
 
     # identify 2*pi term in psi definition based on q estimate
     if a is not None:
         index = numpy.argmin(numpy.abs(q))
         if index == 0:
             index += 1
-        q_estimate = numpy.abs((pi * B0 * (a - a[0]) ** 2) / (psi - psi[0]))
-        if numpy.abs(q_estimate[index] - q[index]) < numpy.abs(q_estimate[index] / (2 * pi) - q[index]):
+        q_estimate = abs((numpy.pi * B0 * (a[index] - a[0]) ** 2) / (psi[index] - psi[0]))
+        q_actual = abs(q[index])
+        if abs(q_estimate - q_actual) < abs(q_estimate / (2 * numpy.pi) - q_actual):
             eBp = 1
         else:
             eBp = 0
