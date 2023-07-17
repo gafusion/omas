@@ -4,6 +4,14 @@ def tile(a, n):
     a = a.data()
     return np.array([a for k in range(n)])
 
+def stack_outer(*args):
+    if len(args) < 2:
+        raise ValueError("stack_outer only makes sense with 2 ore more arguments")
+    import numpy as np
+    a = np.array(args[0].data)
+    for array in args[1:]:
+        a = np.concatenate([a,array],axis=1)
+
 
 def nan_where(a, b, n):
     import numpy as np
@@ -35,6 +43,11 @@ def geqdsk_psi(a, b, c):
     M = a[:, None] + np.linspace(0, 1, n).T * (b[:, None] - a[:, None])
     return M
 
+def efit_psi_to_psi(a, b, c):
+    a = a.data()
+    b = b.data()
+    c = c.data()
+    return (a - b)/(c - b)
 
 def py2tdi(func, *args):
     import inspect

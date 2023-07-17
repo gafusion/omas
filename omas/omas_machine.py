@@ -62,6 +62,15 @@ def python_tdi_namespace(branch):
 
     return _python_tdi_namespace[branch]
 
+def remove_nans(x):
+    import numpy as np
+    if np.isscalar(x):
+        if np.isnan(x):
+            raise ValueError("Behavior of Nan filter undefined for scalar nan values")
+        else:
+            return x
+    else:
+        return x[~np.isnan(x)]
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
     """
@@ -75,7 +84,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :param location: ODS location to be populated
 
-    :param options: dictionary with options to use when loadinig the data
+    :param options: dictionary with options to use when loading the data
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
@@ -99,13 +108,51 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
-            mapped = mappings[location]
+            if not location.endswith(".*"):
+                mapped = mappings[location]
             break
-        except KeyError:
+        except KeyError as e:
             if branch == 'master':
-                raise
+                raise e
+            else:
+                print(f"Failed to load {location} from head. Attempting to resolve using the master branch.")
+                print(f"Error was:")
+                print(e)
     idm = (machine, branch)
+    if location.endswith(".*"):
+        root = location.split(".*")[0]
+        for key in mappings:
+            if root in key:
+                resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+        return ods
+    else:
+        return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
+    
+def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=None):
+    """
+    Routine to resolve a mapping
 
+    :param ods: input ODS to populate
+
+    :param machine: machine name
+
+    :param pulse: pulse number
+
+    :param mappings: Dictionary of available mappings
+
+    :param location: ODS location to be resolved
+
+    :param idm: Tuple with machine and branch
+
+    :param options_with_defaults: dictionary with options to use when loading the data including default settings
+
+    :param branch: load machine mappings and mapping functions from a specific GitHub branch
+
+    :param cache: if cache is a dictionary, this will be used to establiish a cash
+
+    :return: updated ODS and data before being assigned to the ODS
+    """
+    mapped = mappings[location]
     # cocosio
     cocosio = None
     if 'COCOSIO' in mapped:
@@ -194,7 +241,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     # transpose filter
     nanfilter = lambda x: x
     if mapped.get('NANFILTER', False):
-        nanfilter = lambda x: x[~numpy.isnan(x)]
+        #lambda x: x[~numpy.isnan(x)]
+        nanfilter = remove_nans
 
     # assign data to ODS
     if not hasattr(data, 'shape'):
