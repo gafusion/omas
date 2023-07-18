@@ -5,12 +5,13 @@ def tile(a, n):
     return np.array([a for k in range(n)])
 
 def stack_outer(*args):
+    import numpy as np
+
     if len(args) < 2:
         raise ValueError("stack_outer only makes sense with 2 ore more arguments")
-    import numpy as np
-    a = np.array(args[0].data)
+    a = np.array(args[0].data())
     for array in args[1:]:
-        a = np.concatenate([a,array],axis=1)
+        a = np.concatenate([a, array.data()],axis=1)
 
 
 def nan_where(a, b, n):
