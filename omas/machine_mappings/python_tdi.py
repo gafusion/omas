@@ -21,6 +21,13 @@ def nan_where(a, b, n):
     a[b == n] = np.NaN
     return a
 
+def nan_max_where(a, b, n):
+    import numpy as np
+
+    a = a.data()
+    b = b.data()
+    a[b == n] = np.NaN
+    return np.nanmax(a)
 
 def MDS_gEQDSK_COCOS_identify(bt, ip):
     import numpy as np
