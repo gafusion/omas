@@ -291,10 +291,6 @@
   "eval2TDI": "py2tdi(stack_outer,'\\{EFIT_tree}::TOP.MEASUREMENTS.CHIECC','\\{EFIT_tree}::TOP.MEASUREMENTS.CHIFCC')",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
-  "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR)",
   "treename": "{EFIT_tree}"
@@ -313,10 +309,6 @@
  },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
-   "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
