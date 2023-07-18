@@ -1150,7 +1150,7 @@ class ODS(MutableMapping):
                 self.omas_data = []
 
             # dynamic array structure creation
-            if key > len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':
+            if key > len(self.omas_data) and omas_rcparams['dynamic_path_creation'] == 'dynamic_array_structures':# 
                 for k in range(len(self.omas_data), key):
                     self.setraw(k, self.same_init_ods())
             # index exists

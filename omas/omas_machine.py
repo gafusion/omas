@@ -6,6 +6,10 @@ import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
+try:
+    from MDSplus.connection import MdsIpException
+except:
+    pass
 
 __all__ = [
     'machine_expression_types',
@@ -62,6 +66,15 @@ def python_tdi_namespace(branch):
 
     return _python_tdi_namespace[branch]
 
+def remove_nans(x):
+    import numpy as np
+    if np.isscalar(x):
+        if np.isnan(x):
+            raise ValueError("Behavior of Nan filter undefined for scalar nan values")
+        else:
+            return x
+    else:
+        return x[~np.isnan(x)]
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
     """
@@ -75,7 +88,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :param location: ODS location to be populated
 
-    :param options: dictionary with options to use when loadinig the data
+    :param options: dictionary with options to use when loading the data
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
@@ -92,20 +105,70 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         user_machine_mappings = {}
 
     location = l2o(p2l(location))
-
     for branch in [branch, 'master']:
         mappings = machine_mappings(machine, branch, user_machine_mappings)
         options_with_defaults = copy.copy(mappings['__options__'])
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
-            mapped = mappings[location]
+            if not location.endswith(".*"):
+                mapped = mappings[location]
             break
-        except KeyError:
+        except KeyError as e:
             if branch == 'master':
-                raise
+                raise e
+            else:
+                print(f"Failed to load {location} from head. Attempting to resolve using the master branch.")
+                print(f"Error was:")
+                print(e)
     idm = (machine, branch)
+    failed_locations = {}
+    if location.endswith(".*"):
+        root = location.split(".*")[0]
+        for key in mappings:
+            if root in key:
+                try:
+                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+                except MdsIpException as e:
+                    if hasattr(e, "eval2TDI"):
+                        failed_locations[key] = e.eval2TDI
+                    else:
+                        failed_locations[key] = e.TDI
+        if len(failed_locations) > 0:
+            import yaml
+            print("Failed to load the following keys: ")
+            print(failed_locations)
+            with open("failed_locs", "w") as failed_locs_file:
+                yaml.dump(failed_locations, failed_locs_file, yaml.CDumper)
+            return ods
+    else:
+        return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
+    
+def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=None):
+    """
+    Routine to resolve a mapping
 
+    :param ods: input ODS to populate
+
+    :param machine: machine name
+
+    :param pulse: pulse number
+
+    :param mappings: Dictionary of available mappings
+
+    :param location: ODS location to be resolved
+
+    :param idm: Tuple with machine and branch
+
+    :param options_with_defaults: dictionary with options to use when loading the data including default settings
+
+    :param branch: load machine mappings and mapping functions from a specific GitHub branch
+
+    :param cache: if cache is a dictionary, this will be used to establiish a cash
+
+    :return: updated ODS and data before being assigned to the ODS
+    """
+    mapped = mappings[location]
     # cocosio
     cocosio = None
     if 'COCOSIO' in mapped:
@@ -174,9 +237,12 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
-        except Exception:
+        except Exception as e:
             printe(mapped['TDI'].format(**options_with_defaults).replace('\\n', '\n'))
-            raise
+            if "eval2TDI" in mapped:
+                e.eval2TDI = mapped['eval2TDI']
+            e.TDI = mapped['TDI']
+            raise e
 
     else:
         raise ValueError(f"Could not fetch data for {location}. Must define one of {machine_expression_types}")
@@ -194,7 +260,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     # transpose filter
     nanfilter = lambda x: x
     if mapped.get('NANFILTER', False):
-        nanfilter = lambda x: x[~numpy.isnan(x)]
+        #lambda x: x[~numpy.isnan(x)]
+        nanfilter = remove_nans
 
     # assign data to ODS
     if not hasattr(data, 'shape'):
