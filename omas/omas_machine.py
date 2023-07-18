@@ -6,6 +6,10 @@ import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
+try:
+    from MDSplus.connection import MdsIpException
+except:
+    pass
 
 __all__ = [
     'machine_expression_types',
@@ -101,7 +105,6 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         user_machine_mappings = {}
 
     location = l2o(p2l(location))
-
     for branch in [branch, 'master']:
         mappings = machine_mappings(machine, branch, user_machine_mappings)
         options_with_defaults = copy.copy(mappings['__options__'])
@@ -119,12 +122,25 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 print(f"Error was:")
                 print(e)
     idm = (machine, branch)
+    failed_locations = {}
     if location.endswith(".*"):
         root = location.split(".*")[0]
         for key in mappings:
             if root in key:
-                resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
-        return ods
+                try:
+                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+                except MdsIpException as e:
+                    if hasattr(e, "eval2TDI"):
+                        failed_locations[key] = e.eval2TDI
+                    else:
+                        failed_locations[key] = e.TDI
+        if len(failed_locations) > 0:
+            import yaml
+            print("Failed to load the following keys: ")
+            print(failed_locations)
+            with open("failed_locs", "w") as failed_locs_file:
+                yaml.dump(failed_locations, failed_locs_file, yaml.CDumper)
+            return ods
     else:
         return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
     
@@ -221,9 +237,12 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
             data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
-        except Exception:
+        except Exception as e:
             printe(mapped['TDI'].format(**options_with_defaults).replace('\\n', '\n'))
-            raise
+            if "eval2TDI" in mapped:
+                e.eval2TDI = mapped['eval2TDI']
+            e.TDI = mapped['TDI']
+            raise e
 
     else:
         raise ValueError(f"Could not fetch data for {location}. Must define one of {machine_expression_types}")
