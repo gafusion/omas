@@ -248,7 +248,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.flux_loop.:.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISI)",
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISIL)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured": {
