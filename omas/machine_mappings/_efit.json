@@ -15,6 +15,10 @@
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.vacuum_toroidal_field.b0": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
   "treename": "{EFIT_tree}"
@@ -33,8 +37,294 @@
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.boundary.x_point.:.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RSEPS',0)",
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0]
+ },
+ "equilibrium.time_slice.:.boundary.x_point.:.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZSEPS',0)",
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0]
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.outline.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.outline.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.:.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RSEPS',0)",
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0]
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.:.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZSEPS',0)",
+  "treename": "{EFIT_tree}",
+  "TRANSPOSE": [1,0]
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ROUT)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.z": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZOUT)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.DSEP)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
+  "EVAL": "inboard",
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
+  "EVAL": "outboard",
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
+  "EVAL": "top",
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
+  "EVAL": "bottom",
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RVSID/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZVSID/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RVSOD/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZVSOD/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RVSIU/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZVSIU/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.4.r": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RVSOU/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.4.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU/100.','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZVSOU/100.',-0.89)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.triangularity_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TRITOP)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.triangularity_lower": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TRIBOT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.elongation": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.EOUT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)/100.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.psi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.ip.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.IPMEAS)",
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.ip.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIPASMA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.EXPMPI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGMPI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTMP2)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CMPR2)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIMPI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.DIAMAG)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGDIA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTDIA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CDFLUX)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.diamagnetic_flux.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIDFLUX)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SILOPT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGSIL)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTSI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CSILOP)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISI)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.TANGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CMGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIGAM)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT/FCCURT/ACCURT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGECC/SIGFCC)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTEC/FWTFC)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CECURR/CCBRSP)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIECC/CHIFCC)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.weight": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.chi_squared_total": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.CHISQ)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {
@@ -53,12 +343,52 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZMAXIS)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BT0)",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.global_quantities.psi_axis": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.psi_boundary": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.area": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)/10000.",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.surface": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.PSURFA)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.volume": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.VOLUME)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_pol": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAP)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_tor": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAT)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.beta_normal": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAN)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_95": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.Q95)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_axis": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.Q0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.global_quantities.q_min.value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.QMIN)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_1d.dpressure_dpsi": {
@@ -112,8 +442,8 @@
   "TRANSPOSE": [
    1,
    0,
-   3,
-   2
+   2,
+   3
   ],
   "treename": "{EFIT_tree}"
  },
@@ -125,4 +455,15 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
   "treename": "{EFIT_tree}"
  }
+ "equilibrium.time_slice.:.convergence.iterations_n": {
+    "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)')",
+    "treename": "{EFIT_tree}",
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TERROR)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.index": {
+  "EVAL": "3",
+ },
 }
