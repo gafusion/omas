@@ -8,6 +8,7 @@ from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_
 from .omas_physics import cocos_signals
 try:
     from MDSplus.connection import MdsIpException
+    from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
 except:
     pass
 
@@ -129,11 +130,14 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             if root in key:
                 try:
                     resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
-                except MdsIpException as e:
+                except (TreeNODATA, MdsIpException) as e:
                     if hasattr(e, "eval2TDI"):
                         failed_locations[key] = e.eval2TDI
                     else:
                         failed_locations[key] = e.TDI
+                except TreeNNF as e:
+                    if key != 'equilibrium.time_slice.:.constraints.j_tor.:.measured':
+                        raise e
         if len(failed_locations) > 0:
             import yaml
             print("Failed to load the following keys: ")
