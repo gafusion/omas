@@ -6,6 +6,11 @@ from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from uncertainties import unumpy
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
+from omas.omas_core import ODS
+from omas.omas_structure import add_extra_structures
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1344,6 +1349,137 @@ def ip_bt_dflux_data(ods, pulse):
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
 
+def add_extra_profile_structures():
+    extra_structures = {}
+    extra_structures["core_profiles"] = {}
+    sh = "core_profiles.profiles_1d"
+    for quant in ["ion.:.density_fit.psi_norm", "electrons.density_fit.psi_norm",
+                  "ion.:.temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
+                  "ion.:.velocity.toroidal_fit.psi_norm"]:
+        if "velocity" in quant:
+            psi_struct = {"coordinates": "1- 1...N"}
+        else:
+            psi_struct = {"coordinates": sh + ".:." + quant.replace("psi_norm", "rho_tor_norm")}
+        psi_struct["documentation"] = "Normalized Psi for fit data."
+        psi_struct["data_type"] =  "FLT_1D"
+        psi_struct["units"] = ""
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.{quant}"] = psi_struct
+    velo_struct = {"coordinates": sh + ".:." + "ion.:.velocity.toroidal_fit.psi_norm"}
+    velo_struct["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
+    velo_struct["data_type"] =  "FLT_1D"
+    velo_struct["units"] = "m.s^-1"
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    add_extra_structures(extra_structures)
+    
+
+@machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+    add_extra_profile_structures()
+    ods["core_profiles.ids_properties.homogeneous_time"] = 1
+    if "OMFIT_PROFS" in PROFILES_tree:
+        omfit_profiles_node = '\\TOP.'
+        query = {
+            "electrons.density": "N_E",
+            "electrons.density_fit.measured": "RW_N_E",
+            "electrons.temperature": "T_E",
+            "electrons.temperature_fit.measured": "RW_T_E",
+            "ion[0].density": "N_D",
+            "ion[0].temperature": "T_D",
+            "ion[1].velocity.toroidal": "V_TOR_C",
+            "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
+            "ion[1].density": "N_C",
+            "ion[1].density_fit.measured": "RW_N_C",
+            "ion[1].temperature": "T_C",
+            "ion[1].temperature_fit.measured": "RW_T_C",
+        }
+        uncertain_entries = list(query.keys())
+        query["electrons.density_fit.psi_norm"] = "PS_N_E"
+        query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
+        query["ion[1].density_fit.psi_norm"] = "PS_N_C"
+        query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
+        query["ion[1].density_fit.psi_norm"] = "PS_T_C"
+        query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
+        #query["j_total"] = "J_TOT"
+        #query["pressure_perpendicular"] = "P_TOT"
+        query["e_field.radial"] = "ER_C"
+        query["grid.rho_tor_norm"] = "rho"
+        normal_entries = set(query.keys()) - set(uncertain_entries)
+        for entry in query:
+            query[entry] = omfit_profiles_node + query[entry]
+        for entry in uncertain_entries:
+            query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        if data is None:
+            print("No mds+ data")
+            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
+        data['time'] = dim_info.dim_of(1) * 1.e-3
+        psi_n = dim_info.dim_of(0)
+        data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
+        data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
+        # for density in densities:
+        #     data[density] *= 1.e6
+        for unc in ["", "_error_upper"]:
+            data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
+        ods["core_profiles.time"] = data['time']
+        sh = "core_profiles.profiles_1d"
+        for i_time, time in enumerate(data["time"]):
+            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
+        for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
+            if isinstance(data[entry], Exception):
+                continue
+            for i_time, time in enumerate(data["time"]):
+                try:
+                    ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
+                    ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                except Exception as e:
+                    print("Uncertain entry", entry)
+                    print("================ DATA =================")
+                    print(data[entry][i_time])
+                    print("================ ERROR =================")
+                    print(data[entry + "_error_upper"][i_time])
+                    print(data[entry][i_time].shape, 
+                            data[entry + "_error_upper"][i_time].shape)
+                    print(e)
+        for entry in normal_entries:
+            if isinstance(data[entry], Exception):
+                continue
+            for i_time, time in enumerate(data["time"]):
+                try:
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                except:
+                    print("Normal entry", entry)
+                    print("================ DATA =================")
+                    print(data[entry][i_time])
+        for i_time, time in enumerate(data["time"]):
+            ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+            ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+            ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+            ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+            ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+    else:
+        profiles_node = '\\TOP.PROFILES.'
+        query = {
+            "electrons.density": "EDENSFIT",
+            "electrons.density_thermal": "EDENSFIT",
+            "electrons.temperature": "ETEMPFIT"
+        }
+        for entry in query:
+            query[entry] = profiles_node + query[entry]
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
+        data['time'] = dim_info.dim_of(1) * 1.e-3
+        rho_tor_norm = dim_info.dim_of(0)
+        data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
+        data['grid.rho_tor_norm'][:] = rho_tor_norm
+        ods[f"core_profiles.time"] = data['time']
+        for entry in data:
+            if isinstance(data[entry], Exception):
+                continue
+            for i_time, time in enumerate(data["time"]):
+                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):
@@ -1366,5 +1502,3 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 
 # ================================
-if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
