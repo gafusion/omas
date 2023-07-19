@@ -307,14 +307,26 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
+ "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
+ "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
+   "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)*data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)/(data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)/10000.)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.chi_squared_total": {
+   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.CHISQ)",
+   "treename": "{EFIT_tree}"
+  },
  "equilibrium.time_slice.:.global_quantities.ip": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
   "treename": "{EFIT_tree}"
