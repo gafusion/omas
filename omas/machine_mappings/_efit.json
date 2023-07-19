@@ -80,7 +80,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
-  "eval2TDI": "py2tdi(min_4_w_scale,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT', 0.01)",
+  "eval2TDI": "py2tdi(min_4,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT/100.')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.0.name": {
