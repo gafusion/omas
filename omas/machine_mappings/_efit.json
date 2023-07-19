@@ -320,7 +320,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)*data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)/(data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)/10000.)",
+  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {
