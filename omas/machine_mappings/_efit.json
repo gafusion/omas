@@ -443,6 +443,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.convergence.iterations_n": {
+    "eval2TDI": "py2tdi(get_largest_axis_value,'dim_of(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR,1)','\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR')",
+    "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TERROR)",
   "treename": "{EFIT_tree}"

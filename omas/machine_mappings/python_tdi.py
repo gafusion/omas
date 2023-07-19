@@ -34,6 +34,7 @@ def get_largest_axis_value(a, b):
     a = a.data()
     b = b.data()
     a = np.array([a for k in range(b.shape[0])])
+    a[b == 0] = 0
     return np.nanmax(a, axis=1)
 
 def MDS_gEQDSK_COCOS_identify(bt, ip):
