@@ -28,13 +28,14 @@ def nan_where(a, b, n):
     a[b == n] = np.NaN
     return a
 
-def nan_max_where(a, b, n):
+def nan_max_where_tile_a(a, b, n):
     import numpy as np
 
     a = a.data()
     b = b.data()
+    a = np.array([a for k in range(b.shape[-1])])
     a[b == n] = np.NaN
-    return np.nanmax(a)
+    return np.nanmax(a, axis=1)
 
 def MDS_gEQDSK_COCOS_identify(bt, ip):
     import numpy as np
