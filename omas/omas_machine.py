@@ -6,6 +6,10 @@ import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
+from omas.machine_mappings import d3d
+from omas.machine_mappings.d3d import __regression_arguments__
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
 try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
@@ -17,11 +21,8 @@ __all__ = [
     'machines',
     'machine_mappings',
     'load_omas_machine',
-    'machine_mapping_function',
     'test_machine_mapping_functions',
-    'mdstree',
-    'mdsvalue',
-    'reload_machine_mappings',
+    'reload_machine_mappings'
 ]
 
 machine_expression_types = ['VALUE', 'EVAL', 'ENVIRON', 'PYTHON', 'TDI', 'eval2TDI']
@@ -221,9 +222,10 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
             namespace['ods'] = ODS()
             namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
             printd(f"Calling `{call}` in {os.path.basename(namespace['__file__'])}", topic='machine')
-            tmp = compile(call, namespace['__file__'], 'exec')
-            exec(tmp, namespace)
-            ods = namespace[mapped.get('RETURN', 'ods')]
+            # Add the callback for mapping updates
+            # By supplyinh the function to the decorator we avoid a ringinclusion
+            call_w_update_mapping = call[:-1] + ", update_callback=update_mapping)"
+            exec( machine + "." + call_w_update_mapping)
             if isinstance(cache, dict):
                 cache[call] = ods
         if location.endswith(':'):
@@ -606,65 +608,8 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
     return new_raw_mappings
 
 
-# ===================
-# machine mapping functions
-# ===================
-def machine_mapping_function(__regression_arguments__, **regression_args):
-    """
-    Decorator used to identify machine mapping functions
 
-    :param \**regression_args: arguments used to run regression test
-
-    NOTE: use `inspect.unwrap(function)` to call a function decorated with `@machine_mapping_function`
-          from another function decorated with `@machine_mapping_function`
-    """
-
-    __all__ = __regression_arguments__['__all__']
-
-    def machine_mapping_decorator(f, __all__):
-        __all__.append(f.__name__)
-        if __regression_arguments__ is not None:
-            __regression_arguments__[f.__name__] = regression_args
-
-        @functools.wraps(f)
-        def machine_mapping_caller(*args, **kwargs):
-            clean_ods = True
-            if len(args[0]):
-                clean_ods = False
-            if clean_ods and omas_git_repo:
-                import inspect
-
-                # figure out the machine name from where the function `f` is defined
-                machine = os.path.splitext(os.path.split(inspect.getfile(f))[1])[0]
-                if machine == '<string>':  # if `f` is called via exec then we need to look at the call stack to figure out the machine name
-                    machine = os.path.splitext(os.path.split(inspect.getframeinfo(inspect.currentframe().f_back)[0])[1])[0]
-
-                # call signature
-                argspec = inspect.getfullargspec(f)
-                f_args_str = ", ".join('{%s!r}' % item for item in argspec.args if not item.startswith('_'))
-                # f_args_str = ", ".join(item + '={%s!r}' % item for item in argspec.args if not item.startswith('_')) # to use keywords arguments
-                call = f"{f.__qualname__}({f_args_str})".replace('{ods!r}', 'ods').replace('{pulse!r}', '{pulse}')
-                default_options = None
-                if argspec.defaults:
-                    default_options = dict(zip(argspec.args[::-1], argspec.defaults[::-1]))
-                    default_options = {item: value for item, value in default_options.items() if not item.startswith('_')}
-
-            # call
-            out = f(*args, **kwargs)
-
-            # update mappings definitions
-            if clean_ods and omas_git_repo:
-                for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
-                    update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
-
-            return out
-
-        return machine_mapping_caller
-
-    return lambda f: machine_mapping_decorator(f, __all__)
-
-
-def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
+def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace):
     """
     Function used to test python mapping functions
 
@@ -678,7 +623,7 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
     os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
 
     # call machine mapping to make sure the json file is properly formatted
-    machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
+    # machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
     machine_mappings(machine, '', raise_errors=True)
     print('OK')
@@ -691,10 +636,11 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
             print(func_name)
             pprint(regression_kw)
             print('=' * len(func_name))
-            ods = ODS()
-            func = eval(func_name, global_namespace, local_namespace)
+            ods = ODS() #consistency_check= not break_schema
+            func = eval(machine + "." + func_name, global_namespace, local_namespace)
             try:
                 try:
+                    regression_kw["update_callback"] = update_mapping
                     func(ods, **regression_kw)
                 except Exception:
                     raise
@@ -724,217 +670,6 @@ def test_machine_mapping_functions(__all__, global_namespace, local_namespace):
             del os.environ['OMAS_DEBUG_TOPIC']
         else:
             os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
-
-
-# ===================
-# MDS+ functions
-# ===================
-def tunnel_mds(server, treename):
-    """
-    Resolve MDS+ server
-    NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
-
-    :param server: MDS+ server address:port
-
-    :param treename: treename (in case treename affects server to be used)
-
-    :return: string with MDS+ server and port to be used
-    """
-    try:
-        import omfit_classes.omfit_mds
-    except (ImportError, ModuleNotFoundError):
-        return server.format(**os.environ)
-    else:
-        server0 = omfit_classes.omfit_mds.translate_MDSserver(server, treename)
-        tunneled_server = omfit_classes.omfit_mds.tunneled_MDSserver(server0, quiet=False)
-        return tunneled_server
-
-    return server.format(**os.environ)
-
-
-_mds_connection_cache = {}
-
-
-class mdstree(dict):
-    """
-    Class to handle the structure of an MDS+ tree.
-    Nodes in this tree are mdsvalue objects
-    """
-
-    def __init__(self, server, treename, pulse):
-        pulse = int(pulse)
-        for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
-            try:
-                TDI = TDI.decode('utf8')
-            except AttributeError:
-                pass
-            TDI = TDI.strip()
-            path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
-            h = self
-            for p in path[1:-1]:
-                h = h.setdefault(p, mdsvalue(server, treename, pulse, ''))
-            if path[-1] not in h:
-                h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
-            else:
-                h[path[-1]].TDI = TDI
-
-
-class mdsvalue(dict):
-    """
-    Execute MDS+ TDI functions
-    """
-
-    def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
-        self.treename = treename
-        self.pulse = int(pulse)
-        self.TDI = TDI
-        if 'nstx' in server:
-            old_MDS_server = True
-        try:
-            # handle the case that server is just the machine name
-            tmp = machine_mappings(server, '')
-        except NotImplementedError:
-            # hanlde case where server is actually a URL
-            if '.' not in server:
-                raise
-        else:
-            if '__mdsserver__' not in tmp or not len(tmp['__mdsserver__']):
-                raise Exception(f'Must specify `__mdsserver__` for {server}')
-            else:
-                server = tmp['__mdsserver__']
-        self.server = tunnel_mds(server, self.treename)
-        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-        if server in old_servers or self.server in old_servers:
-            old_MDS_server = True
-        self.old_MDS_server = old_MDS_server
-
-    def data(self):
-        return self.raw(f'data({self.TDI})')
-
-    def dim_of(self, dim):
-        return self.raw(f'dim_of({self.TDI},{dim})')
-
-    def units(self):
-        return self.raw(f'units({self.TDI})')
-
-    def error(self):
-        return self.raw(f'error({self.TDI})')
-
-    def error_dim_of(self, dim):
-        return self.raw(f'error_dim_of({self.TDI},{dim})')
-
-    def units_dim_of(self, dim):
-        return self.raw(f'units_dim_of({self.TDI},{dim})')
-
-    def size(self, dim):
-        return self.raw(f'size({self.TDI})')
-
-    def raw(self, TDI=None):
-        """
-        Fetch data from MDS+ with connection caching
-
-        :param TDI: string, list or dict of strings
-            MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
-
-        :return: result of TDI expression, or dictionary with results of TDI expressions
-        """
-        try:
-            import time
-
-            t0 = time.time()
-            import MDSplus
-
-            def mdsk(value):
-                """
-                Translate strings to MDS+ bytes
-                """
-                return str(str(value).encode('utf8'))
-
-            if TDI is None:
-                TDI = self.TDI
-
-            try:
-                out_results = None
-
-                # try connecting and re-try on fail
-                for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                        conn = MDSplus.Connection(self.server)
-                        if self.treename is not None:
-                            conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
-                    try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        break
-                    except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        if fallback:
-                            raise
-
-                # list of TDI expressions
-                if isinstance(TDI, (list, tuple)):
-                    TDI = {expr: expr for expr in TDI}
-
-                # dictionary of TDI expressions
-                if isinstance(TDI, dict):
-                    # old versions of MDS+ server do not support getMany
-                    if self.old_MDS_server:
-                        results = {}
-                        for tdi in TDI:
-                            try:
-                                results[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
-                            except Exception as _excp:
-                                results[tdi] = Exception(str(_excp))
-                        out_results = results
-
-                    # more recent MDS+ server
-                    else:
-                        conns = conn.getMany()
-                        for name, expr in TDI.items():
-                            conns.append(name, expr)
-                        res = conns.execute()
-                        results = {}
-                        for name, expr in TDI.items():
-                            try:
-                                results[name] = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
-                            except KeyError:
-                                try:
-                                    results[name] = MDSplus.Data.data(res[str(name)][str('value')])
-                                except KeyError:
-                                    try:
-                                        results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
-                                    except KeyError:
-                                        results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
-                        out_results = results
-
-                # single TDI expression
-                else:
-                    out_results = MDSplus.Data.data(conn.get(TDI))
-
-                # return values
-                return out_results
-
-            except Exception as _excp:
-                txt = []
-                for item in ['server', 'treename', 'pulse']:
-                    txt += [f' - {item}: {getattr(self, item)}']
-                txt += [f' - TDI: {TDI}']
-                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
-
-        finally:
-            if out_results is not None:
-                if isinstance(out_results, dict):
-                    if all(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    else:
-                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
-            else:
-                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
 
 
 # ===================
@@ -1026,3 +761,6 @@ def load_omas_machine(
         print(location)
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
+
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
