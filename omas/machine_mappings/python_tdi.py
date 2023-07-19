@@ -28,13 +28,12 @@ def nan_where(a, b, n):
     a[b == n] = np.NaN
     return a
 
-def nan_max_where_tile_a(a, b, n):
+def get_largest_axis_value(a, b):
     import numpy as np
 
     a = a.data()
     b = b.data()
-    a = np.array([a for k in range(b.shape[-1])])
-    a[b == n] = np.NaN
+    a = np.array([a for k in range(b.shape[0])])
     return np.nanmax(a, axis=1)
 
 def MDS_gEQDSK_COCOS_identify(bt, ip):

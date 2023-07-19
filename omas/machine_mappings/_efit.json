@@ -444,7 +444,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.iterations_n": {
-    "eval2TDI": "py2tdi(nan_max_where_tile_a,'size(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)','\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR',0)",
+    "eval2TDI": "py2tdi(get_largest_axis_value,'size(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)','\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR')",
     "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
