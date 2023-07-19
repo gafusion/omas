@@ -177,6 +177,7 @@ class mdsvalue(dict):
                 for item in ['server', 'treename', 'pulse']:
                     txt += [f' - {item}: {getattr(self, item)}']
                 txt += [f' - TDI: {TDI}']
+                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
 
         finally:
             if out_results is not None:
