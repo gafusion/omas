@@ -40,22 +40,22 @@
  "equilibrium.time_slice.:.boundary.x_point.0.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.x_point.1.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.x_point.0.z": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.x_point.1.z": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.outline.r": {
   "NANFILTER": true,
@@ -70,22 +70,22 @@
  "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.1.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.0.z": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.1.z": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
-  "treename": "{EFIT_tree}",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)/100.",
