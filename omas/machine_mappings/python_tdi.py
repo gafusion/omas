@@ -28,15 +28,6 @@ def nan_where(a, b, n):
     a[b == n] = np.NaN
     return a
 
-def min_4(a, b, c, d):
-    import numpy as np
-
-    a = a.data()
-    b = b.data()
-    c = c.data()
-    d = d.data()
-    return np.nanmin(np.vstack([a,b,c,d]), axis=0)
-
 def get_largest_axis_value(a, b):
     import numpy as np
 
@@ -72,6 +63,12 @@ def efit_psi_to_psi(a, b, c):
     b = b.data()
     c = c.data()
     return (a - b)/(c - b)
+
+def efit_psi_to_psi_2d(a, b, c):
+    a = a.data()
+    b = b.data()
+    c = c.data()
+    return ((a.T - b)/(c - b)).T
 
 def py2tdi(func, *args):
     import inspect

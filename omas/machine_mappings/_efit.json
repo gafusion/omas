@@ -37,17 +37,25 @@
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.boundary.x_point.:.r": {
+ "equilibrium.time_slice.:.boundary.x_point.0.r": {
   "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS',0)",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0]
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
+  "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.boundary.x_point.:.z": {
+ "equilibrium.time_slice.:.boundary.x_point.1.r": {
   "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS',0)",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0]
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.0.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.1.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.outline.r": {
   "NANFILTER": true,
@@ -59,28 +67,36 @@
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.:.r": {
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
   "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSEPS',0)",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0]
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
+  "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.:.z": {
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.1.r": {
   "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSEPS',0)",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0]
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.0.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.1.z": {
+  "NANFILTER": true,
+  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
+  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ROUT)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)/100.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.z": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZOUT)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)/100.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
-  "eval2TDI": "py2tdi(min_4,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT/100.')",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)/100.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.0.name": {
@@ -272,7 +288,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
-  "eval2TDI": "py2tdi(stack_outer_3,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.ACCURT')",
+  "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured_error_upper": {
@@ -308,7 +324,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
- "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
+ "eval2TDI": "py2tdi(efit_psi_to_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
  "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
@@ -316,7 +332,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
-   "eval2TDI": "py2tdi(efit_psi_to_psi,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
+   "eval2TDI": "py2tdi(efit_psi_to_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
