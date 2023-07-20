@@ -28,15 +28,6 @@ def nan_where(a, b, n):
     a[b == n] = np.NaN
     return a
 
-def min_4_w_scale(a, b, c, d, scale):
-    import numpy as np
-
-    a = a.data()
-    b = b.data()
-    c = c.data()
-    d = d.data()
-    return np.min(np.vstack([a,b,c,d]), axis=0) * scale
-
 def get_largest_axis_value(a, b):
     import numpy as np
 
