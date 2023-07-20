@@ -96,7 +96,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZEPLIM)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)/100.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.0.name": {
@@ -288,7 +288,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
-  "eval2TDI": "py2tdi(stack_outer_3,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.ACCURT')",
+  "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured_error_upper": {
