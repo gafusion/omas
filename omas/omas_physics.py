@@ -458,17 +458,17 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
     )
     cocos = define_cocos(11)
-    if quantity == "b_r":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
+    if quantity == "b_field_r":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
             psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_z":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
+    elif quantity == "b_field_z":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
             -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_tor":
+    elif quantity == "b_field_tor":
         mask = numpy.logical_and(
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
             < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
@@ -478,11 +478,11 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         f_spl = InterpolatedUnivariateSpline(
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
             f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask == False] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
         )
         return ods

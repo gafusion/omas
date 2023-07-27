@@ -139,7 +139,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False, ids_is_
         location = l2i([ds] + path[: kp + 1])
         if isinstance(p, str):
             if p == ":":
-                if allocate:
+                if allocate and len(out) != len(value):
                     out.resize(len(value))
                     done = True
                 if kp == len(path) - 1:
@@ -150,7 +150,10 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False, ids_is_
                         break
                     else:
                         for i in range(value.shape[0]):
-                            imas_set(out[i], path[kp + 1:], value[i], skip_missing_nodes=False, allocate=allocate,only_allocate=only_allocate)
+                            if len(path[kp + 1:]) == 1:
+                                setattr(out[i], path[-1], value[i])
+                            else:
+                                imas_set(out[i], path[kp + 1:], value[i], skip_missing_nodes=False, allocate=allocate,only_allocate=only_allocate)
                     return [ds] + path
             elif hasattr(out, p):
                 if kp < (len(path) - 1):

@@ -302,7 +302,7 @@
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ece": {
-    "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.channel.:": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
@@ -313,6 +313,9 @@
  "ece.channel.:.identifier": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "ece.channel.:.if_bandwidth": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
  "ece.channel.:.name": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
@@ -320,6 +323,9 @@
   "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "ece.channel.:.time": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.ids_properties.homogeneous_time": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.line_of_sight.first_point.phi": {
@@ -699,5 +705,8 @@
    2
   ],
   "treename": "{EFIT_tree}"
+ },
+ "wall.ids_properties.homogeneous_time": {
+  "VALUE": 1
  }
 }
