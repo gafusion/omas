@@ -332,7 +332,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
-   "eval2TDI": "py2tdi(efit_psi_to_real_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
+  "eval2TDI": "py2tdi(efit_psi_to_real_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
