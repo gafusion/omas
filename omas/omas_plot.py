@@ -1080,13 +1080,16 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     if not omas_viewer:
         pyplot.setp(ax.get_xticklabels(), visible=False)
     if omas_viewer:
-        ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
-        x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
-                                          ods[f"equilibrium.time_slice.{time_index}.constraints.j_tor.:.position.psi"])
-        plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
-                                    xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
-                                    r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
-                                    color='red')
+        try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+            x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
+                                            ods[f"equilibrium.time_slice.{time_index}.constraints.j_tor.:.position.psi"])
+            plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
+                                        r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
+                                        color='red')
+        except ValueError:
+            print("WARNING No data for j_tor constraints")
         try:
             plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
                                         xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
