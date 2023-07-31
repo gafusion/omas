@@ -64,11 +64,11 @@ def efit_psi_to_psi(a, b, c):
     c = c.data()
     return (a - b)/(c - b)
 
-def efit_psi_to_psi_2d(a, b, c):
+def efit_psi_to_real_psi_2d(a, b, c):
     a = a.data()
     b = b.data()
     c = c.data()
-    return ((a.T - b)/(c - b)).T
+    return (a.T * (c - b) + b).T
 
 def py2tdi(func, *args):
     import inspect
