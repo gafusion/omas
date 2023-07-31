@@ -1481,6 +1481,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                 continue
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):

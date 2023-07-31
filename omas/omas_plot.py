@@ -1291,7 +1291,8 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     # else:
-                    if len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
+                    if (q + "_error_upper" in prof1d[specie]
+                        and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"])):
                         plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
                                              prof1d[specie][q + "_error_upper"]*scale))
                     else:
@@ -1303,6 +1304,8 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                                               prof1d[specie][q + "_fit.measured_error_upper"]*scale])
                         except Exception as e:
                             data_list.append(None)
+                    else:
+                        data_list.append(None)
                     label_name_z.append("")
                     label_name.append(f'{names[index]} {q.capitalize()}')
         elif "e_field.radial" not in q:
