@@ -9,7 +9,7 @@ from .omas_physics import cocos_signals
 from omas.machine_mappings import d3d
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
 try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
@@ -96,7 +96,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :param user_mappings: allow specification of external mappings
 
-    :param cache: if cache is a dictionary, this will be used to establiish a cash
+    :param cache: if cache is a dictionary, this will be used to establish a cash
 
     :return: updated ODS and data before being assigned to the ODS
     """
@@ -113,7 +113,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
-            if not location.endswith(".*"):
+            if not location.endswith(".*"): # location = "core_profiles.*"
                 mapped = mappings[location]
             break
         except KeyError as e:
@@ -170,7 +170,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
-    :param cache: if cache is a dictionary, this will be used to establiish a cash
+    :param cache: if cache is a dictionary, this will be used to establish a cash
 
     :return: updated ODS and data before being assigned to the ODS
     """
@@ -239,9 +239,13 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
     # MDS+
     elif 'TDI' in mapped:
         try:
+            if 'treename' in  mapped:
+                pulse_id = check_for_pulse_id(pulse, mapped['treename'], options_with_defaults)
+            else:
+                pulse_id = pulse
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
+            data0 = data = mdsvalue(machine, treename, pulse_id, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
         except Exception as e:

@@ -4,8 +4,42 @@ from omas.omas_utils import printd
 
 __all__ = [
     'mdstree',
-    'mdsvalue'
+    'mdsvalue',
+    'get_pulse_id'
 ]
+
+def get_pulse_id(pulse, run_id=None):
+    """
+    Converts the pulse number into a MDS+ run_id
+
+    :param pulse: Regular shot number
+
+    :param run_id: Extension that contains the pulse number. E.g."01". Should be of type string or None
+
+    :return: Pulse id, i.e. shot number with run_id extension if available
+    """
+    if run_id is None:
+        return pulse
+    else:
+        return int(str(pulse) + run_id)
+
+def check_for_pulse_id(pulse, treename, options_with_defaults):
+    """
+    Checks if the tree has a run_id associated with it and returns the pulse id
+
+    :param pulse: Regular shot number
+
+    :param treename: Name of tree being loaded
+
+    :param options_with_defaults: Dictionary with options for the current machine
+
+
+    """
+    if 'EFIT' in treename:
+        return get_pulse_id(pulse, options_with_defaults["EFIT_run_id"])
+    else:
+        return pulse
+
 
 _mds_connection_cache = {}
 
