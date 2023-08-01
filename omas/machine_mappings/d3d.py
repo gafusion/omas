@@ -12,6 +12,7 @@ from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
+import copy
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1462,6 +1463,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            ods[f"{sh}[{i_time}].electrons.density_thermal"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density"])
+            ods[f"{sh}[{i_time}].electrons.density_thermal_error_upper"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_error_upper"])
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
