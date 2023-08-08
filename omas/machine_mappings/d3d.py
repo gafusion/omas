@@ -1477,15 +1477,21 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
         data['time'] = dim_info.dim_of(1) * 1.e-3
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.ETEMPFIT")
+        data['time_te'] = dim_info.dim_of(1) * 1.e-3
+        ods[f"core_profiles.time"] = data['time'][np.in1d(data['time'], data['time_te'])]
+        mask_dict = {
+                "electrons.density": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.density_thermal": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.temperature": np.in1d(data['time_te'], ods[f"core_profiles.time"])
+        }
         rho_tor_norm = dim_info.dim_of(0)
-        data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
-        data['grid.rho_tor_norm'][:] = rho_tor_norm
-        ods[f"core_profiles.time"] = data['time']
-        for entry in data:
-            if isinstance(data[entry], Exception):
-                continue
-            for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+        for i_time, time in enumerate(ods[f"core_profiles.time"]):
+            ods[f"core_profiles.profiles_1d.{i_time}.grid.rho_tor_norm"] = rho_tor_norm
+            for entry in query:
+                if isinstance(data[entry], Exception):
+                    continue
+                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
