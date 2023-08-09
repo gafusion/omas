@@ -37,6 +37,9 @@
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.boundary.x_point.:": {
+   "VALUE":2
+ },
  "equilibrium.time_slice.:.boundary.x_point.0.r": {
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
@@ -66,6 +69,9 @@
   "NANFILTER": true,
   "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
   "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.:": {
+   "VALUE":2
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
   "NANFILTER": true,
@@ -99,6 +105,9 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)/100.",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.boundary_separatrix.gap.:": {
+   "VALUE":4
+ },
  "equilibrium.time_slice.:.boundary_separatrix.gap.0.name": {
   "VALUE": "inboard"
  },
@@ -126,6 +135,9 @@
  "equilibrium.time_slice.:.boundary_separatrix.gap.3.value": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT)/100.",
   "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.:": {
+   "VALUE":4
  },
  "equilibrium.time_slice.:.boundary_separatrix.strike_point.0.r": {
   "NANFILTER": true,
@@ -207,6 +219,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIPASMA)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.EXPMPI,0)",
+   "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.bpol_probe.:.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.EXPMPI)",
   "treename": "{EFIT_tree}"
@@ -247,6 +263,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIDFLUX)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.flux_loop.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.SILOPT,0)",
+   "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.flux_loop.:.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SILOPT)",
   "treename": "{EFIT_tree}"
@@ -266,6 +286,10 @@
  "equilibrium.time_slice.:.constraints.flux_loop.:.chi_squared": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAISIL)",
   "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.TANGAM,0)",
+   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured": {
   "TDI": "ATAN(data(\\{EFIT_tree}::TOP.MEASUREMENTS.TANGAM))",
@@ -287,6 +311,10 @@
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CHIGAM)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.constraints.pf_current.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT,0) + size(\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT,0)",
+   "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
   "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT')",
   "treename": "{EFIT_tree}"
@@ -306,6 +334,10 @@
  "equilibrium.time_slice.:.constraints.pf_current.:.chi_squared": {
   "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.CHIECC','\\{EFIT_tree}::TOP.MEASUREMENTS.CHIFCC')",
   "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR,0)",
+   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR)",
@@ -330,6 +362,10 @@
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
   "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
   "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:": {
+   "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ,0)",
+   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
   "eval2TDI": "py2tdi(efit_psi_to_real_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
