@@ -525,9 +525,12 @@ def use_subplot(fig, *args, **kw):
     with key (*args*, *kwargs*) then it will simply make that subplot
     current and return it.
     """
-    from matplotlib import pyplot
-    pyplot.figure(num=fig.number)
-    return pyplot.subplot(*args, **kw)
+    if hasattr(fig, "number"):
+        from matplotlib import pyplot
+        pyplot.figure(num=fig.number)
+        return pyplot.subplot(*args, **kw)
+    else:
+        return fig.add_subplot(*args, **kw)
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
