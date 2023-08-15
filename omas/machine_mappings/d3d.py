@@ -800,6 +800,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         ch = ods['ece']['channel'][ich]
         if _measurements:
             ch['t_e']['data'] = ece_data[f'T{ich + 1}'] * 1.0e3
+            ch['t_e']['data_error_upper'] = np.sqrt(np.abs(ch['t_e']['data'])) + np.abs(0.07 * ch['t_e']['data'])
         else:
             ch['name'] = 'ECE' + str(ich + 1)
             ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
