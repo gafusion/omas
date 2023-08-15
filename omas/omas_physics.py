@@ -3,7 +3,7 @@
 -------
 '''
 
-from scipy.interpolate.fitpack2 import RectBivariateSpline
+from scipy.interpolate import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
