@@ -315,20 +315,8 @@
    "TDI": "size(\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT,0) + size(\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT,0)",
    "treename": "{EFIT_tree}"
  },
- "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
-  "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.ECCURT','\\{EFIT_tree}::TOP.MEASUREMENTS.FCCURT')",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.constraints.pf_current.:.measured_error_upper": {
-  "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIGECC','\\{EFIT_tree}::TOP.MEASUREMENTS.SIGFCC')",
-  "treename": "{EFIT_tree}"
- },
  "equilibrium.time_slice.:.constraints.pf_current.:.weight": {
   "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.FWTEC','\\{EFIT_tree}::TOP.MEASUREMENTS.FWTFC')",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.constraints.pf_current.:.reconstructed": {
-  "eval2TDI": "py2tdi(stack_outer_2,'\\{EFIT_tree}::TOP.MEASUREMENTS.CECURR','\\{EFIT_tree}::TOP.MEASUREMENTS.CCBRSP')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.chi_squared": {
