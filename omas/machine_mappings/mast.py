@@ -124,6 +124,7 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
         except pyuda.UDAException:
+            print(channel,sig_name)
             tmp = None
             ods[f'pf_active.coil.{channel}.current.data'] = np.array([])
             ods[f'pf_active.coil.{channel}.current.data_error_upper'] = np.array([])

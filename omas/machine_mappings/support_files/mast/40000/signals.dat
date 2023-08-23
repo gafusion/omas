@@ -45,8 +45,8 @@ P1        OH  ioh       1  e  y  0.020  20.0     40.0     y  1.0e3     1.0 1.0  
 ;
 ; Shaping coils
 ;
-PCL       SC  icoil     1  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   xxxxxxxxxxxxxx         - ; kA -> A
-PXL       SC  icoil     2  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   xxxxxxxxxxxxxx         - ; 
+PCL       SC  icoil     1  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/PXU         - ; kA -> A
+PXL       SC  icoil     2  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/PXL         - ; 
 P4U       SC  icoil     3  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P4U         - ; 
 P4L       SC  icoil     4  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P4L         - ; 
 P5U       SC  icoil     5  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P5U         - ; 
@@ -69,26 +69,26 @@ D7U       SC  icoil    21  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0  
 D7L       SC  icoil    22  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D7L         - ; 
 ;
 ; (including case currents)
-D1CU      SC  icoil    23  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1U       - ; kA -> A
-D2CU      SC  icoil    24  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2U       - ;
-D3CU      SC  icoil    25  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3U       - ;
-DPCU      SC  icoil    26  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPU       - ;
-D5CU      SC  icoil    27  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D5U       - ;
-D6CU      SC  icoil    28  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6U       - ;
-D7CU      SC  icoil    29  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7U       - ;
-P4CU      SC  icoil    30  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4U       - ;
-P5CU      SC  icoil    31  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5U       - ;
-P6CU      SC  icoil    32  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6U       - ;
-P6CL      SC  icoil    33  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6L       - ;
-P5CL      SC  icoil    34  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5L       - ;
-P4CL      SC  icoil    35  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4L       - ;
-D7CL      SC  icoil    36  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7L       - ;
-D6CL      SC  icoil    37  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6L       - ;
+P4CU      SC  icoil    23  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4U       - ;
+P4CL      SC  icoil    24  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4L       - ;
+P5CU      SC  icoil    25  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5U       - ;
+P5CL      SC  icoil    26  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5L       - ;
+P6CU      SC  icoil    27  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6U       - ;
+P6CL      SC  icoil    28  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6L       - ;
+D1CU      SC  icoil    29  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1U       - ; kA -> A
+D1CL      SC  icoil    30  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1L       - ;
+D2CU      SC  icoil    31  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2U       - ;
+D2CL      SC  icoil    32  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2L       - ;
+D3CU      SC  icoil    33  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3U       - ;
+D3CL      SC  icoil    34  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3L       - ;
+DPCU      SC  icoil    35  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPU       - ;
+DPCL      SC  icoil    36  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPL       - ;
+D5CU      SC  icoil    37  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D5U       - ;
 D5CL      SC  icoil    38  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D5L       - ;
-DPCL      SC  icoil    39  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPL       - ;
-D3CL      SC  icoil    40  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3L       - ;
-D2CL      SC  icoil    41  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2L       - ;
-D1CL      SC  icoil    42  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1L       - ;
+D6CU      SC  icoil    39  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6U       - ;
+D6CL      SC  icoil    40  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6L       - ;
+D7CU      SC  icoil    41  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7U       - ;
+D7CL      SC  icoil    42  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7L       - ;
 ;
 ; Plasma current
 IP1       PR  ip        1  -  y  0.010  10.0e3   50.0e3   y  1.0e3      1.0 1.0  1  2.1e-3   AMC/PLASMA_CURRENT     - ; kA -> A
@@ -586,28 +586,28 @@ B_O2_P29  MC  bmc     354  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0 
 ;
 ; Vessel segments
 ;
-VS1U      VS  icoil    43  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB05    - ;
-VS2U      VS  icoil    44  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB01    - ; For computed vessel segments,
-VS3U      VS  icoil    45  -  c  0.200  0.5e3    0.50e+3  y  -3.600e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ; the conversion factor is an
-VS4U      VS  icoil    46  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3U03   - ; "effective resistance" which
-VS5U      VS  icoil    47  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; converts Voltage (V) to
-VS6U      VS  icoil    48  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; current (A)
-VS7U      VS  icoil    49  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5U01   - ; NOTE: absolute error is in (A)
-VS7L      VS  icoil    50  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5L01   - ;
+D1CL      VS  icoil    43  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
+D1CU      VS  icoil    44  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ;
+GBL       VS  icoil    45  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBL03    - ;
+GBU       VS  icoil    46  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBU03    - ;
+PSPL      VS  icoil    47  -  c  0.200  0.5e3    0.50e+3  y  -9.000e-4  1.0 1.0  1  2.1e-3   VFNLB05   - ;
+PSPU      VS  icoil    48  -  c  0.200  0.5e3    0.50e+3  y  -9.700e-4  1.0 1.0  1  2.1e-3   VFNUB05   - ;
+VS1L      VS  icoil    49  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB08    - ;
+VS2L      VS  icoil    50  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB12    - ;
+VS3L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -3.800e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
+VS4L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3L03   - ;
+VS5L      VS  icoil    53  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
+VS6L      VS  icoil    54  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
+VS1U      VS  icoil    55  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB05    - ;
+VS2U      VS  icoil    56  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB01    - ; For computed vessel segments,
+VS3U      VS  icoil    57  -  c  0.200  0.5e3    0.50e+3  y  -3.600e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ; the conversion factor is an
+VS4U      VS  icoil    58  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3U03   - ; "effective resistance" which
+VS5U      VS  icoil    59  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; converts Voltage (V) to
+VS6U      VS  icoil    60  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; current (A)
+VS7U      VS  icoil    61  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5U01   - ; NOTE: absolute error is in (A)
+VS7L      VS  icoil    62  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5L01   - ;
 ;;;VS6L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; Not available, try using XL_04
 ;;;VS5L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; 
-VS6L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
-VS5L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
-VS4L      VS  icoil    53  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3L03   - ;
-VS3L      VS  icoil    54  -  c  0.200  0.5e3    0.50e+3  y  -3.800e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
-VS2L      VS  icoil    55  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB12    - ;
-VS1L      VS  icoil    56  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB08    - ;
-D1CU      VS  icoil    57  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ;
-PSPU      VS  icoil    58  -  c  0.200  0.5e3    0.50e+3  y  -9.700e-4  1.0 1.0  1  2.1e-3   VFNUB05   - ;
-GBU       VS  icoil    59  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBU03    - ;
-GBL       VS  icoil    60  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBL03    - ;
-PSPL      VS  icoil    61  -  c  0.200  0.5e3    0.50e+3  y  -9.000e-4  1.0 1.0  1  2.1e-3   VFNLB05   - ;
-D1CL      VS  icoil    62  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
 ;
 ; Run level
 ;
