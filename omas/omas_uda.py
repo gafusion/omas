@@ -145,7 +145,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         keys = range(n)
 
     # kid must be part of this list
-    if len(requested_paths):
+    if len(list(requested_paths)):
         request_check = [p[0] for p in requested_paths]
 
     # traverse
@@ -179,7 +179,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
 
         # generate requested_paths one level deeper
         propagate_requested_paths = requested_paths
-        if len(requested_paths):
+        if len(list(requested_paths)):
             if kid in request_check or (isinstance(kid, int) and ':' in request_check):
                 propagate_requested_paths = [p[1:] for p in requested_paths if len(p) > 1 and (kid == p[0] or p[0] == ':')]
             else:
