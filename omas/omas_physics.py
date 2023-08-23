@@ -596,9 +596,16 @@ def equilibrium_form_constraints(
                     data = remove_integrator_drift(time, data, rm_integr_drift_after)
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
-                const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
-                if error is not None:
-                    const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                # Don't average for length=2 arrays or smaller
+                if len(data) >2:
+                    const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                else:
+                    const = smooth_by_convolution(data * turns, time, times)
+                    if error is not None:
+                         const_error = smooth_by_convolution(error * turns, time, times)
+
                 # assign
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
@@ -1217,7 +1224,8 @@ def summary_heating_power(ods, update=True):
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
     if 'core_sources.source.0' not in ods_n:
         return ods_n
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    q_init = numpy.zeros([len(ods['core_sources']['time']),
+                         len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm'])])
 
     q_dict = {
         'total_heating': copy.deepcopy(q_init),
@@ -1234,25 +1242,25 @@ def summary_heating_power(ods, update=True):
             source_1d = sources[source]['profiles_1d'][time_index]
             if sources[source]['identifier.index'] in index_dict:
                 if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
-                    q_dict['total_heating'] += source_1d['electrons']['energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['electrons']['energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:]  += source_1d['electrons']['energy']
                 if 'total_ion_energy' in source_1d:
-                    q_dict['total_heating'] += source_1d['total_ion_energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['total_ion_energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
-        power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
-        if numpy.sum(value) > 0:
+        power_dict[key] = numpy.trapz(q_dict[key], x=vol,axis=1)
+        if numpy.sum(power_dict[key]) > 0:
             if key == 'total_heating':
-                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
+                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(power_dict[key])
                 continue
             elif key == 'fusion':
-                ods_n['summary.fusion.power.value'] = numpy.array(value)
-                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(value)
+                ods_n['summary.fusion.power.value'] = numpy.array(power_dict[key])
+                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(power_dict[key])
                 continue
-            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
+            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(power_dict[key])
 
     ods_n['summary.time'] = ods['equilibrium.time']
     return ods_n
