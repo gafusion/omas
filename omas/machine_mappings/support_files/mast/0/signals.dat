@@ -1,0 +1,276 @@
+;=== Measured signals to be read - MAST diagnostics ===
+;===
+;=== CY 2019 signal
+;===
+;=== J.W. Berkery 07/30/19:      Originated from sigMAST_010919_VacTests_s1c.dat, with attempted fix to effective resistances
+;===                             for the vessel segments. Calibration factors for probes individually tailored to each
+;===                             particular vacuum calibration shot.
+;===
+;=== Computed "signals" based on measurements ===
+;===
+;=== NOTE: map index is one greater than the corresponding IDL array index
+;===       (i.e., ioh, map index 1 = ioh[0], etc.)
+;===
+;=== NOTE: See notes at end for stated errors, bit noise, etc. as well as definitions
+;=== 
+;Name   sigl  map    map  MDS Read      Error    Signal Use Conversion  Pri Fit  t  Smoothing   Designation
+;       type  var    indx tree sig? rel  abs  threshold err? factor         wgt idx win (s)     Data    Auxiliary
+;===========================================================================================================================================================
+P1        OH  ioh       1  e  y  0.020  20.0     40.0     y  0.5e3     1.0 1.0   1  2.1e-3   AMC_SOL~CURRENT        - ;(A) ; P1 feed is split in two for turns
+P2IU      SC  icoil     1  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2IU~FEED~CURRENT  -
+P2OU      SC  icoil     2  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2OU~FEED~CURRENT  -
+P3U       SC  icoil     3  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P3U~FEED~CURRENT   -
+P4U       SC  icoil     4  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P4U~FEED~CURRENT   -
+P5U       SC  icoil     5  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P5U~FEED~CURRENT   -
+P6U       SC  icoil     6  e  y  0.020  10.0     20.0     y  0.250e3   1.0 1.0   1  2.1e-3   AMC_P6U~CURRENT        - ; Units "ka*turns", so /#turns
+P6L       SC  icoil     7  e  y  0.020  10.0     20.0     y  0.250e3   1.0 1.0   1  2.1e-3   AMC_P6L~CURRENT        - ; Units "ka*turns", so /#turns
+P5L       SC  icoil     8  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P5L~FEED~CURRENT   -
+P4L       SC  icoil     9  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P4L~FEED~CURRENT   -
+P3L       SC  icoil    10  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P3L~FEED~CURRENT   -
+P2OL      SC  icoil    11  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2OL~FEED~CURRENT  -
+P2IL      SC  icoil    12  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2IL~FEED~CURRENT  -
+;
+P2CU      SC  icoil    13  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2U~CASE~CURRENT   -
+P3CU      SC  icoil    14  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P3U~CASE~CURRENT   -
+P4CU      SC  icoil    15  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P4U~CASE~CURRENT   -
+P5CU      SC  icoil    16  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P5U~CASE~CURRENT   -
+P5CL      SC  icoil    17  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P5L~CASE~CURRENT   -
+P4CL      SC  icoil    18  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P4L~CASE~CURRENT   -
+P3CL      SC  icoil    19  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P3L~CASE~CURRENT   -
+P2CL      SC  icoil    20  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC_P2L~CASE~CURRENT   -
+;
+;;P6CU      SC  icoil    21  e  y  0.010  10.0     20.0     y  1.0       1.0 1.0   1  2.1e-3   AMC_P6U~CASE~CURRENT - ; no P6 case signal - model as VV
+;;P6CL      SC  icoil    22  e  y  0.010  10.0     20.0     y  1.0       1.0 1.0   1  2.1e-3   AMC_P6L~CASE~CURRENT - ; no P6 case signal - model as VV
+;
+IP1       PR  ip        1  -  y  0.010  10.0e3   50.0e3   y  1.0e3     1.0 1.0   1  2.1e-3   AMC_PLASMA~CURRENT     - ; (A) 1.0%,10e3,50e3 error (initial)
+TF1       TF  none      1  -  y  0.050  30.0     50.0     y  4.800e-6  1.0 1.0  -1  2.1e-3   XDC1_TF_CURRENT        - ; (A -> m*T) (24 turn coil)
+;TF1       TF  none      1  -  y  0.050  30.0     50.0     y  4.800e-6  1.0 1.0  -1  2.1e-3   AMC_TF_CURRENT         - ;(A -> m*T) (24 turn coil) <== no signal?
+;FDIA      DL  dflux     1  e  n  0.04   0.004    0.004    y  1.0       1.0 1.0  -1  2.1e-3  \\FDIA                  -  ;(Wb) error was 2%, 2mWb
+;
+VFLCC03   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC03   -  ;(V) === loop voltage signals
+VFLCC04   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC04   -  ; 
+VFLCC01   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC01   -  ; 
+VFLP2U1   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P2U/1 -  ;
+VFLP2U4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P2U/4 -  ;
+VFLP3U4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P3U/4 -  ;
+VFLP5U4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P5U/4 -  ;
+VFLP6U1   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P6U/1 -  ;
+VFLP6L1   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P6L/1 -  ;
+VFLP5L4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P5L/4 -  ;
+VFLP3L4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P3L/4 -  ;
+VFLP2L1   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P2L/1 -  ;
+VFLP2L4   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LV/P2L/4 -  ;
+VFLCC07   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC07   -  ;
+VFLCC09   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC09   -  ;
+VFLCC10   VL  none      1  o  y  0.020  0.10     0.10     y  1.0       1.0 1.0  -1  2.1e-3  XMA_LVCC10   -  ;
+;
+CC01      FL  tfl       1  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC01          - ; (Wb)
+CC02      FL  tfl       2  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC02          - ; (Wb)
+CC03      FL  tfl       3  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC03          - ; (Wb)
+CC04      FL  tfl       4  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC04          - ; (Wb) bad
+CC05      FL  tfl       5  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC05          - ; (Wb)
+CC06      FL  tfl       6  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC06          - ; (Wb)
+CC07      FL  tfl       7  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC07          - ; (Wb)
+CC08      FL  tfl       8  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC08          - ; (Wb)
+CC09      FL  tfl       9  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC09          - ; (Wb)
+CC10      FL  tfl      10  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/CC10          - ; (Wb) 
+P2UFL1    FL  tfl      11  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2U/1         - ; (Wb)
+P2UFL2    FL  tfl      12  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2U/2         - ; (Wb)
+P2UFL3    FL  tfl      13  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2U/3         - ; (Wb)
+P2UFL4    FL  tfl      14  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2U/4         - ; (Wb)
+P3UFL1    FL  tfl      15  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3U/1         - ; (Wb)
+P3UFL2    FL  tfl      16  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3U/2         - ; (Wb)
+P3UFL3    FL  tfl      17  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3U/3         - ; (Wb)
+P3UFL4    FL  tfl      18  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3U/4         - ; (Wb)
+P4UFL1    FL  tfl      19  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4U/1         - ; (Wb)
+P4UFL2    FL  tfl      20  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4U/2         - ; (Wb)
+P4UFL3    FL  tfl      21  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4U/3         - ; (Wb)
+P4UFL4    FL  tfl      22  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4U/4         - ; (Wb)
+P5UFL1    FL  tfl      23  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5U/1         - ; (Wb)
+P5UFL2    FL  tfl      24  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5U/2         - ; (Wb)
+P5UFL3    FL  tfl      25  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5U/3         - ; (Wb)
+P5UFL4    FL  tfl      26  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5U/4         - ; (Wb)
+P6UFL1    FL  tfl      27  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P6U/1         - ; (Wb)
+P6UFL2    FL  tfl      28  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P6U/2         - ; (Wb)
+P2LFL1    FL  tfl      29  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2L/1         - ; (Wb)
+P2LFL2    FL  tfl      30  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2L/2         - ; (Wb)
+P2LFL3    FL  tfl      31  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2L/3         - ; (Wb)
+P2LFL4    FL  tfl      32  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P2L/4         - ; (Wb)
+P3LFL1    FL  tfl      33  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3L/1         - ; (Wb)
+P3LFL2    FL  tfl      34  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3L/2         - ; (Wb)
+P3LFL3    FL  tfl      35  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3L/3         - ; (Wb)
+P3LFL4    FL  tfl      36  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P3L/4         - ; (Wb)
+P4LFL1    FL  tfl      37  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4L/1         - ; (Wb)
+P4LFL2    FL  tfl      38  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4L/2         - ; (Wb)
+P4LFL3    FL  tfl      39  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4L/3         - ; (Wb)
+P4LFL4    FL  tfl      40  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P4L/4         - ; (Wb)
+P5LFL1    FL  tfl      41  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5L/1         - ; (Wb)
+P5LFL2    FL  tfl      42  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5L/2         - ; (Wb)
+P5LFL3    FL  tfl      43  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5L/3         - ; (Wb)
+P5LFL4    FL  tfl      44  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P5L/4         - ; (Wb)
+P6LFL1    FL  tfl      45  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P6L/1         - ; (Wb)
+P6LFL2    FL  tfl      46  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB_FL/P6L/2         - ; (Wb)
+CCBV01    MC  bmc       1  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV01           - ; (T)
+CCBV02    MC  bmc       2  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV02           - ; (T)
+CCBV03    MC  bmc       3  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV03           - ; (T) 
+CCBV04    MC  bmc       4  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV04           - ; (T)
+CCBV05    MC  bmc       5  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV05           - ; (T)
+CCBV06    MC  bmc       6  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV06           - ; (T)
+CCBV07    MC  bmc       7  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV07           - ; (T)
+CCBV08    MC  bmc       8  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV08           - ; (T)
+CCBV09    MC  bmc       9  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV09           - ; (T)
+CCBV10    MC  bmc      10  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV10           - ; (T)
+CCBV11    MC  bmc      11  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV11           - ; (T)
+CCBV12    MC  bmc      12  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV12           - ; (T) 
+CCBV13    MC  bmc      13  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV13           - ; (T)
+CCBV14    MC  bmc      14  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV14           - ; (T)
+CCBV15    MC  bmc      15  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV15           - ; (T) 
+CCBV16    MC  bmc      16  -  y  0.040  1.0e-3   1.0e-3   y  0.5        1.0 1.0  1  2.1e-3   AMB_CCBV16           - ; (T) <== x0.5 needed 
+CCBV17    MC  bmc      17  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV17           - ; (T) 
+CCBV18    MC  bmc      18  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV18           - ; (T)
+CCBV19    MC  bmc      19  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV19           - ; (T)
+CCBV20    MC  bmc      20  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV20           - ; (T)
+CCBV21    MC  bmc      21  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV21           - ; (T)
+CCBV22    MC  bmc      22  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV22           - ; (T)
+CCBV23    MC  bmc      23  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV23           - ; (T)
+CCBV24    MC  bmc      24  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV24           - ; (T)
+CCBV25    MC  bmc      25  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV25           - ; (T) 
+CCBV26    MC  bmc      26  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV26           - ; (T)
+CCBV27    MC  bmc      27  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV27           - ; (T)
+CCBV28    MC  bmc      28  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV28           - ; (T) 
+CCBV29    MC  bmc      29  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV29           - ; (T)
+CCBV30    MC  bmc      30  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV30           - ; (T)
+CCBV31    MC  bmc      31  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV31           - ; (T)
+CCBV32    MC  bmc      32  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV32           - ; (T)
+CCBV33    MC  bmc      33  -  y  0.040  1.0e-3   1.0e-3   y  0.5        1.0 1.0  1  2.1e-3   AMB_CCBV33           - ; (T) <== x0.5 needed
+CCBV34    MC  bmc      34  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV34           - ; (T)
+CCBV35    MC  bmc      35  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV35           - ; (T)
+CCBV36    MC  bmc      36  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV36           - ; (T)
+CCBV37    MC  bmc      37  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV37           - ; (T)
+CCBV38    MC  bmc      38  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV38           - ; (T)
+CCBV39    MC  bmc      39  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV39           - ; (T)
+CCBV40    MC  bmc      40  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_CCBV40           - ; (T)
+OBV01     MC  bmc      41  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV01            - ; (T) 
+OBV02     MC  bmc      42  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV02            - ; (T)
+OBV03     MC  bmc      43  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV03            - ; (T)
+OBV04     MC  bmc      44  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV04            - ; (T)
+OBV05     MC  bmc      45  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV05            - ; (T)
+OBV06     MC  bmc      46  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV06            - ; (T)
+OBV07     MC  bmc      47  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV07            - ; (T)
+OBV08     MC  bmc      48  -  y  0.040  1.0e-3   1.0e-3   y  0.5        1.0 1.0  1  2.1e-3   AMB_OBV08            - ; (T) <== x0.5 needed
+OBV09     MC  bmc      49  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV09            - ; (T)
+OBV10     MC  bmc      50  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV10            - ; (T)
+OBV11     MC  bmc      51  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV11            - ; (T)
+OBV12     MC  bmc      52  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV12            - ; (T)
+OBV13     MC  bmc      53  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV13            - ; (T)
+OBV14     MC  bmc      54  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV14            - ; (T)
+OBV15     MC  bmc      55  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV15            - ; (T)
+OBV16     MC  bmc      56  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV16            - ; (T)
+OBV17     MC  bmc      57  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV17            - ; (T)
+OBV18     MC  bmc      58  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV18            - ; (T)
+OBV19     MC  bmc      59  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBV19            - ; (T)
+OBR01     MC  bmc      60  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR01            - ; (T)
+OBR02     MC  bmc      61  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR02            - ; (T)
+OBR03     MC  bmc      62  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR03            - ; (T)
+OBR04     MC  bmc      63  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR04            - ; (T)
+OBR05     MC  bmc      64  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR05            - ; (T)
+OBR06     MC  bmc      65  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR06            - ; (T)
+OBR07     MC  bmc      66  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR07            - ; (T)
+OBR08     MC  bmc      67  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR08            - ; (T)
+OBR09     MC  bmc      68  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR09            - ; (T)
+OBR10     MC  bmc      69  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR10            - ; (T) bad
+OBR11     MC  bmc      70  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR11            - ; (T)
+OBR12     MC  bmc      71  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR12            - ; (T)
+OBR13     MC  bmc      72  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR13            - ; (T)
+OBR14     MC  bmc      73  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR14            - ; (T)
+OBR15     MC  bmc      74  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR15            - ; (T)
+OBR16     MC  bmc      75  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR16            - ; (T)
+OBR17     MC  bmc      76  -  y  0.040  1.0e-3   1.0e-3   y  2.0        1.0 1.0  1  2.1e-3   AMB_OBR17            - ; (T) <== x2 needed
+OBR18     MC  bmc      77  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR18            - ; (T) 
+OBR19     MC  bmc      78  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB_OBR19            - ; (T)
+;
+VS1U      VS  icoil    21  -  c  0.200  0.5e3    0.50e+3  y  1.1718e-4  1.0 1.0  1  2.1e-3  VFLCC03   - ;For computed vessel segments,
+VS2U      VS  icoil    22  -  c  0.200  0.5e3    0.50e+3  y  -2.666e-4  1.0 1.0  1  2.1e-3  VFLCC01   - ;For computed vessel segments,
+VS3U      VS  icoil    23  -  c  0.200  0.5e3    0.50e+3  y  -5.000e-4  1.0 1.0  1  2.1e-3  VFLCC01   - ; the conversion factor is an
+VS4U      VS  icoil    24  -  c  0.200  0.5e3    0.50e+3  y  2.5397e-5  1.0 1.0  1  2.1e-3  VFLP2U1   - ; "effective resistance" which
+VS5U      VS  icoil    25  -  c  0.200  0.5e3    0.50e+3  y  1.5000e-5  1.0 1.0  1  2.1e-3  VFLP3U4   - ; converts Voltage (V) to
+VS6U      VS  icoil    26  -  c  0.200  0.5e3    0.50e+3  y  2.5000e-5  1.0 1.0  1  2.1e-3  VFLP3U4  - ; current (A)
+VS7U      VS  icoil    27  -  c  0.200  0.5e3    0.50e+3  y  1.8750e-5  1.0 1.0  1  2.1e-3  VFLP5U4  - ; NOTE: absolute error is in (A)
+VS7L      VS  icoil    28  -  c  0.200  0.5e3    0.50e+3  y  1.5000e-5  1.0 1.0  1  2.1e-3  VFLP5L4  - ;
+VS6L      VS  icoil    29  -  c  0.200  0.5e3    0.50e+3  y  2.0000e-5  1.0 1.0  1  2.1e-3  VFLP3L4  - ;
+VS5L      VS  icoil    30  -  c  0.200  0.5e3    0.50e+3  y  1.1538e-5  1.0 1.0  1  2.1e-3  VFLP3L4  - ;
+VS4L      VS  icoil    31  -  c  0.200  0.5e3    0.50e+3  y  2.9304e-5  1.0 1.0  1  2.1e-3  VFLP2L1  - ;
+VS3L      VS  icoil    32  -  c  0.200  0.5e3    0.50e+3  y  5.0000e-4  1.0 1.0  1  2.1e-3  VFLCC09  - ;
+VS2L      VS  icoil    33  -  c  0.200  0.5e3    0.50e+3  y  2.6666e-4  1.0 1.0  1  2.1e-3  VFLCC09  - ;
+VS1L      VS  icoil    34  -  c  0.200  0.5e3    0.50e+3  y  1.1718e-4  1.0 1.0  1  2.1e-3  VFLCC07  - ;
+DPU1      VS  icoil    35  -  c  0.200  0.5e3    0.50e+3  y  2.4762e-5  1.0 1.0  1  2.1e-3  VFLP2U1  - ;
+DPL1      VS  icoil    36  -  c  0.200  0.5e3    0.50e+3  y  2.4762e-5  1.0 1.0  1  2.1e-3  VFLP2L1  - ;
+P6CU      VS  icoil    37  -  n  0.200  0.5e3    0.50e+3  y  3.0000e-4  1.0 1.0  1  2.1e-3  VFLP6U1  - ; no P6 case signal, but included in P6U
+P6CL      VS  icoil    38  -  n  0.200  0.5e3    0.50e+3  y  3.0000e-4  1.0 1.0  1  2.1e-3  VFLP6L1  - ; no P6 case signal, but included in P6U
+;
+P1LEVEL   RL  none      1  -  c  0.000  0.00     0.00     n  1.00       1.0 1.0  1     0     NONE                 - ; Process 1 run level at each time
+;=====================================================================================================================================================================
+; Stated errors
+;--------------
+; Coil currents:
+;               
+; Flux loops:   
+;   CS flux loops: Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;   non-CS loops:  Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+; Mirnov coils:
+;  CS normal field Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+;Diamagnetic loop: Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+; NOTE: the values actually used above are taken from fields-only test shots. The
+;       actual error specs in practice can be larger than the stated general values.
+;
+;=========================================================================================
+; Definitions
+;------------
+;Name:        User defined signal name
+;sigl type:   Type of signal - used to determine importance of signal for fit and
+;                              the mathematical definitions of computed signals
+;map var:     compare this signal to the indicated map var when comparing measured and
+;             computed values
+;map indx:    Used to index multiple map vars and two-dimensional signals
+;             - negative value: Interpolate FE data to MD position in time plots
+; *** pending - negative value: Swap X and Y axes of MD data in profile plots          
+;MDS tree:    Designation for MDS+ tree name from which to read signal. Using an       
+;             identifier that is not in the DBsignaldesig.pro file (such as '-')       
+;             will result in the code using the default tree name in maincontrol.dat   
+;Read sig?:   y: read signal, n: skip signal, c: compute signal
+;             m: read multiple dimensional signal, p: process previous multi-dim signal
+;Error rel:   Relative error
+;Error abs:   absolute error
+;threshold:   When signal value is below threshold value, error = threshold value
+;Use err? :   y: compute error from rel,abs,thresh
+;             r: read error from database
+;Conv. fact:  Conversion factor for signal when read; when computed, a scalar used
+;             in computation
+;Pri:         signal "priority": certain signals are essential for reconstructions.
+;             Certain groups have "thresholds" below which reconstructions can not be
+;             computed. The sum of Pri must be greater than the threshold value for
+;             the reconstruction to occur.
+;Fit wgt:     signal fit weight (presently not used for weighting: If a signal is
+;             requested, Fit wgt is set to 1.0 internally)
+; *** pending - negative value: Normalize the mapped FE value in comparison plots
+;t idx:       index of "time" abscissa. This is equal to 1 by definition in a scalar
+;             signal vs. time. In multidimensional signals, this gives the index of the
+;             array corresponding to the "time" coordinate.
+;             - positive value: offset subtraction is not performed
+;             - negative value: offset subtraction performed on signal using t[0]
+;Smooth win:  Smoothing window for the signal in seconds
+;Designation: For read signals, these are the database designations of the signals.
+;             For computed signals, these are used to define the signal name used
+;             in the computation
+;=========================================================================================
