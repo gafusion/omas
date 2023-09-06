@@ -8,7 +8,42 @@
  "__options__": {
   "EFIT_tree": "EFIT01",
   "MSE_Er_correction": true,
-  "MSE_revision": "ANALYSIS"
+  "MSE_revision": "ANALYSIS",
+  "edition": "CT1"
+ },
+ "charge_exchange.channel.:": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.ion.:": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.ion.:.t_i.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.ion.:.velocity_tor.data": {
+  "COCOSIO": 11,
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.name": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.position.r.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.position.z.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.channel.:.zeff.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.ids_properties.homogeneous_time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
+ },
+ "charge_exchange.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
  },
  "equilibrium.time": {
   "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
