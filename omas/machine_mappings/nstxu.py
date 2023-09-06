@@ -212,6 +212,7 @@ def magnetics_floops_data(ods, pulse):
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
 
+
 @machine_mapping_function(__regression_arguments__, pulse=204202)
 def magnetics_probes_data(ods, pulse):
     r"""
@@ -504,7 +505,7 @@ def thomson_scattering_hardware(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=140001)
 def thomson_scattering_data(ods, pulse):
     """
-    Loads DIII-D Thomson measurement data
+    Loads NSTX(-U) Thomson measurement data
 
     :param pulse: int
     """
@@ -531,6 +532,53 @@ def thomson_scattering_data(ods, pulse):
         ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i, :] * signals_norm['FIT_TE_ERR']
         ch['t_e.data'] = res['FIT_TE'][i, :] * signals_norm['FIT_TE']
 
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def charge_exchange_hardware(ods, pulse):
+    """
+    Gathers NSTX(-U) charge exchange measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(charge_exchange_data)(ods, pulse)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def charge_exchange_data(ods, pulse, edition = 'CT1'):
+    """
+    Loads DIII-D charge exchange measurement data
+
+    :param pulse: int
+    """
+
+    tree = 'ACTIVESPEC'
+    signals = ['ZEFF', 'VT', 'TI', 'RADIUS', 'TIME', 'DVT','DTI']
+    signals_norm = {'ZEFF':1.0, 'VT':1e3, 'TI':1e3, 'RADIUS':1e-2, 'TIME':1.0, 'DVT':1e3, 'DTI':1e3}
+
+    data = {}
+    TDIs = {}
+    for sig in signals:
+        TDI = f'\\{tree}::TOP.CHERS.ANALYSIS.{edition}:{sig}'
+        TDIs[sig] = '\\' + TDI.strip('\\')
+
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+
+    ods['charge_exchange.ids_properties.homogeneous_time'] = 1
+    ods['charge_exchange.time'] = res['TIME'] * signals_norm['TIME']
+    ntimes = len(ods['charge_exchange.time'])
+    for i, R in enumerate(res['RADIUS']):
+        ch = ods['charge_exchange']['channel'][i]
+
+        ch['name'] = f'TOP.CHERS.ANALYSIS.{edition}' + str(i)
+        ch['position.r.data'] = R * signals_norm['RADIUS'] * np.ones(ntimes)
+        ch['position.z.data'] = np.zeros(ntimes)
+
+        ch['ion[0].t_i.data'] = res['TI'][:,i] * signals_norm['TI']
+        ch['ion[0].t_i.data_error_upper']  = res['DTI'][:,i] * signals_norm['DTI']
+        ch['ion[0].velocity_tor.data'] = res['VT'][:,i] * signals_norm['VT']
+        ch['ion[0].velocity_tor.data'] = res['DVT'][:,i] * signals_norm['DVT']
+
+        ch['zeff.data'] = res['ZEFF'][:,i] * signals_norm['ZEFF']
 
 # =====================
 if __name__ == '__main__':
