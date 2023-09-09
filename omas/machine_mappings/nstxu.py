@@ -183,22 +183,21 @@ def magnetics_floops_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='magnetics.flux_loop',
-            identifier='magnetics.flux_loop.{channel}.identifier',
-            time='magnetics.flux_loop.{channel}.flux.time',
-            data='magnetics.flux_loop.{channel}.flux.data',
-            validity='magnetics.flux_loop.{channel}.flux.validity',
-            mds_server='nstxu',
-            mds_tree='OPERATIONS',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    fetch_assign(
+        ods,
+        ods1,
+        pulse,
+        channels='magnetics.flux_loop',
+        identifier='magnetics.flux_loop.{channel}.identifier',
+        time='magnetics.flux_loop.{channel}.flux.time',
+        data='magnetics.flux_loop.{channel}.flux.data',
+        validity='magnetics.flux_loop.{channel}.flux.validity',
+        mds_server='nstxu',
+        mds_tree='OPERATIONS',
+        tdi_expression='\\{signal}',
+        time_norm=1.0,
+        data_norm=1.0,
+    )
 
     # handle uncertainties
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
@@ -226,22 +225,21 @@ def magnetics_probes_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='magnetics.b_field_pol_probe',
-            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
-            time='magnetics.b_field_pol_probe.{channel}.field.time',
-            data='magnetics.b_field_pol_probe.{channel}.field.data',
-            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
-            mds_server='nstxu',
-            mds_tree='OPERATIONS',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    fetch_assign(
+        ods,
+        ods1,
+        pulse,
+        channels='magnetics.b_field_pol_probe',
+        identifier='magnetics.b_field_pol_probe.{channel}.identifier',
+        time='magnetics.b_field_pol_probe.{channel}.field.time',
+        data='magnetics.b_field_pol_probe.{channel}.field.data',
+        validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+        mds_server='nstxu',
+        mds_tree='OPERATIONS',
+        tdi_expression='\\{signal}',
+        time_norm=1.0,
+        data_norm=1.0,
+    )
 
     # handle uncertainties
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
