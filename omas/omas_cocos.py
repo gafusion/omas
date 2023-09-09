@@ -83,8 +83,8 @@ _cocos_signals['camera_x_rays.camera.pixel_position.phi']='?'                   
 _cocos_signals['camera_x_rays.filter_window.centre.phi']='?'                               #[ADD?]# 2.000000 # phi  [rad]
 
 # CHARGE_EXCHANGE
-_cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='POL'                                 #[ADD?]# 2.666667 # velocity  _pol  [m.s^-1]
-_cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='TOR'                                 #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
+_cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='POL'                                      # 2.666667 # velocity  _pol  [m.s^-1]
+_cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='TOR'                                      # 2.666667 # velocity  _tor  [m.s^-1]
 _cocos_signals['charge_exchange.channel.:.momentum_tor.data']='?'                                       #[ADD?]# 2.500000 # momentum  _tor  [kg.m^-1.s^-1]
 _cocos_signals['charge_exchange.aperture.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]
 _cocos_signals['charge_exchange.channel.:.position.phi.data']='TOR'                                            # 1.800000 # phi  [rad]
