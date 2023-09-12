@@ -542,7 +542,7 @@ def charge_exchange_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=140001)
-def charge_exchange_data(ods, pulse, edition = 'CT1'):
+def charge_exchange_data(ods, pulse, edition='CT1'):
     """
     Loads DIII-D charge exchange measurement data
 
@@ -550,8 +550,8 @@ def charge_exchange_data(ods, pulse, edition = 'CT1'):
     """
 
     tree = 'ACTIVESPEC'
-    signals = ['ZEFF', 'VT', 'TI', 'RADIUS', 'TIME', 'DVT','DTI']
-    signals_norm = {'ZEFF':1.0, 'VT':1e3, 'TI':1e3, 'RADIUS':1e-2, 'TIME':1.0, 'DVT':1e3, 'DTI':1e3}
+    signals = ['ZEFF', 'VT', 'TI', 'RADIUS', 'TIME', 'DVT', 'DTI']
+    signals_norm = {'ZEFF': 1.0, 'VT': 1e3, 'TI': 1e3, 'RADIUS': 1e-2, 'TIME': 1.0, 'DVT': 1e3, 'DTI': 1e3}
 
     data = {}
     TDIs = {}
@@ -562,21 +562,27 @@ def charge_exchange_data(ods, pulse, edition = 'CT1'):
     res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
 
     ods['charge_exchange.ids_properties.homogeneous_time'] = 1
-    ods['charge_exchange.time'] = res['TIME'] * signals_norm['TIME']
+    ods['charge_exchange.time'] = time = res['TIME'] * signals_norm['TIME']
     ntimes = len(ods['charge_exchange.time'])
     for i, R in enumerate(res['RADIUS']):
         ch = ods['charge_exchange']['channel'][i]
 
         ch['name'] = f'TOP.CHERS.ANALYSIS.{edition}' + str(i)
+        ch['position.r.time'] = time
+        ch['position.z.time'] = time
+        ch['ion[0].t_i.time'] = time
+        ch['ion[0].velocity_tor.time'] = time
+        ch['zeff.time'] = time
+
         ch['position.r.data'] = R * signals_norm['RADIUS'] * np.ones(ntimes)
         ch['position.z.data'] = np.zeros(ntimes)
 
-        ch['ion[0].t_i.data'] = res['TI'][:,i] * signals_norm['TI']
-        ch['ion[0].t_i.data_error_upper']  = res['DTI'][:,i] * signals_norm['DTI']
-        ch['ion[0].velocity_tor.data'] = res['VT'][:,i] * signals_norm['VT']
-        ch['ion[0].velocity_tor.data'] = res['DVT'][:,i] * signals_norm['DVT']
+        ch['ion[0].t_i.data'] = res['TI'][:, i] * signals_norm['TI']
+        ch['ion[0].t_i.data_error_upper'] = res['DTI'][:, i] * signals_norm['DTI']
+        ch['ion[0].velocity_tor.data'] = res['VT'][:, i] * signals_norm['VT']
+        ch['ion[0].velocity_tor.data'] = res['DVT'][:, i] * signals_norm['DVT']
 
-        ch['zeff.data'] = res['ZEFF'][:,i] * signals_norm['ZEFF']
+        ch['zeff.data'] = res['ZEFF'][:, i] * signals_norm['ZEFF']
 
 # =====================
 if __name__ == '__main__':
