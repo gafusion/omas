@@ -375,17 +375,17 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     mapping between IMAS geometric_coefficients and EFIT AAxGAM
     coeffs0: AA1
     coeffs1: AA8
-    coeffs2: AA2
+    coeffs2: 0
     coeffs3: AA5
     coeffs4: AA4
     coeffs5: AA3
-    coeffs6: 0
+    coeffs6: AA2
     coeffs7: AA7
     coeffs8: AA6
 
     mapping between EFIT AAxGAM and IMAS geometric_coefficients
     AA1: coeffs0
-    AA2: coeffs2
+    AA2: coeffs6
     AA3: coeffs5
     AA4: coeffs4
     AA5: coeffs3
@@ -482,7 +482,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
-        IMAS2GAM = [1, 8, 2, 5, 4, 3, 9, 7, 6]
+        IMAS2GAM = [1, 8, 6, 5, 4, 3, 9, 7, 2]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
