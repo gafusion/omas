@@ -261,7 +261,7 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
         sig = signals[item][0]['mds_name'].replace('~',' ')
         scale = signals[item][0]['scale']
         if item =='TF':
-            scale *=1e3 / 0.8 # ods['tf.r0']
+            scale *=1e3  # ods['tf.r0']
         try:
             tmp = client.get(sig,pulse)
 
@@ -308,6 +308,23 @@ def thomson_scattering_data(ods, pulse):
 
     return
 
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def mse_hardware(ods, pulse, server=None, port=None):
+
+    """
+    Gathers MAST(-U) MSE hardware
+
+    :param pulse: int
+
+    """
+    client = get_pyuda_client(server=server, port=port)
+    a_coefficients = client.get('/ams/geometry/a_coefficients', pulse).data
+    nchannels = len(a_coefficients[0,:]) 
+    for ch in range(nchannels):
+        ods[f'mse.channel.{ch}.active_spatial_resolution[0].geometric_coefficients'] = np.zeros(9)
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'][0:3] = a_coefficients[0:3,ch]
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'][4:7] = a_coefficients[3:6,ch]
+  
 
 # =====================
 if __name__ == '__main__':
