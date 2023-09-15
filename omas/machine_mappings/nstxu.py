@@ -473,8 +473,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
         ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch] * norm
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch] * norm
-        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = -1*validity_timed[:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = -1*int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
 
         # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
