@@ -482,7 +482,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
-        IMAS2GAM = [1, 8, 6, 5, 4, 3, 9, 7, 2]
+        IMAS2GAM = [1, 8, 6, 5, 4, 3, 2, 9, 7]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
