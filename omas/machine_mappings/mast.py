@@ -319,6 +319,15 @@ def thomson_scattering_data(ods, pulse):
 
     return
 
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def mse_hardware(ods, pulse, server=None, port=None):
+    """
+    Gathers MAST(-U) MSE measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(mse_data)(ods, pulse)
 
 @machine_mapping_function(__regression_arguments__, pulse=44653)
 def mse_data(ods, pulse, server=None, port=None):
