@@ -341,7 +341,7 @@ def mse_data(ods, pulse, server=None, port=None):
     
     client = get_pyuda_client(server=server, port=port)
   
-    if pulse > 43000:
+    if pulse > 40000:
         measurements = [('ams/gamma/polarisation_angle', 1.0, 'Gamma', True, 'degrees')]
         trace_MSE_gamma = 'ams/gamma/polarisation_angle'
         trace_MSE_noise = 'ams/gamma/error_polarisation_angle'
@@ -353,17 +353,15 @@ def mse_data(ods, pulse, server=None, port=None):
         trace_MSE_noise = 'ams_gammanoise'
         trace_MSE_rad = 'ams_rpos'
         trace_MSE_md = 'ams_md'
+        trace_a_coefficients = 'ams_acoeff'
 
-
-    r = client.get(trace_MSE_rad, pulse).data
+    r = np.squeeze(client.get(trace_MSE_rad, pulse).data)
     z = 0*r
     sig = client.get(trace_MSE_gamma, pulse).data
     time = client.get(trace_MSE_gamma, pulse).dims[0].data
 
     err = client.get(trace_MSE_noise, pulse).data
-    
-    a_coefficients = client.get(trace_a_coefficients, pulse).data
-
+    a_coefficients = np.squeeze(client.get(trace_a_coefficients, pulse).data)
 
     for ch in range(len(r)):
         valid = err[:, ch] > 0  # uncertainty greater than zero
