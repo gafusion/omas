@@ -107,28 +107,39 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
                    for i in sig_name.split('/')[:-1]:
                        tmp +=i+'/'
                    sig_name=tmp[:-1]
-            
+             
             sig_scale = sig['scale']
             if sig_scale<1:
                sig_scale = 1./sig_scale
+            printd(sig_name)
             tmp = client.get(sig_name, pulse)
             printd(f'Smooth PF coil {channel} data', topic='machine')
             data = tmp.data * sig_scale
             ods[f'pf_active.coil.{channel}.current.time'] = time = tmp.time.data
-            ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
+            if not len(time):
+               ods[f'pf_active.coil.{channel}.current.time'] = [0.0, 1e10]
+               ods[f'pf_active.coil.{channel}.current.data'] = [np.nan,np.nan]
+               ods[f'pf_active.coil.{channel}.current.data_error_upper'] = [np.nan,np.nan]
+            else:
+               
+                ods[f'pf_active.coil.{channel}.current.data'] = firFilter(time, data, [0, 300])
 
-            rel_error = data * sig['rel_error']
-            abs_error = sig['abs_error']
-            error = np.sqrt(rel_error**2 + abs_error**2)
-            error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
-            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
+                rel_error = data * sig['rel_error']
+                abs_error = sig['abs_error']
+                error = np.sqrt(rel_error**2 + abs_error**2)
+                error[np.abs(data) < sig['sig_thresh']] = sig['sig_thresh']
+                ods[f'pf_active.coil.{channel}.current.data_error_upper'] = error
 
         except pyuda.UDAException:
             print(channel,sig_name)
             tmp = None
-            ods[f'pf_active.coil.{channel}.current.data'] = np.array([])
-            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = np.array([])
-            ods[f'pf_active.coil.{channel}.current.time'] = np.array([])   
+            ods[f'pf_active.coil.{channel}.current.time'] = [0.0, 1e10]
+            ods[f'pf_active.coil.{channel}.current.data'] = [0.0, 0.0]
+            ods[f'pf_active.coil.{channel}.current.data_error_upper'] = [0.0,0.0]
+
+            #ods[f'pf_active.coil.{channel}.current.data'] = np.array([])
+            #ods[f'pf_active.coil.{channel}.current.data_error_upper'] = np.array([])
+            #ods[f'pf_active.coil.{channel}.current.time'] = np.array([])   
 
 
     # IMAS stores the current in the coil not multiplied by the number of turns
@@ -261,7 +272,7 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
         sig = signals[item][0]['mds_name'].replace('~',' ')
         scale = signals[item][0]['scale']
         if item =='TF':
-            scale *=1e3 / 0.8 # ods['tf.r0']
+            scale *=1e3  # ods['tf.r0']
         try:
             tmp = client.get(sig,pulse)
 
@@ -307,6 +318,71 @@ def thomson_scattering_data(ods, pulse):
     """
 
     return
+
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def mse_hardware(ods, pulse, server=None, port=None):
+    """
+    Gathers MAST(-U) MSE measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(mse_data)(ods, pulse)
+
+@machine_mapping_function(__regression_arguments__, pulse=44653)
+def mse_data(ods, pulse, server=None, port=None):
+
+    """
+    Gathers MAST(-U) MSE data
+
+    :param pulse: int
+
+    """
+    
+    client = get_pyuda_client(server=server, port=port)
+  
+    if pulse > 40000:
+        measurements = [('ams/gamma/polarisation_angle', 1.0, 'Gamma', True, 'degrees')]
+        trace_MSE_gamma = 'ams/gamma/polarisation_angle'
+        trace_MSE_noise = 'ams/gamma/error_polarisation_angle'
+        trace_MSE_rad = 'ams/geometry/radius'
+        trace_MSE_md = 'ams/fibres/md_number'
+        trace_a_coefficients = '/ams/geometry/a_coefficients'
+    else:
+        trace_MSE_gamma = 'ams_gamma'
+        trace_MSE_noise = 'ams_gammanoise'
+        trace_MSE_rad = 'ams_rpos'
+        trace_MSE_md = 'ams_md'
+        trace_a_coefficients = 'ams_acoeff'
+
+    r = np.squeeze(client.get(trace_MSE_rad, pulse).data)
+    z = 0*r
+    sig = client.get(trace_MSE_gamma, pulse).data
+    time = client.get(trace_MSE_gamma, pulse).dims[0].data
+
+    err = client.get(trace_MSE_noise, pulse).data
+    a_coefficients = np.squeeze(client.get(trace_a_coefficients, pulse).data)
+
+    for ch in range(len(r)):
+        valid = err[:, ch] > 0  # uncertainty greater than zero
+        valid &= sig[:, ch] != 0  # no exact zero values
+        if np.std(sig[:, ch]) == 0:
+            valid[:] = 0
+        
+        ods[f'mse.channel[{ch}].polarisation_angle.time'] = time
+        ods[f'mse.channel[{ch}].polarisation_angle.data'] = sig[:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = err[:,ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = valid - 1
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
+ 
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].time'] = 0.0
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = r[ch]
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = r[ch] * 0.0
+
+        ods[f'mse.channel.{ch}.active_spatial_resolution[0].geometric_coefficients'] = np.zeros(9)
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'][0:3] = a_coefficients[0:3,ch]
+        ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'][4:7] = a_coefficients[3:6,ch]
 
 
 # =====================

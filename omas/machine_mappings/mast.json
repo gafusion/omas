@@ -112,6 +112,43 @@
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
+ "mse.channel.:": {
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:": {
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.r": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.z": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.geometric_coefficients": {
+  "COCOSIO": 11,
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.name": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.data": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.data_error_upper": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity_timed": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },

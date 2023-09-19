@@ -375,17 +375,17 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     mapping between IMAS geometric_coefficients and EFIT AAxGAM
     coeffs0: AA1
     coeffs1: AA8
-    coeffs2: AA2
+    coeffs2: 0
     coeffs3: AA5
     coeffs4: AA4
     coeffs5: AA3
-    coeffs6: 0
+    coeffs6: AA2
     coeffs7: AA7
     coeffs8: AA6
 
     mapping between EFIT AAxGAM and IMAS geometric_coefficients
     AA1: coeffs0
-    AA2: coeffs2
+    AA2: coeffs6
     AA3: coeffs5
     AA4: coeffs4
     AA5: coeffs3
@@ -473,8 +473,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
         ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch] * norm
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch] * norm
-        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = -1*validity_timed[:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = -1*int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
 
         # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
@@ -482,7 +482,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
-        IMAS2GAM = [1, 8, 2, 5, 4, 3, 9, 7, 6]
+        IMAS2GAM = [1, 8, 6, 5, 4, 3, 2, 9, 7]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]

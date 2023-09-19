@@ -10,6 +10,10 @@
  nacoil = 1
  device = 'MAST-U'
  mqwant = 66
+ nwwcur = 18
+ nppcur = 18
+ nffcur = 18
+ nmselp = 33
  /
  &IN3
  RF = 0.24849965 0.24849975 0.24849974 0.2344998 2*0.24849974 3*0.24849972 
