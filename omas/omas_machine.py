@@ -128,7 +128,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     if location.endswith(".*"):
         root = location.split(".*")[0]
         for key in mappings:
-            if root in key:
+            if root in key and key not in ods:
                 try:
                     resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
                 except (TreeNODATA, MdsIpException) as e:
