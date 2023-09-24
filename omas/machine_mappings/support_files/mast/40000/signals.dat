@@ -597,15 +597,15 @@ VS2L      VS  icoil    50  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0 
 VS3L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -3.800e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
 VS4L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3L03   - ;
 VS5L      VS  icoil    53  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
-VS6L      VS  icoil    54  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
-VS1U      VS  icoil    55  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB05    - ;
-VS2U      VS  icoil    56  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB01    - ; For computed vessel segments,
-VS3U      VS  icoil    57  -  c  0.200  0.5e3    0.50e+3  y  -3.600e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ; the conversion factor is an
-VS4U      VS  icoil    58  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3U03   - ; "effective resistance" which
-VS5U      VS  icoil    59  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; converts Voltage (V) to
-VS6U      VS  icoil    60  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; current (A)
-VS7U      VS  icoil    61  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5U01   - ; NOTE: absolute error is in (A)
-VS7L      VS  icoil    62  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5L01   - ;
+VS6L      VS  icoil    54  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL04    - ;
+VS7L      VS  icoil    55  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5L01   - ;
+VS1U      VS  icoil    56  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB05    - ;
+VS2U      VS  icoil    57  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB01    - ; For computed vessel segments,
+VS3U      VS  icoil    58  -  c  0.200  0.5e3    0.50e+3  y  -3.600e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ; the conversion factor is an
+VS4U      VS  icoil    59  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3U03   - ; "effective resistance" which
+VS5U      VS  icoil    60  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; converts Voltage (V) to
+VS6U      VS  icoil    61  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; current (A)
+VS7U      VS  icoil    62  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5U01   - ; NOTE: absolute error is in (A)
 ;;;VS6L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; Not available, try using XL_04
 ;;;VS5L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; 
 ;
