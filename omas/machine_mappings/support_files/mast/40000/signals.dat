@@ -1,0 +1,679 @@
+;=== Measured signals to be read - MASTU diagnostics ===
+;===
+;=== CY 2020 signal
+;===
+;=== J.W. Berkery 11/22/22:      Turned on the PF coils that had been off for some reason
+;=== J.W. Berkery 11/17/22:      Added two flux loops that were accidentally left out entirely: F_D1U_03 and F_D1U_02
+;=== J.W. Berkery 11/15/22:      Took out a bunch of signals
+;=== J.W. Berkery 05/05/21:      New version, based on ConfigK, now with all signals in AMB or AMC
+;=== J.W. Berkery 02/09/21:      Updated flux loop calibration factors
+;=== J.W. Berkery 02/08/21:      Removed a few bad probes (Dave Ryan email 2/8/21)
+;=== J.W. Berkery 02/04/21:      Updated some pickup calibration factors, per Dave Ryan email 2/4/21
+;=== J.W. Berkery 01/26/21:      Updated D6L calibration factor
+;=== J.W. Berkery 01/20/21:      A few small changes from ConfigJ to ConfigK
+;=== J.W. Berkery 01/20/21:      From ConfigF - Setup for ConfigJ, per Dave Ryan
+;=== J.W. Berkery 12/04/20:      Tweaked some effective resistances. Changed VS6L and 5L from F_XL_07 to 05
+;=== J.W. Berkery 12/02/20:      Turned on D1, DP, and D7 coils
+;=== J.W. Berkery 11/30/20:      Updated with b_c2 polarity reversals from Lucy
+;=== J.W. Berkery 11/24/20:      Updated with loop voltages, vessel segments, and polarity reversals from Lucy
+;=== J.W. Berkery 11/12/20:      Setup for ConfigF, per Dave Ryan
+;=== J.W. Berkery 11/06/20:      Setup for ConfigE, per Dave Ryan (same flux loops as D, adding Mirnovs. Need to check F_C_A03)
+;=== J.W. Berkery 10/27/20:      Setup for ConfigD, per Dave Ryan
+;=== J.W. Berkery 09/29/20:      Setup for ConfigC, per Dave Ryan
+;=== J.W. Berkery 05/19/20:      Fixed one flux loop tag name and added loop voltage tags to vessel segments
+;=== J.W. Berkery 05/14/20:      Updated loop voltages. But, the non-integrated signals don't actually exist in uda yet 
+;=== J.W. Berkery 05/14/20:      Updated the names of the Shaping coils and coil case currents
+;=== J.W. Berkery 05/14/20:      Updated the names of the Mirnov coils
+;=== J.W. Berkery 05/14/20:      Updated the names of the vessel segments. Don't have corresponding loop voltages yet
+;=== J.W. Berkery 05/13/20:      Flux loop names updated. *Everything else still from MAST*
+;=== J.W. Berkery 02/24/20:      Copied from MAST - needs to be updated for MASTU
+;===
+;=== Computed "signals" based on measurements ===
+;===
+;=== NOTE: map index is one greater than the corresponding IDL array index
+;===       (i.e., ioh, map index 1 = ioh[0], etc.)
+;===
+;=== NOTE: See notes at end for stated errors, bit noise, etc. as well as definitions
+;=== 
+;Name   sigl  map    map  MDS Read      Error    Signal Use Conversion  Pri Fit  t  Smoothing   Designation
+;       type  var    indx tree sig? rel  abs  threshold err? factor         wgt idx win (s)     Data    Auxiliary
+;===========================================================================================================================================================
+;
+; Ohmic
+;
+P1        OH  ioh       1  e  y  0.020  20.0     40.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P1          - ; kA -> A
+;
+; Shaping coils
+;
+PCL       SC  icoil     1  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/PXU         - ; kA -> A
+PXL       SC  icoil     2  e  n  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/PXL         - ; 
+P4U       SC  icoil     3  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P4U         - ; 
+P4L       SC  icoil     4  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P4L         - ; 
+P5U       SC  icoil     5  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P5U         - ; 
+P5L       SC  icoil     6  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P5L         - ; 
+P6U       SC  icoil     7  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P6U         - ; 
+P6L       SC  icoil     8  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/P6L         - ; 
+D1U       SC  icoil     9  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D1U         - ; 
+D1L       SC  icoil    10  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D1L         - ; 
+D2U       SC  icoil    11  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D2U         - ; 
+D2L       SC  icoil    12  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D2L         - ; 
+D3U       SC  icoil    13  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D3U         - ; 
+D3L       SC  icoil    14  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D3L         - ; 
+DPU       SC  icoil    15  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/DPU         - ; 
+DPL       SC  icoil    16  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/DPL         - ; 
+D5U       SC  icoil    17  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D5U         - ; 
+D5L       SC  icoil    18  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D5L         - ; 
+D6U       SC  icoil    19  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D6U         - ; 
+D6L       SC  icoil    20  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D6L         - ; 
+D7U       SC  icoil    21  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D7U         - ; 
+D7L       SC  icoil    22  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/ROGEXT/D7L         - ; 
+;
+; (including case currents)
+P4CU      SC  icoil    23  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4U       - ;
+P4CL      SC  icoil    24  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P4L       - ;
+P5CU      SC  icoil    25  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5U       - ;
+P5CL      SC  icoil    26  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P5L       - ;
+P6CU      SC  icoil    27  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6U       - ;
+P6CL      SC  icoil    28  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/P6L       - ;
+D1CU      SC  icoil    29  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1U       - ; kA -> A
+D1CL      SC  icoil    30  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D1L       - ;
+D2CU      SC  icoil    31  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2U       - ;
+D2CL      SC  icoil    32  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D2L       - ;
+D3CU      SC  icoil    33  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3U       - ;
+D3CL      SC  icoil    34  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D3L       - ;
+DPCU      SC  icoil    35  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPU       - ;
+DPCL      SC  icoil    36  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/DPL       - ;
+D5CU      SC  icoil    37  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D5U       - ;
+D5CL      SC  icoil    38  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D5L       - ;
+D6CU      SC  icoil    39  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6U       - ;
+D6CL      SC  icoil    40  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D6L       - ;
+D7CU      SC  icoil    41  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7U       - ;
+D7CL      SC  icoil    42  e  y  0.020  10.0     20.0     y  1.0e3     1.0 1.0   1  2.1e-3   AMC/CASECURR/D7L       - ;
+;
+; Plasma current
+IP1       PR  ip        1  -  y  0.010  10.0e3   50.0e3   y  1.0e3      1.0 1.0  1  2.1e-3   AMC/PLASMA_CURRENT     - ; kA -> A
+;
+; Toroidal field
+TF1       TF  none      1  -  y  0.050  30.0     50.0     y  4.800e-6     1.0 1.0  -1  2.1e-3   AMC/ROGEXT/TF          - ; kA -> A ; Check -1
+;
+; Diamagnetic loop
+; (the following is from MAST)
+;FDIA      DL  dflux     1  e  n  0.04   0.004    0.004    y  1.0        1.0 1.0 -1  2.1e-3  \\FDIA                  -  ;(Wb) error was 2%, 2mWb
+;
+; Flux loops
+;
+F_NU_01   FL  tfl       1  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_01       - ; (Wb)
+F_NU_02   FL  tfl       2  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_02       - ; 
+F_NU_03   FL  tfl       3  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_03       - ; 
+F_NU_04   FL  tfl       4  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_04       - ;
+F_NU_a05  FL  tfl       5  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_A05      - ; 
+F_NU_b05  FL  tfl       6  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_B05      - ; 
+F_NU_06   FL  tfl       7  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NU_06       - ; Out
+F_NL_01   FL  tfl       8  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_01       - ; 
+F_NL_02   FL  tfl       9  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_02       - ; 
+F_NL_03   FL  tfl      10  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_03       - ; 
+F_NL_04   FL  tfl      11  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_04       - ; 
+F_NL_a05  FL  tfl      12  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_A05      - ; 
+F_NL_b05  FL  tfl      13  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_B05      - ; 
+F_NL_06   FL  tfl      14  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_NL_06       - ; 
+F_P6U_01  FL  tfl      15  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P6U_01      - ; 
+F_P6L_01  FL  tfl      16  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P6L_01      - ; 
+F_BU_01   FL  tfl      17  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BU_01       - ; 
+F_BU_02   FL  tfl      18  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BU_02       - ; 
+F_BU_03   FL  tfl      19  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BU_03       - ; 
+F_BU_04   FL  tfl      20  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BU_04       - ; 
+F_BL_01   FL  tfl      21  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BL_01       - ; 
+F_BL_02   FL  tfl      22  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BL_02       - ; 
+F_BL_03   FL  tfl      23  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BL_03       - ; 
+F_BL_04   FL  tfl      24  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_BL_04       - ; 
+F_P5U_01  FL  tfl      25  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5U_01      - ; 
+F_P5U_02  FL  tfl      26  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5U_02      - ; 
+F_P5U_03  FL  tfl      27  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5U_03      - ; 
+F_P5U_04  FL  tfl      28  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5U_04      - ; 
+F_P5L_01  FL  tfl      29  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5L_01      - ; 
+F_P5L_02  FL  tfl      30  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5L_02      - ; 
+F_P5L_03  FL  tfl      31  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5L_03      - ; 
+F_P5L_04  FL  tfl      32  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_P5L_04      - ; 
+F_XU_01   FL  tfl      33  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_01       - ; Removed, per Dave Ryan's email, 11/09/20
+F_XU_02   FL  tfl      34  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_02       - ; Removed, per Dave Ryan's email, 11/09/20
+F_XU_03   FL  tfl      35  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_03       - ; 
+F_XU_04   FL  tfl      36  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_04       - ; 
+F_XU_05   FL  tfl      37  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_05       - ; 
+F_XU_06   FL  tfl      38  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_06       - ; 
+F_XU_07   FL  tfl      39  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XU_07       - ; 
+F_XL_01   FL  tfl      40  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_01       - ; 
+F_XL_02   FL  tfl      41  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_02       - ; Bad (Dave Ryan email 2/8/21)
+F_XL_03   FL  tfl      42  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_03       - ; 
+F_XL_04   FL  tfl      43  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_04       - ;  
+F_XL_05   FL  tfl      44  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_05       - ; Out
+F_XL_06   FL  tfl      45  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_06       - ; Bad (Dave Ryan email 2/8/21)
+F_XL_07   FL  tfl      46  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_XL_07       - ; Bad (Dave Ryan email 2/8/21)
+F_DPU_01  FL  tfl      47  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPU_01      - ; 
+F_DPU_02  FL  tfl      48  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPU_02      - ; 
+F_DPU_03  FL  tfl      49  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPU_03      - ; 
+F_DPU_04  FL  tfl      50  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPU_04      - ; 
+F_DPL_04  FL  tfl      51  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPL_04      - ; 
+F_DPL_03  FL  tfl      52  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPL_03      - ;  
+F_DPL_02  FL  tfl      53  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPL_02      - ; 
+F_DPL_01  FL  tfl      54  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_DPL_01      - ; 
+F_D3U_02  FL  tfl      55  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3U_02      - ; 
+F_D3U_03  FL  tfl      56  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3U_03      - ; 
+F_D3U_01  FL  tfl      57  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3U_01      - ; 
+F_D3U_04  FL  tfl      58  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3U_04      - ; 
+F_D3L_01  FL  tfl      59  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3L_01      - ; 
+F_D3L_02  FL  tfl      60  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3L_02      - ; 
+F_D3L_04  FL  tfl      61  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3L_04      - ; 
+F_D3L_03  FL  tfl      62  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D3L_03      - ; 
+F_D2U_03  FL  tfl      63  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2U_03      - ; 
+F_D2U_02  FL  tfl      64  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2U_02      - ; Bad (Dave Ryan email 2/8/21)
+F_D2U_04  FL  tfl      65  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2U_04      - ; 
+F_D2U_01  FL  tfl      66  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2U_01      - ; 
+F_D2L_02  FL  tfl      67  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2L_02      - ; 
+F_D2L_01  FL  tfl      68  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2L_01      - ; 
+F_D2L_03  FL  tfl      69  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2L_03      - ; 
+F_D2L_04  FL  tfl      70  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D2L_04      - ; 
+F_D1U_03  FL  tfl      71  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1U_03      - ; Turned off when added because not sure what the status is 
+F_D1U_02  FL  tfl      72  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1U_02      - ; Turned off when added because not sure what the status is 
+
+F_D1U_04  FL  tfl      73  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1U_04      - ; 
+F_D1U_01  FL  tfl      74  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1U_01      - ; Dave's spreadsheet has f_d1u_02 and 03 listed? Don't exist?
+F_D1L_04  FL  tfl      75  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1L_04      - ; 
+F_D1L_01  FL  tfl      76  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1L_01      - ; 
+F_D1L_03  FL  tfl      77  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1L_03      - ; Removed, 11/15/22
+F_D1L_02  FL  tfl      78  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_D1L_02      - ; Removed, 11/15/22
+F_C_A01   FL  tfl      79  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A01       - ; Removed, per Dave Ryan's email, 11/09/20
+F_C_B01   FL  tfl      80  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B01       - ; 
+F_C_A02   FL  tfl      81  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A02       - ; 
+F_C_B02   FL  tfl      82  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B02       - ; 
+F_C_A03   FL  tfl      83  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A03       - ; This signal is missing after 41606. Taken out
+F_C_B03   FL  tfl      84  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B03       - ; 
+F_C_A04   FL  tfl      85  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A04       - ; 
+F_C_B04   FL  tfl      86  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B04       - ; 
+F_C_A05   FL  tfl      87  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A05       - ; 
+F_C_B05   FL  tfl      88  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B05       - ; 
+F_C_A06   FL  tfl      89  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A06       - ; 
+F_C_B06   FL  tfl      90  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B06       - ; Removed, 11/15/22
+F_C_A07   FL  tfl      91  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A07       - ; 
+F_C_B07   FL  tfl      92  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B07       - ; 
+F_C_A08   FL  tfl      93  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A08       - ; 
+F_C_B08   FL  tfl      94  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B08       - ; 
+F_C_A09   FL  tfl      95  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A09       - ; 
+F_C_B09   FL  tfl      96  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B09       - ; 
+F_C_A10   FL  tfl      97  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A10       - ; 
+F_C_B10   FL  tfl      98  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B10       - ; 
+F_C_A11   FL  tfl      99  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A11       - ; 
+F_C_B11   FL  tfl     100  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B11       - ; 
+F_C_A12   FL  tfl     101  -  n  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_A12       - ; Removed, per Dave Ryan's email, 11/09/20
+F_C_B12   FL  tfl     102  -  y  0.020  6.0e-4   6.0e-4   y  1.0        1.0 1.0  1  2.1e-3   AMB/FLUX/F_C_B12       - ; 
+;
+; Loop voltages
+;                                                                                                                   - ; (V) === loop voltage signals
+VFCB05    VM  none      1  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_C_B05     - ; for VS1U
+VFCB01    VM  none      2  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_C_B01     - ; for VS2U
+VFD1U04   VM  none      3  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_D1U_04    - ; for VS3U and D1CU
+VFD3U03   VM  none      4  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_D3U_03    - ; for VS4U
+VFXU07    VM  none      5  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_XU_07     - ; for VS5U and VS6U
+VFP5U01   VM  none      6  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_P5U_01    - ; for VS7U
+VFP5L01   VM  none      7  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_P5L_01    - ; for VS7L
+;;;;VFXL05    VM  none      8  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_XL_05     - ; for VS6L and VS5L ; not available, try using XL_04
+VFXL04    VM  none      8  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_XL_04     - ; for VS6L and VS5L ; not available, try using XL_04
+VFD3L03   VM  none      9  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_D3L_03    - ; for VS4L 
+VFD1L04   VM  none     10  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_D1L_04    - ; for VS3L and D1CL
+VFCB12    VM  none     11  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_C_B12     - ; for VS2L
+VFCB08    VM  none     12  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_C_B08     - ; for VS1L
+VFNUB05   VM  none     13  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_NU_B05    - ; for PSPU
+VFBU03    VM  none     14  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_BU_03     - ; for GBU
+VFBL03    VM  none     15  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_BL_03     - ; for GBL
+VFNLB05   VM  none     16  o  y  0.020  0.80     0.10     y  1.0        1.0 1.0 -1  5.0e-2   AMB/LOOPV/LV_NL_B05    - ; for PSPL
+;
+;
+; Mirnov coils
+;
+B_C1_P01  MC  bmc       1  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P01    - ; (T) 
+B_C1_P03  MC  bmc       2  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P03    - ; (T) 
+B_C1_P05  MC  bmc       3  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P05    - ; (T) 
+B_C1_P07  MC  bmc       4  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P07    - ; (T) 
+B_C1_P09  MC  bmc       5  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P09    - ; (T) 
+B_C1_P10  MC  bmc       6  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P10    - ; (T) 
+B_C1_P12  MC  bmc       7  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P12    - ; (T) 
+B_C1_P14  MC  bmc       8  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P14    - ; (T) 
+B_C1_P15  MC  bmc       9  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P15    - ; (T) 
+B_C1_P16  MC  bmc      10  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P16    - ; (T) 
+B_C1_P18  MC  bmc      11  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P18    - ; (T)
+B_C1_P20  MC  bmc      12  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P20    - ; (T) 
+B_C1_P22  MC  bmc      13  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P22    - ; (T) 
+B_C1_P23  MC  bmc      14  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P23    - ; (T) 
+B_C1_P25  MC  bmc      15  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P25    - ; (T) 
+B_C1_P27  MC  bmc      16  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P27    - ; (T) 
+B_C1_P28  MC  bmc      17  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P28    - ; (T) 
+B_C1_P30  MC  bmc      18  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P30    - ; (T) 
+B_C1_P32  MC  bmc      19  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P32    - ; (T) 
+B_C1_P33  MC  bmc      20  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P33    - ; (T) 
+B_C1_P35  MC  bmc      21  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P35    - ; (T) 
+B_C1_P37  MC  bmc      22  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P37    - ; (T) 
+B_C1_P39  MC  bmc      23  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P39    - ; (T) 
+B_C1_P40  MC  bmc      24  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P40    - ; (T) 
+B_C1_P41  MC  bmc      25  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P41    - ; (T) 
+B_C1_P43  MC  bmc      26  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P43    - ; (T) 
+B_C1_P45  MC  bmc      27  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P45    - ; (T) 
+B_C1_P46  MC  bmc      28  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P46    - ; (T)
+B_C1_P48  MC  bmc      29  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P48    - ; (T) 
+B_C1_P50  MC  bmc      30  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P50    - ; (T)
+B_C1_P52  MC  bmc      31  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P52    - ; (T) 
+B_C1_P54  MC  bmc      32  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C1_P54    - ; (T) 
+B_C2_P01  MC  bmc      33  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P01    - ; (T) 
+B_C2_P03  MC  bmc      34  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P03    - ; (T) 
+B_C2_P05  MC  bmc      35  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P05    - ; (T) 
+B_C2_P07  MC  bmc      36  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P07    - ; (T) 
+B_C2_P09  MC  bmc      37  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P09    - ; (T) 
+B_C2_P10  MC  bmc      38  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P10    - ; (T) 
+B_C2_P12  MC  bmc      39  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P12    - ; (T) 
+B_C2_P14  MC  bmc      40  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P14    - ; (T) 
+B_C2_P15  MC  bmc      41  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P15    - ; (T) 
+B_C2_P16  MC  bmc      42  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P16    - ; (T) 
+B_C2_P18  MC  bmc      43  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P18    - ; (T) 
+B_C2_P20  MC  bmc      44  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P20    - ; (T) 
+B_C2_P22  MC  bmc      45  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P22    - ; (T) 
+B_C2_P23  MC  bmc      46  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P23    - ; (T) 
+B_C2_P25  MC  bmc      47  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P25    - ; (T) 
+B_C2_P27  MC  bmc      48  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P27    - ; (T)
+B_C2_P28  MC  bmc      49  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P28    - ; (T)
+B_C2_P30  MC  bmc      50  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P30    - ; (T)
+B_C2_P32  MC  bmc      51  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P32    - ; (T) 
+B_C2_P33  MC  bmc      52  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P33    - ; (T) 
+B_C2_P35  MC  bmc      53  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P35    - ; (T) 
+B_C2_P37  MC  bmc      54  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P37    - ; (T)
+B_C2_P39  MC  bmc      55  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P39    - ; (T) 
+B_C2_P40  MC  bmc      56  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P40    - ; (T) 
+B_C2_P41  MC  bmc      57  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P41    - ; (T) 
+B_C2_P43  MC  bmc      58  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P43    - ; (T) 
+B_C2_P45  MC  bmc      59  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P45    - ; (T) 
+B_C2_P46  MC  bmc      60  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P46    - ; (T) 
+B_C2_P48  MC  bmc      61  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P48    - ; (T) 
+B_C2_P50  MC  bmc      62  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P50    - ; (T)
+B_C2_P52  MC  bmc      63  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P52    - ; (T) 
+B_C2_P54  MC  bmc      64  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_C2_P54    - ; (T) 
+B_XU1_N01 MC  bmc      65  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N01   - ; (T)
+B_XU1_P02 MC  bmc      66  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P02   - ; (T)
+B_XU1_N03 MC  bmc      67  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N03   - ; (T)
+B_XU1_P04 MC  bmc      68  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P04   - ; (T)
+B_XU1_N05 MC  bmc      69  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N05   - ; (T)
+B_XU1_P06 MC  bmc      70  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P06   - ; (T)
+B_XU1_N07 MC  bmc      71  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N07   - ; (T)
+B_XU1_P08 MC  bmc      72  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P08   - ; (T)
+B_XU1_N09 MC  bmc      73  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N09   - ; (T)
+B_XU1_P10 MC  bmc      74  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P10   - ; (T) Removed, 11/15/22
+B_XU1_N11 MC  bmc      75  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N11   - ; (T)
+B_XU1_P12 MC  bmc      76  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P12   - ; (T)
+B_XU1_N13 MC  bmc      77  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N13   - ; (T) Removed, 11/15/22
+B_XU1_P14 MC  bmc      78  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P14   - ; (T)
+B_XU1_N15 MC  bmc      79  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N15   - ; (T)
+B_XU1_P16 MC  bmc      80  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P16   - ; (T) Removed, 11/15/22
+B_XU1_N17 MC  bmc      81  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N17   - ; (T)
+B_XU1_P18 MC  bmc      82  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P18   - ; (T)
+B_XU1_P19 MC  bmc      83  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P19   - ; (T)
+B_XU1_N20 MC  bmc      84  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N20   - ; (T)
+B_XU1_P21 MC  bmc      85  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P21   - ; (T)
+B_XU1_N22 MC  bmc      86  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N22   - ; (T)
+B_XU1_P23 MC  bmc      87  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P23   - ; (T)
+B_XU1_N24 MC  bmc      88  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N24   - ; (T)
+B_XU1_N25 MC  bmc      89  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N25   - ; (T)
+B_XU1_P26 MC  bmc      90  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P26   - ; (T)
+B_XU1_N27 MC  bmc      91  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N27   - ; (T) Removed, 11/15/22
+B_XU1_P28 MC  bmc      92  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P28   - ; (T) Removed, 11/15/22
+B_XU1_N29 MC  bmc      93  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N29   - ; (T)
+B_XU1_P30 MC  bmc      94  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P30   - ; (T)
+B_XU1_N31 MC  bmc      95  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N31   - ; (T)
+B_XU1_P32 MC  bmc      96  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P32   - ; (T)
+B_XU1_N33 MC  bmc      97  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N33   - ; (T) Removed, 11/15/22
+B_XU1_P34 MC  bmc      98  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P34   - ; (T)
+B_XU1_N35 MC  bmc      99  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_N35   - ; (T)
+B_XU1_P36 MC  bmc     100  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU1_P36   - ; (T)
+B_XU2_N01 MC  bmc     101  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N01   - ; (T)
+B_XU2_P02 MC  bmc     102  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P02   - ; (T)
+B_XU2_N03 MC  bmc     103  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N03   - ; (T)
+B_XU2_P04 MC  bmc     104  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P04   - ; (T) 
+B_XU2_N05 MC  bmc     105  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N05   - ; (T) 
+B_XU2_P06 MC  bmc     106  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P06   - ; (T)
+B_XU2_N07 MC  bmc     107  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N07   - ; (T)
+B_XU2_P08 MC  bmc     108  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P08   - ; (T)
+B_XU2_N09 MC  bmc     109  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N09   - ; (T)
+B_XU2_P10 MC  bmc     110  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P10   - ; (T) 
+B_XU2_N11 MC  bmc     111  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N11   - ; (T) Removed, 11/15/22
+B_XU2_P12 MC  bmc     112  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P12   - ; (T) Removed, 11/15/22 
+B_XU2_N13 MC  bmc     113  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N13   - ; (T)
+B_XU2_P14 MC  bmc     114  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P14   - ; (T)
+B_XU2_N15 MC  bmc     115  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N15   - ; (T) Removed, 11/15/22
+B_XU2_P16 MC  bmc     116  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P16   - ; (T)
+B_XU2_N17 MC  bmc     117  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N17   - ; (T)
+B_XU2_P18 MC  bmc     118  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P18   - ; (T) 
+B_XU2_P19 MC  bmc     119  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P19   - ; (T) 
+B_XU2_N20 MC  bmc     120  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N20   - ; (T)
+B_XU2_P21 MC  bmc     121  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P21   - ; (T)
+B_XU2_N22 MC  bmc     122  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N22   - ; (T) 
+B_XU2_P23 MC  bmc     123  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P23   - ; (T)
+B_XU2_N24 MC  bmc     124  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N24   - ; (T)
+B_XU2_N25 MC  bmc     125  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N25   - ; (T)
+B_XU2_P26 MC  bmc     126  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P26   - ; (T)
+B_XU2_N27 MC  bmc     127  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N27   - ; (T)
+B_XU2_P28 MC  bmc     128  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P28   - ; (T)
+B_XU2_N29 MC  bmc     129  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N29   - ; (T)
+B_XU2_P30 MC  bmc     130  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P30   - ; (T)
+B_XU2_N31 MC  bmc     131  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N31   - ; (T)
+B_XU2_P32 MC  bmc     132  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P32   - ; (T)
+B_XU2_N33 MC  bmc     133  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N33   - ; (T) 
+B_XU2_P34 MC  bmc     134  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P34   - ; (T)
+B_XU2_N35 MC  bmc     135  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_N35   - ; (T) Removed, 11/15/22
+B_XU2_P36 MC  bmc     136  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XU2_P36   - ; (T) 
+B_XL1_N01 MC  bmc     137  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N01   - ; (T)
+B_XL1_P02 MC  bmc     138  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P02   - ; (T)
+B_XL1_N03 MC  bmc     139  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N03   - ; (T)
+B_XL1_P04 MC  bmc     140  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P04   - ; (T)
+B_XL1_N05 MC  bmc     141  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N05   - ; (T)
+B_XL1_P06 MC  bmc     142  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P06   - ; (T)
+B_XL1_N07 MC  bmc     143  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N07   - ; (T)
+B_XL1_P08 MC  bmc     144  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P08   - ; (T)
+B_XL1_N09 MC  bmc     145  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N09   - ; (T)
+B_XL1_P10 MC  bmc     146  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P10   - ; (T) Removed, 11/15/22
+B_XL1_N11 MC  bmc     147  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N11   - ; (T) Removed, 11/15/22
+B_XL1_P12 MC  bmc     148  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P12   - ; (T)
+B_XL1_N13 MC  bmc     149  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N13   - ; (T)
+B_XL1_P14 MC  bmc     150  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P14   - ; (T)
+B_XL1_N15 MC  bmc     151  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N15   - ; (T)
+B_XL1_P16 MC  bmc     152  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P16   - ; (T)
+B_XL1_N17 MC  bmc     153  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N17   - ; (T)
+B_XL1_P18 MC  bmc     154  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P18   - ; (T)
+B_XL1_P19 MC  bmc     155  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P19   - ; (T) Removed, 11/15/22
+B_XL1_N20 MC  bmc     156  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N20   - ; (T)
+B_XL1_P21 MC  bmc     157  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P21   - ; (T)
+B_XL1_N22 MC  bmc     158  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N22   - ; (T)
+B_XL1_P23 MC  bmc     159  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P23   - ; (T)
+B_XL1_N24 MC  bmc     160  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N24   - ; (T)
+B_XL1_N25 MC  bmc     161  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N25   - ; (T)
+B_XL1_P26 MC  bmc     162  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P26   - ; (T)
+B_XL1_N27 MC  bmc     163  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N27   - ; (T)
+B_XL1_P28 MC  bmc     164  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P28   - ; (T)
+B_XL1_N29 MC  bmc     165  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N29   - ; (T)
+B_XL1_P30 MC  bmc     166  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P30   - ; (T)
+B_XL1_N31 MC  bmc     167  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N31   - ; (T)
+B_XL1_P32 MC  bmc     168  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P32   - ; (T)
+B_XL1_N33 MC  bmc     169  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N33   - ; (T)
+B_XL1_P34 MC  bmc     170  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P34   - ; (T)
+B_XL1_N35 MC  bmc     171  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_N35   - ; (T)
+B_XL1_P36 MC  bmc     172  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL1_P36   - ; (T)
+B_XL2_N01 MC  bmc     173  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N01   - ; (T)
+B_XL2_P02 MC  bmc     174  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P02   - ; (T) 
+B_XL2_N03 MC  bmc     175  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N03   - ; (T)
+B_XL2_P04 MC  bmc     176  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P04   - ; (T) 
+B_XL2_N05 MC  bmc     177  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N05   - ; (T) 
+B_XL2_P06 MC  bmc     178  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P06   - ; (T)
+B_XL2_N07 MC  bmc     179  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N07   - ; (T) 
+B_XL2_P08 MC  bmc     180  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P08   - ; (T) Removed, 11/15/22 
+B_XL2_N09 MC  bmc     181  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N09   - ; (T)
+B_XL2_P10 MC  bmc     182  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P10   - ; (T)
+B_XL2_N11 MC  bmc     183  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N11   - ; (T) Removed, 11/15/22 
+B_XL2_P12 MC  bmc     184  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P12   - ; (T) Removed, 11/15/22
+B_XL2_N13 MC  bmc     185  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N13   - ; (T) 
+B_XL2_P14 MC  bmc     186  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P14   - ; (T)
+B_XL2_N15 MC  bmc     187  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N15   - ; (T) Removed, 11/15/22
+B_XL2_P16 MC  bmc     188  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P16   - ; (T)
+B_XL2_N17 MC  bmc     189  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N17   - ; (T)
+B_XL2_P18 MC  bmc     190  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P18   - ; (T)
+B_XL2_P19 MC  bmc     191  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P19   - ; (T)
+B_XL2_N20 MC  bmc     192  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N20   - ; (T)
+B_XL2_P21 MC  bmc     193  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P21   - ; (T)
+B_XL2_N22 MC  bmc     194  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N22   - ; (T) 
+B_XL2_P23 MC  bmc     195  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P23   - ; (T)
+B_XL2_N24 MC  bmc     196  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N24   - ; (T)
+B_XL2_N25 MC  bmc     197  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N25   - ; (T)
+B_XL2_P26 MC  bmc     198  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P26   - ; (T)
+B_XL2_N27 MC  bmc     199  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N27   - ; (T)
+B_XL2_P28 MC  bmc     200  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P28   - ; (T)
+B_XL2_N29 MC  bmc     201  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N29   - ; (T)
+B_XL2_P30 MC  bmc     202  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P30   - ; (T)
+B_XL2_N31 MC  bmc     203  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N31   - ; (T)
+B_XL2_P32 MC  bmc     204  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P32   - ; (T)
+B_XL2_N33 MC  bmc     205  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N33   - ; (T) Removed, 11/15/22 
+B_XL2_P34 MC  bmc     206  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P34   - ; (T) Removed, 11/15/22
+B_XL2_N35 MC  bmc     207  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_N35   - ; (T) Removed, 11/15/22
+B_XL2_P36 MC  bmc     208  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_XL2_P36   - ; (T) 
+B_NU1_P01 MC  bmc     209  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P01   - ; (T)
+B_NU1_N02 MC  bmc     210  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_N02   - ; (T)
+B_NU1_P03 MC  bmc     211  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P03   - ; (T)
+B_NU1_N04 MC  bmc     212  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_N04   - ; (T)
+B_NU1_P05 MC  bmc     213  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P05   - ; (T)
+B_NU1_N06 MC  bmc     214  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_N06   - ; (T)
+B_NU1_P07 MC  bmc     215  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P07   - ; (T)
+B_NU1_N08 MC  bmc     216  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_N08   - ; (T)
+B_NU1_P09 MC  bmc     217  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P09   - ; (T)
+B_NU1_N10 MC  bmc     218  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_N10   - ; (T)
+B_NU1_P11 MC  bmc     219  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU1_P11   - ; (T)
+B_NU2_P01 MC  bmc     220  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P01   - ; (T)
+B_NU2_N02 MC  bmc     221  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_N02   - ; (T)
+B_NU2_P03 MC  bmc     222  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P03   - ; (T)
+B_NU2_N04 MC  bmc     223  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_N04   - ; (T)
+B_NU2_P05 MC  bmc     224  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P05   - ; (T)
+B_NU2_N06 MC  bmc     225  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_N06   - ; (T)
+B_NU2_P07 MC  bmc     226  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P07   - ; (T)
+B_NU2_N08 MC  bmc     227  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_N08   - ; (T)
+B_NU2_P09 MC  bmc     228  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P09   - ; (T)
+B_NU2_N10 MC  bmc     229  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_N10   - ; (T)
+B_NU2_P11 MC  bmc     230  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NU2_P11   - ; (T)
+B_NL1_P01 MC  bmc     231  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P01   - ; (T)
+B_NL1_N02 MC  bmc     232  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_N02   - ; (T)
+B_NL1_P03 MC  bmc     233  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P03   - ; (T)
+B_NL1_N04 MC  bmc     234  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_N04   - ; (T)
+B_NL1_P05 MC  bmc     235  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P05   - ; (T)
+B_NL1_N06 MC  bmc     236  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_N06   - ; (T)
+B_NL1_P07 MC  bmc     237  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P07   - ; (T)
+B_NL1_N08 MC  bmc     238  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_N08   - ; (T)
+B_NL1_P09 MC  bmc     239  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P09   - ; (T)
+B_NL1_N10 MC  bmc     240  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_N10   - ; (T)
+B_NL1_P11 MC  bmc     241  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL1_P11   - ; (T)
+B_NL2_P01 MC  bmc     242  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P01   - ; (T)
+B_NL2_N02 MC  bmc     243  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_N02   - ; (T)
+B_NL2_P03 MC  bmc     244  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P03   - ; (T)
+B_NL2_N04 MC  bmc     245  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_N04   - ; (T)
+B_NL2_P05 MC  bmc     246  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P05   - ; (T)
+B_NL2_N06 MC  bmc     247  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_N06   - ; (T)
+B_NL2_P07 MC  bmc     248  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P07   - ; (T)
+B_NL2_N08 MC  bmc     249  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_N08   - ; (T)
+B_NL2_P09 MC  bmc     250  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P09   - ; (T)
+B_NL2_N10 MC  bmc     251  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_N10   - ; (T)
+B_NL2_P11 MC  bmc     252  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_NL2_P11   - ; (T)
+B_BU1_P01 MC  bmc     253  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P01   - ; (T)
+B_BU1_N02 MC  bmc     254  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_N02   - ; (T)
+B_BU1_P03 MC  bmc     255  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P03   - ; (T)
+B_BU1_N04 MC  bmc     256  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_N04   - ; (T)
+B_BU1_P05 MC  bmc     257  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P05   - ; (T)
+B_BU1_N06 MC  bmc     258  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_N06   - ; (T) 
+B_BU1_P07 MC  bmc     259  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P07   - ; (T)
+B_BU1_N08 MC  bmc     260  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_N08   - ; (T)
+B_BU1_P09 MC  bmc     261  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P09   - ; (T)
+B_BU1_N10 MC  bmc     262  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_N10   - ; (T)
+B_BU1_P11 MC  bmc     263  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU1_P11   - ; (T)
+B_BU2_P01 MC  bmc     264  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P01   - ; (T)
+B_BU2_N02 MC  bmc     265  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_N02   - ; (T)
+B_BU2_P03 MC  bmc     266  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P03   - ; (T)
+B_BU2_N04 MC  bmc     267  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_N04   - ; (T)
+B_BU2_P05 MC  bmc     268  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P05   - ; (T)
+B_BU2_N06 MC  bmc     269  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_N06   - ; (T)
+B_BU2_P07 MC  bmc     270  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P07   - ; (T)
+B_BU2_N08 MC  bmc     271  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_N08   - ; (T)
+B_BU2_P09 MC  bmc     272  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P09   - ; (T)
+B_BU2_N10 MC  bmc     273  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_N10   - ; (T) Removed, 11/15/22
+B_BU2_P11 MC  bmc     274  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BU2_P11   - ; (T)
+B_BL1_P01 MC  bmc     275  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P01   - ; (T)
+B_BL1_N02 MC  bmc     276  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_N02   - ; (T)
+B_BL1_P03 MC  bmc     277  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P03   - ; (T)
+B_BL1_N04 MC  bmc     278  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_N04   - ; (T) Removed, 11/15/22
+B_BL1_P05 MC  bmc     279  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P05   - ; (T)
+B_BL1_N06 MC  bmc     280  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_N06   - ; (T)
+B_BL1_P07 MC  bmc     281  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P07   - ; (T)
+B_BL1_N08 MC  bmc     282  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_N08   - ; (T)
+B_BL1_P09 MC  bmc     283  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P09   - ; (T)
+B_BL1_N10 MC  bmc     284  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_N10   - ; (T)
+B_BL1_P11 MC  bmc     285  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL1_P11   - ; (T)
+B_BL2_P01 MC  bmc     286  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P01   - ; (T)
+B_BL2_N02 MC  bmc     287  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_N02   - ; (T)
+B_BL2_P03 MC  bmc     288  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P03   - ; (T)
+B_BL2_N04 MC  bmc     289  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_N04   - ; (T)
+B_BL2_P05 MC  bmc     290  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P05   - ; (T)
+B_BL2_N06 MC  bmc     291  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_N06   - ; (T)
+B_BL2_P07 MC  bmc     292  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P07   - ; (T) 
+B_BL2_N08 MC  bmc     293  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_N08   - ; (T) 
+B_BL2_P09 MC  bmc     294  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P09   - ; (T)
+B_BL2_N10 MC  bmc     295  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_N10   - ; (T) Removed, 11/15/22
+B_BL2_P11 MC  bmc     296  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_BL2_P11   - ; (T)
+B_O1_P01  MC  bmc     297  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P01    - ; (T)
+B_O1_N02  MC  bmc     298  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N02    - ; (T) 
+B_O1_P03  MC  bmc     299  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P03    - ; (T)
+B_O1_N04  MC  bmc     300  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N04    - ; (T) Removed, 11/15/22 
+B_O1_P05  MC  bmc     301  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P05    - ; (T)
+B_O1_N06  MC  bmc     302  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N06    - ; (T) 
+B_O1_P07  MC  bmc     303  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P07    - ; (T)
+B_O1_N08  MC  bmc     304  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N08    - ; (T) 
+B_O1_P09  MC  bmc     305  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P09    - ; (T)
+B_O1_P10  MC  bmc     306  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P10    - ; (T) 
+B_O1_N11  MC  bmc     307  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N11    - ; (T) 
+B_O1_P12  MC  bmc     308  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P12    - ; (T)
+B_O1_N13  MC  bmc     309  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N13    - ; (T)
+B_O1_P14  MC  bmc     310  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P14    - ; (T)
+B_O1_N15  MC  bmc     311  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N15    - ; (T)
+B_O1_P16  MC  bmc     312  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P16    - ; (T)
+B_O1_N17  MC  bmc     313  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N17    - ; (T)
+B_O1_P18  MC  bmc     314  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P18    - ; (T)
+B_O1_N19  MC  bmc     315  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N19    - ; (T)
+B_O1_P20  MC  bmc     316  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P20    - ; (T) 
+B_O1_P21  MC  bmc     317  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P21    - ; (T)
+B_O1_N22  MC  bmc     318  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N22    - ; (T)
+B_O1_P23  MC  bmc     319  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P23    - ; (T)
+B_O1_N24  MC  bmc     320  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N24    - ; (T)
+B_O1_P25  MC  bmc     321  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P25    - ; (T)
+B_O1_N26  MC  bmc     322  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N26    - ; (T)
+B_O1_P27  MC  bmc     323  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P27    - ; (T)
+B_O1_N28  MC  bmc     324  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_N28    - ; (T)
+B_O1_P29  MC  bmc     325  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O1_P29    - ; (T)
+B_O2_P01  MC  bmc     326  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P01    - ; (T)
+B_O2_N02  MC  bmc     327  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N02    - ; (T)
+B_O2_P03  MC  bmc     328  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P03    - ; (T)
+B_O2_N04  MC  bmc     329  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N04    - ; (T) 
+B_O2_P05  MC  bmc     330  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P05    - ; (T)
+B_O2_N06  MC  bmc     331  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N06    - ; (T) 
+B_O2_P07  MC  bmc     332  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P07    - ; (T)
+B_O2_N08  MC  bmc     333  -  y  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N08    - ; (T) 
+B_O2_P09  MC  bmc     334  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P09    - ; (T)
+B_O2_P10  MC  bmc     335  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P10    - ; (T)
+B_O2_N11  MC  bmc     336  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N11    - ; (T)
+B_O2_P12  MC  bmc     337  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P12    - ; (T) 
+B_O2_N13  MC  bmc     338  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N13    - ; (T)
+B_O2_P14  MC  bmc     339  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P14    - ; (T)
+B_O2_N15  MC  bmc     340  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N15    - ; (T)
+B_O2_P16  MC  bmc     341  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P16    - ; (T)
+B_O2_N17  MC  bmc     342  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N17    - ; (T)
+B_O2_P18  MC  bmc     343  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P18    - ; (T)
+B_O2_N19  MC  bmc     344  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N19    - ; (T)
+B_O2_P20  MC  bmc     345  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P20    - ; (T)
+B_O2_P21  MC  bmc     346  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P21    - ; (T)
+B_O2_N22  MC  bmc     347  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N22    - ; (T)
+B_O2_P23  MC  bmc     348  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P23    - ; (T)
+B_O2_N24  MC  bmc     349  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N24    - ; (T)
+B_O2_P25  MC  bmc     350  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P25    - ; (T)
+B_O2_N26  MC  bmc     351  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N26    - ; (T)
+B_O2_P27  MC  bmc     352  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P27    - ; (T)
+B_O2_N28  MC  bmc     353  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_N28    - ; (T) Removed, 11/15/22
+B_O2_P29  MC  bmc     354  -  n  0.040  1.0e-3   1.0e-3   y  1.0        1.0 1.0  1  2.1e-3   AMB/PICKUP/B_O2_P29    - ; (T)
+;
+; Vessel segments
+;
+D1CL      VS  icoil    43  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
+D1CU      VS  icoil    44  -  c  0.200  0.5e3    0.50e+3  y  -5.700e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ;
+GBL       VS  icoil    45  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBL03    - ;
+GBU       VS  icoil    46  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-3  1.0 1.0  1  2.1e-3   VFBU03    - ;
+PSPL      VS  icoil    47  -  c  0.200  0.5e3    0.50e+3  y  -9.000e-4  1.0 1.0  1  2.1e-3   VFNLB05   - ;
+PSPU      VS  icoil    48  -  c  0.200  0.5e3    0.50e+3  y  -9.700e-4  1.0 1.0  1  2.1e-3   VFNUB05   - ;
+VS1L      VS  icoil    49  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB08    - ;
+VS2L      VS  icoil    50  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB12    - ;
+VS3L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -3.800e-4  1.0 1.0  1  2.1e-3   VFD1L04   - ;
+VS4L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3L03   - ;
+VS5L      VS  icoil    53  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL04    - ; 
+VS6L      VS  icoil    54  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL04    - ;
+VS7L      VS  icoil    55  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5L01   - ;
+VS1U      VS  icoil    56  -  c  0.200  0.5e3    0.50e+3  y  -1.200e-4  1.0 1.0  1  2.1e-3   VFCB05    - ;
+VS2U      VS  icoil    57  -  c  0.200  0.5e3    0.50e+3  y  -1.000e-4  1.0 1.0  1  2.1e-3   VFCB01    - ; For computed vessel segments,
+VS3U      VS  icoil    58  -  c  0.200  0.5e3    0.50e+3  y  -3.600e-4  1.0 1.0  1  2.1e-3   VFD1U04   - ; the conversion factor is an
+VS4U      VS  icoil    59  -  c  0.200  0.5e3    0.50e+3  y  -2.800e-4  1.0 1.0  1  2.1e-3   VFD3U03   - ; "effective resistance" which
+VS5U      VS  icoil    60  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; converts Voltage (V) to
+VS6U      VS  icoil    61  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXU07    - ; current (A)
+VS7U      VS  icoil    62  -  c  0.200  0.5e3    0.50e+3  y  -5.500e-4  1.0 1.0  1  2.1e-3   VFP5U01   - ; NOTE: absolute error is in (A)
+;;;VS6L      VS  icoil    51  -  c  0.200  0.5e3    0.50e+3  y  -2.200e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; Not available, try using XL_04
+;;;VS5L      VS  icoil    52  -  c  0.200  0.5e3    0.50e+3  y  -4.400e-4  1.0 1.0  1  2.1e-3   VFXL05    - ; 
+;
+; Run level
+;
+P1LEVEL   RL  none      1  -  c  0.000  0.00     0.00     n  1.00       1.0 1.0  1     0     NONE                 - ; Process 1 run level at each time
+;=====================================================================================================================================================================
+; Stated errors
+;--------------
+; Coil currents:
+;               
+; Flux loops:   
+;   CS flux loops: Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;   non-CS loops:  Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+; Mirnov coils:
+;  CS normal field Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+;Diamagnetic loop: Minimum useful signal: 
+;                  Resolution:            
+;                  Relative error:        
+;
+; NOTE: the values actually used above are taken from fields-only test shots. The
+;       actual error specs in practice can be larger than the stated general values.
+;
+;=========================================================================================
+; Definitions
+;------------
+;Name:        User defined signal name
+;sigl type:   Type of signal - used to determine importance of signal for fit and
+;                              the mathematical definitions of computed signals
+;map var:     compare this signal to the indicated map var when comparing measured and
+;             computed values
+;map indx:    Used to index multiple map vars and two-dimensional signals
+;             - negative value: Interpolate FE data to MD position in time plots
+; *** pending - negative value: Swap X and Y axes of MD data in profile plots          
+;MDS tree:    Designation for MDS+ tree name from which to read signal. Using an       
+;             identifier that is not in the DBsignaldesig.pro file (such as '-')       
+;             will result in the code using the default tree name in maincontrol.dat   
+;Read sig?:   y: read signal, n: skip signal, c: compute signal
+;             m: read multiple dimensional signal, p: process previous multi-dim signal
+;Error rel:   Relative error
+;Error abs:   absolute error
+;threshold:   When signal value is below threshold value, error = threshold value
+;Use err? :   y: compute error from rel,abs,thresh
+;             r: read error from database
+;Conv. fact:  Conversion factor for signal when read; when computed, a scalar used
+;             in computation
+;Pri:         signal "priority": certain signals are essential for reconstructions.
+;             Certain groups have "thresholds" below which reconstructions can not be
+;             computed. The sum of Pri must be greater than the threshold value for
+;             the reconstruction to occur.
+;Fit wgt:     signal fit weight (presently not used for weighting: If a signal is
+;             requested, Fit wgt is set to 1.0 internally)
+; *** pending - negative value: Normalize the mapped FE value in comparison plots
+;t idx:       index of "time" abscissa. This is equal to 1 by definition in a scalar
+;             signal vs. time. In multidimensional signals, this gives the index of the
+;             array corresponding to the "time" coordinate.
+;             - positive value: offset subtraction is not performed
+;             - negative value: offset subtraction performed on signal using t[0]
+;Smooth win:  Smoothing window for the signal in seconds
+;Designation: For read signals, these are the database designations of the signals.
+;             For computed signals, these are used to define the signal name used
+;             in the computation
+;=========================================================================================

@@ -961,11 +961,11 @@ class ODS(MutableMapping):
 
                     if (
                         'units' in info
-                        and isinstance(value, pint.quantity._Quantity)
+                        and isinstance(value, pint.Quantity)
                         or (
                             isinstance(value, numpy.ndarray)
                             and value.size
-                            and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)
+                            and isinstance(numpy.atleast_1d(value).flat[0], pint.Quantity)
                         )
                     ):
                         value = value.to(info['units']).magnitude
