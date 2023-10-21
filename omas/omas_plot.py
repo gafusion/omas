@@ -515,7 +515,8 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
         stime.on_changed(do_clean)
     stime.on_changed(update)
     for time0 in time:
-        axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        # axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        axtime.axvline(time0, color='r')
     return {'stime': (stime, axtime), 'ax': axs}
 
 
