@@ -2,6 +2,7 @@
 
 -------
 '''
+import pathlib
 
 # to start a mongodb server on the local workstation
 # mongod --dbpath $DIRECTORY_WHERE_TO_STORE_DATA
@@ -154,9 +155,9 @@ def get_mongo_credentials(server='', database='', collection=''):
     server = server.split('@')[-1]
     up = {'user': 'omas_test', 'pass': 'omas_test'}
     config = {}
-    filename = os.environ['HOME'] + '/.omas/mongo_credentials'
-    if os.path.exists(filename):
-        with open(filename) as f:
+    filepath = pathlib.Path.home() / '/.omas/mongo_credentials'
+    if filepath.exists():
+        with open(filepath) as f:
             config = json.loads(f.read())
     if 'default' in config:
         up = config['default']

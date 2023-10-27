@@ -305,7 +305,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     # handle default values for user, machine, pulse, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('dataset_description.data_entry.user', os.environ['USER'])
+        user = ods.get('dataset_description.data_entry.user', os.environ.get('USER', 'default_user'))
     if machine is None:
         machine = ods.get('dataset_description.data_entry.machine', None)
     if pulse is None:
@@ -685,7 +685,7 @@ def browse_imas(
     """
     # if no users are specified, find all users
     if user is None:
-        user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+        user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'default_user'), '/*/'))
         user = list(map(lambda x: x.split(os.sep)[-3], user))
     elif isinstance(user, str):
         user = [user]
@@ -694,7 +694,7 @@ def browse_imas(
     imasdb = {}
     for username in user:
         imasdb[username] = {}
-        imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
+        imasdbdir = user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'default_user'), '/%s/' % username).strip()
 
         # find MDS+ datafiles
         files = list(recursive_glob('*datafile', imasdbdir))
@@ -942,7 +942,7 @@ def through_omas_imas(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    user = os.environ['USER']
+    user = os.environ.get('USER', 'default_user')
     machine = 'ITER'
     pulse = 1
     run = 0

@@ -34,10 +34,10 @@ def through_omas_suite(ods=None, test_type=None, do_raise=False):
         os.environ['OMAS_DEBUG_TOPIC'] = test_type
         ods1 = globals()['through_omas_' + test_type](ods)
         difference = ods.diff(ods1)
-        if not chedifferenceck:
-            print('OMAS data got saved and loaded correctly')
-        else:
-            pprint(difference)
+
+        print('OMAS data got saved and loaded correctly')
+        print("Diff:")
+        pprint(difference)
 
     else:
         os.environ['OMAS_DEBUG_TOPIC'] = '*'

@@ -3,7 +3,7 @@ import warnings
 import os
 
 hard_warnings = True
-print('Setting up OMAS warnings for user {}'.format(os.environ['USER']))
+print('Setting up OMAS warnings for user {}'.format(os.environ.get('USER', 'default_user')))
 
 
 def set_omas_warnings():
