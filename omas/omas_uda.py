@@ -57,12 +57,12 @@ def load_omas_uda(
 
     if server is not None:
         pyuda.Client.server = server
-    elif not os.environ['UDA_HOST']:
+    elif not os.environ.get('UDA_HOST'):
         raise pyuda.UDAException('Must set UDA_HOST environmental variable')
 
     if port is not None:
         pyuda.Client.port = port
-    elif not os.environ['UDA_PORT']:
+    elif not os.environ.get('UDA_PORT'):
         raise pyuda.UDAException('Must set UDA_PORT environmental variable')
 
     # set this to get pyuda metadata (maybe of interest for future use):

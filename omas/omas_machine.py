@@ -148,7 +148,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             return ods
     else:
         return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
-    
+
 def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=None):
     """
     Routine to resolve a mapping
@@ -206,7 +206,11 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     # ENVIRONMENTAL VARIABLE
     elif 'ENVIRON' in mapped:
-        data0 = data = os.environ[mapped['ENVIRON'].format(**options_with_defaults)]
+        data0 = data = os.environ.get(mapped['ENVIRON'].format(**options_with_defaults))
+        if data is None:
+            raise ValueError(
+                f'Environmental variable {mapped["ENVIRON"].format(**options_with_defaults)} is not defined'
+            )
 
     # PYTHON
     elif 'PYTHON' in mapped:
