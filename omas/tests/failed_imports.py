@@ -42,7 +42,8 @@ try:
     from botocore.exceptions import NoCredentialsError
     import boto3
 
-    if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', pathlib.Path.home() + '/.aws/config')):
+    aws_confi_path = pathlib.Path(os.environ.get('AWS_CONFIG_FILE', pathlib.Path.home() / '/.aws/config'))
+    if not aws_confi_path.exists():
         raise RuntimeError('Missing AWS configuration file ~/.aws/config')
     failed_S3 = False
 except (ImportError, RuntimeError, NoCredentialsError) as _excp:
