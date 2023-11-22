@@ -478,7 +478,8 @@ def load_omas_imas(
     skip_uncertainties=False,
     consistency_check=True,
     verbose=True,
-    backend='MDSPLUS'
+    backend='MDSPLUS',
+    raise_exceptions=False
 ):
     """
     Load OMAS data from IMAS
@@ -506,6 +507,8 @@ def load_omas_imas(
     :param verbose: print loading progress
 
     :param backend: Which backend to use, can be one of MDSPLUS, ASCII, HDF5, MEMORY, UDA, NO
+
+    :param raise_exceptions: Raise an exception is a requested path does not have data/does not exist in the schema
 
     :return: OMAS data set
     """
@@ -576,7 +579,9 @@ def load_omas_imas(
                     # get data from IDS
                     data = imas_get(ids, path, None)
                     # continue for empty data
-                    if data is None:
+                    if data is None and raise_exceptions:
+                        raise ValueError(f"Path {path} does not have data!")
+                    elif data is None:
                         continue
                     # add uncertainty
                     if not skip_uncertainties and l2i(path[:-1] + [path[-1] + '_error_upper']) in joined_fetch_paths:
