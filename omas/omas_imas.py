@@ -479,7 +479,8 @@ def load_omas_imas(
     consistency_check=True,
     verbose=True,
     backend='MDSPLUS',
-    raise_exceptions=False
+    raise_exceptions=False,
+    ext_ids=None
 ):
     """
     Load OMAS data from IMAS
@@ -510,6 +511,8 @@ def load_omas_imas(
 
     :param raise_exceptions: Raise an exception is a requested path does not have data/does not exist in the schema
 
+    :param ext_ids: Either None, or an ids object to load data from. Skips loading process.
+    
     :return: OMAS data set
     """
 
@@ -519,10 +522,11 @@ def load_omas_imas(
     printd(
         'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
     )
-
     try:
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose, backend=backend)
-
+        if ext_ids is None:
+            ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose, backend=backend)
+        else:
+            ids = ext_ids
         if imas_version is None:
             try:
                 imas_version = ids.dataset_description.imas_version
