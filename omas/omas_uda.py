@@ -57,12 +57,12 @@ def load_omas_uda(
 
     if server is not None:
         pyuda.Client.server = server
-    elif not os.environ['UDA_HOST']:
+    elif not os.environ.get('UDA_HOST'):
         raise pyuda.UDAException('Must set UDA_HOST environmental variable')
 
     if port is not None:
         pyuda.Client.port = port
-    elif not os.environ['UDA_PORT']:
+    elif not os.environ.get('UDA_PORT'):
         raise pyuda.UDAException('Must set UDA_PORT environmental variable')
 
     # set this to get pyuda metadata (maybe of interest for future use):
@@ -145,7 +145,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
         keys = range(n)
 
     # kid must be part of this list
-    if len(requested_paths):
+    if len(list(requested_paths)):
         request_check = [p[0] for p in requested_paths]
 
     # traverse
@@ -179,7 +179,7 @@ def filled_paths_in_uda(ods, client, pulse, run, ds, path, paths, requested_path
 
         # generate requested_paths one level deeper
         propagate_requested_paths = requested_paths
-        if len(requested_paths):
+        if len(list(requested_paths)):
             if kid in request_check or (isinstance(kid, int) and ':' in request_check):
                 propagate_requested_paths = [p[1:] for p in requested_paths if len(p) > 1 and (kid == p[0] or p[0] == ':')]
             else:
