@@ -1,1 +1,1 @@
-../../../requirements_python3.txt
+../../../requirements.txt

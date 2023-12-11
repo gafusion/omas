@@ -4,127 +4,25 @@
   "_common",
   "_efit"
  ],
- "__mdsserver__": "skylark.pppl.gov:8000",
  "__options__": {
-  "EFIT_tree": "EFIT01",
-  "MSE_Er_correction": true,
-  "MSE_revision": "ANALYSIS",
-  "edition": "CT1"
- },
- "charge_exchange.channel.:": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:.t_i.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:.t_i.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:.velocity_tor.data": {
-  "COCOSIO": 11,
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.ion.:.velocity_tor.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.name": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.position.r.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.position.r.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.position.z.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.position.z.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.zeff.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.channel.:.zeff.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.ids_properties.homogeneous_time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "charge_exchange.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
- },
- "equilibrium.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:": {
-  "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.boundary.outline.r": {
-  "PYTHON": "MDS_gEQDSK_bbbs_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.boundary.outline.z": {
-  "PYTHON": "MDS_gEQDSK_bbbs_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.global_quantities.psi_axis": {
-  "COCOSIO": 11,
-  "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.global_quantities.psi_boundary": {
-  "COCOSIO": 11,
-  "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.profiles_1d.psi": {
-  "COCOSIO": 11,
-  "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
-  "PYTHON": "MDS_gEQDSK_psi_nstx(ods, {pulse}, {EFIT_tree!r})"
- },
- "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
-  "treename": "{EFIT_tree}"
+  "port": null,
+  "server": null
  },
  "magnetics.b_field_pol_probe.:": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.b_field_pol_probe.:.field.data": {
   "COCOSIO": 11,
-  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.b_field_pol_probe.:.field.data_error_upper": {
-  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.b_field_pol_probe.:.field.time": {
-  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.b_field_pol_probe.:.field.validity": {
-  "PYTHON": "magnetics_probes_data(ods, {pulse})"
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.b_field_pol_probe.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -172,16 +70,16 @@
  },
  "magnetics.flux_loop.:.flux.data": {
   "COCOSIO": 11,
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -206,67 +104,63 @@
  },
  "magnetics.ip.:.data": {
   "COCOSIO": 11,
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.ip.:.data_error_upper": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "magnetics.ip.:.time": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r})"
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.active_spatial_resolution.:": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r})"
- },
- "mse.channel.:.active_spatial_resolution.:.centre.phi": {
-  "COCOSIO": 11,
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.centre.r": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.centre.z": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.geometric_coefficients": {
   "COCOSIO": 11,
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.active_spatial_resolution.:.time": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.name": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.polarisation_angle.data": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.polarisation_angle.data_error_upper": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.polarisation_angle.time": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.polarisation_angle.validity": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "mse.channel.:.polarisation_angle.validity_timed": {
-  "PYTHON": "mse_data(ods, {pulse}, {MSE_revision!r}, {MSE_Er_correction!r})"
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "pf_active.coil.:.current.data": {
   "COCOSIO": 11,
-  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "pf_active.coil.:.current.data_error_upper": {
-  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "pf_active.coil.:.current.time": {
-  "PYTHON": "pf_active_coil_current_data(ods, {pulse})"
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "pf_active.coil.:.element.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
@@ -309,16 +203,16 @@
  },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 11,
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "tf.b_field_tor_vacuum_r.data_error_upper": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "tf.b_field_tor_vacuum_r.time": {
-  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
  },
  "tf.r0": {
-  "VALUE": 0.941
+  "VALUE": 0.8
  },
  "thomson_scattering.channel.:": {
   "PYTHON": "thomson_scattering_hardware(ods, {pulse} )"
@@ -352,29 +246,5 @@
  },
  "thomson_scattering.channel.:.t_e.time": {
   "PYTHON": "thomson_scattering_data(ods, {pulse})"
- },
- "wall.description_2d.:": {
-  "VALUE": 1
- },
- "wall.description_2d.:.limiter.unit.:": {
-  "VALUE": 1
- },
- "wall.description_2d.:.limiter.unit.:.outline.r": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RLIM",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
- },
- "wall.description_2d.:.limiter.unit.:.outline.z": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZLIM",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
  }
 }

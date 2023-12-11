@@ -366,6 +366,12 @@ def pf_active_hardware(ods, pulse):
     mhdin.to_omas(ods, update='pf_active')
 
     coil_names = [
+        'ECOILA',
+        'ECOILB',
+        'E567UP',
+        'E567DN',
+        'E89DN',
+        'E89UP',
         'F1A',
         'F2A',
         'F3A',
@@ -384,12 +390,6 @@ def pf_active_hardware(ods, pulse):
         'F7B',
         'F8B',
         'F9B',
-        'ECOILA',
-        'ECOILB',
-        'E567UP',
-        'E567DN',
-        'E89DN',
-        'E89UP',
     ]
     for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
@@ -412,7 +412,7 @@ def pf_active_coil_current_data(ods, pulse):
             ods1,
             pulse,
             channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.element.0.identifier',
+            identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
@@ -435,6 +435,15 @@ def pf_active_coil_current_data(ods, pulse):
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
             ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+
+        # IMAS stores the current in the coil not multiplied by the number of turns
+        for channel in ods1['pf_active.coil']:
+            if f'pf_active.coil.{channel}.current.data' in ods:
+                if 'F' in f'pf_active.coil.{channel}.identifier':
+                    ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+                    ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+            else:
+                print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
 # ================================

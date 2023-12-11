@@ -3,7 +3,7 @@
 -------
 '''
 
-from scipy.interpolate.fitpack2 import RectBivariateSpline
+from scipy.interpolate import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -945,6 +945,12 @@ def equilibrium_form_constraints(
                             ods_n[
                                 f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
                             ] = numpy.nan
+               
+                ods_n['mse.channel.:.active_spatial_resolution[0].geometric_coefficients']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.r']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.z']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.phi']
+
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
 
