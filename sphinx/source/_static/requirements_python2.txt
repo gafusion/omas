@@ -1,1 +1,0 @@
-../../../requirements_python2.txt
