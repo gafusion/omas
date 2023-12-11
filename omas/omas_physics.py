@@ -879,7 +879,7 @@ def summary_greenwald(ods, update=True):
                 % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]
             },
         ):
-            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
+            ne = ods['core_profiles.profiles_1d.%d.electrons.density' % time_index]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
