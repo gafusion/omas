@@ -52,7 +52,7 @@ class TestOmasPlot(UnittestCaseOmas):
         pyplot.close()
 
     def test_quantity(self):
-        self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal', '$n_e$', lw=2)
+        self.ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density', '$n_e$', lw=2)
         self.ods.plot_quantity('@core.*elec.*dens', '$n_e$', lw=2)
         try:
             self.ods.plot_quantity('@core.*')

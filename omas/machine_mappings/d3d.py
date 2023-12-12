@@ -1408,7 +1408,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
         query["ion[1].density_fit.psi_norm"] = "PS_N_C"
         query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
-        query["ion[1].density_fit.psi_norm"] = "PS_T_C"
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
         #query["j_total"] = "J_TOT"
         #query["pressure_perpendicular"] = "P_TOT"
@@ -1473,7 +1472,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         profiles_node = '\\TOP.PROFILES.'
         query = {
             "electrons.density": "EDENSFIT",
-            "electrons.density_thermal": "EDENSFIT",
             "electrons.temperature": "ETEMPFIT"
         }
         for entry in query:
@@ -1490,6 +1488,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                 continue
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):
