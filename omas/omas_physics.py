@@ -291,6 +291,12 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
 
     :return: Transformed values
     """
+    if origin == "psi_norm" or origin == "rho_pol_norm":
+        if origin == "rho_pol_norm":
+            values = values**2
+        return (values * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+               - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+               + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
     if origin == "rho_pol_norm":
         return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
@@ -335,10 +341,14 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
 
         :return: Transformed values
     """
-    if destination == "rho_pol_norm":
-        return np.sqrt((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]) /
-                       (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
-                        - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+    if destination == "psi_norm" or destination == "rho_pol_norm":
+        psi_n = ((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                 / (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+        if destination == "rho_pol_norm":
+            return np.sqrt(psi_n)
+        else:
+            return psi_n
     elif destination == "rho_tor_norm":
         mask = mask_SOL(ods, time_index, values)
         phi = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", values[mask])
@@ -458,17 +468,17 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
     )
     cocos = define_cocos(11)
-    if quantity == "b_r":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
+    if quantity == "b_field_r":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
             psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_z":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
+    elif quantity == "b_field_z":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
             -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_tor":
+    elif quantity == "b_field_tor":
         mask = numpy.logical_and(
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
             < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
@@ -478,11 +488,11 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         f_spl = InterpolatedUnivariateSpline(
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
             f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask == False] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
         )
         return ods
@@ -987,7 +997,7 @@ def summary_greenwald(ods, update=True):
                 % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]
             },
         ):
-            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
+            ne = ods['core_profiles.profiles_1d.%d.electrons.density' % time_index]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
@@ -1051,11 +1061,11 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_spl = RectBivariateSpline(Rgrid, Zgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
     ne = numpy.interp(rhon_eq, rhon_cp, ne)
     tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
 
@@ -1105,7 +1115,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
             ne_line = numpy.trapz(ne_interp)
             ne_line /= abs(i2 - i1)
@@ -1239,7 +1249,7 @@ def summary_taue(ods, thermal=True, update=True):
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi}):
             volume = equilibrium_ods['profiles_1d']['volume']
             kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
-            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
@@ -1542,7 +1552,7 @@ def core_profiles_pressures(ods, update=True):
 
         __p__ = None
         if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
-            __p__ = nominal_values(prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e)
+            __p__ = nominal_values(prof1d['electrons']['density'] * prof1d['electrons']['temperature'] * constants.e)
         elif 'pressure_thermal' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_thermal'])
 
@@ -2615,6 +2625,26 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
 
     return match
 
+@add_to__ALL__
+def get_plot_scale_and_unit(phys_quant, species=None):
+    """
+    Returns normalizing scale for a physical quantity.
+    E.g. "temprerature" returns 1.e-3 and keV
+    :param phys_qaunt: str with a physical quantity. Uses IMAS scheme names where possible
+    :return: scale, unit
+    """
+    if "temperature" in phys_quant:
+        return 1.e-3, r"\mathrm{keV}"
+    elif "density" in phys_quant :
+        if species is not None and species not in ["H", "D", "He"]:
+            return 1.e-18, r"\times 10^{18}\,\mathrm{m}^{-3}"
+        else:
+            return 1.e-19, r"\times 10^{19}\,\mathrm{m}^{-3}"
+    elif "velocity" in  phys_quant:
+        return 1.e-6, r"\mathrm{Mm}\,\mathrm{s}^{-1}"
+    elif "e_field" in phys_quant:
+        return 1.e-3, r"\mathrm{kV}\,\mathrm{m}^{-1}"
+    
 
 @add_to__ALL__
 def define_cocos(cocos_ind):

@@ -80,7 +80,7 @@ def imas_open(user, machine, pulse, run, occurrence={}, new=False, imas_major_ve
     return IDS(DBentry, occurrence)
 
 
-def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
+def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False, ids_is_subtype=False, only_allocate=True):
     """
     assign a value to a path of an open IMAS ids
 
@@ -100,21 +100,25 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
     :return: path if set was done, otherwise None
     """
     # handle uncertain data
+    if type(path) != list:
+        path = p2l(path)
     if is_uncertain(value):
         path = copy.deepcopy(path)
-        tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        tmp = imas_set(ids, path, nominal_values(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate, only_allocate=only_allocate)
         path[-1] = path[-1] + '_error_upper'
-        imas_set(ids, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate)
+        imas_set(ids, path, std_devs(value), skip_missing_nodes=skip_missing_nodes, allocate=allocate, only_allocate=only_allocate)
         return tmp
-
     ds = path[0]
     path = path[1:]
 
     # identify data dictionary to use, from this point on `m` points to the IDS
     debug_path = ''
-    if hasattr(ids, ds):
+    if hasattr(ids, ds) or ids_is_subtype:
         debug_path += '%s' % ds
-        m = getattr(ids, ds)
+        if ids_is_subtype:
+            m = ids
+        else:
+            m = getattr(ids, ds)
         if hasattr(m, 'time') and not isinstance(m.time, float) and not m.time.size:
             m.time= numpy.resize(m.time, 1)
             m.time[0] = -1.0
@@ -130,13 +134,32 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
 
     # traverse IMAS structure until reaching the leaf
     out = m
+    done = allocate
     for kp, p in enumerate(path):
         location = l2i([ds] + path[: kp + 1])
         if isinstance(p, str):
-            if hasattr(out, p):
+            if p == ":":
+                if allocate and len(out) != len(value):
+                    out.resize(len(value))
+                    done = True
+                if kp == len(path) - 1:
+                    break
+                else:
+                    if len(value) == 1:
+                        out = out[0]
+                        break
+                    else:
+                        for i in range(value.shape[0]):
+                            if len(path[kp + 1:]) == 1:
+                                setattr(out[i], path[-1], value[i])
+                            else:
+                                imas_set(out[i], path[kp + 1:], value[i], skip_missing_nodes=False, allocate=allocate,only_allocate=only_allocate)
+                    return [ds] + path
+            elif hasattr(out, p):
                 if kp < (len(path) - 1):
                     debug_path += '.' + p
                     out = getattr(out, p)
+            
             elif skip_missing_nodes is not False:
                 if skip_missing_nodes is None:
                     printe('WARNING: %s is not part of IMAS' % location)
@@ -157,7 +180,7 @@ def imas_set(ids, path, value, skip_missing_nodes=False, allocate=False):
                 out = out[p]
 
     # if we are allocating data, simply stop here
-    if allocate:
+    if done and only_allocate:
         return [ds] + path
 
     # assign data to leaf node
@@ -305,7 +328,7 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
     # handle default values for user, machine, pulse, run, imas_version
     # it tries to re-use existing information
     if user is None:
-        user = ods.get('dataset_description.data_entry.user', os.environ['USER'])
+        user = ods.get('dataset_description.data_entry.user', os.environ.get('USER', 'default_user'))
     if machine is None:
         machine = ods.get('dataset_description.data_entry.machine', None)
     if pulse is None:
@@ -685,7 +708,7 @@ def browse_imas(
     """
     # if no users are specified, find all users
     if user is None:
-        user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ['USER'], '/*/'))
+        user = glob.glob(user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'default_user'), '/*/'))
         user = list(map(lambda x: x.split(os.sep)[-3], user))
     elif isinstance(user, str):
         user = [user]
@@ -694,7 +717,7 @@ def browse_imas(
     imasdb = {}
     for username in user:
         imasdb[username] = {}
-        imasdbdir = user_imasdbdir.replace('/%s/' % os.environ['USER'], '/%s/' % username).strip()
+        imasdbdir = user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'default_user'), '/%s/' % username).strip()
 
         # find MDS+ datafiles
         files = list(recursive_glob('*datafile', imasdbdir))
@@ -942,7 +965,7 @@ def through_omas_imas(ods, method=['function', 'class_method'][1]):
 
     :return: ods
     """
-    user = os.environ['USER']
+    user = os.environ.get('USER', 'default_user')
     machine = 'ITER'
     pulse = 1
     run = 0
