@@ -31,7 +31,7 @@ print('Data output with units support: %s' % outvalue)
 # how to manipulate data that has units
 ods.sample()
 with omas_environment(ods, unitsio=True):
-    ne = ods['core_profiles.profiles_1d.0.electrons.density_thermal']
+    ne = ods['core_profiles.profiles_1d.0.electrons.density']
     print(f'Mean density in  m^-3: {numpy.mean(ne.to("m^-3").magnitude):3.3g}')
     print(f'Mean density in cm^-3: {numpy.mean(ne.to("cm^-3").magnitude):3.3g}')
 

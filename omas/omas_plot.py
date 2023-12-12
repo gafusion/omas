@@ -765,7 +765,10 @@ def equilibrium_CX(
     if levels is None and value_1d is not None:
         if contour_quantity == 'q':
             max_q = int(numpy.round(omas_interp1d(0.95, x_value_1d, value_1d)))
-            levels = numpy.arange(max_q)
+            levels = numpy.arange(numpy.abs(max_q))
+            if max_q < 0:
+                levels *= -1
+                levels = levels[::-1]
         else:
             levels = numpy.linspace(numpy.min(value_1d), numpy.max(value_1d), 11)[1:-1]
             levels = numpy.hstack((levels, levels[-1] + (levels[1] - levels[0]) * numpy.arange(100)[1:]))
@@ -802,8 +805,10 @@ def equilibrium_CX(
             r = scipy.ndimage.zoom(r, sf)
             z = scipy.ndimage.zoom(z, sf)
             value_2d = scipy.ndimage.zoom(value_2d, sf)
-
-        cs = ax.contour(r, z, value_2d, levels, **kw)
+        if levels is not None:
+            cs = ax.contour(r, z, value_2d, levels, **kw)
+        else:
+            cs = ax.contour(r, z, value_2d, **kw)
 
         if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
             ax.clabel(cs)
@@ -1201,7 +1206,7 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
-                          ods_species=None, quantities=['density_thermal', 'temperature'], 
+                          ods_species=None, quantities=['density', 'temperature'], 
                           x_axis = "rho_tor_norm", **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
@@ -1295,8 +1300,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     # else:
-                    if (q + "_error_upper" in prof1d[specie]
-                        and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"])):
+                    if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
                         plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
                                              prof1d[specie][q + "_error_upper"]*scale))
                     else:

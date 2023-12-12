@@ -1477,7 +1477,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         profiles_node = '\\TOP.PROFILES.'
         query = {
             "electrons.density": "EDENSFIT",
-            "electrons.density_thermal": "EDENSFIT",
             "electrons.temperature": "ETEMPFIT"
         }
         for entry in query:
@@ -1500,7 +1499,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 if isinstance(data[entry], Exception):
                     continue
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
-
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
