@@ -102,13 +102,13 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     .. code-block:: python
 
-        ods['core_profiles.profiles_1d.0.electrons.density_thermal'].xarray()
+        ods['core_profiles.profiles_1d.0.electrons.density'].xarray()
 
 14. Conveniently **plot individual quantities**:
 
     .. code-block:: python
 
-        ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
+        ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density')
 
 15. **Use regular expressions** with ``@`` construct for accessing data and plotting:
 

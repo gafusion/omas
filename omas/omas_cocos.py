@@ -83,8 +83,8 @@ _cocos_signals['camera_x_rays.camera.pixel_position.phi']='?'                   
 _cocos_signals['camera_x_rays.filter_window.centre.phi']='?'                               #[ADD?]# 2.000000 # phi  [rad]
 
 # CHARGE_EXCHANGE
-_cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='?'                                 #[ADD?]# 2.666667 # velocity  _pol  [m.s^-1]
-_cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='?'                                 #[ADD?]# 2.666667 # velocity  _tor  [m.s^-1]
+_cocos_signals['charge_exchange.channel.:.ion.:.velocity_pol.data']='POL'                                      # 2.666667 # velocity  _pol  [m.s^-1]
+_cocos_signals['charge_exchange.channel.:.ion.:.velocity_tor.data']='TOR'                                      # 2.666667 # velocity  _tor  [m.s^-1]
 _cocos_signals['charge_exchange.channel.:.momentum_tor.data']='?'                                       #[ADD?]# 2.500000 # momentum  _tor  [kg.m^-1.s^-1]
 _cocos_signals['charge_exchange.aperture.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]
 _cocos_signals['charge_exchange.channel.:.position.phi.data']='TOR'                                            # 1.800000 # phi  [rad]
@@ -840,6 +840,7 @@ _cocos_signals['magnetics.b_field_pol_probe.:.voltage.data']='POL'              
 _cocos_signals['magnetics.b_field_tor_probe.:.field.data']='TOR'                                           # 1.500000 # b  b_field  [T]
 _cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='TOR'                                         # 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.ip.:.data']='TOR'                                                                # 1.333333 # ip  [A]
+_cocos_signals['magnetics.flux_loop.:.flux.data']='PSI'                                             #[DEL?]# -1.000000 # flux
 
 # MHD
 _cocos_signals['mhd.ggd.:.b_field_tor.:.values']='?'                                               #[ADD?]# 2.800000 # b  b_field  _tor  [T]
