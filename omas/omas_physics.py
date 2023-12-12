@@ -943,11 +943,11 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_spl = RectBivariateSpline(Rgrid, Zgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
     ne = numpy.interp(rhon_eq, rhon_cp, ne)
     tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
 
@@ -997,7 +997,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
             ne_line = numpy.trapz(ne_interp)
             ne_line /= abs(i2 - i1)
@@ -1131,7 +1131,7 @@ def summary_taue(ods, thermal=True, update=True):
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi}):
             volume = equilibrium_ods['profiles_1d']['volume']
             kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
-            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
+            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
@@ -1434,7 +1434,7 @@ def core_profiles_pressures(ods, update=True):
 
         __p__ = None
         if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
-            __p__ = nominal_values(prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e)
+            __p__ = nominal_values(prof1d['electrons']['density'] * prof1d['electrons']['temperature'] * constants.e)
         elif 'pressure_thermal' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_thermal'])
 
