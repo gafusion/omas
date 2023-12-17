@@ -1389,15 +1389,15 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
-            "electrons.density": "N_E",
+            "electrons.density_thermal": "N_E",
             "electrons.density_fit.measured": "RW_N_E",
             "electrons.temperature": "T_E",
             "electrons.temperature_fit.measured": "RW_T_E",
-            "ion[0].density": "N_D",
+            "ion[0].density_thermal": "N_D",
             "ion[0].temperature": "T_D",
             "ion[1].velocity.toroidal": "V_TOR_C",
             "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
-            "ion[1].density": "N_C",
+            "ion[1].density_thermal": "N_C",
             "ion[1].density_fit.measured": "RW_N_C",
             "ion[1].temperature": "T_C",
             "ion[1].temperature_fit.measured": "RW_T_C",
@@ -1426,8 +1426,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
-        # for density in densities:
-        #     data[density] *= 1.e6
+        # for density_thermal in densities:
+        #     data[density_thermal] *= 1.e6
         for unc in ["", "_error_upper"]:
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
@@ -1470,7 +1470,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
-            "electrons.density": "EDENSFIT",
+            "electrons.density_thermal": "EDENSFIT",
             "electrons.temperature": "ETEMPFIT"
         }
         for entry in query:

@@ -879,7 +879,7 @@ def summary_greenwald(ods, update=True):
                 % time_index: ods['equilibrium.time_slice.%s.profiles_1d.rho_tor_norm' % time_index]
             },
         ):
-            ne = ods['core_profiles.profiles_1d.%d.electrons.density' % time_index]
+            ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
@@ -947,7 +947,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
-    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
+    ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
     ne = numpy.interp(rhon_eq, rhon_cp, ne)
     tck = scipy.interpolate.splrep(psi_eq, ne, k=3)
 
@@ -1131,7 +1131,7 @@ def summary_taue(ods, thermal=True, update=True):
         with omas_environment(ods, coordsio={'equilibrium.time_slice.0.profiles_1d.psi': psi}):
             volume = equilibrium_ods['profiles_1d']['volume']
             kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
-            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density']
+            ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
             ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
@@ -1434,7 +1434,7 @@ def core_profiles_pressures(ods, update=True):
 
         __p__ = None
         if 'density_thermal' in prof1d['electrons'] and 'temperature' in prof1d['electrons']:
-            __p__ = nominal_values(prof1d['electrons']['density'] * prof1d['electrons']['temperature'] * constants.e)
+            __p__ = nominal_values(prof1d['electrons']['density_thermal'] * prof1d['electrons']['temperature'] * constants.e)
         elif 'pressure_thermal' in prof1d['electrons']:
             __p__ = nominal_values(prof1d['electrons']['pressure_thermal'])
 

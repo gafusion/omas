@@ -1191,7 +1191,7 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
 
 @add_to__ODS__
 def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
-                          ods_species=None, quantities=['density', 'temperature'], 
+                          ods_species=None, quantities=['density_thermal', 'temperature'], 
                           x_axis = "rho_tor_norm", **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
