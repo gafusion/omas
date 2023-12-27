@@ -1806,7 +1806,7 @@ class ODS(MutableMapping):
             orig_value = orig_value + [value]
         else:
             key = p2l(key)
-            raise IndexError('%s has length %d and time_index %d is bejond current range' % (l2o(key), len(orig_value), time_index))
+            raise IndexError('%s has length %d and time_index %d is beyond current range' % (l2o(key), len(orig_value), time_index))
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value

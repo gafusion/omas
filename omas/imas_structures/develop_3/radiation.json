@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "radiation.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "radiation.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -116,6 +132,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "radiation.grid_ggd[:].grid_subset": {
@@ -859,10 +876,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "radiation.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "radiation/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "radiation.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "radiation.ids_properties.occurrence"
+ },
+ "radiation.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "radiation/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "radiation.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "radiation/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "radiation/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "radiation/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "radiation.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -884,6 +939,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -919,6 +982,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -970,6 +1041,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1027,6 +1106,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "radiation.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "radiation.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1070,6 +1157,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "radiation/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "radiation.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "radiation/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1204,6 +1299,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "radiation.process[:].ggd[:].electrons": {
@@ -1278,7 +1374,7 @@
  },
  "radiation.process[:].ggd[:].electrons.emissivity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "radiation/process(i1)/ggd(itime)/electrons/emissivity(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1517,7 +1613,7 @@
  },
  "radiation.process[:].ggd[:].ion[:].emissivity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/emissivity(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1667,7 +1763,7 @@
  },
  "radiation.process[:].ggd[:].ion[:].state[:].emissivity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/state(i3)/emissivity(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2048,7 +2144,7 @@
  },
  "radiation.process[:].ggd[:].neutral[:].emissivity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/emissivity(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2198,7 +2294,7 @@
  },
  "radiation.process[:].ggd[:].neutral[:].state[:].emissivity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/state(i3)/emissivity(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2337,6 +2433,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_global",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "radiation.process[:].global_quantities[:].inside_lcfs": {
@@ -2658,6 +2755,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "radiation_process_profiles_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].electrons": {

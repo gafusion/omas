@@ -2,7 +2,7 @@
  "edge_profiles": {
   "documentation": "Edge plasma profiles (includes the scrape-off layer and possibly part of the confined plasma)",
   "full_path": "edge_profiles",
-  "lifecycle_last_change": "3.38.1",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -22,6 +22,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "edge_profiles.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "edge_profiles.code.library": {
   "coordinates": [
    "1...N"
@@ -37,6 +45,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_profiles/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_profiles.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -117,7 +133,120 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "edge_profiles_time_slice",
+  "timebasepath": "time",
   "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].a_field_parallel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Parallel (to the local magnetic field) component of the magnetic vector potential, given on various grid subsets",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].coefficients": {
+  "coordinates": [
+   "edge_profiles.ggd[:].a_field_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].coefficients_error_lower": {
+  "coordinates": [
+   "edge_profiles.ggd[:].a_field_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].coefficients_error_upper": {
+  "coordinates": [
+   "edge_profiles.ggd[:].a_field_parallel[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/grid_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/grid_subset_index",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/values(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/values_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "edge_profiles.ggd[:].a_field_parallel[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "edge_profiles/ggd(itime)/a_field_parallel(i1)/values_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "T.m"
  },
  "edge_profiles.ggd[:].e_field": {
   "coordinates": [
@@ -225,7 +354,7 @@
  },
  "edge_profiles.ggd[:].e_field[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -824,7 +953,7 @@
  },
  "edge_profiles.ggd[:].electrons.density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/density(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -935,7 +1064,7 @@
  },
  "edge_profiles.ggd[:].electrons.density_fast[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/density_fast(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1046,7 +1175,7 @@
  },
  "edge_profiles.ggd[:].electrons.distribution_function[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/distribution_function(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1157,7 +1286,7 @@
  },
  "edge_profiles.ggd[:].electrons.pressure[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/pressure(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1268,7 +1397,7 @@
  },
  "edge_profiles.ggd[:].electrons.pressure_fast_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/pressure_fast_parallel(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1379,7 +1508,7 @@
  },
  "edge_profiles.ggd[:].electrons.pressure_fast_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/pressure_fast_perpendicular(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1490,7 +1619,7 @@
  },
  "edge_profiles.ggd[:].electrons.temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/temperature(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1642,7 +1771,7 @@
  },
  "edge_profiles.ggd[:].electrons.velocity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2245,7 +2374,7 @@
  },
  "edge_profiles.ggd[:].ion[:].density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/density(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2356,7 +2485,7 @@
  },
  "edge_profiles.ggd[:].ion[:].density_fast[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/density_fast(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2584,7 +2713,7 @@
  },
  "edge_profiles.ggd[:].ion[:].energy_density_kinetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/energy_density_kinetic(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2716,7 +2845,7 @@
  },
  "edge_profiles.ggd[:].ion[:].pressure[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/pressure(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2827,7 +2956,7 @@
  },
  "edge_profiles.ggd[:].ion[:].pressure_fast_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/pressure_fast_parallel(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2938,7 +3067,7 @@
  },
  "edge_profiles.ggd[:].ion[:].pressure_fast_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/pressure_fast_perpendicular(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2986,7 +3115,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state": {
   "coordinates": [
-   "1...N_charge_states"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
@@ -3060,7 +3189,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/density(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3171,7 +3300,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].density_fast[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/density_fast(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3282,7 +3411,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].distribution_function[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/distribution_function(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3400,7 +3529,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].energy_density_kinetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/energy_density_kinetic(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3511,7 +3640,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].ionisation_potential[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/ionisation_potential(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3629,7 +3758,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].pressure[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/pressure(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3740,7 +3869,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].pressure_fast_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/pressure_fast_parallel(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3851,7 +3980,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].pressure_fast_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3962,7 +4091,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/temperature(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -4114,7 +4243,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].velocity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -4747,7 +4876,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -5380,7 +5509,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6011,7 +6140,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].z_average[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/z_average(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6186,7 +6315,7 @@
  },
  "edge_profiles.ggd[:].ion[:].state[:].z_square_average[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/z_square_average(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6297,7 +6426,7 @@
  },
  "edge_profiles.ggd[:].ion[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/temperature(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6449,7 +6578,7 @@
  },
  "edge_profiles.ggd[:].ion[:].velocity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -7114,7 +7243,7 @@
  },
  "edge_profiles.ggd[:].j_anomalous[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -7747,7 +7876,7 @@
  },
  "edge_profiles.ggd[:].j_diamagnetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -8380,7 +8509,7 @@
  },
  "edge_profiles.ggd[:].j_heat_viscosity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -9013,7 +9142,7 @@
  },
  "edge_profiles.ggd[:].j_inertial[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -9646,7 +9775,7 @@
  },
  "edge_profiles.ggd[:].j_ion_neutral_friction[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -10239,7 +10368,7 @@
  },
  "edge_profiles.ggd[:].j_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_parallel(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -10391,7 +10520,7 @@
  },
  "edge_profiles.ggd[:].j_parallel_viscosity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -11024,7 +11153,7 @@
  },
  "edge_profiles.ggd[:].j_perpendicular_viscosity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -11657,7 +11786,7 @@
  },
  "edge_profiles.ggd[:].j_pfirsch_schlueter[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -12291,7 +12420,7 @@
  },
  "edge_profiles.ggd[:].j_total[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -12883,7 +13012,7 @@
  },
  "edge_profiles.ggd[:].n_i_total_over_n_e[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/n_i_total_over_n_e(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13005,7 +13134,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/density(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13116,7 +13245,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].density_fast[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/density_fast(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13344,7 +13473,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].energy_density_kinetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/energy_density_kinetic(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13476,7 +13605,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].pressure[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/pressure(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13587,7 +13716,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].pressure_fast_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/pressure_fast_parallel(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13698,7 +13827,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].pressure_fast_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/pressure_fast_perpendicular(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13746,7 +13875,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state": {
   "coordinates": [
-   "1...N_charge_states"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (energy, excitation, ...)",
@@ -13820,7 +13949,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/density(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -13931,7 +14060,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].density_fast[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/density_fast(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14042,7 +14171,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].distribution_function[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/distribution_function(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14160,7 +14289,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].energy_density_kinetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/energy_density_kinetic(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14306,7 +14435,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].pressure[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/pressure(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14417,7 +14546,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].pressure_fast_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/pressure_fast_parallel(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14528,7 +14657,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].pressure_fast_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/pressure_fast_perpendicular(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14639,7 +14768,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/temperature(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -14791,7 +14920,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -15424,7 +15553,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -16057,7 +16186,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -16688,7 +16817,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/temperature(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -16840,7 +16969,7 @@
  },
  "edge_profiles.ggd[:].neutral[:].velocity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17432,7 +17561,7 @@
  },
  "edge_profiles.ggd[:].phi_potential[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/phi_potential(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17543,7 +17672,7 @@
  },
  "edge_profiles.ggd[:].pressure_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/pressure_parallel(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17654,7 +17783,7 @@
  },
  "edge_profiles.ggd[:].pressure_perpendicular[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/pressure_perpendicular(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17765,7 +17894,7 @@
  },
  "edge_profiles.ggd[:].pressure_thermal[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/pressure_thermal(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17876,7 +18005,7 @@
  },
  "edge_profiles.ggd[:].t_i_average[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/t_i_average(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -17995,7 +18124,7 @@
  },
  "edge_profiles.ggd[:].zeff[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd(itime)/zeff(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18051,6 +18180,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "edge_profiles_ggd_fast",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_profiles.ggd_fast[:].electrons": {
@@ -18081,7 +18211,7 @@
  },
  "edge_profiles.ggd_fast[:].electrons.density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/electrons/density(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18139,7 +18269,7 @@
  },
  "edge_profiles.ggd_fast[:].electrons.temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/electrons/temperature(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18197,7 +18327,7 @@
  },
  "edge_profiles.ggd_fast[:].energy_thermal[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/energy_thermal(i1)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18266,7 +18396,7 @@
  },
  "edge_profiles.ggd_fast[:].ion[:].content[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/ion(i1)/content(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18324,7 +18454,7 @@
  },
  "edge_profiles.ggd_fast[:].ion[:].density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/ion(i1)/density(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18513,7 +18643,7 @@
  },
  "edge_profiles.ggd_fast[:].ion[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_profiles/ggd_fast(itime)/ion(i1)/temperature(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -18600,6 +18730,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_profiles.grid_ggd[:].grid_subset": {
@@ -19343,10 +19474,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "edge_profiles.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "edge_profiles/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "edge_profiles.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "edge_profiles.ids_properties.occurrence"
+ },
+ "edge_profiles.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "edge_profiles/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "edge_profiles.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "edge_profiles/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "edge_profiles/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "edge_profiles/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "edge_profiles.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -19368,6 +19537,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_profiles/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -19403,6 +19580,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_profiles/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -19454,6 +19639,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -19511,6 +19704,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "edge_profiles.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "edge_profiles.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -19554,6 +19755,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_profiles/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_profiles.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_profiles/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -19707,6 +19916,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "edge_profiles_profiles_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_profiles.profiles_1d[:].conductivity_parallel": {
@@ -27713,6 +27923,391 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
+ },
+ "edge_profiles.statistics": {
+  "coordinates": [
+   "edge_profiles.statistics[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Statistics for various time slices",
+  "full_path": "edge_profiles/statistics(itime)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.40.0",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of 2D quantities on which statistics are provided. 2D means 1D+time dimension, so either a 1D quantity within a dynamic array of structure, or a 2D dynamic quantity outside of an array of structure. Therefore the resulting statistical value is 1D for a given statistics time slice. ",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_quantity_2d"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution": {
+  "data_type": "STRUCTURE",
+  "documentation": "Probability distribution function of the quantity",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution",
+  "lifecycle_status": "alpha",
+  "structure_reference": "statistics_distribution_2d"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.bins": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.bins_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.bins_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.bins_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.probability": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.probability_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.probability_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].distribution.probability_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the quantity within the IDS, following the syntax given in the link below",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of statistics types applied to the quantity",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_quantity_2d_type"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/statistics_type_identifier.xml",
+  "documentation": "Identifier of the statistics type\n1) mean : Mean\n2) sigma : Standard deviation\n3) skewness : Skewness\n4) kurtosis : Pearson (full) kurtosis\n5) sobol_1 : First order Sobol index\n6) percentile_10 : 10% percentile\n7) percentile_90 : 90% percentile",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].uq_input_path": {
+  "data_type": "INT_0D",
+  "documentation": "For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) ",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/uq_input_path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].value": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value of the statistics for that quantity, the array corresponding to the first dimension of the original 2D quantity",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "edge_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "edge_profiles/statistics(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "edge_profiles.statistics[:].time_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Width of the time interval over which the statistics have been calculated. By convention, the time interval starts at time-time_width and ends at time.",
+  "full_path": "edge_profiles/statistics(itime)/time_width",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "edge_profiles.statistics[:].time_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_width\"",
+  "full_path": "edge_profiles/statistics(itime)/time_width_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].time_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_width\"",
+  "full_path": "edge_profiles/statistics(itime)/time_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "edge_profiles.statistics[:].time_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_width\"",
+  "full_path": "edge_profiles/statistics(itime)/time_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "edge_profiles.statistics[:].uq_input_2d": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "If the statistics are based on an uncertainty quantification process, set of 2D input quantities that are varied",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_input_2d"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution": {
+  "data_type": "STRUCTURE",
+  "documentation": "Probability distribution function of the quantity",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution",
+  "lifecycle_status": "alpha",
+  "structure_reference": "statistics_distribution_2d"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.bins": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"bins\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.probability": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"probability\"",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_profiles.statistics[:].uq_input_2d[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the quantity within the IDS, following the syntax given in the link below",
+  "full_path": "edge_profiles/statistics(itime)/uq_input_2d(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "edge_profiles.time": {
   "coordinates": [

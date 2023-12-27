@@ -2,7 +2,7 @@
  "neutron_diagnostic": {
   "documentation": "Neutron diagnostic such as DNFM, NFM or MFC",
   "full_path": "neutron_diagnostic",
-  "lifecycle_last_change": "3.38.1",
+  "lifecycle_last_change": "3.39.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.6.0",
   "maxoccur": "3"
@@ -80,7 +80,7 @@
  },
  "neutron_diagnostic.characteristics.reaction": {
   "coordinates": [
-   "neutron_diagnostic.characteristics.reaction[:].index"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Plasma reaction (1 -'DT'; 2 - 'DD')",
@@ -130,7 +130,7 @@
  },
  "neutron_diagnostic.characteristics.reaction[:].mode": {
   "coordinates": [
-   "neutron_diagnostic.characteristics.reaction[:].mode[:].index"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Characteristics of counting linear limits in recent Measuring modes for recent Plasma reaction type",
@@ -215,6 +215,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "neutron_diagnostic.code.library": {
   "coordinates": [
    "1...N"
@@ -230,6 +238,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "neutron_diagnostic/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -308,7 +324,7 @@
   "documentation": "Description of Detectors properties and Data in Neutron Diagnostic Module",
   "full_path": "neutron_diagnostic/detectors(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "50",
+  "maxoccur": "60",
   "structure_reference": "neutron_diagnostic_detectors"
  },
  "neutron_diagnostic.detectors[:].adc": {
@@ -3132,7 +3148,7 @@
  },
  "neutron_diagnostic.detectors[:].radiation": {
   "coordinates": [
-   "neutron_diagnostic.detectors[:].radiation[:].index"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Radiation type on detector's converter (1 - 'neutrons'; 2 - 'gamma-rays')",
@@ -3276,7 +3292,7 @@
  },
  "neutron_diagnostic.detectors[:].spectrum.data": {
   "coordinates": [
-   "neutron_diagnostic.detectors[:].spectrum.data.as_parent",
+   "neutron_diagnostic.detectors[:].energy_band",
    "neutron_diagnostic.detectors[:].spectrum.time"
   ],
   "data_type": "INT_2D",
@@ -4152,10 +4168,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "neutron_diagnostic/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "neutron_diagnostic.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "neutron_diagnostic.ids_properties.occurrence"
+ },
+ "neutron_diagnostic.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "neutron_diagnostic/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "neutron_diagnostic.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "neutron_diagnostic/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "neutron_diagnostic/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "neutron_diagnostic/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "neutron_diagnostic.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -4177,6 +4231,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "neutron_diagnostic/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -4212,6 +4274,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "neutron_diagnostic/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -4263,6 +4333,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "neutron_diagnostic/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -4320,6 +4398,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "neutron_diagnostic.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "neutron_diagnostic.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -4363,6 +4449,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "neutron_diagnostic/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "neutron_diagnostic.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "neutron_diagnostic/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "mhd.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "mhd/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -116,6 +132,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "mhd_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "mhd.ggd[:].a_field_r": {
@@ -183,7 +200,7 @@
  },
  "mhd.ggd[:].a_field_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/a_field_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -294,7 +311,7 @@
  },
  "mhd.ggd[:].a_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -405,7 +422,7 @@
  },
  "mhd.ggd[:].a_field_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/a_field_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -516,7 +533,7 @@
  },
  "mhd.ggd[:].b_field_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/b_field_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -627,7 +644,7 @@
  },
  "mhd.ggd[:].b_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -738,7 +755,7 @@
  },
  "mhd.ggd[:].b_field_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/b_field_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -856,7 +873,7 @@
  },
  "mhd.ggd[:].electrons.temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/electrons/temperature(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -967,7 +984,7 @@
  },
  "mhd.ggd[:].j_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1078,7 +1095,7 @@
  },
  "mhd.ggd[:].j_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1190,7 +1207,7 @@
  },
  "mhd.ggd[:].j_tor_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1301,7 +1318,7 @@
  },
  "mhd.ggd[:].j_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1412,7 +1429,7 @@
  },
  "mhd.ggd[:].mass_density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/mass_density(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1523,7 +1540,7 @@
  },
  "mhd.ggd[:].n_i_total[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/n_i_total(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1634,7 +1651,7 @@
  },
  "mhd.ggd[:].phi_potential[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/phi_potential(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1745,7 +1762,7 @@
  },
  "mhd.ggd[:].psi[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/psi(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1856,7 +1873,7 @@
  },
  "mhd.ggd[:].t_i_average[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/t_i_average(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1975,7 +1992,7 @@
  },
  "mhd.ggd[:].velocity_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_parallel(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2087,7 +2104,7 @@
  },
  "mhd.ggd[:].velocity_parallel_over_b_field[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_parallel_over_b_field(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2198,7 +2215,7 @@
  },
  "mhd.ggd[:].velocity_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2309,7 +2326,7 @@
  },
  "mhd.ggd[:].velocity_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2420,7 +2437,7 @@
  },
  "mhd.ggd[:].velocity_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2531,7 +2548,7 @@
  },
  "mhd.ggd[:].vorticity[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/vorticity(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2643,7 +2660,7 @@
  },
  "mhd.ggd[:].vorticity_over_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/vorticity_over_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2754,7 +2771,7 @@
  },
  "mhd.ggd[:].zeff[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/zeff(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2810,6 +2827,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "mhd.grid_ggd[:].grid_subset": {
@@ -3553,10 +3571,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "mhd/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "mhd.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "mhd.ids_properties.occurrence"
+ },
+ "mhd.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "mhd/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "mhd.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "mhd/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "mhd/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "mhd/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "mhd.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -3578,6 +3634,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "mhd/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3613,6 +3677,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "mhd/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3664,6 +3736,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "mhd/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3721,6 +3801,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "mhd.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "mhd.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -3764,6 +3852,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "mhd/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "mhd.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "mhd/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -14,10 +14,10 @@
  aminor_min=30.
  elong_max=4.0
  elong_min=0.8
- rout_max=240.
- rout_min=90.0
- zout_max=100.
- zout_min=-100.
+ rcntr_max=240.
+ rcntr_min=90.0
+ zcntr_max=100.
+ zcntr_min=-100.
  rcurrt_max=240.
  rcurrt_min=90.0
  zcurrt_max=100.
