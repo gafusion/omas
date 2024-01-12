@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "nbi.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "nbi.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "nbi/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -134,10 +150,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "nbi.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "nbi/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "nbi.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "nbi.ids_properties.occurrence"
+ },
+ "nbi.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "nbi/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "nbi.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "nbi/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "nbi/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "nbi/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "nbi.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -159,6 +213,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "nbi/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -194,6 +256,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "nbi/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -245,6 +315,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "nbi/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -302,6 +380,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "nbi.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "nbi.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -345,6 +431,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "nbi/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "nbi.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "nbi/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1313,7 +1407,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description",
+  "documentation": "Group of beamlets with common vertical and horizontal focal point. If there are no common focal points, then select small groups of beamlets such that a focal point description of the beamlets group provides a fair description. Beamlet groups are assumed to be Gaussian.",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "16",
@@ -1733,7 +1827,7 @@
  },
  "nbi.unit[:].beamlets_group[:].focus": {
   "data_type": "STRUCTURE",
-  "documentation": "Describes how the beamlet group is focused",
+  "documentation": "Describes how the beamlet group is focused. Calculations of width_min_horizontal and width_min_vertical are on a plane defined by the average normal vector of the two constituent accelerator nbi target planes.",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus",
   "lifecycle_status": "alpha",
   "structure_reference": "nbi_unit_beamlets_group_focus"
@@ -1804,7 +1898,7 @@
  },
  "nbi.unit[:].beamlets_group[:].focus.width_min_horizontal": {
   "data_type": "FLT_0D",
-  "documentation": "The horizontal width of the beamlets group at the at the horizontal focal point",
+  "documentation": "The horizontal width (Full Width at Half Maximum) of the beamlets group at the horizontal focal point",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_horizontal",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -1836,7 +1930,7 @@
  },
  "nbi.unit[:].beamlets_group[:].focus.width_min_vertical": {
   "data_type": "FLT_0D",
-  "documentation": "The vertical width of the beamlets group at the at the vertical focal point",
+  "documentation": "The vertical width (Full Width at Half Maximum) of the beamlets group at the vertical focal point",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/focus/width_min_vertical",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -2014,6 +2108,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "nbi_unit_beamlets_group_tilting",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "nbi.unit[:].beamlets_group[:].tilting[:].delta_angle": {
@@ -2193,7 +2288,7 @@
  },
  "nbi.unit[:].beamlets_group[:].width_horizontal": {
   "data_type": "FLT_0D",
-  "documentation": "Horizontal width of the beam group at the injection unit surface (or grounded grid)",
+  "documentation": "Horizontal width (dimensions of the smallest rectangle that surrounds the outer dimensions of the beamlets) of the beamlet group at the injection unit surface (or grounded grid) ",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_horizontal",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -2225,7 +2320,7 @@
  },
  "nbi.unit[:].beamlets_group[:].width_vertical": {
   "data_type": "FLT_0D",
-  "documentation": "Vertical width of the beam group at the injection unit surface (or grounded grid)",
+  "documentation": "Vertical width (dimensions of the smallest rectangle that surrounds the outer dimensions of the beamlets) of the beamlet group at the injection unit surface (or grounded grid)",
   "full_path": "nbi/unit(i1)/beamlets_group(i2)/width_vertical",
   "lifecycle_status": "alpha",
   "type": "static",

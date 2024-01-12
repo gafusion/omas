@@ -2,7 +2,7 @@
  "transport_solver_numerics": {
   "documentation": "Numerical quantities used by transport solvers and convergence details",
   "full_path": "transport_solver_numerics",
-  "lifecycle_last_change": "3.22.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.1.0",
   "maxoccur": "6"
@@ -17,6 +17,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_bc_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_1d[:].current": {
@@ -1317,6 +1318,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_bc_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.boundary_conditions_ggd[:].current": {
@@ -3036,6 +3038,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "transport_solver_numerics.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "transport_solver_numerics.code.library": {
   "coordinates": [
    "1...N"
@@ -3051,6 +3061,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "transport_solver_numerics/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3138,6 +3156,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_convergence_equation",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.convergence.equations[:].current": {
@@ -4002,6 +4021,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_profiles_1d_derivatives",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.derivatives_1d[:].d2_drho_tor_norm2": {
@@ -7001,7 +7021,7 @@
  },
  "transport_solver_numerics.derivatives_1d[:].ion[:].state": {
   "coordinates": [
-   "1...N_charge_states"
+   "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
@@ -8267,10 +8287,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "transport_solver_numerics.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "transport_solver_numerics/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "transport_solver_numerics.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "transport_solver_numerics.ids_properties.occurrence"
+ },
+ "transport_solver_numerics.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "transport_solver_numerics/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "transport_solver_numerics.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "transport_solver_numerics/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "transport_solver_numerics/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "transport_solver_numerics/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "transport_solver_numerics.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -8292,6 +8350,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "transport_solver_numerics/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8327,6 +8393,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "transport_solver_numerics/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8378,6 +8452,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "transport_solver_numerics/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8435,6 +8517,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "transport_solver_numerics.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "transport_solver_numerics.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -8478,6 +8568,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "transport_solver_numerics/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "transport_solver_numerics.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "transport_solver_numerics/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8629,6 +8727,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_restart",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.restart_files[:].descriptions": {
@@ -8699,6 +8798,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_solver_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "transport_solver_numerics.solver_1d[:].control_parameters": {
@@ -8719,6 +8819,14 @@
   "maxoccur": "unbounded",
   "structure_reference": "numerics_solver_1d_equation_control_int"
  },
+ "transport_solver_numerics.solver_1d[:].control_parameters.integer0d[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the control parameter",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/control_parameters/integer0d(i1)/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "transport_solver_numerics.solver_1d[:].control_parameters.integer0d[:].value": {
   "data_type": "INT_0D",
   "documentation": "Value of the control parameter",
@@ -8736,6 +8844,14 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "numerics_solver_1d_equation_control_float"
+ },
+ "transport_solver_numerics.solver_1d[:].control_parameters.real0d[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Name of the control parameter",
+  "full_path": "transport_solver_numerics/solver_1d(itime)/control_parameters/real0d(i1)/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
  },
  "transport_solver_numerics.solver_1d[:].control_parameters.real0d[:].value": {
   "data_type": "FLT_0D",

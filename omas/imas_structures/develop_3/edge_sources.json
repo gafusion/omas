@@ -22,6 +22,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "edge_sources.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "edge_sources.code.library": {
   "coordinates": [
    "1...N"
@@ -37,6 +45,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_sources.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -117,6 +133,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_sources.grid_ggd[:].grid_subset": {
@@ -860,10 +877,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "edge_sources.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "edge_sources/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "edge_sources.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "edge_sources.ids_properties.occurrence"
+ },
+ "edge_sources.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "edge_sources/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "edge_sources.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "edge_sources/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "edge_sources/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "edge_sources/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "edge_sources.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -885,6 +940,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -920,6 +983,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -971,6 +1042,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1028,6 +1107,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "edge_sources.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "edge_sources.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1071,6 +1158,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "edge_sources/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "edge_sources.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "edge_sources/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1235,6 +1330,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd[:].current": {
@@ -1302,7 +1398,7 @@
  },
  "edge_sources.source[:].ggd[:].current[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/current(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1420,7 +1516,7 @@
  },
  "edge_sources.source[:].ggd[:].electrons.energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/energy(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1531,7 +1627,7 @@
  },
  "edge_sources.source[:].ggd[:].electrons.particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/electrons/particles(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1770,7 +1866,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/energy(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -1929,7 +2025,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/momentum(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2535,7 +2631,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/particles(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2664,7 +2760,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/energy(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -2823,7 +2919,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/momentum(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3415,7 +3511,7 @@
  },
  "edge_sources.source[:].ggd[:].ion[:].state[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/ion(i2)/state(i3)/particles(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -3702,7 +3798,7 @@
  },
  "edge_sources.source[:].ggd[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/momentum(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -4422,7 +4518,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/energy(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -4588,7 +4684,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/momentum(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -5187,7 +5283,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/particles(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -5316,7 +5412,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/energy(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -5475,7 +5571,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].momentum[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6095,7 +6191,7 @@
  },
  "edge_sources.source[:].ggd[:].neutral[:].state[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/neutral(i2)/state(i3)/particles(i4)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6253,7 +6349,7 @@
  },
  "edge_sources.source[:].ggd[:].total_ion_energy[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd(itime)/total_ion_energy(i2)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6309,6 +6405,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "edge_sources_source_ggd_fast",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "edge_sources.source[:].ggd_fast[:].ion": {
@@ -6474,7 +6571,7 @@
  },
  "edge_sources.source[:].ggd_fast[:].ion[:].power[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "edge_sources/source(i1)/ggd_fast(itime)/ion(i2)/power(i3)/grid_subset_index",
   "lifecycle_status": "active",
   "type": "dynamic"
@@ -6554,7 +6651,7 @@
  "edge_sources.source[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "edge_sources/edge_source_identifier.xml",
-  "documentation": "Source term identifier (process causing this source term)\n0) unspecified : Unspecified source type\n1) total : Combined source excluding time derivative\n702) total_linearized : Combined source (linearized) excluding time derivative\n703) background : Background source\n801) database : Source from database entry\n705) prescribed : Source prescribed from code input parameters\n706) time_derivative : Source associated with time derivative\n707) atomic_ionization : Source from atomic ionization\n708) molecular_ionization : Source from molecular ionization/dissociation\n709) ionization : Source from ionization (combined)\n710) recombination : Source from recombination\n305) charge_exchange : Source from charge exchange. Charge exchange losses are negative sources\n11) collisional_equipartition : Collisional equipartition\n7) ohmic : Source from ohmic heating\n200) radiation : Source from line + recombination assisted + bremsstrahlung\n715) compression : Internal energy source from compression\n716) bulk_motion : Internal energy source correction for bulk motion",
+  "documentation": "Source term identifier (process causing this source term)\n0) unspecified : Unspecified source type\n1) total : Combined source excluding time derivative\n701) neutrals : Combined source from all plasma-neutrals interactions\n702) total_linearized : Combined source (linearized) excluding time derivative\n703) background : Background source\n801) database : Source from database entry\n705) prescribed : Source prescribed from code input parameters\n706) time_derivative : Source associated with time derivative\n707) atomic_ionization : Source from atomic ionization\n708) molecular_ionization : Source from molecular ionization/dissociation\n709) ionization : Source from ionization (combined)\n710) recombination : Source from recombination\n305) charge_exchange : Source from charge exchange. Charge exchange losses are negative sources\n11) collisional_equipartition : Collisional equipartition\n7) ohmic : Source from ohmic heating\n200) radiation : Source from line + recombination assisted + bremsstrahlung\n715) compression : Internal energy source from compression\n716) bulk_motion : Internal energy source correction for bulk motion",
   "full_path": "edge_sources/source(i1)/identifier",
   "lifecycle_status": "active",
   "structure_reference": "identifier"

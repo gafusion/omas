@@ -2,7 +2,7 @@
  "equilibrium": {
   "documentation": "Description of a 2D, axi-symmetric, tokamak equilibrium; result of an equilibrium code.",
   "full_path": "equilibrium",
-  "lifecycle_last_change": "3.38.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "3"
@@ -21,6 +21,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "equilibrium.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "equilibrium.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "equilibrium/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "equilibrium.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -117,6 +133,7 @@
   "lifecycle_version": "3.18.0",
   "maxoccur": "unbounded",
   "structure_reference": "equilibrium_ggd_array",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "equilibrium.grids_ggd[:].grid": {
@@ -872,10 +889,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "equilibrium.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "equilibrium/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "equilibrium.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "equilibrium.ids_properties.occurrence"
+ },
+ "equilibrium.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "equilibrium/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "equilibrium.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "equilibrium/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "equilibrium/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "equilibrium/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "equilibrium.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -897,6 +952,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "equilibrium/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -932,6 +995,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "equilibrium/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -983,6 +1054,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "equilibrium/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1040,6 +1119,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "equilibrium.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "equilibrium.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1083,6 +1170,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "equilibrium/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "equilibrium.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "equilibrium/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1218,6 +1313,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "equilibrium_time_slice",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "equilibrium.time_slice[:].boundary": {
@@ -3488,6 +3584,44 @@
   "units": "-",
   "url": "equilibrium/DefinitionEqBoundary.svg"
  },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_inner": {
+  "data_type": "FLT_0D",
+  "documentation": "Inner triangularity of the plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_inner",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_inner_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"triangularity_inner\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_inner_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_inner_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"triangularity_inner\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_inner_error_lower",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_inner_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"triangularity_inner\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_inner_error_upper",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
  "equilibrium.time_slice[:].boundary_separatrix.triangularity_lower": {
   "data_type": "FLT_0D",
   "documentation": "Lower triangularity of the plasma boundary",
@@ -3518,6 +3652,82 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"triangularity_lower\"",
   "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_lower_error_upper",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_minor": {
+  "data_type": "FLT_0D",
+  "documentation": "Minor triangularity of the plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_minor",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_minor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"triangularity_minor\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_minor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_minor_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"triangularity_minor\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_minor_error_lower",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_minor_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"triangularity_minor\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_minor_error_upper",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_outer": {
+  "data_type": "FLT_0D",
+  "documentation": "Outer triangularity of the plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_outer",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_outer_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"triangularity_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_outer_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_outer_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"triangularity_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_outer_error_lower",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-",
+  "url": "equilibrium/DefinitionEqBoundary.svg"
+ },
+ "equilibrium.time_slice[:].boundary_separatrix.triangularity_outer_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"triangularity_outer\"",
+  "full_path": "equilibrium/time_slice(itime)/boundary_separatrix/triangularity_outer_error_upper",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-",
@@ -3658,11 +3868,11 @@
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T.m"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -3678,7 +3888,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T.m"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -3686,7 +3896,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/b_field_tor_vacuum_r/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T.m"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.b_field_tor_vacuum_r.exact": {
   "data_type": "INT_0D",
@@ -3846,11 +4056,11 @@
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -3866,7 +4076,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -3874,7 +4084,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/bpol_probe(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.bpol_probe[:].exact": {
   "data_type": "INT_0D",
@@ -4036,6 +4246,52 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].constraints.chi_squared_reduced": {
+  "data_type": "FLT_0D",
+  "documentation": "Sum of the chi_squared of all constraints used for the equilibrium reconstruction, divided by the number of degrees of freedom of the identification model",
+  "full_path": "equilibrium/time_slice(itime)/constraints/chi_squared_reduced",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-",
+  "uri": "https://arxiv.org/abs/1009.2755"
+ },
+ "equilibrium.time_slice[:].constraints.chi_squared_reduced_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"chi_squared_reduced\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/chi_squared_reduced_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.chi_squared_reduced_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared_reduced\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/chi_squared_reduced_error_lower",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-",
+  "uri": "https://arxiv.org/abs/1009.2755"
+ },
+ "equilibrium.time_slice[:].constraints.chi_squared_reduced_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared_reduced\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/chi_squared_reduced_error_upper",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-",
+  "uri": "https://arxiv.org/abs/1009.2755"
+ },
+ "equilibrium.time_slice[:].constraints.constraints_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of constraints used (i.e. having a non-zero weight)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/constraints_n",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux": {
   "cocos_alias": "IDSPATH",
   "cocos_replace": "equilibrium.time_slice{i}.constraints.diamagnetic_flux",
@@ -4048,11 +4304,11 @@
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -4068,7 +4324,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -4076,7 +4332,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/diamagnetic_flux/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.diamagnetic_flux.exact": {
   "data_type": "INT_0D",
@@ -4252,11 +4508,11 @@
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -4272,7 +4528,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -4280,7 +4536,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/faraday_angle(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.faraday_angle[:].exact": {
   "data_type": "INT_0D",
@@ -4440,11 +4696,11 @@
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -4460,7 +4716,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -4468,7 +4724,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/flux_loop(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Wb"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.flux_loop[:].exact": {
   "data_type": "INT_0D",
@@ -4630,6 +4886,14 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].constraints.freedom_degrees_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of degrees of freedom of the identification model",
+  "full_path": "equilibrium/time_slice(itime)/constraints/freedom_degrees_n",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "equilibrium.time_slice[:].constraints.ip": {
   "cocos_alias": "IDSPATH",
   "cocos_replace": "equilibrium.time_slice{i}.constraints.ip",
@@ -4642,11 +4906,11 @@
  },
  "equilibrium.time_slice[:].constraints.ip.chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.ip.chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -4662,7 +4926,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.ip.chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -4670,7 +4934,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/ip/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.ip.exact": {
   "data_type": "INT_0D",
@@ -4854,11 +5118,11 @@
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -4874,7 +5138,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -4882,7 +5146,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_r/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_r.exact": {
   "data_type": "INT_0D",
@@ -5036,11 +5300,11 @@
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -5056,7 +5320,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -5064,7 +5328,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/iron_core_segment(i1)/magnetisation_z/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "T"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.iron_core_segment[:].magnetisation_z.exact": {
   "data_type": "INT_0D",
@@ -5208,6 +5472,732 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].constraints.j_parallel": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of flux-surface averaged parallel current density approximations at various positions (= average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "equilibrium_constraints_0D_position",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].chi_squared": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/chi_squared",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].chi_squared_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/chi_squared_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].chi_squared_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/chi_squared_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].chi_squared_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/chi_squared_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].exact": {
+  "data_type": "INT_0D",
+  "documentation": "Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/exact",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].measured": {
+  "data_type": "FLT_0D",
+  "documentation": "Measured value",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/measured",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].measured_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/measured_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].measured_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/measured_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].measured_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/measured_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position at which this measurement is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].reconstructed": {
+  "data_type": "FLT_0D",
+  "documentation": "Value calculated from the reconstructed equilibrium",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/reconstructed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].reconstructed_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/reconstructed_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].reconstructed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/reconstructed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].reconstructed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/reconstructed_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].source": {
+  "data_type": "STR_0D",
+  "documentation": "Path to the source data for this measurement in the IMAS data dictionary",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/source",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].time_measurement": {
+  "data_type": "FLT_0D",
+  "documentation": "Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/time_measurement",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].time_measurement_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/time_measurement_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].time_measurement_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/time_measurement_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].time_measurement_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/time_measurement_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].weight": {
+  "data_type": "FLT_0D",
+  "documentation": "Weight given to the measurement",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/weight",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].weight_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/weight_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].weight_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/weight_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_parallel[:].weight_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_parallel(i1)/weight_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of flux-surface averaged toroidal current density approximations at various positions  (= average(j_tor/R) / average(1/R))",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "equilibrium_constraints_0D_position",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].chi_squared": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/chi_squared",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].chi_squared_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/chi_squared_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].chi_squared_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/chi_squared_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].chi_squared_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/chi_squared_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].exact": {
+  "data_type": "INT_0D",
+  "documentation": "Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/exact",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].measured": {
+  "data_type": "FLT_0D",
+  "documentation": "Measured value",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/measured",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].measured_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/measured_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].measured_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/measured_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].measured_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/measured_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position at which this measurement is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].reconstructed": {
+  "data_type": "FLT_0D",
+  "documentation": "Value calculated from the reconstructed equilibrium",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/reconstructed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].reconstructed_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/reconstructed_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].reconstructed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/reconstructed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].reconstructed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/reconstructed_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].source": {
+  "data_type": "STR_0D",
+  "documentation": "Path to the source data for this measurement in the IMAS data dictionary",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/source",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].time_measurement": {
+  "data_type": "FLT_0D",
+  "documentation": "Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/time_measurement",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].time_measurement_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/time_measurement_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].time_measurement_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/time_measurement_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].time_measurement_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/time_measurement_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].weight": {
+  "data_type": "FLT_0D",
+  "documentation": "Weight given to the measurement",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/weight",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].weight_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/weight_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].weight_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/weight_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.j_tor[:].weight_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/j_tor(i1)/weight_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle": {
   "coordinates": [
    "mse.channel"
@@ -5222,11 +6212,11 @@
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -5242,7 +6232,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -5250,7 +6240,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/mse_polarisation_angle(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "rad"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.mse_polarisation_angle[:].exact": {
   "data_type": "INT_0D",
@@ -5403,12 +6393,12 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_position",
   "units": "m^-3"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -5477,13 +6467,189 @@
   "type": "dynamic",
   "units": "m^-3"
  },
+ "equilibrium.time_slice[:].constraints.n_e[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position at which this measurement is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.n_e[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
  "equilibrium.time_slice[:].constraints.n_e[:].reconstructed": {
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/reconstructed",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-3"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -5499,7 +6665,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/reconstructed_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-3"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].reconstructed_error_upper": {
   "data_type": "FLT_0D",
@@ -5507,7 +6673,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e(i1)/reconstructed_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-3"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e[:].source": {
   "data_type": "STR_0D",
@@ -5594,11 +6760,11 @@
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -5614,7 +6780,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -5622,7 +6788,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/n_e_line(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m^-2"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.n_e_line[:].exact": {
   "data_type": "INT_0D",
@@ -5782,11 +6948,11 @@
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -5802,7 +6968,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -5810,7 +6976,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_current(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_current[:].exact": {
   "data_type": "INT_0D",
@@ -5986,11 +7152,11 @@
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_index": {
   "data_type": "INT_TYPE",
@@ -6006,7 +7172,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].chi_squared_error_upper": {
   "data_type": "FLT_0D",
@@ -6014,7 +7180,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pf_passive_current(i1)/chi_squared_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "A"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pf_passive_current[:].exact": {
   "data_type": "INT_0D",
@@ -6167,12 +7333,12 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_constraints_0D",
+  "structure_reference": "equilibrium_constraints_0D_position",
   "units": "Pa"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -6241,13 +7407,189 @@
   "type": "dynamic",
   "units": "Pa"
  },
+ "equilibrium.time_slice[:].constraints.pressure[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position at which this measurement is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
  "equilibrium.time_slice[:].constraints.pressure[:].reconstructed": {
   "data_type": "FLT_0D",
   "documentation": "Value calculated from the reconstructed equilibrium",
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/reconstructed",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Pa"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].reconstructed_error_index": {
   "data_type": "INT_TYPE",
@@ -6263,7 +7605,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/reconstructed_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Pa"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].reconstructed_error_upper": {
   "data_type": "FLT_0D",
@@ -6271,7 +7613,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/pressure(i1)/reconstructed_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "Pa"
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.pressure[:].source": {
   "data_type": "STR_0D",
@@ -6344,6 +7686,370 @@
   "type": "dynamic",
   "units": "-"
  },
+ "equilibrium.time_slice[:].constraints.pressure_rotational": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of rotational pressure estimates. The rotational pressure is defined as R0^2*rho*omega^2 / 2, where omega is the toroidal rotation frequency, rho=ne(R0,psi)*m, and m is the plasma equivalent mass.",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "equilibrium_constraints_0D_position",
+  "units": "Pa",
+  "url": "https://doi.org/10.13182/FST48-968"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].chi_squared": {
+  "data_type": "FLT_0D",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/chi_squared",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].chi_squared_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/chi_squared_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].chi_squared_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/chi_squared_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].chi_squared_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"chi_squared\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/chi_squared_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].exact": {
+  "data_type": "INT_0D",
+  "documentation": "Integer flag : 1 means exact data, taken as an exact input without being fitted; 0 means the equilibrium code does a least square fit",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/exact",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].measured": {
+  "data_type": "FLT_0D",
+  "documentation": "Measured value",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/measured",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].measured_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/measured_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].measured_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/measured_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].measured_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"measured\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/measured_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position at which this measurement is given",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/r",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/z",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].position.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/position/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].reconstructed": {
+  "data_type": "FLT_0D",
+  "documentation": "Value calculated from the reconstructed equilibrium",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/reconstructed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].reconstructed_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/reconstructed_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].reconstructed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/reconstructed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].reconstructed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"reconstructed\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/reconstructed_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].source": {
+  "data_type": "STR_0D",
+  "documentation": "Path to the source data for this measurement in the IMAS data dictionary",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/source",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].time_measurement": {
+  "data_type": "FLT_0D",
+  "documentation": "Exact time slice used from the time array of the measurement source data. If the time slice does not exist in the time array of the source data, it means linear interpolation has been used",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/time_measurement",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].time_measurement_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/time_measurement_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].time_measurement_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/time_measurement_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].time_measurement_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_measurement\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/time_measurement_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].weight": {
+  "data_type": "FLT_0D",
+  "documentation": "Weight given to the measurement",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/weight",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].weight_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/weight_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].weight_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/weight_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.pressure_rotational[:].weight_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"weight\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/pressure_rotational(i1)/weight_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
  "equilibrium.time_slice[:].constraints.q": {
   "coordinates": [
    "1...N"
@@ -6358,7 +8064,7 @@
  },
  "equilibrium.time_slice[:].constraints.q[:].chi_squared": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error normalized by the variance considered in the minimization process : chi_squared = weight^2 *(reconstructed - measured)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/chi_squared",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -6432,7 +8138,7 @@
   "documentation": "Position at which this measurement is given",
   "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi0d_dynamic_aos3"
+  "structure_reference": "rzphipsirho0d_dynamic_aos3"
  },
  "equilibrium.time_slice[:].constraints.q[:].position.phi": {
   "data_type": "FLT_0D",
@@ -6466,6 +8172,47 @@
   "type": "dynamic",
   "units": "rad"
  },
+ "equilibrium.time_slice[:].constraints.q[:].position.psi": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Poloidal magnetic flux",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/psi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.psi_error_lower": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/psi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.psi_error_upper": {
+  "cocos_label_transformation": "psi_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.psi",
+  "cocos_transformation_expression": ".fact_psi",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/psi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
  "equilibrium.time_slice[:].constraints.q[:].position.r": {
   "data_type": "FLT_0D",
   "documentation": "Major radius",
@@ -6497,6 +8244,38 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "m"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.rho_tor_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Normalised toroidal flux coordinate. The normalizing value for rho_tor_norm, is the toroidal flux coordinate at the equilibrium boundary (LCFS or 99.x % of the LCFS in case of a fixed boundary equilibium calculation, see time_slice/boundary/b_flux_pol_norm in the equilibrium IDS) ",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/rho_tor_norm",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.rho_tor_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/rho_tor_norm_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].constraints.q[:].position.rho_tor_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/constraints/q(i1)/position/rho_tor_norm_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
  },
  "equilibrium.time_slice[:].constraints.q[:].position.z": {
   "data_type": "FLT_0D",
@@ -6646,11 +8425,11 @@
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error on the major radius normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_index": {
   "data_type": "INT_TYPE",
@@ -6666,7 +8445,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_r_error_upper": {
   "data_type": "FLT_0D",
@@ -6674,15 +8453,15 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_r_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error on the altitude normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_index": {
   "data_type": "INT_TYPE",
@@ -6698,7 +8477,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].chi_squared_z_error_upper": {
   "data_type": "FLT_0D",
@@ -6706,7 +8485,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/strike_point(i1)/chi_squared_z_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.strike_point[:].exact": {
   "data_type": "INT_0D",
@@ -6941,11 +8720,11 @@
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_r": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error on the major radius normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error on the major radius normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/r - position_measured/r)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_r",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_r_error_index": {
   "data_type": "INT_TYPE",
@@ -6961,7 +8740,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_r_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_r_error_upper": {
   "data_type": "FLT_0D",
@@ -6969,15 +8748,15 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_r_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_z": {
   "data_type": "FLT_0D",
-  "documentation": "Squared error on the altitude normalized by the standard deviation considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
+  "documentation": "Squared error on the altitude normalized by the variance considered in the minimization process : chi_squared = weight^2 *(position_reconstructed/z - position_measured/z)^2 / sigma^2, where sigma is the standard deviation of the measurement error",
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_z",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_z_error_index": {
   "data_type": "INT_TYPE",
@@ -6993,7 +8772,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_z_error_lower",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].chi_squared_z_error_upper": {
   "data_type": "FLT_0D",
@@ -7001,7 +8780,7 @@
   "full_path": "equilibrium/time_slice(itime)/constraints/x_point(i1)/chi_squared_z_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
-  "units": "m"
+  "units": "m^-2"
  },
  "equilibrium.time_slice[:].constraints.x_point[:].exact": {
   "data_type": "INT_0D",
@@ -8368,7 +10147,8 @@
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.2.1",
   "maxoccur": "unbounded",
-  "structure_reference": "equilibrium_ggd"
+  "structure_reference": "equilibrium_ggd",
+  "timebasepath": "time"
  },
  "equilibrium.time_slice[:].ggd[:].b_field_r": {
   "coordinates": [
@@ -8435,7 +10215,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].b_field_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_r(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -8546,7 +10326,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].b_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_tor(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -8657,7 +10437,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].b_field_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/b_field_z(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -9482,7 +11262,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].j_parallel[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_parallel(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -9593,7 +11373,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].j_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/j_tor(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -9704,7 +11484,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].phi[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/phi(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -9815,7 +11595,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].psi[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/psi(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -9926,7 +11706,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/r(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -10037,7 +11817,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].theta[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/theta(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -10148,7 +11928,7 @@
  },
  "equilibrium.time_slice[:].ggd[:].z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "equilibrium/time_slice(itime)/ggd(i1)/z(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -11004,6 +12784,76 @@
   "lifecycle_status": "active",
   "structure_reference": "equilibrium_global_quantities_qmin"
  },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi": {
+  "data_type": "FLT_0D",
+  "documentation": "Minimum q position in poloidal flux",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_error_lower",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_error_upper",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_norm": {
+  "data_type": "FLT_0D",
+  "documentation": "Minimum q position in normalised poloidal flux",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_norm",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_norm_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_norm_error_lower",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].global_quantities.q_min.psi_norm_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/q_min/psi_norm_error_upper",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "equilibrium.time_slice[:].global_quantities.q_min.rho_tor_norm": {
   "data_type": "FLT_0D",
   "documentation": "Minimum q position in normalised toroidal flux coordinate",
@@ -11076,6 +12926,41 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
+ },
+ "equilibrium.time_slice[:].global_quantities.rho_tor_boundary": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal flux coordinate at the selected plasma boundary",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/rho_tor_boundary",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.rho_tor_boundary_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_boundary\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/rho_tor_boundary_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].global_quantities.rho_tor_boundary_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"rho_tor_boundary\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/rho_tor_boundary_error_lower",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "equilibrium.time_slice[:].global_quantities.rho_tor_boundary_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"rho_tor_boundary\"",
+  "full_path": "equilibrium/time_slice(itime)/global_quantities/rho_tor_boundary_error_upper",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m"
  },
  "equilibrium.time_slice[:].global_quantities.surface": {
   "data_type": "FLT_0D",
@@ -12456,11 +14341,11 @@
    "equilibrium.time_slice[:].profiles_1d.psi"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Flux surface averaged parallel current density = average(j.B) / B0, where B0 = Equilibrium/Global/Toroidal_Field/B0",
+  "documentation": "Flux surface averaged approximation to parallel current density = average(j.B) / B0, where B0 = /vacuum_toroidal_field/b0",
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_parallel(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.j_parallel_error_index": {
   "data_type": "INT_TYPE",
@@ -12482,7 +14367,7 @@
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_parallel_error_lower(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.j_parallel_error_upper": {
   "cocos_label_transformation": "ip_like",
@@ -12496,7 +14381,7 @@
   "full_path": "equilibrium/time_slice(itime)/profiles_1d/j_parallel_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
-  "units": "A/m^2"
+  "units": "A.m^-2"
  },
  "equilibrium.time_slice[:].profiles_1d.j_tor": {
   "cocos_label_transformation": "ip_like",
@@ -12770,6 +14655,50 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "Wb"
+ },
+ "equilibrium.time_slice[:].profiles_1d.psi_norm": {
+  "coordinates": [
+   "equilibrium.time_slice[:].profiles_1d.psi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised poloidal flux, namely (psi(rho)-psi(magnetic_axis)) / (psi(LCFS)-psi(magnetic_axis))",
+  "full_path": "equilibrium/time_slice(itime)/profiles_1d/psi_norm(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].profiles_1d.psi_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/profiles_1d/psi_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "equilibrium.time_slice[:].profiles_1d.psi_norm_error_lower": {
+  "coordinates": [
+   "equilibrium.time_slice[:].profiles_1d.psi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/profiles_1d/psi_norm_error_lower(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "equilibrium.time_slice[:].profiles_1d.psi_norm_error_upper": {
+  "coordinates": [
+   "equilibrium.time_slice[:].profiles_1d.psi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"psi_norm\"",
+  "full_path": "equilibrium/time_slice(itime)/profiles_1d/psi_norm_error_upper(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
  },
  "equilibrium.time_slice[:].profiles_1d.q": {
   "cocos_label_transformation": "q_like",

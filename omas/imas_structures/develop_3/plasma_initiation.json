@@ -2,7 +2,7 @@
  "plasma_initiation": {
   "documentation": "Description the early phases of the plasma, before an equilibrium can be calculated",
   "full_path": "plasma_initiation",
-  "lifecycle_last_change": "3.38.0",
+  "lifecycle_last_change": "3.39.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.38.0",
   "maxoccur": "1"
@@ -17,6 +17,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "plasma_initiation_field_lines",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "plasma_initiation.b_field_lines[:].e_field_parallel": {
@@ -677,6 +678,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "plasma_initiation.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "plasma_initiation.code.library": {
   "coordinates": [
    "1...N"
@@ -692,6 +701,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "plasma_initiation/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -770,180 +787,260 @@
   "structure_reference": "plasma_initiation_global_quantities"
  },
  "plasma_initiation.global_quantities.b_field_perpendicular": {
+  "data_type": "STRUCTURE",
+  "documentation": "Perpendicular magnetic field at plasma position. b_field_perpendicular = sqrt(b_field_stray^2+b_field_eddy^2) ",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T"
+ },
+ "plasma_initiation.global_quantities.b_field_perpendicular.data": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_perpendicular.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Perpendicular magnetic field at plasma position. b_field_perpendicular = sqrt(b_field_stray^2+b_field_eddy^2) ",
-  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular(:)",
+  "documentation": "Data",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular/data(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_perpendicular/time",
   "type": "dynamic",
   "units": "T"
  },
- "plasma_initiation.global_quantities.b_field_perpendicular_error_index": {
+ "plasma_initiation.global_quantities.b_field_perpendicular.data_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"b_field_perpendicular\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular_error_index",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular/data_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "plasma_initiation.global_quantities.b_field_perpendicular_error_lower": {
+ "plasma_initiation.global_quantities.b_field_perpendicular.data_error_lower": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_perpendicular.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"b_field_perpendicular\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular_error_lower(:)",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular/data_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_perpendicular/time",
   "type": "dynamic",
   "units": "T"
  },
- "plasma_initiation.global_quantities.b_field_perpendicular_error_upper": {
+ "plasma_initiation.global_quantities.b_field_perpendicular.data_error_upper": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_perpendicular.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"b_field_perpendicular\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular_error_upper(:)",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular/data_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_perpendicular/time",
   "type": "dynamic",
   "units": "T"
+ },
+ "plasma_initiation.global_quantities.b_field_perpendicular.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "plasma_initiation/global_quantities/b_field_perpendicular/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/b_field_perpendicular/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "plasma_initiation.global_quantities.b_field_stray": {
+  "data_type": "STRUCTURE",
+  "documentation": "Stray magnetic field at plasma position",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T"
+ },
+ "plasma_initiation.global_quantities.b_field_stray.data": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_stray.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Stray magnetic field at plasma position",
-  "full_path": "plasma_initiation/global_quantities/b_field_stray(:)",
+  "documentation": "Data",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray/data(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_stray/time",
   "type": "dynamic",
   "units": "T"
  },
- "plasma_initiation.global_quantities.b_field_stray_error_index": {
+ "plasma_initiation.global_quantities.b_field_stray.data_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"b_field_stray\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_stray_error_index",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray/data_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "plasma_initiation.global_quantities.b_field_stray_error_lower": {
+ "plasma_initiation.global_quantities.b_field_stray.data_error_lower": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_stray.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"b_field_stray\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_stray_error_lower(:)",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray/data_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_stray/time",
   "type": "dynamic",
   "units": "T"
  },
- "plasma_initiation.global_quantities.b_field_stray_error_upper": {
+ "plasma_initiation.global_quantities.b_field_stray.data_error_upper": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.b_field_stray.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"b_field_stray\"",
-  "full_path": "plasma_initiation/global_quantities/b_field_stray_error_upper(:)",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray/data_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/b_field_stray/time",
   "type": "dynamic",
   "units": "T"
+ },
+ "plasma_initiation.global_quantities.b_field_stray.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "plasma_initiation/global_quantities/b_field_stray/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/b_field_stray/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "plasma_initiation.global_quantities.connection_length": {
+  "data_type": "STRUCTURE",
+  "documentation": "Average length of open magnetic field lines. In the case of fully closed field lines, connection_length = 1",
+  "full_path": "plasma_initiation/global_quantities/connection_length",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m"
+ },
+ "plasma_initiation.global_quantities.connection_length.data": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.connection_length.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Average length of open magnetic field lines. In the case of fully closed field lines, connection_length = 1",
-  "full_path": "plasma_initiation/global_quantities/connection_length(:)",
+  "documentation": "Data",
+  "full_path": "plasma_initiation/global_quantities/connection_length/data(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/connection_length/time",
   "type": "dynamic",
   "units": "m"
  },
- "plasma_initiation.global_quantities.connection_length_error_index": {
+ "plasma_initiation.global_quantities.connection_length.data_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"connection_length\"",
-  "full_path": "plasma_initiation/global_quantities/connection_length_error_index",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/connection_length/data_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "plasma_initiation.global_quantities.connection_length_error_lower": {
+ "plasma_initiation.global_quantities.connection_length.data_error_lower": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.connection_length.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"connection_length\"",
-  "full_path": "plasma_initiation/global_quantities/connection_length_error_lower(:)",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/connection_length/data_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/connection_length/time",
   "type": "dynamic",
   "units": "m"
  },
- "plasma_initiation.global_quantities.connection_length_error_upper": {
+ "plasma_initiation.global_quantities.connection_length.data_error_upper": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.connection_length.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"connection_length\"",
-  "full_path": "plasma_initiation/global_quantities/connection_length_error_upper(:)",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/connection_length/data_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/connection_length/time",
   "type": "dynamic",
   "units": "m"
+ },
+ "plasma_initiation.global_quantities.connection_length.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "plasma_initiation/global_quantities/connection_length/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/connection_length/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "plasma_initiation.global_quantities.coulomb_logarithm": {
+  "data_type": "STRUCTURE",
+  "documentation": "Coulomb logarithm",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "-"
+ },
+ "plasma_initiation.global_quantities.coulomb_logarithm.data": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.coulomb_logarithm.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Coulomb logarithm",
-  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm(:)",
+  "documentation": "Data",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm/data(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/coulomb_logarithm/time",
   "type": "dynamic",
   "units": "-"
  },
- "plasma_initiation.global_quantities.coulomb_logarithm_error_index": {
+ "plasma_initiation.global_quantities.coulomb_logarithm.data_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"coulomb_logarithm\"",
-  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm_error_index",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm/data_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "plasma_initiation.global_quantities.coulomb_logarithm_error_lower": {
+ "plasma_initiation.global_quantities.coulomb_logarithm.data_error_lower": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.coulomb_logarithm.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"coulomb_logarithm\"",
-  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm_error_lower(:)",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm/data_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/coulomb_logarithm/time",
   "type": "dynamic",
   "units": "-"
  },
- "plasma_initiation.global_quantities.coulomb_logarithm_error_upper": {
+ "plasma_initiation.global_quantities.coulomb_logarithm.data_error_upper": {
   "coordinates": [
-   "plasma_initiation.time"
+   "plasma_initiation.global_quantities.coulomb_logarithm.time"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"coulomb_logarithm\"",
-  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm_error_upper(:)",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm/data_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "time",
+  "timebasepath": "global_quantities/coulomb_logarithm/time",
   "type": "dynamic",
   "units": "-"
+ },
+ "plasma_initiation.global_quantities.coulomb_logarithm.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "plasma_initiation/global_quantities/coulomb_logarithm/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "global_quantities/coulomb_logarithm/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "plasma_initiation.ids_properties": {
   "data_type": "STRUCTURE",
@@ -973,10 +1070,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "plasma_initiation.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "plasma_initiation/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "plasma_initiation.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "plasma_initiation.ids_properties.occurrence"
+ },
+ "plasma_initiation.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "plasma_initiation/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "plasma_initiation.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "plasma_initiation/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "plasma_initiation/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "plasma_initiation/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "plasma_initiation.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -998,6 +1133,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "plasma_initiation/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1033,6 +1176,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "plasma_initiation/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1084,6 +1235,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "plasma_initiation/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1141,6 +1300,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "plasma_initiation.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "plasma_initiation.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1184,6 +1351,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "plasma_initiation/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "plasma_initiation.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "plasma_initiation/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1296,6 +1471,254 @@
   "full_path": "plasma_initiation/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "plasma_initiation.profiles_2d": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "2D profiles in the poloidal plane, given at various time slices",
+  "full_path": "plasma_initiation/profiles_2d(itime)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "plasma_initiation_profiles_2d",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_tor": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal component of the electric field",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"e_field_tor\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_tor_error_lower": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"e_field_tor\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_tor_error_upper": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"e_field_tor\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "plasma_initiation.profiles_2d[:].grid": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "plasma_initiation.profiles_2d{i}",
+  "data_type": "STRUCTURE",
+  "documentation": "Definition of the 2D grid (the content of dim1 and dim2 is defined by the selected grid_type)",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "equilibrium_profiles_2d_grid"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim1": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim1(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim1_error_lower": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim1_error_upper": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim2": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim2(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim2_error_lower": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.dim2_error_upper": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/dim2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "plasma_initiation.profiles_2d[:].grid.volume_element": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/volume_element(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "plasma_initiation.profiles_2d[:].grid.volume_element_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/volume_element_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].grid.volume_element_error_lower": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/volume_element_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "plasma_initiation.profiles_2d[:].grid.volume_element_error_upper": {
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid/volume_element_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "plasma_initiation.profiles_2d[:].grid_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk (R=dim1, Z=dim2). In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho=dim1, theta=dim2) with magnetic axis as centre of grid; theta and values following the COCOS=11 convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label (dim1) and the straight-field line poloidal angle (mod(index,10)=1) (dim2); could be non-equidistant; magnetic axis as centre of grid; following the COCOS=11 convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label (dim1) and the equal arc poloidal angle (mod(index,10)=2) (dim2)\n13) inverse_psi_polar : Flux surface type with psi as radial label (dim1) and the polar poloidal angle (mod(index,10)=3) (dim2); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4) (dim2), could be non-equidistant; magnetic axis as centre of grid; following the COCOS=11 convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the equal arc poloidal angle (mod(index,10)=5) (dim2)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the polar poloidal angle (mod(index,10)=6) (dim2); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the straight-field line poloidal angle (dim2)\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the equal arc poloidal angle (dim2)\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the polar poloidal angle (dim2)\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the straight-field line poloidal angle (dim2)\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the equal arc poloidal angle (dim2)\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the polar poloidal angle (dim2)\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the straight-field line poloidal angle (dim2)\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the equal arc poloidal angle (dim2)\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the polar poloidal angle (dim2)\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the straight-field line poloidal angle (dim2)\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the equal arc poloidal angle (dim2)\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the polar poloidal angle (dim2)\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle (dim2)\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle (dim2)\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the polar poloidal angle (dim2)\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid_type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "plasma_initiation.profiles_2d[:].grid_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid_type/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].grid_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid_type/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].grid_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "plasma_initiation/profiles_2d(itime)/grid_type/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "plasma_initiation/profiles_2d(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
  },
  "plasma_initiation.time": {
   "coordinates": [

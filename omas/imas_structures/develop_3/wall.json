@@ -2,7 +2,7 @@
  "wall": {
   "documentation": "Description of the torus wall and its interaction with the plasma",
   "full_path": "wall",
-  "lifecycle_last_change": "3.38.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.1.0",
   "maxoccur": "5"
@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "wall.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "wall.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "wall/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -157,16 +173,47 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Set of limiter units",
+  "documentation": "Set of limiter units. Multiple units must be ordered so that they define contiguous sections, clockwise in the poloidal direction. ",
   "full_path": "wall/description_2d(i1)/limiter/unit(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "33",
   "structure_reference": "wall_2d_limiter_unit"
  },
- "wall.description_2d[:].limiter.unit[:].closed": {
+ "wall.description_2d[:].limiter.unit[:].component_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "wall/wall_component_identifier.xml",
+  "documentation": "Type of component of this unit\n0) other : Other type of component not in the list yet\n1) port : Port\n2) divertor : Divertor\n3) baffle : Baffle\n4) blanket : Blanket for Tritium generation\n5) limiter : Limiter\n6) panel : First wall panel\n7) antenna : Plasma facing element of an RF antenna",
+  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/component_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "wall.description_2d[:].limiter.unit[:].component_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/component_type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "wall.description_2d[:].limiter.unit[:].component_type.index": {
   "data_type": "INT_0D",
-  "documentation": "Flag identifying whether the contour is closed (1) or open (0)",
-  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/closed",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/component_type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "wall.description_2d[:].limiter.unit[:].component_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/component_type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "wall.description_2d[:].limiter.unit[:].identifier": {
+  "data_type": "STR_0D",
+  "documentation": "Identifier of this unit. Although the details may be machine-specific, a tree-like syntax must be followed, listing first top level components, then going down to finer element description. The tree levels are separated by a /, using a number of levels relevant to the granularity of the description. Example : ic_antenna/a1/bumpers refers to the bumpers of the a1 IC antenna",
+  "full_path": "wall/description_2d(i1)/limiter/unit(i2)/identifier",
+  "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -412,6 +459,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "rz1d_dynamic_aos_time",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "wall.description_2d[:].mobile.unit[:].outline[:].r": {
@@ -582,7 +630,8 @@
  },
  "wall.description_2d[:].type": {
   "data_type": "STRUCTURE",
-  "documentation": "Type of the description. index = 0 for equilibrium codes (single closed limiter and vessel); 1 for gas-tight walls (disjoint PFCs with inner vessel as last limiter_unit; no vessel structure); 2 for free boundary codes (disjoint PFCs and vessel) ",
+  "doc_identifier": "wall/wall_description_2d_type_identifier.xml",
+  "documentation": "Type of the description\n0) single_unit_vessel : Limiter structure is using a single unit, the vessel structure is filled\n1) multiple_units_no_vessel : Limiter is described with multiple units, no vessel description\n2) multiple_units_vessel : Limiter is described with multiple units and the vessel structure is filled",
   "full_path": "wall/description_2d(i1)/type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -1289,6 +1338,92 @@
   "maxoccur": "3",
   "structure_reference": "wall_description_ggd"
  },
+ "wall.description_ggd[:].component": {
+  "coordinates": [
+   "wall.description_ggd[:].component[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Description of the components represented by various subsets, given for each slice of the grid_ggd time base (the component description is not supposed to change, but grid_ggd may evolve with time)",
+  "full_path": "wall/description_ggd(i1)/component(itime)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "wall_description_ggd_component",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].identifiers": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "Identifiers of the components (described in the various grid_subsets). Although the details may be machine-specific, a tree-like syntax must be followed, listing first top level components, then going down to finer element description. The tree levels are separated by a /, using a number of levels relevant to the granularity of the description. Example : ic_antenna/a1/bumpers refers to the bumpers of the a1 IC antenna",
+  "full_path": "wall/description_ggd(i1)/component(itime)/identifiers(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "wall/description_ggd(i1)/component(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "wall.description_ggd[:].component[:].type": {
+  "coordinates": [
+   "wall.description_ggd[:].component[:].identifiers"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "doc_identifier": "wall/wall_component_identifier.xml",
+  "documentation": "The component type is given for various grid_subsets, using the identifier convention below\n0) other : Other type of component not in the list yet\n1) port : Port\n2) divertor : Divertor\n3) baffle : Baffle\n4) blanket : Blanket for Tritium generation\n5) limiter : Limiter\n6) panel : First wall panel\n7) antenna : Plasma facing element of an RF antenna",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_identifier_single"
+ },
+ "wall.description_ggd[:].component[:].type[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].type[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].type[:].identifier": {
+  "data_type": "STRUCTURE",
+  "documentation": "Identifier value for the grid subset",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/identifier",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "wall.description_ggd[:].component[:].type[:].identifier.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/identifier/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].type[:].identifier.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/identifier/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].component[:].type[:].identifier.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "wall/description_ggd(i1)/component(itime)/type(i2)/identifier/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "wall.description_ggd[:].ggd": {
   "coordinates": [
    "wall.description_ggd[:].ggd[:].time"
@@ -1299,7 +1434,572 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "wall_description_ggd_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Magnetic vector potential, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_vector_components_rzphi",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].toroidal_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].z_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].e_field": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Electric field, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_vector_components_rzphi",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].toroidal_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].z_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes": {
   "data_type": "STRUCTURE",
@@ -1381,7 +2081,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.current.emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/current/emitted(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1492,7 +2192,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.current.incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/current/incident(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1617,7 +2317,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.electrons.emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/electrons/emitted(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1728,7 +2428,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.electrons.incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/electrons/incident(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1967,7 +2667,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2078,7 +2778,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2228,7 +2928,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2339,7 +3039,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2720,7 +3420,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2831,7 +3531,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2981,7 +3681,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3092,7 +3792,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3284,7 +3984,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.radiation.emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/radiation/emitted(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3395,7 +4095,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.radiation.incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/radiation/incident(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3641,7 +4341,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3752,7 +4452,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3902,7 +4602,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4013,7 +4713,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4394,7 +5094,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4505,7 +5205,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4655,7 +5355,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4766,7 +5466,7 @@
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -4886,6 +5586,288 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].j_total": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Total current density, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_vector_components_rzphi",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the major radius axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the major radius axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"r_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"toroidal_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].toroidal_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"toroidal\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Component along the height axis, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the component along the height axis, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"z_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].z_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "wall.description_ggd[:].ggd[:].particle_fluxes": {
   "data_type": "STRUCTURE",
   "documentation": "Particle fluxes. The incident and emitted components are distinguished. The net flux received by the wall is equal to incident - emitted",
@@ -4966,7 +5948,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.electrons.emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/electrons/emitted(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -5077,7 +6059,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.electrons.incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/electrons/incident(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -5316,7 +6298,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -5427,7 +6409,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -5577,7 +6559,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -5688,7 +6670,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6069,7 +7051,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/emitted(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6180,7 +7162,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/incident(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6330,7 +7312,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].state[:].emitted[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/state(i3)/emitted(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6441,7 +7423,7 @@
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].state[:].incident[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/state(i3)/incident(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6561,6 +7543,118 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].phi_potential": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Electric potential, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].coefficients": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].phi_potential[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].coefficients_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].phi_potential[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].coefficients_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].phi_potential[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "wall.description_ggd[:].ggd[:].phi_potential[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/phi_potential(i2)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V"
+ },
  "wall.description_ggd[:].ggd[:].power_density": {
   "coordinates": [
    "1...N"
@@ -6626,7 +7720,7 @@
  },
  "wall.description_ggd[:].ggd[:].power_density[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/power_density(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -6671,6 +7765,118 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "W.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].psi": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Poloidal flux, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].coefficients": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].psi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].coefficients_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].psi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].coefficients_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].psi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "wall.description_ggd[:].ggd[:].psi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/psi(i2)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
  },
  "wall.description_ggd[:].ggd[:].recycling": {
   "data_type": "STRUCTURE",
@@ -6756,7 +7962,7 @@
  },
  "wall.description_ggd[:].ggd[:].recycling.ion[:].coefficient[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/coefficient(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7016,7 +8222,7 @@
  },
  "wall.description_ggd[:].ggd[:].recycling.ion[:].state[:].coefficient[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/state(i3)/coefficient(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7287,7 +8493,7 @@
  },
  "wall.description_ggd[:].ggd[:].recycling.neutral[:].coefficient[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/coefficient(i3)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7547,7 +8753,7 @@
  },
  "wall.description_ggd[:].ggd[:].recycling.neutral[:].state[:].coefficient[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/state(i3)/coefficient(i4)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7674,6 +8880,118 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].resistivity": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Resistivity, given on various grid subsets",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].coefficients": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].resistivity[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].coefficients_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].resistivity[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].coefficients_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].resistivity[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
+ "wall.description_ggd[:].ggd[:].resistivity[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/resistivity(i2)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Ohm.m"
+ },
  "wall.description_ggd[:].ggd[:].temperature": {
   "coordinates": [
    "1...N"
@@ -7739,7 +9057,7 @@
  },
  "wall.description_ggd[:].ggd[:].temperature[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/temperature(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7859,7 +9177,7 @@
  },
  "wall.description_ggd[:].ggd[:].v_biasing[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/v_biasing(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -7915,6 +9233,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_aos3_root",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "wall.description_ggd[:].grid_ggd[:].grid_subset": {
@@ -8641,6 +9960,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "wall_description_ggd_material",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "wall.description_ggd[:].material[:].grid_subset": {
@@ -8649,7 +9969,7 @@
   ],
   "data_type": "STRUCT_ARRAY",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material is described for various wall components (grid subsets), using the identifier convention below\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Material is described for various wall components (grid subsets), using the identifier convention below\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy",
   "full_path": "wall/description_ggd(i1)/material(itime)/grid_subset(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
@@ -8664,7 +9984,7 @@
  },
  "wall.description_ggd[:].material[:].grid_subset[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "wall/description_ggd(i1)/material(itime)/grid_subset(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -8714,9 +10034,142 @@
   "type": "dynamic",
   "units": "s"
  },
+ "wall.description_ggd[:].thickness": {
+  "coordinates": [
+   "wall.description_ggd[:].thickness[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "In the case of a thin wall description, effective thickness of each surface element of grid_ggd, given for each slice of the grid_ggd time base (the thickness is not supposed to change, but grid_ggd may evolve with time)",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "wall_description_ggd_thickness",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "The thickness is given for various wall components (grid subsets)",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].coefficients": {
+  "coordinates": [
+   "wall.description_ggd[:].thickness[:].grid_subset[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].coefficients_error_lower": {
+  "coordinates": [
+   "wall.description_ggd[:].thickness[:].grid_subset[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].coefficients_error_upper": {
+  "coordinates": [
+   "wall.description_ggd[:].thickness[:].grid_subset[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].grid_subset[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/grid_subset(i2)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "wall.description_ggd[:].thickness[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "wall/description_ggd(i1)/thickness(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
  "wall.description_ggd[:].type": {
   "data_type": "STRUCTURE",
-  "documentation": "Type of wall: index = 0 for gas tight and 1 for a wall with holes/open ports",
+  "documentation": "Type of wall: index = 0 for gas tight, 1 for a wall with holes/open ports, 2 for a thin wall description",
   "full_path": "wall/description_ggd(i1)/type",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -10580,10 +12033,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "wall.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "wall/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "wall.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "wall.ids_properties.occurrence"
+ },
+ "wall.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "wall/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "wall.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "wall/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "wall/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "wall/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "wall.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -10605,6 +12096,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "wall/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -10640,6 +12139,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "wall/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -10691,6 +12198,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "wall/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -10748,6 +12263,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "wall.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "wall.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -10791,6 +12314,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "wall/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "wall.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "wall/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
