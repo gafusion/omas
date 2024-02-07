@@ -515,7 +515,7 @@ class ODS(MutableMapping):
         return top
 
     @property
-    def structure(self, location):
+    def structure(self):
         """
         Property which returns structure of current ODS
         """
