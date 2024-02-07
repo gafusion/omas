@@ -12,7 +12,9 @@
   "default_tree": "D3D",
   "fast_ece": false,
   "nref": 0,
-  "revision": "BLESSED"
+  "revision": "BLESSED",
+  "PROFILES_run_id":  null,
+  "EFIT_run_id":  null
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -117,28 +119,124 @@
   "COCOSIO": 11,
   "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
  },
- "core_profiles.profiles_1d.:": {
-  "TDI": "size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)",
-  "treename": "{PROFILES_tree}"
+ "core_profiles.ids_properties.homogeneous_time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
- "core_profiles.profiles_1d.:.electrons.density_thermal": {
-  "TDI": "\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT",
-  "treename": "{PROFILES_tree}"
+ "core_profiles.profiles_1d.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.e_field.radial": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.e_field.radial_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature": {
-  "TDI": "\\{PROFILES_tree}::TOP.PROFILES.ETEMPFIT",
-  "treename": "{PROFILES_tree}"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.temperature_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.rho_pol_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.grid.rho_tor_norm": {
-  "eval2TDI": "py2tdi(tile,'dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,0)','size(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)')",
-  "treename": "{PROFILES_tree}"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
- "core_profiles.profiles_1d.:.time": {
-  "TDI": "dim_of(\\{PROFILES_tree}::TOP.PROFILES.EDENSFIT,1)/1000.",
-  "treename": "{PROFILES_tree}"
+ "core_profiles.profiles_1d.:.ion.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:.a": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.element.:.z_n": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.label": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.temperature_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.j_total": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.pressure_perpendicular": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.time": {
-  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
@@ -199,6 +297,9 @@
  "ec_launchers.beam.:.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
+ "ece": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
  "ece.channel.:": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
@@ -208,6 +309,9 @@
  "ece.channel.:.identifier": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "ece.channel.:.if_bandwidth": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
  "ece.channel.:.name": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
@@ -215,6 +319,9 @@
   "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "ece.channel.:.time": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.ids_properties.homogeneous_time": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.line_of_sight.first_point.phi": {
@@ -594,5 +701,8 @@
    2
   ],
   "treename": "{EFIT_tree}"
+ },
+ "wall.ids_properties.homogeneous_time": {
+  "VALUE": 1
  }
 }
