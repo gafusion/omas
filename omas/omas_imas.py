@@ -233,7 +233,7 @@ def imas_empty(value):
     return None
 
 
-def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
+def imas_get(ids, path, skip_missing_nodes=False, check_empty=True, ids_is_single_object=False):
     """
     read the value of a path in an open IMAS ids
 
@@ -255,19 +255,22 @@ def imas_get(ids, path, skip_missing_nodes=False, check_empty=True):
     path = path[1:]
 
     debug_path = ''
-    if hasattr(ids, ds):
-        debug_path += '%s' % ds
-        m = getattr(ids, ds)
-    elif skip_missing_nodes is not False:
-        if skip_missing_nodes is None:
-            printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
-        return None
+    if not ids_is_single_object:
+        if hasattr(ids, ds):
+            debug_path += '%s' % ds
+            m = getattr(ids, ds)
+        elif skip_missing_nodes is not False:
+            if skip_missing_nodes is None:
+                printe('WARNING: %s is not part of IMAS' % l2i([ds] + path))
+            return None
+        else:
+            printd(debug_path, topic='imas_code')
+            raise AttributeError('%s is not part of IMAS' % l2i([ds] + path))
+        out = m
     else:
-        printd(debug_path, topic='imas_code')
-        raise AttributeError('%s is not part of IMAS' % l2i([ds] + path))
-
+        out = ids
     # traverse the IDS to get the data
-    out = m
+    
     for kp, p in enumerate(path):
         if isinstance(p, str):
             if hasattr(out, p):
@@ -360,7 +363,8 @@ def save_omas_imas(ods, user=None, machine=None, pulse=None, run=None, occurrenc
 
     try:
         # open IMAS tree
-        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=new, verbose=verbose, backend=backend)
+        ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, 
+                        occurrence=occurrence, new=new, verbose=verbose, backend=backend)
 
     except IOError as _excp:
         raise IOError(str(_excp) + '\nIf this is a new pulse/run then set `new=True`')
@@ -539,17 +543,20 @@ def load_omas_imas(
     :return: OMAS data set
     """
 
-    if pulse is None or run is None:
+    if (pulse is None or run is None) and ext_ids is None:
         raise Exception('`pulse` and `run` must be specified')
-
-    printd(
-        'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
-    )
+    if ext_ids is None:
+        printd(
+            'Loading from IMAS (user:%s machine:%s pulse:%d run:%d, imas_version:%s)' % (user, machine, pulse, run, imas_version), topic='imas'
+        )
+    ids_is_single_object=False
     try:
         if ext_ids is None:
-            ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, occurrence=occurrence, new=False, verbose=verbose, backend=backend)
+            ids = imas_open(user=user, machine=machine, pulse=pulse, run=run, 
+                            occurrence=occurrence, new=False, verbose=verbose, backend=backend)
         else:
             ids = ext_ids
+            ids_is_single_object=True
         if imas_version is None:
             try:
                 imas_version = ids.dataset_description.imas_version
@@ -581,30 +588,46 @@ def load_omas_imas(
     else:
 
         try:
-            # see what paths have data
-            # NOTE: this is where the IDS.get operation occurs
-            fetch_paths, joined_fetch_paths = infer_fetch_paths(
-                ids, occurrence=occurrence, paths=paths, time=time, imas_version=imas_version, verbose=verbose
-            )
             # build omas data structure
             ods = ODS(imas_version=imas_version, consistency_check=False)
-            if verbose and tqdm is not None:
-                progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
-            else:
+            if ext_ids is not None:
+                if paths is None:
+                    raise NotImplementedError("Paths must be specified if an external ids is provided.")
+                fetch_paths = []
+                for path in paths:
+                    if ":" in path:
+                        raise NotImplementedError("Wildcard expression : not allowed when ext_ids is not None")
+                    fetch_paths.append([])
+                    for sub_path in path.split("."):
+                        try:
+                            fetch_paths[-1].append(int(sub_path))
+                        except ValueError:
+                            fetch_paths[-1].append(sub_path)
+                joined_fetch_paths = list(map(l2i, fetch_paths))
                 progress_fetch_paths = fetch_paths
+            else:
+                # see what paths have data
+                # NOTE: this is where the IDS.get operation occurs
+                fetch_paths, joined_fetch_paths = infer_fetch_paths(
+                        ids, occurrence=occurrence, paths=paths, time=time, imas_version=imas_version, verbose=verbose)
+                if verbose and tqdm is not None:
+                    progress_fetch_paths = tqdm.tqdm(fetch_paths, file=sys.stdout)
+                else:
+                    progress_fetch_paths = fetch_paths
             with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
                 for k, path in enumerate(progress_fetch_paths):
-                    # print progress
-                    if verbose:
-                        if tqdm is not None:
-                            progress_fetch_paths.set_description(joined_fetch_paths[k])
-                        elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
-                            print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
-                    # uncertain data is loaded as part of the nominal value of the data
-                    if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
-                        continue
+                    if ext_ids is None:
+                        # print progress
+                        if verbose:
+                            if tqdm is not None:
+                                progress_fetch_paths.set_description(joined_fetch_paths[k])
+                            elif k % int(numpy.ceil(len(fetch_paths) / 10)) == 0 or k == len(fetch_paths) - 1:
+                                print('Loading {0:3.1f}%'.format(100 * float(k) / (len(fetch_paths) - 1)))
+                        # uncertain data is loaded as part of the nominal value of the data
+                        if path[-1].endswith('_error_upper') or path[-1].endswith('_error_lower') or path[-1].endswith('_error_index'):
+                            continue
                     # get data from IDS
-                    data = imas_get(ids, path, None)
+                    data = imas_get(ids, path, None, ids_is_single_object=ids_is_single_object)
                     # continue for empty data
                     if data is None and raise_exceptions:
                         raise ValueError(f"Path {path} does not have data!")
@@ -625,10 +648,11 @@ def load_omas_imas(
         finally:
             # close connection to IMAS database
             printd("ids.close()", topic='imas_code')
-            ids.close()
+            if ext_ids is None:
+                ids.close()
 
     # add dataset_description information to this ODS
-    if paths is None:
+    if paths is None and ext_ids is None:
         ods.setdefault('dataset_description.data_entry.user', str(user))
         ods.setdefault('dataset_description.data_entry.machine', str(machine))
         ods.setdefault('dataset_description.data_entry.pulse', int(pulse))
