@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "controllers.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "controllers.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "controllers/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -134,10 +150,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "controllers.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "controllers/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "controllers.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "controllers.ids_properties.occurrence"
+ },
+ "controllers.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "controllers/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "controllers.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "controllers/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "controllers/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "controllers/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "controllers.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -159,6 +213,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "controllers/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -194,6 +256,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "controllers/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -245,6 +315,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "controllers/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -302,6 +380,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "controllers.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "controllers.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -345,6 +431,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "controllers/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "controllers.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "controllers/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -674,8 +768,8 @@
  },
  "controllers.linear_controller[:].pid.d.data": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.d.data.as_parent",
-   "controllers.linear_controller[:].pid.d.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.d.time"
   ],
   "data_type": "FLT_3D",
@@ -696,8 +790,8 @@
  },
  "controllers.linear_controller[:].pid.d.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.d.data.as_parent",
-   "controllers.linear_controller[:].pid.d.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.d.time"
   ],
   "data_type": "FLT_3D",
@@ -710,8 +804,8 @@
  },
  "controllers.linear_controller[:].pid.d.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.d.data.as_parent",
-   "controllers.linear_controller[:].pid.d.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.d.time"
   ],
   "data_type": "FLT_3D",
@@ -749,8 +843,8 @@
  },
  "controllers.linear_controller[:].pid.i.data": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.i.data.as_parent",
-   "controllers.linear_controller[:].pid.i.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.i.time"
   ],
   "data_type": "FLT_3D",
@@ -771,8 +865,8 @@
  },
  "controllers.linear_controller[:].pid.i.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.i.data.as_parent",
-   "controllers.linear_controller[:].pid.i.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.i.time"
   ],
   "data_type": "FLT_3D",
@@ -785,8 +879,8 @@
  },
  "controllers.linear_controller[:].pid.i.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.i.data.as_parent",
-   "controllers.linear_controller[:].pid.i.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.i.time"
   ],
   "data_type": "FLT_3D",
@@ -824,8 +918,8 @@
  },
  "controllers.linear_controller[:].pid.p.data": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.p.data.as_parent",
-   "controllers.linear_controller[:].pid.p.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.p.time"
   ],
   "data_type": "FLT_3D",
@@ -846,8 +940,8 @@
  },
  "controllers.linear_controller[:].pid.p.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.p.data.as_parent",
-   "controllers.linear_controller[:].pid.p.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.p.time"
   ],
   "data_type": "FLT_3D",
@@ -860,8 +954,8 @@
  },
  "controllers.linear_controller[:].pid.p.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].pid.p.data.as_parent",
-   "controllers.linear_controller[:].pid.p.data.as_parent",
+   "controllers.linear_controller[:].output_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].pid.p.time"
   ],
   "data_type": "FLT_3D",
@@ -970,8 +1064,8 @@
  },
  "controllers.linear_controller[:].statespace.a.data": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].statespace.state_names",
    "controllers.linear_controller[:].statespace.a.time"
   ],
   "data_type": "FLT_3D",
@@ -992,8 +1086,8 @@
  },
  "controllers.linear_controller[:].statespace.a.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].statespace.state_names",
    "controllers.linear_controller[:].statespace.a.time"
   ],
   "data_type": "FLT_3D",
@@ -1006,8 +1100,8 @@
  },
  "controllers.linear_controller[:].statespace.a.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
-   "controllers.linear_controller[:].statespace.a.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].statespace.state_names",
    "controllers.linear_controller[:].statespace.a.time"
   ],
   "data_type": "FLT_3D",
@@ -1045,8 +1139,8 @@
  },
  "controllers.linear_controller[:].statespace.b.data": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].statespace.b.time"
   ],
   "data_type": "FLT_3D",
@@ -1067,8 +1161,8 @@
  },
  "controllers.linear_controller[:].statespace.b.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].statespace.b.time"
   ],
   "data_type": "FLT_3D",
@@ -1081,8 +1175,8 @@
  },
  "controllers.linear_controller[:].statespace.b.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
-   "controllers.linear_controller[:].statespace.b.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].statespace.b.time"
   ],
   "data_type": "FLT_3D",
@@ -1120,8 +1214,8 @@
  },
  "controllers.linear_controller[:].statespace.c.data": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.c.time"
   ],
   "data_type": "FLT_3D",
@@ -1142,8 +1236,8 @@
  },
  "controllers.linear_controller[:].statespace.c.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.c.time"
   ],
   "data_type": "FLT_3D",
@@ -1156,8 +1250,8 @@
  },
  "controllers.linear_controller[:].statespace.c.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
-   "controllers.linear_controller[:].statespace.c.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.c.time"
   ],
   "data_type": "FLT_3D",
@@ -1195,8 +1289,8 @@
  },
  "controllers.linear_controller[:].statespace.d.data": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.d.time"
   ],
   "data_type": "FLT_3D",
@@ -1217,8 +1311,8 @@
  },
  "controllers.linear_controller[:].statespace.d.data_error_lower": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.d.time"
   ],
   "data_type": "FLT_3D",
@@ -1231,8 +1325,8 @@
  },
  "controllers.linear_controller[:].statespace.d.data_error_upper": {
   "coordinates": [
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
-   "controllers.linear_controller[:].statespace.d.data.as_parent",
+   "controllers.linear_controller[:].statespace.state_names",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].statespace.d.time"
   ],
   "data_type": "FLT_3D",

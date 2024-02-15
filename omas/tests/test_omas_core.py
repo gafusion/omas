@@ -198,8 +198,8 @@ class TestOmasCore(UnittestCaseOmas):
         from uncertainties import ufloat
 
         ods = ODS()
-        ods['pulse_schedule']['position_control']['x_point'][0]['z']['reference']['data'] = [ufloat(1.019, 0.02), ufloat(1.019, 0.02)]
-        result = ods['pulse_schedule.position_control.x_point.:.z.reference.data']
+        ods['pulse_schedule']['position_control']['x_point'][0]['z']['reference'] = [ufloat(1.019, 0.02), ufloat(1.019, 0.02)]
+        result = ods['pulse_schedule.position_control.x_point.:.z.reference']
         # Trips a ValueError if the dtype of the uncertain array isn't handled properly.
 
     def test_dynamic_set_nonzero_array_index(self):

@@ -88,6 +88,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "tf.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "tf.code.library": {
   "coordinates": [
    "1...N"
@@ -103,6 +111,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "tf/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1321,6 +1337,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "tf_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "tf.field_map[:].a_field_r": {
@@ -1388,7 +1405,7 @@
  },
  "tf.field_map[:].a_field_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/a_field_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1499,7 +1516,7 @@
  },
  "tf.field_map[:].a_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/a_field_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1610,7 +1627,7 @@
  },
  "tf.field_map[:].a_field_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/a_field_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1721,7 +1738,7 @@
  },
  "tf.field_map[:].b_field_r[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/b_field_r(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1832,7 +1849,7 @@
  },
  "tf.field_map[:].b_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/b_field_tor(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1943,7 +1960,7 @@
  },
  "tf.field_map[:].b_field_z[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "tf/field_map(itime)/b_field_z(i1)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -2738,10 +2755,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "tf.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "tf/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "tf.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "tf.ids_properties.occurrence"
+ },
+ "tf.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "tf/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "tf.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "tf/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "tf/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "tf/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "tf.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -2763,6 +2818,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "tf/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2798,6 +2861,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "tf/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2849,6 +2920,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "tf/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2906,6 +2985,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "tf.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "tf.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -2949,6 +3036,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "tf/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "tf.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "tf/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

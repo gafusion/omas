@@ -1,8 +1,8 @@
 {
  "core_profiles": {
-  "documentation": "Core plasma radial profiles",
+  "documentation": "Core plasma profiles",
   "full_path": "core_profiles",
-  "lifecycle_last_change": "3.34.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "15",
@@ -22,6 +22,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_profiles.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "core_profiles.code.library": {
   "coordinates": [
    "1...N"
@@ -37,6 +45,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_profiles/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -106,6 +122,77 @@
   "full_path": "core_profiles/code/version",
   "lifecycle_status": "active",
   "type": "constant"
+ },
+ "core_profiles.covariance": {
+  "data_type": "STRUCTURE",
+  "documentation": "User defined covariance matrix. The covariance of various quantities can be stored here, these quantities are referred to by giving their IDS path in the rows_uri list",
+  "full_path": "core_profiles/covariance",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.40.0",
+  "structure_reference": "covariance_matrix"
+ },
+ "core_profiles.covariance.data": {
+  "coordinates": [
+   "core_profiles.covariance.rows_uri",
+   "core_profiles.covariance.rows_uri"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Covariance matrix",
+  "full_path": "core_profiles/covariance/data(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "mixed"
+ },
+ "core_profiles.covariance.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "core_profiles/covariance/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "core_profiles.covariance.data_error_lower": {
+  "coordinates": [
+   "core_profiles.covariance.rows_uri",
+   "core_profiles.covariance.rows_uri"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "core_profiles/covariance/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "mixed"
+ },
+ "core_profiles.covariance.data_error_upper": {
+  "coordinates": [
+   "core_profiles.covariance.rows_uri",
+   "core_profiles.covariance.rows_uri"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "core_profiles/covariance/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "mixed"
+ },
+ "core_profiles.covariance.description": {
+  "data_type": "STR_0D",
+  "documentation": "Description of this covariance matrix",
+  "full_path": "core_profiles/covariance/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.covariance.rows_uri": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "List of URIs corresponding to the rows (1st dimension) of the covariance matrix. If not all indices of a given node are used, they must be listed explicitly e.g. rows_uri(i) = pf_active:1/coil(i) will refer to a list of indices of the occurrence 1 of the pf_active IDS of this data entry. If the rows correspond to all indices of a given vector it is sufficient to give a single URI where this vector is denoted using the (:) implicit notation, e.g. rows_uri(1) = /grid_ggd(3)/grid_subset(2)/elements(:).",
+  "full_path": "core_profiles/covariance/rows_uri(:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "url": "utilities/IMAS-URI-scheme.md"
  },
  "core_profiles.global_quantities": {
   "data_type": "STRUCTURE",
@@ -442,7 +529,7 @@
  },
  "core_profiles.global_quantities.ion": {
   "coordinates": [
-   "core_profiles.profiles_1d.ion"
+   "core_profiles.profiles_1d[:].ion"
   ],
   "data_type": "STRUCT_ARRAY",
   "documentation": "Quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. The set of ion species of this array must be the same as the one defined in profiles_1d/ion, at the time slice indicated in ion_time_slice",
@@ -450,7 +537,8 @@
   "introduced_after_version": "3.33.0",
   "lifecycle_status": "active",
   "maxoccur": "20",
-  "structure_reference": "core_profiles_global_quantities_ion"
+  "structure_reference": "core_profiles_global_quantities_ion",
+  "timebasepath": "time"
  },
  "core_profiles.global_quantities.ion[:].n_i_volume_average": {
   "coordinates": [
@@ -1070,10 +1158,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_profiles.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "core_profiles/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "core_profiles.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "core_profiles.ids_properties.occurrence"
+ },
+ "core_profiles.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "core_profiles/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "core_profiles.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "core_profiles/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "core_profiles/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "core_profiles/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "core_profiles.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1095,6 +1221,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1130,6 +1264,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1181,6 +1323,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1238,6 +1388,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "core_profiles.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "core_profiles.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1281,6 +1439,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_profiles.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_profiles/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1406,6 +1572,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_profiles_profiles_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "core_profiles.profiles_1d[:].conductivity_parallel": {
@@ -9175,6 +9342,2417 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "-"
+ },
+ "core_profiles.profiles_2d": {
+  "cocos_alias": "IDSPATH",
+  "cocos_replace": "core_profiles.profiles_2d{i}",
+  "coordinates": [
+   "core_profiles.profiles_2d[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Core plasma quantities in a poloidal cross section, for various time slices",
+  "full_path": "core_profiles/profiles_2d(itime)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.39.0",
+  "maxoccur": "unbounded",
+  "structure_reference": "core_profiles_profiles_2d",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid": {
+  "data_type": "STRUCTURE",
+  "documentation": "Definition of the 2D grid (the content of dim1 and dim2 is defined by the selected grid_type)",
+  "full_path": "core_profiles/profiles_2d(itime)/grid",
+  "lifecycle_status": "alpha",
+  "structure_reference": "equilibrium_profiles_2d_grid"
+ },
+ "core_profiles.profiles_2d[:].grid.dim1": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "First dimension values",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim1(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.dim1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim1\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid.dim1_error_lower": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim1\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim1_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.dim1_error_upper": {
+  "cocos_label_transformation": "grid_type_dim1_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim1",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,1)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim1\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim1_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.dim2": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Second dimension values",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim2(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.dim2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"dim2\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid.dim2_error_lower": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"dim2\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim2_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.dim2_error_upper": {
+  "cocos_label_transformation": "grid_type_dim2_like",
+  "cocos_leaf_name_aos_indices": "IDSPATH.grid.dim2",
+  "cocos_transformation_expression": "grid_type_transformation(index_grid_type,2)",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"dim2\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/dim2_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.profiles_2d[:].grid.volume_element": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Elementary plasma volume of plasma enclosed in the cell formed by the nodes [dim1(i) dim2(j)], [dim1(i+1) dim2(j)], [dim1(i) dim2(j+1)] and [dim1(i+1) dim2(j+1)]",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/volume_element(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "core_profiles.profiles_2d[:].grid.volume_element_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"volume_element\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/volume_element_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid.volume_element_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"volume_element\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/volume_element_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "core_profiles.profiles_2d[:].grid.volume_element_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"volume_element\"",
+  "full_path": "core_profiles/profiles_2d(itime)/grid/volume_element_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^3"
+ },
+ "core_profiles.profiles_2d[:].grid_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/poloidal_plane_coordinates_identifier.xml",
+  "documentation": "Selection of one of a set of grid types\n1) rectangular : Cylindrical R,Z ala eqdsk (R=dim1, Z=dim2). In this case the position arrays should not be filled since they are redundant with grid/dim1 and dim2.\n2) inverse : Rhopolar_polar 2D polar coordinates (rho=dim1, theta=dim2) with magnetic axis as centre of grid; theta and values following the COCOS=11 convention; the polar angle is theta=atan2(z-zaxis,r-raxis)\n11) inverse_psi_straight_field_line : Flux surface type with psi as radial label (dim1) and the straight-field line poloidal angle (mod(index,10)=1) (dim2); could be non-equidistant; magnetic axis as centre of grid; following the COCOS=11 convention\n12) inverse_psi_equal_arc : Flux surface type with psi as radial label (dim1) and the equal arc poloidal angle (mod(index,10)=2) (dim2)\n13) inverse_psi_polar : Flux surface type with psi as radial label (dim1) and the polar poloidal angle (mod(index,10)=3) (dim2); could be non-equidistant\n14) inverse_psi_straight_field_line_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the straight-field line poloidal angle (mod(index,10)=4) (dim2), could be non-equidistant; magnetic axis as centre of grid; following the COCOS=11 convention\n15) inverse_psi_equal_arc_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the equal arc poloidal angle (mod(index,10)=5) (dim2)\n16) inverse_psi_polar_fourier : Flux surface type with psi as radial label (dim1) and Fourier modes in the polar poloidal angle (mod(index,10)=6) (dim2); could be non-equidistant\n21) inverse_rhopolnorm_straight_field_line : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the straight-field line poloidal angle (dim2)\n22) inverse_rhopolnorm_equal_arc : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the equal arc poloidal angle (dim2)\n23) inverse_rhopolnorm_polar : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and the polar poloidal angle (dim2)\n24) inverse_rhopolnorm_straight_field_line_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n25) inverse_rhopolnorm_equal_arc_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n26) inverse_rhopolnorm_polar_fourier : Flux surface type with radial label sqrt[(psi-psi_axis)/(psi_edge-psi_axis)] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n31) inverse_rhotornorm_straight_field_line : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the straight-field line poloidal angle (dim2)\n32) inverse_rhotornorm_equal_arc : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the equal arc poloidal angle (dim2)\n33) inverse_rhotornorm_polar : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and the polar poloidal angle (dim2)\n34) inverse_rhotornorm_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n35) inverse_rhotornorm_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n36) inverse_rhotornorm_polar_fourier : Flux surface type with radial label sqrt[Phi/Phi_edge] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n41) inverse_rhopol_straight_field_line : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the straight-field line poloidal angle (dim2)\n42) inverse_rhopol_equal_arc : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the equal arc poloidal angle (dim2)\n43) inverse_rhopol_polar : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and the polar poloidal angle (dim2)\n44) inverse_rhopol_straight_field_line_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the straight-field line poloidal angle (dim2)\n45) inverse_rhopol_equal_arc_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the equal arc poloidal angle (dim2)\n46) inverse_rhopol_polar_fourier : Flux surface type with radial label sqrt[psi-psi_axis] (dim1) and Fourier modes in the polar poloidal angle (dim2)\n51) inverse_rhotor_straight_field_line : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the straight-field line poloidal angle (dim2)\n52) inverse_rhotor_equal_arc : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the equal arc poloidal angle (dim2)\n53) inverse_rhotor_polar : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and the polar poloidal angle (dim2)\n54) inverse_rhotor_straight_field_line_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the straight-field line poloidal angle (dim2)\n55) inverse_rhotor_equal_arc_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the equal arc poloidal angle (dim2)\n56) inverse_rhotor_polar_fourier : Flux surface type with radial label sqrt[Phi/pi/B0] (dim1), Phi being toroidal flux, and Fourier modes in the polar poloidal angle (dim2)\n91) irregular_rz_na : Irregular grid, thus give list of vertices in dim1(1:ndim1), dim2(1:ndim1) and then all fields are on values(1:ndim1,1)",
+  "full_path": "core_profiles/profiles_2d(itime)/grid_type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "core_profiles.profiles_2d[:].grid_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "core_profiles/profiles_2d(itime)/grid_type/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "core_profiles/profiles_2d(itime)/grid_type/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].grid_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "core_profiles/profiles_2d(itime)/grid_type/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "2D quantities related to the different ion species, in the sense of isonuclear or isomolecular sequences. Ionisation states (or other types of states) must be differentiated at the state level below. This array doesn't necessarily have the same size as the profiles_1d/ion array, since 2D data may be relevant only for a subset of ion species.",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "core_profile_2d_ions"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_fast": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density of fast (non-thermal) particles (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_fast(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_fast_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_fast_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_fast_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_fast_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_fast_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_fast_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_thermal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density (thermal) (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_thermal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_thermal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_thermal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_thermal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_thermal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].density_thermal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/density_thermal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of elements forming the atom or molecule",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "plasma_composition_neutral_element"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].a": {
+  "data_type": "FLT_0D",
+  "documentation": "Mass of atom",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/a",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].a_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/a_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].a_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/a_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].a_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/a_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].atoms_n": {
+  "data_type": "INT_0D",
+  "documentation": "Number of atoms of this element in the molecule",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/atoms_n",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].multiplicity": {
+  "data_type": "FLT_0D",
+  "documentation": "Multiplicity of the atom",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].multiplicity_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"multiplicity\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].multiplicity_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"multiplicity\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity_error_lower",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].multiplicity_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"multiplicity\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/multiplicity_error_upper",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.15.0",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].z_n": {
+  "data_type": "FLT_0D",
+  "documentation": "Nuclear charge",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/z_n",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].z_n_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_n\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].z_n_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_n\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].element[:].z_n_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_n\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/element(i2)/z_n_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].ion_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the corresponding ion species in the ../../../profiles_1d/ion array",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/ion_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].label": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/label",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].multiple_states_flag": {
+  "data_type": "INT_0D",
+  "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Pressure (thermal+non-thermal) (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_parallel": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Fast (non-thermal) parallel pressure  (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_parallel(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_parallel_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_parallel_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_parallel_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_parallel_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_perpendicular": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_perpendicular(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_perpendicular_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_perpendicular_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_perpendicular_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_perpendicular_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_fast_perpendicular_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_fast_perpendicular_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_thermal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2) (sum over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_thermal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_thermal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_thermal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_thermal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_thermal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].pressure_thermal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/pressure_thermal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].rotation_frequency_tor": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal rotation frequency  (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken) (average over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/rotation_frequency_tor(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].rotation_frequency_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/rotation_frequency_tor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].rotation_frequency_tor_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/rotation_frequency_tor_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].rotation_frequency_tor_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/rotation_frequency_tor_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Quantities related to the different states of the species (ionisation, energy, excitation, ...)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "core_profiles_2d_ions_states"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density (thermal+non-thermal)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_fast": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density of fast (non-thermal) particles",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_fast(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_fast_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_fast_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_fast_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_fast_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_fast_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density_fast\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_fast_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_thermal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Density of thermal particles",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_thermal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_thermal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_thermal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_thermal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_thermal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].density_thermal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"density_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/density_thermal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].electron_configuration": {
+  "data_type": "STR_0D",
+  "documentation": "Configuration of atomic orbitals of this state, e.g. 1s2-2s1",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/electron_configuration",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].ionisation_potential": {
+  "data_type": "FLT_0D",
+  "documentation": "Cumulative and average ionisation potential to reach a given bundle. Defined as sum (x_z* (sum of Epot from z'=0 to z-1)), where Epot is the ionisation potential of ion Xz\u2019+, and x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/ionisation_potential",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].ionisation_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"ionisation_potential\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/ionisation_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].ionisation_potential_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"ionisation_potential\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/ionisation_potential_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].ionisation_potential_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"ionisation_potential\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/ionisation_potential_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].label": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/label",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Pressure (thermal+non-thermal)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_parallel": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Fast (non-thermal) parallel pressure ",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_parallel(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_parallel_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_parallel_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_fast_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_parallel_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_perpendicular": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Fast (non-thermal) perpendicular pressure  ",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_perpendicular_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_perpendicular_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_fast_perpendicular_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_fast_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_fast_perpendicular_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_thermal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Pressure (thermal) associated with random motion ~average((v-average(v))^2)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_thermal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_thermal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_thermal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_thermal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_thermal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].pressure_thermal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/pressure_thermal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].rotation_frequency_tor": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal rotation frequency (i.e. toroidal velocity divided by the major radius at which the toroidal velocity is taken)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/rotation_frequency_tor(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].rotation_frequency_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/rotation_frequency_tor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].rotation_frequency_tor_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/rotation_frequency_tor_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].rotation_frequency_tor_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"rotation_frequency_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/rotation_frequency_tor_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].temperature": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Temperature",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/temperature(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].temperature_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/temperature_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].temperature_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/temperature_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].temperature_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/temperature_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].vibrational_level": {
+  "data_type": "FLT_0D",
+  "documentation": "Vibrational level (can be bundled)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/vibrational_level",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].vibrational_level_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"vibrational_level\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/vibrational_level_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].vibrational_level_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"vibrational_level\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/vibrational_level_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].vibrational_level_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"vibrational_level\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/vibrational_level_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].vibrational_mode": {
+  "data_type": "STR_0D",
+  "documentation": "Vibrational mode of this state, e.g. \"A_g\". Need to define, or adopt a standard nomenclature.",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/vibrational_mode",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_average": {
+  "data_type": "FLT_0D",
+  "documentation": "Average Z of the charge state bundle, volume averaged over the plasma radius (equal to z_min if no bundle), = sum (Z*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_average",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_average_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_average_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_average_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_average_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_average_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_average_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_max": {
+  "data_type": "FLT_0D",
+  "documentation": "Maximum Z of the charge state bundle (equal to z_min if no bundle)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_max",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_max_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_max\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_max_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_max_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_max\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_max_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_max_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_max\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_max_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_min": {
+  "data_type": "FLT_0D",
+  "documentation": "Minimum Z of the charge state bundle",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_min",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_min_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_min\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_min_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_min_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_min\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_min_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_min_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_min\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_min_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_square_average": {
+  "data_type": "FLT_0D",
+  "documentation": "Average Z square of the charge state bundle, volume averaged over the plasma radius (equal to z_min squared if no bundle), = sum (Z^2*x_z) where x_z is the relative concentration of a given charge state in the bundle, i.e. sum(x_z) = 1 over the bundle.",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_square_average",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_square_average_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_square_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_square_average_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_square_average_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_square_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_square_average_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].state[:].z_square_average_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_square_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/state(i2)/z_square_average_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].temperature": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Temperature (average over charge states when multiple charge states are considered)",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/temperature(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].temperature_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/temperature_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].temperature_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/temperature_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].temperature_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"temperature\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/temperature_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity": {
+  "data_type": "STRUCTURE",
+  "documentation": "Velocity (average over charge states when multiple charge states are considered) at the position of maximum major radius on every flux surface",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity",
+  "lifecycle_status": "alpha",
+  "structure_reference": "core_profiles_2d_vector_components_2",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.diamagnetic": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Diamagnetic component",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/diamagnetic(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.diamagnetic_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"diamagnetic\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/diamagnetic_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.diamagnetic_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"diamagnetic\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/diamagnetic_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.diamagnetic_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"diamagnetic\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/diamagnetic_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.parallel": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Parallel component",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/parallel(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.parallel_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/parallel_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.parallel_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/parallel_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.poloidal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Poloidal component",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/poloidal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.poloidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"poloidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/poloidal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.poloidal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"poloidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/poloidal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.poloidal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"poloidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/poloidal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.radial": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Radial component",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/radial(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.radial_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radial\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/radial_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.radial_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"radial\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/radial_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.radial_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"radial\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/radial_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.toroidal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal component",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/toroidal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.toroidal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"toroidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/toroidal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.toroidal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"toroidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/toroidal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].velocity.toroidal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"toroidal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/velocity/toroidal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_profiles.profiles_2d[:].ion[:].z_ion": {
+  "data_type": "FLT_0D",
+  "documentation": "Ion charge (of the dominant ionisation state; lumped ions are allowed), volume averaged over plasma radius",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/z_ion",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].z_ion_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z_ion\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/z_ion_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].ion[:].z_ion_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z_ion\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/z_ion_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].ion[:].z_ion_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z_ion\"",
+  "full_path": "core_profiles/profiles_2d(itime)/ion(i1)/z_ion_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Elementary Charge Unit"
+ },
+ "core_profiles.profiles_2d[:].momentum_tor": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
+  "full_path": "core_profiles/profiles_2d(itime)/momentum_tor(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "core_profiles.profiles_2d[:].momentum_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/momentum_tor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].momentum_tor_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"momentum_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/momentum_tor_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "core_profiles.profiles_2d[:].momentum_tor_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"momentum_tor\"",
+  "full_path": "core_profiles/profiles_2d(itime)/momentum_tor_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "core_profiles.profiles_2d[:].n_i_thermal_total": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total ion thermal density (sum over species and charge states)",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_thermal_total(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].n_i_thermal_total_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"n_i_thermal_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_thermal_total_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].n_i_thermal_total_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"n_i_thermal_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_thermal_total_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].n_i_thermal_total_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"n_i_thermal_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_thermal_total_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "core_profiles.profiles_2d[:].n_i_total_over_n_e": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Ratio of total ion density (sum over species and charge states) over electron density. (thermal+non-thermal)",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_total_over_n_e(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.profiles_2d[:].n_i_total_over_n_e_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"n_i_total_over_n_e\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_total_over_n_e_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].n_i_total_over_n_e_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"n_i_total_over_n_e\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_total_over_n_e_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.profiles_2d[:].n_i_total_over_n_e_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"n_i_total_over_n_e\"",
+  "full_path": "core_profiles/profiles_2d(itime)/n_i_total_over_n_e_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.profiles_2d[:].pressure_ion_total": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total (sum over ion species) thermal ion pressure",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_ion_total(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_ion_total_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_ion_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_ion_total_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].pressure_ion_total_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_ion_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_ion_total_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_ion_total_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_ion_total\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_ion_total_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_parallel": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total parallel pressure (electrons+ions, thermal+non-thermal)",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_parallel(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].pressure_parallel_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_parallel_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_parallel_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_parallel\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_parallel_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_perpendicular": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total perpendicular pressure (electrons+ions, thermal+non-thermal)",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_perpendicular(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_perpendicular_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_perpendicular_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].pressure_perpendicular_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_perpendicular_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_perpendicular_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_perpendicular\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_perpendicular_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_thermal": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Thermal pressure (electrons+ions)",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_thermal(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_thermal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_thermal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].pressure_thermal_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_thermal_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].pressure_thermal_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"pressure_thermal\"",
+  "full_path": "core_profiles/profiles_2d(itime)/pressure_thermal_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "core_profiles.profiles_2d[:].t_i_average": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Ion temperature (averaged on states and ion species)",
+  "full_path": "core_profiles/profiles_2d(itime)/t_i_average(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].t_i_average_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"t_i_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/t_i_average_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].t_i_average_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"t_i_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/t_i_average_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].t_i_average_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"t_i_average\"",
+  "full_path": "core_profiles/profiles_2d(itime)/t_i_average_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "core_profiles.profiles_2d[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "core_profiles/profiles_2d(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "core_profiles.profiles_2d[:].zeff": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Effective charge",
+  "full_path": "core_profiles/profiles_2d(itime)/zeff(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.profiles_2d[:].zeff_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"zeff\"",
+  "full_path": "core_profiles/profiles_2d(itime)/zeff_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.profiles_2d[:].zeff_error_lower": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"zeff\"",
+  "full_path": "core_profiles/profiles_2d(itime)/zeff_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.profiles_2d[:].zeff_error_upper": {
+  "coordinates": [
+   "core_profiles.profiles_2d[:].grid.dim1",
+   "core_profiles.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"zeff\"",
+  "full_path": "core_profiles/profiles_2d(itime)/zeff_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics": {
+  "coordinates": [
+   "core_profiles.statistics[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Statistics for various time slices",
+  "full_path": "core_profiles/statistics(itime)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.40.0",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of 2D quantities on which statistics are provided. 2D means 1D+time dimension, so either a 1D quantity within a dynamic array of structure, or a 2D dynamic quantity outside of an array of structure. Therefore the resulting statistical value is 1D for a given statistics time slice. ",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_quantity_2d"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution": {
+  "data_type": "STRUCTURE",
+  "documentation": "Probability distribution function of the quantity",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution",
+  "lifecycle_status": "alpha",
+  "structure_reference": "statistics_distribution_2d"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.bins": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.bins_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.bins_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.bins_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/bins_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.probability": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.probability_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.probability_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].distribution.probability_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/distribution/probability_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the quantity within the IDS, following the syntax given in the link below",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of statistics types applied to the quantity",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_quantity_2d_type"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the grid used to represent the statistics value",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Only if the statistics value is given on a different GGD grid subset than the original quantity (e.g. if the statistics has worked over a dimension of the GGD), index of the new grid subset the statistics value is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/statistics_type_identifier.xml",
+  "documentation": "Identifier of the statistics type\n1) mean : Mean\n2) sigma : Standard deviation\n3) skewness : Skewness\n4) kurtosis : Pearson (full) kurtosis\n5) sobol_1 : First order Sobol index\n6) percentile_10 : 10% percentile\n7) percentile_90 : 90% percentile",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_dynamic_aos3"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/description",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].identifier.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/identifier/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].uq_input_path": {
+  "data_type": "INT_0D",
+  "documentation": "For Sobol index only, path to the related the uq_input quantity, e.g. ../../../uq_input_2d(3) ",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/uq_input_path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].value": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Value of the statistics for that quantity, the array corresponding to the first dimension of the original 2D quantity",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].quantity_2d[:].statistics_type[:].value_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "core_profiles/statistics(itime)/quantity_2d(i1)/statistics_type(i2)/value_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "core_profiles/statistics(itime)/time",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "core_profiles.statistics[:].time_width": {
+  "data_type": "FLT_0D",
+  "documentation": "Width of the time interval over which the statistics have been calculated. By convention, the time interval starts at time-time_width and ends at time.",
+  "full_path": "core_profiles/statistics(itime)/time_width",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "core_profiles.statistics[:].time_width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_width\"",
+  "full_path": "core_profiles/statistics(itime)/time_width_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].time_width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_width\"",
+  "full_path": "core_profiles/statistics(itime)/time_width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "core_profiles.statistics[:].time_width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_width\"",
+  "full_path": "core_profiles/statistics(itime)/time_width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "core_profiles.statistics[:].uq_input_2d": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "If the statistics are based on an uncertainty quantification process, set of 2D input quantities that are varied",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "statistics_input_2d"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution": {
+  "data_type": "STRUCTURE",
+  "documentation": "Probability distribution function of the quantity",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution",
+  "lifecycle_status": "alpha",
+  "structure_reference": "statistics_distribution_2d"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.bins": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Bins of quantitiy values, defined for each element (first dimension) corresponding to the first dimension of the original 2D quantity",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.bins_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"bins\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/bins_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.probability": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Probability to have a value of the quantity between bins(n) and bins(n+1) (thus the size of its second dimension is the size of the second dimension of the bins array - 1). The first dimension correspond to the first dimension of the original 2D quantity",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].distribution.probability_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"probability\"",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/distribution/probability_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "core_profiles.statistics[:].uq_input_2d[:].path": {
+  "data_type": "STR_0D",
+  "documentation": "Path of the quantity within the IDS, following the syntax given in the link below",
+  "full_path": "core_profiles/statistics(itime)/uq_input_2d(i1)/path",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "url": "utilities/IDS-path-syntax.md"
  },
  "core_profiles.time": {
   "coordinates": [
