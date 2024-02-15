@@ -588,6 +588,7 @@ def add_extra_structures(extra_structures, lifecycle_status='tmp'):
     # reset structure caches
     omas_utils._structures = {}
     omas_utils._structures_dict = {}
+    omas_utils._ods_structure_cache = {}
 
     # add _structures
     for _ids in extra_structures:
