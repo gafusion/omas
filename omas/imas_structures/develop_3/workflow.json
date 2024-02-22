@@ -750,6 +750,39 @@
   "data_type": "FLT_0D",
   "documentation": "Simulation time interval during which this component has to compute its results.",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.41.0",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_elapsed": {
+  "data_type": "FLT_0D",
+  "documentation": "Simulation time interval for which this component has last computed its results",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_elapsed",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_elapsed_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_interval_elapsed\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_elapsed_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_elapsed_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_interval_elapsed\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_elapsed_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_elapsed_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_interval_elapsed\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_elapsed_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
@@ -766,7 +799,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"time_interval\"",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.41.0",
   "type": "dynamic",
   "units": "s"
  },
@@ -774,6 +808,39 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"time_interval\"",
   "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_error_upper",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.41.0",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_request": {
+  "data_type": "FLT_0D",
+  "documentation": "Simulation time interval for which this component is requested to compute its results",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_request",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_request_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"time_interval_request\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_request_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_request_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"time_interval_request\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_request_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "workflow.time_loop.workflow_cycle[:].component[:].time_interval_request_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"time_interval_request\"",
+  "full_path": "workflow/time_loop/workflow_cycle(itime)/component(i1)/time_interval_request_error_upper",
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"

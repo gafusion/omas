@@ -2,7 +2,7 @@
  "interferometer": {
   "documentation": "Interferometer diagnostic",
   "full_path": "interferometer",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.41.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.15.0",
   "maxoccur": "5"
@@ -341,6 +341,203 @@
   "type": "static",
   "units": "m"
  },
+ "interferometer.channel[:].n_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Estimated electron density profile on a set of positions along the line of sight and used by forward models.",
+  "full_path": "interferometer/channel(i1)/n_e",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "interferometer_channel_n_e"
+ },
+ "interferometer.channel[:].n_e.data": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "interferometer/channel(i1)/n_e/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.data_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.data_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.positions": {
+  "data_type": "STRUCTURE",
+  "documentation": "Positions along the line of sight",
+  "full_path": "interferometer/channel(i1)/n_e/positions",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_static"
+ },
+ "interferometer.channel[:].n_e.positions.phi": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "interferometer/channel(i1)/n_e/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "interferometer.channel[:].n_e_line": {
   "data_type": "STRUCTURE",
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
@@ -425,7 +622,7 @@
  },
  "interferometer.channel[:].n_e_line_average": {
   "data_type": "STRUCTURE",
-  "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
+  "documentation": "Line average density inferred from interferometer measurements. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "full_path": "interferometer/channel(i1)/n_e_line_average",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d_validity",

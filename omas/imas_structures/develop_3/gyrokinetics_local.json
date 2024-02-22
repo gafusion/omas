@@ -4,7 +4,7 @@
   "full_path": "gyrokinetics_local",
   "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
-  "lifecycle_version": "3.40.0",
+  "lifecycle_version": "3.41.0",
   "maxoccur": "1",
   "url": "https://gitlab.com/gkdb/gkdb/raw/master/doc/general/IOGKDB.pdf"
  },
@@ -709,6 +709,11 @@
   "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "gyrokinetics_local.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "gyrokinetics_local.ids_properties.occurrence"
  },
  "gyrokinetics_local.ids_properties.occurrence_type": {
   "data_type": "STRUCTURE",
@@ -1845,9 +1850,12 @@
   "units": "-"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights.momentum_tor_parallel_a_field_parallel": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Contribution of the perturbed parallel electromagnetic potential to the parallel component of the normalised toroidal momentum flux",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
@@ -1861,17 +1869,23 @@
   "type": "constant"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights.momentum_tor_parallel_a_field_parallel_error_lower": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor_parallel_a_field_parallel\"",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel_error_lower",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel_error_lower(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights.momentum_tor_parallel_a_field_parallel_error_upper": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor_parallel_a_field_parallel\"",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel_error_upper",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights/momentum_tor_parallel_a_field_parallel_error_upper(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
@@ -2335,9 +2349,12 @@
   "units": "-"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights_rotating_frame.momentum_tor_parallel_a_field_parallel": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Contribution of the perturbed parallel electromagnetic potential to the parallel component of the normalised toroidal momentum flux",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
@@ -2351,17 +2368,23 @@
   "type": "constant"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights_rotating_frame.momentum_tor_parallel_a_field_parallel_error_lower": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor_parallel_a_field_parallel\"",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel_error_lower",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel_error_lower(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
  },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].linear_weights_rotating_frame.momentum_tor_parallel_a_field_parallel_error_upper": {
-  "data_type": "FLT_0D",
+  "coordinates": [
+   "gyrokinetics_local.species"
+  ],
+  "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor_parallel_a_field_parallel\"",
-  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel_error_upper",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/linear_weights_rotating_frame/momentum_tor_parallel_a_field_parallel_error_upper(:)",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "-"
