@@ -577,6 +577,27 @@ class TestOmasCore(UnittestCaseOmas):
         assert ods1['core_profiles.profiles_1d.0.ion.0.element[0].z_n'] == 1.5
         assert ods1['equilibrium.time_slice[0].profiles_2d[0].psi'][0, 1] == 1.5
 
+    def test_add_extra_structures(self):
+        from omas.omas_structure import add_extra_structures, imas_structure
+
+        original = imas_structure("3.39.0", "wall.description_2d.0.limiter.unit.0")
+        extension = {
+            "wall": {
+                "wall.description_2d[:].limiter.unit[:].test_field": {
+                    "data_type": "STR_0D",
+                    "documentation": "Test field Name",
+                    "full_path": "wall/description_2d(i1)/limiter/unit(i2)/test_field",
+                    "type": "static",
+                }
+            }
+        }
+        add_extra_structures(extension)
+        extended = imas_structure("3.39.0", "wall.description_2d.0.limiter.unit.0")
+
+        assert 'test_field' not in original
+        assert 'test_field' in extended
+
+
     # End of TestOmasCore class
 
 
