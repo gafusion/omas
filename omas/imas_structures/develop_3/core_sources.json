@@ -2,7 +2,7 @@
  "core_sources": {
   "documentation": "Core plasma thermal source terms (for the transport equations of the thermal species). Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)",
   "full_path": "core_sources",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.41.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "15",
@@ -2450,6 +2450,94 @@
   "type": "dynamic",
   "units": "s^-1.m^-3"
  },
+ "core_sources.source[:].profiles_1d[:].ion[:].particles_inside": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ion source inside the flux surface. Cumulative volume integral of the source term for the electron density equation.",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_inside(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].particles_inside_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_inside_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].particles_inside_error_lower": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_inside_error_lower(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].particles_inside_error_upper": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/particles_inside_error_upper(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].power_inside": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Power coupled to the ion species inside the flux surface. Cumulative volume integral of the source term for the electron energy equation",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/power_inside(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].power_inside_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].power_inside_error_lower": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_lower(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].power_inside_error_upper": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/power_inside_error_upper(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
+ },
  "core_sources.source[:].profiles_1d[:].ion[:].state": {
   "coordinates": [
    "1...N"
@@ -2771,6 +2859,94 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "s^-1.m^-3"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_inside": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "State source inside the flux surface. Cumulative volume integral of the source term for the electron density equation.",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_inside(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_inside_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_inside_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_inside_error_lower": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_inside_error_lower(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].particles_inside_error_upper": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"particles_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/particles_inside_error_upper(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "s^-1"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].power_inside": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Power coupled to the state inside the flux surface. Cumulative volume integral of the source term for the electron energy equation",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].power_inside_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].power_inside_error_lower": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_lower(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "core_sources.source[:].profiles_1d[:].ion[:].state[:].power_inside_error_upper": {
+  "coordinates": [
+   "core_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_inside\"",
+  "full_path": "core_sources/source(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_error_upper(:)",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "W"
  },
  "core_sources.source[:].profiles_1d[:].ion[:].state[:].vibrational_level": {
   "data_type": "FLT_0D",
