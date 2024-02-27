@@ -27,9 +27,12 @@ jobs:
     - name: git version
       run: git --version
 
-    - name: Install OMAS
+    - name: Build & Install OMAS
       run: |
-        python3 -m pip install .[machine]
+        python3 -m pip install build
+        python3 -m build --sdist 
+        # TODO do not hard code version here
+        python3 -m pip install "./dist/omas-0.93.0.tar.gz[machine]"
 
     - name: Move to root and try importing OMAS
       run: |
@@ -38,4 +41,7 @@ jobs:
 
     - name: Run OMAS tests
       run: |
+        # TODO the tests pickup omas from the python files in the directory not the installed version
+        # so to make that work we run an editable install to create the omas_cython lib in the right place.
+        python3 -m pip install -e .
         make test

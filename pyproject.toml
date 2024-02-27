@@ -9,6 +9,7 @@ exclude = ["sphinx*"]
 [tool.setuptools.package-data]
 "*" = ["*.json", "*.dat"]
 "omas.samples" = ["*"]
+"omas"=["*.pyx"]
 
 [tool.setuptools.dynamic]
 version = {file = "omas/version"}
