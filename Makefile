@@ -87,7 +87,7 @@ tag:
 
 sdist:
 	rm -rf dist
-	python3 setup.py sdist
+	python3 -m build --sdist
 
 pypi: sdist
 	python3 -m twine upload --repository pypi dist/omas-$(VERSION).tar.gz
