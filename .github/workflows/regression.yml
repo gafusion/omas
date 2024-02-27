@@ -22,7 +22,7 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: '3.8'
+        python-version: '3.7'
 
     - name: git version
       run: git --version
@@ -43,5 +43,5 @@ jobs:
       run: |
         # TODO the tests pickup omas from the python files in the directory not the installed version
         # so to make that work we run an editable install to create the omas_cython lib in the right place.
-        python3 -m pip install -e .
+        python3 -m pip install -e
         make test

@@ -30,7 +30,7 @@ classifiers = [
 ]
 keywords = ["integrated modeling",  "OMFIT", "IMAS",  "ITER"]
 
-requires-python = '>=3.8'
+requires-python = '>=3.7'
 dependencies = [
     'numpy>=1.16.1',
     'uncertainties',
@@ -44,7 +44,6 @@ dependencies = [
     'dnspython',
     'xmltodict',
     'xarray',
-    'setuptools>=41.2',
     'tqdm',
 ]
 readme="README.md"
