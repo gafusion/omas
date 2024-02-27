@@ -24,6 +24,9 @@ jobs:
       with:
         python-version: '3.8'
 
+    - name: git version
+      run: git --version
+
     - name: Install OMAS
       run: |
         python3 -m pip install .[machine]

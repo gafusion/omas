@@ -1,10 +1,14 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm", "Cython"]
+requires = ["setuptools", "Cython"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
 exclude = ["sphinx*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.dat"]
+"omas.samples" = ["*"]
 
 [tool.setuptools.dynamic]
 version = {file = "omas/version"}
