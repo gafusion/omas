@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "Cython"]
+requires = ["setuptools", "setuptools-scm", "Cython"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
@@ -25,7 +25,7 @@ classifiers = [
 ]
 keywords = ["integrated modeling",  "OMFIT", "IMAS",  "ITER"]
 
-requires-python = '>=3.6'
+requires-python = '>=3.8'
 dependencies = [
     'numpy>=1.16.1',
     'uncertainties',
