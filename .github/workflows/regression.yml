@@ -27,10 +27,13 @@ jobs:
     - name: git version
       run: git --version
 
-    - name: Install hdf5 & netcdf
+    - name: Install hdf5 & netcdf & numpy
       run: |
           sudo apt-get update
           sudo apt-get install libhdf5-dev libnetcdf-dev
+          # This is a build time dependency of pygacode
+          # that it assumes to be installed
+          python3 -m pip install numpy
 
     - name: Build & Install OMAS
       run: |
