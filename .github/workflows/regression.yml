@@ -27,6 +27,11 @@ jobs:
     - name: git version
       run: git --version
 
+    - name: Install hdf5 & netcdf
+      run: |
+          sudo apt-get update
+          sudo apt-get install libhdf5-dev libnetcdf-dev
+
     - name: Build & Install OMAS
       run: |
         python3 -m pip install build
