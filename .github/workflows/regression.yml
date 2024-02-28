@@ -17,24 +17,30 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.6'
+        python-version: '3.7'
 
-    - name: Install numpy
-      run: |
-        python3 -m pip install numpy
+    - name: git version
+      run: git --version
 
-    - name: Install dependencies
+    - name: Install hdf5 & netcdf & numpy
       run: |
-        python3 -m pip install -r requirements.txt
+          sudo apt-get update
+          sudo apt-get install libhdf5-dev libnetcdf-dev
+          # This is a build time dependency of pygacode
+          # that it assumes to be installed
+          python3 -m pip install numpy
 
-    - name: Install OMAS
+    - name: Build & Install OMAS
       run: |
-        python3 -m pip install .[machine]
+        python3 -m pip install build
+        python3 -m build --sdist 
+        # TODO do not hard code version here
+        python3 -m pip install "./dist/omas-0.93.0.tar.gz[machine]"
 
     - name: Move to root and try importing OMAS
       run: |
@@ -43,4 +49,7 @@ jobs:
 
     - name: Run OMAS tests
       run: |
+        # TODO the tests pickup omas from the python files in the directory not the installed version
+        # so to make that work we run an editable install to create the omas_cython lib in the right place.
+        python3 -m pip install -e
         make test

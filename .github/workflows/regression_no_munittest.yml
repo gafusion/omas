@@ -19,14 +19,6 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install numpy
-      run: |
-        python3 -m pip install numpy
-
-    - name: Install dependencies
-      run: |
-        python3 -m pip install -r requirements.txt
-
     - name: Install OMAS
       run: |
         python3 -m pip install .[machine]

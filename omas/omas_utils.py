@@ -5,6 +5,7 @@
 
 from .omas_setup import *
 from .omas_setup import __version__
+from .omas_cython import *
 import sys
 
 # --------------------------------------------
@@ -862,23 +863,6 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
 
             _global_quantities[imas_version] = extract_global_quantities(imas_version)
     return _global_quantities[imas_version]
-
-
-# only attempt cython if effective user owns this copy of omas
-# disabled for Windows: need to add check for file ownership under Windows
-if os.name == 'nt' or os.geteuid() != os.stat(__file__).st_uid:
-    with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
-        exec(f.read(), globals())
-else:
-    try:
-        import pyximport
-
-        pyximport.install(language_level=3)
-        from .omas_cython import *
-    except Exception as _excp:
-        warnings.warn('omas cython failed: ' + str(_excp))
-        with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
-            exec(f.read(), globals())
 
 
 def l2ut(path):
