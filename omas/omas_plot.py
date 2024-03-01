@@ -800,7 +800,7 @@ def equilibrium_CX(
             z = scipy.ndimage.zoom(z, sf)
             value_2d = scipy.ndimage.zoom(value_2d, sf)
 
-        cs = ax.contour(r, z, value_2d, levels, **kw)
+        cs = ax.contour(r, z, value_2d, levels=levels, **kw)
 
         if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
             ax.clabel(cs)
