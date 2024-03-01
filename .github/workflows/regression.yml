@@ -27,6 +27,13 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
 
+
+    - name: Extra dependencies required for 3.7
+      if: ${{matrix.python-version == '3.7'}}
+      run: |
+        sudo apt-get update
+        sudo apt-get install libhdf5-dev libnetcdf-dev
+
     - name: Install numpy
       run: |
         python3 -m pip install numpy
