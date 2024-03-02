@@ -97,6 +97,8 @@ class TestOmasExamples(UnittestCaseOmas):
 
     @unittest.skipIf(failed_OMFIT, str(failed_OMFIT))
     def test_plot_g_s_2_ip(self):
+        if sys.version_info.minor==7:
+            raise unittest.SkipTest("Avoid Py 3.7 omfit_classes bug.")
         from omas.examples import plot_g_s_2_ip
 
     def test_plot_saveload_scaling(self):

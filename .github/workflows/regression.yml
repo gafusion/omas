@@ -44,8 +44,9 @@ jobs:
         python3 -m pip install -r requirements.txt
 
     # numpy is a build time dependency of pygacode
-    # but before 1.0 it did not specify it so we need to build without build isolation
-    # and manually install numpy 
+    # but before pygacode 1.0 it did not specify its build dependencies correctly
+    # and pygacode requires python >= 3.8,
+    # so for 3.7 we need to build without build isolation and manually install numpy
     - name: Install OMAS (Py 3.7)
       if: ${{matrix.python-version == '3.7'}}
       run: |
