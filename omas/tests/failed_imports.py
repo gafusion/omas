@@ -3,6 +3,7 @@ import pathlib
 from omas.omas_setup import omas_rcparams
 import os
 import warnings
+from omas.tests.warning_setup import hard_warnings, set_omas_warnings
 import socket
 
 if 'iter' in socket.gethostname():
