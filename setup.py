@@ -1,5 +1,4 @@
 import os
-import sys
 import glob
 import subprocess
 
@@ -19,6 +18,8 @@ install_requires = [
     'setuptools>=41.2',
     'tqdm',
     'Cython',
+    # latest xarray version that works with 3.7 doesn't work
+    # with importlib_metadata >5 since they deprecated the `get()` method on Entrypoints
     "importlib_metadata <5;python_version=='3.7'"
 ]
 
