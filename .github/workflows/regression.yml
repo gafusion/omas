@@ -15,14 +15,25 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
+      matrix:
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11']
+    # 3.12 does not yet work because numpy removed numpy.distutils that pygacode relies on
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.6'
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+
+    - name: Extra dependencies required for 3.7
+      if: ${{matrix.python-version == '3.7'}}
+      run: |
+        sudo apt-get update
+        sudo apt-get install libhdf5-dev libnetcdf-dev
 
     - name: Install numpy
       run: |
@@ -32,7 +43,18 @@ jobs:
       run: |
         python3 -m pip install -r requirements.txt
 
-    - name: Install OMAS
+    # numpy is a build time dependency of pygacode
+    # but before pygacode 1.0 it did not specify its build dependencies correctly
+    # and pygacode requires python >= 3.8,
+    # so for 3.7 we need to build without build isolation and manually install numpy
+    - name: Install OMAS (Py 3.7)
+      if: ${{matrix.python-version == '3.7'}}
+      run: |
+        python3 -m pip install wheel
+        python3 -m pip install --no-build-isolation .[machine]
+
+    - name: Install OMAS (normal)
+      if: ${{matrix.python-version != '3.7'}}
       run: |
         python3 -m pip install .[machine]
 
