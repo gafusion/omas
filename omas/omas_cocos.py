@@ -30,6 +30,7 @@
 #        transforms['F'] = transforms['TOR']
 #        transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
 #        transforms['BP'] = transforms['POL']
+#        transforms['PSI/TOR'] = sigma_Ip_eff * sigma_B0_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
 #        transforms[None] = 1
 #
 
@@ -594,9 +595,18 @@ _cocos_signals['edge_transport.model.:.ggd.:.electrons.particles.flux_pol.:.valu
 _cocos_signals['edge_transport.model.:.ggd.:.total_ion_energy.d_pol.:.values']='?'                                             #[ADD?]# 0.750000 # _pol
 
 # EM_COUPLING
-_cocos_signals['em_coupling.b_field_pol_probes_active']='?'                                                #[ADD?]# 2.000000 # b  b_field
-_cocos_signals['em_coupling.b_field_pol_probes_passive']='?'                                               #[ADD?]# 2.000000 # b  b_field
-_cocos_signals['em_coupling.b_field_pol_probes_plasma']='?'                                                #[ADD?]# 2.000000 # b  b_field
+_cocos_signals['em_coupling.b_field_pol_probes_active']='TOR'                                                     # 3.000000 # b  b_field  [T/A]
+_cocos_signals['em_coupling.b_field_pol_probes_passive']='TOR'                                                    # 3.000000 # b  b_field  [T/A]
+_cocos_signals['em_coupling.b_field_pol_probes_plasma']='TOR'                                                     # 3.000000 # b  b_field  [T/A]
+_cocos_signals['em_coupling.mutual_active_active']=None                                                           # 0.000000 # 
+_cocos_signals['em_coupling.mutual_loops_active']='PSI/TOR'                                                       # 0.000000 # 
+_cocos_signals['em_coupling.mutual_loops_passive']='PSI/TOR'                                                      # 0.000000 # 
+_cocos_signals['em_coupling.mutual_loops_plasma']='PSI/TOR'                                                       # 0.000000 # 
+_cocos_signals['em_coupling.mutual_passive_active']=None                                                          # 0.000000 # 
+_cocos_signals['em_coupling.mutual_passive_passive']=None                                                         # 0.000000 # 
+_cocos_signals['em_coupling.mutual_plasma_active']='PSI/TOR'                                                      # 0.000000 # 
+_cocos_signals['em_coupling.mutual_plasma_passive']='PSI/TOR'                                                     # 0.000000 # 
+_cocos_signals['em_coupling.mutual_plasma_plasma']='PSI/TOR'                                                      # 0.000000 # 
 
 # EQUILIBRIUM
 _cocos_signals['equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor']='TOR'                                    # 4.000000 # b  b_field  _tor  [T]
