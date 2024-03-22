@@ -48,7 +48,9 @@ def force_imas_type(value):
     # lists are saved as numpy arrays, and 0D numpy arrays as scalars
     for function in input_data_process_functions:
         value = function(value)
-    if isinstance(value, list):
+    if isinstance(value, list) and not len(value):
+        value = numpy.array(value)
+    if isinstance(value, list) and len(value) and not isinstance(value[0], str):
         value = numpy.array(value)
     if 'DataArray' in value.__class__.__name__:
         import xarray
@@ -101,7 +103,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         elif 'INT' in info['data_type']:
             value = value.astype(int)
         elif 'STR' in info['data_type']:
-            value = value.astype(str)
+            value = value.astype(str).tolist()
     elif isinstance(value, (int, float, numpy.integer, numpy.floating)):
         if 'FLT' in info['data_type']:
             value = float(value)
@@ -121,6 +123,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
         isinstance(value, (int, float, str, numpy.ndarray, uncertainties.core.Variable))
         or value is None
         or isinstance(value, (CodeParameters, ODS))
+        or (isinstance(value, list) and 'STR' in info['data_type'])
     ):
         txt = f'{location} is of type {type(value)} but supported types are: string, float, int, array'
     # check consistency for scalar entries
@@ -130,7 +133,7 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     elif (
         'coordinates' in info
         and len(info['coordinates'])
-        and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
+        and (not isinstance(value, (numpy.ndarray, list)) or len(numpy.asarray(value).shape) != len(info['coordinates']))
     ):
         txt = f'{location} shape {numpy.asarray(value).shape} is inconsistent with coordinates: {info["coordinates"]}'
 
