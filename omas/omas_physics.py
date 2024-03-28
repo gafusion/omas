@@ -943,7 +943,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_spl = RectBivariateSpline(Rgrid, Zgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
@@ -997,7 +997,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
             ne_line = numpy.trapz(ne_interp)
             ne_line /= abs(i2 - i1)
@@ -2507,6 +2507,26 @@ def search_in_array_structure(ods, conditions, no_matches_return=0, no_matches_r
 
     return match
 
+@add_to__ALL__
+def get_plot_scale_and_unit(phys_quant, species=None):
+    """
+    Returns normalizing scale for a physical quantity.
+    E.g. "temprerature" returns 1.e-3 and keV
+    :param phys_qaunt: str with a physical quantity. Uses IMAS scheme names where possible
+    :return: scale, unit
+    """
+    if "temperature" in phys_quant:
+        return 1.e-3, r"\mathrm{keV}"
+    elif "density" in phys_quant :
+        if species is not None and species not in ["H", "D", "He"]:
+            return 1.e-18, r"\times 10^{18}\,\mathrm{m}^{-3}"
+        else:
+            return 1.e-19, r"\times 10^{19}\,\mathrm{m}^{-3}"
+    elif "velocity" in  phys_quant:
+        return 1.e-6, r"\mathrm{Mm}\,\mathrm{s}^{-1}"
+    elif "e_field" in phys_quant:
+        return 1.e-3, r"\mathrm{kV}\,\mathrm{m}^{-1}"
+    
 
 @add_to__ALL__
 def define_cocos(cocos_ind):

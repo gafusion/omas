@@ -3,6 +3,8 @@ from omas import *
 from omas.omas_utils import printd
 import os
 import glob
+from omas.omas_setup import omas_dir
+from omas.utilities.omas_mds import mdsvalue
 
 __support_files_cache__ = {}
 
