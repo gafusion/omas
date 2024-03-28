@@ -3543,7 +3543,7 @@ def position_control_overlay(
     :param ax: Axes instance
 
     :param t: float
-        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+        Time to display in seconds. If not specified, defaults to the average time of position control samples.
 
     :param xpoint_marker: string
         Matplotlib marker spec for X-point target(s)
@@ -3581,7 +3581,7 @@ def position_control_overlay(
     shot = ods['dataset_description.data_entry'].get('pulse', 0)
     if t is None:
         try:
-            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+            t = np.nanmean(ods['pulse_schedule.position_control.time'])
         except (ValueError, IndexError):
             t = 0
 
@@ -3620,28 +3620,29 @@ def position_control_overlay(
     s = ods['pulse_schedule.position_control.strike_point']
     ikw = dict(bounds_error=False, fill_value=np.NaN)
     try:
-        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nbp = np.shape(b['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nbp = 0
     try:
-        nx = np.shape(x['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nx = 0
     try:
-        ns = np.shape(s['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference'])[0]
     except (IndexError, ValueError):
         ns = 0
     if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return {'ax': ax}
-    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
-    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
+    tt = ods['pulse_schedule.position_control.time']
+    r = [interp1d(tt, b[i]['r.reference'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(tt, b[i]['z.reference'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
-    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
-    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
+    rx = [interp1d(tt, x[i]['r.reference'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(tt, x[i]['z.reference'], **ikw)(t) for i in range(nx)]
     xname = x['[:].r.reference_name']
-    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
-    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
+    rs = [interp1d(tt, s[i]['r.reference'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(tt, s[i]['z.reference'], **ikw)(t) for i in range(ns)]
     sname = s['[:].r.reference_name']
     # Measured X-point position from eq might not be present
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])

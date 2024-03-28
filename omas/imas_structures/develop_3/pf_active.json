@@ -2,7 +2,7 @@
  "pf_active": {
   "documentation": "Description of the axisymmetric active poloidal field (PF) coils and supplies; includes the limits of these systems; includes the forces on them; does not include non-axisymmetric coil systems",
   "full_path": "pf_active",
-  "lifecycle_last_change": "3.37.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -196,6 +196,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_active.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "pf_active.code.library": {
   "coordinates": [
    "1...N"
@@ -211,6 +219,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "pf_active/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1476,6 +1492,266 @@
   "type": "static",
   "units": "J"
  },
+ "pf_active.coil[:].force_radial": {
+  "data_type": "STRUCTURE",
+  "documentation": "Radial force applied on this coil (positive when outwards) ",
+  "full_path": "pf_active/coil(i1)/force_radial",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial.data": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/coil(i1)/force_radial/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.coil[:].force_radial.data_error_lower": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial.data_error_upper": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "pf_active/coil(i1)/force_radial/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.coil[:].force_radial_crushing": {
+  "data_type": "STRUCTURE",
+  "documentation": "Radial crushing force applied on this coil (positive when compressive) ",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial_crushing.data": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial_crushing.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.coil[:].force_radial_crushing.data_error_lower": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial_crushing.data_error_upper": {
+  "coordinates": [
+   "pf_active.coil[:].force_radial_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_radial_crushing.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "pf_active/coil(i1)/force_radial_crushing/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_radial_crushing/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.coil[:].force_vertical": {
+  "data_type": "STRUCTURE",
+  "documentation": "Vertical force applied on this coil (positive when upwards) ",
+  "full_path": "pf_active/coil(i1)/force_vertical",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical.data": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/coil(i1)/force_vertical/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.coil[:].force_vertical.data_error_lower": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical.data_error_upper": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "pf_active/coil(i1)/force_vertical/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.coil[:].force_vertical_crushing": {
+  "data_type": "STRUCTURE",
+  "documentation": "Vertical crushing force applied on this coil (positive when compressive) ",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical_crushing.data": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical_crushing.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.coil[:].force_vertical_crushing.data_error_lower": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical_crushing.data_error_upper": {
+  "coordinates": [
+   "pf_active.coil[:].force_vertical_crushing.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical_crushing/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.coil[:].force_vertical_crushing.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "pf_active/coil(i1)/force_vertical_crushing/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_vertical_crushing/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "pf_active.coil[:].function": {
   "coordinates": [
    "1...N"
@@ -1726,6 +2002,204 @@
   "type": "dynamic",
   "units": "s"
  },
+ "pf_active.force_limits": {
+  "data_type": "STRUCTURE",
+  "documentation": "Description of force limits on the axisymmetric PF coil system",
+  "full_path": "pf_active/force_limits",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "pf_force_limits"
+ },
+ "pf_active.force_limits.combination_matrix": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Force limits are expressed as a linear combination of the forces on each individual coil. The weights of the linear combination are given by this matrix, while the limits are given by the sibling nodes limit_min and limit_max. Each row of this matrix corresponds to a force limit. The columns represent, for each coil, the 4 types of forces on the coil namely [coil1_radial, coil1_vertical, coil1_radial_crush, coil1_vertical_crush, coil2_radial, coil2_vertical, coil2_radial_crush, coil2_vertical_crush, ...]. There are therefore 4*coils_n columns.",
+  "full_path": "pf_active/force_limits/combination_matrix(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.force_limits.combination_matrix_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"combination_matrix\"",
+  "full_path": "pf_active/force_limits/combination_matrix_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.force_limits.combination_matrix_error_lower": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"combination_matrix\"",
+  "full_path": "pf_active/force_limits/combination_matrix_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.force_limits.combination_matrix_error_upper": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"combination_matrix\"",
+  "full_path": "pf_active/force_limits/combination_matrix_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "pf_active.force_limits.force": {
+  "data_type": "STRUCTURE",
+  "documentation": "Force (positive when upwards for a vertical force, positive when outwards for a radial force) ",
+  "full_path": "pf_active/force_limits/force",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "N"
+ },
+ "pf_active.force_limits.force.data": {
+  "coordinates": [
+   "pf_active.force_limits.force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "pf_active/force_limits/force/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_limits/force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.force_limits.force.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "pf_active/force_limits/force/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.force_limits.force.data_error_lower": {
+  "coordinates": [
+   "pf_active.force_limits.force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "pf_active/force_limits/force/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_limits/force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.force_limits.force.data_error_upper": {
+  "coordinates": [
+   "pf_active.force_limits.force.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "pf_active/force_limits/force/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_limits/force/time",
+  "type": "dynamic",
+  "units": "N"
+ },
+ "pf_active.force_limits.force.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "pf_active/force_limits/force/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "force_limits/force/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "pf_active.force_limits.limit_max": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Maximum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded",
+  "full_path": "pf_active/force_limits/limit_max(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.force_limits.limit_max_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"limit_max\"",
+  "full_path": "pf_active/force_limits/limit_max_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.force_limits.limit_max_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"limit_max\"",
+  "full_path": "pf_active/force_limits/limit_max_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.force_limits.limit_max_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"limit_max\"",
+  "full_path": "pf_active/force_limits/limit_max_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.force_limits.limit_min": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Minimum force limit, for each limit (line of the combination matrix). EMPTY_FLT value means unbounded",
+  "full_path": "pf_active/force_limits/limit_min(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.force_limits.limit_min_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"limit_min\"",
+  "full_path": "pf_active/force_limits/limit_min_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "pf_active.force_limits.limit_min_error_lower": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"limit_min\"",
+  "full_path": "pf_active/force_limits/limit_min_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
+ "pf_active.force_limits.limit_min_error_upper": {
+  "coordinates": [
+   "pf_active.force_limits.limit_max"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"limit_min\"",
+  "full_path": "pf_active/force_limits/limit_min_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "N"
+ },
  "pf_active.ids_properties": {
   "data_type": "STRUCTURE",
   "documentation": "Interface Data Structure properties. This element identifies the node above as an IDS",
@@ -1754,10 +2228,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_active.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "pf_active/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "pf_active.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "pf_active.ids_properties.occurrence"
+ },
+ "pf_active.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "pf_active/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "pf_active.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "pf_active/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "pf_active/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "pf_active/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "pf_active.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1779,6 +2291,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "pf_active/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1814,6 +2334,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "pf_active/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1865,6 +2393,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "pf_active/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1922,6 +2458,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "pf_active.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "pf_active.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1965,6 +2509,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "pf_active/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pf_active.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "pf_active/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2120,7 +2672,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Radial forces on the axisymmetric PF coil system",
   "full_path": "pf_active/radial_force(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.40.0",
   "maxoccur": "20",
   "structure_reference": "pf_forces"
  },
@@ -2131,7 +2684,7 @@
   "data_type": "FLT_1D",
   "documentation": "Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
   "full_path": "pf_active/radial_force(i1)/combination(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2150,7 +2703,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"combination\"",
   "full_path": "pf_active/radial_force(i1)/combination_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2161,7 +2714,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"combination\"",
   "full_path": "pf_active/radial_force(i1)/combination_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2169,7 +2722,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Force (positive when upwards for a vertical force, positive when outwards for a radial force) ",
   "full_path": "pf_active/radial_force(i1)/force",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "signal_flt_1d",
   "units": "N"
  },
@@ -2180,7 +2733,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "pf_active/radial_force(i1)/force/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2200,7 +2753,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "pf_active/radial_force(i1)/force/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2212,7 +2765,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "pf_active/radial_force(i1)/force/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2224,7 +2777,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/radial_force(i1)/force/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "s"
@@ -2233,7 +2786,7 @@
   "data_type": "FLT_0D",
   "documentation": "Maximum force combination limit",
   "full_path": "pf_active/radial_force(i1)/limit_max",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2249,7 +2802,7 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"limit_max\"",
   "full_path": "pf_active/radial_force(i1)/limit_max_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2257,7 +2810,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"limit_max\"",
   "full_path": "pf_active/radial_force(i1)/limit_max_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2265,7 +2818,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum force combination limit",
   "full_path": "pf_active/radial_force(i1)/limit_min",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2281,7 +2834,7 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"limit_min\"",
   "full_path": "pf_active/radial_force(i1)/limit_min_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2289,7 +2842,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"limit_min\"",
   "full_path": "pf_active/radial_force(i1)/limit_min_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2297,7 +2850,7 @@
   "data_type": "STR_0D",
   "documentation": "Name of the force combination",
   "full_path": "pf_active/radial_force(i1)/name",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static"
  },
  "pf_active.supply": {
@@ -2707,7 +3260,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Vertical forces on the axisymmetric PF coil system",
   "full_path": "pf_active/vertical_force(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.40.0",
   "maxoccur": "20",
   "structure_reference": "pf_forces"
  },
@@ -2718,7 +3272,7 @@
   "data_type": "FLT_1D",
   "documentation": "Coils involved in the force combinations. Normally the force would be the full set of coils, but in some cases, we want to have a difference in forces, such as a CS coil separation force. We therefore give each coil a force weight which we call the combination",
   "full_path": "pf_active/vertical_force(i1)/combination(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2737,7 +3291,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"combination\"",
   "full_path": "pf_active/vertical_force(i1)/combination_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2748,7 +3302,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"combination\"",
   "full_path": "pf_active/vertical_force(i1)/combination_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "-"
  },
@@ -2756,7 +3310,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Force (positive when upwards for a vertical force, positive when outwards for a radial force) ",
   "full_path": "pf_active/vertical_force(i1)/force",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "signal_flt_1d",
   "units": "N"
  },
@@ -2767,7 +3321,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "pf_active/vertical_force(i1)/force/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2787,7 +3341,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "pf_active/vertical_force(i1)/force/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2799,7 +3353,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "pf_active/vertical_force(i1)/force/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "N"
@@ -2811,7 +3365,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "pf_active/vertical_force(i1)/force/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "force/time",
   "type": "dynamic",
   "units": "s"
@@ -2820,7 +3374,7 @@
   "data_type": "FLT_0D",
   "documentation": "Maximum force combination limit",
   "full_path": "pf_active/vertical_force(i1)/limit_max",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2836,7 +3390,7 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"limit_max\"",
   "full_path": "pf_active/vertical_force(i1)/limit_max_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2844,7 +3398,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"limit_max\"",
   "full_path": "pf_active/vertical_force(i1)/limit_max_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2852,7 +3406,7 @@
   "data_type": "FLT_0D",
   "documentation": "Minimum force combination limit",
   "full_path": "pf_active/vertical_force(i1)/limit_min",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2868,7 +3422,7 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"limit_min\"",
   "full_path": "pf_active/vertical_force(i1)/limit_min_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2876,7 +3430,7 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"limit_min\"",
   "full_path": "pf_active/vertical_force(i1)/limit_min_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static",
   "units": "N"
  },
@@ -2884,7 +3438,7 @@
   "data_type": "STR_0D",
   "documentation": "Name of the force combination",
   "full_path": "pf_active/vertical_force(i1)/name",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "static"
  }
 }

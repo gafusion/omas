@@ -2,7 +2,7 @@
  "ece": {
   "documentation": "Electron cyclotron emission diagnostic",
   "full_path": "ece",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.41.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.2.1",
   "maxoccur": "3"
@@ -15,7 +15,7 @@
   "documentation": "Set of channels (frequency)",
   "full_path": "ece/channel(i1)",
   "lifecycle_status": "alpha",
-  "maxoccur": "100",
+  "maxoccur": "200",
   "structure_reference": "ece_channel"
  },
  "ece.channel[:].beam": {
@@ -749,54 +749,21 @@
   "documentation": "Harmonic detected by the channel. 1 corresponds to the \"O1\" mode, while 2 corresponds to the \"X2\" mode. ",
   "full_path": "ece/channel(i1)/harmonic",
   "lifecycle_status": "alpha",
-  "structure_reference": "physical_quantity_flt_1d_time_1"
+  "structure_reference": "int_1d_time_1_and_type_change"
  },
  "ece.channel[:].harmonic.data": {
+  "change_nbc_description": "type_changed",
+  "change_nbc_previous_type": "FLT_1D",
+  "change_nbc_version": "3.41.0",
   "coordinates": [
    "ece.channel[:].time"
   ],
-  "data_type": "FLT_1D",
+  "data_type": "INT_1D",
   "documentation": "Data",
   "full_path": "ece/channel(i1)/harmonic/data(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
-  "type": "dynamic",
-  "units": "?",
-  "utilities_aoscontext": "yes"
- },
- "ece.channel[:].harmonic.data_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "ece/channel(i1)/harmonic/data_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "ece.channel[:].harmonic.data_error_lower": {
-  "coordinates": [
-   "ece.channel[:].time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "ece/channel(i1)/harmonic/data_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "time",
-  "type": "dynamic",
-  "units": "?",
-  "utilities_aoscontext": "yes"
- },
- "ece.channel[:].harmonic.data_error_upper": {
-  "coordinates": [
-   "ece.channel[:].time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "ece/channel(i1)/harmonic/data_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "time",
-  "type": "dynamic",
-  "units": "?",
-  "utilities_aoscontext": "yes"
+  "type": "dynamic"
  },
  "ece.channel[:].harmonic.validity": {
   "data_type": "INT_0D",
@@ -814,8 +781,7 @@
   "full_path": "ece/channel(i1)/harmonic/validity_timed(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
-  "type": "dynamic",
-  "utilities_aoscontext": "yes"
+  "type": "dynamic"
  },
  "ece.channel[:].identifier": {
   "data_type": "STR_0D",
@@ -1480,6 +1446,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ece.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ece.code.library": {
   "coordinates": [
    "1...N"
@@ -1495,6 +1469,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ece/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1593,10 +1575,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ece.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "ece/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ece.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "ece.ids_properties.occurrence"
+ },
+ "ece.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "ece/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "ece.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "ece/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "ece/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "ece/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "ece.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1618,6 +1638,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ece/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1653,6 +1681,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ece/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1704,6 +1740,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ece/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1761,6 +1805,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ece.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ece.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1804,6 +1856,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ece/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ece/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

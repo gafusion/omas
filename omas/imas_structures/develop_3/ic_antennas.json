@@ -2,7 +2,7 @@
  "ic_antennas": {
   "documentation": "Antenna systems for heating and current drive in the ion cyclotron (IC) frequencies.",
   "full_path": "ic_antennas",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -99,6 +99,71 @@
   "lifecycle_status": "alpha",
   "maxoccur": "8",
   "structure_reference": "ic_antennas_antenna_module"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance": {
+  "data_type": "STRUCTURE",
+  "documentation": "Coupling resistance",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "ohm"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance.data": {
+  "coordinates": [
+   "ic_antennas.antenna[:].module[:].coupling_resistance.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "coupling_resistance/time",
+  "type": "dynamic",
+  "units": "ohm"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance.data_error_lower": {
+  "coordinates": [
+   "ic_antennas.antenna[:].module[:].coupling_resistance.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "coupling_resistance/time",
+  "type": "dynamic",
+  "units": "ohm"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance.data_error_upper": {
+  "coordinates": [
+   "ic_antennas.antenna[:].module[:].coupling_resistance.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "coupling_resistance/time",
+  "type": "dynamic",
+  "units": "ohm"
+ },
+ "ic_antennas.antenna[:].module[:].coupling_resistance.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/coupling_resistance/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "coupling_resistance/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "ic_antennas.antenna[:].module[:].current": {
   "coordinates": [
@@ -1191,7 +1256,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Power reflection coefficient",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.40.0",
   "structure_reference": "signal_flt_1d",
   "units": "-"
  },
@@ -1202,7 +1268,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "reflection_coefficient/time",
   "type": "dynamic",
   "units": "-"
@@ -1222,7 +1288,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "reflection_coefficient/time",
   "type": "dynamic",
   "units": "-"
@@ -1234,7 +1300,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "reflection_coefficient/time",
   "type": "dynamic",
   "units": "-"
@@ -1246,7 +1312,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/reflection_coefficient/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "reflection_coefficient/time",
   "type": "dynamic",
   "units": "s"
@@ -2953,6 +3019,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "ic_antennas_surface_current",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "ic_antennas.antenna[:].surface_current[:].m_pol": {
@@ -2970,7 +3037,7 @@
    "1...N"
   ],
   "data_type": "INT_1D",
-  "documentation": "Toroidal mode numbers, used to describe the spectrum of the antenna current",
+  "documentation": "Toroidal mode numbers, used to describe the spectrum of the antenna current. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "ic_antennas/antenna(i1)/surface_current(itime)/n_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -3041,6 +3108,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ic_antennas.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ic_antennas.code.library": {
   "coordinates": [
    "1...N"
@@ -3056,6 +3131,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ic_antennas/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3154,10 +3237,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ic_antennas.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "ic_antennas/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ic_antennas.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "ic_antennas.ids_properties.occurrence"
+ },
+ "ic_antennas.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "ic_antennas/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "ic_antennas.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "ic_antennas/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "ic_antennas/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "ic_antennas/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "ic_antennas.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -3179,6 +3300,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ic_antennas/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3214,6 +3343,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ic_antennas/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3265,6 +3402,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ic_antennas/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3322,6 +3467,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ic_antennas.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ic_antennas.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -3365,6 +3518,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ic_antennas/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ic_antennas.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ic_antennas/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

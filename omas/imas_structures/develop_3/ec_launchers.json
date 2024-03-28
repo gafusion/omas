@@ -2,7 +2,7 @@
  "ec_launchers": {
   "documentation": "Launchers for heating and current drive in the electron cyclotron (EC) frequencies.",
   "full_path": "ec_launchers",
-  "lifecycle_last_change": "3.37.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.7.0",
   "maxoccur": "2"
@@ -261,9 +261,56 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
+ "ec_launchers.beam[:].o_mode_fraction": {
+  "coordinates": [
+   "ec_launchers.beam[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Fraction of EC beam power launched in ordinary (O) mode. If all power is launched in ordinary mode (O-mode), o_mode_fraction = 1.0. If all  power is launched in extraordinary mode (X-mode), o_mode_fraction = 0.0",
+  "full_path": "ec_launchers/beam(i1)/o_mode_fraction(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ec_launchers.beam[:].o_mode_fraction_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"o_mode_fraction\"",
+  "full_path": "ec_launchers/beam(i1)/o_mode_fraction_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ec_launchers.beam[:].o_mode_fraction_error_lower": {
+  "coordinates": [
+   "ec_launchers.beam[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"o_mode_fraction\"",
+  "full_path": "ec_launchers/beam(i1)/o_mode_fraction_error_lower(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ec_launchers.beam[:].o_mode_fraction_error_upper": {
+  "coordinates": [
+   "ec_launchers.beam[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"o_mode_fraction\"",
+  "full_path": "ec_launchers/beam(i1)/o_mode_fraction_error_upper(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "-"
+ },
  "ec_launchers.beam[:].phase": {
   "data_type": "STRUCTURE",
-  "documentation": "Phase ellipse characteristics",
+  "documentation": "Phase ellipse characteristics at launch",
   "full_path": "ec_launchers/beam(i1)/phase",
   "lifecycle_status": "alpha",
   "structure_reference": "ec_launchers_beam_phase"
@@ -318,7 +365,7 @@
    "ec_launchers.beam[:].time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams",
+  "documentation": "Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams, in the horizontal direction (first index of the first coordinate) and in the vertical direction (second index of the first coordinate)",
   "full_path": "ec_launchers/beam(i1)/phase/curvature(:,:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
@@ -425,7 +472,7 @@
  },
  "ec_launchers.beam[:].spot": {
   "data_type": "STRUCTURE",
-  "documentation": "Spot ellipse characteristics",
+  "documentation": "Spot ellipse characteristics at launch",
   "full_path": "ec_launchers/beam(i1)/spot",
   "lifecycle_status": "alpha",
   "structure_reference": "ec_launchers_beam_spot"
@@ -480,7 +527,7 @@
    "ec_launchers.beam[:].time"
   ],
   "data_type": "FLT_2D",
-  "documentation": "Size of the spot ellipse",
+  "documentation": "Size of the spot ellipse: distance between the central ray and the peripheral rays in the horizontal (first index of the first coordinate) and vertical direction (second index of the first coordinate)",
   "full_path": "ec_launchers/beam(i1)/spot/size(:,:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
@@ -623,7 +670,7 @@
    "1...N"
   ],
   "data_type": "FLT_1D_TYPE",
-  "documentation": "Time base used for position, angle, spot and phase quantities",
+  "documentation": "Time base used for launching_position, o_mode_fraction, angle, spot and phase quantities",
   "full_path": "ec_launchers/beam(i1)/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
@@ -644,6 +691,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ec_launchers.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ec_launchers.code.library": {
   "coordinates": [
    "1...N"
@@ -659,6 +714,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -757,10 +820,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ec_launchers.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "ec_launchers/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ec_launchers.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "ec_launchers.ids_properties.occurrence"
+ },
+ "ec_launchers.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "ec_launchers/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "ec_launchers.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "ec_launchers/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "ec_launchers/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "ec_launchers/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "ec_launchers.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -782,6 +883,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -817,6 +926,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -868,6 +985,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -925,6 +1050,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "ec_launchers.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "ec_launchers.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -968,6 +1101,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "ec_launchers/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ec_launchers.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "ec_launchers/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

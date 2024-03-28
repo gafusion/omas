@@ -2,7 +2,7 @@
  "summary": {
   "documentation": "Summary of physics quantities from a simulation or an experiment. Dynamic quantities are either taken at given time slices (indicated in the \"time\" vector) or time-averaged over an interval (in such case the \"time_width\" of the interval is indicated and the \"time\" vector represents the end of each time interval).",
   "full_path": "summary",
-  "lifecycle_last_change": "3.38.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "1"
@@ -1002,6 +1002,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "summary.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "summary.code.library": {
   "coordinates": [
    "1...N"
@@ -1017,6 +1025,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "summary/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -1114,6 +1130,1109 @@
   "full_path": "summary/disruption",
   "lifecycle_status": "active",
   "structure_reference": "summary_disruption"
+ },
+ "summary.disruption.decay_times": {
+  "data_type": "STRUCTURE",
+  "documentation": "Characteristic decay times describing the loss of different quantities during the disruption",
+  "full_path": "summary/disruption/decay_times",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay"
+ },
+ "summary.disruption.decay_times.current_runaways": {
+  "data_type": "STRUCTURE",
+  "documentation": "Total toroidal current carried by runaway electrons",
+  "full_path": "summary/disruption/decay_times/current_runaways",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_times"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential": {
+  "data_type": "STRUCTURE",
+  "documentation": "Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here \"t\" is time and \"t0\" is the time where the decay process starts",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.exponential.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/exponential/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_20_80.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_20_80/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value ",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_linear"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.decay_time.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/decay_time/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x1": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined parameter, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x1",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x1_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x1_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x1_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x1_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x2": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined value, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x2",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x2_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x2_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.current_runaways.linear_custom.x2_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/current_runaways/linear_custom/x2_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal": {
+  "data_type": "STRUCTURE",
+  "documentation": "Thermal plasma energy content = 3/2 * integral over the plasma volume of the thermal pressure",
+  "full_path": "summary/disruption/decay_times/energy_thermal",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_times"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential": {
+  "data_type": "STRUCTURE",
+  "documentation": "Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here \"t\" is time and \"t0\" is the time where the decay process starts",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.exponential.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/exponential/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_20_80.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_20_80/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value ",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_linear"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.decay_time.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/decay_time/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x1": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined parameter, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x1",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x1_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x1_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x1_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x1_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x2": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined value, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x2",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x2_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x2_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.energy_thermal.linear_custom.x2_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/energy_thermal/linear_custom/x2_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip": {
+  "data_type": "STRUCTURE",
+  "documentation": "Total toroidal plasma current (including runaway electrons and halo currents)",
+  "full_path": "summary/disruption/decay_times/ip",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_times"
+ },
+ "summary.disruption.decay_times.ip.exponential": {
+  "data_type": "STRUCTURE",
+  "documentation": "Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here \"t\" is time and \"t0\" is the time where the decay process starts",
+  "full_path": "summary/disruption/decay_times/ip/exponential",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.exponential.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/ip/exponential/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.exponential.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/ip/exponential/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.exponential.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/exponential/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.exponential.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/exponential/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.exponential.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/exponential/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_20_80.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_20_80/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_custom": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value ",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_linear"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.decay_time.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/decay_time/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x1": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined parameter, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x1",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x1_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x1_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x1_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x1_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x2": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined value, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x2",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x2_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x2_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.ip.linear_custom.x2_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/ip/linear_custom/x2_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electron temperature at the magnetic axis",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_times"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential": {
+  "data_type": "STRUCTURE",
+  "documentation": "Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here \"t\" is time and \"t0\" is the time where the decay process starts",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.exponential.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/exponential/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_20_80.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_20_80/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value ",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_linear"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.decay_time.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/decay_time/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x1": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined parameter, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x1",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x1_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x1_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x1_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x1_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x2": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined value, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x2",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x2_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x2_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_magnetic_axis.linear_custom.x2_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_magnetic_axis/linear_custom/x2_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average": {
+  "data_type": "STRUCTURE",
+  "documentation": "Volume average electron temperature",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_times"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential": {
+  "data_type": "STRUCTURE",
+  "documentation": "Exponential decay time (tau) used when the process is described by an exponential function (exp(-(t-t0)/tau))). Here \"t\" is time and \"t0\" is the time where the decay process starts",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.exponential.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/exponential/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(0.2)-t(0.8))/0.6, where t(X) corresponds to the time where this quantity reaches X*100% of its pre-disruptive value",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_20_80.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_20_80/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time defined as (t(X2)-t(X1))/(X1-X2), where t(Xj) corresponds to the time where this quantity reaches Xj*100% of its pre-disruptive value ",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_disruption_decay_linear"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time": {
+  "data_type": "STRUCTURE",
+  "documentation": "Decay time",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time",
+  "lifecycle_status": "active",
+  "structure_reference": "summary_constant_flt_0d",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time.source": {
+  "data_type": "STR_0D",
+  "documentation": "Source of the data (any comment describing the origin of the data : code, path to diagnostic signals, processing method, ...)",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time/source",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time.value": {
+  "data_type": "FLT_0D",
+  "documentation": "Value",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time/value",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time.value_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time/value_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time.value_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time/value_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.decay_time.value_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"value\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/decay_time/value_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "s"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x1": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined parameter, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x1",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x1_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x1_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x1_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x1_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x1_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x1\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x1_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x2": {
+  "data_type": "FLT_0D",
+  "documentation": "User-defined value, see description of linear_custom",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x2",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x2_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x2_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x2_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x2_error_lower",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
+ },
+ "summary.disruption.decay_times.t_e_volume_average.linear_custom.x2_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"x2\"",
+  "full_path": "summary/disruption/decay_times/t_e_volume_average/linear_custom/x2_error_upper",
+  "lifecycle_status": "active",
+  "type": "constant",
+  "units": "-"
  },
  "summary.disruption.mitigation_valve": {
   "data_type": "STRUCTURE",
@@ -11635,7 +12754,7 @@
  },
  "summary.heating_current_drive.ic[:].n_tor": {
   "data_type": "STRUCTURE",
-  "documentation": "Main toroidal mode number of IC waves",
+  "documentation": "Main toroidal mode number of IC waves. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "summary/heating_current_drive/ic(i1)/n_tor",
   "lifecycle_status": "active",
   "structure_reference": "summary_dynamic_int_1d_root"
@@ -13700,10 +14819,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "summary.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "summary/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "summary.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "summary.ids_properties.occurrence"
+ },
+ "summary.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "summary/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "summary.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "summary/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "summary/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "summary.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "summary/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "summary.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -13725,6 +14882,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "summary/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "summary.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -13760,6 +14925,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "summary/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "summary.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -13811,6 +14984,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "summary/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "summary.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -13868,6 +15049,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "summary.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "summary.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -13911,6 +15100,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "summary/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "summary.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "summary/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -14063,7 +15260,7 @@
  "summary.limiter.material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Limiter material\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Limiter material\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy",
   "full_path": "summary/limiter/material",
   "lifecycle_status": "active",
   "structure_reference": "identifier_static"
@@ -40843,7 +42040,7 @@
  "summary.wall.material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Wall material\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Wall material\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy",
   "full_path": "summary/wall/material",
   "lifecycle_status": "active",
   "structure_reference": "identifier_static"
