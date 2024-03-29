@@ -3,6 +3,8 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
