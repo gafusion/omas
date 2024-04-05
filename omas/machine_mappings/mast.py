@@ -4,6 +4,8 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.omas_core import ODS
 import glob
 import pyuda
 

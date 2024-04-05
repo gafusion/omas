@@ -11,6 +11,7 @@ from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
+from omas.omas_physics import omas_environment
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
