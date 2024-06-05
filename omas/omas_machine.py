@@ -19,6 +19,7 @@ except:
 try:
     from omas.machine_mappings import mast
 except ImportError:
+    print('Could not import mast machine mappings. Check that pyuda is installed')
     pass
 
 
