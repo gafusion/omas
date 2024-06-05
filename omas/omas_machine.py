@@ -6,7 +6,7 @@ import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
-from omas.machine_mappings import d3d, nstx, nstxu, east, mast
+from omas.machine_mappings import d3d, nstx, nstxu, east
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue
@@ -15,6 +15,12 @@ try:
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
 except:
     pass
+
+try:
+    from omas.machine_mappings import mast
+except ImportError:
+    pass
+
 
 __all__ = [
     'machine_expression_types',
