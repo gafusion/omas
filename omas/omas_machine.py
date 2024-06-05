@@ -16,6 +16,13 @@ try:
 except:
     pass
 
+try:
+    from omas.machine_mappings import mast
+except ImportError:
+    print('Could not import mast machine mappings. Check that pyuda is installed')
+    pass
+
+
 __all__ = [
     'machine_expression_types',
     'machines',
@@ -215,9 +222,6 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     # PYTHON
     elif 'PYTHON' in mapped:
-        if 'mast' in machine:
-            printe(f"MAST is currently not supported because of UDA", topic='machine')
-            return ods
         call = mapped['PYTHON'].format(**options_with_defaults)
         # python functions tend to set multiple locations at once
         # it is thus very beneficial to cache that
