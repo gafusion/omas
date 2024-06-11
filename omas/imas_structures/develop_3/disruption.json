@@ -129,6 +129,62 @@
   "lifecycle_status": "alpha",
   "structure_reference": "disruption_global_quantities"
  },
+ "disruption.global_quantities.current_halo_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_halo_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "disruption.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal halo current",
+  "full_path": "disruption/global_quantities/current_halo_phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "disruption.global_quantities.current_halo_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_halo_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_halo_phi\"",
+  "full_path": "disruption/global_quantities/current_halo_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "disruption.global_quantities.current_halo_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_halo_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "disruption.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_halo_phi\"",
+  "full_path": "disruption/global_quantities/current_halo_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "disruption.global_quantities.current_halo_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_halo_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "disruption.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_halo_phi\"",
+  "full_path": "disruption/global_quantities/current_halo_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
  "disruption.global_quantities.current_halo_pol": {
   "coordinates": [
    "disruption.time"
@@ -180,7 +236,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal halo current",
   "full_path": "disruption/global_quantities/current_halo_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -200,7 +257,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_halo_tor\"",
   "full_path": "disruption/global_quantities/current_halo_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -212,7 +270,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_halo_tor\"",
   "full_path": "disruption/global_quantities/current_halo_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -1631,7 +1690,7 @@
    "disruption.profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "disruption/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",

@@ -1274,7 +1274,7 @@
  },
  "nbi.unit[:].beam_current_fraction.data": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_current_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -1295,7 +1295,7 @@
  },
  "nbi.unit[:].beam_current_fraction.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_current_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -1308,7 +1308,7 @@
  },
  "nbi.unit[:].beam_current_fraction.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_current_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -1345,7 +1345,7 @@
  },
  "nbi.unit[:].beam_power_fraction.data": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_power_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -1366,7 +1366,7 @@
  },
  "nbi.unit[:].beam_power_fraction.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_power_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -1379,7 +1379,7 @@
  },
  "nbi.unit[:].beam_power_fraction.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "nbi.unit[:].beam_power_fraction.time"
   ],
   "data_type": "FLT_2D",
@@ -3181,6 +3181,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "nbi/unit(i1)/species/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "nbi.unit[:].species.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "nbi/unit(i1)/species/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

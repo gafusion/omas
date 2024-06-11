@@ -2,10 +2,80 @@
  "tf": {
   "documentation": "Toroidal field coils",
   "full_path": "tf",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
+ },
+ "tf.b_field_phi_vacuum_r": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "b_field_tor_vacuum_r",
+  "change_nbc_version": "3.42.0",
+  "cocos_label_transformation": "b0_like",
+  "cocos_leaf_name_aos_indices": "tf.b_field_tor_vacuum_r.data",
+  "cocos_transformation_expression": ".sigma_b0_eff",
+  "data_type": "STRUCTURE",
+  "documentation": "Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above",
+  "full_path": "tf/b_field_phi_vacuum_r",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T.m"
+ },
+ "tf.b_field_phi_vacuum_r.data": {
+  "coordinates": [
+   "tf.b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "tf/b_field_phi_vacuum_r/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.b_field_phi_vacuum_r.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "tf/b_field_phi_vacuum_r/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.b_field_phi_vacuum_r.data_error_lower": {
+  "coordinates": [
+   "tf.b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "tf/b_field_phi_vacuum_r/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.b_field_phi_vacuum_r.data_error_upper": {
+  "coordinates": [
+   "tf.b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "tf/b_field_phi_vacuum_r/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.b_field_phi_vacuum_r.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "tf/b_field_phi_vacuum_r/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "tf.b_field_tor_vacuum_r": {
   "cocos_label_transformation": "b0_like",
@@ -14,7 +84,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Vacuum field times major radius in the toroidal field magnet. Positive sign means anti-clockwise when viewed from above",
   "full_path": "tf/b_field_tor_vacuum_r",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "T.m"
  },
@@ -25,7 +96,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "tf/b_field_tor_vacuum_r/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -45,7 +116,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "tf/b_field_tor_vacuum_r/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -57,7 +128,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "tf/b_field_tor_vacuum_r/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -69,7 +140,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "tf/b_field_tor_vacuum_r/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "s"
@@ -198,7 +269,7 @@
   "full_path": "tf/coil(i1)",
   "lifecycle_status": "alpha",
   "maxoccur": "32",
-  "structure_reference": "tf_coil",
+  "structure_reference": "coil",
   "type": "static"
  },
  "tf.coil[:].conductor": {
@@ -210,220 +281,287 @@
   "full_path": "tf/coil(i1)/conductor(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "20",
-  "structure_reference": "tf_coil_conductor",
+  "structure_reference": "coil_conductor",
   "type": "static"
  },
  "tf.coil[:].conductor[:].cross_section": {
+  "change_nbc_description": "type_changed",
+  "change_nbc_previous_type": "delta_rzphi1d_static",
+  "change_nbc_version": "3.40.0",
+  "coordinates": [
+   "coil[:].conductor[:].elements.types"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "The cross-section perpendicular to the conductor contour is described by a series of contour points, given by their relative position with respect to the start point of each element. If the size of this array of structure is equal to 1, then the cross-section is given only for the first element and translated along the conductor elements. Otherwise, it's given explictly for each element, allowing to describe changes of the cross section shape",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "50",
+  "structure_reference": "coil_cross_section"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of the conductor cross-section, derived from the above geometric data",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].area_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"area\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/area_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"area\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"area\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].geometry_type": {
   "data_type": "STRUCTURE",
-  "documentation": "The cross-section perpendicular to the TF conductor contour is described by a series of contour points, given by their relative position with respect to the start point of the first element. This cross-section is assumed constant for all elements.",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section",
+  "doc_identifier": "utilities/surface_geometry_identifier.xml",
+  "documentation": "Geometry type used to describe the cross section of this element. The conductor centre is given by the ../../elements description.\n1) polygon : Contour described by a polygonal outline\n2) circle : Circle\n3) rectangle : Rectangle\n4) square : Square\n5) annulus : Annulus",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type",
   "lifecycle_status": "alpha",
-  "structure_reference": "delta_rzphi1d_static"
+  "structure_reference": "identifier_static"
  },
- "tf.coil[:].conductor[:].cross_section.delta_phi": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Toroidal angles (relative to a reference point)",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_phi(:)",
+ "tf.coil[:].conductor[:].cross_section[:].geometry_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].geometry_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].geometry_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].height": {
+  "data_type": "FLT_0D",
+  "documentation": "Full height of the rectangle in the binormal direction, used only if geometry_type/index = 3",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/height",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "rad"
+  "units": "m"
  },
- "tf.coil[:].conductor[:].cross_section.delta_phi_error_index": {
+ "tf.coil[:].conductor[:].cross_section[:].height_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_phi\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_phi_error_index",
+  "documentation": "Index in the error_description list for \"height\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/height_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "tf.coil[:].conductor[:].cross_section.delta_phi_error_lower": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_phi\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_phi_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "rad"
- },
- "tf.coil[:].conductor[:].cross_section.delta_phi_error_upper": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_phi\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_phi_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "rad"
- },
- "tf.coil[:].conductor[:].cross_section.delta_r": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Major radii (relative to a reference point)",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_r(:)",
+ "tf.coil[:].conductor[:].cross_section[:].height_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"height\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/height_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
- "tf.coil[:].conductor[:].cross_section.delta_r_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_r\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_r_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "tf.coil[:].conductor[:].cross_section.delta_r_error_lower": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_r\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_r_error_lower(:)",
+ "tf.coil[:].conductor[:].cross_section[:].height_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"height\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/height_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
- "tf.coil[:].conductor[:].cross_section.delta_r_error_upper": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_r\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_r_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "tf.coil[:].conductor[:].cross_section.delta_z": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Heights (relative to a reference point)",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_z(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "tf.coil[:].conductor[:].cross_section.delta_z_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_z\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_z_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "tf.coil[:].conductor[:].cross_section.delta_z_error_lower": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_z\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_z_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "tf.coil[:].conductor[:].cross_section.delta_z_error_upper": {
-  "coordinates": [
-   "tf.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_z\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/cross_section/delta_z_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "tf.coil[:].conductor[:].current": {
+ "tf.coil[:].conductor[:].cross_section[:].outline": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in the conductor (positive when it flows from the first to the last element)",
-  "full_path": "tf/coil(i1)/conductor(i2)/current",
+  "documentation": "Polygonal outline of the cross section in the (normal, binormal) coordinate system. Do NOT repeat the first point.",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline",
   "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "A"
+  "structure_reference": "normal_binormal_static"
  },
- "tf.coil[:].conductor[:].current.data": {
+ "tf.coil[:].conductor[:].cross_section[:].outline.binormal": {
   "coordinates": [
-   "tf.coil[:].conductor[:].current.time"
+   "tf.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "tf/coil(i1)/conductor(i2)/current/data(:)",
+  "documentation": "Coordinates along the binormal axis",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "tf.coil[:].conductor[:].current.data_error_index": {
+ "tf.coil[:].conductor[:].cross_section[:].outline.binormal_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/current/data_error_index",
+  "documentation": "Index in the error_description list for \"binormal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "tf.coil[:].conductor[:].current.data_error_lower": {
+ "tf.coil[:].conductor[:].cross_section[:].outline.binormal_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].current.time"
+   "tf.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/current/data_error_lower(:)",
+  "documentation": "Lower error for \"binormal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "tf.coil[:].conductor[:].current.data_error_upper": {
+ "tf.coil[:].conductor[:].cross_section[:].outline.binormal_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].current.time"
+   "tf.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "tf/coil(i1)/conductor(i2)/current/data_error_upper(:)",
+  "documentation": "Upper error for \"binormal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "tf.coil[:].conductor[:].current.time": {
+ "tf.coil[:].conductor[:].cross_section[:].outline.normal": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "tf/coil(i1)/conductor(i2)/current/time(:)",
+  "data_type": "FLT_1D",
+  "documentation": "Coordinate along the normal axis",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "s"
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].outline.normal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"normal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].outline.normal_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"normal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].outline.normal_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"normal\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].radius_inner": {
+  "data_type": "FLT_0D",
+  "documentation": "Inner radius of the annulus, used only if geometry_type/index = 5",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].radius_inner_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radius_inner\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].radius_inner_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"radius_inner\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].radius_inner_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"radius_inner\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the rectangle or square in the normal direction, when geometry_type/index = 3 or 4. Diameter of the circle when geometry_type/index = 2. Outer diameter of the annulus in case geometry_type/index = 5",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"width\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/width_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"width\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "tf.coil[:].conductor[:].cross_section[:].width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"width\"",
+  "full_path": "tf/coil(i1)/conductor(i2)/cross_section(i3)/width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "tf.coil[:].conductor[:].elements": {
   "data_type": "STRUCTURE",
-  "documentation": "Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the TF conductor centre",
+  "documentation": "Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the conductor centre. We define a coordinate system associated to each element as follows: for the arc and circle elements: binormal = (start point - center) x (intermediate point - center). This vector points in the direction of the circle / arc axis. normal = (center - point on curve). The normal vector will rotate as the point moves around the curve. Tangent = normal x binormal. For the line element we require an extra point, using the currently redundant intermediate point to define the line element's normal axis. The local coordinates for the line element then become: tangent = end point - start point; normal = intermediate point - start point; binormal = tangent x normal. It is assumed that all the axes above are normalized such that they have a unit length.",
   "full_path": "tf/coil(i1)/conductor(i2)/elements",
   "lifecycle_status": "alpha",
-  "structure_reference": "tf_coil_conductor_elements"
+  "structure_reference": "coil_conductor_elements"
  },
  "tf.coil[:].conductor[:].elements.centres": {
   "data_type": "STRUCTURE",
   "documentation": "Position of the centre of the arc of a circle of every element (meaningful only if type/index = 2 or 3, fill with default/empty value otherwise)",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/centres",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "tf.coil[:].conductor[:].elements.centres.phi": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -442,7 +580,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.phi_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -453,7 +591,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.phi_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -464,7 +602,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.r": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -483,7 +621,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -494,7 +632,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -505,7 +643,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.z": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -524,7 +662,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.z_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -535,7 +673,7 @@
  },
  "tf.coil[:].conductor[:].elements.centres.z_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.centres.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -549,11 +687,11 @@
   "documentation": "Position of the end point of every element. Meaningful only if type/index = 1 or 2, fill with default/empty value otherwise",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/end_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "tf.coil[:].conductor[:].elements.end_points.phi": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -572,7 +710,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.phi_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -583,7 +721,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.phi_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -594,7 +732,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.r": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -613,7 +751,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -624,7 +762,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -635,7 +773,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.z": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -654,7 +792,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.z_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -665,7 +803,7 @@
  },
  "tf.coil[:].conductor[:].elements.end_points.z_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.end_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -676,14 +814,14 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points": {
   "data_type": "STRUCTURE",
-  "documentation": "Position of an intermediate point along the arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). Meaningful only if type/index = 2, fill with default/empty value otherwise",
+  "documentation": "Position of an intermediate point along the circle or arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). In the case of a line segment (../types/index=1), fill this node with a point such that the vector intermediate_point - start_point defines the direction of the element's normal axis (see documentation of ../elements)",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/intermediate_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.phi": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -702,7 +840,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.phi_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -713,7 +851,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.phi_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -724,7 +862,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.r": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -743,7 +881,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -754,7 +892,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -765,7 +903,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.z": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -784,7 +922,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.z_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -795,7 +933,7 @@
  },
  "tf.coil[:].conductor[:].elements.intermediate_points.z_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.intermediate_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -804,26 +942,16 @@
   "type": "static",
   "units": "m"
  },
- "tf.coil[:].conductor[:].elements.names": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "STR_1D",
-  "documentation": "Name or description of every element",
-  "full_path": "tf/coil(i1)/conductor(i2)/elements/names(:)",
-  "lifecycle_status": "alpha",
-  "type": "static"
- },
  "tf.coil[:].conductor[:].elements.start_points": {
   "data_type": "STRUCTURE",
   "documentation": "Position of the start point of every element",
   "full_path": "tf/coil(i1)/conductor(i2)/elements/start_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "tf.coil[:].conductor[:].elements.start_points.phi": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -842,7 +970,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.phi_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -853,7 +981,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.phi_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -864,7 +992,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.r": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -883,7 +1011,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -894,7 +1022,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -905,7 +1033,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.z": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -924,7 +1052,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.z_error_lower": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -935,7 +1063,7 @@
  },
  "tf.coil[:].conductor[:].elements.start_points.z_error_upper": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.start_points.r"
+   "tf.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -946,7 +1074,7 @@
  },
  "tf.coil[:].conductor[:].elements.types": {
   "coordinates": [
-   "tf.coil[:].conductor[:].elements.names"
+   "1...N"
   ],
   "data_type": "INT_1D",
   "documentation": "Type of every element: 1: line segment, its ends are given by the start and end points; index = 2: arc of a circle; index = 3: full circle",
@@ -988,7 +1116,7 @@
  },
  "tf.coil[:].conductor[:].voltage": {
   "data_type": "STRUCTURE",
-  "documentation": "Voltage on the conductor terminals",
+  "documentation": "Voltage on the conductor terminals. Sign convention : positive when the current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "tf/coil(i1)/conductor(i2)/voltage",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1052,7 +1180,7 @@
  },
  "tf.coil[:].current": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in the coil",
+  "documentation": "Current in one turn of the coil (to be multiplied by the number of turns to calculate the magnetic field generated). Sign convention : a positive current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "tf/coil(i1)/current",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1116,7 +1244,7 @@
  },
  "tf.coil[:].identifier": {
   "data_type": "STR_0D",
-  "documentation": "Alphanumeric identifier of coil used for convenience",
+  "documentation": "Alphanumeric identifier of coil",
   "full_path": "tf/coil(i1)/identifier",
   "lifecycle_status": "alpha",
   "type": "static"
@@ -1162,7 +1290,7 @@
  },
  "tf.coil[:].turns": {
   "data_type": "FLT_0D",
-  "documentation": "Number of total turns in a toroidal field coil. May be a fraction when describing the coil connections.",
+  "documentation": "Number of total turns in the coil. May be a fraction when describing the coil connections.",
   "full_path": "tf/coil(i1)/turns",
   "lifecycle_status": "alpha",
   "type": "static",
@@ -1194,7 +1322,7 @@
  },
  "tf.coil[:].voltage": {
   "data_type": "STRUCTURE",
-  "documentation": "Voltage on the coil terminals",
+  "documentation": "Voltage on the coil terminals. Sign convention : positive when the current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "tf/coil(i1)/voltage",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1263,11 +1391,79 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
+ "tf.delta_b_field_phi_vacuum_r": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "delta_b_field_tor_vacuum_r",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Variation of (vacuum field times major radius in the toroidal field magnet) from the start of the plasma.",
+  "full_path": "tf/delta_b_field_phi_vacuum_r",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_phi_vacuum_r.data": {
+  "coordinates": [
+   "tf.delta_b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "tf/delta_b_field_phi_vacuum_r/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_phi_vacuum_r.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "tf/delta_b_field_phi_vacuum_r/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "tf.delta_b_field_phi_vacuum_r.data_error_lower": {
+  "coordinates": [
+   "tf.delta_b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "tf/delta_b_field_phi_vacuum_r/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_phi_vacuum_r.data_error_upper": {
+  "coordinates": [
+   "tf.delta_b_field_phi_vacuum_r.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "tf/delta_b_field_phi_vacuum_r/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "tf.delta_b_field_phi_vacuum_r.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "tf/delta_b_field_phi_vacuum_r/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "delta_b_field_phi_vacuum_r/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "tf.delta_b_field_tor_vacuum_r": {
   "data_type": "STRUCTURE",
   "documentation": "Variation of (vacuum field times major radius in the toroidal field magnet) from the start of the plasma.",
   "full_path": "tf/delta_b_field_tor_vacuum_r",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "T.m"
  },
@@ -1278,7 +1474,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "tf/delta_b_field_tor_vacuum_r/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "delta_b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -1298,7 +1494,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "tf/delta_b_field_tor_vacuum_r/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "delta_b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -1310,7 +1506,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "tf/delta_b_field_tor_vacuum_r/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "delta_b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "T.m"
@@ -1322,7 +1518,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "tf/delta_b_field_tor_vacuum_r/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "delta_b_field_tor_vacuum_r/time",
   "type": "dynamic",
   "units": "s"

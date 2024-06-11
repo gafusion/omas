@@ -2,7 +2,7 @@
  "turbulence": {
   "documentation": "Description of plasma turbulence",
   "full_path": "turbulence",
-  "lifecycle_last_change": "3.12.1",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.12.1",
   "maxoccur": "2"
@@ -1056,6 +1056,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "turbulence/profiles_2d(itime)/ion(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "turbulence.profiles_2d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "turbulence/profiles_2d(itime)/ion(i1)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -1369,6 +1380,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "turbulence.profiles_2d[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "turbulence/profiles_2d(itime)/neutral(i1)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },

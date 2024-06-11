@@ -2,7 +2,7 @@
  "em_coupling": {
   "documentation": "Description of the axisymmetric mutual electromagnetics; does not include non-axisymmetric coil systems; the convention is Quantity_Sensor_Source",
   "full_path": "em_coupling",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "3"
@@ -14,7 +14,8 @@
   "data_type": "STR_1D",
   "documentation": "List of URIs of the active coils considered in the IDS",
   "full_path": "em_coupling/active_coils(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "url": "utilities/IMAS-URI-scheme.md"
  },
@@ -28,7 +29,8 @@
   "data_type": "STR_1D",
   "documentation": "List of URIs of the poloidal field probes considered in the IDS",
   "full_path": "em_coupling/b_field_pol_probes(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "url": "utilities/IMAS-URI-scheme.md"
  },
@@ -43,7 +45,8 @@
   "data_type": "FLT_2D",
   "documentation": "Poloidal field coupling from active coils to poloidal field probes",
   "full_path": "em_coupling/b_field_pol_probes_active(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -69,7 +72,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_pol_probes_active\"",
   "full_path": "em_coupling/b_field_pol_probes_active_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -84,7 +88,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_pol_probes_active\"",
   "full_path": "em_coupling/b_field_pol_probes_active_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -99,7 +104,8 @@
   "data_type": "FLT_2D",
   "documentation": "Poloidal field coupling from passive loops to poloidal field probes",
   "full_path": "em_coupling/b_field_pol_probes_passive(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -125,7 +131,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_pol_probes_passive\"",
   "full_path": "em_coupling/b_field_pol_probes_passive_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -140,7 +147,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_pol_probes_passive\"",
   "full_path": "em_coupling/b_field_pol_probes_passive_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -152,7 +160,8 @@
   "data_type": "FLT_2D",
   "documentation": "Poloidal field coupling from plasma elements to poloidal field probes",
   "full_path": "em_coupling/b_field_pol_probes_plasma(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -172,7 +181,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_pol_probes_plasma\"",
   "full_path": "em_coupling/b_field_pol_probes_plasma_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -184,7 +194,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_pol_probes_plasma\"",
   "full_path": "em_coupling/b_field_pol_probes_plasma_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "T/A"
  },
@@ -424,7 +435,8 @@
   "data_type": "STR_1D",
   "documentation": "List of URIs of the flux loops considered in the IDS",
   "full_path": "em_coupling/flux_loops(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "url": "utilities/IMAS-URI-scheme.md"
  },
@@ -1580,7 +1592,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from active coils to active coils",
   "full_path": "em_coupling/mutual_active_active(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1600,7 +1613,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_active_active\"",
   "full_path": "em_coupling/mutual_active_active_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1612,7 +1626,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_active_active\"",
   "full_path": "em_coupling/mutual_active_active_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1624,7 +1639,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from active coils to flux loops",
   "full_path": "em_coupling/mutual_loops_active(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1644,7 +1660,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_loops_active\"",
   "full_path": "em_coupling/mutual_loops_active_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1656,7 +1673,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_loops_active\"",
   "full_path": "em_coupling/mutual_loops_active_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1668,7 +1686,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from passive loops to flux loops",
   "full_path": "em_coupling/mutual_loops_passive(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1688,7 +1707,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_loops_passive\"",
   "full_path": "em_coupling/mutual_loops_passive_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1700,7 +1720,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_loops_passive\"",
   "full_path": "em_coupling/mutual_loops_passive_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1712,7 +1733,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance from plasma elements to poloidal flux loops ",
   "full_path": "em_coupling/mutual_loops_plasma(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1732,7 +1754,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_loops_plasma\"",
   "full_path": "em_coupling/mutual_loops_plasma_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1744,7 +1767,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_loops_plasma\"",
   "full_path": "em_coupling/mutual_loops_plasma_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1756,7 +1780,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from active coils to passive loops",
   "full_path": "em_coupling/mutual_passive_active(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1776,7 +1801,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_passive_active\"",
   "full_path": "em_coupling/mutual_passive_active_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1788,7 +1814,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_passive_active\"",
   "full_path": "em_coupling/mutual_passive_active_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1800,7 +1827,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from passive loops to passive loops",
   "full_path": "em_coupling/mutual_passive_passive(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1820,7 +1848,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_passive_passive\"",
   "full_path": "em_coupling/mutual_passive_passive_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1832,7 +1861,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_passive_passive\"",
   "full_path": "em_coupling/mutual_passive_passive_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1844,7 +1874,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from active coils to plasma elements",
   "full_path": "em_coupling/mutual_plasma_active(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1864,7 +1895,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_plasma_active\"",
   "full_path": "em_coupling/mutual_plasma_active_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1876,7 +1908,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_plasma_active\"",
   "full_path": "em_coupling/mutual_plasma_active_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1888,7 +1921,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from passive loops to plasma elements",
   "full_path": "em_coupling/mutual_plasma_passive(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1908,7 +1942,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_plasma_passive\"",
   "full_path": "em_coupling/mutual_plasma_passive_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1920,7 +1955,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_plasma_passive\"",
   "full_path": "em_coupling/mutual_plasma_passive_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1932,7 +1968,8 @@
   "data_type": "FLT_2D",
   "documentation": "Mutual inductance coupling from plasma elements to plasma elements",
   "full_path": "em_coupling/mutual_plasma_plasma(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1952,7 +1989,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"mutual_plasma_plasma\"",
   "full_path": "em_coupling/mutual_plasma_plasma_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1964,7 +2002,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"mutual_plasma_plasma\"",
   "full_path": "em_coupling/mutual_plasma_plasma_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "H"
  },
@@ -1975,7 +2014,8 @@
   "data_type": "STR_1D",
   "documentation": "List of URIs of the passive loops considered in the IDS",
   "full_path": "em_coupling/passive_loops(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "url": "utilities/IMAS-URI-scheme.md"
  },
@@ -1987,7 +2027,8 @@
   "documentation": "List of URIs of the plasma elements considered in the IDS",
   "full_path": "em_coupling/plasma_elements(:)",
   "introduced_after_version": "3.39.0",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "url": "utilities/IMAS-URI-scheme.md"
  },

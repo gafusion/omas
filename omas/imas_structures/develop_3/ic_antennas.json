@@ -2521,11 +2521,56 @@
   "type": "dynamic",
   "units": "s"
  },
+ "ic_antennas.antenna[:].module[:].strap[:].width_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "width_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Width of strap in the toroidal direction",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ic_antennas.antenna[:].module[:].strap[:].width_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "width_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"width_phi\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ic_antennas.antenna[:].module[:].strap[:].width_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "width_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"width_phi\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ic_antennas.antenna[:].module[:].strap[:].width_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "width_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"width_phi\"",
+  "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
  "ic_antennas.antenna[:].module[:].strap[:].width_tor": {
   "data_type": "FLT_0D",
   "documentation": "Width of strap in the toroidal direction",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "m"
  },
@@ -2541,7 +2586,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"width_tor\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "m"
  },
@@ -2549,7 +2595,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"width_tor\"",
   "full_path": "ic_antennas/antenna(i1)/module(i2)/strap(i3)/width_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static",
   "units": "m"
  },
@@ -3032,6 +3079,19 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "ic_antennas.antenna[:].surface_current[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal mode numbers, used to describe the spectrum of the antenna current. The wave vector toroidal component is defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_phi means a wave propagating in the positive phi direction",
+  "full_path": "ic_antennas/antenna(i1)/surface_current(itime)/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "ic_antennas.antenna[:].surface_current[:].n_tor": {
   "coordinates": [
    "1...N"
@@ -3039,7 +3099,8 @@
   "data_type": "INT_1D",
   "documentation": "Toroidal mode numbers, used to describe the spectrum of the antenna current. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "ic_antennas/antenna(i1)/surface_current(itime)/n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "ic_antennas.antenna[:].surface_current[:].spectrum": {

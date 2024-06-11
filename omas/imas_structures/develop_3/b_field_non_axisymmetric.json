@@ -2,7 +2,7 @@
  "b_field_non_axisymmetric": {
   "documentation": "Vacuum 3d error magnetic field (the full 3d magnetic field with the axisymmetric components subtracted)",
   "full_path": "b_field_non_axisymmetric",
-  "lifecycle_last_change": "3.39.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.39.0",
   "maxoccur": "20"
@@ -693,6 +693,62 @@
   "type": "dynamic",
   "units": "T"
  },
+ "b_field_non_axisymmetric.time_slice[:].control_surface[:].b_field_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].outline.r",
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal component of the vacuum error magnetic field on the various surface points",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "b_field_non_axisymmetric.time_slice[:].control_surface[:].b_field_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "b_field_non_axisymmetric.time_slice[:].control_surface[:].b_field_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].outline.r",
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "b_field_non_axisymmetric.time_slice[:].control_surface[:].b_field_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].outline.r",
+   "b_field_non_axisymmetric.time_slice[:].control_surface[:].phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
  "b_field_non_axisymmetric.time_slice[:].control_surface[:].b_field_r": {
   "coordinates": [
    "b_field_non_axisymmetric.time_slice[:].control_surface[:].outline.r",
@@ -745,7 +801,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal component of the vacuum error magnetic field on the various surface points",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -765,7 +822,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"b_field_tor\"",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -777,7 +835,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"b_field_tor\"",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/control_surface(i1)/b_field_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -1061,6 +1120,65 @@
   "lifecycle_status": "alpha",
   "structure_reference": "b_field_na_field_map"
  },
+ "b_field_non_axisymmetric.time_slice[:].field_map.b_field_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.r",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.phi",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.z"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Toroidal component of the vacuum error magnetic field",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "b_field_non_axisymmetric.time_slice[:].field_map.b_field_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "b_field_non_axisymmetric.time_slice[:].field_map.b_field_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.r",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.phi",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.z"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "b_field_non_axisymmetric.time_slice[:].field_map.b_field_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.r",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.phi",
+   "b_field_non_axisymmetric.time_slice[:].field_map.grid.z"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"b_field_phi\"",
+  "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
  "b_field_non_axisymmetric.time_slice[:].field_map.b_field_r": {
   "coordinates": [
    "b_field_non_axisymmetric.time_slice[:].field_map.grid.r",
@@ -1117,7 +1235,8 @@
   "data_type": "FLT_3D",
   "documentation": "Toroidal component of the vacuum error magnetic field",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -1138,7 +1257,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"b_field_tor\"",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -1151,7 +1271,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"b_field_tor\"",
   "full_path": "b_field_non_axisymmetric/time_slice(itime)/field_map/b_field_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },

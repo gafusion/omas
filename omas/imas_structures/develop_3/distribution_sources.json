@@ -1662,11 +1662,56 @@
   "type": "dynamic",
   "units": "W"
  },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal torque losses due to shinethrough",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
  "distribution_sources.source[:].global_quantities[:].shinethrough.torque_tor": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal torque losses due to shinethrough",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1682,7 +1727,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1690,7 +1736,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1702,11 +1749,56 @@
   "type": "dynamic",
   "units": "s"
  },
+ "distribution_sources.source[:].global_quantities[:].torque_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Total toroidal torque of the source",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
  "distribution_sources.source[:].global_quantities[:].torque_tor": {
   "data_type": "FLT_0D",
   "documentation": "Total toroidal torque of the source",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1722,7 +1814,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1730,7 +1823,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -2467,7 +2561,7 @@
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -2626,6 +2720,59 @@
   "type": "dynamic",
   "units": "m^3"
  },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Source term for the toroidal momentum equation",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
  "distribution_sources.source[:].profiles_1d[:].momentum_tor": {
   "coordinates": [
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
@@ -2633,7 +2780,8 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the toroidal momentum equation",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2652,7 +2800,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2663,7 +2812,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2851,6 +3001,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.ion.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "distribution_sources/source(i1)/species/ion/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2872,6 +3033,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.ion.state.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "distribution_sources/source(i1)/species/ion/state/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3138,6 +3310,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "distribution_sources/source(i1)/species/neutral/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.neutral.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "distribution_sources/source(i1)/species/neutral/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3159,6 +3342,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral state ",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.neutral.state.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral state ",
+  "full_path": "distribution_sources/source(i1)/species/neutral/state/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

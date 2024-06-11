@@ -2,7 +2,7 @@
  "spi": {
   "documentation": "Shattered pellets injectors",
   "full_path": "spi",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.40.0",
   "maxoccur": "2"
@@ -801,6 +801,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "spi/injector(i1)/fragment(i2)/species(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spi.injector[:].fragment[:].species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "spi/injector(i1)/fragment(i2)/species(i3)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1174,6 +1185,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "spi/injector(i1)/fragmentation_gas/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spi.injector[:].fragmentation_gas.species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "spi/injector(i1)/fragmentation_gas/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1634,6 +1656,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "spi/injector(i1)/pellet/core/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spi.injector[:].pellet.core.species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "spi/injector(i1)/pellet/core/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1999,6 +2032,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "spi/injector(i1)/pellet/shell/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spi.injector[:].pellet.shell.species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "spi/injector(i1)/pellet/shell/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2360,6 +2404,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "spi/injector(i1)/propellant_gas/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spi.injector[:].propellant_gas.species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "spi/injector(i1)/propellant_gas/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

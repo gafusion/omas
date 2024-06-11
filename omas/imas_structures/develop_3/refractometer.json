@@ -239,7 +239,7 @@
  },
  "refractometer.channel[:].bandwidth[:].phase_quadrature.data": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "refractometer.channel[:].bandwidth[:].phase_quadrature.time"
   ],
   "data_type": "FLT_2D",
@@ -260,7 +260,7 @@
  },
  "refractometer.channel[:].bandwidth[:].phase_quadrature.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "refractometer.channel[:].bandwidth[:].phase_quadrature.time"
   ],
   "data_type": "FLT_2D",
@@ -273,7 +273,7 @@
  },
  "refractometer.channel[:].bandwidth[:].phase_quadrature.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "refractometer.channel[:].bandwidth[:].phase_quadrature.time"
   ],
   "data_type": "FLT_2D",

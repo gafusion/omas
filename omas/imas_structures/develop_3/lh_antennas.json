@@ -463,7 +463,7 @@
  },
  "lh_antennas.antenna[:].n_e.data": {
   "coordinates": [
-   "1...N",
+   "lh_antennas.antenna[:].distance_to_antenna",
    "lh_antennas.antenna[:].n_e.time"
   ],
   "data_type": "FLT_2D",
@@ -484,7 +484,7 @@
  },
  "lh_antennas.antenna[:].n_e.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "lh_antennas.antenna[:].distance_to_antenna",
    "lh_antennas.antenna[:].n_e.time"
   ],
   "data_type": "FLT_2D",
@@ -497,7 +497,7 @@
  },
  "lh_antennas.antenna[:].n_e.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "lh_antennas.antenna[:].distance_to_antenna",
    "lh_antennas.antenna[:].n_e.time"
   ],
   "data_type": "FLT_2D",

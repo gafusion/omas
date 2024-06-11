@@ -2,7 +2,7 @@
  "core_transport": {
   "documentation": "Core plasma transport of particles, energy, momentum and poloidal flux. The transport of particles, energy and momentum is described by diffusion coefficients, D, and convection velocities, v. These are defined by the total fluxes of particles, energy and momentum, across a flux surface given by : V' [-D Y' <|grad(rho_tor_norm)|^2> + v Y <|grad(rho_tor_norm)|>], where Y represents the particles, energy and momentum density, respectively, while V is the volume inside a flux surface, the primes denote derivatives with respect to rho_tor_norm and < X > is the flux surface average of a quantity X. This formulation remains valid when changing simultaneously rho_tor_norm into rho_tor in the gradient terms and in the derivatives denoted by the prime. The average flux stored in the IDS as sibling of D and v is the total flux described above divided by the flux surface area V' <|grad(rho_tor_norm)|>. Note that the energy flux includes the energy transported by the particle flux, in this form: Q =  V' [- n D (T)' <|grad(rho_tor_norm)|^2> + v (nT) <|grad(rho_tor_norm)|>] + flux_multiplier * T * particle_flux",
   "full_path": "core_transport",
-  "lifecycle_last_change": "3.41.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.1.0",
   "maxoccur": "10",
@@ -1285,7 +1285,7 @@
    "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_d/rho_tor(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -1652,7 +1652,7 @@
    "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_flux/rho_tor(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -2019,7 +2019,7 @@
    "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/grid_v/rho_tor(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -2440,7 +2440,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].momentum": {
@@ -3312,6 +3313,16 @@
   "lifecycle_status": "active",
   "type": "dynamic"
  },
+ "core_transport.model[:].profiles_1d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
  "core_transport.model[:].profiles_1d[:].ion[:].neutral_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the corresponding neutral species in the ../../neutral array",
@@ -3609,7 +3620,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].momentum": {
@@ -4474,6 +4486,16 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "core_transport.model[:].profiles_1d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/ion(i2)/state(i3)/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
  "core_transport.model[:].profiles_1d[:].ion[:].state[:].neutral_type": {
   "data_type": "STRUCTURE",
   "documentation": "Neutral type (if the considered state is a neutral), in terms of energy. ID =1: cold; 2: thermal; 3: fast; 4: NBI",
@@ -4768,11 +4790,145 @@
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
+ "core_transport.model[:].profiles_1d[:].momentum_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Transport coefficients for total toroidal momentum equation",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi",
+  "lifecycle_status": "active",
+  "structure_reference": "core_transport_model_1_momentum"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.d": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Effective diffusivity",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/d(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.d_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"d\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/d_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.d_error_lower": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"d\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/d_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.d_error_upper": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_d.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"d\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/d_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.flux": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Flux",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/flux(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.flux_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"flux\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/flux_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.flux_error_lower": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"flux\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/flux_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.flux_error_upper": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_flux.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"flux\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/flux_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.v": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Effective convection",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/v(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.v_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"v\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/v_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.v_error_lower": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"v\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/v_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "core_transport.model[:].profiles_1d[:].momentum_phi.v_error_upper": {
+  "coordinates": [
+   "core_transport.model[:].profiles_1d[:].grid_v.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"v\"",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_phi/v_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "core_transport.model[:].profiles_1d[:].momentum_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Transport coefficients for total toroidal momentum equation",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "core_transport_model_1_momentum"
  },
  "core_transport.model[:].profiles_1d[:].momentum_tor.d": {
@@ -4782,7 +4938,7 @@
   "data_type": "FLT_1D",
   "documentation": "Effective diffusivity",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/d(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -4801,7 +4957,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/d_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -4812,7 +4968,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"d\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/d_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -4823,7 +4979,7 @@
   "data_type": "FLT_1D",
   "documentation": "Flux",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/flux(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4842,7 +4998,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/flux_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4853,7 +5009,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"flux\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/flux_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -4864,7 +5020,7 @@
   "data_type": "FLT_1D",
   "documentation": "Effective convection",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/v(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4883,7 +5039,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/v_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4894,7 +5050,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"v\"",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/momentum_tor/v_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5167,13 +5323,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "core_transport.model[:].profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "core_transport.model[:].profiles_1d[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -5459,6 +5626,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "core_transport.model[:].profiles_1d[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "core_transport/model(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },

@@ -2,7 +2,7 @@
  "spectrometer_uv": {
   "documentation": "Spectrometer in uv light range diagnostic",
   "full_path": "spectrometer_uv",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.29.0",
   "maxoccur": "2"
@@ -2527,7 +2527,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2548,7 +2548,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2561,7 +2561,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -3087,6 +3087,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
   "full_path": "spectrometer_uv/channel(i1)/processed_line(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spectrometer_uv.channel[:].processed_line[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
+  "full_path": "spectrometer_uv/channel(i1)/processed_line(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3248,7 +3259,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3269,7 +3280,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3282,7 +3293,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",

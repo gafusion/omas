@@ -974,11 +974,22 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "ntms.time_slice[:].mode[:].detailed_evolution.n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Toroidal mode number",
+  "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/n_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "ntms.time_slice[:].mode[:].detailed_evolution.n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/detailed_evolution/n_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].detailed_evolution.phase": {
@@ -1380,11 +1391,22 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "ntms.time_slice[:].mode[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Toroidal mode number",
+  "full_path": "ntms/time_slice(itime)/mode(i1)/n_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "ntms.time_slice[:].mode[:].n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/n_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset": {
@@ -1408,11 +1430,22 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "ntms.time_slice[:].mode[:].onset.n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Toroidal mode number",
+  "full_path": "ntms/time_slice(itime)/mode(i1)/onset/n_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "ntms.time_slice[:].mode[:].onset.n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number",
   "full_path": "ntms/time_slice(itime)/mode(i1)/onset/n_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "ntms.time_slice[:].mode[:].onset.phase": {

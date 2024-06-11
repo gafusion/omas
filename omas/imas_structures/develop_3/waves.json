@@ -2,7 +2,7 @@
  "waves": {
   "documentation": "RF wave propagation and deposition. Note that current estimates in this IDS are a priori not taking into account synergies between multiple sources (a convergence loop with Fokker-Planck calculations is required to account for such synergies) ",
   "full_path": "waves",
-  "lifecycle_last_change": "3.39.0",
+  "lifecycle_last_change": "3.41.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.5.0",
   "maxoccur": "8"
@@ -163,7 +163,7 @@
   "documentation": "Electric field polarization of the ray/beam along its path",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/e_field",
   "lifecycle_status": "alpha",
-  "structure_reference": "waves_coherent_wave_beam_tracing_beam_e_field"
+  "structure_reference": "waves_beam_tracing_beam_e_field"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].e_field.minus": {
   "data_type": "STRUCTURE",
@@ -440,7 +440,7 @@
   "documentation": "Quantities related to the electrons",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/electrons",
   "lifecycle_status": "alpha",
-  "structure_reference": "waves_coherent_wave_beam_tracing_electrons"
+  "structure_reference": "waves_beam_tracing_electrons"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].electrons.power": {
   "coordinates": [
@@ -615,13 +615,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -688,6 +699,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/ion(i3)/state(i4)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -1131,12 +1153,53 @@
   "type": "dynamic",
   "units": "m"
  },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].position.rho_tor_norm": {
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].position.theta": {
   "coordinates": [
    "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Poloidal angle",
+  "documentation": "Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/position/theta(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -1218,7 +1281,7 @@
   "documentation": "Normalised power flow",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm",
   "lifecycle_status": "alpha",
-  "structure_reference": "waves_coherent_wave_beam_tracing_power_flow"
+  "structure_reference": "waves_beam_tracing_power_flow"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].power_flow_norm.parallel": {
   "coordinates": [
@@ -1432,7 +1495,113 @@
   "documentation": "Wave vector of the ray/beam along its path",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector",
   "lifecycle_status": "alpha",
-  "structure_reference": "waves_coherent_wave_beam_tracing_beam_k"
+  "structure_reference": "waves_beam_tracing_beam_k"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave vector component in the toroidal direction",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_phi\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_phi\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_phi\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized wave vector component in the toroidal direction = k_phi / norm(k)",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_phi_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_phi_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_phi_norm\"",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
  },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.k_r": {
   "coordinates": [
@@ -1526,7 +1695,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave vector component in the toroidal direction",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -1545,7 +1715,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"k_tor\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -1556,7 +1727,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"k_tor\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^-1"
  },
@@ -1568,7 +1740,8 @@
   "documentation": "Normalized wave vector component in the toroidal direction = k_tor / norm(k)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm(:)",
   "introduced_after_version": "3.38.1",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -1588,7 +1761,8 @@
   "documentation": "Lower error for \"k_tor_norm\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm_error_lower(:)",
   "introduced_after_version": "3.38.1",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -1600,7 +1774,8 @@
   "documentation": "Upper error for \"k_tor_norm\"",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm_error_upper(:)",
   "introduced_after_version": "3.38.1",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -1771,6 +1946,19 @@
   "type": "dynamic",
   "units": "-"
  },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "coherent_wave[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal wave number, contains a single value if varying_ntor = 0 to avoid useless repetition constant values. The wave vector toroidal component is defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.n_tor": {
   "coordinates": [
    "coherent_wave[:].beam_tracing[:].beam[:].length"
@@ -1778,6 +1966,17 @@
   "data_type": "INT_1D",
   "documentation": "Toroidal wave number, contains a single value if varying_ntor = 0 to avoid useless repetition constant values. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_tor(:)",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].beam_tracing[:].beam[:].wave_vector.varying_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "varying_n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Flag telling whether n_phi is constant along the ray path (0) or varying (1)",
+  "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/varying_n_phi",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -1785,7 +1984,8 @@
   "data_type": "INT_0D",
   "documentation": "Flag telling whether n_tor is constant along the ray path (0) or varying (1)",
   "full_path": "waves/coherent_wave(i1)/beam_tracing(itime)/beam(i2)/wave_vector/varying_n_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].beam_tracing[:].time": {
@@ -3580,11 +3780,109 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "waves.coherent_wave[:].global_quantities[:].current_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Wave driven toroidal current from a stand alone calculation (not consistent with other sources)",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"current_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"current_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave driven toroidal current from a stand alone calculation (not consistent with other sources) per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_phi_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].global_quantities[:].current_phi_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_phi_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_phi_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
  "waves.coherent_wave[:].global_quantities[:].current_tor": {
   "data_type": "FLT_0D",
   "documentation": "Wave driven toroidal current from a stand alone calculation (not consistent with other sources)",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3600,7 +3898,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"current_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3608,7 +3907,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"current_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3619,7 +3919,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave driven toroidal current from a stand alone calculation (not consistent with other sources) per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3638,7 +3939,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_tor_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3649,7 +3951,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_tor_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/current_tor_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -3699,6 +4002,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -3706,7 +4062,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3725,7 +4082,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3736,7 +4094,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_fast_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3772,6 +4131,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].electrons.power_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -3779,7 +4191,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3798,7 +4211,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3809,7 +4223,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/electrons/power_thermal_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -3984,13 +4399,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].global_quantities[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -4026,6 +4452,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -4033,7 +4512,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4052,7 +4532,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4063,7 +4544,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_fast_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4099,6 +4581,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].ion[:].power_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -4106,7 +4641,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4125,7 +4661,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4136,7 +4673,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/power_thermal_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4162,6 +4700,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -4197,6 +4746,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -4204,7 +4806,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the fast particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4223,7 +4826,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4234,7 +4838,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_fast_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4270,6 +4875,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].ion[:].state[:].power_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -4277,7 +4935,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave power absorbed by the thermal particle population per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4296,7 +4955,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4307,7 +4967,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/ion(i2)/state(i3)/power_thermal_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4446,6 +5107,19 @@
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
+ "waves.coherent_wave[:].global_quantities[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "waves.coherent_wave[:].global_quantities[:].n_tor": {
   "coordinates": [
    "1...N"
@@ -4453,7 +5127,8 @@
   "data_type": "INT_1D",
   "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].global_quantities[:].power": {
@@ -4488,6 +5163,59 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].global_quantities[:].power_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Absorbed wave power per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].power_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].global_quantities[:].power_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].global_quantities[:].power_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].global_quantities[:].n_phi"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].global_quantities[:].power_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].global_quantities[:].n_tor"
@@ -4495,7 +5223,8 @@
   "data_type": "FLT_1D",
   "documentation": "Absorbed wave power per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4514,7 +5243,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"power_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4525,7 +5255,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"power_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/global_quantities(itime)/power_n_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -4643,6 +5374,62 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_parallel_density_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged wave driven parallel current density, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_parallel_density_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_parallel_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_parallel_density_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"current_parallel_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_parallel_density_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"current_parallel_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "waves.coherent_wave[:].profiles_1d[:].current_parallel_density_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -4651,7 +5438,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged wave driven parallel current density, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -4671,7 +5459,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"current_parallel_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -4683,9 +5472,119 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"current_parallel_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_parallel_density_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave driven toroidal current, inside a flux surface",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi_inside\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_phi_inside\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_phi_inside\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Wave driven toroidal current, inside a flux surface, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"current_phi_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].current_phi_inside_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_inside_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"current_phi_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_phi_inside_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
  },
  "waves.coherent_wave[:].profiles_1d[:].current_tor_inside": {
   "coordinates": [
@@ -4694,7 +5593,8 @@
   "data_type": "FLT_1D",
   "documentation": "Wave driven toroidal current, inside a flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -4713,7 +5613,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_tor_inside\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -4724,7 +5625,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_tor_inside\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -4736,7 +5638,8 @@
   "data_type": "FLT_2D",
   "documentation": "Wave driven toroidal current, inside a flux surface, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -4756,7 +5659,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"current_tor_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
  },
@@ -4768,9 +5672,294 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"current_tor_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/current_tor_inside_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "e_field_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "waves_profiles_1d_e_field_n_phi"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Right hand polarised electric field component for every flux surface",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_1D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.amplitude": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/amplitude(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.amplitude_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/amplitude_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.amplitude_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/amplitude_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.phase": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/phase(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.phase_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/phase_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].minus.phase_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/minus/phase_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel electric field component for every flux surface",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_1D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.amplitude": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/amplitude(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.amplitude_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.amplitude_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.phase": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/phase(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.phase_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/phase_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].parallel.phase_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/parallel/phase_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Left hand polarised electric field component for every flux surface",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_1D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.amplitude": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/amplitude(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.amplitude_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/amplitude_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.amplitude_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/amplitude_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.phase": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/phase(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.phase_error_lower": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/phase_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].e_field_n_phi[:].plus.phase_error_upper": {
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_phi(i2)/plus/phase_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor": {
   "coordinates": [
@@ -4779,15 +5968,16 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Components of the electric field per toroidal mode number, averaged over the flux surface, where the averaged is weighted with the power deposition density, such that e_field = ave(e_field.power_density) / ave(power_density)",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
-  "structure_reference": "waves_profiles_1d_e_field_n_tor"
+  "structure_reference": "waves_profiles_1d_e_field_n_phi"
  },
  "waves.coherent_wave[:].profiles_1d[:].e_field_n_tor[:].minus": {
   "data_type": "STRUCTURE",
   "documentation": "Right hand polarised electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_1D",
   "units": "V.m^-1"
  },
@@ -4798,7 +5988,7 @@
   "data_type": "FLT_1D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/amplitude(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4817,7 +6007,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/amplitude_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4828,7 +6018,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/amplitude_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4839,7 +6029,7 @@
   "data_type": "FLT_1D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/phase(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4858,7 +6048,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/phase_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4869,7 +6059,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/minus/phase_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4877,7 +6067,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Parallel electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_1D",
   "units": "V.m^-1"
  },
@@ -4888,7 +6078,7 @@
   "data_type": "FLT_1D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/amplitude(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4907,7 +6097,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4918,7 +6108,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4929,7 +6119,7 @@
   "data_type": "FLT_1D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/phase(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4948,7 +6138,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/phase_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4959,7 +6149,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/parallel/phase_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4967,7 +6157,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Left hand polarised electric field component for every flux surface",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_1D",
   "units": "V.m^-1"
  },
@@ -4978,7 +6168,7 @@
   "data_type": "FLT_1D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/amplitude(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -4997,7 +6187,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/amplitude_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -5008,7 +6198,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/amplitude_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -5019,7 +6209,7 @@
   "data_type": "FLT_1D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/phase(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -5038,7 +6228,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/phase_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -5049,7 +6239,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/e_field_n_tor(i2)/plus/phase_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -5101,6 +6291,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -5109,7 +6355,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5129,7 +6376,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5141,7 +6389,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5186,6 +6435,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_density_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -5194,7 +6499,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5214,7 +6520,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5226,7 +6533,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_density_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5271,6 +6579,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -5279,7 +6643,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5299,7 +6664,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5311,7 +6677,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5356,6 +6723,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_inside_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_inside_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_inside_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_thermal_inside_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].electrons.power_inside_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -5364,7 +6787,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5384,7 +6808,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5396,7 +6821,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/electrons/power_inside_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -5608,7 +7034,7 @@
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -5899,13 +7325,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -5950,6 +7387,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -5958,7 +7451,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5978,7 +7472,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -5990,7 +7485,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6035,6 +7531,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_density_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6043,7 +7595,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6063,7 +7616,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6075,7 +7629,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_density_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6120,6 +7675,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6128,7 +7739,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6148,7 +7760,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6160,7 +7773,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6205,6 +7819,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].power_inside_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6213,7 +7883,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6233,7 +7904,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6245,7 +7917,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/power_inside_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6271,6 +7944,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -6315,6 +7999,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6323,7 +8063,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6343,7 +8084,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6355,7 +8097,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6400,6 +8143,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_density_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6408,7 +8207,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6428,7 +8228,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6440,7 +8241,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6485,6 +8287,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_fast_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6493,7 +8351,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6513,7 +8372,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6525,7 +8385,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_fast_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6570,6 +8431,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].ion[:].state[:].power_inside_thermal_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6578,7 +8495,8 @@
   "data_type": "FLT_2D",
   "documentation": "Absorbed wave power on thermal species inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6598,7 +8516,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6610,7 +8529,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/ion(i2)/state(i3)/power_inside_thermal_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6752,7 +8672,7 @@
  "waves.coherent_wave[:].profiles_1d[:].k_perpendicular": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
-   "waves.coherent_wave[:].profiles_1d[:].n_tor"
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
   ],
   "data_type": "FLT_2D",
   "documentation": "Perpendicular wave vector,  averaged over the flux surface, where the averaged is weighted with the power deposition density, such that k_perpendicular = ave(k_perpendicular.power_density) / ave(power_density), for every flux surface and every toroidal number",
@@ -6772,7 +8692,7 @@
  "waves.coherent_wave[:].profiles_1d[:].k_perpendicular_error_lower": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
-   "waves.coherent_wave[:].profiles_1d[:].n_tor"
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"k_perpendicular\"",
@@ -6784,7 +8704,7 @@
  "waves.coherent_wave[:].profiles_1d[:].k_perpendicular_error_upper": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
-   "waves.coherent_wave[:].profiles_1d[:].n_tor"
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"k_perpendicular\"",
@@ -6793,6 +8713,19 @@
   "type": "dynamic",
   "units": "V.m^-1"
  },
+ "waves.coherent_wave[:].profiles_1d[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_phi means a wave propagating in the positive phi direction",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "waves.coherent_wave[:].profiles_1d[:].n_tor": {
   "coordinates": [
    "1...N"
@@ -6800,7 +8733,8 @@
   "data_type": "INT_1D",
   "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].profiles_1d[:].power_density": {
@@ -6844,6 +8778,62 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_1d[:].power_density_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Flux surface averaged absorbed wave power density per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_density_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_density_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_density_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_1d[:].power_density_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6852,7 +8842,8 @@
   "data_type": "FLT_2D",
   "documentation": "Flux surface averaged absorbed wave power density per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6872,7 +8863,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6884,7 +8876,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_density_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -6929,6 +8922,62 @@
   "type": "dynamic",
   "units": "W"
  },
+ "waves.coherent_wave[:].profiles_1d[:].power_inside_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Total absorbed wave power (electrons + ion + fast populations) inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_inside_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_inside_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"power_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "waves.coherent_wave[:].profiles_1d[:].power_inside_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_inside_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
+   "waves.coherent_wave[:].profiles_1d[:].n_phi"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"power_inside_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
  "waves.coherent_wave[:].profiles_1d[:].power_inside_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_1d[:].grid.rho_tor_norm",
@@ -6937,7 +8986,8 @@
   "data_type": "FLT_2D",
   "documentation": "Total absorbed wave power (electrons + ion + fast populations) inside a flux surface (cumulative volume integral of the absorbed power density), per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6957,7 +9007,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"power_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6969,7 +9020,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"power_inside_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_1d(itime)/power_inside_n_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W"
  },
@@ -6994,6 +9046,308 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "e_field_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Components of the electric field per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "waves_profiles_2d_e_field_n_phi"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Right hand polarised electric field component",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_2D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.amplitude": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/amplitude(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.amplitude_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/amplitude_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.amplitude_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/amplitude_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.phase": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/phase(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.phase_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/phase_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].minus.phase_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/minus/phase_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel electric field component",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_2D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.amplitude": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/amplitude(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.amplitude_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.amplitude_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/amplitude_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.phase": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/phase(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.phase_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/phase_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].parallel.phase_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/parallel/phase_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Left hand polarised electric field component",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_amp_phase_2D",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.amplitude": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Amplitude",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/amplitude(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.amplitude_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/amplitude_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.amplitude_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/amplitude_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.amplitude_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"amplitude\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/amplitude_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.phase": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Phase",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/phase(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.phase_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/phase_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.phase_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/phase_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].e_field_n_phi[:].plus.phase_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phase\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_phi(i2)/plus/phase_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor": {
   "coordinates": [
    "waves.coherent_wave[:].profiles_2d[:].n_tor"
@@ -7001,15 +9355,16 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Components of the electric field per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
-  "structure_reference": "waves_profiles_2d_e_field_n_tor"
+  "structure_reference": "waves_profiles_2d_e_field_n_phi"
  },
  "waves.coherent_wave[:].profiles_2d[:].e_field_n_tor[:].minus": {
   "data_type": "STRUCTURE",
   "documentation": "Right hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_2D",
   "units": "V.m^-1"
  },
@@ -7021,7 +9376,7 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/amplitude(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7041,7 +9396,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/amplitude_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7053,7 +9408,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/amplitude_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7065,7 +9420,7 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/phase(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7085,7 +9440,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/phase_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7097,7 +9452,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/minus/phase_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7105,7 +9460,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Parallel electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_2D",
   "units": "V.m^-1"
  },
@@ -7117,7 +9472,7 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/amplitude(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7137,7 +9492,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7149,7 +9504,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/amplitude_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7161,7 +9516,7 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/phase(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7181,7 +9536,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/phase_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7193,7 +9548,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/parallel/phase_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7201,7 +9556,7 @@
   "data_type": "STRUCTURE",
   "documentation": "Left hand polarised electric field component",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "structure_reference": "waves_CPX_amp_phase_2D",
   "units": "V.m^-1"
  },
@@ -7213,7 +9568,7 @@
   "data_type": "FLT_2D",
   "documentation": "Amplitude",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/amplitude(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7233,7 +9588,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/amplitude_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7245,7 +9600,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"amplitude\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/amplitude_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7257,7 +9612,7 @@
   "data_type": "FLT_2D",
   "documentation": "Phase",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/phase(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7277,7 +9632,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/phase_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7289,7 +9644,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"phase\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/e_field_n_tor(i2)/plus/phase_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -7344,6 +9699,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_fast_n_tor": {
   "coordinates": [
    "1...N",
@@ -7353,7 +9767,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -7374,7 +9789,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -7387,7 +9803,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_fast_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -7435,6 +9852,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].electrons.power_density_thermal_n_tor": {
   "coordinates": [
    "1...N",
@@ -7444,7 +9920,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -7465,7 +9942,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -7478,7 +9956,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/electrons/power_density_thermal_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8049,13 +10528,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8103,6 +10593,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_fast_n_tor": {
   "coordinates": [
    "1...N",
@@ -8112,7 +10661,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8133,7 +10683,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8146,7 +10697,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_fast_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8194,6 +10746,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].power_density_thermal_n_tor": {
   "coordinates": [
    "1...N",
@@ -8203,7 +10814,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8224,7 +10836,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8237,7 +10850,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/power_density_thermal_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8263,6 +10877,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8310,6 +10935,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_fast_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_fast_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_fast_n_tor": {
   "coordinates": [
    "1...N",
@@ -8319,7 +11003,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the fast species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8340,7 +11025,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8353,7 +11039,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_fast_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_fast_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8401,6 +11088,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_thermal_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_thermal_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].ion[:].state[:].power_density_thermal_n_tor": {
   "coordinates": [
    "1...N",
@@ -8410,7 +11156,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density on the thermal species, per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8431,7 +11178,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8444,7 +11192,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_thermal_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/ion(i2)/state(i3)/power_density_thermal_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8583,6 +11332,19 @@
   "type": "dynamic",
   "units": "Elementary Charge Unit"
  },
+ "waves.coherent_wave[:].profiles_2d[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_phi means a wave propagating in the positive phi direction",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "waves.coherent_wave[:].profiles_2d[:].n_tor": {
   "coordinates": [
    "1...N"
@@ -8590,7 +11352,8 @@
   "data_type": "INT_1D",
   "documentation": "Toroidal mode numbers, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/n_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "waves.coherent_wave[:].profiles_2d[:].power_density": {
@@ -8637,6 +11400,65 @@
   "type": "dynamic",
   "units": "W.m^-3"
  },
+ "waves.coherent_wave[:].profiles_2d[:].power_density_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Absorbed wave power density per toroidal mode number",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_phi(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].power_density_n_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].power_density_n_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_phi_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
+ "waves.coherent_wave[:].profiles_2d[:].power_density_n_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "power_density_n_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "waves.coherent_wave[:].profiles_2d[:].n_phi"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"power_density_n_phi\"",
+  "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_phi_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W.m^-3"
+ },
  "waves.coherent_wave[:].profiles_2d[:].power_density_n_tor": {
   "coordinates": [
    "1...N",
@@ -8646,7 +11468,8 @@
   "data_type": "FLT_3D",
   "documentation": "Absorbed wave power density per toroidal mode number",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_tor(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8667,7 +11490,8 @@
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_tor_error_lower(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },
@@ -8680,7 +11504,8 @@
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"power_density_n_tor\"",
   "full_path": "waves/coherent_wave(i1)/profiles_2d(itime)/power_density_n_tor_error_upper(:,:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "W.m^-3"
  },

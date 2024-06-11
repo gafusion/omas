@@ -2,7 +2,7 @@
  "pellets": {
   "documentation": "Description of pellets launched into the plasma",
   "full_path": "pellets",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "2"
@@ -1470,7 +1470,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the neutral molecule (e.g. H2, D2, T2, N2, ...)",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/propellant_gas/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "pellets.time_slice[:].pellet[:].propellant_gas.molecules_n": {
@@ -1504,6 +1505,16 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "-"
+ },
+ "pellets.time_slice[:].pellet[:].propellant_gas.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the neutral molecule (e.g. H2, D2, T2, N2, ...)",
+  "full_path": "pellets/time_slice(itime)/pellet(i1)/propellant_gas/name",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
  },
  "pellets.time_slice[:].pellet[:].shape": {
   "data_type": "STRUCTURE",
@@ -1692,6 +1703,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, ...)",
   "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "pellets.time_slice[:].pellet[:].species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, ...)",
+  "full_path": "pellets/time_slice(itime)/pellet(i1)/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },

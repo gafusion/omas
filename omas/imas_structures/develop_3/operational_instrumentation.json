@@ -1168,7 +1168,7 @@
  },
  "operational_instrumentation.sensor[:].strain_rosette.data": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "operational_instrumentation.sensor[:].strain_rosette.time"
   ],
   "data_type": "FLT_2D",
@@ -1189,7 +1189,7 @@
  },
  "operational_instrumentation.sensor[:].strain_rosette.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "operational_instrumentation.sensor[:].strain_rosette.time"
   ],
   "data_type": "FLT_2D",
@@ -1202,7 +1202,7 @@
  },
  "operational_instrumentation.sensor[:].strain_rosette.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...3",
    "operational_instrumentation.sensor[:].strain_rosette.time"
   ],
   "data_type": "FLT_2D",

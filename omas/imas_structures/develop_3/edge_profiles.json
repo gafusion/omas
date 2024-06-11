@@ -2,7 +2,7 @@
  "edge_profiles": {
   "documentation": "Edge plasma profiles (includes the scrape-off layer and possibly part of the confined plasma)",
   "full_path": "edge_profiles",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -444,6 +444,115 @@
   "type": "dynamic",
   "units": "V.m^-1"
  },
+ "edge_profiles.ggd[:].e_field[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "edge_profiles.ggd[:].e_field[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/e_field(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
  "edge_profiles.ggd[:].e_field[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -712,7 +821,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -724,7 +834,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -744,7 +855,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -756,7 +868,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -775,7 +888,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -786,7 +900,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/e_field(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1861,6 +1976,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].electrons.velocity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].electrons.velocity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -2129,7 +2353,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2141,7 +2366,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2161,7 +2387,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2173,7 +2400,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2192,7 +2420,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2203,7 +2432,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/electrons/velocity(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2763,13 +2993,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_profiles.ggd[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -3690,6 +3931,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -4333,6 +4585,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].ion[:].state[:].velocity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -4601,7 +4962,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4613,7 +4975,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4633,7 +4996,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4645,7 +5009,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4664,7 +5029,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4675,7 +5041,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -4966,6 +5333,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].ion[:].state[:].velocity_diamagnetic[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -5234,7 +5710,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5246,7 +5723,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5266,7 +5744,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5278,7 +5757,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5297,7 +5777,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5308,7 +5789,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5599,6 +6081,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].ion[:].state[:].velocity_exb[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -5867,7 +6458,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5879,7 +6471,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5899,7 +6492,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5911,7 +6505,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5930,7 +6525,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -5941,7 +6537,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/state(i2)/velocity_exb(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -6668,6 +7265,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].ion[:].velocity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].ion[:].velocity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -6936,7 +7642,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -6948,7 +7655,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -6968,7 +7676,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -6980,7 +7689,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -6999,7 +7709,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -7010,7 +7721,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/ion(i1)/velocity(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -7333,6 +8045,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_anomalous[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_anomalous[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_anomalous[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -7601,7 +8422,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7613,7 +8435,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7633,7 +8456,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7645,7 +8469,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7664,7 +8489,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7675,7 +8501,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_anomalous(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -7966,6 +8793,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_diamagnetic[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_diamagnetic[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -8234,7 +9170,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8246,7 +9183,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8266,7 +9204,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8278,7 +9217,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8297,7 +9237,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8308,7 +9249,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_diamagnetic(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8599,6 +9541,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_heat_viscosity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_heat_viscosity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -8867,7 +9918,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8879,7 +9931,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8899,7 +9952,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8911,7 +9965,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8930,7 +9985,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -8941,7 +9997,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_heat_viscosity(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9232,6 +10289,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_inertial[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_inertial[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_inertial[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -9500,7 +10666,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9512,7 +10679,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9532,7 +10700,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9544,7 +10713,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9563,7 +10733,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9574,7 +10745,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_inertial(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -9865,6 +11037,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_ion_neutral_friction[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_ion_neutral_friction[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -10133,7 +11414,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10145,7 +11427,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10165,7 +11448,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10177,7 +11461,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10196,7 +11481,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10207,7 +11493,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_ion_neutral_friction(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10610,6 +11897,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_parallel_viscosity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_parallel_viscosity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -10878,7 +12274,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10890,7 +12287,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10910,7 +12308,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10922,7 +12321,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10941,7 +12341,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -10952,7 +12353,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_parallel_viscosity(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11243,6 +12645,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_perpendicular_viscosity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_perpendicular_viscosity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -11511,7 +13022,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11523,7 +13035,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11543,7 +13056,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11555,7 +13069,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11574,7 +13089,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11585,7 +13101,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_perpendicular_viscosity(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -11876,6 +13393,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_pfirsch_schlueter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_pfirsch_schlueter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -12144,7 +13770,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12156,7 +13783,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12176,7 +13804,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12188,7 +13817,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12207,7 +13837,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12218,7 +13849,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_pfirsch_schlueter(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12510,6 +14142,115 @@
   "type": "dynamic",
   "units": "A.m^-2"
  },
+ "edge_profiles.ggd[:].j_total[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "edge_profiles.ggd[:].j_total[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/j_total(i1)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "edge_profiles.ggd[:].j_total[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -12778,7 +14519,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12790,7 +14532,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12810,7 +14553,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12822,7 +14566,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12841,7 +14586,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -12852,7 +14598,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/j_total(i1)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -13530,13 +15277,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_profiles.ggd[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple state calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -14339,6 +16097,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -15010,6 +16779,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -15278,7 +17156,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15290,7 +17169,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15310,7 +17190,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15322,7 +17203,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15341,7 +17223,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15352,7 +17235,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15643,6 +17527,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity_diamagnetic[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -15911,7 +17904,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15923,7 +17917,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15943,7 +17938,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15955,7 +17951,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15974,7 +17971,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -15985,7 +17983,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_diamagnetic(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16276,6 +18275,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].neutral[:].state[:].velocity_exb[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -16544,7 +18652,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16556,7 +18665,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16576,7 +18686,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16588,7 +18699,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16607,7 +18719,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -16618,7 +18731,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/state(i2)/velocity_exb(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17059,6 +19173,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_profiles.ggd[:].neutral[:].velocity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_profiles.ggd[:].neutral[:].velocity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -17327,7 +19550,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17339,7 +19563,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17359,7 +19584,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17371,7 +19597,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17390,7 +19617,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -17401,7 +19629,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_profiles/ggd(itime)/neutral(i1)/velocity(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18612,6 +20841,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
   "full_path": "edge_profiles/ggd_fast(itime)/ion(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.ggd_fast[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H+, D+, T+, He+2, C+, D2, DT, CD4, ...)",
+  "full_path": "edge_profiles/ggd_fast(itime)/ion(i1)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -22702,13 +24942,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "edge_profiles/profiles_1d(itime)/ion(i1)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_profiles.profiles_1d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "edge_profiles/profiles_1d(itime)/ion(i1)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "edge_profiles/profiles_1d(itime)/ion(i1)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -23492,6 +25743,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_profiles/profiles_1d(itime)/ion(i1)/state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "edge_profiles/profiles_1d(itime)/ion(i1)/state(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -25181,6 +27443,59 @@
   "type": "dynamic",
   "units": "A/m^2"
  },
+ "edge_profiles.profiles_1d[:].j_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Total toroidal current density = average(J_phi/R) / average(1/R)",
+  "full_path": "edge_profiles/profiles_1d(itime)/j_phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
+ "edge_profiles.profiles_1d[:].j_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"j_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/j_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].j_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/j_phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
+ "edge_profiles.profiles_1d[:].j_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/j_phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
  "edge_profiles.profiles_1d[:].j_tor": {
   "coordinates": [
    "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
@@ -25188,7 +27503,8 @@
   "data_type": "FLT_1D",
   "documentation": "Total toroidal current density = average(J_Tor/R) / average(1/R)",
   "full_path": "edge_profiles/profiles_1d(itime)/j_tor(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -25207,7 +27523,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_tor\"",
   "full_path": "edge_profiles/profiles_1d(itime)/j_tor_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -25218,7 +27535,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_tor\"",
   "full_path": "edge_profiles/profiles_1d(itime)/j_tor_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -25304,6 +27622,59 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_profiles.profiles_1d[:].momentum_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
+  "full_path": "edge_profiles/profiles_1d(itime)/momentum_phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "edge_profiles.profiles_1d[:].momentum_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/momentum_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].momentum_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"momentum_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/momentum_phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "edge_profiles.profiles_1d[:].momentum_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"momentum_phi\"",
+  "full_path": "edge_profiles/profiles_1d(itime)/momentum_phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
  "edge_profiles.profiles_1d[:].momentum_tor": {
   "coordinates": [
    "edge_profiles.profiles_1d[:].grid.rho_pol_norm"
@@ -25311,7 +27682,8 @@
   "data_type": "FLT_1D",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
   "full_path": "edge_profiles/profiles_1d(itime)/momentum_tor(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -25330,7 +27702,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "edge_profiles/profiles_1d(itime)/momentum_tor_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -25341,7 +27714,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "edge_profiles/profiles_1d(itime)/momentum_tor_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -25689,13 +28063,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
   "full_path": "edge_profiles/profiles_1d(itime)/neutral(i1)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_profiles.profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_profiles/profiles_1d(itime)/neutral(i1)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
+  "full_path": "edge_profiles/profiles_1d(itime)/neutral(i1)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -26008,6 +28393,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "edge_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_profiles.profiles_1d[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "edge_profiles/profiles_1d(itime)/neutral(i1)/state(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },

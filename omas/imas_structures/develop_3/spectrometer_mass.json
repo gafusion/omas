@@ -2,7 +2,7 @@
  "spectrometer_mass": {
   "documentation": "Mass spectrometer diagnostic",
   "full_path": "spectrometer_mass",
-  "lifecycle_last_change": "3.39.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.29.0",
   "maxoccur": "4"
@@ -327,6 +327,76 @@
   "full_path": "spectrometer_mass/code/version",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "spectrometer_mass.detector_voltage": {
+  "data_type": "FLT_0D",
+  "documentation": "Voltage applied on the microchannel plate detector",
+  "full_path": "spectrometer_mass/detector_voltage",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.detector_voltage_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.detector_voltage_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_lower",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.detector_voltage_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_upper",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.emission_current": {
+  "data_type": "FLT_0D",
+  "documentation": "Emission current in the spectrometer filament",
+  "full_path": "spectrometer_mass/emission_current",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
+ },
+ "spectrometer_mass.emission_current_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.emission_current_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_lower",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
+ },
+ "spectrometer_mass.emission_current_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_upper",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
  },
  "spectrometer_mass.identifier": {
   "data_type": "STR_0D",
