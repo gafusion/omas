@@ -8,7 +8,7 @@ from .omas_core import ODS, ODC, force_imas_type
 
 
 def identify_imas_type(value):
-    if isinstance(value, (str, numpy.string_, numpy.unicode_, numpy.str_)):
+    if isinstance(value, (str, numpy.bytes_, numpy.unicode_, numpy.str_)):
         dtype = dict(type='50 (CHAR_DATA)', dim=1, size=(len(value),))
     elif isinstance(value, (float, numpy.floating)):
         dtype = dict(type='52 (DOUBLE_DATA)', dim=0)
