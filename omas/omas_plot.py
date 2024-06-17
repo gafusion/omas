@@ -3250,8 +3250,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
-    r = [[numpy.NaN]] * nc
-    z = [[numpy.NaN]] * nc
+    r = [[numpy.nan]] * nc
+    z = [[numpy.nan]] * nc
     for i in range(nc):
         rs = ods['charge_exchange.channel'][i]['position.r.data']
         zs = ods['charge_exchange.channel'][i]['position.z.data']
@@ -3618,7 +3618,7 @@ def position_control_overlay(
     b = ods['pulse_schedule.position_control.boundary_outline']
     x = ods['pulse_schedule.position_control.x_point']
     s = ods['pulse_schedule.position_control.strike_point']
-    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    ikw = dict(bounds_error=False, fill_value=np.nan)
     try:
         nbp = np.shape(b['[:].r.reference'])[0]
     except (IndexError, ValueError):
@@ -3656,7 +3656,7 @@ def position_control_overlay(
             rxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)]
             zxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)]
     else:
-        rxm = zxm = np.NaN
+        rxm = zxm = np.nan
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 

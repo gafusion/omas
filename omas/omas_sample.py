@@ -586,19 +586,19 @@ def langmuir_probes(ods):
     ods['langmuir_probes.embedded.1.name'] = 'p23'
     ods['langmuir_probes.embedded.1.position.r'] = 0.9
     ods['langmuir_probes.embedded.1.position.z'] = -0.9
-    ods['langmuir_probes.embedded.1.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.1.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.2.identifier'] = -2
     ods['langmuir_probes.embedded.2.name'] = 'blah'
     ods['langmuir_probes.embedded.2.position.r'] = 1.5
     ods['langmuir_probes.embedded.2.position.z'] = -1.25
-    ods['langmuir_probes.embedded.2.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.2.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.3.identifier'] = -3
     ods['langmuir_probes.embedded.3.name'] = 'donkey!'
     ods['langmuir_probes.embedded.3.position.r'] = 1.525
     ods['langmuir_probes.embedded.3.position.z'] = -1.25
-    ods['langmuir_probes.embedded.3.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.3.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.4.identifier'] = -4
     ods['langmuir_probes.embedded.4.name'] = 'zzz'
@@ -610,7 +610,7 @@ def langmuir_probes(ods):
     ods['langmuir_probes.embedded.5.name'] = "it's just a test"
     ods['langmuir_probes.embedded.5.position.r'] = 2.45
     ods['langmuir_probes.embedded.5.position.z'] = 0.25
-    ods['langmuir_probes.embedded.5.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.5.position.phi'] = numpy.nan
 
     return ods
 
@@ -691,10 +691,10 @@ def pulse_schedule(ods):
             bdry[i]['r.reference_name'] = bdry[i]['z.reference_name'] = 'seg{}'.format(i)
 
         strk = ods_['pulse_schedule.position_control.strike_point']
-        strk[0]['r.reference'] = numpy.array([numpy.NaN, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, numpy.NaN, numpy.NaN])
-        strk[0]['z.reference'] = numpy.array([numpy.NaN, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, numpy.NaN, numpy.NaN])
-        strk[1]['r.reference'] = numpy.array([numpy.NaN, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, numpy.NaN, numpy.NaN])
-        strk[1]['z.reference'] = numpy.array([numpy.NaN, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, numpy.NaN, numpy.NaN])
+        strk[0]['r.reference'] = numpy.array([numpy.nan, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, numpy.nan, numpy.nan])
+        strk[0]['z.reference'] = numpy.array([numpy.nan, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, numpy.nan, numpy.nan])
+        strk[1]['r.reference'] = numpy.array([numpy.nan, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, numpy.nan, numpy.nan])
+        strk[1]['z.reference'] = numpy.array([numpy.nan, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, numpy.nan, numpy.nan])
 
         for i in range(2):
             strk[i]['r.reference_type'] = strk[i]['z.reference_type'] = 1
@@ -703,8 +703,8 @@ def pulse_schedule(ods):
         xpt = ods_['pulse_schedule.position_control.x_point']
         xpt[0]['r.reference'] = numpy.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
         xpt[0]['z.reference'] = numpy.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
-        xpt[1]['r.reference'] = numpy.array([numpy.NaN] * len(t))
-        xpt[1]['z.reference'] = numpy.array([numpy.NaN] * len(t))
+        xpt[1]['r.reference'] = numpy.array([numpy.nan] * len(t))
+        xpt[1]['z.reference'] = numpy.array([numpy.nan] * len(t))
 
         for i in range(2):
             xpt[i]['r.reference_type'] = xpt[i]['z.reference_type'] = 1

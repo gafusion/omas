@@ -153,7 +153,7 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse):
                     identifier = '{}{:02d}'.format(corner.upper(), probe_number)
                     ods['langmuir_probes.embedded'][j]['position.r'] = r[i]
                     ods['langmuir_probes.embedded'][j]['position.z'] = z[i]
-                    ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                    ods['langmuir_probes.embedded'][j]['position.phi'] = np.nan  # Didn't find this in MDSplus
                     ods['langmuir_probes.embedded'][j]['identifier'] = identifier
                     ods['langmuir_probes.embedded'][j]['name'] = identifier
                     j += 1
