@@ -2,7 +2,6 @@ import os
 import numpy as np
 from inspect import unwrap
 
-from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
@@ -571,7 +570,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
-        if iterable(xfrac):
+        if np.iterable(xfrac):
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         elif type(xfrac) == int or type(xfrac) == float:
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
