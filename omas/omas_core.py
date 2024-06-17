@@ -57,7 +57,7 @@ def force_imas_type(value):
             value = value.values
     if isinstance(value, numpy.ndarray) and not len(value.shape):
         value = value.item()
-    if isinstance(value, (numpy.bytes_, numpy.unicode_, numpy.str_)):
+    if isinstance(value, (numpy.bytes_, numpy.str_)):
         value = value.item()
     elif isinstance(value, (float, numpy.floating)):
         value = float(value)
