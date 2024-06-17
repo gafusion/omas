@@ -16,7 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.6', '3.7', '3.8', '3.10', '3.11']
+    # 3.9 no longer works because pint does not support it https://github.com/hgrecco/pint/issues/1974#issuecomment-2172693837
     # 3.12 does not yet work because numpy removed numpy.distutils that pygacode relies on
 
     steps:
