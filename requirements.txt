@@ -3,6 +3,7 @@
 # usage: pip install -r requirements.txt
 
 numpy>=1.16.1                                      # required
+numpy<2;python_version=='3.9'                      # required to use pint
 uncertainties                                      # required
 pint                                               # required
 netCDF4                                            # required
