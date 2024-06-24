@@ -2,7 +2,7 @@
  "mhd": {
   "documentation": "Magnetohydrodynamic activity, description of perturbed fields and profiles using the Generic Grid Description.",
   "full_path": "mhd",
-  "lifecycle_last_change": "3.37.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.20.0",
   "maxoccur": "2"
@@ -135,6 +135,120 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "mhd.ggd[:].a_field_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "a_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Toroidal component of the magnetic vector potential, given on various grid subsets",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].coefficients": {
+  "coordinates": [
+   "mhd.ggd[:].a_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].a_field_phi[:].coefficients_error_lower": {
+  "coordinates": [
+   "mhd.ggd[:].a_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].coefficients_error_upper": {
+  "coordinates": [
+   "mhd.ggd[:].a_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].a_field_phi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].a_field_phi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].a_field_phi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "mhd.ggd[:].a_field_phi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "mhd/ggd(itime)/a_field_phi(i1)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
  "mhd.ggd[:].a_field_r": {
   "coordinates": [
    "1...N"
@@ -253,7 +367,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the magnetic vector potential, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "T.m"
@@ -266,7 +381,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -286,7 +401,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -298,7 +413,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -306,14 +421,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/grid_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].a_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/grid_subset_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].a_field_tor[:].values": {
@@ -323,7 +438,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/values(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -342,7 +457,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -353,7 +468,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "mhd/ggd(itime)/a_field_tor(i1)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -467,6 +582,120 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T.m"
+ },
+ "mhd.ggd[:].b_field_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "b_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Toroidal component of the magnetic field, given on various grid subsets",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].coefficients": {
+  "coordinates": [
+   "mhd.ggd[:].b_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].b_field_phi[:].coefficients_error_lower": {
+  "coordinates": [
+   "mhd.ggd[:].b_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].coefficients_error_upper": {
+  "coordinates": [
+   "mhd.ggd[:].b_field_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].b_field_phi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].b_field_phi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].b_field_phi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "mhd.ggd[:].b_field_phi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "mhd/ggd(itime)/b_field_phi(i1)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
  },
  "mhd.ggd[:].b_field_r": {
   "coordinates": [
@@ -586,7 +815,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the magnetic field, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "T"
@@ -599,7 +829,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -619,7 +849,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -631,7 +861,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -639,14 +869,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/grid_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].b_field_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/grid_subset_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].b_field_tor[:].values": {
@@ -656,7 +886,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/values(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -675,7 +905,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -686,7 +916,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "mhd/ggd(itime)/b_field_tor(i1)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "T"
  },
@@ -919,6 +1149,120 @@
   "type": "dynamic",
   "units": "eV"
  },
+ "mhd.ggd[:].j_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Toroidal component of the current density, given on various grid subsets",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].coefficients": {
+  "coordinates": [
+   "mhd.ggd[:].j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].j_phi[:].coefficients_error_lower": {
+  "coordinates": [
+   "mhd.ggd[:].j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].coefficients_error_upper": {
+  "coordinates": [
+   "mhd.ggd[:].j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].j_phi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].j_phi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].j_phi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "mhd.ggd[:].j_phi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "mhd/ggd(itime)/j_phi(i1)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "mhd.ggd[:].j_r": {
   "coordinates": [
    "1...N"
@@ -1037,7 +1381,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the current density, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/j_tor(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "A.m^-2"
@@ -1050,7 +1395,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1070,7 +1415,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1082,7 +1427,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1090,14 +1435,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/grid_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].j_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/grid_subset_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].j_tor[:].values": {
@@ -1107,7 +1452,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/values(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1126,7 +1471,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1137,7 +1482,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "mhd/ggd(itime)/j_tor(i1)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -1149,7 +1494,8 @@
   "documentation": "Toroidal component of the current density multiplied by the local major radius, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)",
   "introduced_after_version": "3.36.0",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "A.m^-1"
@@ -1162,7 +1508,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1182,7 +1528,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1194,7 +1540,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1202,14 +1548,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/grid_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].j_tor_r[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/grid_subset_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].j_tor_r[:].values": {
@@ -1219,7 +1565,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/values(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1238,7 +1584,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1249,7 +1595,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "mhd/ggd(itime)/j_tor_r(i1)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "A.m^-1"
  },
@@ -1808,6 +2154,121 @@
   "type": "dynamic",
   "units": "Wb"
  },
+ "mhd.ggd[:].r_j_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "j_tor_r",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Toroidal component of the current density multiplied by the local major radius, given on various grid subsets",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)",
+  "introduced_after_version": "3.36.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].coefficients": {
+  "coordinates": [
+   "mhd.ggd[:].r_j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].r_j_phi[:].coefficients_error_lower": {
+  "coordinates": [
+   "mhd.ggd[:].r_j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].coefficients_error_upper": {
+  "coordinates": [
+   "mhd.ggd[:].r_j_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].r_j_phi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].r_j_phi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].r_j_phi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
+ "mhd.ggd[:].r_j_phi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "mhd/ggd(itime)/r_j_phi(i1)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-1"
+ },
  "mhd.ggd[:].t_i_average": {
   "coordinates": [
    "1...N"
@@ -2150,6 +2611,120 @@
   "type": "dynamic",
   "units": "m.s^-1.T^-1"
  },
+ "mhd.ggd[:].velocity_phi": {
+  "change_nbc_description": "aos_renamed",
+  "change_nbc_previous_name": "velocity_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Toroidal component of the plasma velocity, given on various grid subsets",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "generic_grid_scalar",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].coefficients": {
+  "coordinates": [
+   "mhd.ggd[:].velocity_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].velocity_phi[:].coefficients_error_lower": {
+  "coordinates": [
+   "mhd.ggd[:].velocity_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].coefficients_error_upper": {
+  "coordinates": [
+   "mhd.ggd[:].velocity_phi[:].values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].velocity_phi[:].grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].velocity_phi[:].values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "mhd.ggd[:].velocity_phi[:].values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "mhd.ggd[:].velocity_phi[:].values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "mhd/ggd(itime)/velocity_phi(i1)/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "mhd.ggd[:].velocity_r": {
   "coordinates": [
    "1...N"
@@ -2268,7 +2843,8 @@
   "data_type": "STRUCT_ARRAY",
   "documentation": "Toroidal component of the plasma velocity, given on various grid subsets",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "maxoccur": "unbounded",
   "structure_reference": "generic_grid_scalar",
   "units": "m.s^-1"
@@ -2281,7 +2857,7 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2301,7 +2877,7 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2313,7 +2889,7 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"coefficients\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2321,14 +2897,14 @@
   "data_type": "INT_0D",
   "documentation": "Index of the grid used to represent this quantity",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/grid_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].velocity_tor[:].grid_subset_index": {
   "data_type": "INT_0D",
   "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/grid_subset_index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic"
  },
  "mhd.ggd[:].velocity_tor[:].values": {
@@ -2338,7 +2914,7 @@
   "data_type": "FLT_1D",
   "documentation": "One scalar value is provided per element in the grid subset.",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/values(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2357,7 +2933,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/values_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -2368,7 +2944,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"values\"",
   "full_path": "mhd/ggd(itime)/velocity_tor(i1)/values_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "dynamic",
   "units": "m.s^-1"
  },

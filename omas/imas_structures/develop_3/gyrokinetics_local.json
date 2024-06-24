@@ -2,9 +2,9 @@
  "gyrokinetics_local": {
   "documentation": "Description of a local gyrokinetic simulation (delta-f, flux-tube). All quantities within this IDS are normalised (apart from time and from the normalizing quantities structure), thus independent of rhostar, consistently with the local approximation and a spectral representation is assumed in the perpendicular plane (i.e. homogeneous turbulence).",
   "full_path": "gyrokinetics_local",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
-  "lifecycle_version": "3.41.0",
+  "lifecycle_version": "3.40.0",
   "maxoccur": "1",
   "url": "https://gitlab.com/gkdb/gkdb/raw/master/doc/general/IOGKDB.pdf"
  },
@@ -2865,6 +2865,56 @@
   "type": "constant",
   "units": "-"
  },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter.pressure": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Normalised pressure, defined as the sum of pressure_parallel and pressure_perpendicular",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter.pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter.pressure_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure_error_lower(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter.pressure_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure_error_upper(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter.pressure_parallel": {
   "coordinates": [
    "gyrokinetics_local.species",
@@ -2872,7 +2922,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised parallel temperature",
+  "documentation": "Normalised parallel pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure_parallel(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -2919,7 +2969,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised perpendicular temperature",
+  "documentation": "Normalised perpendicular pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter/pressure_perpendicular(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3201,6 +3251,56 @@
   "type": "constant",
   "units": "-"
  },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_0.pressure": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Normalised pressure, defined as the sum of pressure_parallel and pressure_perpendicular",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_0.pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_0.pressure_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure_error_lower(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_0.pressure_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure_error_upper(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_0.pressure_parallel": {
   "coordinates": [
    "gyrokinetics_local.species",
@@ -3208,7 +3308,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised parallel temperature",
+  "documentation": "Normalised parallel pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure_parallel(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3255,7 +3355,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised perpendicular temperature",
+  "documentation": "Normalised perpendicular pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_0/pressure_perpendicular(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3537,6 +3637,56 @@
   "type": "constant",
   "units": "-"
  },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_1.pressure": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Normalised pressure, defined as the sum of pressure_parallel and pressure_perpendicular",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_1.pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_1.pressure_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure_error_lower(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_1.pressure_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure_error_upper(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_gyrocenter_bessel_1.pressure_parallel": {
   "coordinates": [
    "gyrokinetics_local.species",
@@ -3544,7 +3694,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised parallel temperature",
+  "documentation": "Normalised parallel pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure_parallel(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3591,7 +3741,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised perpendicular temperature",
+  "documentation": "Normalised perpendicular pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_gyrocenter_bessel_1/pressure_perpendicular(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3873,6 +4023,56 @@
   "type": "constant",
   "units": "-"
  },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_particle.pressure": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Normalised pressure, defined as the sum of pressure_parallel and pressure_perpendicular",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_particle.pressure_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_particle.pressure_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Lower error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure_error_lower(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_particle.pressure_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].angle_pol",
+   "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
+  ],
+  "data_type": "CPX_3D",
+  "documentation": "Upper error for \"pressure\"",
+  "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure_error_upper(:,:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
  "gyrokinetics_local.linear.wavevector[:].eigenmode[:].moments_norm_particle.pressure_parallel": {
   "coordinates": [
    "gyrokinetics_local.species",
@@ -3880,7 +4080,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised parallel temperature",
+  "documentation": "Normalised parallel pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure_parallel(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -3927,7 +4127,7 @@
    "gyrokinetics_local.linear.wavevector[:].eigenmode[:].time_norm"
   ],
   "data_type": "CPX_3D",
-  "documentation": "Normalised perpendicular temperature",
+  "documentation": "Normalised perpendicular pressure",
   "full_path": "gyrokinetics_local/linear/wavevector(i1)/eigenmode(i2)/moments_norm_particle/pressure_perpendicular(:,:,:)",
   "lifecycle_status": "alpha",
   "type": "constant",
@@ -4211,10 +4411,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "gyrokinetics_local.model.include_full_curvature_drift": {
+ "gyrokinetics_local.model.use_mhd_approximation": {
   "data_type": "INT_0D",
-  "documentation": "Flag = 1 if all contributions to the curvature drift are included (including beta_prime), 0 otherwise. Neglecting the beta_prime contribution (Flag=0) is only recommended together with the neglect of parallel magnetic field fluctuations",
-  "full_path": "gyrokinetics_local/model/include_full_curvature_drift",
+  "documentation": "Flag = 1 if the geometric dependence of the grad-B drift is approximated to be that of the curvature drift (including the pressure gradient contribution), 0 otherwise. Using this approximation (Flag=1) is only recommended together with the neglect of parallel magnetic field fluctuations",
+  "full_path": "gyrokinetics_local/model/use_mhd_approximation",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8752,6 +8953,1150 @@
   "type": "constant",
   "units": "-"
  },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum": {
+  "data_type": "STRUCTURE",
+  "documentation": "3D fluxes (flux surface averaged, summed over kx)",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "gyrokinetics_fluxes_nl_3d_sum_kx"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.energy_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/energy_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_parallel_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_parallel_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.momentum_tor_perpendicular_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/momentum_tor_perpendicular_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum.particles_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum/particles_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame": {
+  "data_type": "STRUCTURE",
+  "documentation": "3D fluxes (flux surface averaged, summed over kx)",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "gyrokinetics_fluxes_nl_3d_sum_kx"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the normalised energy flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.energy_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"energy_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/energy_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the parallel component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_parallel_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_parallel_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_parallel_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the perpendicular component of the normalised toroidal momentum flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.momentum_tor_perpendicular_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"momentum_tor_perpendicular_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/momentum_tor_perpendicular_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_a_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel electromagnetic potential to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_a_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_a_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_a_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_a_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_a_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_a_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_a_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_a_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_b_field_parallel": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed parallel magnetic field to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_b_field_parallel(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_b_field_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_b_field_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_b_field_parallel_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_b_field_parallel_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_b_field_parallel_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_b_field_parallel\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_b_field_parallel_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_phi_potential": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Contribution of the perturbed electrostatic potential to the normalised particle flux",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_phi_potential(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_phi_potential_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_phi_potential_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_phi_potential_error_lower": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_phi_potential_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
+ "gyrokinetics_local.non_linear.fluxes_3d_k_x_sum_rotating_frame.particles_phi_potential_error_upper": {
+  "coordinates": [
+   "gyrokinetics_local.species",
+   "gyrokinetics_local.non_linear.binormal_wavevector_norm",
+   "gyrokinetics_local.non_linear.time_norm"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"particles_phi_potential\"",
+  "full_path": "gyrokinetics_local/non_linear/fluxes_3d_k_x_sum_rotating_frame/particles_phi_potential_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "-"
+ },
  "gyrokinetics_local.non_linear.fluxes_3d_rotating_frame": {
   "data_type": "STRUCTURE",
   "documentation": "3D fluxes (time and flux surface averaged) in the rotating frame",
@@ -11960,11 +13305,56 @@
   "lifecycle_status": "alpha",
   "structure_reference": "gyrokinetics_input_normalizing"
  },
+ "gyrokinetics_local.normalizing_quantities.b_field_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal magnetic field at major radius r",
+  "full_path": "gyrokinetics_local/normalizing_quantities/b_field_phi",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "T"
+ },
+ "gyrokinetics_local.normalizing_quantities.b_field_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"b_field_phi\"",
+  "full_path": "gyrokinetics_local/normalizing_quantities/b_field_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "gyrokinetics_local.normalizing_quantities.b_field_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"b_field_phi\"",
+  "full_path": "gyrokinetics_local/normalizing_quantities/b_field_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "T"
+ },
+ "gyrokinetics_local.normalizing_quantities.b_field_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"b_field_phi\"",
+  "full_path": "gyrokinetics_local/normalizing_quantities/b_field_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "T"
+ },
  "gyrokinetics_local.normalizing_quantities.b_field_tor": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal magnetic field at major radius r",
   "full_path": "gyrokinetics_local/normalizing_quantities/b_field_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant",
   "units": "T"
  },
@@ -11980,7 +13370,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"b_field_tor\"",
   "full_path": "gyrokinetics_local/normalizing_quantities/b_field_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant",
   "units": "T"
  },
@@ -11988,7 +13379,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"b_field_tor\"",
   "full_path": "gyrokinetics_local/normalizing_quantities/b_field_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant",
   "units": "T"
  },
@@ -12229,7 +13621,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_gradient_norm": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Effective potential energy determining the poloidal variation of the species background density",
@@ -12249,7 +13641,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_gradient_norm_error_lower": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"potential_energy_gradient_norm\"",
@@ -12261,7 +13653,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_gradient_norm_error_upper": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"potential_energy_gradient_norm\"",
@@ -12273,7 +13665,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_norm": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Normalised gradient (with respect to r_minor_norm) of the effective potential energy",
@@ -12293,7 +13685,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_norm_error_lower": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"potential_energy_norm\"",
@@ -12305,7 +13697,7 @@
  },
  "gyrokinetics_local.species[:].potential_energy_norm_error_upper": {
   "coordinates": [
-   "gyrokinetics_local.species_all.angle_pol"
+   "gyrokinetics_local.species_all.angle_pol_equilibrium"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"potential_energy_norm\"",
@@ -12418,46 +13810,46 @@
   "lifecycle_status": "alpha",
   "structure_reference": "gyrokinetics_input_species_global"
  },
- "gyrokinetics_local.species_all.angle_pol": {
+ "gyrokinetics_local.species_all.angle_pol_equilibrium": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Poloidal angle grid, from -pi to pi, on which the species dependent effective potential energy (which determines the poloidal variation of the density) is expressed. The angle is defined with respect to (R0,Z0) with R0=(Rmax-Rmin)/2 and Z0=(Zmax-Zmin)/2. It is increasing clockwise. So (r,theta,phi) is right-handed. theta=0 for Z=Z0 and R>R0 (LFS)",
-  "full_path": "gyrokinetics_local/species_all/angle_pol(:)",
-  "introduced_after_version": "3.39.0",
+  "full_path": "gyrokinetics_local/species_all/angle_pol_equilibrium(:)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "rad"
  },
- "gyrokinetics_local.species_all.angle_pol_error_index": {
+ "gyrokinetics_local.species_all.angle_pol_equilibrium_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"angle_pol\"",
-  "full_path": "gyrokinetics_local/species_all/angle_pol_error_index",
+  "documentation": "Index in the error_description list for \"angle_pol_equilibrium\"",
+  "full_path": "gyrokinetics_local/species_all/angle_pol_equilibrium_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "gyrokinetics_local.species_all.angle_pol_error_lower": {
+ "gyrokinetics_local.species_all.angle_pol_equilibrium_error_lower": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"angle_pol\"",
-  "full_path": "gyrokinetics_local/species_all/angle_pol_error_lower(:)",
-  "introduced_after_version": "3.39.0",
+  "documentation": "Lower error for \"angle_pol_equilibrium\"",
+  "full_path": "gyrokinetics_local/species_all/angle_pol_equilibrium_error_lower(:)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "rad"
  },
- "gyrokinetics_local.species_all.angle_pol_error_upper": {
+ "gyrokinetics_local.species_all.angle_pol_equilibrium_error_upper": {
   "coordinates": [
    "1...N"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"angle_pol\"",
-  "full_path": "gyrokinetics_local/species_all/angle_pol_error_upper(:)",
-  "introduced_after_version": "3.39.0",
+  "documentation": "Upper error for \"angle_pol_equilibrium\"",
+  "full_path": "gyrokinetics_local/species_all/angle_pol_equilibrium_error_upper(:)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
   "type": "constant",
   "units": "rad"

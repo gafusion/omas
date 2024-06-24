@@ -2297,6 +2297,62 @@
   "lifecycle_status": "alpha",
   "structure_reference": "runaway_electrons_global_quantities"
  },
+ "runaway_electrons.global_quantities.current_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "runaway_electrons.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Total runaway current (toroidal component)",
+  "full_path": "runaway_electrons/global_quantities/current_phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "runaway_electrons.global_quantities.current_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi\"",
+  "full_path": "runaway_electrons/global_quantities/current_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "runaway_electrons.global_quantities.current_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "runaway_electrons.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_phi\"",
+  "full_path": "runaway_electrons/global_quantities/current_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "runaway_electrons.global_quantities.current_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "runaway_electrons.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_phi\"",
+  "full_path": "runaway_electrons/global_quantities/current_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
  "runaway_electrons.global_quantities.current_tor": {
   "coordinates": [
    "runaway_electrons.time"
@@ -2304,7 +2360,8 @@
   "data_type": "FLT_1D",
   "documentation": "Total runaway current (toroidal component)",
   "full_path": "runaway_electrons/global_quantities/current_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -2324,7 +2381,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_tor\"",
   "full_path": "runaway_electrons/global_quantities/current_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -2336,7 +2394,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_tor\"",
   "full_path": "runaway_electrons/global_quantities/current_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -4811,7 +4870,7 @@
    "runaway_electrons.profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "runaway_electrons/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",

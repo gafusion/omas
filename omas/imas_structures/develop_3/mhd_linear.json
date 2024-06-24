@@ -857,11 +857,22 @@
   "type": "dynamic",
   "units": "-"
  },
+ "mhd_linear.time_slice[:].toroidal_mode[:].n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Toroidal mode number of the MHD mode",
+  "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/n_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
  "mhd_linear.time_slice[:].toroidal_mode[:].n_tor": {
   "data_type": "INT_0D",
   "documentation": "Toroidal mode number of the MHD mode",
   "full_path": "mhd_linear/time_slice(itime)/toroidal_mode(i1)/n_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "mhd_linear.time_slice[:].toroidal_mode[:].perturbation_type": {

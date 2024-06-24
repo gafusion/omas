@@ -2,7 +2,7 @@
  "amns_data": {
   "documentation": "Atomic, molecular, nuclear and surface physics data. Each occurrence contains the data for a given element (nuclear charge), describing various physical processes. For each process, data tables are organized by charge states. The coordinate system used by the data tables is described under the coordinate_system node.",
   "full_path": "amns_data",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "2"
@@ -197,6 +197,17 @@
   "data_type": "STR_0D",
   "documentation": "Description of coordinate (e.g. \"Electron temperature\")",
   "full_path": "amns_data/coordinate_system(i1)/coordinate(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.coordinate_system[:].coordinate[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "Name of coordinate (e.g. \"Electron temperature\")",
+  "full_path": "amns_data/coordinate_system(i1)/coordinate(i2)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -728,6 +739,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "amns_data/process(i1)/charge_state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.process[:].charge_state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "amns_data/process(i1)/charge_state(i2)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -1136,6 +1158,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the process (e.g. EI, RC, ...)",
   "full_path": "amns_data/process(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.process[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the process (e.g. EI, RC, ...)",
+  "full_path": "amns_data/process(i1)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -1303,7 +1336,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
   "full_path": "amns_data/process(i1)/products(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static"
  },
  "amns_data.process[:].products[:].mass": {
@@ -1386,6 +1420,16 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
+ },
+ "amns_data.process[:].products[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
+  "full_path": "amns_data/process(i1)/products(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "amns_data.process[:].products[:].relative_charge": {
   "data_type": "INT_0D",
@@ -1593,7 +1637,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
   "full_path": "amns_data/process(i1)/reactants(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static"
  },
  "amns_data.process[:].reactants[:].mass": {
@@ -1676,6 +1721,16 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
+ },
+ "amns_data.process[:].reactants[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
+  "full_path": "amns_data/process(i1)/reactants(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "amns_data.process[:].reactants[:].relative_charge": {
   "data_type": "INT_0D",

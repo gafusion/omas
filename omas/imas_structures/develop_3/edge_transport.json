@@ -2,7 +2,7 @@
  "edge_transport": {
   "documentation": "Edge plasma transport. Energy terms correspond to the full kinetic energy equation (i.e. the energy flux takes into account the energy transported by the particle flux)",
   "full_path": "edge_transport",
-  "lifecycle_last_change": "3.39.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "active",
   "lifecycle_version": "3.22.0",
   "maxoccur": "10",
@@ -1641,6 +1641,115 @@
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
+ "edge_transport.model[:].ggd[:].conductivity[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "ohm^-1.m^-1"
+ },
  "edge_transport.model[:].ggd[:].conductivity[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -1909,7 +2018,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -1921,7 +2031,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -1941,7 +2052,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -1953,7 +2065,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -1972,7 +2085,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -1983,7 +2097,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/conductivity(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "ohm^-1.m^-1"
  },
@@ -5586,7 +5701,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].ion[:].momentum": {
@@ -5788,6 +5904,115 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/parallel_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.d[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/phi_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2.s^-1"
@@ -6060,7 +6285,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6072,7 +6298,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6092,7 +6319,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6104,7 +6332,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6123,7 +6352,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6134,7 +6364,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/d(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -6649,6 +6880,115 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -6917,7 +7257,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -6929,7 +7270,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -6949,7 +7291,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -6961,7 +7304,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -6980,7 +7324,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -6991,7 +7336,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -7282,6 +7628,115 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "edge_transport.model[:].ggd[:].ion[:].momentum.flux_limiter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -7550,7 +8005,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -7562,7 +8018,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -7582,7 +8039,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -7594,7 +8052,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -7613,7 +8072,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -7624,7 +8084,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/flux_limiter(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -8139,6 +8600,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_transport.model[:].ggd[:].ion[:].momentum.v[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -8407,7 +8977,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8419,7 +8990,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8439,7 +9011,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8451,7 +9024,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8470,7 +9044,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8481,7 +9056,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/momentum/v(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -8804,6 +9380,16 @@
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -11082,7 +11668,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum": {
@@ -11284,6 +11871,115 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/parallel_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.d[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/phi_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2.s^-1"
@@ -11556,7 +12252,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -11568,7 +12265,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -11588,7 +12286,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -11600,7 +12299,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -11619,7 +12319,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -11630,7 +12331,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/d(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -12145,6 +12847,115 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -12413,7 +13224,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12425,7 +13237,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12445,7 +13258,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12457,7 +13271,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12476,7 +13291,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12487,7 +13303,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -12778,6 +13595,115 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.flux_limiter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -13046,7 +13972,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13058,7 +13985,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13078,7 +14006,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13090,7 +14019,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13109,7 +14039,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13120,7 +14051,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -13635,6 +14567,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_transport.model[:].ggd[:].ion[:].state[:].momentum.v[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -13903,7 +14944,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -13915,7 +14957,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -13935,7 +14978,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -13947,7 +14991,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -13966,7 +15011,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -13977,7 +15023,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/momentum/v(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -14295,6 +15342,16 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/ion(i2)/state(i3)/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].ion[:].state[:].particles": {
   "data_type": "STRUCTURE",
@@ -15757,6 +16814,115 @@
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.d[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
  "edge_transport.model[:].ggd[:].momentum.d[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -16025,7 +17191,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16037,7 +17204,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16057,7 +17225,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16069,7 +17238,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16088,7 +17258,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16099,7 +17270,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/d(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -16614,6 +17786,115 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_transport.model[:].ggd[:].momentum.flux[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -16882,7 +18163,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -16894,7 +18176,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -16914,7 +18197,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -16926,7 +18210,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -16945,7 +18230,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -16956,7 +18242,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -17247,6 +18534,115 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "edge_transport.model[:].ggd[:].momentum.flux_limiter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -17515,7 +18911,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -17527,7 +18924,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -17547,7 +18945,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -17559,7 +18958,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -17578,7 +18978,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -17589,7 +18990,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/flux_limiter(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -18104,6 +19506,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].momentum.v[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_transport.model[:].ggd[:].momentum.v[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -18372,7 +19883,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18384,7 +19896,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18404,7 +19917,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18416,7 +19930,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18435,7 +19950,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -18446,7 +19962,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/momentum/v(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -20024,10 +21541,14 @@
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].neutral[:].label": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].neutral[:].momentum": {
@@ -20229,6 +21750,115 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/parallel_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.d[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/phi_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2.s^-1"
@@ -20501,7 +22131,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -20513,7 +22144,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -20533,7 +22165,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -20545,7 +22178,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -20564,7 +22198,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -20575,7 +22210,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/d(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -21090,6 +22726,115 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -21358,7 +23103,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21370,7 +23116,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21390,7 +23137,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21402,7 +23150,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21421,7 +23170,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21432,7 +23182,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -21723,6 +23474,115 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.flux_limiter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -21991,7 +23851,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22003,7 +23864,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22023,7 +23885,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22035,7 +23898,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22054,7 +23918,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22065,7 +23930,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/flux_limiter(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -22580,6 +24446,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].momentum.v[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -22848,7 +24823,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -22860,7 +24836,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -22880,7 +24857,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -22892,7 +24870,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -22911,7 +24890,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -22922,7 +24902,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/momentum/v(i3)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -23245,6 +25226,13 @@
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -25516,7 +27504,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum": {
@@ -25718,6 +27707,115 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"parallel\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/parallel_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m^2.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.d[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/phi_error_upper(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m^2.s^-1"
@@ -25990,7 +28088,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26002,7 +28101,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26022,7 +28122,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26034,7 +28135,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26053,7 +28155,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26064,7 +28167,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/d(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m^2.s^-1"
  },
@@ -26579,6 +28683,115 @@
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-2"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -26847,7 +29060,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -26859,7 +29073,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -26879,7 +29094,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -26891,7 +29107,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -26910,7 +29127,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -26921,7 +29139,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-2"
  },
@@ -27212,6 +29431,115 @@
   "type": "dynamic",
   "units": "-"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "-"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.flux_limiter[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -27480,7 +29808,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -27492,7 +29821,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -27512,7 +29842,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -27524,7 +29855,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -27543,7 +29875,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -27554,7 +29887,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/flux_limiter(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "-"
  },
@@ -28069,6 +30403,115 @@
   "type": "dynamic",
   "units": "m.s^-1"
  },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_coefficients(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].momentum.v[:].poloidal": {
   "coordinates": [
    "1...N"
@@ -28337,7 +30780,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28349,7 +30793,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28369,7 +30814,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28381,7 +30827,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28400,7 +30847,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28411,7 +30859,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/momentum/v(i4)/toroidal_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "m.s^-1"
  },
@@ -28729,6 +31178,16 @@
   "lifecycle_status": "active",
   "type": "dynamic",
   "units": "m.s^-1"
+ },
+ "edge_transport.model[:].ggd[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "edge_transport/model(i1)/ggd(itime)/neutral(i2)/state(i3)/name",
+  "lifecycle_status": "active",
+  "type": "dynamic"
  },
  "edge_transport.model[:].ggd[:].neutral[:].state[:].neutral_type": {
   "data_type": "STRUCTURE",
@@ -31377,6 +33836,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "edge_transport/model(i1)/ggd_fast(itime)/ion(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd_fast[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "edge_transport/model(i1)/ggd_fast(itime)/ion(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -31616,6 +34086,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "edge_transport/model(i1)/ggd_fast(itime)/neutral(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "edge_transport.model[:].ggd_fast[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "edge_transport/model(i1)/ggd_fast(itime)/neutral(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },

@@ -2,7 +2,7 @@
  "spectrometer_visible": {
   "documentation": "Spectrometer in visible light range diagnostic",
   "full_path": "spectrometer_visible",
-  "lifecycle_last_change": "3.39.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.3.1",
   "maxoccur": "1"
@@ -3125,6 +3125,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
   "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/processed_line(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].filter_spectrometer.processed_line[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
+  "full_path": "spectrometer_visible/channel(i1)/filter_spectrometer/processed_line(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3916,7 +3927,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -3937,7 +3948,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -3950,7 +3961,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -4052,6 +4063,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
   "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].grating_spectrometer.processed_line[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
+  "full_path": "spectrometer_visible/channel(i1)/grating_spectrometer/processed_line(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -4213,7 +4235,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -4234,7 +4256,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -4247,7 +4269,7 @@
  },
  "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_visible.channel[:].grating_spectrometer.wavelengths",
    "spectrometer_visible.channel[:].grating_spectrometer.radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -4780,6 +4802,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (H, D, T, He3, He4)",
   "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spectrometer_visible.channel[:].isotope_ratios.isotope[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (H, D, T, He3, He4)",
+  "full_path": "spectrometer_visible/channel(i1)/isotope_ratios/isotope(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

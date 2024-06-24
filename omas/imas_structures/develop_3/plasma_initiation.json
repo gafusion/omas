@@ -1486,6 +1486,62 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "plasma_initiation.profiles_2d[:].e_field_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "e_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Toroidal component of the electric field",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_phi(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "e_field_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"e_field_phi\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "e_field_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"e_field_phi\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_phi_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "plasma_initiation.profiles_2d[:].e_field_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "e_field_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "plasma_initiation.profiles_2d[:].grid.dim1",
+   "plasma_initiation.profiles_2d[:].grid.dim2"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"e_field_phi\"",
+  "full_path": "plasma_initiation/profiles_2d(itime)/e_field_phi_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
  "plasma_initiation.profiles_2d[:].e_field_tor": {
   "coordinates": [
    "plasma_initiation.profiles_2d[:].grid.dim1",
@@ -1494,7 +1550,8 @@
   "data_type": "FLT_2D",
   "documentation": "Toroidal component of the electric field",
   "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1514,7 +1571,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"e_field_tor\"",
   "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1526,7 +1584,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"e_field_tor\"",
   "full_path": "plasma_initiation/profiles_2d(itime)/e_field_tor_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },

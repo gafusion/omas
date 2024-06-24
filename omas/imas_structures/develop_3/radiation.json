@@ -2,7 +2,7 @@
  "radiation": {
   "documentation": "Radiation emitted by the plasma and neutrals",
   "full_path": "radiation",
-  "lifecycle_last_change": "3.25.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.17.1",
   "maxoccur": "2"
@@ -1663,13 +1663,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "radiation.process[:].ggd[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "radiation.process[:].ggd[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -1813,6 +1824,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "radiation.process[:].ggd[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "radiation/process(i1)/ggd(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -2201,13 +2223,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
   "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "radiation.process[:].ggd[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "radiation.process[:].ggd[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
+  "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -2344,6 +2377,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "radiation.process[:].ggd[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "radiation/process(i1)/ggd(itime)/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3137,7 +3181,7 @@
    "radiation.process[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -3469,13 +3513,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "radiation.process[:].profiles_1d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3590,6 +3645,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "radiation.process[:].profiles_1d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "radiation/process(i1)/profiles_1d(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3949,13 +4015,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "radiation.process[:].profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "radiation.process[:].profiles_1d[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the neutral species (e.g. H, D, T, He, C, ...)",
+  "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -4063,6 +4140,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "radiation.process[:].profiles_1d[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "radiation/process(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },

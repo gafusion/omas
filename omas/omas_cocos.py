@@ -364,6 +364,8 @@ _cocos_signals['ec_launchers.beam.:.steering_angle_tor']='TOR'                  
 # ECE
 _cocos_signals['ece.channel.:.delta_position_suprathermal.phi']='TOR'                        # 2.000000 # phi  [rad]
 _cocos_signals['ece.channel.:.delta_position_suprathermal.psi']='PSI'                        # 2.000000 # psi  [W]
+_cocos_signals['ece.channel.:.line_of_sight.first_point.phi']='?'                     #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['ece.channel.:.line_of_sight.second_point.phi']='?'                    #[ADD?]# 2.000000 # phi  [rad]
 _cocos_signals['ece.channel.:.position.phi']='TOR'                                           # 2.000000 # phi  [rad]
 _cocos_signals['ece.channel.:.position.psi']='PSI'                                           # 2.000000 # psi  [W]
 _cocos_signals['ece.line_of_sight.first_point.phi']='TOR'                                    # 2.000000 # phi  [rad]
@@ -890,6 +892,7 @@ _cocos_signals['ic_antennas.antenna.:.surface_current.:.spectrum']='?'          
 _cocos_signals['interferometer.channel.:.line_of_sight.first_point.phi']='TOR'                           # 2.000000 # phi  [rad]
 _cocos_signals['interferometer.channel.:.line_of_sight.second_point.phi']='TOR'                          # 2.000000 # phi  [rad]
 _cocos_signals['interferometer.channel.:.line_of_sight.third_point.phi']='TOR'                           # 2.000000 # phi  [rad]
+_cocos_signals['interferometer.channel.:.n_e.positions.phi']='?'                                  #[ADD?]# 2.000000 # phi  [rad]
 
 # IRON_CORE
 _cocos_signals['iron_core.segment.:.b_field']='?'                                          #[ADD?]# 3.000000 # b  b_field  [T]
@@ -1119,17 +1122,18 @@ _cocos_signals['nbi.unit.:.source.centre.phi']='TOR'                            
 _cocos_signals['nbi.unit.:.beamlets_group.:.direction']='TOR'                                        #[DEL?]# -1.000000 # [None]
 
 # NEUTRON_DIAGNOSTIC
-_cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.amplitude.data']='?'                                       #[ADD?]# 2.200000 # b  b_field  [V]
-_cocos_signals['neutron_diagnostic.detectors.:.b_field_sensor.frequency.data']='?'                                       #[ADD?]# 2.200000 # b  b_field  [Hz]
-_cocos_signals['neutron_diagnostic.detectors.:.aperture.:.centre.phi']='TOR'                                                    # 2.000000 # phi  [rad]
-_cocos_signals['neutron_diagnostic.detectors.:.detector.centre.phi']='TOR'                                                      # 2.000000 # phi  [rad]
-_cocos_signals['neutron_diagnostic.detectors.:.field_of_view.emission_grid.phi']='?'                                     #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['neutron_diagnostic.detectors.:.position.phi']='TOR'                                                             # 2.000000 # phi  [rad]
+_cocos_signals['neutron_diagnostic.detector.:.b_field_sensor.amplitude.data']='?'                                       #[ADD?]# 2.200000 # b  b_field  [V]
+_cocos_signals['neutron_diagnostic.detector.:.b_field_sensor.frequency.data']='?'                                       #[ADD?]# 2.200000 # b  b_field  [Hz]
+_cocos_signals['neutron_diagnostic.detector.:.aperture.:.centre.phi']='?'                                               #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['neutron_diagnostic.detector.:.field_of_view.emission_grid.phi']='?'                                     #[ADD?]# 2.000000 # phi  [rad]
+_cocos_signals['neutron_diagnostic.detector.:.geometry.centre.phi']='?'                                                 #[ADD?]# 2.000000 # phi  [rad]
 
 # NTMS
 _cocos_signals['ntms.vacuum_toroidal_field.b0']='TOR'                                            # 2.000000 # b0  [T]
 _cocos_signals['ntms.time_slice.:.mode.:.detailed_evolution.torque.:.value']='TOR'               # 1.750000 # torque  [kg.m^2.s^-2]
 _cocos_signals['ntms.time_slice.:.mode.:.torque.:.value']='TOR'                                  # 1.714286 # torque  [kg.m^2.s^-2]
+
+# OPERATIONAL_INSTRUMENTATION
 
 # PELLETS
 _cocos_signals['pellets.time_slice.:.pellet.:.path_geometry.first_point.phi']='TOR'                       # 2.000000 # phi  [rad]

@@ -20,7 +20,7 @@
  },
  "focs.b_field_z.data": {
   "coordinates": [
-   "1...N",
+   "focs.outline.r",
    "focs.b_field_z.time"
   ],
   "data_type": "FLT_2D",
@@ -41,7 +41,7 @@
  },
  "focs.b_field_z.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "focs.outline.r",
    "focs.b_field_z.time"
   ],
   "data_type": "FLT_2D",
@@ -54,7 +54,7 @@
  },
  "focs.b_field_z.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "focs.outline.r",
    "focs.b_field_z.time"
   ],
   "data_type": "FLT_2D",

@@ -2384,6 +2384,59 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "ferritic.object[:].time_slice[:].b_field_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component of the magnetic field at each centroid",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "ferritic.object[:].time_slice[:].b_field_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"b_field_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ferritic.object[:].time_slice[:].b_field_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"b_field_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
+ "ferritic.object[:].time_slice[:].b_field_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "b_field_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"b_field_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T"
+ },
  "ferritic.object[:].time_slice[:].b_field_r": {
   "coordinates": [
    "ferritic.object[:].centroid.x"
@@ -2432,7 +2485,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component of the magnetic field at each centroid",
   "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -2451,7 +2505,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"b_field_tor\"",
   "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -2462,7 +2517,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"b_field_tor\"",
   "full_path": "ferritic/object(i1)/time_slice(itime)/b_field_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T"
  },
@@ -2506,6 +2562,59 @@
   "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "T"
+ },
+ "ferritic.object[:].time_slice[:].magnetic_moment_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "magnetic_moment_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component of the magnetic moment of each element",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "ferritic.object[:].time_slice[:].magnetic_moment_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "magnetic_moment_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"magnetic_moment_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ferritic.object[:].time_slice[:].magnetic_moment_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "magnetic_moment_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"magnetic_moment_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "ferritic.object[:].time_slice[:].magnetic_moment_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "magnetic_moment_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ferritic.object[:].centroid.x"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"magnetic_moment_phi\"",
+  "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
  },
  "ferritic.object[:].time_slice[:].magnetic_moment_r": {
   "coordinates": [
@@ -2555,7 +2664,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component of the magnetic moment of each element",
   "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -2574,7 +2684,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"magnetic_moment_tor\"",
   "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -2585,7 +2696,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"magnetic_moment_tor\"",
   "full_path": "ferritic/object(i1)/time_slice(itime)/magnetic_moment_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },

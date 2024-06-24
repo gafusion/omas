@@ -1089,11 +1089,79 @@
   "maxoccur": "38",
   "structure_reference": "vessel_2d_element"
  },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal current induced in this block element",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi.data": {
+  "coordinates": [
+   "wall.description_2d[:].vessel.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi.data_error_lower": {
+  "coordinates": [
+   "wall.description_2d[:].vessel.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi.data_error_upper": {
+  "coordinates": [
+   "wall.description_2d[:].vessel.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "wall.description_2d[:].vessel.unit[:].element[:].j_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "wall.description_2d[:].vessel.unit[:].element[:].j_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -1104,7 +1172,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1124,7 +1192,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1136,7 +1204,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1148,7 +1216,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "wall/description_2d(i1)/vessel/unit(i2)/element(i3)/j_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1471,6 +1539,115 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
+ "wall.description_ggd[:].ggd[:].a_field[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].a_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "T.m"
+ },
  "wall.description_ggd[:].ggd[:].a_field[:].r": {
   "coordinates": [
    "1...N"
@@ -1563,7 +1740,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1575,7 +1753,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1595,7 +1774,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1607,7 +1787,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1626,7 +1807,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1637,7 +1819,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/a_field(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "T.m"
  },
@@ -1753,6 +1936,115 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "wall.description_ggd[:].ggd[:].e_field[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].e_field[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
  "wall.description_ggd[:].ggd[:].e_field[:].r": {
   "coordinates": [
    "1...N"
@@ -1845,7 +2137,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1857,7 +2150,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1877,7 +2171,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1889,7 +2184,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1908,7 +2204,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -1919,7 +2216,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/e_field(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "V.m^-1"
  },
@@ -2835,13 +3133,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3096,6 +3405,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3595,13 +3915,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -3849,6 +4180,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.kinetic.neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/kinetic/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -4509,13 +4851,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -4770,6 +5123,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -5269,13 +5633,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -5523,6 +5898,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].energy_fluxes.recombination.neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/energy_fluxes/recombination/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -5620,6 +6006,115 @@
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_coefficients": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_coefficients_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_coefficients_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_coefficients_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_coefficients_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"phi_coefficients\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
+ "wall.description_ggd[:].ggd[:].j_total[:].phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "toroidal_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.description_ggd[:].ggd[:].j_total[:].r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A.m^-2"
+ },
  "wall.description_ggd[:].ggd[:].j_total[:].r": {
   "coordinates": [
    "1...N"
@@ -5712,7 +6207,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal component, one scalar value is provided per element in the grid subset.",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -5724,7 +6220,8 @@
   "data_type": "FLT_2D",
   "documentation": "Interpolation coefficients for the toroidal component, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -5744,7 +6241,8 @@
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients_error_lower(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -5756,7 +6254,8 @@
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"toroidal_coefficients\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_coefficients_error_upper(:,:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -5775,7 +6274,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -5786,7 +6286,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"toroidal\"",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/j_total(i2)/toroidal_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A.m^-2"
  },
@@ -6466,13 +6967,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -6727,6 +7239,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].particle_fluxes.ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -7226,13 +7749,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -7480,6 +8014,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].particle_fluxes.neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/particle_fluxes/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8136,13 +8681,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].recycling.ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].recycling.ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8286,6 +8842,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].recycling.ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/ion(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8674,13 +9241,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "wall.description_ggd[:].ggd[:].recycling.neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].recycling.neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -8817,6 +9395,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "wall.description_ggd[:].ggd[:].recycling.neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "wall/description_ggd(i1)/ggd(itime)/recycling/neutral(i2)/state(i3)/name",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -9976,7 +10565,7 @@
   ],
   "data_type": "STRUCT_ARRAY",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material is described for various wall components (grid subsets), using the identifier convention below\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy",
+  "documentation": "Material is described for various wall components (grid subsets), using the identifier convention below\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy\n20) U_235 : Uranium 235 isotope\n21) U_238 : Uranium 238 isotope\n22) Diamond : Diamond\n23) CxHy : Organic molecule\n24) LaCl3 : Lanthanum chloride\n25) LaBr : Lanthanum bromide\n26) HPGe : High Purity Germanium\n27) CeBr : Cesium bromide\n28) CZT : Cadmium zinc telluride\n29) In_115 : Indium 115 isotope\n30) He_4 : Helium 4 isotope",
   "full_path": "wall/description_ggd(i1)/material(itime)/grid_subset(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
@@ -10340,6 +10929,62 @@
   "lifecycle_status": "alpha",
   "structure_reference": "wall_global_quantitites"
  },
+ "wall.global_quantities.current_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal current flowing in the vacuum vessel",
+  "full_path": "wall/global_quantities/current_phi(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "wall.global_quantities.current_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current_phi\"",
+  "full_path": "wall/global_quantities/current_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "wall.global_quantities.current_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current_phi\"",
+  "full_path": "wall/global_quantities/current_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "wall.global_quantities.current_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "current_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "wall.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current_phi\"",
+  "full_path": "wall/global_quantities/current_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
  "wall.global_quantities.current_tor": {
   "coordinates": [
    "wall.time"
@@ -10347,7 +10992,8 @@
   "data_type": "FLT_1D",
   "documentation": "Toroidal current flowing in the vacuum vessel",
   "full_path": "wall/global_quantities/current_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -10367,7 +11013,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"current_tor\"",
   "full_path": "wall/global_quantities/current_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -10379,7 +11026,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"current_tor\"",
   "full_path": "wall/global_quantities/current_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "A"
@@ -11004,6 +11652,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the incident species (e.g. H, D, CD4, ...)",
   "full_path": "wall/global_quantities/neutral(i1)/incident_species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "wall.global_quantities.neutral[:].incident_species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the incident species (e.g. H, D, CD4, ...)",
+  "full_path": "wall/global_quantities/neutral(i1)/incident_species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -11108,6 +11767,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, CD4, ...)",
   "full_path": "wall/global_quantities/neutral(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "wall.global_quantities.neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, CD4, ...)",
+  "full_path": "wall/global_quantities/neutral(i1)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

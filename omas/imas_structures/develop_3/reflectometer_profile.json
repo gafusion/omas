@@ -33,7 +33,7 @@
  },
  "reflectometer_profile.channel[:].amplitude.data": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].amplitude.time"
   ],
   "data_type": "FLT_2D",
@@ -54,7 +54,7 @@
  },
  "reflectometer_profile.channel[:].amplitude.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].amplitude.time"
   ],
   "data_type": "FLT_2D",
@@ -67,7 +67,7 @@
  },
  "reflectometer_profile.channel[:].amplitude.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].amplitude.time"
   ],
   "data_type": "FLT_2D",
@@ -2004,7 +2004,7 @@
  },
  "reflectometer_profile.channel[:].phase.data": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].phase.time"
   ],
   "data_type": "FLT_2D",
@@ -2025,7 +2025,7 @@
  },
  "reflectometer_profile.channel[:].phase.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].phase.time"
   ],
   "data_type": "FLT_2D",
@@ -2038,7 +2038,7 @@
  },
  "reflectometer_profile.channel[:].phase.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "reflectometer_profile.channel[:].frequencies",
    "reflectometer_profile.channel[:].phase.time"
   ],
   "data_type": "FLT_2D",

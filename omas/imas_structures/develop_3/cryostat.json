@@ -558,11 +558,79 @@
   "maxoccur": "38",
   "structure_reference": "vessel_2d_element"
  },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal current induced in this block element",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_lower": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_upper": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].j_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -573,7 +641,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -593,7 +661,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -605,7 +673,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -617,7 +685,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1228,11 +1296,79 @@
   "maxoccur": "38",
   "structure_reference": "vessel_2d_element"
  },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal current induced in this block element",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_lower": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_upper": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -1243,7 +1379,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1263,7 +1399,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1275,7 +1411,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1287,7 +1423,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "s"

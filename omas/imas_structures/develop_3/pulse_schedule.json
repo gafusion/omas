@@ -2,7 +2,7 @@
  "pulse_schedule": {
   "documentation": "Description of Pulse Schedule, described by subsystems waveform references and an enveloppe around them. The controllers, pulse schedule and SDN are defined in separate IDSs. All names and identifiers of subsystems appearing in the pulse_schedule must be identical to those used in the IDSs describing the related subsystems.",
   "full_path": "pulse_schedule",
-  "lifecycle_last_change": "3.40.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.6.0",
   "maxoccur": "1"
@@ -262,7 +262,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "pulse_schedule/density_control/ion(i1)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant"
  },
  "pulse_schedule.density_control.ion[:].n_i_volume_average": {
@@ -347,6 +348,16 @@
   "data_type": "INT_0D",
   "documentation": "Reference type:  0:relative (don't use for the moment, to be defined later when segments are introduced in the IDS structure); 1: absolute: the reference time trace is provided in the reference/data node",
   "full_path": "pulse_schedule/density_control/ion(i1)/n_i_volume_average/reference_type",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "pulse_schedule.density_control.ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "pulse_schedule/density_control/ion(i1)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1512,6 +1523,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "pulse_schedule.density_control.valve[:].species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "pulse_schedule/density_control/valve(i1)/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -4933,6 +4955,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "pulse_schedule.nbi.unit[:].species[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "pulse_schedule/nbi/unit(i1)/species(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -2,7 +2,7 @@
  "ece": {
   "documentation": "Electron cyclotron emission diagnostic",
   "full_path": "ece",
-  "lifecycle_last_change": "3.41.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.2.1",
   "maxoccur": "3"
@@ -110,7 +110,7 @@
  },
  "ece.channel[:].beam.phase.curvature.data": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.phase.curvature.time"
   ],
   "data_type": "FLT_2D",
@@ -131,7 +131,7 @@
  },
  "ece.channel[:].beam.phase.curvature.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.phase.curvature.time"
   ],
   "data_type": "FLT_2D",
@@ -144,7 +144,7 @@
  },
  "ece.channel[:].beam.phase.curvature.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.phase.curvature.time"
   ],
   "data_type": "FLT_2D",
@@ -252,7 +252,7 @@
  },
  "ece.channel[:].beam.spot.size.data": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.spot.size.time"
   ],
   "data_type": "FLT_2D",
@@ -273,7 +273,7 @@
  },
  "ece.channel[:].beam.spot.size.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.spot.size.time"
   ],
   "data_type": "FLT_2D",
@@ -286,7 +286,7 @@
  },
  "ece.channel[:].beam.spot.size.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...2",
    "ece.channel[:].beam.spot.size.time"
   ],
   "data_type": "FLT_2D",
@@ -306,6 +306,1470 @@
   "full_path": "ece/channel(i1)/beam/spot/size/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "beam/spot/size/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ece.channel[:].beam_tracing": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].time"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Beam tracing calculations, for various time slices",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "ece_beam_tracing",
+  "timebasepath": "time",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of rays/beams describing the wave propagation",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "unbounded",
+  "structure_reference": "ece_beam_tracing_beam"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field": {
+  "data_type": "STRUCTURE",
+  "documentation": "Electric field polarization of the ray/beam along its path",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_tracing_beam_e_field"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Right hand polarised electric field component",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_1D",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.imaginary": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Imaginary part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/imaginary(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.imaginary_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/imaginary_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.imaginary_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/imaginary_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.imaginary_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/imaginary_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.real": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Real part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/real(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.real_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/real_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.real_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/real_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.minus.real_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/minus/real_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel": {
+  "data_type": "STRUCTURE",
+  "documentation": "Parallel to magnetic field polarised electric field component",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_1D",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.imaginary": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Imaginary part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/imaginary(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.imaginary_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/imaginary_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.imaginary_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/imaginary_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.imaginary_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/imaginary_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.real": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Real part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/real(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.real_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/real_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.real_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/real_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.parallel.real_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/parallel/real_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus": {
+  "data_type": "STRUCTURE",
+  "documentation": "Left hand polarised electric field component",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_CPX_1D",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.imaginary": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Imaginary part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/imaginary(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.imaginary_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/imaginary_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.imaginary_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/imaginary_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.imaginary_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"imaginary\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/imaginary_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.real": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Real part",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/real(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.real_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/real_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.real_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/real_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].e_field.plus.real_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"real\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/e_field/plus/real_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "V.m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].electrons": {
+  "data_type": "STRUCTURE",
+  "documentation": "Quantities related to the electrons",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/electrons",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_tracing_electrons"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].electrons.power": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Power absorbed along the beam by the species",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/electrons/power(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].electrons.power_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/electrons/power_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].electrons.power_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"power\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/electrons/power_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].electrons.power_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"power\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/electrons/power_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].length": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Ray/beam curvilinear length",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/length(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].length_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"length\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/length_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].length_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"length\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/length_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].length_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"length\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/length_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].mode": {
+  "data_type": "STR_0D",
+  "documentation": "X or O mode for this beam",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/mode",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase": {
+  "data_type": "STRUCTURE",
+  "documentation": "Phase ellipse characteristics",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_phase"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.angle": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Rotation angle for the phase ellipse",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/angle(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.angle_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/angle_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.angle_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/angle_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.angle_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/angle_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.curvature": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Inverse curvature radii for the phase ellipse, positive/negative for divergent/convergent beams, in the horizontal direction (first index of the first coordinate) and in the vertical direction (second index of the first coordinate)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/curvature(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.curvature_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"curvature\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/curvature_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.curvature_error_lower": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"curvature\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/curvature_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].phase.curvature_error_upper": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"curvature\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/phase/curvature_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the ray/beam along its path",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_rzphipsitheta1d_dynamic_aos3"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.phi": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.phi_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.phi_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.psi": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal flux",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/psi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.psi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"psi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/psi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.psi_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"psi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/psi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.psi_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"psi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/psi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Wb"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.r": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.r_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.r_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.rho_tor_norm": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.theta": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Poloidal angle (oriented clockwise when viewing the poloidal cross section on the right hand side of the tokamak axis of symmetry, with the origin placed on the plasma magnetic axis)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/theta(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.theta_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"theta\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/theta_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.theta_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"theta\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/theta_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.theta_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"theta\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/theta_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.z": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.z_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].position.z_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/position/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm": {
+  "data_type": "STRUCTURE",
+  "documentation": "Normalised power flow",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_tracing_power_flow"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.parallel": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized power flow in the direction parallel to the magnetic field",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/parallel(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.parallel_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.parallel_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.perpendicular": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized power flow in the direction perpendicular to the magnetic field",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/perpendicular(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.perpendicular_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/perpendicular_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.perpendicular_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/perpendicular_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_flow_norm.perpendicular_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_flow_norm/perpendicular_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_initial": {
+  "data_type": "FLT_0D",
+  "documentation": "Initial power in the ray/beam",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_initial",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_initial_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"power_initial\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_initial_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_initial_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"power_initial\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_initial_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].power_initial_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"power_initial\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/power_initial_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "W"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot": {
+  "data_type": "STRUCTURE",
+  "documentation": "Spot ellipse characteristics",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_spot"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.angle": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Rotation angle for the spot ellipse",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/angle(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.angle_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/angle_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.angle_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/angle_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.angle_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"angle\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/angle_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.size": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Size of the spot ellipse: distance between the central ray and the peripheral rays in the horizontal (first index of the first coordinate) and vertical direction (second index of the first coordinate)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/size(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.size_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"size\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/size_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.size_error_lower": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"size\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/size_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].spot.size_error_upper": {
+  "coordinates": [
+   "1...2",
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"size\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/spot/size_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector": {
+  "data_type": "STRUCTURE",
+  "documentation": "Wave vector of the ray/beam along its path",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector",
+  "lifecycle_status": "alpha",
+  "structure_reference": "waves_beam_tracing_beam_k"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave vector component in the toroidal direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_phi\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized wave vector component in the toroidal direction = k_phi / norm(k)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_phi_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_phi_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_phi_norm_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "k_tor_norm_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_phi_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_phi_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave vector component in the major radius direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_r\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_norm": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized wave vector component in the major radius direction = k_r / norm(k)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_norm(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_r_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_norm_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_r_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_norm_error_lower(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_r_norm_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_r_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_r_norm_error_upper(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave vector component in the toroidal direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor(:)",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_tor\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_tor\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_lower(:)",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_tor\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_error_upper(:)",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_norm": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized wave vector component in the toroidal direction = k_tor / norm(k)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_norm_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm_error_lower(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_tor_norm_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_tor_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_tor_norm_error_upper(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Wave vector component in the vertical direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_z\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-1"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_norm": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalized wave vector component in the vertical direction = k_z / norm(k)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_norm(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"k_z_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_norm_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"k_z_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_norm_error_lower(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.k_z_norm_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"k_z_norm\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/k_z_norm_error_upper(:)",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_parallel": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Parallel refractive index",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_parallel(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_parallel_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"n_parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_parallel_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_parallel_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"n_parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_parallel_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_parallel_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"n_parallel\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_parallel_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_perpendicular": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Perpendicular refractive index",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_perpendicular(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_perpendicular_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"n_perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_perpendicular_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_perpendicular_error_lower": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"n_perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_perpendicular_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_perpendicular_error_upper": {
+  "coordinates": [
+   "ece.channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"n_perpendicular\"",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_perpendicular_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "n_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal wave number, contains a single value if varying_ntor = 0 to avoid useless repetition constant values. The wave vector toroidal component is defined as k_phi = n_phi grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.n_tor": {
+  "coordinates": [
+   "channel[:].beam_tracing[:].beam[:].length"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Toroidal wave number, contains a single value if varying_ntor = 0 to avoid useless repetition constant values. The wave vector toroidal component is defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/n_tor(:)",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.varying_n_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "varying_n_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_0D",
+  "documentation": "Flag telling whether n_phi is constant along the ray path (0) or varying (1)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/varying_n_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].beam[:].wave_vector.varying_n_tor": {
+  "data_type": "INT_0D",
+  "documentation": "Flag telling whether n_tor is constant along the ray path (0) or varying (1)",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/beam(i2)/wave_vector/varying_n_tor",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "ece.channel[:].beam_tracing[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "ece/channel(i1)/beam_tracing(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
  },
@@ -822,6 +2286,220 @@
   "type": "static",
   "units": "Hz"
  },
+ "ece.channel[:].line_of_sight": {
+  "data_type": "STRUCTURE",
+  "documentation": "Line of sight of this channel, defined by two points. By convention, the first point is the closest to the diagnostic. Fill only in case the channels have different lines of sight",
+  "full_path": "ece/channel(i1)/line_of_sight",
+  "introduced_after_version": "3.40.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "line_of_sight_2points"
+ },
+ "ece.channel[:].line_of_sight.first_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the first point",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "ece.channel[:].line_of_sight.first_point.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.first_point.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.first_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.first_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.first_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.first_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.first_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.first_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.first_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.first_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/first_point/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the second point",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "ece.channel[:].line_of_sight.second_point.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.second_point.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "ece.channel[:].line_of_sight.second_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.second_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].line_of_sight.second_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "ece.channel[:].line_of_sight.second_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "ece/channel(i1)/line_of_sight/second_point/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
  "ece.channel[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of the channel",
@@ -1268,7 +2946,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Electron temperature",
   "full_path": "ece/channel(i1)/t_e",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "physical_quantity_flt_1d_time_1",
   "units": "eV"
  },
@@ -1279,7 +2958,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "ece/channel(i1)/t_e/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "eV",
@@ -1300,7 +2979,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "ece/channel(i1)/t_e/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "eV",
@@ -1313,7 +2992,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "ece/channel(i1)/t_e/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "time",
   "type": "dynamic",
   "units": "eV",
@@ -1323,7 +3002,7 @@
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/channel(i1)/t_e/validity",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "ece.channel[:].t_e.validity_timed": {
@@ -1333,7 +3012,7 @@
   "data_type": "INT_1D",
   "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/channel(i1)/t_e/validity_timed(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "time",
   "type": "dynamic",
   "utilities_aoscontext": "yes"
@@ -1342,7 +3021,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Raw voltage measured on each channel, from which the calibrated temperature data is then derived",
   "full_path": "ece/channel(i1)/t_e_voltage",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d_validity",
   "units": "V"
  },
@@ -1353,7 +3033,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "ece/channel(i1)/t_e_voltage/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_voltage/time",
   "type": "dynamic",
   "units": "V"
@@ -1373,7 +3053,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "ece/channel(i1)/t_e_voltage/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_voltage/time",
   "type": "dynamic",
   "units": "V"
@@ -1385,7 +3065,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "ece/channel(i1)/t_e_voltage/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_voltage/time",
   "type": "dynamic",
   "units": "V"
@@ -1397,7 +3077,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "ece/channel(i1)/t_e_voltage/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_voltage/time",
   "type": "dynamic",
   "units": "s"
@@ -1406,7 +3086,7 @@
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/channel(i1)/t_e_voltage/validity",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "ece.channel[:].t_e_voltage.validity_timed": {
@@ -1416,9 +3096,238 @@
   "data_type": "INT_1D",
   "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/channel(i1)/t_e_voltage/validity_timed(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_voltage/time",
   "type": "dynamic"
+ },
+ "ece.channel[:].t_radiation": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "t_e",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Radiation temperature",
+  "full_path": "ece/channel(i1)/t_radiation",
+  "lifecycle_status": "alpha",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "ece.channel[:].t_radiation.data": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/channel(i1)/t_radiation/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation.data_error_lower": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation.data_error_upper": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation.validity_timed": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_o": {
+  "data_type": "STRUCTURE",
+  "documentation": "Predicted radiation temperature of the Ordinary mode",
+  "full_path": "ece/channel(i1)/t_radiation_o",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.42.0",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "ece.channel[:].t_radiation_o.data": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/channel(i1)/t_radiation_o/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_o.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_o/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation_o.data_error_lower": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_o/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_o.data_error_upper": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_o/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_o.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation_o/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation_o.validity_timed": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation_o/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_x": {
+  "data_type": "STRUCTURE",
+  "documentation": "Predicted radiation temperature of the e(X)traordinary mode",
+  "full_path": "ece/channel(i1)/t_radiation_x",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.42.0",
+  "structure_reference": "physical_quantity_flt_1d_time_1",
+  "units": "eV"
+ },
+ "ece.channel[:].t_radiation_x.data": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/channel(i1)/t_radiation_x/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_x.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_x/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation_x.data_error_lower": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_x/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_x.data_error_upper": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/channel(i1)/t_radiation_x/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "eV",
+  "utilities_aoscontext": "yes"
+ },
+ "ece.channel[:].t_radiation_x.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation_x/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.channel[:].t_radiation_x.validity_timed": {
+  "coordinates": [
+   "ece.channel[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/t_radiation_x/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "utilities_aoscontext": "yes"
  },
  "ece.channel[:].time": {
   "coordinates": [
@@ -1431,6 +3340,91 @@
   "timebasepath": "time",
   "type": "dynamic",
   "units": "s"
+ },
+ "ece.channel[:].voltage_t_radiation": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "t_e_voltage",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Raw voltage measured on each channel, from which the calibrated temperature data is then derived",
+  "full_path": "ece/channel(i1)/voltage_t_radiation",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d_validity",
+  "units": "V"
+ },
+ "ece.channel[:].voltage_t_radiation.data": {
+  "coordinates": [
+   "ece.channel[:].voltage_t_radiation.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "voltage_t_radiation/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].voltage_t_radiation.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].voltage_t_radiation.data_error_lower": {
+  "coordinates": [
+   "ece.channel[:].voltage_t_radiation.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "voltage_t_radiation/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].voltage_t_radiation.data_error_upper": {
+  "coordinates": [
+   "ece.channel[:].voltage_t_radiation.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "voltage_t_radiation/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].voltage_t_radiation.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "voltage_t_radiation/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ece.channel[:].voltage_t_radiation.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.channel[:].voltage_t_radiation.validity_timed": {
+  "coordinates": [
+   "ece.channel[:].voltage_t_radiation.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/channel(i1)/voltage_t_radiation/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "voltage_t_radiation/time",
+  "type": "dynamic"
  },
  "ece.code": {
   "data_type": "STRUCTURE",
@@ -2014,7 +4008,7 @@
  },
  "ece.line_of_sight": {
   "data_type": "STRUCTURE",
-  "documentation": "Description of the line of sight of the diagnostic (valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic",
+  "documentation": "Line of sight of the diagnostic (fill when valid for all channels), defined by two points. By convention, the first point is the closest to the diagnostic. In case the channels have different lines of sight, they should be described within the channel array of structures",
   "full_path": "ece/line_of_sight",
   "lifecycle_status": "alpha",
   "structure_reference": "line_of_sight_2points"
@@ -2823,7 +4817,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Electron temperature from the closest channel to the magnetic axis, together with its radial location",
   "full_path": "ece/t_e_central",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d_validity_position",
   "units": "eV"
  },
@@ -2834,7 +4829,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "ece/t_e_central/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "eV"
@@ -2854,7 +4849,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "ece/t_e_central/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "eV"
@@ -2866,7 +4861,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "ece/t_e_central/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "eV"
@@ -2878,7 +4873,7 @@
   "data_type": "FLT_1D",
   "documentation": "Normalised toroidal flux coordinate of the measurement",
   "full_path": "ece/t_e_central/rho_tor_norm(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "-"
@@ -2898,7 +4893,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"rho_tor_norm\"",
   "full_path": "ece/t_e_central/rho_tor_norm_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "-"
@@ -2910,7 +4905,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"rho_tor_norm\"",
   "full_path": "ece/t_e_central/rho_tor_norm_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "-"
@@ -2922,7 +4917,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "ece/t_e_central/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
   "type": "dynamic",
   "units": "s"
@@ -2931,7 +4926,7 @@
   "data_type": "INT_0D",
   "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/t_e_central/validity",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "ece.t_e_central.validity_timed": {
@@ -2941,8 +4936,393 @@
   "data_type": "INT_1D",
   "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
   "full_path": "ece/t_e_central/validity_timed(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "t_e_central/time",
+  "type": "dynamic"
+ },
+ "ece.t_radiation_central": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "t_e_central",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Radiation temperature from the closest channel to the magnetic axis, together with its radial location",
+  "full_path": "ece/t_radiation_central",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d_validity_position",
+  "units": "eV"
+ },
+ "ece.t_radiation_central.data": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/t_radiation_central/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/t_radiation_central/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central.data_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/t_radiation_central/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central.data_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/t_radiation_central/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central.rho_tor_norm": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate of the measurement",
+  "full_path": "ece/t_radiation_central/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ece/t_radiation_central/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ece.t_radiation_central.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.t_radiation_central.validity_timed": {
+  "coordinates": [
+   "ece.t_radiation_central.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central/time",
+  "type": "dynamic"
+ },
+ "ece.t_radiation_central_o": {
+  "data_type": "STRUCTURE",
+  "documentation": "Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (Ordinary mode)",
+  "full_path": "ece/t_radiation_central_o",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.42.0",
+  "structure_reference": "signal_flt_1d_validity_position",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_o.data": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/t_radiation_central_o/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_o.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/t_radiation_central_o/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_o.data_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/t_radiation_central_o/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_o.data_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/t_radiation_central_o/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_o.rho_tor_norm": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate of the measurement",
+  "full_path": "ece/t_radiation_central_o/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_o.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_o/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_o.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_o/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_o.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_o/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_o.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ece/t_radiation_central_o/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ece.t_radiation_central_o.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central_o/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_o.validity_timed": {
+  "coordinates": [
+   "ece.t_radiation_central_o.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central_o/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_o/time",
+  "type": "dynamic"
+ },
+ "ece.t_radiation_central_x": {
+  "data_type": "STRUCTURE",
+  "documentation": "Predicted radiation temperature of the channel closest to the magnetic axis, together with its radial location (eXtraordinary mode)",
+  "full_path": "ece/t_radiation_central_x",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "lifecycle_version": "3.42.0",
+  "structure_reference": "signal_flt_1d_validity_position",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_x.data": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/t_radiation_central_x/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_x.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/t_radiation_central_x/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_x.data_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/t_radiation_central_x/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_x.data_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/t_radiation_central_x/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "eV"
+ },
+ "ece.t_radiation_central_x.rho_tor_norm": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Normalised toroidal flux coordinate of the measurement",
+  "full_path": "ece/t_radiation_central_x/rho_tor_norm(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_x.rho_tor_norm_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_x/rho_tor_norm_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_x.rho_tor_norm_error_lower": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_x/rho_tor_norm_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_x.rho_tor_norm_error_upper": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"rho_tor_norm\"",
+  "full_path": "ece/t_radiation_central_x/rho_tor_norm_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "-"
+ },
+ "ece.t_radiation_central_x.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ece/t_radiation_central_x/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "ece.t_radiation_central_x.validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central_x/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.t_radiation_central_x.validity_timed": {
+  "coordinates": [
+   "ece.t_radiation_central_x.time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
+  "full_path": "ece/t_radiation_central_x/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_radiation_central_x/time",
   "type": "dynamic"
  },
  "ece.time": {

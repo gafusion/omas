@@ -2,7 +2,6 @@ import os
 import numpy as np
 from inspect import unwrap
 
-from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
@@ -571,7 +570,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
-        if iterable(xfrac):
+        if np.iterable(xfrac):
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         elif type(xfrac) == int or type(xfrac) == float:
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
@@ -1049,7 +1048,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='machine')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
-                ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                ods['langmuir_probes.embedded'][j]['position.phi'] = np.nan  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 if _get_measurements:
@@ -1507,7 +1506,7 @@ def core_profiles_global_quantities_data(ods, pulse):
 
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
 
-        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.NaN)(t)
+        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
 # ================================

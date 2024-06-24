@@ -601,7 +601,7 @@
  },
  "controllers.linear_controller[:].inputs.data": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -622,7 +622,7 @@
  },
  "controllers.linear_controller[:].inputs.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -635,7 +635,7 @@
  },
  "controllers.linear_controller[:].inputs.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].input_names",
    "controllers.linear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -689,7 +689,7 @@
  },
  "controllers.linear_controller[:].outputs.data": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
@@ -710,7 +710,7 @@
  },
  "controllers.linear_controller[:].outputs.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
@@ -723,7 +723,7 @@
  },
  "controllers.linear_controller[:].outputs.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "controllers.linear_controller[:].output_names",
    "controllers.linear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1479,7 +1479,7 @@
  },
  "controllers.nonlinear_controller[:].inputs.data": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].input_names",
    "controllers.nonlinear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1500,7 +1500,7 @@
  },
  "controllers.nonlinear_controller[:].inputs.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].input_names",
    "controllers.nonlinear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1513,7 +1513,7 @@
  },
  "controllers.nonlinear_controller[:].inputs.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].input_names",
    "controllers.nonlinear_controller[:].inputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1567,7 +1567,7 @@
  },
  "controllers.nonlinear_controller[:].outputs.data": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].output_names",
    "controllers.nonlinear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1588,7 +1588,7 @@
  },
  "controllers.nonlinear_controller[:].outputs.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].output_names",
    "controllers.nonlinear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
@@ -1601,7 +1601,7 @@
  },
  "controllers.nonlinear_controller[:].outputs.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "controllers.nonlinear_controller[:].output_names",
    "controllers.nonlinear_controller[:].outputs.time"
   ],
   "data_type": "FLT_2D",
