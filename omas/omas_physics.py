@@ -2684,6 +2684,7 @@ def cocos_transform(cocosin_index, cocosout_index):
     transforms['F'] = transforms['TOR']
     transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
     transforms['BP'] = transforms['POL']
+    transforms['PSI/TOR'] = sigma_Ip_eff * sigma_B0_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
     transforms[None] = 1
 
     printd(transforms, topic='cocos')
@@ -2982,6 +2983,7 @@ def generate_cocos_signals(structures=[], threshold=0, write=True, verbose=False
 #        transforms['F'] = transforms['TOR']
 #        transforms['POL'] = sigma_B0_eff * sigma_rhotp_eff
 #        transforms['BP'] = transforms['POL']
+#        transforms['PSI/TOR'] = sigma_Ip_eff * sigma_B0_eff * sigma_Bp_eff * (2 * numpy.pi) ** exp_Bp_eff
 #        transforms[None] = 1
 #
 
