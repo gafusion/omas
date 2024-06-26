@@ -158,6 +158,11 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "operational_instrumentation.ids_properties.occurrence": {
+  "data_type": "INT_0D",
+  "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
+  "full_path": "operational_instrumentation.ids_properties.occurrence"
+ },
  "operational_instrumentation.ids_properties.occurrence_type": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/occurrence_type_identifier.xml",
