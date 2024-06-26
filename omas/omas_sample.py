@@ -175,8 +175,6 @@ def ic_antennas(ods):
 
     :param ods: ODS instance
 
-    :param time_index: int
-
     :return: ODS instance with profiles added
     """
     from omas import load_omas_json
@@ -253,8 +251,6 @@ def summary(ods):
     This method operates in in-place
 
     :param ods: ODS instance
-
-    :param time_index: int
 
     :return: ODS instance with sources added
     """
@@ -590,19 +586,19 @@ def langmuir_probes(ods):
     ods['langmuir_probes.embedded.1.name'] = 'p23'
     ods['langmuir_probes.embedded.1.position.r'] = 0.9
     ods['langmuir_probes.embedded.1.position.z'] = -0.9
-    ods['langmuir_probes.embedded.1.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.1.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.2.identifier'] = -2
     ods['langmuir_probes.embedded.2.name'] = 'blah'
     ods['langmuir_probes.embedded.2.position.r'] = 1.5
     ods['langmuir_probes.embedded.2.position.z'] = -1.25
-    ods['langmuir_probes.embedded.2.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.2.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.3.identifier'] = -3
     ods['langmuir_probes.embedded.3.name'] = 'donkey!'
     ods['langmuir_probes.embedded.3.position.r'] = 1.525
     ods['langmuir_probes.embedded.3.position.z'] = -1.25
-    ods['langmuir_probes.embedded.3.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.3.position.phi'] = numpy.nan
 
     ods['langmuir_probes.embedded.4.identifier'] = -4
     ods['langmuir_probes.embedded.4.name'] = 'zzz'
@@ -614,7 +610,7 @@ def langmuir_probes(ods):
     ods['langmuir_probes.embedded.5.name'] = "it's just a test"
     ods['langmuir_probes.embedded.5.position.r'] = 2.45
     ods['langmuir_probes.embedded.5.position.z'] = 0.25
-    ods['langmuir_probes.embedded.5.position.phi'] = numpy.NaN
+    ods['langmuir_probes.embedded.5.position.phi'] = numpy.nan
 
     return ods
 
@@ -660,62 +656,61 @@ def pulse_schedule(ods):
 
     def add_position_control(ods_):
         """Adds sample data for the position control subset"""
-        bdry = ods_['pulse_schedule.position_control.boundary_outline']
 
         # These data are sampled from DIII-D#161558 at the following times:
         t = numpy.array([0.1, 0.52, 0.99, 1.29, 1.46, 2.01, 3.91, 5.97, 6.6, 6.9])  # s
-        bdry[0]['r.reference.data'] = numpy.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
-        bdry[0]['z.reference.data'] = numpy.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-        bdry[1]['r.reference.data'] = numpy.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
-        bdry[1]['z.reference.data'] = numpy.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
-        bdry[2]['r.reference.data'] = numpy.array([1.9, 1.9, 1.9, 1.88, 1.87, 1.87, 1.87, 1.87, 1.83, 1.83])
-        bdry[2]['z.reference.data'] = numpy.array([0.81, 0.81, 0.81, 0.78, 0.76, 0.76, 0.76, 0.76, 0.69, 0.69])
-        bdry[3]['r.reference.data'] = numpy.array([1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52])
-        bdry[3]['z.reference.data'] = numpy.array([0.84, 0.91, 0.91, 0.87, 0.84, 0.83, 0.83, 0.83, 1.35, 1.35])
-        bdry[4]['r.reference.data'] = numpy.array([1.44, 1.39, 1.39, 1.41, 1.43, 1.43, 1.43, 1.43, 1.1, 1.1])
-        bdry[4]['z.reference.data'] = numpy.array([0.8, 0.86, 0.86, 0.83, 0.81, 0.81, 0.81, 0.81, 1.21, 1.21])
-        bdry[5]['r.reference.data'] = numpy.array([1.32, 1.28, 1.28, 1.3, 1.31, 1.32, 1.32, 1.32, 1.07, 1.07])
-        bdry[5]['z.reference.data'] = numpy.array([0.73, 0.77, 0.77, 0.75, 0.74, 0.73, 0.73, 0.73, 0.99, 0.99])
-        bdry[6]['r.reference.data'] = numpy.array([0.92, 1.16, 1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 0.92, 0.92])
-        bdry[6]['z.reference.data'] = numpy.array([0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0, 0.0])
-        bdry[7]['r.reference.data'] = numpy.array([1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2])
-        bdry[7]['z.reference.data'] = numpy.array([0.5, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.5, 0.5])
-        bdry[8]['r.reference.data'] = numpy.array([1.08, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.08, 1.08])
-        bdry[8]['z.reference.data'] = numpy.array([-0.5, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.5, -0.5])
-        bdry[9]['r.reference.data'] = numpy.array([1.23, 1.12, 1.12, 1.14, 1.14, 1.14, 1.14, 1.14, 1.23, 1.23])
-        bdry[9]['z.reference.data'] = numpy.array([-0.78, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.79, -0.79])
-        bdry[10]['r.reference.data'] = numpy.array([1.94, 1.18, 1.18, 1.21, 1.22, 1.22, 1.22, 1.22, 1.92, 1.92])
-        bdry[10]['z.reference.data'] = numpy.array([-0.88, -0.81, -0.81, -0.79, -0.79, -0.79, -0.79, -0.79, -0.85, -0.85])
-        bdry[11]['r.reference.data'] = numpy.array([2.23, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 2.18, 2.18])
-        bdry[11]['z.reference.data'] = numpy.array([-0.43, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.43, -0.43])
+
+        bdry = ods_['pulse_schedule.position_control.boundary_outline']
+        bdry[0]['r.reference'] = numpy.array([2.31, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.27, 2.25, 2.25])  # m
+        bdry[0]['z.reference'] = numpy.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+        bdry[1]['r.reference'] = numpy.array([2.21, 2.17, 2.17, 2.16, 2.16, 2.15, 2.16, 2.15, 2.12, 2.12])
+        bdry[1]['z.reference'] = numpy.array([0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43, 0.43])
+        bdry[2]['r.reference'] = numpy.array([1.9, 1.9, 1.9, 1.88, 1.87, 1.87, 1.87, 1.87, 1.83, 1.83])
+        bdry[2]['z.reference'] = numpy.array([0.81, 0.81, 0.81, 0.78, 0.76, 0.76, 0.76, 0.76, 0.69, 0.69])
+        bdry[3]['r.reference'] = numpy.array([1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52, 1.52])
+        bdry[3]['z.reference'] = numpy.array([0.84, 0.91, 0.91, 0.87, 0.84, 0.83, 0.83, 0.83, 1.35, 1.35])
+        bdry[4]['r.reference'] = numpy.array([1.44, 1.39, 1.39, 1.41, 1.43, 1.43, 1.43, 1.43, 1.1, 1.1])
+        bdry[4]['z.reference'] = numpy.array([0.8, 0.86, 0.86, 0.83, 0.81, 0.81, 0.81, 0.81, 1.21, 1.21])
+        bdry[5]['r.reference'] = numpy.array([1.32, 1.28, 1.28, 1.3, 1.31, 1.32, 1.32, 1.32, 1.07, 1.07])
+        bdry[5]['z.reference'] = numpy.array([0.73, 0.77, 0.77, 0.75, 0.74, 0.73, 0.73, 0.73, 0.99, 0.99])
+        bdry[6]['r.reference'] = numpy.array([0.92, 1.16, 1.16, 1.16, 1.17, 1.17, 1.17, 1.17, 0.92, 0.92])
+        bdry[6]['z.reference'] = numpy.array([0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0, 0.0])
+        bdry[7]['r.reference'] = numpy.array([1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2])
+        bdry[7]['z.reference'] = numpy.array([0.5, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.5, 0.5])
+        bdry[8]['r.reference'] = numpy.array([1.08, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.08, 1.08])
+        bdry[8]['z.reference'] = numpy.array([-0.5, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.16, -0.5, -0.5])
+        bdry[9]['r.reference'] = numpy.array([1.23, 1.12, 1.12, 1.14, 1.14, 1.14, 1.14, 1.14, 1.23, 1.23])
+        bdry[9]['z.reference'] = numpy.array([-0.78, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.79, -0.79])
+        bdry[10]['r.reference'] = numpy.array([1.94, 1.18, 1.18, 1.21, 1.22, 1.22, 1.22, 1.22, 1.92, 1.92])
+        bdry[10]['z.reference'] = numpy.array([-0.88, -0.81, -0.81, -0.79, -0.79, -0.79, -0.79, -0.79, -0.85, -0.85])
+        bdry[11]['r.reference'] = numpy.array([2.23, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 1.89, 2.18, 2.18])
+        bdry[11]['z.reference'] = numpy.array([-0.43, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.43, -0.43])
 
         for i in range(12):
             bdry[i]['r.reference_type'] = bdry[i]['z.reference_type'] = 1
             bdry[i]['r.reference_name'] = bdry[i]['z.reference_name'] = 'seg{}'.format(i)
-            bdry[i]['r.reference.time'] = bdry[i]['z.reference.time'] = t
 
         strk = ods_['pulse_schedule.position_control.strike_point']
-        strk[0]['r.reference.data'] = numpy.array([numpy.NaN, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, numpy.NaN, numpy.NaN])
-        strk[0]['z.reference.data'] = numpy.array([numpy.NaN, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, numpy.NaN, numpy.NaN])
-        strk[1]['r.reference.data'] = numpy.array([numpy.NaN, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, numpy.NaN, numpy.NaN])
-        strk[1]['z.reference.data'] = numpy.array([numpy.NaN, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, numpy.NaN, numpy.NaN])
+        strk[0]['r.reference'] = numpy.array([numpy.nan, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, numpy.nan, numpy.nan])
+        strk[0]['z.reference'] = numpy.array([numpy.nan, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, -1.35, numpy.nan, numpy.nan])
+        strk[1]['r.reference'] = numpy.array([numpy.nan, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, numpy.nan, numpy.nan])
+        strk[1]['z.reference'] = numpy.array([numpy.nan, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, -1.2, numpy.nan, numpy.nan])
 
         for i in range(2):
             strk[i]['r.reference_type'] = strk[i]['z.reference_type'] = 1
             strk[i]['r.reference_name'] = strk[i]['z.reference_name'] = 'strk{}'.format(i)
-            strk[i]['r.reference.time'] = strk[i]['z.reference.time'] = t
 
         xpt = ods_['pulse_schedule.position_control.x_point']
-        xpt[0]['r.reference.data'] = numpy.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
-        xpt[0]['z.reference.data'] = numpy.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
-        xpt[1]['r.reference.data'] = numpy.array([numpy.NaN] * len(t))
-        xpt[1]['z.reference.data'] = numpy.array([numpy.NaN] * len(t))
+        xpt[0]['r.reference'] = numpy.array([1.1, 1.34, 1.34, 1.43, 1.43, 1.43, 1.43, 1.43, 1.13, 1.13])
+        xpt[0]['z.reference'] = numpy.array([-1.6, -1.21, -1.21, -1.15, -1.15, -1.15, -1.15, -1.15, -1.41, -1.41])
+        xpt[1]['r.reference'] = numpy.array([numpy.nan] * len(t))
+        xpt[1]['z.reference'] = numpy.array([numpy.nan] * len(t))
 
         for i in range(2):
             xpt[i]['r.reference_type'] = xpt[i]['z.reference_type'] = 1
             xpt[i]['r.reference_name'] = xpt[i]['z.reference_name'] = 'strk{}'.format(i)
-            xpt[i]['r.reference.time'] = xpt[i]['z.reference.time'] = t
 
+        ods_['pulse_schedule.position_control.time'] = t
         ods_['pulse_schedule.time'] = t
 
     add_position_control(ods)

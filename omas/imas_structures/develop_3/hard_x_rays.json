@@ -1714,7 +1714,7 @@
  "hard_x_rays.channel[:].filter_window[:].material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material of the filter window\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Material of the filter window\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy\n20) U_235 : Uranium 235 isotope\n21) U_238 : Uranium 238 isotope\n22) Diamond : Diamond\n23) CxHy : Organic molecule\n24) LaCl3 : Lanthanum chloride\n25) LaBr : Lanthanum bromide\n26) HPGe : High Purity Germanium\n27) CeBr : Cesium bromide\n28) CZT : Cadmium zinc telluride\n29) In_115 : Indium 115 isotope\n30) He_4 : Helium 4 isotope",
   "full_path": "hard_x_rays/channel(i1)/filter_window(i2)/material",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -2752,7 +2752,7 @@
  },
  "hard_x_rays.channel[:].radiance.data": {
   "coordinates": [
-   "1...N",
+   "hard_x_rays.channel[:].energy_band",
    "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
@@ -2773,7 +2773,7 @@
  },
  "hard_x_rays.channel[:].radiance.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "hard_x_rays.channel[:].energy_band",
    "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
@@ -2786,7 +2786,7 @@
  },
  "hard_x_rays.channel[:].radiance.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "hard_x_rays.channel[:].energy_band",
    "hard_x_rays.channel[:].radiance.time"
   ],
   "data_type": "FLT_2D",
@@ -2841,6 +2841,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "hard_x_rays.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "hard_x_rays.code.library": {
   "coordinates": [
    "1...N"
@@ -2856,6 +2864,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "hard_x_rays/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3272,10 +3288,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "hard_x_rays.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "hard_x_rays/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "hard_x_rays.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "hard_x_rays.ids_properties.occurrence"
+ },
+ "hard_x_rays.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "hard_x_rays/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "hard_x_rays.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "hard_x_rays/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "hard_x_rays/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "hard_x_rays/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "hard_x_rays.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -3297,6 +3351,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "hard_x_rays/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3332,6 +3394,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "hard_x_rays/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3383,6 +3453,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "hard_x_rays/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3440,6 +3518,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "hard_x_rays.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "hard_x_rays.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -3483,6 +3569,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "hard_x_rays/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "hard_x_rays.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "hard_x_rays/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -3,6 +3,8 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -151,7 +153,7 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse):
                     identifier = '{}{:02d}'.format(corner.upper(), probe_number)
                     ods['langmuir_probes.embedded'][j]['position.r'] = r[i]
                     ods['langmuir_probes.embedded'][j]['position.z'] = z[i]
-                    ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                    ods['langmuir_probes.embedded'][j]['position.phi'] = np.nan  # Didn't find this in MDSplus
                     ods['langmuir_probes.embedded'][j]['identifier'] = identifier
                     ods['langmuir_probes.embedded'][j]['name'] = identifier
                     j += 1

@@ -2,7 +2,7 @@
  "interferometer": {
   "documentation": "Interferometer diagnostic",
   "full_path": "interferometer",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.41.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.15.0",
   "maxoccur": "5"
@@ -341,6 +341,203 @@
   "type": "static",
   "units": "m"
  },
+ "interferometer.channel[:].n_e": {
+  "data_type": "STRUCTURE",
+  "documentation": "Estimated electron density profile on a set of positions along the line of sight and used by forward models.",
+  "full_path": "interferometer/channel(i1)/n_e",
+  "introduced_after_version": "3.40.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "interferometer_channel_n_e"
+ },
+ "interferometer.channel[:].n_e.data": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Data",
+  "full_path": "interferometer/channel(i1)/n_e/data(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.data_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.data_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r",
+   "interferometer.channel[:].n_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "interferometer/channel(i1)/n_e/data_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "m^-3"
+ },
+ "interferometer.channel[:].n_e.positions": {
+  "data_type": "STRUCTURE",
+  "documentation": "Positions along the line of sight",
+  "full_path": "interferometer/channel(i1)/n_e/positions",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_static"
+ },
+ "interferometer.channel[:].n_e.positions.phi": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.phi_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "interferometer.channel[:].n_e.positions.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_lower": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.positions.z_error_upper": {
+  "coordinates": [
+   "interferometer.channel[:].n_e.positions.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "interferometer/channel(i1)/n_e/positions/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "interferometer.channel[:].n_e.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "interferometer/channel(i1)/n_e/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "n_e/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "interferometer.channel[:].n_e_line": {
   "data_type": "STRUCTURE",
   "documentation": "Line integrated density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight (i.e. forward AND return for a reflected channel: NO dividing by 2 correction)",
@@ -425,7 +622,7 @@
  },
  "interferometer.channel[:].n_e_line_average": {
   "data_type": "STRUCTURE",
-  "documentation": "Line average density, possibly obtained by a combination of multiple interferometry wavelengths. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
+  "documentation": "Line average density inferred from interferometer measurements. Corresponds to the density integrated along the full line-of-sight and then divided by the length of the line-of-sight",
   "full_path": "interferometer/channel(i1)/n_e_line_average",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d_validity",
@@ -780,6 +977,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "interferometer.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "interferometer.code.library": {
   "coordinates": [
    "1...N"
@@ -795,6 +1000,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -975,10 +1188,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "interferometer.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "interferometer/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "interferometer.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "interferometer.ids_properties.occurrence"
+ },
+ "interferometer.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "interferometer/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "interferometer.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "interferometer/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "interferometer/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "interferometer/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "interferometer.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1000,6 +1251,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1035,6 +1294,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1086,6 +1353,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1143,6 +1418,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "interferometer.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "interferometer.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1186,6 +1469,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "interferometer/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "interferometer.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "interferometer/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

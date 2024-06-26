@@ -52,12 +52,15 @@ def machine_mapping_function(__regression_arguments__, **regression_args):
                     default_options = {item: value for item, value in default_options.items() if not item.startswith('_')}
 
             # call
-            update_mapping = kwargs.pop("update_callback")
+            update_mapping = None
+            if "update_callback" in kwargs:
+                update_mapping = kwargs.pop("update_callback")
             out = f(*args, **kwargs)
             #update mappings definitions
-            if clean_ods and omas_git_repo:
-                for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
-                    update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
+            if not update_mapping is None:
+                if clean_ods and omas_git_repo:
+                    for ulocation in numpy.unique(list(map(o2u, args[0].flat().keys()))):
+                        update_mapping(machine, ulocation, {'PYTHON': call}, 11, default_options, update_path=True)
 
             return out
 

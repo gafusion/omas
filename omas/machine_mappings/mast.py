@@ -4,6 +4,8 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.omas_core import ODS
 import glob
 import pyuda
 
@@ -310,12 +312,61 @@ def thomson_scattering_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=44653)
-def thomson_scattering_data(ods, pulse):
+def thomson_scattering_data(ods, pulse, server=None, port=None):
     """
     Loads MAST Thomson measurement data
 
     :param pulse: int
     """
+
+
+    if int(pulse) < 23000:
+        trace_te = "atm_te"
+        trace_ne = "atm_ne"
+        trace_r = "atm_R"
+    elif int(pulse) > 43000:
+        trace_te = "ayc/T_e"
+        trace_ne = "ayc/n_e"
+        trace_r = "ayc/r"
+    else:
+        trace_te = "ayc_te"
+        trace_ne = "ayc_ne"
+        trace_r = "ayc_r"
+
+    client = get_pyuda_client(server=server, port=port)
+
+    udasignal = client.get(trace_te, pulse)
+
+    Te_data = udasignal.data
+    Te_err = udasignal.errors
+    Te_time = udasignal.dims[0].data
+    udasignal = client.get(trace_ne, pulse)
+    ne_data = udasignal.data
+    ne_err = udasignal.errors
+    ne_time = udasignal.dims[0].data
+
+    r = client.get(trace_r, pulse).data
+
+    r = r[0]
+
+    for i, R in enumerate(r):
+        
+        ch = ods['thomson_scattering']['channel'][i]
+        ch['name'] = 'ch_' + str(i)
+        ch['identifier'] = 'ch_' + str(i)
+        ch['position']['r'] = R 
+        ch['position']['z'] = 0.0
+
+        mask = ~np.isnan(ne_data[:,i])
+
+        ch['n_e.time'] = ne_time[mask]
+        ch['n_e.data_error_upper'] =  ne_err[mask,i]
+        ch['n_e.data'] =  ne_data[mask,i]
+
+        mask = ~np.isinf(Te_data[:,i])
+        ch['t_e.time'] = Te_time[mask]
+        ch['t_e.data_error_upper'] =  Te_err[mask,i]
+        ch['t_e.data'] =  Te_data[mask,i]
 
     return
 

@@ -2,7 +2,7 @@
  "charge_exchange": {
   "documentation": "Charge exchange spectroscopy diagnostic",
   "full_path": "charge_exchange",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "4"
@@ -771,7 +771,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the diagnostic neutral beam particle",
   "full_path": "charge_exchange/channel(i1)/bes/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].bes.lorentz_shift": {
@@ -838,6 +839,16 @@
   "type": "dynamic",
   "units": "s"
  },
+ "charge_exchange.channel[:].bes.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the diagnostic neutral beam particle",
+  "full_path": "charge_exchange/channel(i1)/bes/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.channel[:].bes.radiances": {
   "coordinates": [
    "1...9",
@@ -852,7 +863,7 @@
  },
  "charge_exchange.channel[:].bes.radiances.data": {
   "coordinates": [
-   "1...N",
+   "1...9",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
   "data_type": "FLT_2D",
@@ -873,7 +884,7 @@
  },
  "charge_exchange.channel[:].bes.radiances.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "1...9",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
   "data_type": "FLT_2D",
@@ -886,7 +897,7 @@
  },
  "charge_exchange.channel[:].bes.radiances.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "1...9",
    "charge_exchange.channel[:].bes.radiances.time"
   ],
   "data_type": "FLT_2D",
@@ -1059,7 +1070,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the ion (e.g. H+, D+, T+, He+2, C+6, ...)",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].n_i_over_n_e": {
@@ -1154,6 +1166,16 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.channel[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the ion (e.g. H+, D+, T+, He+2, C+6, ...)",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.channel[:].ion[:].t_i": {
   "data_type": "STRUCTURE",
   "documentation": "Ion temperature at the channel measurement point",
@@ -1243,6 +1265,105 @@
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/t_i_method/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "velocity_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "m.s^-1"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi.data": {
+  "coordinates": [
+   "charge_exchange.channel[:].ion[:].velocity_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "velocity_phi/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi.data_error_lower": {
+  "coordinates": [
+   "charge_exchange.channel[:].ion[:].velocity_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "velocity_phi/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi.data_error_upper": {
+  "coordinates": [
+   "charge_exchange.channel[:].ion[:].velocity_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "velocity_phi/time",
+  "type": "dynamic",
+  "units": "m.s^-1"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "velocity_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi_method": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "velocity_tor_method",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Description of the method used to reconstruct the ion toroidal velocity",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi_method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier",
+  "units": "m.s^-1"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi_method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi_method/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi_method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi_method/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].ion[:].velocity_phi_method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_phi_method/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1342,7 +1463,8 @@
   "data_type": "STRUCTURE",
   "documentation": "Toroidal velocity of the ion (oriented counter-clockwise when seen from above) at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "m.s^-1"
  },
@@ -1353,7 +1475,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
@@ -1373,7 +1495,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
@@ -1385,7 +1507,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "m.s^-1"
@@ -1397,7 +1519,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "velocity_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1406,28 +1528,29 @@
   "data_type": "STRUCTURE",
   "documentation": "Description of the method used to reconstruct the ion toroidal velocity",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor_method",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "identifier"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor_method.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor_method/description",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor_method.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor_method/index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].velocity_tor_method.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "charge_exchange/channel(i1)/ion(i2)/velocity_tor_method/name",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].ion[:].z_ion": {
@@ -1541,6 +1664,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the fast ion (e.g. H+, D+, T+, He+2, C+6, ...)",
   "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].ion_fast[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the fast ion (e.g. H+, D+, T+, He+2, C+6, ...)",
+  "full_path": "charge_exchange/channel(i1)/ion_fast(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1732,11 +1866,110 @@
   "type": "constant",
   "units": "Elementary Charge Unit"
  },
+ "charge_exchange.channel[:].momentum_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "kg.m^-1.s^-1"
+ },
+ "charge_exchange.channel[:].momentum_phi.data": {
+  "coordinates": [
+   "charge_exchange.channel[:].momentum_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "momentum_phi/time",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "charge_exchange.channel[:].momentum_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].momentum_phi.data_error_lower": {
+  "coordinates": [
+   "charge_exchange.channel[:].momentum_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "momentum_phi/time",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "charge_exchange.channel[:].momentum_phi.data_error_upper": {
+  "coordinates": [
+   "charge_exchange.channel[:].momentum_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "momentum_phi/time",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "charge_exchange.channel[:].momentum_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "momentum_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "charge_exchange.channel[:].momentum_phi_method": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "momentum_tor_method",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Description of the method used to reconstruct the total plasma toroidal momentum",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi_method",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "charge_exchange.channel[:].momentum_phi_method.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi_method/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].momentum_phi_method.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi_method/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].momentum_phi_method.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "charge_exchange/channel(i1)/momentum_phi_method/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.channel[:].momentum_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi), at the channel measurement point",
   "full_path": "charge_exchange/channel(i1)/momentum_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "kg.m^-1.s^-1"
  },
@@ -1747,7 +1980,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
@@ -1767,7 +2000,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
@@ -1779,7 +2012,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
@@ -1791,7 +2024,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "charge_exchange/channel(i1)/momentum_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "momentum_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1800,28 +2033,29 @@
   "data_type": "STRUCTURE",
   "documentation": "Description of the method used to reconstruct the total plasma toroidal momentum",
   "full_path": "charge_exchange/channel(i1)/momentum_tor_method",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "identifier"
  },
  "charge_exchange.channel[:].momentum_tor_method.description": {
   "data_type": "STR_0D",
   "documentation": "Verbose description",
   "full_path": "charge_exchange/channel(i1)/momentum_tor_method/description",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].momentum_tor_method.index": {
   "data_type": "INT_0D",
   "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
   "full_path": "charge_exchange/channel(i1)/momentum_tor_method/index",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].momentum_tor_method.name": {
   "data_type": "STR_0D",
   "documentation": "Short string identifier",
   "full_path": "charge_exchange/channel(i1)/momentum_tor_method/name",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "type": "constant"
  },
  "charge_exchange.channel[:].name": {
@@ -2163,7 +2397,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2184,7 +2418,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2197,7 +2431,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].intensity_spectrum.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2299,6 +2533,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the processed spectral line: Spectroscopy notation emitting element (e.g. D I, Be IV,  W I, C VI), transition - if known - between round brackets (e.g. (3-2) ) and indication type of charge exchange - if applicable - between square brackets (e.g. [ACX] or [PCX]). Example for beryllium active charge exchange line at 468.5 nm: 'Be IV (8-6) [ACX]'. Example for impact excitation tungsten line coming from the plasma edge: 'W I' ",
   "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "charge_exchange.channel[:].spectrum[:].processed_line[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the processed spectral line: Spectroscopy notation emitting element (e.g. D I, Be IV,  W I, C VI), transition - if known - between round brackets (e.g. (3-2) ) and indication type of charge exchange - if applicable - between square brackets (e.g. [ACX] or [PCX]). Example for beryllium active charge exchange line at 468.5 nm: 'Be IV (8-6) [ACX]'. Example for impact excitation tungsten line coming from the plasma edge: 'W I' ",
+  "full_path": "charge_exchange/channel(i1)/spectrum(i2)/processed_line(i3)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2588,7 +2833,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
   "data_type": "FLT_2D",
@@ -2609,7 +2854,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
   "data_type": "FLT_2D",
@@ -2622,7 +2867,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_continuum.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_continuum.time"
   ],
   "data_type": "FLT_2D",
@@ -2659,7 +2904,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -2680,7 +2925,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -2693,7 +2938,7 @@
  },
  "charge_exchange.channel[:].spectrum[:].radiance_spectral.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "charge_exchange.channel[:].spectrum[:].wavelengths",
    "charge_exchange.channel[:].spectrum[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3086,6 +3331,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.code.library": {
   "coordinates": [
    "1...N"
@@ -3101,6 +3354,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "charge_exchange/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3259,10 +3520,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "charge_exchange/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "charge_exchange.ids_properties.occurrence"
+ },
+ "charge_exchange.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "charge_exchange/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "charge_exchange.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "charge_exchange/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "charge_exchange/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "charge_exchange/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "charge_exchange.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -3284,6 +3583,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "charge_exchange/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3319,6 +3626,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "charge_exchange/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3370,6 +3685,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "charge_exchange/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3427,6 +3750,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "charge_exchange.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "charge_exchange.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -3470,6 +3801,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "charge_exchange/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "charge_exchange.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "charge_exchange/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
