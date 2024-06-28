@@ -291,6 +291,12 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
 
     :return: Transformed values
     """
+    if origin == "psi_norm" or origin == "rho_pol_norm":
+        if origin == "rho_pol_norm":
+            values = values**2
+        return (values * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+               - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+               + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
     if origin == "rho_pol_norm":
         return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
@@ -335,10 +341,14 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
 
         :return: Transformed values
     """
-    if destination == "rho_pol_norm":
-        return np.sqrt((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]) /
-                       (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
-                        - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+    if destination == "psi_norm" or destination == "rho_pol_norm":
+        psi_n = ((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                 / (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+        if destination == "rho_pol_norm":
+            return np.sqrt(psi_n)
+        else:
+            return psi_n
     elif destination == "rho_tor_norm":
         mask = mask_SOL(ods, time_index, values)
         phi = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", values[mask])
