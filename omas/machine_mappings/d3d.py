@@ -773,7 +773,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     TECE = '\\ECE::TOP.TECE.TECE' + fast_ece
 
     query = {}
-    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ'], ['NUMCH']]):
+    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ', "FLTRWID"], ['NUMCH']]):
         for quantity in quantities:
             query[quantity] = node + quantity
     query['TIME'] = f"dim_of({TECE + '01'})"
@@ -786,7 +786,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
-
+    ods['ece.ids_properties.homogeneous_time'] = 0
     # Not in mds+
     if not _measurements:
         points = [{}, {}]
@@ -813,6 +813,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ch['time'] = ece_map['TIME'] * 1.0e-3
             f[:] = ece_map['FREQ'][ich]
             ch['frequency']['data'] = f * 1.0e9
+            ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
