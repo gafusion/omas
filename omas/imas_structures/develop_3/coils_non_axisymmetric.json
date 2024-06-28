@@ -2,7 +2,7 @@
  "coils_non_axisymmetric": {
   "documentation": "Non axisymmetric active coils system (e.g. ELM control coils, error field correction coils, ...)",
   "full_path": "coils_non_axisymmetric",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.19.1",
   "maxoccur": "5"
@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "coils_non_axisymmetric.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "coils_non_axisymmetric.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "coils_non_axisymmetric/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -131,202 +147,269 @@
   "type": "static"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].cross_section": {
+  "change_nbc_description": "type_changed",
+  "change_nbc_previous_type": "delta_rzphi1d_static",
+  "change_nbc_version": "3.40.0",
+  "coordinates": [
+   "coil[:].conductor[:].elements.types"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "The cross-section perpendicular to the conductor contour is described by a series of contour points, given by their relative position with respect to the start point of each element. If the size of this array of structure is equal to 1, then the cross-section is given only for the first element and translated along the conductor elements. Otherwise, it's given explictly for each element, allowing to describe changes of the cross section shape",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "50",
+  "structure_reference": "coil_cross_section"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].area": {
+  "data_type": "FLT_0D",
+  "documentation": "Area of the conductor cross-section, derived from the above geometric data",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/area",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].area_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"area\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/area_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].area_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"area\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/area_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].area_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"area\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/area_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m^2"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].geometry_type": {
   "data_type": "STRUCTURE",
-  "documentation": "The cross-section perpendicular to the conductor contour is described by a series of contour points, given by their relative position with respect to the start point of the first element. This cross-section is assumed constant for all elements.",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section",
+  "doc_identifier": "utilities/surface_geometry_identifier.xml",
+  "documentation": "Geometry type used to describe the cross section of this element. The conductor centre is given by the ../../elements description.\n1) polygon : Contour described by a polygonal outline\n2) circle : Circle\n3) rectangle : Rectangle\n4) square : Square\n5) annulus : Annulus",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type",
   "lifecycle_status": "alpha",
-  "structure_reference": "delta_rzphi1d_static"
+  "structure_reference": "identifier_static"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_phi": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Toroidal angles (relative to a reference point)",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_phi(:)",
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].geometry_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].geometry_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].geometry_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/geometry_type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].height": {
+  "data_type": "FLT_0D",
+  "documentation": "Full height of the rectangle in the binormal direction, used only if geometry_type/index = 3",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/height",
   "lifecycle_status": "alpha",
   "type": "static",
-  "units": "rad"
+  "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_phi_error_index": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].height_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_phi\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_phi_error_index",
+  "documentation": "Index in the error_description list for \"height\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/height_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_phi_error_lower": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_phi\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_phi_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "rad"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_phi_error_upper": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_phi\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_phi_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "rad"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Major radii (relative to a reference point)",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_r(:)",
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].height_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"height\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/height_error_lower",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_r\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_r_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r_error_lower": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_r\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_r_error_lower(:)",
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].height_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"height\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/height_error_upper",
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r_error_upper": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_r\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_r_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_z": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Heights (relative to a reference point)",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_z(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_z_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"delta_z\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_z_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_z_error_lower": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"delta_z\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_z_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_z_error_upper": {
-  "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].cross_section.delta_r"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"delta_z\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section/delta_z_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "m"
- },
- "coils_non_axisymmetric.coil[:].conductor[:].current": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in the conductor (positive when it flows from the first to the last element)",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current",
+  "documentation": "Polygonal outline of the cross section in the (normal, binormal) coordinate system. Do NOT repeat the first point.",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline",
   "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "A"
+  "structure_reference": "normal_binormal_static"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].current.data": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.binormal": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].current.time"
+   "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data(:)",
+  "documentation": "Coordinates along the binormal axis",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].current.data_error_index": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.binormal_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_index",
+  "documentation": "Index in the error_description list for \"binormal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].current.data_error_lower": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.binormal_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].current.time"
+   "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_lower(:)",
+  "documentation": "Lower error for \"binormal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_lower(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].current.data_error_upper": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.binormal_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].current.time"
+   "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/data_error_upper(:)",
+  "documentation": "Upper error for \"binormal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/binormal_error_upper(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "A"
+  "type": "static",
+  "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].current.time": {
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/current/time(:)",
+  "data_type": "FLT_1D",
+  "documentation": "Coordinate along the normal axis",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "current/time",
-  "type": "dynamic",
-  "units": "s"
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"normal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"normal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].outline.normal_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"normal\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/outline/normal_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].radius_inner": {
+  "data_type": "FLT_0D",
+  "documentation": "Inner radius of the annulus, used only if geometry_type/index = 5",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].radius_inner_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"radius_inner\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].radius_inner_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"radius_inner\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].radius_inner_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"radius_inner\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/radius_inner_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].width": {
+  "data_type": "FLT_0D",
+  "documentation": "Full width of the rectangle or square in the normal direction, when geometry_type/index = 3 or 4. Diameter of the circle when geometry_type/index = 2. Outer diameter of the annulus in case geometry_type/index = 5",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/width",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].width_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"width\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/width_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].width_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"width\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/width_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "coils_non_axisymmetric.coil[:].conductor[:].cross_section[:].width_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"width\"",
+  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/cross_section(i3)/width_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements": {
   "data_type": "STRUCTURE",
-  "documentation": "Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the conductor centre",
+  "documentation": "Set of geometrical elements (line segments and/or arcs of a circle) describing the contour of the conductor centre. We define a coordinate system associated to each element as follows: for the arc and circle elements: binormal = (start point - center) x (intermediate point - center). This vector points in the direction of the circle / arc axis. normal = (center - point on curve). The normal vector will rotate as the point moves around the curve. Tangent = normal x binormal. For the line element we require an extra point, using the currently redundant intermediate point to define the line element's normal axis. The local coordinates for the line element then become: tangent = end point - start point; normal = intermediate point - start point; binormal = tangent x normal. It is assumed that all the axes above are normalized such that they have a unit length.",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements",
   "lifecycle_status": "alpha",
   "structure_reference": "coil_conductor_elements"
@@ -336,11 +419,11 @@
   "documentation": "Position of the centre of the arc of a circle of every element (meaningful only if type/index = 2 or 3, fill with default/empty value otherwise)",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/centres",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.phi": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -359,7 +442,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.phi_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -370,7 +453,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.phi_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -381,7 +464,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -400,7 +483,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -411,7 +494,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -422,7 +505,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.z": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -441,7 +524,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.z_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -452,7 +535,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.z_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.centres.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -466,11 +549,11 @@
   "documentation": "Position of the end point of every element. Meaningful only if type/index = 1 or 2, fill with default/empty value otherwise",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/end_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.phi": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -489,7 +572,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.phi_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -500,7 +583,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.phi_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -511,7 +594,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -530,7 +613,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -541,7 +624,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -552,7 +635,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.z": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -571,7 +654,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.z_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -582,7 +665,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.z_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.end_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -593,14 +676,14 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points": {
   "data_type": "STRUCTURE",
-  "documentation": "Position of an intermediate point along the arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). Meaningful only if type/index = 2, fill with default/empty value otherwise",
+  "documentation": "Position of an intermediate point along the circle or arc of circle, for every element, providing the orientation of the element (must define with the corresponding start point an aperture angle strictly inferior to PI). In the case of a line segment (../types/index=1), fill this node with a point such that the vector intermediate_point - start_point defines the direction of the element's normal axis (see documentation of ../elements)",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/intermediate_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.phi": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -619,7 +702,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.phi_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -630,7 +713,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.phi_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -641,7 +724,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -660,7 +743,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -671,7 +754,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -682,7 +765,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.z": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -701,7 +784,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.z_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -712,7 +795,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.z_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.intermediate_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -721,26 +804,16 @@
   "type": "static",
   "units": "m"
  },
- "coils_non_axisymmetric.coil[:].conductor[:].elements.names": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "STR_1D",
-  "documentation": "Name or description of every element",
-  "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/names(:)",
-  "lifecycle_status": "alpha",
-  "type": "static"
- },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points": {
   "data_type": "STRUCTURE",
   "documentation": "Position of the start point of every element",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/elements/start_points",
   "lifecycle_status": "alpha",
-  "structure_reference": "rzphi1d_static"
+  "structure_reference": "coil_na_rzphi1d_static"
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.phi": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
@@ -759,7 +832,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.phi_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"phi\"",
@@ -770,7 +843,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.phi_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"phi\"",
@@ -781,7 +854,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Major radius",
@@ -800,7 +873,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r_error_lower": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"r\"",
@@ -811,7 +884,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r_error_upper": {
   "coordinates": [
-   "1...N"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"r\"",
@@ -822,7 +895,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.z": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Height",
@@ -841,7 +914,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.z_error_lower": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"z\"",
@@ -852,7 +925,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.z_error_upper": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.start_points.r"
+   "coils_non_axisymmetric.coil[:].conductor[:].elements.types"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"z\"",
@@ -863,7 +936,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].elements.types": {
   "coordinates": [
-   "coils_non_axisymmetric.coil[:].conductor[:].elements.names"
+   "1...N"
   ],
   "data_type": "INT_1D",
   "documentation": "Type of every element: 1: line segment, its ends are given by the start and end points; index = 2: arc of a circle; index = 3: full circle",
@@ -905,7 +978,7 @@
  },
  "coils_non_axisymmetric.coil[:].conductor[:].voltage": {
   "data_type": "STRUCTURE",
-  "documentation": "Voltage on the conductor terminals",
+  "documentation": "Voltage on the conductor terminals. Sign convention : positive when the current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "coils_non_axisymmetric/coil(i1)/conductor(i2)/voltage",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -969,7 +1042,7 @@
  },
  "coils_non_axisymmetric.coil[:].current": {
   "data_type": "STRUCTURE",
-  "documentation": "Current in one turn of the coil (to be multiplied by the number of turns to calculate the magnetic field generated). Sign convention : a positive current generates a positive radial magnetic field",
+  "documentation": "Current in one turn of the coil (to be multiplied by the number of turns to calculate the magnetic field generated). Sign convention : a positive current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "coils_non_axisymmetric/coil(i1)/current",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1111,7 +1184,7 @@
  },
  "coils_non_axisymmetric.coil[:].voltage": {
   "data_type": "STRUCTURE",
-  "documentation": "Voltage on the coil terminals. Sign convention : a positive power supply voltage (and power supply current) generates a positive radial magnetic field",
+  "documentation": "Voltage on the coil terminals. Sign convention : positive when the current flows in the direction in which conductor elements are ordered (from start to end for a positive polarity coil)",
   "full_path": "coils_non_axisymmetric/coil(i1)/voltage",
   "lifecycle_status": "alpha",
   "structure_reference": "signal_flt_1d",
@@ -1201,10 +1274,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "coils_non_axisymmetric.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "coils_non_axisymmetric/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "coils_non_axisymmetric.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "coils_non_axisymmetric.ids_properties.occurrence"
+ },
+ "coils_non_axisymmetric.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "coils_non_axisymmetric/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "coils_non_axisymmetric.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "coils_non_axisymmetric/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "coils_non_axisymmetric/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "coils_non_axisymmetric/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "coils_non_axisymmetric.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1226,6 +1337,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "coils_non_axisymmetric/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1261,6 +1380,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "coils_non_axisymmetric/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1312,6 +1439,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "coils_non_axisymmetric/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1369,6 +1504,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "coils_non_axisymmetric.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "coils_non_axisymmetric.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1412,6 +1555,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "coils_non_axisymmetric/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "coils_non_axisymmetric.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "coils_non_axisymmetric/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

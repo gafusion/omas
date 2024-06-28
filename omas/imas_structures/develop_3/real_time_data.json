@@ -2,7 +2,7 @@
  "real_time_data": {
   "documentation": "Description of the data bus circulating on the real time data network of the machine. This is typically used (but not only) as an interface to the Plasma Control System (PCS)",
   "full_path": "real_time_data",
-  "lifecycle_last_change": "3.34.0",
+  "lifecycle_last_change": "3.40.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.34.0",
   "maxoccur": "3"
@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "real_time_data.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "real_time_data.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "real_time_data/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -134,10 +150,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "real_time_data.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "real_time_data/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "real_time_data.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "real_time_data.ids_properties.occurrence"
+ },
+ "real_time_data.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "real_time_data/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "real_time_data.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "real_time_data/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "real_time_data/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "real_time_data/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "real_time_data.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -159,6 +213,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "real_time_data/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -194,6 +256,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "real_time_data/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -245,6 +315,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "real_time_data/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -302,6 +380,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "real_time_data.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "real_time_data.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -345,6 +431,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "real_time_data/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "real_time_data/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -488,6 +582,17 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "real_time_data.topic[:].sample": {
+  "coordinates": [
+   "real_time_data.topic[:].time_stamp"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Index of sample (time stamp counter)",
+  "full_path": "real_time_data/topic(i1)/sample(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "real_time_data.topic[:].signal": {
   "coordinates": [
    "1...N"
@@ -500,16 +605,31 @@
   "structure_reference": "rtd_allocatable_signals"
  },
  "real_time_data.topic[:].signal[:].allocated_position": {
-  "data_type": "INT_0D",
-  "documentation": "Allocation of signal to a position in the SDN (1..N); this will be implementation specific",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/allocated_position",
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Allocation of signal to a position in the SDN (1..N), or several positions in case of signal reshaping; this will be implementation specific",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/allocated_position(:)",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
- "real_time_data.topic[:].signal[:].definition": {
+ "real_time_data.topic[:].signal[:].data_str": {
+  "coordinates": [
+   "real_time_data.topic[:].time_stamp"
+  ],
+  "data_type": "STR_1D",
+  "documentation": "Signal data (e.g. diagnostic signal or PCS command), serialized as a string",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/data_str(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "real_time_data.topic[:].signal[:].data_type": {
   "data_type": "STR_0D",
-  "documentation": "Signal definition",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/definition",
+  "documentation": "Signal data type",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/data_type",
+  "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -521,97 +641,58 @@
   "type": "constant"
  },
  "real_time_data.topic[:].signal[:].quality": {
-  "data_type": "STRUCTURE",
-  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/quality",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_int_1d"
- },
- "real_time_data.topic[:].signal[:].quality.data": {
   "coordinates": [
-   "real_time_data.topic[:].signal[:].quality.time"
+   "real_time_data.topic[:].time_stamp"
   ],
   "data_type": "INT_1D",
-  "documentation": "Data",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/quality/data(:)",
+  "documentation": "Indicator of the quality of the signal. Following ITER PCS documentation (https://user.iter.org/?uid=354SJ3&action=get_document), possible values are: 1 - GOOD (the nominal state); 2 - INVALID (data no usable); 3 - DATA INTEGRITY ERROR (e.g. out of bounds with respect to expectations, calibration error,...)",
+  "full_path": "real_time_data/topic(i1)/signal(i2)/quality(:)",
+  "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
-  "timebasepath": "quality/time",
-  "type": "dynamic"
+  "type": "constant"
  },
- "real_time_data.topic[:].signal[:].quality.time": {
+ "real_time_data.topic[:].time_stamp": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/quality/time(:)",
+  "data_type": "FLT_1D",
+  "documentation": "Time of creation for all signals belonging to this topic. A set of time stamps can be recorded if needed",
+  "full_path": "real_time_data/topic(i1)/time_stamp(:)",
+  "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
-  "timebasepath": "quality/time",
-  "type": "dynamic",
+  "type": "constant",
   "units": "s"
  },
- "real_time_data.topic[:].signal[:].value": {
-  "data_type": "STRUCTURE",
-  "documentation": "Signal value",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value",
-  "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_1d",
-  "units": "mixed"
- },
- "real_time_data.topic[:].signal[:].value.data": {
-  "coordinates": [
-   "real_time_data.topic[:].signal[:].value.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Data",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "value/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "real_time_data.topic[:].signal[:].value.data_error_index": {
+ "real_time_data.topic[:].time_stamp_error_index": {
   "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_index",
+  "documentation": "Index in the error_description list for \"time_stamp\"",
+  "full_path": "real_time_data/topic(i1)/time_stamp_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "real_time_data.topic[:].signal[:].value.data_error_lower": {
-  "coordinates": [
-   "real_time_data.topic[:].signal[:].value.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_lower(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "value/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "real_time_data.topic[:].signal[:].value.data_error_upper": {
-  "coordinates": [
-   "real_time_data.topic[:].signal[:].value.time"
-  ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value/data_error_upper(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "value/time",
-  "type": "dynamic",
-  "units": "mixed"
- },
- "real_time_data.topic[:].signal[:].value.time": {
+ "real_time_data.topic[:].time_stamp_error_lower": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "real_time_data/topic(i1)/signal(i2)/value/time(:)",
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"time_stamp\"",
+  "full_path": "real_time_data/topic(i1)/time_stamp_error_lower(:)",
+  "introduced_after_version": "3.39.0",
   "lifecycle_status": "alpha",
-  "timebasepath": "value/time",
-  "type": "dynamic",
+  "type": "constant",
+  "units": "s"
+ },
+ "real_time_data.topic[:].time_stamp_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"time_stamp\"",
+  "full_path": "real_time_data/topic(i1)/time_stamp_error_upper(:)",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant",
   "units": "s"
  }
 }

@@ -2,7 +2,6 @@ import os
 import numpy as np
 from inspect import unwrap
 
-from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
@@ -572,7 +571,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
-        if iterable(xfrac):
+        if np.iterable(xfrac):
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         elif type(xfrac) == int or type(xfrac) == float:
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
@@ -1051,7 +1050,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='machine')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
-                ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                ods['langmuir_probes.embedded'][j]['position.phi'] = np.nan  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 if _get_measurements:
@@ -1393,15 +1392,15 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
-            "electrons.density": "N_E",
+            "electrons.density_thermal": "N_E",
             "electrons.density_fit.measured": "RW_N_E",
             "electrons.temperature": "T_E",
             "electrons.temperature_fit.measured": "RW_T_E",
-            "ion[0].density": "N_D",
+            "ion[0].density_thermal": "N_D",
             "ion[0].temperature": "T_D",
             "ion[1].velocity.toroidal": "V_TOR_C",
             "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
-            "ion[1].density": "N_C",
+            "ion[1].density_thermal": "N_C",
             "ion[1].density_fit.measured": "RW_N_C",
             "ion[1].temperature": "T_C",
             "ion[1].temperature_fit.measured": "RW_T_C",
@@ -1430,8 +1429,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
-        # for density in densities:
-        #     data[density] *= 1.e6
+        # for density_thermal in densities:
+        #     data[density_thermal] *= 1.e6
         for unc in ["", "_error_upper"]:
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
@@ -1476,7 +1475,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
-            "electrons.density": "EDENSFIT",
+            "electrons.density_thermal": "EDENSFIT",
             "electrons.temperature": "ETEMPFIT"
         }
         for entry in query:
@@ -1523,7 +1522,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
 
-        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.NaN)(t)
+        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
 # ================================
