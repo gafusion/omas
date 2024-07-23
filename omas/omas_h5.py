@@ -7,7 +7,7 @@ from .omas_utils import *
 from .omas_core import ODS
 
 
-def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None):
+def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=False, compression=None, hsds=False):
     """
     Utility function to save hierarchy of dictionaries containing numpy-compatible objects to hdf5 file
 
@@ -23,11 +23,14 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
     :param compression: gzip compression level
     """
-    import h5py
+    if hsds:
+        import h5pyd as h5py
+    else:
+        import h5py
 
     if isinstance(filename, str):
         with h5py.File(filename, 'w') as g:
-            dict2hdf5(g, dictin, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
+            dict2hdf5(g, dictin, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression, hsds=hsds)
         return
     else:
         parent = filename
@@ -47,11 +50,11 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
 
         if isinstance(item, dict):
             if recursive:
-                dict2hdf5(g, item, str(key), recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
+                dict2hdf5(g, item, str(key), recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression,hsds=hsds)
 
         elif lists_as_dicts and isinstance(item, (list, tuple)) and not isinstance(item, numpy.ndarray):
             item = {'%d' % k: v for k, v in enumerate(item)}
-            dict2hdf5(g, item, key, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression)
+            dict2hdf5(g, item, key, recursive=recursive, lists_as_dicts=lists_as_dicts, compression=compression,hsds=hsds)
 
         else:
             if item is None:
@@ -75,7 +78,7 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     return g
 
 
-def save_omas_h5(ods, filename):
+def save_omas_h5(ods, filename, hsds=False):
     """
     Save an ODS to HDF5
 
@@ -83,10 +86,10 @@ def save_omas_h5(ods, filename):
 
     :param filename: filename or file descriptor to save to
     """
-    return dict2hdf5(filename, ods, lists_as_dicts=True)
+    return dict2hdf5(filename, ods, lists_as_dicts=True, hsds=hsds)
 
 
-def convertDataset(ods, data):
+def convertDataset(ods, data, hsds=False):
     """
     Recursive utility function to map HDF5 structure to ODS
 
@@ -114,10 +117,10 @@ def convertDataset(ods, data):
             else:
                 ods.setraw(item, data[item][()])
         elif isinstance(data[item], h5py.Group):
-            convertDataset(ods.setraw(oitem, ods.same_init_ods()), data[item])
+            convertDataset(ods.setraw(oitem, ods.same_init_ods()), data[item], hsds=hsds)
 
 
-def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS):
+def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['default_imas_version'], cls=ODS, hsds=False):
     """
     Load ODS or ODC from HDF5
 
@@ -131,11 +134,14 @@ def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['d
 
     :return: OMAS data set
     """
-    import h5py
+    if hsds:
+        import h5pyd as h5py
+    else:
+        import h5py
 
     ods = cls(imas_version=imas_version, consistency_check=False)
     with h5py.File(filename, 'r') as data:
-        convertDataset(ods, data)
+        convertDataset(ods, data, hsds=hsds)
     ods.consistency_check = consistency_check
     return ods
 
