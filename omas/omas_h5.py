@@ -22,6 +22,8 @@ def dict2hdf5(filename, dictin, groupname='', recursive=True, lists_as_dicts=Fal
     :param lists_as_dicts: convert lists to dictionaries with integer strings
 
     :param compression: gzip compression level
+    
+    :param hsds: use HSDS (HDF5 in the remote server)
     """
     if hsds:
         import h5pyd as h5py
@@ -85,6 +87,8 @@ def save_omas_h5(ods, filename, hsds=False):
     :param ods: OMAS data set
 
     :param filename: filename or file descriptor to save to
+
+    :param hsds: use HSDS (HDF5 in the remote server)
     """
     return dict2hdf5(filename, ods, lists_as_dicts=True, hsds=hsds)
 
@@ -96,6 +100,8 @@ def convertDataset(ods, data, hsds=False):
     :param ods: input ODS to be populated
 
     :param data: HDF5 dataset of group
+
+    :param hsds: use HSDS (HDF5 in the remote server)
     """
     import h5py
 
@@ -131,6 +137,8 @@ def load_omas_h5(filename, consistency_check=True, imas_version=omas_rcparams['d
     :param imas_version: imas version to use for consistency check
 
     :param cls: class to use for loading the data
+
+    :param hsds: use HSDS (HDF5 in the remote server)
 
     :return: OMAS data set
     """
