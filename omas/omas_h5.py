@@ -103,7 +103,10 @@ def convertDataset(ods, data, hsds=False):
 
     :param hsds: use HSDS (HDF5 in the remote server)
     """
-    import h5py
+    if hsds:
+        import h5pyd as h5py
+    else:
+        import h5py
 
     keys = data.keys()
     try:
