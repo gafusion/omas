@@ -11,6 +11,7 @@ boto3                                              # required
 matplotlib                                         # required
 scipy                                              # required
 h5py                                               # required
+h5pyd                                              # required
 pymongo                                            # required
 dnspython                                          # required
 xmltodict                                          # required
