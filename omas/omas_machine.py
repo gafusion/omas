@@ -299,7 +299,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                     f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"
                 )
             if dsize - osize == 0 or ':' not in location:
-                if data.size == 1:
+                if data.size == 1 and csize == 0:
                     data = data.item()
                 ods[location] = nanfilter(data)
             else:
