@@ -1359,7 +1359,7 @@ def equilibirum_time(ods, pulse, EFIT_tree="EFIT"):
 @machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT", get_all=True)
 def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
     from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
-    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS.KTIME").raw()
+    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME").raw()
     if times is None:
         print("No mds+ data")
         raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
