@@ -48,7 +48,7 @@ jobs:
     # and pygacode requires python >= 3.8,
     # so for 3.7 we need to build without build isolation and manually install numpy
     - name: Install OMAS (Py 3.7)
-      if: ${{matrix.python-version == '3.7'}}
+      if: ${{matrix.python-version == '3.7' || matrix.python-version == '3.8' || matrix.python_version == '3.9'}}
       run: |
         python3 -m pip install wheel
         python3 -m pip install --no-build-isolation .[machine]
