@@ -1381,12 +1381,13 @@ def add_extra_profile_structures():
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
     add_extra_structures(extra_structures)
-    
+
 
 @machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
+    sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
         omfit_profiles_node = '\\TOP.'
         query = {
@@ -1448,7 +1449,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                     print(data[entry][i_time])
                     print("================ ERROR =================")
                     print(data[entry + "_error_upper"][i_time])
-                    print(data[entry][i_time].shape, 
+                    print(data[entry][i_time].shape,
                             data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
@@ -1472,7 +1473,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         profiles_node = '\\TOP.PROFILES.'
         query = {
             "electrons.density_thermal": "EDENSFIT",
-            "electrons.temperature": "ETEMPFIT"
+            "electrons.temperature": "ETEMPFIT"#,
+            # "ion[0].density_thermal": "ZDENSFIT", # Need to deal with different times
+            #"ion[0].temperature": "ITEMPFIT",  # Need to deal with different times
+            #"ion[1].velocity.toroidal": "TROTFIT",# Need to check units/meaning rot freq vs velocity
         }
         for entry in query:
             query[entry] = profiles_node + query[entry]
@@ -1488,6 +1492,14 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                 continue
             for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+        #Needed for ion components
+        #for i_time, time in enumerate(data["time"]):
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+        #    ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+        #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
