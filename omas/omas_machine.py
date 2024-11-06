@@ -14,7 +14,9 @@ try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
 except:
-    pass
+    MdsIpException = Exception
+    TreeNODATA = Exception
+    TreeNNF = Exception
 
 __all__ = [
     'machine_expression_types',
@@ -134,8 +136,10 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 except (TreeNODATA, MdsIpException) as e:
                     if hasattr(e, "eval2TDI"):
                         failed_locations[key] = e.eval2TDI
-                    else:
+                    elif hasattr(e, "TDI"):
                         failed_locations[key] = e.TDI
+                    else:
+                        failed_locations[key] = key
                 except TreeNNF as e:
                     failed_locations[key] = e.TDI
                     if key != 'equilibrium.time_slice.:.constraints.j_tor.:.measured':
