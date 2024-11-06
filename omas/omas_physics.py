@@ -3,7 +3,7 @@
 -------
 '''
 
-from scipy.interpolate.fitpack2 import RectBivariateSpline
+from scipy.interpolate import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -955,6 +955,12 @@ def equilibrium_form_constraints(
                             ods_n[
                                 f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
                             ] = numpy.nan
+               
+                ods_n['mse.channel.:.active_spatial_resolution[0].geometric_coefficients']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.r']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.z']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.phi']
+
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
 
@@ -1055,7 +1061,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_spl = RectBivariateSpline(Rgrid, Zgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
@@ -1109,7 +1115,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
             ne_line = numpy.trapz(ne_interp)
             ne_line /= abs(i2 - i1)
@@ -1835,7 +1841,10 @@ def core_profiles_currents(
             )
         return
 
-    from scipy.integrate import cumtrapz
+    try:
+        from scipy.integrate import cumulative_trapezoid as cumtrapz
+    except ImportError:
+        from scipy.integrate import cumtrapz
 
     prof1d = ods['core_profiles.profiles_1d'][time_index]
 

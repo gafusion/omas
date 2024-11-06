@@ -515,7 +515,8 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
         stime.on_changed(do_clean)
     stime.on_changed(update)
     for time0 in time:
-        axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        # axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        axtime.axvline(time0, color='r')
     return {'stime': (stime, axtime), 'ax': axs}
 
 
@@ -764,7 +765,10 @@ def equilibrium_CX(
     if levels is None and value_1d is not None:
         if contour_quantity == 'q':
             max_q = int(numpy.round(omas_interp1d(0.95, x_value_1d, value_1d)))
-            levels = numpy.arange(max_q)
+            levels = numpy.arange(numpy.abs(max_q))
+            if max_q < 0:
+                levels *= -1
+                levels = levels[::-1]
         else:
             levels = numpy.linspace(numpy.min(value_1d), numpy.max(value_1d), 11)[1:-1]
             levels = numpy.hstack((levels, levels[-1] + (levels[1] - levels[0]) * numpy.arange(100)[1:]))
@@ -801,8 +805,10 @@ def equilibrium_CX(
             r = scipy.ndimage.zoom(r, sf)
             z = scipy.ndimage.zoom(z, sf)
             value_2d = scipy.ndimage.zoom(value_2d, sf)
-
-        cs = ax.contour(r, z, value_2d, levels, **kw)
+        if levels is not None:
+            cs = ax.contour(r, z, value_2d, levels, **kw)
+        else:
+            cs = ax.contour(r, z, value_2d, **kw)
 
         if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
             ax.clabel(cs)
@@ -1294,8 +1300,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     # else:
-                    if (q + "_error_upper" in prof1d[specie]
-                        and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"])):
+                    if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
                         plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
                                              prof1d[specie][q + "_error_upper"]*scale))
                     else:
@@ -3259,8 +3264,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
-    r = [[numpy.NaN]] * nc
-    z = [[numpy.NaN]] * nc
+    r = [[numpy.nan]] * nc
+    z = [[numpy.nan]] * nc
     for i in range(nc):
         rs = ods['charge_exchange.channel'][i]['position.r.data']
         zs = ods['charge_exchange.channel'][i]['position.z.data']
@@ -3552,7 +3557,7 @@ def position_control_overlay(
     :param ax: Axes instance
 
     :param t: float
-        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+        Time to display in seconds. If not specified, defaults to the average time of position control samples.
 
     :param xpoint_marker: string
         Matplotlib marker spec for X-point target(s)
@@ -3590,7 +3595,7 @@ def position_control_overlay(
     shot = ods['dataset_description.data_entry'].get('pulse', 0)
     if t is None:
         try:
-            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+            t = np.nanmean(ods['pulse_schedule.position_control.time'])
         except (ValueError, IndexError):
             t = 0
 
@@ -3627,30 +3632,31 @@ def position_control_overlay(
     b = ods['pulse_schedule.position_control.boundary_outline']
     x = ods['pulse_schedule.position_control.x_point']
     s = ods['pulse_schedule.position_control.strike_point']
-    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    ikw = dict(bounds_error=False, fill_value=np.nan)
     try:
-        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nbp = np.shape(b['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nbp = 0
     try:
-        nx = np.shape(x['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nx = 0
     try:
-        ns = np.shape(s['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference'])[0]
     except (IndexError, ValueError):
         ns = 0
     if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return {'ax': ax}
-    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
-    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
+    tt = ods['pulse_schedule.position_control.time']
+    r = [interp1d(tt, b[i]['r.reference'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(tt, b[i]['z.reference'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
-    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
-    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
+    rx = [interp1d(tt, x[i]['r.reference'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(tt, x[i]['z.reference'], **ikw)(t) for i in range(nx)]
     xname = x['[:].r.reference_name']
-    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
-    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
+    rs = [interp1d(tt, s[i]['r.reference'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(tt, s[i]['z.reference'], **ikw)(t) for i in range(ns)]
     sname = s['[:].r.reference_name']
     # Measured X-point position from eq might not be present
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
@@ -3664,7 +3670,7 @@ def position_control_overlay(
             rxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)]
             zxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)]
     else:
-        rxm = zxm = np.NaN
+        rxm = zxm = np.nan
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 

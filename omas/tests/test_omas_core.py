@@ -198,8 +198,8 @@ class TestOmasCore(UnittestCaseOmas):
         from uncertainties import ufloat
 
         ods = ODS()
-        ods['pulse_schedule']['position_control']['x_point'][0]['z']['reference']['data'] = [ufloat(1.019, 0.02), ufloat(1.019, 0.02)]
-        result = ods['pulse_schedule.position_control.x_point.:.z.reference.data']
+        ods['pulse_schedule']['position_control']['x_point'][0]['z']['reference'] = [ufloat(1.019, 0.02), ufloat(1.019, 0.02)]
+        result = ods['pulse_schedule.position_control.x_point.:.z.reference']
         # Trips a ValueError if the dtype of the uncertain array isn't handled properly.
 
     def test_dynamic_set_nonzero_array_index(self):
@@ -576,6 +576,27 @@ class TestOmasCore(UnittestCaseOmas):
         assert ods1['core_profiles.profiles_1d.0.ion.0.element[0].atoms_n'] == 1
         assert ods1['core_profiles.profiles_1d.0.ion.0.element[0].z_n'] == 1.5
         assert ods1['equilibrium.time_slice[0].profiles_2d[0].psi'][0, 1] == 1.5
+
+    def test_add_extra_structures(self):
+        from omas.omas_structure import add_extra_structures, imas_structure
+
+        original = imas_structure("3.39.0", "wall.description_2d.0.limiter.unit.0")
+        extension = {
+            "wall": {
+                "wall.description_2d[:].limiter.unit[:].test_field": {
+                    "data_type": "STR_0D",
+                    "documentation": "Test field Name",
+                    "full_path": "wall/description_2d(i1)/limiter/unit(i2)/test_field",
+                    "type": "static",
+                }
+            }
+        }
+        add_extra_structures(extension)
+        extended = imas_structure("3.39.0", "wall.description_2d.0.limiter.unit.0")
+
+        assert 'test_field' not in original
+        assert 'test_field' in extended
+
 
     # End of TestOmasCore class
 

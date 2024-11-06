@@ -2,7 +2,7 @@
  "spectrometer_uv": {
   "documentation": "Spectrometer in uv light range diagnostic",
   "full_path": "spectrometer_uv",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.29.0",
   "maxoccur": "2"
@@ -2527,7 +2527,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2548,7 +2548,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -2561,7 +2561,7 @@
  },
  "spectrometer_uv.channel[:].intensity_spectrum.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].intensity_spectrum.time"
   ],
   "data_type": "FLT_2D",
@@ -3087,6 +3087,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
   "full_path": "spectrometer_uv/channel(i1)/processed_line(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "spectrometer_uv.channel[:].processed_line[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the processed line. To avoid ambiguities, the following syntax is used : element with ionization state_wavelength in Angstrom (e.g. WI_4000)",
+  "full_path": "spectrometer_uv/channel(i1)/processed_line(i2)/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3248,7 +3259,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3269,7 +3280,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data_error_lower": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3282,7 +3293,7 @@
  },
  "spectrometer_uv.channel[:].radiance_spectral.data_error_upper": {
   "coordinates": [
-   "1...N",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].radiance_spectral.time"
   ],
   "data_type": "FLT_2D",
@@ -3406,7 +3417,7 @@
  },
  "spectrometer_uv.channel[:].validity_timed.data": {
   "coordinates": [
-   "spectrometer_uv.channel[:].validity_timed.data.as_parent",
+   "spectrometer_uv.channel[:].wavelengths",
    "spectrometer_uv.channel[:].validity_timed.time"
   ],
   "data_type": "INT_2D",
@@ -3561,6 +3572,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_uv.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_uv.code.library": {
   "coordinates": [
    "1...N"
@@ -3576,6 +3595,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_uv/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3734,10 +3761,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_uv.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "spectrometer_uv/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_uv.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "spectrometer_uv.ids_properties.occurrence"
+ },
+ "spectrometer_uv.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "spectrometer_uv/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "spectrometer_uv.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_uv/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_uv/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_uv/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "spectrometer_uv.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -3759,6 +3824,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_uv/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3794,6 +3867,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_uv/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3845,6 +3926,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_uv/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3902,6 +3991,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_uv.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_uv.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -3945,6 +4042,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_uv/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_uv.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_uv/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "cryostat.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "cryostat.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "cryostat/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -542,11 +558,79 @@
   "maxoccur": "38",
   "structure_reference": "vessel_2d_element"
  },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal current induced in this block element",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_lower": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.data_error_upper": {
+  "coordinates": [
+   "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].cryostat.unit[:].element[:].j_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "cryostat.description_2d[:].cryostat.unit[:].element[:].j_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -557,7 +641,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -577,7 +661,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -589,7 +673,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -601,7 +685,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/cryostat/unit(i2)/element(i3)/j_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1212,11 +1296,79 @@
   "maxoccur": "38",
   "structure_reference": "vessel_2d_element"
  },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi": {
+  "change_nbc_description": "structure_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal current induced in this block element",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_lower": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.data_error_upper": {
+  "coordinates": [
+   "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_phi.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_phi/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "j_phi/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "cryostat.description_2d[:].thermal_shield.unit[:].element[:].j_tor": {
   "data_type": "STRUCTURE",
   "documentation": "Toroidal current induced in this block element",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "structure_reference": "signal_flt_1d",
   "units": "A"
  },
@@ -1227,7 +1379,7 @@
   "data_type": "FLT_1D",
   "documentation": "Data",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1247,7 +1399,7 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1259,7 +1411,7 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"data\"",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/data_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "A"
@@ -1271,7 +1423,7 @@
   "data_type": "FLT_1D_TYPE",
   "documentation": "Time",
   "full_path": "cryostat/description_2d(i1)/thermal_shield/unit(i2)/element(i3)/j_tor/time(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
   "timebasepath": "j_tor/time",
   "type": "dynamic",
   "units": "s"
@@ -1485,10 +1637,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "cryostat.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "cryostat/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "cryostat.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "cryostat.ids_properties.occurrence"
+ },
+ "cryostat.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "cryostat/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "cryostat.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "cryostat/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "cryostat/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "cryostat/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "cryostat.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -1510,6 +1700,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "cryostat/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1545,6 +1743,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "cryostat/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1596,6 +1802,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "cryostat/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -1653,6 +1867,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "cryostat.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "cryostat.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -1696,6 +1918,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "cryostat/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "cryostat.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "cryostat/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

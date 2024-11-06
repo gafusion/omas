@@ -2,51 +2,216 @@
  "spectrometer_mass": {
   "documentation": "Mass spectrometer diagnostic",
   "full_path": "spectrometer_mass",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.29.0",
   "maxoccur": "4"
  },
- "spectrometer_mass.a": {
+ "spectrometer_mass.channel": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D",
-  "documentation": "Array of atomic masses for which partial pressures are recorded by the spectrometer",
-  "full_path": "spectrometer_mass/a(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of mass channels, each corresponding to a given atomic mass measured continuously by the spectrometer",
+  "full_path": "spectrometer_mass/channel(i1)",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
-  "type": "static",
+  "maxoccur": "100",
+  "structure_reference": "spectrometer_mass_channel"
+ },
+ "spectrometer_mass.channel[:].a": {
+  "data_type": "FLT_0D",
+  "documentation": "Atomic mass measured by this channel",
+  "full_path": "spectrometer_mass/channel(i1)/a",
+  "lifecycle_status": "alpha",
+  "type": "constant",
   "units": "Atomic Mass Unit"
  },
- "spectrometer_mass.a_error_index": {
+ "spectrometer_mass.channel[:].a_error_index": {
   "data_type": "INT_TYPE",
   "documentation": "Index in the error_description list for \"a\"",
-  "full_path": "spectrometer_mass/a_error_index",
+  "full_path": "spectrometer_mass/channel(i1)/a_error_index",
   "lifecycle_status": "obsolescent",
   "lifecycle_version": "3.39.0",
   "type": "constant"
  },
- "spectrometer_mass.a_error_lower": {
-  "coordinates": [
-   "1...N"
-  ],
-  "data_type": "FLT_1D",
+ "spectrometer_mass.channel[:].a_error_lower": {
+  "data_type": "FLT_0D",
   "documentation": "Lower error for \"a\"",
-  "full_path": "spectrometer_mass/a_error_lower(:)",
+  "full_path": "spectrometer_mass/channel(i1)/a_error_lower",
   "lifecycle_status": "alpha",
-  "type": "static",
+  "type": "constant",
   "units": "Atomic Mass Unit"
  },
- "spectrometer_mass.a_error_upper": {
+ "spectrometer_mass.channel[:].a_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "spectrometer_mass/channel(i1)/a_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.channel[:].current": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Collected current",
+  "full_path": "spectrometer_mass/channel(i1)/current(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.channel[:].current_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current\"",
+  "full_path": "spectrometer_mass/channel(i1)/current_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.channel[:].current_error_lower": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current\"",
+  "full_path": "spectrometer_mass/channel(i1)/current_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.channel[:].current_error_upper": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current\"",
+  "full_path": "spectrometer_mass/channel(i1)/current_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.channel[:].photomultiplier_voltage": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Voltage applied to the photomultiplier",
+  "full_path": "spectrometer_mass/channel(i1)/photomultiplier_voltage(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "spectrometer_mass.channel[:].photomultiplier_voltage_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"photomultiplier_voltage\"",
+  "full_path": "spectrometer_mass/channel(i1)/photomultiplier_voltage_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.channel[:].photomultiplier_voltage_error_lower": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"photomultiplier_voltage\"",
+  "full_path": "spectrometer_mass/channel(i1)/photomultiplier_voltage_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "spectrometer_mass.channel[:].photomultiplier_voltage_error_upper": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"photomultiplier_voltage\"",
+  "full_path": "spectrometer_mass/channel(i1)/photomultiplier_voltage_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "spectrometer_mass.channel[:].pressure_partial": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Partial pressure (calibrated data)",
+  "full_path": "spectrometer_mass/channel(i1)/pressure_partial(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.channel[:].pressure_partial_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"pressure_partial\"",
+  "full_path": "spectrometer_mass/channel(i1)/pressure_partial_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.channel[:].pressure_partial_error_lower": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"pressure_partial\"",
+  "full_path": "spectrometer_mass/channel(i1)/pressure_partial_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.channel[:].pressure_partial_error_upper": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"pressure_partial\"",
+  "full_path": "spectrometer_mass/channel(i1)/pressure_partial_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "Pa"
+ },
+ "spectrometer_mass.channel[:].time": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D",
-  "documentation": "Upper error for \"a\"",
-  "full_path": "spectrometer_mass/a_error_upper(:)",
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Timebase for the dynamic nodes of this channel",
+  "full_path": "spectrometer_mass/channel(i1)/time(:)",
   "lifecycle_status": "alpha",
-  "type": "static",
-  "units": "Atomic Mass Unit"
+  "timebasepath": "time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "spectrometer_mass.channel[:].validity": {
+  "data_type": "INT_0D",
+  "documentation": "Indicator of the validity of the data. 0: Valid from automated processing; 1: Valid and certified by the diagnostic RO; -1: Problem identified in the data processing (request verification by the diagnostic RO); -2: Invalid data, should not be used. (Values less than -2 have a code-specific meaning)",
+  "full_path": "spectrometer_mass/channel(i1)/validity",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.channel[:].validity_timed": {
+  "coordinates": [
+   "spectrometer_mass.channel[:].time"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "Indicator of the validity of the data for each time slice. 0: Valid from automated processing; 1: Valid and certified by the diagnostic RO; -1: Means problem identified in the data processing (request verification by the diagnostic RO); -2: Invalid data, should not be used. (Values less than -2 have a code-specific meaning.)",
+  "full_path": "spectrometer_mass/channel(i1)/validity_timed(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "time",
+  "type": "dynamic"
  },
  "spectrometer_mass.code": {
   "data_type": "STRUCTURE",
@@ -59,6 +224,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/code/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/code/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -77,6 +250,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -147,6 +328,76 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_mass.detector_voltage": {
+  "data_type": "FLT_0D",
+  "documentation": "Voltage applied on the microchannel plate detector",
+  "full_path": "spectrometer_mass/detector_voltage",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.detector_voltage_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.detector_voltage_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_lower",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.detector_voltage_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"detector_voltage\"",
+  "full_path": "spectrometer_mass/detector_voltage_error_upper",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "V"
+ },
+ "spectrometer_mass.emission_current": {
+  "data_type": "FLT_0D",
+  "documentation": "Emission current in the spectrometer filament",
+  "full_path": "spectrometer_mass/emission_current",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
+ },
+ "spectrometer_mass.emission_current_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_mass.emission_current_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_lower",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
+ },
+ "spectrometer_mass.emission_current_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"emission_current\"",
+  "full_path": "spectrometer_mass/emission_current_error_upper",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "A"
+ },
  "spectrometer_mass.identifier": {
   "data_type": "STR_0D",
   "documentation": "ID of the spectrometer",
@@ -182,10 +433,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_mass.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "spectrometer_mass/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_mass.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "spectrometer_mass.ids_properties.occurrence"
+ },
+ "spectrometer_mass.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "spectrometer_mass/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "spectrometer_mass.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_mass/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_mass/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_mass/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "spectrometer_mass.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -207,6 +496,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -242,6 +539,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -293,6 +598,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -350,6 +663,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_mass.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_mass.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -393,6 +714,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_mass/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_mass.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_mass/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -548,93 +877,109 @@
   "lifecycle_status": "alpha",
   "type": "static"
  },
- "spectrometer_mass.pressures_partial": {
+ "spectrometer_mass.residual_spectrum": {
   "coordinates": [
-   "spectrometer_mass.a"
+   "spectrometer_mass.residual_spectrum[:].time"
   ],
-  "data_type": "STRUCTURE",
-  "documentation": "Partial pressures recorded by the spectrometer",
-  "full_path": "spectrometer_mass/pressures_partial",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of entire mass spectra recorded at various time slices",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
-  "structure_reference": "signal_flt_2d_validity",
-  "units": "Pa"
+  "maxoccur": "unbounded",
+  "structure_reference": "spectrometer_mass_residual",
+  "timebasepath": "time",
+  "type": "dynamic"
  },
- "spectrometer_mass.pressures_partial.data": {
-  "coordinates": [
-   "1...N",
-   "spectrometer_mass.pressures_partial.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Data",
-  "full_path": "spectrometer_mass/pressures_partial/data(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "pressures_partial/time",
-  "type": "dynamic",
-  "units": "Pa"
- },
- "spectrometer_mass.pressures_partial.data_error_index": {
-  "data_type": "INT_TYPE",
-  "documentation": "Index in the error_description list for \"data\"",
-  "full_path": "spectrometer_mass/pressures_partial/data_error_index",
-  "lifecycle_status": "obsolescent",
-  "lifecycle_version": "3.39.0",
-  "type": "constant"
- },
- "spectrometer_mass.pressures_partial.data_error_lower": {
-  "coordinates": [
-   "1...N",
-   "spectrometer_mass.pressures_partial.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Lower error for \"data\"",
-  "full_path": "spectrometer_mass/pressures_partial/data_error_lower(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "pressures_partial/time",
-  "type": "dynamic",
-  "units": "Pa"
- },
- "spectrometer_mass.pressures_partial.data_error_upper": {
-  "coordinates": [
-   "1...N",
-   "spectrometer_mass.pressures_partial.time"
-  ],
-  "data_type": "FLT_2D",
-  "documentation": "Upper error for \"data\"",
-  "full_path": "spectrometer_mass/pressures_partial/data_error_upper(:,:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "pressures_partial/time",
-  "type": "dynamic",
-  "units": "Pa"
- },
- "spectrometer_mass.pressures_partial.time": {
+ "spectrometer_mass.residual_spectrum[:].a": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "FLT_1D_TYPE",
-  "documentation": "Time",
-  "full_path": "spectrometer_mass/pressures_partial/time(:)",
+  "data_type": "FLT_1D",
+  "documentation": "Array of atomic masses",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/a(:)",
   "lifecycle_status": "alpha",
-  "timebasepath": "pressures_partial/time",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.residual_spectrum[:].a_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"a\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/a_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "spectrometer_mass.residual_spectrum[:].a_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"a\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/a_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.residual_spectrum[:].a_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"a\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/a_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "Atomic Mass Unit"
+ },
+ "spectrometer_mass.residual_spectrum[:].current": {
+  "coordinates": [
+   "spectrometer_mass.residual_spectrum[:].a"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Collected current",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/current(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.residual_spectrum[:].current_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"current\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/current_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "spectrometer_mass.residual_spectrum[:].current_error_lower": {
+  "coordinates": [
+   "spectrometer_mass.residual_spectrum[:].a"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"current\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/current_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.residual_spectrum[:].current_error_upper": {
+  "coordinates": [
+   "spectrometer_mass.residual_spectrum[:].a"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"current\"",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/current_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "A"
+ },
+ "spectrometer_mass.residual_spectrum[:].time": {
+  "data_type": "FLT_0D",
+  "documentation": "Time",
+  "full_path": "spectrometer_mass/residual_spectrum(itime)/time",
+  "lifecycle_status": "alpha",
   "type": "dynamic",
   "units": "s"
- },
- "spectrometer_mass.pressures_partial.validity": {
-  "data_type": "INT_0D",
-  "documentation": "Indicator of the validity of the data for the whole acquisition period. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
-  "full_path": "spectrometer_mass/pressures_partial/validity",
-  "lifecycle_status": "alpha",
-  "type": "constant"
- },
- "spectrometer_mass.pressures_partial.validity_timed": {
-  "coordinates": [
-   "spectrometer_mass.pressures_partial.time"
-  ],
-  "data_type": "INT_1D",
-  "documentation": "Indicator of the validity of the data for each time slice. 0: valid from automated processing, 1: valid and certified by the diagnostic RO; - 1 means problem identified in the data processing (request verification by the diagnostic RO), -2: invalid data, should not be used (values lower than -2 have a code-specific meaning detailing the origin of their invalidity)",
-  "full_path": "spectrometer_mass/pressures_partial/validity_timed(:)",
-  "lifecycle_status": "alpha",
-  "timebasepath": "pressures_partial/time",
-  "type": "dynamic"
  },
  "spectrometer_mass.time": {
   "coordinates": [

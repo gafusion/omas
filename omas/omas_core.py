@@ -57,7 +57,7 @@ def force_imas_type(value):
             value = value.values
     if isinstance(value, numpy.ndarray) and not len(value.shape):
         value = value.item()
-    if isinstance(value, (numpy.string_, numpy.unicode_, numpy.str_)):
+    if isinstance(value, (numpy.bytes_, numpy.str_)):
         value = value.item()
     elif isinstance(value, (float, numpy.floating)):
         value = float(value)
@@ -515,7 +515,7 @@ class ODS(MutableMapping):
         return top
 
     @property
-    def structure(self, location):
+    def structure(self):
         """
         Property which returns structure of current ODS
         """
@@ -961,11 +961,11 @@ class ODS(MutableMapping):
 
                     if (
                         'units' in info
-                        and isinstance(value, pint.quantity._Quantity)
+                        and isinstance(value, pint.Quantity)
                         or (
                             isinstance(value, numpy.ndarray)
                             and value.size
-                            and isinstance(numpy.atleast_1d(value).flat[0], pint.quantity._Quantity)
+                            and isinstance(numpy.atleast_1d(value).flat[0], pint.Quantity)
                         )
                     ):
                         value = value.to(info['units']).magnitude
@@ -1806,7 +1806,7 @@ class ODS(MutableMapping):
             orig_value = orig_value + [value]
         else:
             key = p2l(key)
-            raise IndexError('%s has length %d and time_index %d is bejond current range' % (l2o(key), len(orig_value), time_index))
+            raise IndexError('%s has length %d and time_index %d is beyond current range' % (l2o(key), len(orig_value), time_index))
 
         self[key] = numpy.atleast_1d(orig_value)
         return orig_value

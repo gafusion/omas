@@ -6,7 +6,7 @@ import shutil
 from .omas_utils import *
 from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from .omas_physics import cocos_signals
-from omas.machine_mappings import d3d
+from omas.machine_mappings import d3d, nstx, nstxu, east
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
@@ -17,6 +17,13 @@ except:
     MdsIpException = Exception
     TreeNODATA = Exception
     TreeNNF = Exception
+
+try:
+    from omas.machine_mappings import mast
+except ImportError:
+    print('Could not import mast machine mappings. Check that pyuda is installed')
+    pass
+
 
 __all__ = [
     'machine_expression_types',
@@ -130,7 +137,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     if location.endswith(".*"):
         root = location.split(".*")[0]
         for key in mappings:
-            if root in key:
+            if root in key and key not in ods:
                 try:
                     resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
                 except (TreeNODATA, MdsIpException) as e:
@@ -153,7 +160,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
             return ods
     else:
         return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
-    
+
 def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=None):
     """
     Routine to resolve a mapping
@@ -211,7 +218,11 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     # ENVIRONMENTAL VARIABLE
     elif 'ENVIRON' in mapped:
-        data0 = data = os.environ[mapped['ENVIRON'].format(**options_with_defaults)]
+        data0 = data = os.environ.get(mapped['ENVIRON'].format(**options_with_defaults))
+        if data is None:
+            raise ValueError(
+                f'Environmental variable {mapped["ENVIRON"].format(**options_with_defaults)} is not defined'
+            )
 
     # PYTHON
     elif 'PYTHON' in mapped:
@@ -292,7 +303,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                     f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"
                 )
             if dsize - osize == 0 or ':' not in location:
-                if data.size == 1:
+                if data.size == 1 and csize == 0:
                     data = data.item()
                 ods[location] = nanfilter(data)
             else:
@@ -737,7 +748,11 @@ class dynamic_omas_machine(dynamic_ODS):
     def keys(self, location):
         ulocation = (o2u(location) + ".").lstrip('.')
         if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
-            return list(range(self[ulocation + ':']))
+            try:
+                return list(range(self[ulocation + ':']))
+            except Exception as _excp:
+                printe(f'{ulocation}: issue:' + repr(_excp))
+                return []
         else:
             tmp = numpy.unique(
                 [
