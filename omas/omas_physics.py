@@ -485,9 +485,16 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
             > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
         )
-        f_spl = InterpolatedUnivariateSpline(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
-        )
+        if ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'][0] > ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'][-1]:
+            f_spl = InterpolatedUnivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'][::-1], 
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][::-1]
+            )
+        else:
+            f_spl = InterpolatedUnivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], 
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
+            )
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
             f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]

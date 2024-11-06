@@ -781,13 +781,13 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     ece_map = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
     N_time = len(ece_map['TIME'])
     N_ch = ece_map['NUMCH'].item()
-
+    ods['ece.ids_properties.homogeneous_time'] = 0
+    ods['ece.time'] = ece_map['TIME'] * 1.e-3
     if _measurements:
         query = {}
         for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
-    ods['ece.ids_properties.homogeneous_time'] = 0
     # Not in mds+
     if not _measurements:
         points = [{}, {}]
@@ -1471,8 +1471,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
-            ods[f"{sh}[{i_time}].electrons.density_thermal"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density"])
-            ods[f"{sh}[{i_time}].electrons.density_thermal_error_upper"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_error_upper"])
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {

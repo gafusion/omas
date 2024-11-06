@@ -131,9 +131,6 @@
  "core_profiles.profiles_1d.:.e_field.radial_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
- "core_profiles.profiles_1d.:.electrons.density_thermal": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
- },
  "core_profiles.profiles_1d.:.electrons.density_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
@@ -145,6 +142,9 @@
  },
  "core_profiles.profiles_1d.:.electrons.density_fit.psi_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
@@ -170,19 +170,19 @@
  "core_profiles.profiles_1d.:.ion.:": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
  "core_profiles.profiles_1d.:.ion.:.density_thermal": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.density_thermal_error_upper": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.density_thermal_fit.measured": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.density_thermal_fit.measured_error_upper": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
- },
- "core_profiles.profiles_1d.:.ion.:.density_fit.psi_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.element.:": {
@@ -325,7 +325,7 @@
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.ids_properties.homogeneous_time": {
-  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "ece.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
@@ -346,6 +346,9 @@
  },
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.time": {
+  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
