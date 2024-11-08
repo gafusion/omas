@@ -156,6 +156,12 @@ class mdsvalue(dict):
                         _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
                     try:
                         conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        try:
+                            conn.get("\\TOP")
+                        except MDSplus.mdsExceptions.TreeNODATA:
+                            pass
+                        except MDSplus.mdsExceptions.TreeNOT_OPEN:
+                            conn.openTree(self.treename, self.pulse)
                         break
                     except Exception as _excp:
                         if (self.server, self.treename, self.pulse) in _mds_connection_cache:

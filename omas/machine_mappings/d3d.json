@@ -325,7 +325,7 @@
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.ids_properties.homogeneous_time": {
-  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
@@ -348,7 +348,7 @@
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.time": {
-  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
