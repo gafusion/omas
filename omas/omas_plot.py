@@ -477,16 +477,21 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
         if axs is not None:
             for ax in axs:
                 if axs[ax] is not None:
+                    printd(f'Cleaning {ax}', topic='time_plot')
                     axs[ax].cla()
 
     def update(time0):
         if 'ax' in kw:
+            printd('Getting ax from kw',topic='time_plot')
             ax = kw.pop('ax')
         elif not len(axs):
+            printd('Setting ax to None because axs was empty',topic='time_plot')
             ax = None
         elif len(axs) == 1:
+            printd('Setting ax to first element of axs', topic='time_plot')
             ax = list(axs.values())[0]
         else:
+            printd('Setting ax to axs', topic='time_plot')
             ax = axs
         time_index0 = time_index[numpy.argmin(abs(time - time0))]
         tmp = ods_plot_function(ods, time_index0, ax=ax, **kw)['ax']
@@ -546,6 +551,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
 
     :return: matplotlib axes
     """
+    printd('cached_add_subplot used', topic='time_plot')
     if args in ax_cache:
         return ax_cache[args]
     else:
