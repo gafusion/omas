@@ -501,6 +501,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
+    from omas.omas_core import CodeParameters
     setup = '.ECH.'
     # We need three queries in order to retrieve only the fields we need
     # First the amount of systems in use
@@ -545,7 +546,7 @@ def ec_launcher_active_hardware(ods, pulse):
         system_index = system_no - 1
         if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
-        b_half.append(query["DISPERSION" + f'_{system_no}'])
+        b_half.append(systems["DISPERSION" + f'_{system_no}'])
         beam = ods['ec_launchers.beam'][system_index]
         time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
         if len(time) == 1:
