@@ -46,7 +46,7 @@ def generate_xml_schemas(imas_version=None):
         subprocess.Popen(
             f"""
         cd {omas_dir}
-        curl https://cytranet.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
+        curl https://netactuate.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip?viasf=1 > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
         rm {saxon_version}.zip""",
             shell=True,
