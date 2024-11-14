@@ -139,4 +139,4 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("profiles_db_ccfe", __all__, globals(), locals())
