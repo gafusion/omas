@@ -2,7 +2,7 @@
  "thomson_scattering": {
   "documentation": "Thomson scattering diagnostic",
   "full_path": "thomson_scattering",
-  "lifecycle_last_change": "3.33.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.4",
   "maxoccur": "3"
@@ -234,12 +234,276 @@
   "type": "dynamic",
   "units": "s"
  },
+ "thomson_scattering.channel[:].gaussian_fit": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band",
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Amplitude of the gaussian fit of the measured signal in each energy band, used to estimate the electron temperature",
+  "full_path": "thomson_scattering/channel(i1)/gaussian_fit(:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "thomson_scattering.channel[:].gaussian_fit_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"gaussian_fit\"",
+  "full_path": "thomson_scattering/channel(i1)/gaussian_fit_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].gaussian_fit_error_lower": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band",
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"gaussian_fit\"",
+  "full_path": "thomson_scattering/channel(i1)/gaussian_fit_error_lower(:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "thomson_scattering.channel[:].gaussian_fit_error_upper": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band",
+   "thomson_scattering.channel[:].t_e.time"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"gaussian_fit\"",
+  "full_path": "thomson_scattering/channel(i1)/gaussian_fit_error_upper(:,:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "timebasepath": "t_e/time",
+  "type": "dynamic",
+  "units": "mixed"
+ },
  "thomson_scattering.channel[:].identifier": {
   "data_type": "STR_0D",
   "documentation": "ID of the channel",
   "full_path": "thomson_scattering/channel(i1)/identifier",
   "lifecycle_status": "alpha",
   "type": "static"
+ },
+ "thomson_scattering.channel[:].line_of_sight": {
+  "data_type": "STRUCTURE",
+  "documentation": "Description of the line of sight of the channel, given by 2 points",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "line_of_sight_2points"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the first point",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.first_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/first_point/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point": {
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the second point",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi0d_static"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.phi": {
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/phi",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.phi_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.phi_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.r": {
+  "data_type": "FLT_0D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/r",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.r_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/r_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.r_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/r_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.z": {
+  "data_type": "FLT_0D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/z",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.z_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/z_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].line_of_sight.second_point.z_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/line_of_sight/second_point/z_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "thomson_scattering.channel[:].n_e": {
   "data_type": "STRUCTURE",
@@ -309,6 +573,14 @@
   "data_type": "STR_0D",
   "documentation": "Name of the channel",
   "full_path": "thomson_scattering/channel(i1)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.channel[:].polychromator_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the polychromator used by this channel (refers to the ../../polychromator array)",
+  "full_path": "thomson_scattering/channel(i1)/polychromator_index",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -415,6 +687,191 @@
   "type": "static",
   "units": "m"
  },
+ "thomson_scattering.channel[:].position_per_laser": {
+  "coordinates": [
+   "thomson_scattering.laser"
+  ],
+  "data_type": "STRUCTURE",
+  "documentation": "Position of the intersection between each laser beam and this line of sight",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser",
+  "lifecycle_status": "alpha",
+  "structure_reference": "rzphi1d_static"
+ },
+ "thomson_scattering.channel[:].position_per_laser.phi": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Toroidal angle (oriented counter-clockwise when viewing from above)",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position_per_laser.phi_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position_per_laser.phi_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position_per_laser.phi_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"phi\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].position_per_laser.r": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Major radius",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/r(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position_per_laser.r_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/r_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position_per_laser.r_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/r_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position_per_laser.r_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"r\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/r_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position_per_laser.z": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Height",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/z(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position_per_laser.z_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/z_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].position_per_laser.z_error_lower": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/z_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].position_per_laser.z_error_upper": {
+  "coordinates": [
+   "thomson_scattering.channel[:].position_per_laser.r"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"z\"",
+  "full_path": "thomson_scattering/channel(i1)/position_per_laser/z_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.channel[:].scattering_angle": {
+  "coordinates": [
+   "thomson_scattering.laser"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Angle formed by the laser beam wave vector and the line of sight, counted clockwise when projected in the poloidal plane",
+  "full_path": "thomson_scattering/channel(i1)/scattering_angle(:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].scattering_angle_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"scattering_angle\"",
+  "full_path": "thomson_scattering/channel(i1)/scattering_angle_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.channel[:].scattering_angle_error_lower": {
+  "coordinates": [
+   "thomson_scattering.laser"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"scattering_angle\"",
+  "full_path": "thomson_scattering/channel(i1)/scattering_angle_error_lower(:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].scattering_angle_error_upper": {
+  "coordinates": [
+   "thomson_scattering.laser"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"scattering_angle\"",
+  "full_path": "thomson_scattering/channel(i1)/scattering_angle_error_upper(:)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "rad"
+ },
+ "thomson_scattering.channel[:].solid_angle": {
+  "data_type": "INT_0D",
+  "documentation": "Solid angle of the line of sight",
+  "full_path": "thomson_scattering/channel(i1)/solid_angle",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
  "thomson_scattering.channel[:].t_e": {
   "data_type": "STRUCTURE",
   "documentation": "Electron temperature",
@@ -478,6 +935,14 @@
   "timebasepath": "t_e/time",
   "type": "dynamic",
   "units": "s"
+ },
+ "thomson_scattering.channel[:].width_z": {
+  "data_type": "INT_0D",
+  "documentation": "Full width of the light collection area along the Z coordinate",
+  "full_path": "thomson_scattering/channel(i1)/width_z",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "thomson_scattering.code": {
   "data_type": "STRUCTURE",
@@ -1034,16 +1499,32 @@
   "type": "constant",
   "url": "utilities/IDS-path-syntax.md"
  },
- "thomson_scattering.ids_properties.provenance.node[:].sources": {
+ "thomson_scattering.ids_properties.provenance.node[:].reference": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
-  "full_path": "thomson_scattering/ids_properties/provenance/node(i1)/sources(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of references used to populate or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the reference is an input to the process described in the \"code\" structure at the root of the IDS. The reference can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the reference, or the persistent identifier of the data reference). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data references.",
+  "full_path": "thomson_scattering/ids_properties/provenance/node(i1)/reference(i2)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
-  "type": "constant",
+  "maxoccur": "10",
+  "structure_reference": "ids_provenance_node_reference",
   "url": "utilities/IMAS-URI-scheme.md"
+ },
+ "thomson_scattering.ids_properties.provenance.node[:].reference[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name",
+  "full_path": "thomson_scattering/ids_properties/provenance/node(i1)/reference(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "thomson_scattering.ids_properties.provenance.node[:].reference[:].timestamp": {
+  "data_type": "STR_0D",
+  "documentation": "Date and time (UTC) at which the reference was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z",
+  "full_path": "thomson_scattering/ids_properties/provenance/node(i1)/reference(i2)/timestamp",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "thomson_scattering.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -1087,6 +1568,146 @@
   "full_path": "thomson_scattering/ids_properties/version_put/data_dictionary",
   "lifecycle_status": "alpha",
   "type": "constant"
+ },
+ "thomson_scattering.laser": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of probing lasers",
+  "full_path": "thomson_scattering/laser(i1)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "3",
+  "structure_reference": "thomson_scattering_laser"
+ },
+ "thomson_scattering.laser[:].energy_in": {
+  "data_type": "STRUCTURE",
+  "documentation": "Energy of the laser pulse measured just before entering the vacuum vessel",
+  "full_path": "thomson_scattering/laser(i1)/energy_in",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_in.data": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_in.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "thomson_scattering/laser(i1)/energy_in/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_in/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_in.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_in/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.laser[:].energy_in.data_error_lower": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_in.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_in/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_in/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_in.data_error_upper": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_in.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_in/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_in/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_in.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "thomson_scattering/laser(i1)/energy_in/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_in/time",
+  "type": "dynamic",
+  "units": "s"
+ },
+ "thomson_scattering.laser[:].energy_out": {
+  "data_type": "STRUCTURE",
+  "documentation": "Energy of the laser pulse measured after crossing the plasma",
+  "full_path": "thomson_scattering/laser(i1)/energy_out",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_out.data": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_out.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "thomson_scattering/laser(i1)/energy_out/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_out/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_out.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_out/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.laser[:].energy_out.data_error_lower": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_out.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_out/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_out/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_out.data_error_upper": {
+  "coordinates": [
+   "thomson_scattering.laser[:].energy_out.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "thomson_scattering/laser(i1)/energy_out/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_out/time",
+  "type": "dynamic",
+  "units": "J"
+ },
+ "thomson_scattering.laser[:].energy_out.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "thomson_scattering/laser(i1)/energy_out/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "energy_out/time",
+  "type": "dynamic",
+  "units": "s"
  },
  "thomson_scattering.latency": {
   "data_type": "FLT_0D",
@@ -1152,6 +1773,271 @@
   "full_path": "thomson_scattering/midplane/name",
   "lifecycle_status": "alpha",
   "type": "static"
+ },
+ "thomson_scattering.polychromator": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of polychromators",
+  "full_path": "thomson_scattering/polychromator(i1)",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "maxoccur": "40",
+  "structure_reference": "thomson_scattering_polychromator"
+ },
+ "thomson_scattering.polychromator[:].calibration_absolute": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Factor to be multiplied by the spectral calibration to obtain the instrument function (fraction of signal received on each energy channel when a photon of relevant energy enters the optical system)",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_absolute(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].calibration_absolute_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which the absolute calibration was carried out",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_absolute_date",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.polychromator[:].calibration_absolute_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"calibration_absolute\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_absolute_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].calibration_absolute_error_lower": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"calibration_absolute\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_absolute_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].calibration_absolute_error_upper": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"calibration_absolute\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_absolute_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].calibration_spectral": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Polychromator response function: fraction of signal received on each energy channel when a photon of relevant energy enters the polychromator.",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_spectral(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].calibration_spectral_date": {
+  "data_type": "STR_0D",
+  "documentation": "Date at which the spectral calibration was carried out",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_spectral_date",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "thomson_scattering.polychromator[:].calibration_spectral_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"calibration_spectral\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_spectral_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].calibration_spectral_error_lower": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"calibration_spectral\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_spectral_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].calibration_spectral_error_upper": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"calibration_spectral\"",
+  "full_path": "thomson_scattering/polychromator(i1)/calibration_spectral_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "Set of wavelength bands in which photons are counted by the polychromator",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)",
+  "lifecycle_status": "alpha",
+  "maxoccur": "8",
+  "structure_reference": "detector_wavelength"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].detection_efficiency": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Probability of detection of a photon impacting the detector as a function of its wavelength ",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/detection_efficiency(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].detection_efficiency_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"detection_efficiency\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/detection_efficiency_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].detection_efficiency_error_lower": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"detection_efficiency\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/detection_efficiency_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].detection_efficiency_error_upper": {
+  "coordinates": [
+   "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"detection_efficiency\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/detection_efficiency_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "-"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower bound of the detector wavelength range",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_lower_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelength_lower\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_lower_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_lower_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"wavelength_lower\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_lower_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_lower_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"wavelength_lower\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_lower_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper bound of the detector wavelength range",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_upper_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelength_upper\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_upper_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_upper_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"wavelength_upper\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_upper_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelength_upper_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"wavelength_upper\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelength_upper_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "constant",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of wavelength values",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelengths(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelengths\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelengths_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"wavelengths\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelengths_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "thomson_scattering.polychromator[:].wavelength_band[:].wavelengths_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"wavelengths\"",
+  "full_path": "thomson_scattering/polychromator(i1)/wavelength_band(i2)/wavelengths_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
  },
  "thomson_scattering.time": {
   "coordinates": [

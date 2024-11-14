@@ -147,6 +147,114 @@
   "timebasepath": "time",
   "type": "dynamic"
  },
+ "distributions.distribution[:].ggd[:].amplitude": {
+  "data_type": "STRUCTURE",
+  "documentation": "Value of the distribution function at the grid position in phase space. The interpolation coefficients refer to a C-2 spline.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "generic_grid_scalar",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.coefficients": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].amplitude.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.coefficients_error_lower": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].amplitude.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.coefficients_error_upper": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].amplitude.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
+ "distributions.distribution[:].ggd[:].amplitude.values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/amplitude/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "m^-6.s^-3"
+ },
  "distributions.distribution[:].ggd[:].expansion": {
   "coordinates": [
    "1...N"
@@ -1104,6 +1212,375 @@
   "data_type": "INT_1D",
   "documentation": "List of nodes forming this object (indices to objects_per_dimension(1)%object(:) in Fortran notation)",
   "full_path": "distributions/distribution(i1)/ggd(itime)/grid/space(i2)/objects_per_dimension(i3)/object(i4)/nodes(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit": {
+  "data_type": "STRUCTURE",
+  "documentation": "Orbit description of the particle at this position in phase space. First dimension is the element index. Second dimension is the time along the orbit. Third dimension contains the particle phase space coordinates.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "generic_grid_matrix",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.coefficients": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_4D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension). Second dimension: first matrix index. Third dimension: second matrix index. Fourth dimension: coefficient index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/coefficients(:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit.coefficients_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_4D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/coefficients_error_lower(:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.coefficients_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_4D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/coefficients_error_upper(:,:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit.grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit.values": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "List of matrix components, one list per element in the grid subset. First dimension: element index. Second dimension: first matrix index. Third dimension: second matrix index.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/values(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit.values_error_lower": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/values_error_lower(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit.values_error_upper": {
+  "coordinates": [
+   "1...N",
+   "1...N",
+   "1...N"
+  ],
+  "data_type": "FLT_3D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit/values_error_upper(:,:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "mixed"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol": {
+  "data_type": "STRUCTURE",
+  "documentation": "Poloidal orbit frequency (transit or bounce) at the grid location (in phase space)",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "generic_grid_scalar",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.coefficients": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_pol.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.coefficients_error_lower": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_pol.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.coefficients_error_upper": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_pol.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_pol.values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_pol/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor": {
+  "data_type": "STRUCTURE",
+  "documentation": "Toroidal orbit frequency (transit or precession) at the grid location (in phase space)",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "generic_grid_scalar",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.coefficients": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_tor.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Interpolation coefficients, to be used for a high precision evaluation of the physical quantity with finite elements, provided per element in the grid subset (first dimension).",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/coefficients(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.coefficients_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/coefficients_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.coefficients_error_lower": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_tor.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/coefficients_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.coefficients_error_upper": {
+  "coordinates": [
+   "distributions.distribution[:].ggd[:].orbit_frequency_tor.values",
+   "1...N"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"coefficients\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/coefficients_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "One scalar value is provided per element in the grid subset.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/values(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.values_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/values_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_frequency_tor.values_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_frequency_tor/values_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "rad.s^-1"
+ },
+ "distributions.distribution[:].ggd[:].orbit_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/orbit_type_identifier.xml",
+  "documentation": "Orbit type identifier\n0) unspecified : Unspecified\n1) none : No possible trajectories\n2) lost_co : Trajectories leave confined region moving co-current\n3) lost_counter : Trajectories leave confined region moving counter-current\n4) co : Trajectories in co-current direction\n5) counter : Trajectories in counter-current direction\n6) co_counter : Trajectories in co- and counter-current directions\n7) stagnation : Co-passing (only), non-axis encircling trajectories\n8) banana : Non-axis encircling trajectories that reverse parallel motion (are trapped)\n9) potato : Axis encircling trajectories that reverse parallel motion (are trapped)",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_type",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "generic_grid_integer"
+ },
+ "distributions.distribution[:].ggd[:].orbit_type.grid_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid used to represent this quantity",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_type/grid_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_type.grid_subset_index": {
+  "data_type": "INT_0D",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_type/grid_subset_index",
+  "lifecycle_status": "alpha",
+  "type": "dynamic"
+ },
+ "distributions.distribution[:].ggd[:].orbit_type.values": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "INT_1D",
+  "documentation": "One integer value is provided per element in the grid subset.",
+  "full_path": "distributions/distribution(i1)/ggd(itime)/orbit_type/values(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic"
  },
@@ -20028,16 +20505,32 @@
   "type": "constant",
   "url": "utilities/IDS-path-syntax.md"
  },
- "distributions.ids_properties.provenance.node[:].sources": {
+ "distributions.ids_properties.provenance.node[:].reference": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
-  "full_path": "distributions/ids_properties/provenance/node(i1)/sources(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of references used to populate or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the reference is an input to the process described in the \"code\" structure at the root of the IDS. The reference can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the reference, or the persistent identifier of the data reference). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data references.",
+  "full_path": "distributions/ids_properties/provenance/node(i1)/reference(i2)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
-  "type": "constant",
+  "maxoccur": "10",
+  "structure_reference": "ids_provenance_node_reference",
   "url": "utilities/IMAS-URI-scheme.md"
+ },
+ "distributions.ids_properties.provenance.node[:].reference[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name",
+  "full_path": "distributions/ids_properties/provenance/node(i1)/reference(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distributions.ids_properties.provenance.node[:].reference[:].timestamp": {
+  "data_type": "STR_0D",
+  "documentation": "Date and time (UTC) at which the reference was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z",
+  "full_path": "distributions/ids_properties/provenance/node(i1)/reference(i2)/timestamp",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "distributions.ids_properties.provider": {
   "data_type": "STR_0D",
