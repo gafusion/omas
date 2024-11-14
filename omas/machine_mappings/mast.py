@@ -438,4 +438,4 @@ def mse_data(ods, pulse, server=None, port=None):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("mast", __all__, globals(), locals())

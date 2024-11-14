@@ -1523,3 +1523,5 @@ def core_profiles_global_quantities_data(ods, pulse):
 
 
 # ================================
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
