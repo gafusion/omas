@@ -1145,7 +1145,7 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     """
     Plot equilibrium cross section, pressure profile and constraints, and convergence error
 
-    :param ods: input ods
+    :param ods: input ods that has data to plot
 
     :param time_index: int, list of ints, or None
         time slice to plot.  If None all timeslices are plotted.
@@ -1153,6 +1153,9 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     :param time: float, list of floats, or None
         time to plot. If None all timeslicess are plotted.
         if not None, it takes precedence over time_index
+
+    :param fig: matplotlib Figure
+    
     """
     from matplotlib import pyplot
     from omas.omas_physics import get_plot_scale_and_unit
@@ -1179,6 +1182,25 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
             return ods_time_plot(
                 equilibrium_summary_and_quality_and_core_profiles, ods, time_index, time, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, ods_species=ods_species, **kw
             )
+    
+    eq = ods['equilibrium']['time_slice'][time_index]
+    shot_txt = ''
+    try:
+        shot_txt = f"{ods['dataset_description.data_entry.machine']} "
+        shot_txt = f"{shot_txt}#{ods['dataset_description.data_entry.pulse']}"
+    except:
+        pass
+    shot_txt = f"{shot_txt} @ {eq['time']:.3f} s"
+    shot_comment = ''
+    try:
+        shot_comment = ods['dataset_description.ids_properties.comment']
+    except:
+        pass
+    if not len(fig.texts):
+        fig.text(0.05,0.01,'',ha='left', va='bottom', size='x-large')
+        fig.text(0.95,0.01,'',ha='right',va='bottom', size='small')
+    fig.texts[0].set_text(shot_txt)
+    fig.texts[1].set_text(shot_comment)
     ax = cached_add_subplot(fig, axs, 1, 4, 1)
     tmp = equilibrium_CX(
         ods, time_index=time_index, ax=ax, contour_quantity='psi', ggd_points_triangles=ggd_points_triangles, **kw
@@ -1186,7 +1208,6 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     overlay(ods, ax=ax, thomson_scattering=True)
 
     # Work with equilibrium - inspired by equilibrium_summary
-    eq = ods['equilibrium']['time_slice'][time_index]
     raw_xName = 'psi'
     def psi2psin(psix):
         return (psix-eq['global_quantities']['psi_axis'])/(eq['global_quantities']['psi_boundary']-eq['global_quantities']['psi_axis'])
