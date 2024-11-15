@@ -1505,19 +1505,22 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def core_profiles_global_quantities_data(ods, pulse):
     from scipy.interpolate import interp1d
+    mpulse = pulse
+    if len(str(pulse))>8:
+        mpulse = int(str(pulse)[:6])
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1, pulse)
+    unwrap(magnetics_hardware)(ods1, mpulse)
 
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
         if 'time' not in cp:
-            m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
+            m = mdsvalue('d3d', pulse=mpulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
             cp['time'] = m.dim_of(1) * 1e-3
         t = cp['time']
 
-        m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
+        m = mdsvalue('d3d', pulse=mpulse, TDI=f"ptdata2(\"VLOOP\",{mpulse})", treename=None)
 
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
