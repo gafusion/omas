@@ -1215,7 +1215,7 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     xName = r"$\Psi_\mathrm{n}$"
 
     # pressure
-    ax = cached_add_subplot(fig, axs, 2, 4, 8)
+    ax = cached_add_subplot(fig, axs, 2, 4, 4)
     pfac = 1.e-3
     ax.plot(x, eq['profiles_1d']['pressure'] * pfac)
     ytitle = 0.9
@@ -1227,12 +1227,10 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     p_e = eq['constraints.pressure.:.measured_error_upper'] * pfac
     ax.errorbar(p_x, p, yerr=p_e, color='red', marker='', alpha=0.25)
 
-    # Convergence error - inspired by equilibrium_quality
-    ax = cached_add_subplot(fig, axs, 2, 4, 4)
-    ax.plot(ods['equilibrium.time'], ods['equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value'])
-    ax.axvline(eq['time'],color='black')
-    ax.set_yscale('log')
-    ax.set_title('Convergence error vs time', y=ytitle, va='top')
+    # ax = cached_add_subplot(fig, axs, 2, 4, 4)
+    # ax.plot(ods['equilibrium.time'], ods['equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value'])
+    # ax.axvline(eq['time'],color='black')
+    # ax.set_yscale('log')
 
     # Core profiles (Mostly copy paste from core_profiles_summary)
     kw.pop('color',None)
@@ -1255,7 +1253,7 @@ def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time
     else:
         ncols = len(ods_species)
     nplots = 0
-    quantities = ['density_thermal', 'temperature']
+    quantities = ['density_thermal', 'temperature', 'velocity.toroidal']
     for quant in quantities:
         if 'density' in quant or 'temperature' in quant:
             nplots += ncols
