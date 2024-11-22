@@ -5,7 +5,7 @@ import copy
 tmp = {}
 for version in omas.imas_versions:
     print(version)
-    if version.startswith("3"):
+    if version.startswith("3") or version.startswith("4"):
         ods = omas.omas_info(imas_version=version)
         for ds in ods:
             for key in ods[ds].flat():

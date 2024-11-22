@@ -117,14 +117,14 @@ class IMAS_versions(OrderedDict):
         """
         OrderedDict.__init__(self)
         if mode in ['all', 'named']:
-            # first `develop/3` and other branches
+            # first `develop/3`, `develop/4` and other branches
             for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
-                if not _item.startswith('3'):
+                if not (_item.startswith('3') or _item.startswith('4')):
                     self[_item.replace('_', '.')] = _item
         if mode in ['all', 'tagged']:
             # next all tagged versions sorted by version number
             for _item in list(map(lambda x: os.path.basename(x), sorted(glob.glob(imas_json_dir + os.sep + '*')))):
-                if _item.startswith('3'):
+                if  (_item.startswith('3') or _item.startswith('4')):
                     self[_item.replace('_', '.')] = _item
         # do not include empty imas_structures directories (eg. needed to avoid issues wheen switching to old git branches)
         for item, value in list(self.items()):
