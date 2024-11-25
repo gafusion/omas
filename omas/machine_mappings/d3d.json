@@ -131,9 +131,6 @@
  "core_profiles.profiles_1d.:.e_field.radial_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
- "core_profiles.profiles_1d.:.electrons.density_thermal": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
- },
  "core_profiles.profiles_1d.:.electrons.density_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
@@ -145,6 +142,12 @@
  },
  "core_profiles.profiles_1d.:.electrons.density_fit.psi_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
@@ -169,6 +172,15 @@
  },
  "core_profiles.profiles_1d.:.ion.:": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.measured_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.density_thermal": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
@@ -234,6 +246,9 @@
  },
  "core_profiles.profiles_1d.:.pressure_perpendicular": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r})"
  },
  "core_profiles.time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"

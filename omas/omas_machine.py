@@ -651,7 +651,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             pprint(regression_kw)
             print('=' * len(func_name))
             ods = ODS() #consistency_check= not break_schema
-            func = eval(machine + "." + func_name, global_namespace, local_namespace)
+            func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
                     regression_kw["update_callback"] = update_mapping
@@ -780,5 +780,3 @@ def load_omas_machine(
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
 
-if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())

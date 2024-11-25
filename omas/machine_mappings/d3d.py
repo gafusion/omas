@@ -1382,12 +1382,13 @@ def add_extra_profile_structures():
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
     add_extra_structures(extra_structures)
-    
+
 
 @machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
+    sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
         pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
@@ -1450,7 +1451,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     print(data[entry][i_time])
                     print("================ ERROR =================")
                     print(data[entry + "_error_upper"][i_time])
-                    print(data[entry][i_time].shape, 
+                    print(data[entry][i_time].shape,
                             data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
@@ -1476,7 +1477,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         profiles_node = '\\TOP.PROFILES.'
         query = {
             "electrons.density_thermal": "EDENSFIT",
-            "electrons.temperature": "ETEMPFIT"
+            "electrons.temperature": "ETEMPFIT"#,
+            # "ion[0].density_thermal": "ZDENSFIT", # Need to deal with different times
+            #"ion[0].temperature": "ITEMPFIT",  # Need to deal with different times
+            #"ion[1].velocity.toroidal": "TROTFIT",# Need to check units/meaning rot freq vs velocity
         }
         for entry in query:
             query[entry] = profiles_node + query[entry]
@@ -1492,12 +1496,23 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 "electrons.temperature": np.in1d(data['time_te'], ods[f"core_profiles.time"])
         }
         rho_tor_norm = dim_info.dim_of(0)
-        for i_time, time in enumerate(ods[f"core_profiles.time"]):
-            ods[f"core_profiles.profiles_1d.{i_time}.grid.rho_tor_norm"] = rho_tor_norm
-            for entry in query:
-                if isinstance(data[entry], Exception):
-                    continue
+        data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
+        data['grid.rho_tor_norm'][:] = rho_tor_norm
+        ods[f"core_profiles.time"] = data['time']
+        for entry in data:
+            if isinstance(data[entry], Exception):
+                continue
+            for i_time, time in enumerate(data["time"]):
                 ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
+        #Needed for ion components
+        #for i_time, time in enumerate(data["time"]):
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+        #    ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+        #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
@@ -1526,3 +1541,5 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
 
 # ================================
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())

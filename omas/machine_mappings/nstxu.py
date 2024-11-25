@@ -590,4 +590,4 @@ def charge_exchange_data(ods, pulse, edition='CT1'):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("nstxu", __all__, globals(), locals())
