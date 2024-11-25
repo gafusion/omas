@@ -11,6 +11,7 @@ from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
+import copy
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -1383,12 +1384,13 @@ def add_extra_profile_structures():
     add_extra_structures(extra_structures)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
-def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
             "electrons.density_thermal": "N_E",
@@ -1419,11 +1421,11 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
             print("No mds+ data")
             raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
@@ -1469,6 +1471,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            ods[f"{sh}[{i_time}].electrons.density_thermal"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density"])
+            ods[f"{sh}[{i_time}].electrons.density_thermal_error_upper"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_error_upper"])
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
@@ -1483,6 +1487,14 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
         data['time'] = dim_info.dim_of(1) * 1.e-3
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.ETEMPFIT")
+        data['time_te'] = dim_info.dim_of(1) * 1.e-3
+        ods[f"core_profiles.time"] = data['time'][np.in1d(data['time'], data['time_te'])]
+        mask_dict = {
+                "electrons.density": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.density_thermal": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.temperature": np.in1d(data['time_te'], ods[f"core_profiles.time"])
+        }
         rho_tor_norm = dim_info.dim_of(0)
         data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
         data['grid.rho_tor_norm'][:] = rho_tor_norm
@@ -1491,7 +1503,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
         #Needed for ion components
         #for i_time, time in enumerate(data["time"]):
         #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
@@ -1502,19 +1514,25 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221)
-def core_profiles_global_quantities_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
+def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
         if 'time' not in cp:
-            m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
-            cp['time'] = m.dim_of(1) * 1e-3
+            if "ZIPFIT0" in PROFILES_tree:
+                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
+                cp['time'] = m.dim_of(1) * 1e-3
+            elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
+                pulse_id = int(str(pulse) + PROFILES_run_id)
+                dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+                cp['time'] = dim_info.dim_of(1) * 1.e-3
+            else:
+                raise ValueError(f"Trying to access global_quantities with unknown profiles tree: {PROFILES_tree}")
         t = cp['time']
 
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)

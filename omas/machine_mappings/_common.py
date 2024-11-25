@@ -4,7 +4,7 @@ from omas.omas_utils import printd
 import os
 import glob
 from omas.omas_setup import omas_dir
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, get_pulse_id
 
 __support_files_cache__ = {}
 
@@ -47,30 +47,33 @@ def get_support_file(object_type, filename):
 __MDS_gEQDSK_COCOS_identify_cache__ = {}
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
+def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
     """
     Python function that queries MDS+ EFIT tree to figure
     out COCOS convention used for a particular reconstruction
 
     :param machine: machine name
 
-    :param pulse: pulse
+    :param pulse: pulse number
 
     :param EFIT_tree: MDS+ EFIT tree name
 
+    :param EFIT_run_id:  with id extension for non-standard shot numbers. E.g. 19484401 for EFIT tree
+
     :return: integer cocos convention
     """
-    if (machine, pulse, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
-        return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)]
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+    if (machine, pulse_id, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
+        return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
-    res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+    res = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
     bt = res['bt']
     ip = res['ip']
     g_cocos = {(+1, +1): 1, (+1, -1): 3, (-1, +1): 5, (-1, -1): 7, (+1, 0): 1, (-1, 0): 3}
     sign_Bt = int(np.sign(bt))
     sign_Ip = int(np.sign(ip))
     cocosio = g_cocos.get((sign_Bt, sign_Ip), None)
-    __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)] = cocosio
+    __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)] = cocosio
     return cocosio
 
 
