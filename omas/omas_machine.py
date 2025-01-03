@@ -246,7 +246,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         else:
             return ods, {'raw_data': ods, 'processed_data': ods, 'cocosio': cocosio, 'branch': mappings['__branch__']}
 
-    # MDS+
+    # MDSplus
     elif 'TDI' in mapped:
         try:
             if 'treename' in  mapped:
@@ -289,10 +289,10 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         ods[location] = data
     else:
         with omas_environment(ods, cocosio=cocosio):
-            dsize = len(data.shape)  # size of the data fetched from MDS+
+            dsize = len(data.shape)  # size of the data fetched from MDSplus
             csize = len(mapped.get('COORDINATES', []))  # number of coordinates
             osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])  # number of named coordinates
-            asize = location.count(':') + csize  # data size required from MDS+ to make the assignement
+            asize = location.count(':') + csize  # data size required from MDSplus to make the assignement
             if asize != dsize:
                 raise Exception(
                     f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"

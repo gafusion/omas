@@ -90,6 +90,6 @@ class TestOmasMachine(UnittestCaseOmas):
         ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
 
     def test_tdi(self):
-        # make sure all machines have a MDS+ server assigned
+        # make sure all machines have a MDSplus server assigned
         for machine in machines():
             machine_mappings(self.machine, '')['__mdsserver__']

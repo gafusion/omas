@@ -1424,7 +1424,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
             print("No mds+ data")
-            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
+            raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)

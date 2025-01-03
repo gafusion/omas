@@ -49,14 +49,14 @@ __MDS_gEQDSK_COCOS_identify_cache__ = {}
 
 def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
     """
-    Python function that queries MDS+ EFIT tree to figure
+    Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
 
     :param machine: machine name
 
     :param pulse: pulse number
 
-    :param EFIT_tree: MDS+ EFIT tree name
+    :param EFIT_tree: MDSplus EFIT tree name
 
     :param EFIT_run_id:  with id extension for non-standard shot numbers. E.g. 19484401 for EFIT tree
 
@@ -87,7 +87,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
     :param pulse: pulse
 
-    :param EFIT_tree: MDS+ EFIT tree name
+    :param EFIT_tree: MDSplus EFIT tree name
 
     :return: integer cocos convention
     """
@@ -200,9 +200,9 @@ def fetch_assign(
 
     :param validity: location in `ods` where to set the validity flag
 
-    :param mds_server: MDS+ server to connect to
+    :param mds_server: MDSplus server to connect to
 
-    :param mds_tree: MDS+ tree from where to get the data
+    :param mds_tree: MDSplus tree from where to get the data
 
     :param tdi_expression: string with tdi_expression to use
 
