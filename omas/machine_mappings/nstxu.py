@@ -4,6 +4,10 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
+from omas.omas_core import ODS
+from omas.omas_physics import omas_environment
 import glob
 
 # NOTES:
@@ -586,4 +590,4 @@ def charge_exchange_data(ods, pulse, edition='CT1'):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("nstxu", __all__, globals(), locals())

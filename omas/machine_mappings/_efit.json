@@ -188,7 +188,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.elongation": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.EOUT)",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.KAPPA)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
@@ -508,7 +508,7 @@
     "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TERROR)",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ERROR)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.index": {

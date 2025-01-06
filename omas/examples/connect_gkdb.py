@@ -15,8 +15,8 @@ import sys
 # load a sample GKDB sample json file
 sample_filename = omas_dir + 'samples/gkdb_linear_eigenvalue.json'
 ods = ODS()
-# warn about `gyrokinetics.fluxes_integrated_norm = []` and drop it
-ods['gyrokinetics'].load(sample_filename, consistency_check='warn_drop')
+# warn about `gyrokinetics_local.fluxes_integrated_norm = []` and drop it
+ods['gyrokinetics_local'].load(sample_filename, consistency_check='warn_drop')
 
 # show content
 pprint(ods.pretty_paths())
@@ -29,11 +29,11 @@ except NameError:
 
     __file__ = inspect.getfile(lambda: None)
 filename = omas_testdir(__file__) + '/gkdb_linear_initialvalue.json'
-ods['gyrokinetics'].save(filename)
+ods['gyrokinetics_local'].save(filename)
 
 # load the newly saved copy
 ods1 = ODS()
-ods1['gyrokinetics'].load(filename)
+ods1['gyrokinetics_local'].load(filename)
 
 # look for differences between original GKDB json and OMAS json
 differences = ods.diff(ods1, ignore_type=True)

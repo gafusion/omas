@@ -2,21 +2,23 @@
 #
 # usage: pip install -r requirements.txt
 
-numpy>=1.16.1            # required
-uncertainties            # required
-pint                     # required
-netCDF4                  # required
-boto3                    # required
-matplotlib               # required
-scipy                    # required
-h5py                     # required
-pymongo                  # required
-dnspython                # required
-xmltodict                # required
-xarray                   # required
-setuptools>=41.2         # required
-tqdm                     # required
-Cython                   # required
+numpy>=1.16.1                                      # required
+numpy<2;python_version=='3.9'                      # required to use pint
+uncertainties                                      # required
+pint                                               # required
+netCDF4                                            # required
+boto3                                              # required
+matplotlib                                         # required
+scipy                                              # required
+h5py                                               # required
+pymongo                                            # required
+dnspython                                          # required
+xmltodict                                          # required
+xarray                                             # required
+setuptools>=41.2                                   # required
+tqdm                                               # required
+Cython                                             # required
+importlib_metadata <5;python_version=='3.7'        # required
 
 # omfit_classes            # machine
 # pexpect                  # machine

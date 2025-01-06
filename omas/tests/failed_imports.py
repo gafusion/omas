@@ -69,6 +69,8 @@ with warnings.catch_warnings():
         failed_OMFIT = False
     except ImportError as _excp:
         failed_OMFIT = _excp
+    except AttributeError as _excp:
+        failed_OMFIT = "omfit_classes, from xarray import * bug "
 
 try:
     import MDSplus
