@@ -843,8 +843,11 @@ def equilibrium_CX(
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
-        for collection in cs.collections:
-            collection.set_clip_path(wall_path)
+        if hasattr(cs, "collections"): # Matplotlib < 3.10
+            for collection in cs.collections:
+                collection.set_clip_path(wall_path)
+        else:
+            cs.set_clip_path(wall_path)
 
     # Wall
     if wall is not None and show_wall:
