@@ -4,6 +4,10 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
+from omas.utilities.omas_mds import mdsvalue
+from omas.omas_core import ODS
+from omas.omas_physics import omas_environment
 import glob
 
 # NOTES:
@@ -183,22 +187,21 @@ def magnetics_floops_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='magnetics.flux_loop',
-            identifier='magnetics.flux_loop.{channel}.identifier',
-            time='magnetics.flux_loop.{channel}.flux.time',
-            data='magnetics.flux_loop.{channel}.flux.data',
-            validity='magnetics.flux_loop.{channel}.flux.validity',
-            mds_server='nstxu',
-            mds_tree='OPERATIONS',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    fetch_assign(
+        ods,
+        ods1,
+        pulse,
+        channels='magnetics.flux_loop',
+        identifier='magnetics.flux_loop.{channel}.identifier',
+        time='magnetics.flux_loop.{channel}.flux.time',
+        data='magnetics.flux_loop.{channel}.flux.data',
+        validity='magnetics.flux_loop.{channel}.flux.validity',
+        mds_server='nstxu',
+        mds_tree='OPERATIONS',
+        tdi_expression='\\{signal}',
+        time_norm=1.0,
+        data_norm=1.0,
+    )
 
     # handle uncertainties
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
@@ -211,9 +214,6 @@ def magnetics_floops_data(ods, pulse):
             error = np.sqrt(rel_error**2 + abs_error**2)
             error[np.abs(data) < tfl_signals[channel + 1]['sig_thresh']] = tfl_signals[channel + 1]['sig_thresh']
             ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] = error
-            # 2*pi normalization is done at this stage so that rel_error, abs_error, sig_thresh are consistent with data
-            ods[f'magnetics.flux_loop.{channel}.flux.data'] /= 2.0 * np.pi
-            ods[f'magnetics.flux_loop.{channel}.flux.data_error_upper'] /= 2.0 * np.pi
 
 
 @machine_mapping_function(__regression_arguments__, pulse=204202)
@@ -229,22 +229,21 @@ def magnetics_probes_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
-        fetch_assign(
-            ods,
-            ods1,
-            pulse,
-            channels='magnetics.b_field_pol_probe',
-            identifier='magnetics.b_field_pol_probe.{channel}.identifier',
-            time='magnetics.b_field_pol_probe.{channel}.field.time',
-            data='magnetics.b_field_pol_probe.{channel}.field.data',
-            validity='magnetics.b_field_pol_probe.{channel}.field.validity',
-            mds_server='nstxu',
-            mds_tree='OPERATIONS',
-            tdi_expression='\\{signal}',
-            time_norm=1.0,
-            data_norm=1.0,
-        )
+    fetch_assign(
+        ods,
+        ods1,
+        pulse,
+        channels='magnetics.b_field_pol_probe',
+        identifier='magnetics.b_field_pol_probe.{channel}.identifier',
+        time='magnetics.b_field_pol_probe.{channel}.field.time',
+        data='magnetics.b_field_pol_probe.{channel}.field.data',
+        validity='magnetics.b_field_pol_probe.{channel}.field.validity',
+        mds_server='nstxu',
+        mds_tree='OPERATIONS',
+        tdi_expression='\\{signal}',
+        time_norm=1.0,
+        data_norm=1.0,
+    )
 
     # handle uncertainties
     signals = get_support_file(OMFITnstxMHD, nstx_filenames('signals', pulse))
@@ -380,17 +379,17 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     mapping between IMAS geometric_coefficients and EFIT AAxGAM
     coeffs0: AA1
     coeffs1: AA8
-    coeffs2: AA2
+    coeffs2: 0
     coeffs3: AA5
     coeffs4: AA4
     coeffs5: AA3
-    coeffs6: 0
+    coeffs6: AA2
     coeffs7: AA7
     coeffs8: AA6
 
     mapping between EFIT AAxGAM and IMAS geometric_coefficients
     AA1: coeffs0
-    AA2: coeffs2
+    AA2: coeffs6
     AA3: coeffs5
     AA4: coeffs4
     AA5: coeffs3
@@ -478,8 +477,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].polarisation_angle.time'] = res['time']
         ods[f'mse.channel[{ch}].polarisation_angle.data'] = res[name][:, ch] * norm
         ods[f'mse.channel[{ch}].polarisation_angle.data_error_upper'] = res[name + '_error'][:, ch] * norm
-        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = validity_timed[:, ch]
-        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = int(np.sum(valid) == 0)
+        ods[f'mse.channel[{ch}].polarisation_angle.validity_timed'] = -1*validity_timed[:, ch]
+        ods[f'mse.channel[{ch}].polarisation_angle.validity'] = -1*int(np.sum(valid) == 0)
         ods[f'mse.channel[{ch}].name'] = f'{ch + 1}'
 
         # use a single time slice for the whole pulse if the beam and the line of sight are not moving during the pulse
@@ -487,7 +486,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.r'] = res['geom_R'][ch]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.z'] = res['geom_R'][ch] * 0.0
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].centre.phi'] = res['geom_R'][ch] * 0.0  # don't actually know this one
-        IMAS2GAM = [1, 8, 2, 5, 4, 3, 9, 7, 6]
+        IMAS2GAM = [1, 8, 6, 5, 4, 3, 2, 9, 7]
         ods[f'mse.channel[{ch}].active_spatial_resolution[0].geometric_coefficients'] = [
             coef_list.get(f'AA{IMAS2GAM[k]}GAM', [0] * (ch + 1))[ch] for k in range(9)
         ]
@@ -508,7 +507,7 @@ def thomson_scattering_hardware(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=140001)
 def thomson_scattering_data(ods, pulse):
     """
-    Loads DIII-D Thomson measurement data
+    Loads NSTX(-U) Thomson measurement data
 
     :param pulse: int
     """
@@ -535,7 +534,60 @@ def thomson_scattering_data(ods, pulse):
         ch['t_e.data_error_upper'] = res['FIT_TE_ERR'][i, :] * signals_norm['FIT_TE_ERR']
         ch['t_e.data'] = res['FIT_TE'][i, :] * signals_norm['FIT_TE']
 
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def charge_exchange_hardware(ods, pulse):
+    """
+    Gathers NSTX(-U) charge exchange measurement locations
+
+    :param pulse: int
+
+    """
+    unwrap(charge_exchange_data)(ods, pulse)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=140001)
+def charge_exchange_data(ods, pulse, edition='CT1'):
+    """
+    Loads DIII-D charge exchange measurement data
+
+    :param pulse: int
+    """
+
+    tree = 'ACTIVESPEC'
+    signals = ['ZEFF', 'VT', 'TI', 'RADIUS', 'TIME', 'DVT', 'DTI']
+    signals_norm = {'ZEFF': 1.0, 'VT': 1e3, 'TI': 1e3, 'RADIUS': 1e-2, 'TIME': 1.0, 'DVT': 1e3, 'DTI': 1e3}
+
+    data = {}
+    TDIs = {}
+    for sig in signals:
+        TDI = f'\\{tree}::TOP.CHERS.ANALYSIS.{edition}:{sig}'
+        TDIs[sig] = '\\' + TDI.strip('\\')
+
+    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+
+    ods['charge_exchange.ids_properties.homogeneous_time'] = 1
+    ods['charge_exchange.time'] = time = res['TIME'] * signals_norm['TIME']
+    ntimes = len(ods['charge_exchange.time'])
+    for i, R in enumerate(res['RADIUS']):
+        ch = ods['charge_exchange']['channel'][i]
+
+        ch['name'] = f'TOP.CHERS.ANALYSIS.{edition}' + str(i)
+        ch['position.r.time'] = time
+        ch['position.z.time'] = time
+        ch['ion[0].t_i.time'] = time
+        ch['ion[0].velocity_tor.time'] = time
+        ch['zeff.time'] = time
+
+        ch['position.r.data'] = R * signals_norm['RADIUS'] * np.ones(ntimes)
+        ch['position.z.data'] = np.zeros(ntimes)
+
+        ch['ion[0].t_i.data'] = res['TI'][:, i] * signals_norm['TI']
+        ch['ion[0].t_i.data_error_upper'] = res['DTI'][:, i] * signals_norm['DTI']
+        ch['ion[0].velocity_tor.data'] = res['VT'][:, i] * signals_norm['VT']
+        ch['ion[0].velocity_tor.data'] = res['DVT'][:, i] * signals_norm['DVT']
+
+        ch['zeff.data'] = res['ZEFF'][:, i] * signals_norm['ZEFF']
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("nstxu", __all__, globals(), locals())

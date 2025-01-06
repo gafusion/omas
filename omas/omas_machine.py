@@ -6,10 +6,20 @@ import shutil
 from omas.omas_utils import *
 from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from omas.omas_physics import cocos_signals
-from omas.machine_mappings import d3d
+from omas.machine_mappings import d3d, nstx, nstxu, east
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
+try:
+    from MDSplus.connection import MdsIpException
+    from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
+except:
+    pass
+
+try:
+    from omas.machine_mappings import mast
+except ImportError:
+    pass
 
 __all__ = [
     'machine_expression_types',
@@ -63,6 +73,15 @@ def python_tdi_namespace(branch):
 
     return _python_tdi_namespace[branch]
 
+def remove_nans(x):
+    import numpy as np
+    if np.isscalar(x):
+        if np.isnan(x):
+            raise ValueError("Behavior of Nan filter undefined for scalar nan values")
+        else:
+            return x
+    else:
+        return x[~np.isnan(x)]
 
 def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_machine_mappings=None, cache=None):
     """
@@ -76,13 +95,13 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :param location: ODS location to be populated
 
-    :param options: dictionary with options to use when loadinig the data
+    :param options: dictionary with options to use when loading the data
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
     :param user_mappings: allow specification of external mappings
 
-    :param cache: if cache is a dictionary, this will be used to establiish a cash
+    :param cache: if cache is a dictionary, this will be used to establish a cash
 
     :return: updated ODS and data before being assigned to the ODS
     """
@@ -93,20 +112,74 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         user_machine_mappings = {}
 
     location = l2o(p2l(location))
-
     for branch in [branch, 'master']:
         mappings = machine_mappings(machine, branch, user_machine_mappings)
         options_with_defaults = copy.copy(mappings['__options__'])
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
-            mapped = mappings[location]
+            if not location.endswith(".*"): # location = "core_profiles.*"
+                mapped = mappings[location]
             break
-        except KeyError:
+        except KeyError as e:
             if branch == 'master':
-                raise
+                raise e
+            else:
+                print(f"Failed to load {location} from head. Attempting to resolve using the master branch.")
+                print(f"Error was:")
+                print(e)
     idm = (machine, branch)
+    failed_locations = {}
+    if location.endswith(".*"):
+        root = location.split(".*")[0]
+        for key in mappings:
+            if root in key and key not in ods:
+                try:
+                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+                except (TreeNODATA, MdsIpException) as e:
+                    if hasattr(e, "eval2TDI"):
+                        failed_locations[key] = e.eval2TDI
+                    else:
+                        failed_locations[key] = e.TDI
+                except TreeNNF as e:
+                    failed_locations[key] = e.TDI
+                    if key != 'equilibrium.time_slice.:.constraints.j_tor.:.measured':
+                        raise e
+        if len(failed_locations) > 0:
+            import yaml
+            print("Failed to load the following keys: ")
+            print(failed_locations)
+            with open("failed_locs", "w") as failed_locs_file:
+                yaml.dump(failed_locations, failed_locs_file, yaml.CDumper)
+            return ods
+    else:
+        return resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=cache)
 
+def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_defaults, branch, cache=None):
+    """
+    Routine to resolve a mapping
+
+    :param ods: input ODS to populate
+
+    :param machine: machine name
+
+    :param pulse: pulse number
+
+    :param mappings: Dictionary of available mappings
+
+    :param location: ODS location to be resolved
+
+    :param idm: Tuple with machine and branch
+
+    :param options_with_defaults: dictionary with options to use when loading the data including default settings
+
+    :param branch: load machine mappings and mapping functions from a specific GitHub branch
+
+    :param cache: if cache is a dictionary, this will be used to establish a cash
+
+    :return: updated ODS and data before being assigned to the ODS
+    """
+    mapped = mappings[location]
     # cocosio
     cocosio = None
     if 'COCOSIO' in mapped:
@@ -139,7 +212,11 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     # ENVIRONMENTAL VARIABLE
     elif 'ENVIRON' in mapped:
-        data0 = data = os.environ[mapped['ENVIRON'].format(**options_with_defaults)]
+        data0 = data = os.environ.get(mapped['ENVIRON'].format(**options_with_defaults))
+        if data is None:
+            raise ValueError(
+                f'Environmental variable {mapped["ENVIRON"].format(**options_with_defaults)} is not defined'
+            )
 
     # PYTHON
     elif 'PYTHON' in mapped:
@@ -171,14 +248,21 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     # MDS+
     elif 'TDI' in mapped:
         try:
+            if 'treename' in  mapped:
+                pulse_id = check_for_pulse_id(pulse, mapped['treename'], options_with_defaults)
+            else:
+                pulse_id = pulse
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
+            data0 = data = mdsvalue(machine, treename, pulse_id, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
-        except Exception:
+        except Exception as e:
             printe(mapped['TDI'].format(**options_with_defaults).replace('\\n', '\n'))
-            raise
+            if "eval2TDI" in mapped:
+                e.eval2TDI = mapped['eval2TDI']
+            e.TDI = mapped['TDI']
+            raise e
 
     else:
         raise ValueError(f"Could not fetch data for {location}. Must define one of {machine_expression_types}")
@@ -196,7 +280,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     # transpose filter
     nanfilter = lambda x: x
     if mapped.get('NANFILTER', False):
-        nanfilter = lambda x: x[~numpy.isnan(x)]
+        #lambda x: x[~numpy.isnan(x)]
+        nanfilter = remove_nans
 
     # assign data to ODS
     if not hasattr(data, 'shape'):
@@ -565,7 +650,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             pprint(regression_kw)
             print('=' * len(func_name))
             ods = ODS() #consistency_check= not break_schema
-            func = eval(machine + "." + func_name, global_namespace, local_namespace)
+            func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
                     regression_kw["update_callback"] = update_mapping
@@ -657,7 +742,11 @@ class dynamic_omas_machine(dynamic_ODS):
     def keys(self, location):
         ulocation = (o2u(location) + ".").lstrip('.')
         if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
-            return list(range(self[ulocation + ':']))
+            try:
+                return list(range(self[ulocation + ':']))
+            except Exception as _excp:
+                printe(f'{ulocation}: issue:' + repr(_excp))
+                return []
         else:
             tmp = numpy.unique(
                 [
@@ -689,6 +778,3 @@ def load_omas_machine(
         print(location)
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
-
-if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())

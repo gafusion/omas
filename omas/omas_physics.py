@@ -3,7 +3,7 @@
 -------
 '''
 
-from scipy.interpolate.fitpack2 import RectBivariateSpline
+from scipy.interpolate import RectBivariateSpline
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -213,8 +213,72 @@ def equilibrium_ggd_to_rectangular(ods, time_index=None, resolution=None, method
         profiles_2d['grid.dim2'] = z
     return ods_n
 
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def add_rho_pol_norm_to_equilbrium_profiles_1d_ods(ods, time_index):
+    try:
+        if (len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["rho_pol-norm"]) ==
+            len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])):
+            return
+        else:
+            raise LookupError
+    except LookupError:
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["rho_pol_norm"] = (
+            ods.map_pol_flux_to_flux_coordinate(ods, time_index, "rho_pol_norm", 
+            ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])
+        )
+
+def mask_SOL(ods, time_index, psi_values):
+    """
+        Returns a numpy array of `dtype=bool`/
+        The array is true for all values inside and on the LCFS
+        :param ods: input ods
+
+        :param time_index: time slices to process
+
+        :param values: Psi values that need to masked
+
+        :return: mask that is True for values inside and on the LCFS
+    """
+    if (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"] <
+        ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]):
+        return psi_values <= ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+    else:
+        return psi_values >= ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+
+@add_to__ODS__
+@preprocess_ods('equilibrium')
+def add_phi_to_equilbrium_profiles_1d_ods(ods, time_index):
+    """
+        Adds `profiles_1d.phi` to an ODS using q
+        :param ods: input ods
+
+        :param time_index: time slices to process
+    """
+    try:
+        if (len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"]) ==
+            len(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"])):
+            return
+        else:
+            raise LookupError
+    except (LookupError, ValueError):
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        #TODO: 
+        # - Any cocos needed here?
+        psi = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        mask = mask_SOL(ods, time_index, psi)
+        q_spline = InterpolatedUnivariateSpline(
+                ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][mask],
+                ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["q"][mask])
+        phi_spline = q_spline.antiderivative(1)
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"] = numpy.zeros(psi.shape)
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][mask] = (
+            phi_spline(ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"][mask]))
+        ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][mask==False] = numpy.inf
+
 
 def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
+    import numpy as np
     """
     Maps from one magnetic coordinate system to psi
     :param ods: input ods
@@ -227,15 +291,37 @@ def map_flux_coordinate_to_pol_flux(ods, time_index, origin, values):
 
     :return: Transformed values
     """
-    if origin == "rho_pol":
-        return (
-            values**2
-            * (
-                ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_sep"]
-                - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]
-            )
-            + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]
-        )
+    if origin == "psi_norm" or origin == "rho_pol_norm":
+        if origin == "rho_pol_norm":
+            values = values**2
+        return (values * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+               - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+               + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+    if origin == "rho_pol_norm":
+        return (values**2 * (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                + ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+    elif origin == "rho_tor_norm":
+        phi = values**2
+        phi *= map_pol_flux_to_flux_coordinate(ods, time_index, "phi", 
+                np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]))
+        return map_flux_coordinate_to_pol_flux(ods, time_index, "phi", phi)
+    elif origin == "phi":
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        psi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        psi_mask = mask_SOL(ods, time_index, psi_grid)
+        phi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_mask]
+        if phi_grid[-1] < phi_grid[0]:
+            psi_spl = InterpolatedUnivariateSpline(phi_grid[psi_mask][::-1], psi_grid[psi_mask][::-1])
+        else:
+            psi_spl = InterpolatedUnivariateSpline(phi_grid[psi_mask], psi_grid[psi_mask])
+        phi_min = np.min(phi_grid)
+        phi_max = np.max(phi_grid)
+        values_mask = np.logical_and(values >= phi_min, values <= phi_max)
+        psi = np.zeros(values.shape)
+        psi[:] = np.nan
+        psi[values_mask] = psi_spl(values[values_mask])
+        return psi
     else:
         raise NotImplementedError(f"Conversion from {origin} not yet implemented.")
 
@@ -255,14 +341,46 @@ def map_pol_flux_to_flux_coordinate(ods, time_index, destination, values):
 
         :return: Transformed values
     """
-    if destination == "rho_pol":
-        return np.sqrt(
-            (values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
-            / (
-                ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
-                - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]
-            )
-        )
+    if destination == "psi_norm" or destination == "rho_pol_norm":
+        psi_n = ((values - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"])
+                 / (ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]
+                 - ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_axis"]))
+        if destination == "rho_pol_norm":
+            return np.sqrt(psi_n)
+        else:
+            return psi_n
+    elif destination == "rho_tor_norm":
+        mask = mask_SOL(ods, time_index, values)
+        phi = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", values[mask])
+        rho_tor_norm = np.zeros(values.shape)
+        phi_boundary = map_pol_flux_to_flux_coordinate(ods, time_index, "phi", 
+                np.array([ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"]]))
+        rho_tor_norm[mask] = np.sqrt(phi / phi_boundary)
+        rho_tor_norm[mask==False] = np.inf
+        return rho_tor_norm
+    elif destination == "phi":
+        from scipy.interpolate import InterpolatedUnivariateSpline
+        psi_grid = ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["psi"]
+        psi_grid_mask = mask_SOL(ods, time_index, psi_grid)
+        try:
+            phi_spl = InterpolatedUnivariateSpline(psi_grid[psi_grid_mask],
+                    ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_grid_mask])
+        except ValueError:
+            add_phi_to_equilbrium_profiles_1d_ods(ods, time_index)
+            phi_spl = InterpolatedUnivariateSpline(psi_grid[psi_grid_mask],
+                    ods["equilibrium"]["time_slice"][time_index]["profiles_1d"]["phi"][psi_grid_mask])
+        mask = mask_SOL(ods, time_index, values)
+        phi = np.zeros(values.shape)
+        phi[mask] = phi_spl(values[mask])
+        phi_bound = phi_spl(ods["equilibrium"]["time_slice"][time_index]["global_quantities"]["psi_boundary"])
+        phi[mask==False] = np.inf * np.sign(phi_bound)
+        wrong_sign_mask = phi_bound * phi < 0
+        if np.any(wrong_sign_mask):
+            if np.any(np.abs(phi[wrong_sign_mask]/phi_bound) > 1.e-4):
+                raise ValueError("Unphysical phi encountered when mapping to phi")
+            else:
+                phi[wrong_sign_mask] = 0.0
+        return phi
     else:
         raise NotImplementedError(f"Conversion to {destination} not yet implemented.")
 
@@ -350,17 +468,17 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
     )
     cocos = define_cocos(11)
-    if quantity == "b_r":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_r'] = (
+    if quantity == "b_field_r":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
             psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_z":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_z'] = (
+    elif quantity == "b_field_z":
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
             -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
         )
         return ods
-    elif quantity == "b_tor":
+    elif quantity == "b_field_tor":
         mask = numpy.logical_and(
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
             < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
@@ -370,11 +488,11 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         f_spl = InterpolatedUnivariateSpline(
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'] = numpy.zeros(r.shape)
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
             f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
         )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_tor'][mask == False] = (
+        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
         )
         return ods
@@ -596,9 +714,16 @@ def equilibrium_form_constraints(
                     data = remove_integrator_drift(time, data, rm_integr_drift_after)
                 if cutoff_hz is not None:
                     data = firFilter(time, data, cutoff_hz)
-                const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
-                if error is not None:
-                    const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                # Don't average for length=2 arrays or smaller
+                if len(data) >2:
+                    const = smooth_by_convolution(data * turns, time, times, average, **nuconv_kw)
+                    if error is not None:
+                        const_error = smooth_by_convolution(error * turns, time, times, average, **nuconv_kw)
+                else:
+                    const = smooth_by_convolution(data * turns, time, times)
+                    if error is not None:
+                         const_error = smooth_by_convolution(error * turns, time, times)
+
                 # assign
                 for time_index in range(len(times)):
                     ods_n[f'equilibrium.time_slice.{time_index}.constraints.pf_current.{channel}.measured'] = const[time_index]
@@ -830,6 +955,12 @@ def equilibrium_form_constraints(
                             ods_n[
                                 f'equilibrium.time_slice.{time_index}.constraints.mse_polarisation_angle.{channel}.measured_error_upper'
                             ] = numpy.nan
+               
+                ods_n['mse.channel.:.active_spatial_resolution[0].geometric_coefficients']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.r']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.z']
+                ods_n['mse.channel.:.active_spatial_resolution[0].centre.phi']
+
             except Exception as _excp:
                 raise _excp.__class__(f'Problem with mse channel {channel}: {_excp}')
 
@@ -930,7 +1061,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
     Zgrid = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['grid']['dim2']
 
     psi2d = ods['equilibrium']['time_slice'][time_index]['profiles_2d'][0]['psi']
-    psi_interp = scipy.interpolate.interp2d(Zgrid, Rgrid, psi2d)
+    psi_spl = RectBivariateSpline(Rgrid, Zgrid, psi2d)
     psi_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['psi']
     rhon_eq = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['rho_tor_norm']
     rhon_cp = ods['core_profiles']['profiles_1d'][time_index]['grid']['rho_tor_norm']
@@ -984,7 +1115,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
             i1 = zero_crossings[0]
             i2 = zero_crossings[-1]
 
-            psival = [psi_interp(Zline[i], Rline[i])[0] for i in range(i1, i2, numpy.sign(i2 - i1))]
+            psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
             ne_line = numpy.trapz(ne_interp)
             ne_line /= abs(i2 - i1)
@@ -1217,7 +1348,8 @@ def summary_heating_power(ods, update=True):
     power_dict = {'total_heating': [], 'nbi': [], 'ec': [], 'lh': [], 'ic': [], 'fusion': []}
     if 'core_sources.source.0' not in ods_n:
         return ods_n
-    q_init = numpy.zeros(len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm']))
+    q_init = numpy.zeros([len(ods['core_sources']['time']),
+                         len(sources[0]['profiles_1d'][0]['grid']['rho_tor_norm'])])
 
     q_dict = {
         'total_heating': copy.deepcopy(q_init),
@@ -1234,25 +1366,25 @@ def summary_heating_power(ods, update=True):
             source_1d = sources[source]['profiles_1d'][time_index]
             if sources[source]['identifier.index'] in index_dict:
                 if 'electrons' in source_1d and 'energy' in source_1d['electrons']:
-                    q_dict['total_heating'] += source_1d['electrons']['energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['electrons']['energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['electrons']['energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:]  += source_1d['electrons']['energy']
                 if 'total_ion_energy' in source_1d:
-                    q_dict['total_heating'] += source_1d['total_ion_energy']
+                    q_dict['total_heating'][time_index,:] += source_1d['total_ion_energy']
                     if sources[source]['identifier.index'] in index_dict and index_dict[sources[source]['identifier.index']] in q_dict:
-                        q_dict[index_dict[sources[source]['identifier.index']]] += source_1d['total_ion_energy']
+                        q_dict[index_dict[sources[source]['identifier.index']]][time_index,:] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
-        power_dict[key].append(numpy.trapz(q_dict[key], x=vol))
-        if numpy.sum(value) > 0:
+        power_dict[key] = numpy.trapz(q_dict[key], x=vol,axis=1)
+        if numpy.sum(power_dict[key]) > 0:
             if key == 'total_heating':
-                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(value)
+                ods_n['summary.global_quantities.power_steady.value'] = numpy.array(power_dict[key])
                 continue
             elif key == 'fusion':
-                ods_n['summary.fusion.power.value'] = numpy.array(value)
-                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(value)
+                ods_n['summary.fusion.power.value'] = numpy.array(power_dict[key])
+                ods_n['summary.fusion.neutron_power_total.value'] = (14.1 / 3.5) * numpy.array(power_dict[key])
                 continue
-            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(value)
+            ods_n[f'summary.heating_current_drive.{key}[0].power.value'] = numpy.array(power_dict[key])
 
     ods_n['summary.time'] = ods['equilibrium.time']
     return ods_n
@@ -1709,7 +1841,10 @@ def core_profiles_currents(
             )
         return
 
-    from scipy.integrate import cumtrapz
+    try:
+        from scipy.integrate import cumulative_trapezoid as cumtrapz
+    except ImportError:
+        from scipy.integrate import cumtrapz
 
     prof1d = ods['core_profiles.profiles_1d'][time_index]
 

@@ -22,4 +22,4 @@ def sample_function(ods, pulse, user_argument='this is a test'):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("sample", __all__, globals(), locals())

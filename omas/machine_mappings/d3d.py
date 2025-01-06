@@ -2,7 +2,6 @@ import os
 import numpy as np
 from inspect import unwrap
 
-from numpy.lib.function_base import iterable
 from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
@@ -11,7 +10,9 @@ from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
-# from omas.omas_structure import add_extra_structures
+from omas.omas_physics import omas_environment
+import copy
+
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -367,6 +368,12 @@ def pf_active_hardware(ods, pulse):
     mhdin.to_omas(ods, update='pf_active')
 
     coil_names = [
+        'ECOILA',
+        'ECOILB',
+        'E567UP',
+        'E567DN',
+        'E89DN',
+        'E89UP',
         'F1A',
         'F2A',
         'F3A',
@@ -385,12 +392,6 @@ def pf_active_hardware(ods, pulse):
         'F7B',
         'F8B',
         'F9B',
-        'ECOILA',
-        'ECOILB',
-        'E567UP',
-        'E567DN',
-        'E89DN',
-        'E89UP',
     ]
     for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
@@ -413,7 +414,7 @@ def pf_active_coil_current_data(ods, pulse):
             ods1,
             pulse,
             channels='pf_active.coil',
-            identifier='pf_active.coil.{channel}.element.0.identifier',
+            identifier='pf_active.coil.{channel}.identifier',
             time='pf_active.coil.{channel}.current.time',
             data='pf_active.coil.{channel}.current.data',
             validity=None,
@@ -436,6 +437,15 @@ def pf_active_coil_current_data(ods, pulse):
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
             ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+
+        # IMAS stores the current in the coil not multiplied by the number of turns
+        for channel in ods1['pf_active.coil']:
+            if f'pf_active.coil.{channel}.current.data' in ods:
+                if 'F' in f'pf_active.coil.{channel}.identifier':
+                    ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+                    ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
+            else:
+                print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
 # ================================
@@ -562,7 +572,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
-        if iterable(xfrac):
+        if np.iterable(xfrac):
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
         elif type(xfrac) == int or type(xfrac) == float:
             beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
@@ -765,7 +775,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     TECE = '\\ECE::TOP.TECE.TECE' + fast_ece
 
     query = {}
-    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ'], ['NUMCH']]):
+    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ', "FLTRWID"], ['NUMCH']]):
         for quantity in quantities:
             query[quantity] = node + quantity
     query['TIME'] = f"dim_of({TECE + '01'})"
@@ -784,6 +794,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             # Assumes 7% calibration error (optimisitic) + Poisson uncertainty
             ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
 
+    ods['ece.ids_properties.homogeneous_time'] = 0
     # Not in mds+
     if not _measurements:
         points = [{}, {}]
@@ -811,6 +822,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ch['time'] = ece_map['TIME'] * 1.0e-3
             f[:] = ece_map['FREQ'][ich]
             ch['frequency']['data'] = f * 1.0e9
+            ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1048,7 +1060,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='machine')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
-                ods['langmuir_probes.embedded'][j]['position.phi'] = np.NaN  # Didn't find this in MDSplus
+                ods['langmuir_probes.embedded'][j]['position.phi'] = np.nan  # Didn't find this in MDSplus
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 if _get_measurements:
@@ -1393,6 +1405,7 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
             ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] /\
             ods[f"equilibrium.time_slice[{time_index}].global_quantities.area"]
 
+
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
@@ -1415,24 +1428,26 @@ def add_extra_profile_structures():
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
     add_extra_structures(extra_structures)
-    
 
-@machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
-def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+
+@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
+    sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
-            "electrons.density": "N_E",
+            "electrons.density_thermal": "N_E",
             "electrons.density_fit.measured": "RW_N_E",
             "electrons.temperature": "T_E",
             "electrons.temperature_fit.measured": "RW_T_E",
-            "ion[0].density": "N_D",
+            "ion[0].density_thermal": "N_D",
             "ion[0].temperature": "T_D",
             "ion[1].velocity.toroidal": "V_TOR_C",
             "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
-            "ion[1].density": "N_C",
+            "ion[1].density_thermal": "N_C",
             "ion[1].density_fit.measured": "RW_N_C",
             "ion[1].temperature": "T_C",
             "ion[1].temperature_fit.measured": "RW_T_C",
@@ -1453,17 +1468,19 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
             print("No mds+ data")
             raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
-        # for density in densities:
-        #     data[density] *= 1.e6
+        # for density_thermal in densities:
+        #     data[density_thermal] *= 1.e6
+
         for unc in ["", "_error_upper"]:
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
@@ -1483,8 +1500,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                     print(data[entry][i_time])
                     print("================ ERROR =================")
                     print(data[entry + "_error_upper"][i_time])
-                    print(data[entry][i_time].shape, 
-                            data[entry + "_error_upper"][i_time].shape)
+
+                    print(data[entry][i_time].shape,
+                          data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
             if isinstance(data[entry], Exception):
@@ -1502,19 +1520,29 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
-            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"            
     else:
         profiles_node = '\\TOP.PROFILES.'
         query = {
-            "electrons.density": "EDENSFIT",
             "electrons.density_thermal": "EDENSFIT",
-            "electrons.temperature": "ETEMPFIT"
+            "electrons.temperature": "ETEMPFIT"#,
+            # "ion[0].density_thermal": "ZDENSFIT", # Need to deal with different times
+            #"ion[0].temperature": "ITEMPFIT",  # Need to deal with different times
+            #"ion[1].velocity.toroidal": "TROTFIT",# Need to check units/meaning rot freq vs velocityr
         }
         for entry in query:
             query[entry] = profiles_node + query[entry]
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
         data['time'] = dim_info.dim_of(1) * 1.e-3
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.ETEMPFIT")
+        data['time_te'] = dim_info.dim_of(1) * 1.e-3
+        ods[f"core_profiles.time"] = data['time'][np.in1d(data['time'], data['time_te'])]
+        mask_dict = {
+                "electrons.density": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.density_thermal": np.in1d(data['time'], ods[f"core_profiles.time"]),
+                "electrons.temperature": np.in1d(data['time_te'], ods[f"core_profiles.time"])
+        }
         rho_tor_norm = dim_info.dim_of(0)
         data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
         data['grid.rho_tor_norm'][:] = rho_tor_norm
@@ -1523,26 +1551,44 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
+                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
+        ods[f"{sh}[{i_time}].electrons.density"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_thermal"])
+        ods[f"{sh}[{i_time}].electrons.density_error_upper"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_thermal_error_upper"])
+        #Needed for ion components
+        #for i_time, time in enumerate(data["time"]):
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+        #    ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+        #    ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+        #    ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+        #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221)
-def core_profiles_global_quantities_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
+def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
         if 'time' not in cp:
-            m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
-            cp['time'] = m.dim_of(1) * 1e-3
+            if "ZIPFIT0" in PROFILES_tree:
+                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
+                cp['time'] = m.dim_of(1) * 1e-3
+            elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
+                pulse_id = int(str(pulse) + PROFILES_run_id)
+                dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+                cp['time'] = dim_info.dim_of(1) * 1.e-3
+            else:
+                raise ValueError(f"Trying to access global_quantities with unknown profiles tree: {PROFILES_tree}")
         t = cp['time']
 
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
 
-        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.NaN)(t)
+        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
-# ================================
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())

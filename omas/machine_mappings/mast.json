@@ -1,0 +1,250 @@
+{
+ "__cocos_rules__": {},
+ "__include__": [
+  "_common",
+  "_efit"
+ ],
+ "__options__": {
+  "port": null,
+  "server": null
+ },
+ "magnetics.b_field_pol_probe.:": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.data": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.b_field_pol_probe.:.field.time": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.b_field_pol_probe.:.field.validity": {
+  "PYTHON": "magnetics_probes_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.b_field_pol_probe.:.identifier": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.length": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.name": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.poloidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.position.r": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.position.z": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.toroidal_angle": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.turns": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.type.index": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:": {
+  "VALUE": 1
+ },
+ "magnetics.diamagnetic_flux.:.data": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.diamagnetic_flux.:.time": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.data": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.flux_loop.:.flux.time": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.flux_loop.:.flux.validity": {
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.flux_loop.:.identifier": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.name": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.position.:": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.position.:.r": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.position.:.z": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.type.index": {
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
+ },
+ "magnetics.ip.:": {
+  "VALUE": 1
+ },
+ "magnetics.ip.:.data": {
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.ip.:.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "magnetics.ip.:.time": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:": {
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:": {
+  "PYTHON": "mse_hardware(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.r": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.centre.z": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.geometric_coefficients": {
+  "COCOSIO": 11,
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.active_spatial_resolution.:.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.name": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.data": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.data_error_upper": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.time": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "mse.channel.:.polarisation_angle.validity_timed": {
+  "PYTHON": "mse_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "pf_active.coil.:": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.data": {
+  "COCOSIO": 11,
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "pf_active.coil.:.current.data_error_upper": {
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "pf_active.coil.:.current.time": {
+  "PYTHON": "pf_active_coil_current_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "pf_active.coil.:.element.:": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.geometry_type": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.r": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.z": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.height": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.r": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.width": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.z": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.identifier": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.name": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.identifier": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.name": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.data": {
+  "COCOSIO": 11,
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "tf.b_field_tor_vacuum_r.time": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse}, {server!r}, {port!r})"
+ },
+ "tf.r0": {
+  "VALUE": 0.8
+ },
+ "thomson_scattering.channel.:": {
+  "PYTHON": "thomson_scattering_hardware(ods, {pulse} )"
+ },
+ "thomson_scattering.channel.:.identifier": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.n_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.n_e.data_error_upper": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.n_e.time": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.name": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.position.r": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.position.z": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.t_e.data": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.t_e.data_error_upper": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ },
+ "thomson_scattering.channel.:.t_e.time": {
+  "PYTHON": "thomson_scattering_data(ods, {pulse})"
+ }
+}

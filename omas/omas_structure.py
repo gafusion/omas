@@ -46,7 +46,7 @@ def generate_xml_schemas(imas_version=None):
         subprocess.Popen(
             f"""
         cd {omas_dir}
-        curl https://cytranet.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip > {saxon_version}.zip
+        curl https://netactuate.dl.sourceforge.net/project/saxon/Saxon-HE/9.9/{saxon_version}.zip?viasf=1 > {saxon_version}.zip
         unzip -d {saxon_version} {saxon_version}.zip
         rm {saxon_version}.zip""",
             shell=True,
@@ -588,6 +588,7 @@ def add_extra_structures(extra_structures, lifecycle_status='tmp'):
     # reset structure caches
     omas_utils._structures = {}
     omas_utils._structures_dict = {}
+    omas_utils._ods_structure_cache = {}
 
     # add _structures
     for _ids in extra_structures:

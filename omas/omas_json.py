@@ -75,9 +75,9 @@ def load_omas_json(filename, consistency_check=True, imas_version=omas_rcparams[
         clsODS = lambda: ODS(imas_version=imas_version, consistency_check=False)
         clsODC = lambda: ODC(imas_version=imas_version, consistency_check=False)
         try:
-            tmp = json_loader(x, clsODS, null_to=numpy.NaN)
+            tmp = json_loader(x, clsODS, null_to=numpy.nan)
         except Exception:
-            tmp = json_loader(x, clsODC, null_to=numpy.NaN)
+            tmp = json_loader(x, clsODC, null_to=numpy.nan)
         return tmp
 
     tmp = json.loads(json_string, object_pairs_hook=lambda x: base_class(x), **kw)

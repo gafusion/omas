@@ -1,3 +1,5 @@
+import pathlib
+
 from omas.omas_setup import omas_rcparams
 import os
 import warnings
@@ -40,7 +42,8 @@ try:
     from botocore.exceptions import NoCredentialsError
     import boto3
 
-    if not os.path.exists(os.environ.get('AWS_CONFIG_FILE', os.environ['HOME'] + '/.aws/config')):
+    aws_confi_path = pathlib.Path(os.environ.get('AWS_CONFIG_FILE', pathlib.Path.home() / '/.aws/config'))
+    if not aws_confi_path.exists():
         raise RuntimeError('Missing AWS configuration file ~/.aws/config')
     failed_S3 = False
 except (ImportError, RuntimeError, NoCredentialsError) as _excp:
@@ -66,6 +69,8 @@ with warnings.catch_warnings():
         failed_OMFIT = False
     except ImportError as _excp:
         failed_OMFIT = _excp
+    except AttributeError as _excp:
+        failed_OMFIT = "omfit_classes, from xarray import * bug "
 
 try:
     import MDSplus

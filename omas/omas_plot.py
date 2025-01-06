@@ -515,8 +515,23 @@ def ods_time_plot(ods_plot_function, ods, time_index, time, **kw):
         stime.on_changed(do_clean)
     stime.on_changed(update)
     for time0 in time:
-        axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        # axtime.axvline(time0, color=['r', 'y', 'c', 'm'][stime.cnt - 2])
+        axtime.axvline(time0, color='r')
     return {'stime': (stime, axtime), 'ax': axs}
+
+
+def use_subplot(fig, *args, **kw):
+    """
+    Same as add_subplot, but if the figure already has a subplot
+    with key (*args*, *kwargs*) then it will simply make that subplot
+    current and return it.
+    """
+    if hasattr(fig, "number"):
+        from matplotlib import pyplot
+        pyplot.figure(num=fig.number)
+        return pyplot.subplot(*args, **kw)
+    else:
+        return fig.add_subplot(*args, **kw)
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -537,7 +552,7 @@ def cached_add_subplot(fig, ax_cache, *args, **kw):
     if args in ax_cache:
         return ax_cache[args]
     else:
-        ax = fig.add_subplot(*args, **kw)
+        ax = use_subplot(fig, *args, **kw)
         ax_cache[args] = ax
         return ax
 
@@ -750,7 +765,10 @@ def equilibrium_CX(
     if levels is None and value_1d is not None:
         if contour_quantity == 'q':
             max_q = int(numpy.round(omas_interp1d(0.95, x_value_1d, value_1d)))
-            levels = numpy.arange(max_q)
+            levels = numpy.arange(numpy.abs(max_q))
+            if max_q < 0:
+                levels *= -1
+                levels = levels[::-1]
         else:
             levels = numpy.linspace(numpy.min(value_1d), numpy.max(value_1d), 11)[1:-1]
             levels = numpy.hstack((levels, levels[-1] + (levels[1] - levels[0]) * numpy.arange(100)[1:]))
@@ -787,8 +805,10 @@ def equilibrium_CX(
             r = scipy.ndimage.zoom(r, sf)
             z = scipy.ndimage.zoom(z, sf)
             value_2d = scipy.ndimage.zoom(value_2d, sf)
-
-        cs = ax.contour(r, z, value_2d, levels, **kw)
+        if levels is not None:
+            cs = ax.contour(r, z, value_2d, levels, **kw)
+        else:
+            cs = ax.contour(r, z, value_2d, **kw)
 
         if label_contours or ((label_contours is None) and (contour_quantity == 'q')):
             ax.clabel(cs)
@@ -993,7 +1013,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     :return: figure handler
     """
-
+    from omas.omas_physics import remap_flux_coordinates
     # caching of ggd data
     if ggd_points_triangles is None and 'equilibrium.grids_ggd' in ods:
         from .omas_physics import grids_ggd_points_triangles
@@ -1030,7 +1050,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         x = eq['profiles_1d'][raw_xName]
         xName = nice_names.get(raw_xName, raw_xName)
     else:
-        raw_xName = 'psi'
+        raw_xName = 'psi_norm'
         x = ((eq['profiles_1d']['psi'] - eq['global_quantities']['psi_axis']) 
             / (  eq['global_quantities']['psi_boundary'] - eq['global_quantities']['psi_axis']))
         xName = r"$\Psi_\mathrm{n}$"
@@ -1038,8 +1058,12 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     # pressure
     ax = cached_add_subplot(fig, axs, 2, 3, 2)
     if omas_viewer:
-        ax.plot(-ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.rpress"],
-                ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.pressr"]/1.e3, ".r")
+        x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
+                                          ods[f"equilibrium.time_slice.{time_index}.constraints.pressure.:.position.psi"])
+        plot_1d_equilbrium_quantity(ax, x_constr, ods[f"equilibrium.time_slice.{time_index}.constraints.pressure.:.measured"] * 1.e-3,
+                                    xName, r"$p$ [kPa]", r'$\,$ Pressure', 
+                                    visible_x=omas_viewer, linestyle="None", marker=".",
+                                    color='red')
     plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['pressure'] * 1.e-3, 
                                 xName, r"$p$ [kPa]", r'$\,$ Pressure', 
                                 visible_x=omas_viewer, **kw)
@@ -1051,7 +1075,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
     plot_1d_equilbrium_quantity(ax, x, numpy.abs(eq['profiles_1d']['q']),
-                                xName, r'$q$ Safety factor', r'$q$ Safety factor', 
+                                xName, r'$q$ Safety factor', r'$q$ Safety factor',
                                 visible_x=omas_viewer, **kw)
     #ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
@@ -1065,25 +1089,37 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     if not omas_viewer:
         pyplot.setp(ax.get_xticklabels(), visible=False)
     if omas_viewer:
-        ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
-        ax.plot(ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.sizeroj"],
-                ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] / 1.e6, ".r")
-        plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
-                                    xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
-                                    r"$j_\mathrm{tor}$", 
-                                    visible_x=omas_viewer, **kw)
+        try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+            x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
+                                            ods[f"equilibrium.time_slice.{time_index}.constraints.j_tor.:.position.psi"])
+            plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
+                                        r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
+                                        color='red')
+        except ValueError:
+            print("WARNING No data for j_tor constraints")
+        try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+            plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]",
+                                        r"$j_\mathrm{tor}$",
+                                        visible_x=omas_viewer, **kw)
+        except ValueError:
+            print("WARNING j_tor not yet implemtented.")
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
+        
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['dpressure_dpsi'] * 1.e-3,
-                                xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
-                                r"$P\,^\prime$ source function", 
-                                visible_x=True, **kw)
+                                    xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
+                                    r"$P\,^\prime$ source function", visible_x=True, **kw)
+
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
     if omas_viewer:
         ax = cached_add_subplot(fig, axs, 2, 3, 6)
         ax = cached_add_subplot(fig, axs, 2, 3, 6)
-        # ax.plot(eq['profiles_1d']['convergence']['iteration'], 
+        # ax.plot(eq['profiles_1d']['convergence']['iteration'],
         #         eq['profiles_1d']['convergence']['grad_shafranov_deviation_value'], **kw)
         diag_chi_2 = []
         labels = []
@@ -1094,7 +1130,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         except:
             printd("Failed to find pf_active chi^2. Skipping pf_active in chi^2 plot.")
         for constraint, imas_mangetics_id, nice_label in zip(["flux_loop", "bpol_probe"],
-                                           ["flux_loop", "b_field_pol_probe"], 
+                                           ["flux_loop", "b_field_pol_probe"],
                                             ["Flux loop ", r"$B_\mathrm{pol}$ Probe "]):
             chi_2 = list(eq[f'constraints.{constraint}[:].chi_squared'])
             for i in range(len(chi_2)):
@@ -1102,11 +1138,11 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
             diag_chi_2 += chi_2
         indices = numpy.array(range(len(diag_chi_2))) + 1
         plot_1d_equilbrium_quantity(ax, indices, diag_chi_2,
-                                    r"Diagnostic #", r"$\chi^2$ convergence", 
-                                    r"Magnetics $\chi^2$", 
+                                    r"Diagnostic #", r"$\chi^2$ convergence",
+                                    r"Magnetics $\chi^2$",
                                     visible_x=True, marker="+", linestyle='', **kw)
         for i_label, label in enumerate(labels):
-            annot = ax.annotate(label, xy=(indices[i_label],diag_chi_2[i_label]), 
+            annot = ax.annotate(label, xy=(indices[i_label],diag_chi_2[i_label]),
                                 xytext=(20,20),textcoords="offset points",
                                 bbox=dict(boxstyle="round", fc="w"),
                                 arrowprops=dict(arrowstyle="->"))
@@ -1116,8 +1152,8 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
         # FdF_dpsi
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['f_df_dpsi'],
-                                    xName, r'$FF\,^\prime$ [T$^2$ m$^2$ Wb$^{-1}$]', 
-                                    r"$FF\,^\prime$ source function", 
+                                    xName, r'$FF\,^\prime$ [T$^2$ m$^2$ Wb$^{-1}$]',
+                                    r"$FF\,^\prime$ source function",
                                     visible_x=True, **kw)
     return {'ax': axs}
 
@@ -1173,8 +1209,8 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
     return {'ax': ax}
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
-                          ods_species=None, quantities=['density_thermal', 'temperature'], 
+def core_profiles_summary(ods, time_index=None, time=None, fig=None,
+                          ods_species=None, quantities=['density_thermal', 'temperature'],
                           x_axis = "rho_tor_norm", **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
@@ -1210,13 +1246,13 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
         fig = pyplot.figure()
 
     # time animation
-    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
+    time_index, time = handle_time(ods, 'core_profiles.time', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
-                core_profiles_summary, ods, time_index, time, fig=fig, ods_species=ods_species, quantities=quantities, ax=axs, **kw
+                core_profiles_summary, ods, time_index, time, fig=fig, ods_species=ods_species, quantities=quantities, x_axis=x_axis, ax=axs, **kw
             )
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1268,24 +1304,30 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     # else:
-                    if len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
-                        plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
-                                             prof1d[specie][q + "_error_upper"]*scale))
-                    else:
+                    try:
+                        if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
+                            plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
+                                                 prof1d[specie][q + "_error_upper"]*scale))
+                        else:
+                            plotting_list.append(prof1d[specie][q]*scale)
+                    except Exception as _excp:
+                        print(f'Error in fetching {q}_error_upper')
                         plotting_list.append(prof1d[specie][q]*scale)
+
                     if x_axis == "psi_norm":
                         try:
-                            data_list.append([prof1d[specie][q + "_fit.psi_norm"],
-                                              prof1d[specie][q + "_fit.measured"]*scale,
-                                              prof1d[specie][q + "_fit.measured_error_upper"]*scale])
+                            qfit = q.replace('_thermal','')
+                            data_list.append([prof1d[specie][f"{qfit}_fit.psi_norm"],
+                                              prof1d[specie][f"{qfit}_fit.measured"]*scale,
+                                              prof1d[specie][f"{qfit}_fit.measured_error_upper"]*scale])
                         except Exception as e:
+                            if 'has no data' not in str(e):
+                                print(f'Exception getting raw data: {e}')
                             data_list.append(None)
+                    else:
+                        data_list.append(None)
                     label_name_z.append("")
                     label_name.append(f'{names[index]} {q.capitalize()}')
-
-                # else:
-                #     plotting_list.append(numpy.zeros(len(rho)))
-
         elif "e_field.radial" not in q:
             unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
             plotting_list.append(prof1d[q])
@@ -1335,13 +1377,12 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             x_data = data_list[index][0][mask]
             y_data = data_list[index][1][mask]
             y_data_err = data_list[index][2][mask]
-            mask = mask[mask]                    
+            mask = mask[mask]
             mask[numpy.abs(y_data_err[mask]) > numpy.abs(y_data[mask])] = False
             if numpy.any(mask):
-                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask], 
+                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask],
                             linestyle='', marker=".", color=(1.0, 0.0, 0.0, 0.3), zorder=-10, **kw)
         uband(x, y, ax=ax, **kw)
-        
         species_label = label_name[index].split()[0]
         species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:
@@ -1356,7 +1397,7 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             ax.set_ylabel(label_name[index][:10] + imas_units_to_latex(unit_list[index]))
         if (nplots - plot) < ncols:
             ax.set_xlabel(x_label)
-    
+
     if 'label' in kw:
         ax.legend(loc='lower center')
     ax.set_xlim(0, 1)
@@ -3234,8 +3275,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
-    r = [[numpy.NaN]] * nc
-    z = [[numpy.NaN]] * nc
+    r = [[numpy.nan]] * nc
+    z = [[numpy.nan]] * nc
     for i in range(nc):
         rs = ods['charge_exchange.channel'][i]['position.r.data']
         zs = ods['charge_exchange.channel'][i]['position.z.data']
@@ -3527,7 +3568,7 @@ def position_control_overlay(
     :param ax: Axes instance
 
     :param t: float
-        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+        Time to display in seconds. If not specified, defaults to the average time of position control samples.
 
     :param xpoint_marker: string
         Matplotlib marker spec for X-point target(s)
@@ -3565,7 +3606,7 @@ def position_control_overlay(
     shot = ods['dataset_description.data_entry'].get('pulse', 0)
     if t is None:
         try:
-            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+            t = np.nanmean(ods['pulse_schedule.position_control.time'])
         except (ValueError, IndexError):
             t = 0
 
@@ -3602,30 +3643,31 @@ def position_control_overlay(
     b = ods['pulse_schedule.position_control.boundary_outline']
     x = ods['pulse_schedule.position_control.x_point']
     s = ods['pulse_schedule.position_control.strike_point']
-    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    ikw = dict(bounds_error=False, fill_value=np.nan)
     try:
-        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nbp = np.shape(b['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nbp = 0
     try:
-        nx = np.shape(x['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nx = 0
     try:
-        ns = np.shape(s['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference'])[0]
     except (IndexError, ValueError):
         ns = 0
     if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return {'ax': ax}
-    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
-    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
+    tt = ods['pulse_schedule.position_control.time']
+    r = [interp1d(tt, b[i]['r.reference'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(tt, b[i]['z.reference'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
-    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
-    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
+    rx = [interp1d(tt, x[i]['r.reference'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(tt, x[i]['z.reference'], **ikw)(t) for i in range(nx)]
     xname = x['[:].r.reference_name']
-    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
-    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
+    rs = [interp1d(tt, s[i]['r.reference'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(tt, s[i]['z.reference'], **ikw)(t) for i in range(ns)]
     sname = s['[:].r.reference_name']
     # Measured X-point position from eq might not be present
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
@@ -3639,7 +3681,7 @@ def position_control_overlay(
             rxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)]
             zxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)]
     else:
-        rxm = zxm = np.NaN
+        rxm = zxm = np.nan
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 

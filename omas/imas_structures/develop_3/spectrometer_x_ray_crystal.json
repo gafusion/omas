@@ -2,7 +2,7 @@
  "spectrometer_x_ray_crystal": {
   "documentation": "X-crystal spectrometer diagnostic",
   "full_path": "spectrometer_x_ray_crystal",
-  "lifecycle_last_change": "3.36.0",
+  "lifecycle_last_change": "3.39.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.26.0",
   "maxoccur": "2"
@@ -677,6 +677,292 @@
   "maxoccur": "100",
   "structure_reference": "spectrometer_x_ray_crystal_bin"
  },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function": {
+  "data_type": "STRUCTURE",
+  "documentation": "Instrument function for this bin (replaces the ../../instrument function in case vertical binning is used), i.e. response of the detector to a monochromatic emission passing through the spectrometer. The resulting image on the detector will be a 2-D distribution of pixel values, for each wavelength. It can be given as explicit values for each detector pixel (values node) or as a parametric function of wavelength (described by the other nodes) ",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "structure_reference": "spectrometer_x_ray_crystal_instrument_func_bin"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.centre": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Centre (in terms of absolute wavelength) of instrument function",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/centre(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.centre_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"centre\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/centre_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.centre_error_lower": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"centre\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/centre_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.centre_error_upper": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"centre\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/centre_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.intensity": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Scaling factor for the instrument function such that convolving the instrument function with an emission spectrum gives the counts per second on the detector",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/intensity(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.intensity_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"intensity\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/intensity_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.intensity_error_lower": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"intensity\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/intensity_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.intensity_error_upper": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"intensity\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/intensity_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.scale": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Scale of Lorentzian instrument function (full width at half height)",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/scale(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.scale_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"scale\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/scale_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.scale_error_lower": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"scale\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/scale_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.scale_error_upper": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"scale\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/scale_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.sigma": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Standard deviation of Gaussian instrument function",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/sigma(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.sigma_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"sigma\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/sigma_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.sigma_error_lower": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"sigma\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/sigma_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.sigma_error_upper": {
+  "coordinates": [
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"sigma\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/sigma_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "spectrometer_x_ray_crystal/spectro_x_instrument_function_identifier.xml",
+  "documentation": "Instrument function type\n1) explicit : Explicit values, use the values node\n2) gaussian : Gaussian : use parameters intensity, centre, and sigma\n3) lorentzian : Lorentzian : use parameters intensity, centre, and scale\n4) voigt : Voigt : use parameters intensity, centre, sigma, and scale",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/type",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier_static"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/type/description",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/type/index",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/type/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.values": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Explicit instrument function values for the detector. When multiplied by the line-integrated emission spectrum in photons/second/sr/m/m^2 received on a binned pixel of the detector, gives the detector pixel output in counts/seconds.",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/values(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "sr.m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.values_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"values\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/values_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.values_error_lower": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Lower error for \"values\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/values_error_lower(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "sr.m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.values_error_upper": {
+  "coordinates": [
+   "1...N",
+   "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths"
+  ],
+  "data_type": "FLT_2D",
+  "documentation": "Upper error for \"values\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/values_error_upper(:,:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "sr.m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Array of wavelengths on which the instrument function is defined",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/wavelengths(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"wavelengths\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/wavelengths_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths_error_lower": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"wavelengths\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/wavelengths_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
+ "spectrometer_x_ray_crystal.channel[:].bin[:].instrument_function.wavelengths_error_upper": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"wavelengths\"",
+  "full_path": "spectrometer_x_ray_crystal/channel(i1)/bin(i2)/instrument_function/wavelengths_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "m"
+ },
  "spectrometer_x_ray_crystal.channel[:].bin[:].line_of_sight": {
   "data_type": "STRUCTURE",
   "documentation": "Description of the line of sight from the crystal to the plasma for this bin, defined by two points",
@@ -933,7 +1219,7 @@
  },
  "spectrometer_x_ray_crystal.channel[:].bin[:].z_pixel_range": {
   "coordinates": [
-   "spectrometer_x_ray_crystal.channel[:].bin[:].z_pixel_range.1..2"
+   "1...2"
   ],
   "data_type": "INT_1D",
   "documentation": "Vertical pixel index range indicating the corresponding binned detector area",
@@ -2106,7 +2392,7 @@
  "spectrometer_x_ray_crystal.channel[:].crystal.material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material of the object\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Material of the object\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy\n20) U_235 : Uranium 235 isotope\n21) U_238 : Uranium 238 isotope\n22) Diamond : Diamond\n23) CxHy : Organic molecule\n24) LaCl3 : Lanthanum chloride\n25) LaBr : Lanthanum bromide\n26) HPGe : High Purity Germanium\n27) CeBr : Cesium bromide\n28) CZT : Cadmium zinc telluride\n29) In_115 : Indium 115 isotope\n30) He_4 : Helium 4 isotope",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/crystal/material",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -3212,7 +3498,7 @@
  "spectrometer_x_ray_crystal.channel[:].filter_window[:].material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material of the filter window\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Material of the filter window\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy\n20) U_235 : Uranium 235 isotope\n21) U_238 : Uranium 238 isotope\n22) Diamond : Diamond\n23) CxHy : Organic molecule\n24) LaCl3 : Lanthanum chloride\n25) LaBr : Lanthanum bromide\n26) HPGe : High Purity Germanium\n27) CeBr : Cesium bromide\n28) CZT : Cadmium zinc telluride\n29) In_115 : Indium 115 isotope\n30) He_4 : Helium 4 isotope",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/filter_window(i2)/material",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -4019,6 +4305,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "spectrometer_x_ray_crystal_frame",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "spectrometer_x_ray_crystal.channel[:].frame[:].counts_bin_n": {
@@ -4125,7 +4412,7 @@
  },
  "spectrometer_x_ray_crystal.channel[:].instrument_function": {
   "data_type": "STRUCTURE",
-  "documentation": "Instrument function, i.e. response of the detector to a monochromatic emission passing through the spectrometer. The resulting image on the detector will be a 2-D distribution of pixel values, for each wavelength. It can be given as explicit values for each detector pixel (values node) or as a parametric function of wavelength (described by the other nodes) ",
+  "documentation": "Instrument function (to be used in case vertical binning is not used), i.e. response of the detector to a monochromatic emission passing through the spectrometer. The resulting image on the detector will be a 2-D distribution of pixel values, for each wavelength. It can be given as explicit values for each detector pixel (values node) or as a parametric function of wavelength (described by the other nodes) ",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/instrument_function",
   "introduced_after_version": "3.34.0",
   "lifecycle_status": "alpha",
@@ -5076,7 +5363,7 @@
  "spectrometer_x_ray_crystal.channel[:].reflector[:].material": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/materials_identifier.xml",
-  "documentation": "Material of the object\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) B_C : Boron carbide\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide",
+  "documentation": "Material of the object\n0) unspecified : unspecified\n1) C : Carbon\n2) W : Tungsten\n3) C_W_coating : Carbon with tungsten coating\n4) SS : Stainless steel\n5) SS_C_coating : Stainless steel with carbon coating\n6) IN : Inconel\n7) IN_C_coating : Inconel with carbon coating\n8) BC : Boron carbide\n17) BN : Boron nitride\n9) Ti_C_coating : Titanium with carbon coating\n10) Be : Beryllium\n11) Mo : Molybdenum\n12) Quartz : Quartz\n13) Ge : Germanium\n14) Si : Silicon\n15) LiF : Lithium fluoride\n16) InSb : Indium antimonide\n18) Cu : Copper\n19) CuCrZr : Copper Chromium Zirconium alloy\n20) U_235 : Uranium 235 isotope\n21) U_238 : Uranium 238 isotope\n22) Diamond : Diamond\n23) CxHy : Organic molecule\n24) LaCl3 : Lanthanum chloride\n25) LaBr : Lanthanum bromide\n26) HPGe : High Purity Germanium\n27) CeBr : Cesium bromide\n28) CZT : Cadmium zinc telluride\n29) In_115 : Indium 115 isotope\n30) He_4 : Helium 4 isotope",
   "full_path": "spectrometer_x_ray_crystal/channel(i1)/reflector(i2)/material",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_static"
@@ -5794,6 +6081,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_x_ray_crystal.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_x_ray_crystal.code.library": {
   "coordinates": [
    "1...N"
@@ -5809,6 +6104,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_x_ray_crystal/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -5907,10 +6210,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_x_ray_crystal.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_x_ray_crystal.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "spectrometer_x_ray_crystal.ids_properties.occurrence"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "spectrometer_x_ray_crystal.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -5932,6 +6273,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -5967,6 +6316,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -6018,6 +6375,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -6075,6 +6440,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -6118,6 +6491,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "spectrometer_x_ray_crystal.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "spectrometer_x_ray_crystal/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
