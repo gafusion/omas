@@ -3,9 +3,9 @@
 import subprocess
 import functools
 import shutil
-from .omas_utils import *
-from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
-from .omas_physics import cocos_signals
+from omas.omas_utils import *
+from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
+from omas.omas_physics import cocos_signals
 from omas.machine_mappings import d3d, nstx, nstxu, east
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
@@ -20,7 +20,6 @@ try:
     from omas.machine_mappings import mast
 except ImportError:
     pass
-
 
 __all__ = [
     'machine_expression_types',
@@ -779,4 +778,3 @@ def load_omas_machine(
         print(location)
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
-
