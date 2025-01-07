@@ -788,7 +788,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
     ods['ece.ids_properties.homogeneous_time'] = 0
-    # Not in mds+
+    # Not in MDSplus
     if not _measurements:
         points = [{}, {}]
         points[0]['r'] = 2.5
@@ -1423,7 +1423,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
-            print("No mds+ data")
+            print("No MDSplus data")
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
         data['time'] = dim_info.dim_of(1) * 1.e-3
