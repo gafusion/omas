@@ -57,6 +57,7 @@ try:
     up = get_mongo_credentials(server=omas_rcparams['default_mongo_server'])
     client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
     client.server_info()
+    client.close()
     failed_MONGO = False
 except (ImportError, ServerSelectionTimeoutError) as _excp:
     failed_MONGO = _excp

@@ -843,8 +843,11 @@ def equilibrium_CX(
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
-        for collection in cs.collections:
-            collection.set_clip_path(wall_path)
+        if hasattr(cs, "collections"): # Matplotlib < 3.10
+            for collection in cs.collections:
+                collection.set_clip_path(wall_path)
+        else:
+            cs.set_clip_path(wall_path)
 
     # Wall
     if wall is not None and show_wall:
@@ -974,7 +977,7 @@ def equilibrium_quality(ods, fig=None, **kw):
     :param ods: input ods
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
-    """
+    """    
     from matplotlib import pyplot
 
     axs = kw.pop('ax', {})
@@ -1113,6 +1116,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['dpressure_dpsi'] * 1.e-3,
                                     xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
                                     r"$P\,^\prime$ source function", visible_x=True, **kw)
+
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
     if omas_viewer:
@@ -1382,7 +1386,6 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                 ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask],
                             linestyle='', marker=".", color=(1.0, 0.0, 0.0, 0.3), zorder=-10, **kw)
         uband(x, y, ax=ax, **kw)
-
         species_label = label_name[index].split()[0]
         species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:

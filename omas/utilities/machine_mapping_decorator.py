@@ -52,9 +52,7 @@ def machine_mapping_function(__regression_arguments__, **regression_args):
                     default_options = {item: value for item, value in default_options.items() if not item.startswith('_')}
 
             # call
-            update_mapping = None
-            if "update_callback" in kwargs:
-                update_mapping = kwargs.pop("update_callback")
+            update_mapping = kwargs.pop("update_callback", None)
             out = f(*args, **kwargs)
             #update mappings definitions
             if not update_mapping is None:
