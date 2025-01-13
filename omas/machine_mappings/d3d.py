@@ -503,6 +503,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
+    from omas.omas_core import CodeParameters
     setup = '.ECH.'
     # We need three queries in order to retrieve only the fields we need
     # First the amount of systems in use
@@ -521,7 +522,8 @@ def ec_launcher_active_hardware(ods, pulse):
         query[f'GYROTRON_{system_no}'] = setup + cur_system + 'GYROTRON.NAME'
         query[f'FREQUENCY_{system_no}'] = setup + cur_system + 'GYROTRON.FREQUENCY'
         for field in ['LAUNCH_R', 'LAUNCH_Z', 'PORT']:
-            query[field + f'_{system_no}'] = setup + cur_system + f'antenna.{field}'
+            query[field + f'_{system_no}'] = setup + cur_system + f'ANTENNA.{field}'
+        query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
     query = {}
     gyrotron_names = []
@@ -541,10 +543,12 @@ def ec_launcher_active_hardware(ods, pulse):
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+    b_half = []
     for system_no in range(1, system_max):
         system_index = system_no - 1
         if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
+        b_half.append(systems["DISPERSION" + f'_{system_no}'])
         beam = ods['ec_launchers.beam'][system_index]
         time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
         if len(time) == 1:
@@ -591,7 +595,10 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
         beam['spot.size'] = 0.0172 * np.ones([2, ntime])
-
+    # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
+    # For more info look for hlwec in the TORAY documentation
+    ods['ec_launchers.code.parameters'] = CodeParameters()
+    ods['ec_launchers.code.parameters']["toray.bhalf"] = np.array(b_half)
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
