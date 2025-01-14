@@ -10,7 +10,6 @@ netCDF4                                            # required
 matplotlib                                         # required
 scipy                                              # required
 h5py                                               # required
-dnspython                                          # required
 xarray                                             # required
 setuptools>=41.2                                   # required
 Cython                                             # required

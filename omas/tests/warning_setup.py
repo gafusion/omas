@@ -23,7 +23,6 @@ def set_omas_warnings():
     warnings.filterwarnings('always', category=UserWarning, message='No contour levels were found.*')
     warnings.filterwarnings('always', category=matplotlib.MatplotlibDeprecationWarning)
     warnings.filterwarnings('always', category=RuntimeWarning, message='invalid value encountered.*')
-    warnings.filterwarnings('always', category=DeprecationWarning, message='please use dns.resolver.resolve.*')
     warnings.filterwarnings(
         'always', category=UserWarning, message='Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure'
     )
