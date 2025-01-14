@@ -26,10 +26,11 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install -r requirements.txt
+        python3 -m pip install boto3 pymongo
 
     - name: Install OMAS
       run: |
-        python3 -m pip install .[machine, s3, mongo]
+        python3 -m pip install .[machine]
 
     - name: Move to root and try importing OMAS
       run: |
