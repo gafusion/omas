@@ -719,10 +719,10 @@ def browse_imas(
         imasdb[username] = {}
         imasdbdir = user_imasdbdir.replace('/%s/' % os.environ.get('USER', 'default_user'), '/%s/' % username).strip()
 
-        # find MDS+ datafiles
+        # find MDSplus datafiles
         files = list(recursive_glob('*datafile', imasdbdir))
 
-        # extract machine/pulse/run from filename of MDS+ datafiles
+        # extract machine/pulse/run from filename of MDSplus datafiles
         for file in files:
             tmp = file.split(os.sep)
             if not re.match('ids_[0-9]{5,}.datafile', tmp[-1]):

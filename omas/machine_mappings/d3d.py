@@ -802,7 +802,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
 
     ods['ece.ids_properties.homogeneous_time'] = 0
-    # Not in mds+
+    # Not in MDSplus
     if not _measurements:
         points = [{}, {}]
         points[0]['r'] = 2.5
@@ -1386,8 +1386,8 @@ def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
     from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
     times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME").raw()
     if times is None:
-        print("No mds+ data")
-        raise ValueError(f"Could not find any data in MDS+ for {pulse} and {EFIT_tree}")
+        print("No MDSplus data")
+        raise ValueError(f"Could not find any data in MDSplus for {pulse} and {EFIT_tree}")
     ods["equilibrium.ids_properties.homogeneous_time"] = 1
     ods["equilibrium.time"]= times / 1.e3
     if get_all == False:
@@ -1477,8 +1477,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
-            print("No mds+ data")
-            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
+            print("No MDSplus data")
+            raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
 
         data['time'] = dim_info.dim_of(1) * 1.e-3

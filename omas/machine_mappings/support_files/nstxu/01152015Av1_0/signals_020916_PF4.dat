@@ -372,7 +372,7 @@ P1LEVEL   RL  none     1   -  c  0.000  0.00     0.00     n  1.00      1.0 1.0  
 ;map indx:    Used to index multiple map vars and two-dimensional signals
 ;             - negative value: Interpolate FE data to MD position in time plots
 ; *** pending - negative value: Swap X and Y axes of MD data in profile plots
-;MDS tree:    Designation for MDS+ tree name from which to read signal
+;MDS tree:    Designation for MDSplus tree name from which to read signal
 ;Read sig?:   y: read signal, n: skip signal, c: compute signal
 ;             m: read multiple dimensional signal, p: process previous multi-dim signal
 ;Error rel:   Relative error
