@@ -7,16 +7,12 @@ install_requires = [
     'uncertainties',
     'pint',
     'netCDF4',
-    'boto3',
     'matplotlib',
     'scipy',
     'h5py',
-    'pymongo',
     'dnspython',
-    'xmltodict',
     'xarray',
     'setuptools>=41.2',
-    'tqdm',
     'Cython',
     # latest xarray version that works with 3.7 doesn't work
     # with importlib_metadata >5 since they deprecated the `get()` method on Entrypoints
@@ -31,9 +27,11 @@ extras_require = {
         'pygacode',
     ],
     'hdc': ['pyhdc'],
-    'imas': ['imas'],
+    'imas': ['imas', 'tqdm'],
     'uda': ['pyuda'],
-    'build_structures': ['bs4'],
+    'mongo': ['pymongo'],
+    's3': ['boto3'],
+    'build_structures': ['bs4', 'xmltodict'],
     'build_documentation': ['Sphinx', 'sphinx-bootstrap-theme', 'sphinx-gallery', 'Pillow'],
 }
 
