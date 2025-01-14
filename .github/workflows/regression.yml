@@ -42,7 +42,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install -r requirements.txt
-        python3 -m pip install boto3 pymongo
+        python3 -m pip install boto3 pymongo xmltodict
 
     # numpy is a build time dependency of pygacode
     # but before pygacode 1.0 it did not specify its build dependencies correctly
