@@ -659,16 +659,32 @@
   "type": "constant",
   "url": "utilities/IDS-path-syntax.md"
  },
- "amns_data.ids_properties.provenance.node[:].sources": {
+ "amns_data.ids_properties.provenance.node[:].reference": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
-  "full_path": "amns_data/ids_properties/provenance/node(i1)/sources(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of references used to populate or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the reference is an input to the process described in the \"code\" structure at the root of the IDS. The reference can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the reference, or the persistent identifier of the data reference). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data references.",
+  "full_path": "amns_data/ids_properties/provenance/node(i1)/reference(i2)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
-  "type": "constant",
+  "maxoccur": "10",
+  "structure_reference": "ids_provenance_node_reference",
   "url": "utilities/IMAS-URI-scheme.md"
+ },
+ "amns_data.ids_properties.provenance.node[:].reference[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name",
+  "full_path": "amns_data/ids_properties/provenance/node(i1)/reference(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.provenance.node[:].reference[:].timestamp": {
+  "data_type": "STR_0D",
+  "documentation": "Date and time (UTC) at which the reference was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z",
+  "full_path": "amns_data/ids_properties/provenance/node(i1)/reference(i2)/timestamp",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "amns_data.ids_properties.provider": {
   "data_type": "STR_0D",
@@ -729,7 +745,7 @@
    "1...N"
   ],
   "data_type": "STRUCT_ARRAY",
-  "documentation": "Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension",
+  "documentation": "Process tables for a set of charge states. Only one table is used for that process, defined by process(:)/table_dimension. If the data in the table_Nd array are used as parameters for a function, then no coordinates are needed, and coordinate_index should be set to -1, and result_transformation should contain the integer identifier to the internally provided functions. If the results will come from an interpolation in the table_Nd data, then coordinates must be provided in coordinate_system(process(i1)/coordinate_index), and the shape of the table should match the cartesian product of the coordinates",
   "full_path": "amns_data/process(i1)/charge_state(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "75",
@@ -787,7 +803,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "1D table describing the process data",
@@ -806,7 +822,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"table_1d\"",
@@ -817,7 +833,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"table_1d\"",
@@ -828,8 +844,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_2D",
   "documentation": "2D table describing the process data",
@@ -848,8 +864,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"table_2d\"",
@@ -860,8 +876,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"table_2d\"",
@@ -872,9 +888,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_3D",
   "documentation": "3D table describing the process data",
@@ -893,9 +909,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"table_3d\"",
@@ -906,9 +922,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"table_3d\"",
@@ -919,10 +935,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_4D",
   "documentation": "4D table describing the process data",
@@ -941,10 +957,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"table_4d\"",
@@ -955,10 +971,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"table_4d\"",
@@ -969,11 +985,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_5D",
   "documentation": "5D table describing the process data",
@@ -992,11 +1008,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"table_5d\"",
@@ -1007,11 +1023,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"table_5d\"",
@@ -1022,12 +1038,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_6D",
   "documentation": "6D table describing the process data",
@@ -1046,12 +1062,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_6D",
   "documentation": "Lower error for \"table_6d\"",
@@ -1062,12 +1078,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values",
-   "amns_data.coordinate_system[:].coordinate[:].values"
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N",
+   "1...N"
   ],
   "data_type": "FLT_6D",
   "documentation": "Upper error for \"table_6d\"",
