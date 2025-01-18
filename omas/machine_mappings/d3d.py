@@ -1439,6 +1439,8 @@ def add_extra_profile_structures():
 
 @machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
+    from scipy.interpolate import interp1d
+
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
@@ -1529,46 +1531,51 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"            
     else:
-        profiles_node = '\\TOP.PROFILES.'
         query = {
-            "electrons.density_thermal": "EDENSFIT",
-            "electrons.temperature": "ETEMPFIT"#,
-            # "ion[0].density_thermal": "ZDENSFIT", # Need to deal with different times
-            #"ion[0].temperature": "ITEMPFIT",  # Need to deal with different times
-            #"ion[1].velocity.toroidal": "TROTFIT",# Need to check units/meaning rot freq vs velocityr
+            "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
+            "electrons.temperature": "\\TOP.PROFILES.ETEMPFIT",
+            "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
+            "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
+            "ion[1].temperature": "\\TOP.PROFILES.ITEMPFIT",
+            #"ion[1].velocity.toroidal": "TROTFIT", # Need to check units/meaning rot freq vs velocityr
         }
-        for entry in query:
-            query[entry] = profiles_node + query[entry]
+        for entry in list(query.keys()):
+            query["time__" + entry] = f"dim_of({query[entry]},1)"
+            query["rho__" + entry] = f"dim_of({query[entry]},0)"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
-        data['time'] = dim_info.dim_of(1) * 1.e-3
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.ETEMPFIT")
-        data['time_te'] = dim_info.dim_of(1) * 1.e-3
-        ods[f"core_profiles.time"] = data['time'][np.in1d(data['time'], data['time_te'])]
-        mask_dict = {
-                "electrons.density": np.in1d(data['time'], ods[f"core_profiles.time"]),
-                "electrons.density_thermal": np.in1d(data['time'], ods[f"core_profiles.time"]),
-                "electrons.temperature": np.in1d(data['time_te'], ods[f"core_profiles.time"])
-        }
-        rho_tor_norm = dim_info.dim_of(0)
-        data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
-        data['grid.rho_tor_norm'][:] = rho_tor_norm
-        ods[f"core_profiles.time"] = data['time']
-        for entry in data:
+
+        for entry in data.keys():
             if isinstance(data[entry], Exception):
                 continue
-            for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][mask_dict[entry]][i_time]
-        ods[f"{sh}[{i_time}].electrons.density"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_thermal"])
-        ods[f"{sh}[{i_time}].electrons.density_error_upper"] = copy.deepcopy(ods[f"{sh}[{i_time}].electrons.density_thermal_error_upper"])
-        #Needed for ion components
-        #for i_time, time in enumerate(data["time"]):
-        #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
-        #    ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
-        #    ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
-        #    ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
-        #    ods[f"{sh}[{i_time}].ion[0].label"] = "D"
-        #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            elif "rho" in entry:
+                pass
+            elif "time" in entry:
+                data[entry] *= 1E-3 # in [s]
+            elif "density" in entry:
+                data[entry] *= 1E19 # in [m^-3]
+            elif "temperature" in entry:
+                data[entry] *= 1E3 # in [eV]
+
+        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__")]))
+        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__")])]))
+        rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
+        ods["core_profiles.time"] = time
+        for i_time, time0 in enumerate(time):
+            ods[f"{sh}[{i_time}].time"] = time0
+            ods[f"{sh}[{i_time}].grid.rho_tor_norm"] = rho_tor_norm
+            ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+            ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+            ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+            ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+            ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            for entry in data.keys():
+                if "__" in entry or isinstance(data[entry], Exception):
+                    continue
+                time_index = np.argmin(np.abs(data["time__" + entry] - time0))
+                ods[f"{sh}[{i_time}]."+entry] = interp1d(data["rho__" + entry], data[entry][time_index], bounds_error=False, fill_value=np.nan)(rho_tor_norm) 
+            # deuterium from quasineutrality
+            ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
@@ -1580,6 +1587,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
+
         if 'time' not in cp:
             if "ZIPFIT0" in PROFILES_tree:
                 m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
@@ -1593,7 +1601,6 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         t = cp['time']
 
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
-
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
