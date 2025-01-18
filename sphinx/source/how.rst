@@ -145,9 +145,9 @@ The `ODS` class extends native Python dictionary and list classes with:
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
 | **HDF5**      | Files using binary HDF5 format (hierarchical data structure)                         | Binary file                   |       no       |          h5py         |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
-| **S3**        | Cloud storage using Amazon Simple Storage Service                                    | Object Store                  |       yes      |         boto3         |
+| **S3**        | Cloud storage using Amazon Simple Storage Service                                    | Object Store                  |       yes      |   boto3 (optional)    |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
-| **MongoDB**   | Document-based distributed database                                                  | MongoDB Database              |       yes      |        pymongo        |
+| **MongoDB**   | Document-based distributed database                                                  | MongoDB Database              |       yes      |  pymongo (optional)   |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
 | **HDC**       | Hierarchical Dynamic Containers                                                      | Memory                        |       no       |   pyhdc (optional)    |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
