@@ -1378,41 +1378,37 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
-@machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT")
-def equilibirum_time(ods, pulse, EFIT_tree="EFIT"):
-    unwrap(equilibrium_special)(ods, pulse, EFIT_tree, False)
-    
-
 @machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT", get_all=True)
 def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
     from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
-    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME").raw()
-    if times is None:
-        print("No MDSplus data")
-        raise ValueError(f"Could not find any data in MDSplus for {pulse} and {EFIT_tree}")
-    ods["equilibrium.ids_properties.homogeneous_time"] = 1
-    ods["equilibrium.time"]= times / 1.e3
-    if get_all == False:
+
+    if not get_all:
         return
-    for i_time, time in enumerate(times):
-        ods[f"equilibrium.time_slice[{i_time}].time"] = time / 1.e3
-    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
+
+    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME").raw()
+
+    # mfile
     eq = from_mds_plus(device="d3d", shot=pulse, times=times,
                        exact=True, snap_file=EFIT_tree, get_afile=False, get_mfile=True,
                        show_missing_data_warnings=None, close=True)
     for time_index, time in enumerate(times):
-        kstrstr = '\n'.join(list(kfiles[time_index]))
-        kEQDSK = OMFITkeqdsk(f'k{pulse}.{time_index}',fromString=kstrstr)
-        kEQDSK.to_omas(ods, time_index=time_index)
-        eq['gEQDSK'][time].to_omas(ods, time_index=time_index)
-        ods = eq['mEQDSK'][time].to_omas(ods, time_index=time_index)
-        if (np.abs(ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] - 
-                   ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.plasma"]) > 
-            np.abs(0.08*ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"])):
-            raise ValueError("Cannot reconstruct contraints, current constraints not met.")
-        ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  \
-            ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] /\
-            ods[f"equilibrium.time_slice[{time_index}].global_quantities.area"]
+#        eq['gEQDSK'][time].to_omas(ods, time_index=time_index) # we don't do this since the gEQDSK data is filled from omas/machine_mappings/_efit.json
+        eq['mEQDSK'][time].to_omas(ods, time_index=time_index)
+
+    # kfile
+    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
+    if kfiles is not None:
+        for time_index, time in enumerate(times):
+            kstrstr = '\n'.join(list(kfiles[time_index]))
+            kEQDSK = OMFITkeqdsk(f'k{pulse}.{time_index}',fromString=kstrstr)
+            kEQDSK.to_omas(ods, time_index=time_index)
+            if (np.abs(ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] - 
+                    ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.plasma"]) > 
+                np.abs(0.08*ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"])):
+                raise ValueError("Cannot reconstruct contraints, current constraints not met.")
+            ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  \
+                ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] /\
+                ods[f"equilibrium.time_slice[{time_index}].global_quantities.area"]
 
 
 def add_extra_profile_structures():
