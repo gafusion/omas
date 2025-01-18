@@ -636,7 +636,8 @@ def interferometer_hardware(ods, pulse):
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
-        ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
+        for field in ch['line_of_sight.first_point'].keys():
+            ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
