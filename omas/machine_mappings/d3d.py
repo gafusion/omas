@@ -568,8 +568,8 @@ def ec_launcher_active_hardware(ods, pulse):
         phi = -phi - np.pi / 2.0
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
         beam['frequency.time'] = np.atleast_1d(0)
+        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
         beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
@@ -597,8 +597,9 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['spot.size'] = 0.0172 * np.ones([2, ntime])
     # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
     # For more info look for hlwec in the TORAY documentation
-    ods['ec_launchers.code.parameters'] = CodeParameters()
-    ods['ec_launchers.code.parameters']["toray.bhalf"] = np.array(b_half)
+    cp = CodeParameters()
+    cp["toray.bhalf"] = np.array(b_half)
+    ods['ec_launchers.code.parameters'] = cp
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
