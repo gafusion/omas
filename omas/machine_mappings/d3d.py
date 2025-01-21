@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from inspect import unwrap
 
@@ -11,8 +10,6 @@ from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
-import copy
-
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -503,9 +500,12 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
+    from scipy.interpolate import interp1d
     from omas.omas_core import CodeParameters
     setup = '.ECH.'
+    
     # We need three queries in order to retrieve only the fields we need
+    
     # First the amount of systems in use
     query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
     num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
@@ -515,8 +515,8 @@ def ec_launcher_active_hardware(ods, pulse):
         printe('No ECH system found')
         return
 
-    query = {}
     # Second query the used systems to resolve the gyrotron names
+    query = {}
     for system_no in range(1, system_max):
         cur_system = f'SYSTEM_{system_no}.'
         query[f'GYROTRON_{system_no}'] = setup + cur_system + 'GYROTRON.NAME'
@@ -525,6 +525,8 @@ def ec_launcher_active_hardware(ods, pulse):
             query[field + f'_{system_no}'] = setup + cur_system + f'ANTENNA.{field}'
         query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    # Final, third query now that we have resolved all the TDIs related to gyrotron names
     query = {}
     gyrotron_names = []
     for system_no in range(1, system_max):
@@ -539,10 +541,11 @@ def ec_launcher_active_hardware(ods, pulse):
         gyr = gyr[:3]
         for field in ['STAT', 'XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
-            if field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
+            if field in ['FPWRC', 'AZIANG']:
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
-    # Final, third query now that we have resolved all the TDIs related to gyrotron names
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    # assign data to ODS
     b_half = []
     for system_no in range(1, system_max):
         system_index = system_no - 1
@@ -554,7 +557,7 @@ def ec_launcher_active_hardware(ods, pulse):
         if len(time) == 1:
             beam['time'] = np.atleast_1d(0)
         else:
-            beam['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+            beam['time'] = time
         ntime = len(beam['time'])
         beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
         beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
@@ -595,6 +598,7 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
         beam['spot.size'] = 0.0172 * np.ones([2, ntime])
+
     # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
     # For more info look for hlwec in the TORAY documentation
     cp = CodeParameters()
@@ -1527,7 +1531,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
             ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
-            ods[f"{sh}[{i_time}].ion[1].label"] = "C"            
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
