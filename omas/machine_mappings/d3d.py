@@ -605,6 +605,63 @@ def ec_launcher_active_hardware(ods, pulse):
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
+@machine_mapping_function(__regression_arguments__, pulse=180893)
+def nbi_active_hardware(ods, pulse):
+    beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
+
+    e = 1.602176634e-19 #[C]
+    m_u = 1.6605390666e-27 #[kg]
+
+    query = {}
+    for beam_name in beam_names:
+        for field in ["PINJ", "TINJ"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}_{beam_name}"
+            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}_{beam_name}, 0)"
+        for field in ["VBEAM"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)"
+        for field in ["GAS"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+
+    data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
+
+    R0 = 1.6955
+    beam_index = 0
+    for beam_name in beam_names:
+        if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
+            continue
+
+        nbu = ods["nbi.unit"][beam_index]
+        nbu["name"] = beam_name
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"] / 1E3
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"] / 1E3
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"]
+        beam_index += 1
+        gas = data[f"{beam_name}.GAS"].strip()
+        if not len(gas):
+            nbu["species.a"] = 2.0
+        else:            
+            nbu["species.a"] = beam_mass = int(gas[1])
+
+        # infer toroidal angle of the beam from torque
+        index = (data[f"{beam_name}.PINJ"] * data[f"{beam_name}.VBEAM"]) > 0.0
+        if sum(index) > 0:
+            torque_tor = data[f"{beam_name}.TINJ"][index]
+            power_launched = data[f"{beam_name}.PINJ"][index]
+            beam_mass = nbu["species.a"]
+            beam_energy = nbu["energy.data"][index]
+            particles_per_second = power_launched / (beam_energy * e)
+            velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
+            force = particles_per_second * velocity * beam_mass * m_u
+            torque_tot = force * R0
+            angle = np.arcsin(torque_tor / torque_tot)
+            angle = sorted(angle)
+            angle = angle[int(len(angle)/2)] # median value
+        else:
+            angle = 0.0
+        nbu["beamlets_group[0].angle"] = angle
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_hardware(ods, pulse):
@@ -1607,4 +1664,4 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["nbi_active_hardware"], globals(), locals())
