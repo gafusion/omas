@@ -1663,5 +1663,14 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def wall(ods, pulse):
+    lim = mdsvalue('d3d', treename="EFIT01", pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
+    ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
+    ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
+    ods["wall.description_2d.0.limiter.type.index"] = 0
+    ods["wall.time"] = [0.0]
+
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["nbi_active_hardware"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["wall"], globals(), locals())
