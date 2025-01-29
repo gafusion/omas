@@ -1011,9 +1011,6 @@
  "equilibrium.ids_properties.comment": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },
- "equilibrium.ids_properties.homogeneous_time": {
-  "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
- },
  "equilibrium.time_slice.:.boundary.outline.r": {
   "PYTHON": "equilibrium_special(ods, {pulse}, {EFIT_tree!r}, {get_all!r})"
  },
