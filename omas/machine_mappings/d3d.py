@@ -545,16 +545,10 @@ def ec_launcher_active_hardware(ods, pulse):
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
 
-    if system_max>0:
-        trim_start = 0
-        trim_end = 0
-        time = gyrotrons[f'TIME_FPWRC_1']
-        for k in range(len(time)):
-            if time[k] < 0.0:
-                trim_start = k
-            elif time[k] > 6.0:
-                trim_end = k-1
-                break
+    if system_max > 0:
+        times = gyrotrons[f'TIME_FPWRC_1']
+        trim_start = np.searchsorted(times, 0.0, side='left')
+        trim_end = np.searchsorted(times, 6.0, side='right')
 
     # assign data to ODS
     b_half = []
@@ -636,6 +630,8 @@ def nbi_active_hardware(ods, pulse):
 
     data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
 
+    trim_start = 0
+    trim_end = 0
     R0 = 1.6955
     beam_index = 0
     for beam_name in beam_names:
@@ -644,14 +640,10 @@ def nbi_active_hardware(ods, pulse):
 
         data[f"{beam_name}.VBEAM_time"] = data[f"{beam_name}.PINJ_time"]
 
-        trim_start = 0
-        trim_end = 0
-        for k in range(len(data[f"{beam_name}.PINJ_time"])):
-            if data[f"{beam_name}.PINJ_time"][k] < 0.0:
-                trim_start = k
-            elif data[f"{beam_name}.PINJ_time"][k] > 6.0:
-                trim_end = k-1
-                break
+        if trim_start == 0 and trim_end == 0:
+            times = data[f"{beam_name}.PINJ_time"]
+            trim_start = np.searchsorted(times, 0.0, side='left')
+            trim_end = np.searchsorted(times, 6.0, side='right')
 
         nbu = ods["nbi.unit"][beam_index]
         nbu["name"] = beam_name
