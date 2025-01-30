@@ -542,8 +542,19 @@ def ec_launcher_active_hardware(ods, pulse):
         for field in ['STAT', 'XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
             if field in ['FPWRC', 'AZIANG']:
-                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
+                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    if system_max>0:
+        trim_start = 0
+        trim_end = 0
+        time = gyrotrons[f'TIME_FPWRC_1']
+        for k in range(len(time)):
+            if time[k] < 0.0:
+                trim_start = k
+            elif time[k] > 6.0:
+                trim_end = k-1
+                break
 
     # assign data to ODS
     b_half = []
@@ -553,7 +564,7 @@ def ec_launcher_active_hardware(ods, pulse):
             continue
         b_half.append(systems["DISPERSION" + f'_{system_no}'])
         beam = ods['ec_launchers.beam'][system_index]
-        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}'])
         if len(time) == 1:
             beam['time'] = np.atleast_1d(0)
         else:
@@ -574,8 +585,8 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['frequency.time'] = np.atleast_1d(0)
         beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
-        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
 
@@ -616,10 +627,10 @@ def nbi_active_hardware(ods, pulse):
     for beam_name in beam_names:
         for field in ["PINJ", "TINJ"]:
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}_{beam_name}"
-            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}_{beam_name}, 0)"
+            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}_{beam_name}, 0)/1E3"
         for field in ["VBEAM"]:
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
-            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)"
+            #query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)/1E3"
         for field in ["GAS"]:
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
 
@@ -631,12 +642,23 @@ def nbi_active_hardware(ods, pulse):
         if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
             continue
 
+        data[f"{beam_name}.VBEAM_time"] = data[f"{beam_name}.PINJ_time"]
+
+        trim_start = 0
+        trim_end = 0
+        for k in range(len(data[f"{beam_name}.PINJ_time"])):
+            if data[f"{beam_name}.PINJ_time"][k] < 0.0:
+                trim_start = k
+            elif data[f"{beam_name}.PINJ_time"][k] > 6.0:
+                trim_end = k-1
+                break
+
         nbu = ods["nbi.unit"][beam_index]
         nbu["name"] = beam_name
-        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"] / 1E3
-        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"]
-        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"] / 1E3
-        nbu["energy.data"] = data[f"{beam_name}.VBEAM"]
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"][trim_start:trim_end]
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"][trim_start:trim_end]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"][trim_start:trim_end]
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"][trim_start:trim_end]
         beam_index += 1
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
@@ -650,7 +672,7 @@ def nbi_active_hardware(ods, pulse):
             torque_tor = data[f"{beam_name}.TINJ"][index]
             power_launched = data[f"{beam_name}.PINJ"][index]
             beam_mass = nbu["species.a"]
-            beam_energy = nbu["energy.data"][index]
+            beam_energy = data[f"{beam_name}.VBEAM"][index]
             particles_per_second = power_launched / (beam_energy * e)
             velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
             force = particles_per_second * velocity * beam_mass * m_u
