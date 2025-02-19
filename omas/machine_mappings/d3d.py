@@ -565,7 +565,6 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
 
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
-        phi = -phi - np.pi / 2.0
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
