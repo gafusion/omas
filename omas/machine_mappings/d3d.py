@@ -583,14 +583,7 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
-
-        if np.iterable(xfrac):
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
-        elif type(xfrac) == int or type(xfrac) == float:
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
-        else:
-            printe(f'Invalid mode type returned for beam {system_index}')
-            beam['mode'] = 0
+        beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
@@ -639,6 +632,8 @@ def nbi_active_hardware(ods, pulse):
             continue
 
         data[f"{beam_name}.VBEAM_time"] = data[f"{beam_name}.PINJ_time"]
+        if isinstance(data[f"{beam_name}.VBEAM"], Exception):
+            data[f"{beam_name}.VBEAM"] = data[f"{beam_name}.VBEAM_time"] * 0.0 + 80E3 # assume 80keV when beam voltage is missing
 
         if trim_start == 0 and trim_end == 0:
             times = data[f"{beam_name}.PINJ_time"]
@@ -1687,4 +1682,4 @@ def wall(ods, pulse):
     ods["wall.time"] = [0.0]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["wall"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
