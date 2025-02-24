@@ -515,6 +515,10 @@ def ec_launcher_active_hardware(ods, pulse):
         printe('No ECH system found')
         return
 
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
+
     # Second query the used systems to resolve the gyrotron names
     query = {}
     for system_no in range(1, system_max):
@@ -548,7 +552,7 @@ def ec_launcher_active_hardware(ods, pulse):
     if system_max > 0:
         times = gyrotrons[f'TIME_FPWRC_1']
         trim_start = np.searchsorted(times, 0.0, side='left')
-        trim_end = np.searchsorted(times, 6.0, side='right')
+        trim_end = np.searchsorted(times, last_time, side='right')
 
     # assign data to ODS
     b_half = []
@@ -620,8 +624,11 @@ def nbi_active_hardware(ods, pulse):
             #query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)/1E3"
         for field in ["GAS"]:
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
-
     data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
+
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
 
     trim_start = 0
     trim_end = 0
@@ -638,7 +645,7 @@ def nbi_active_hardware(ods, pulse):
         if trim_start == 0 and trim_end == 0:
             times = data[f"{beam_name}.PINJ_time"]
             trim_start = np.searchsorted(times, 0.0, side='left')
-            trim_end = np.searchsorted(times, 6.0, side='right')
+            trim_end = np.searchsorted(times, last_time, side='right')
 
         nbu = ods["nbi.unit"][beam_index]
         nbu["name"] = beam_name
