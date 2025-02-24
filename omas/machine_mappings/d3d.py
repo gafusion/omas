@@ -1382,39 +1382,6 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
-@machine_mapping_function(__regression_arguments__, pulse=19438702, EFIT_tree="EFIT", get_all=True)
-def equilibrium_special(ods, pulse, EFIT_tree="EFIT", get_all=True):
-    from omfit_classes.omfit_eqdsk import from_mds_plus, OMFITkeqdsk
-
-    if not get_all:
-        return
-
-    times = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME").raw()
-
-    # mfile
-    eq = from_mds_plus(device="d3d", shot=pulse, times=times,
-                       exact=True, snap_file=EFIT_tree, get_afile=False, get_mfile=True,
-                       show_missing_data_warnings=None, close=True)
-    for time_index, time in enumerate(times):
-#        eq['gEQDSK'][time].to_omas(ods, time_index=time_index) # we don't do this since the gEQDSK data is filled from omas/machine_mappings/_efit.json
-        eq['mEQDSK'][time].to_omas(ods, time_index=time_index)
-
-    # kfile
-    kfiles = mdsvalue('d3d', treename=EFIT_tree, pulse=pulse, TDI="\\TOP.NAMELISTS.KEQDSKS").raw() #
-    if kfiles is not None:
-        for time_index, time in enumerate(times):
-            kstrstr = '\n'.join(list(kfiles[time_index]))
-            kEQDSK = OMFITkeqdsk(f'k{pulse}.{time_index}',fromString=kstrstr)
-            kEQDSK.to_omas(ods, time_index=time_index)
-            if (np.abs(ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] - 
-                    ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.plasma"]) > 
-                np.abs(0.08*ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"])):
-                raise ValueError("Cannot reconstruct contraints, current constraints not met.")
-            ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] *=  \
-                ods[f"equilibrium.time_slice[{time_index}].global_quantities.ip"] /\
-                ods[f"equilibrium.time_slice[{time_index}].global_quantities.area"]
-
-
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
