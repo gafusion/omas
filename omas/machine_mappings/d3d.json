@@ -732,15 +732,21 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
-  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "wall.description_2d.:.limiter.type.index": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:": {
-  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
-  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
-  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "wall.time": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  }
 }

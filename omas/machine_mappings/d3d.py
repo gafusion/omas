@@ -1648,8 +1648,11 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def wall(ods, pulse):
-    lim = mdsvalue('d3d', treename="EFIT01", pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
+def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
+    run = pulse
+    if EFIT_run_id is not None:
+        run = int(str(pulse) + str(EFIT_run_id))
+    lim = mdsvalue('d3d', treename=EFIT_tree, pulse=run, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
     ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
