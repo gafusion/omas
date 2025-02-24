@@ -515,6 +515,10 @@ def ec_launcher_active_hardware(ods, pulse):
         printe('No ECH system found')
         return
 
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
+
     # Second query the used systems to resolve the gyrotron names
     query = {}
     for system_no in range(1, system_max):
@@ -542,8 +546,13 @@ def ec_launcher_active_hardware(ods, pulse):
         for field in ['STAT', 'XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
             if field in ['FPWRC', 'AZIANG']:
-                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
+                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    if system_max > 0:
+        times = gyrotrons[f'TIME_FPWRC_1']
+        trim_start = np.searchsorted(times, 0.0, side='left')
+        trim_end = np.searchsorted(times, last_time, side='right')
 
     # assign data to ODS
     b_half = []
@@ -553,7 +562,7 @@ def ec_launcher_active_hardware(ods, pulse):
             continue
         b_half.append(systems["DISPERSION" + f'_{system_no}'])
         beam = ods['ec_launchers.beam'][system_index]
-        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}'])
         if len(time) == 1:
             beam['time'] = np.atleast_1d(0)
         else:
@@ -574,18 +583,11 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['frequency.time'] = np.atleast_1d(0)
         beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
-        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
-
-        if np.iterable(xfrac):
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
-        elif type(xfrac) == int or type(xfrac) == float:
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
-        else:
-            printe(f'Invalid mode type returned for beam {system_index}')
-            beam['mode'] = 0
+        beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
@@ -604,6 +606,77 @@ def ec_launcher_active_hardware(ods, pulse):
     cp = CodeParameters()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
+
+@machine_mapping_function(__regression_arguments__, pulse=180893)
+def nbi_active_hardware(ods, pulse):
+    beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
+
+    e = 1.602176634e-19 #[C]
+    m_u = 1.6605390666e-27 #[kg]
+
+    query = {}
+    for beam_name in beam_names:
+        for field in ["PINJ", "TINJ"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}_{beam_name}"
+            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}_{beam_name}, 0)/1E3"
+        for field in ["VBEAM"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+            #query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)/1E3"
+        for field in ["GAS"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+    data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
+
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
+
+    trim_start = 0
+    trim_end = 0
+    R0 = 1.6955
+    beam_index = 0
+    for beam_name in beam_names:
+        if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
+            continue
+
+        data[f"{beam_name}.VBEAM_time"] = data[f"{beam_name}.PINJ_time"]
+        if isinstance(data[f"{beam_name}.VBEAM"], Exception):
+            data[f"{beam_name}.VBEAM"] = data[f"{beam_name}.VBEAM_time"] * 0.0 + 80E3 # assume 80keV when beam voltage is missing
+
+        if trim_start == 0 and trim_end == 0:
+            times = data[f"{beam_name}.PINJ_time"]
+            trim_start = np.searchsorted(times, 0.0, side='left')
+            trim_end = np.searchsorted(times, last_time, side='right')
+
+        nbu = ods["nbi.unit"][beam_index]
+        nbu["name"] = beam_name
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"][trim_start:trim_end]
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"][trim_start:trim_end]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"][trim_start:trim_end]
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"][trim_start:trim_end]
+        beam_index += 1
+        gas = data[f"{beam_name}.GAS"].strip()
+        if not len(gas):
+            nbu["species.a"] = 2.0
+        else:            
+            nbu["species.a"] = beam_mass = int(gas[1])
+
+        # infer toroidal angle of the beam from torque
+        index = (data[f"{beam_name}.PINJ"] * data[f"{beam_name}.VBEAM"]) > 0.0
+        if sum(index) > 0:
+            torque_tor = data[f"{beam_name}.TINJ"][index]
+            power_launched = data[f"{beam_name}.PINJ"][index]
+            beam_mass = nbu["species.a"]
+            beam_energy = data[f"{beam_name}.VBEAM"][index]
+            particles_per_second = power_launched / (beam_energy * e)
+            velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
+            force = particles_per_second * velocity * beam_mass * m_u
+            torque_tot = force * R0
+            angle = np.arcsin(torque_tor / torque_tot)
+            angle = sorted(angle)
+            angle = angle[int(len(angle)/2)] # median value
+        else:
+            angle = 0.0
+        nbu["beamlets_group[0].angle"] = angle
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1573,5 +1646,14 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def wall(ods, pulse):
+    lim = mdsvalue('d3d', treename="EFIT01", pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
+    ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
+    ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
+    ods["wall.description_2d.0.limiter.type.index"] = 0
+    ods["wall.time"] = [0.0]
+
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())

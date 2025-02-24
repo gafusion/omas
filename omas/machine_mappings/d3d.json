@@ -602,6 +602,33 @@
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
+ "nbi.unit.:": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.beamlets_group.:": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.beamlets_group.:.angle": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.energy.data": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.energy.time": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.name": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.power_launched.data": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.power_launched.time": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.species.a": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
@@ -705,12 +732,15 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
-  "VALUE": 1
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
  },
  "wall.description_2d.:.limiter.unit.:": {
-  "VALUE": 1
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
  },
- "wall.ids_properties.homogeneous_time": {
-  "VALUE": 1
+ "wall.description_2d.:.limiter.unit.:.outline.r": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.z": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r})"
  }
 }
