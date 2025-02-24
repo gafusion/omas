@@ -556,8 +556,11 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
         ntime = len(beam['time'])
-        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+        phi_tor = np.atleast_1d(np.deg2rad(gyrotrons[f'AZIANG_{system_no}'] - 180.0))
+        theta_pol = np.atleast_1d(np.deg2rad(gyrotrons[f'POLANG_{system_no}'] - 90.0))
+        
+        beam['steering_angle_tor'] = -np.arcsin(np.cos(theta_pol)*np.sin(phi_tor))
+        beam['steering_angle_pol'] = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
 
         beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
@@ -1598,3 +1601,4 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
 if __name__ == '__main__':
     test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
+
