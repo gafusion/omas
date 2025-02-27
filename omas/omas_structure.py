@@ -65,9 +65,10 @@ def generate_xml_schemas(imas_version=None):
 
     # find IMAS data-dictionary tags
     result = b2s(subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0])
-    tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
+    tags = list(filter(lambda x: (str(x).startswith('3.') and int(x.split('.')[1]) >= 10) or str(x).startswith('4.'), result.split()))
     # add development branch at the beginning of list of tags
     tags.insert(0, 'develop/3')
+    tags.insert(0, 'develop/4')
     imas_versions = OrderedDict()
     for item in tags:
         imas_versions[item] = item.replace('.', '_').replace('/', '_')
