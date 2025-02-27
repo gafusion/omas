@@ -586,7 +586,11 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
-        beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
+        if isinstance(xfrac, Exception):
+            beam['mode'] = -1 # assume X-mode if XMFRAC is not recorded
+        else:
+            beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
+            
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
