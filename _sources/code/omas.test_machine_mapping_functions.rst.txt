@@ -1,0 +1,6 @@
+﻿omas.test\_machine\_mapping\_functions
+======================================
+
+.. currentmodule:: omas
+
+.. autofunction:: test_machine_mapping_functions

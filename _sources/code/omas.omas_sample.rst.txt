@@ -1,0 +1,49 @@
+﻿omas.omas\_sample
+=================
+
+.. automodule:: omas.omas_sample
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_to_ODS
+      bolometer
+      charge_exchange
+      core_profiles
+      core_sources
+      core_transport
+      dataset_description
+      ec_launchers
+      equilibrium
+      gas_injection
+      ic_antennas
+      interferometer
+      langmuir_probes
+      magnetics
+      nbi
+      ods_sample
+      pf_active
+      pulse_schedule
+      summary
+      thomson_scattering
+      wall
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

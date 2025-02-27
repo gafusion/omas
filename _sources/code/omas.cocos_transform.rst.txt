@@ -1,0 +1,6 @@
+﻿omas.cocos\_transform
+=====================
+
+.. currentmodule:: omas
+
+.. autofunction:: cocos_transform

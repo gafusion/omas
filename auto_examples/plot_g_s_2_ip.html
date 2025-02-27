@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gEQDSK + statefile to input.profiles &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">gEQDSK + statefile to input.profiles</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-plot-g-s-2-ip-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="geqdsk-statefile-to-input-profiles">
+<span id="sphx-glr-auto-examples-plot-g-s-2-ip-py"></span><h1>gEQDSK + statefile to input.profiles<a class="headerlink" href="#geqdsk-statefile-to-input-profiles" title="Link to this heading">¶</a></h1>
+<p>This example shows how OMAS can be used to generate a GACODE input.profiles
+file given a gEQDSK file and a ONETWO statefile.</p>
+<img src="../_images/sphx_glr_plot_g_s_2_ip_001.png" srcset="../_images/sphx_glr_plot_g_s_2_ip_001.png" alt="plot g s 2 ip" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>SyntaxWarning: &quot;is not&quot; with a literal. Did you mean &quot;!=&quot;? (omfit_gacode.py@243)
+0) pow_e_aux += i_vol(qohm[electrons.energy])/1e+06
+1) pow_ei -= i_vol(qdelt[electrons.energy])/2e+06
+1) pow_ei += i_vol(qdelt[total_ion_energy])/2e+06
+2) pow_e_line -= i_vol(qrad[electrons.energy])/1e+06
+3) pow_e_aux += i_vol(qione[electrons.energy])/1e+06
+4) pow_e_aux += i_vol(qbeame[electrons.energy])/1e+06
+7) pow_i_aux += i_vol(qioni[total_ion_energy])/1e+06
+8) pow_i_aux += i_vol(qcx[total_ion_energy])/1e+06
+9) pow_i_aux += i_vol(qbeami[total_ion_energy])/1e+06
+12) flow_wall += i_vol(sion_thermal_e[electrons.particles])/6.24e+21
+13) flow_beam += i_vol(sbeame[electrons.particles])/6.24e+21
+14) flow_wall += i_vol(srecom_e[electrons.particles])/6.24e+21
+16) flow_mom += i_vol(storqueb[momentum_tor])/1
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">omfit_classes.omfit_eqdsk</span> <span class="kn">import</span> <span class="n">OMFITgeqdsk</span>
+<span class="kn">from</span> <span class="nn">omfit_classes.omfit_onetwo</span> <span class="kn">import</span> <span class="n">OMFITstatefile</span>
+<span class="kn">from</span> <span class="nn">omfit_classes.omfit_gacode</span> <span class="kn">import</span> <span class="n">OMFITinputprofiles</span>
+
+<span class="n">gfilename</span> <span class="o">=</span> <span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/g145419.02100&#39;</span>  <span class="c1"># gEQDSK file</span>
+<span class="n">sfilename</span> <span class="o">=</span> <span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/state145419_02100.nc&#39;</span>  <span class="c1"># ONETWO statefile</span>
+<span class="n">ipfilename</span> <span class="o">=</span> <span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/input.profiles_145419_02100&#39;</span>  <span class="c1"># input.profiles generated with PROFILES_GEN</span>
+
+<span class="c1"># load OMFIT classes</span>
+<span class="n">gEQDSK</span> <span class="o">=</span> <span class="n">OMFITgeqdsk</span><span class="p">(</span><span class="n">gfilename</span><span class="p">)</span>
+<span class="n">statefile</span> <span class="o">=</span> <span class="n">OMFITstatefile</span><span class="p">(</span><span class="n">sfilename</span><span class="p">)</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="n">OMFITinputprofiles</span><span class="p">(</span><span class="n">ipfilename</span><span class="p">)</span>
+
+<span class="c1"># equilibrium ods from gEQDSK (and fluxSurfaces)</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">gEQDSK</span><span class="o">.</span><span class="n">to_omas</span><span class="p">()</span>
+
+<span class="c1"># append core profiles and sources based on ONETWO statefile</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">statefile</span><span class="o">.</span><span class="n">to_omas</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>
+
+<span class="c1"># generate new input.profiles file</span>
+<span class="n">ip1</span> <span class="o">=</span> <span class="n">OMFITinputprofiles</span><span class="p">(</span><span class="n">ipfilename</span><span class="p">)</span><span class="o">.</span><span class="n">from_omas</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>
+
+<span class="c1"># compare the input.profiles file generated by PROFILES_GEN and the one generated via OMFIT+OMAS</span>
+<span class="n">ip</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ip1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-g-s-2-ip-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/48909592db34cbdb7ddb09e89c89ba37/plot_g_s_2_ip.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_g_s_2_ip.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/837fb62b88b1d77c1f0d1fe366e10f80/plot_g_s_2_ip.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_g_s_2_ip.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

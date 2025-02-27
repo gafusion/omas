@@ -1,0 +1,6 @@
+﻿omas.through\_omas\_mongo
+=========================
+
+.. currentmodule:: omas
+
+.. autofunction:: through_omas_mongo

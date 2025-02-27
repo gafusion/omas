@@ -1,0 +1,6 @@
+﻿omas.omas\_dir
+==============
+
+.. currentmodule:: omas
+
+.. autodata:: omas_dir

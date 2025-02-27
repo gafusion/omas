@@ -1,0 +1,89 @@
+﻿omas.omas\_physics
+==================
+
+.. automodule:: omas.omas_physics
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_phi_to_equilbrium_profiles_1d_ods
+      add_rho_pol_norm_to_equilbrium_profiles_1d_ods
+      add_to__ALL__
+      add_to__ODS__
+      cache_interpolator
+      check_iter_scenario_requirements
+      cocos_transform
+      consistent_times
+      core_profiles_consistent
+      core_profiles_currents
+      core_profiles_densities
+      core_profiles_pressures
+      core_profiles_zeff
+      core_sources_j_parallel_sum
+      create_scatter_interpolator
+      current_from_eq
+      define_cocos
+      delete_ggd
+      derive_equilibrium_profiles_2d_quantity
+      equilibrium_consistent
+      equilibrium_form_constraints
+      equilibrium_ggd_to_rectangular
+      equilibrium_profiles_2d_map
+      equilibrium_stored_energy
+      equilibrium_transpose_RZ
+      generate_cocos_signals
+      get_plot_scale_and_unit
+      grids_ggd_points_triangles
+      identify_cocos
+      imas_info
+      magnetics_sanitize
+      map_flux_coordinate_to_pol_flux
+      map_pol_flux_to_flux_coordinate
+      mask_SOL
+      omas_environment
+      preprocess_ods
+      probe_endpoints
+      remap_flux_coordinates
+      remove_integrator_drift
+      resolve_equilibrium_profiles_2d_grid_index
+      scatter_to_rectangular
+      search_in_array_structure
+      search_ion
+      summary_consistent_global_quantities
+      summary_currents
+      summary_global_quantities
+      summary_greenwald
+      summary_heating_power
+      summary_lineaverage_density
+      summary_taue
+      summary_thermal_stored_energy
+      transform_current
+      wall_add
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CocosSignals
+      ScatterInterpolator
+      constants
+   
+   
+
+   
+   
+   
+
+
+

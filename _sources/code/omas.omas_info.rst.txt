@@ -1,0 +1,6 @@
+﻿omas.omas\_info
+===============
+
+.. currentmodule:: omas
+
+.. autofunction:: omas_info

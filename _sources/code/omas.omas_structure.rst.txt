@@ -1,0 +1,38 @@
+﻿omas.omas\_structure
+====================
+
+.. automodule:: omas.omas_structure
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_extra_structures
+      create_html_documentation
+      create_json_structure
+      extract_cocos
+      extract_coordinates
+      extract_ggd
+      extract_global_quantities
+      extract_times
+      generate_xml_schemas
+      symlink_imas_structure_versions
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

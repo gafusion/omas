@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OMAS plot examples &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">OMAS plot examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-plot-omas-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="omas-plot-examples">
+<span id="sphx-glr-auto-examples-plot-omas-py"></span><h1>OMAS plot examples<a class="headerlink" href="#omas-plot-examples" title="Link to this heading">¶</a></h1>
+<p>This example loads some data from S3, augments the ODS with pressure information, and generates some plots</p>
+<div class="sphx-glr-script-out highlight-pytb notranslate"><div class="highlight"><pre><span></span><span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/omas/omas/examples/plot_omas.py&quot;</span>, line <span class="m">13</span>, in <span class="n">&lt;module&gt;</span>
+<span class="w">    </span><span class="n">ods</span> <span class="o">=</span> <span class="n">load_omas_s3</span><span class="p">(</span><span class="s1">&#39;OMFITprofiles_sample&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;omas_shared&#39;</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/omas/omas/omas_s3.py&quot;</span>, line <span class="m">131</span>, in <span class="n">load_omas_s3</span>
+<span class="w">    </span><span class="n">remote_uri</span><span class="p">(</span><span class="n">_base_S3_uri</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;down&#39;</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/omas/omas/omas_s3.py&quot;</span>, line <span class="m">64</span>, in <span class="n">remote_uri</span>
+<span class="w">    </span><span class="n">obj</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">Config</span><span class="o">=</span><span class="n">TransferConfig</span><span class="p">(</span><span class="n">use_threads</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/boto3/s3/inject.py&quot;</span>, line <span class="m">359</span>, in <span class="n">object_download_file</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/boto3/s3/inject.py&quot;</span>, line <span class="m">190</span>, in <span class="n">download_file</span>
+<span class="w">    </span><span class="k">return</span> <span class="n">transfer</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/boto3/s3/transfer.py&quot;</span>, line <span class="m">326</span>, in <span class="n">download_file</span>
+<span class="w">    </span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/s3transfer/futures.py&quot;</span>, line <span class="m">103</span>, in <span class="n">result</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coordinator</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/s3transfer/futures.py&quot;</span>, line <span class="m">266</span>, in <span class="n">result</span>
+<span class="w">    </span><span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/s3transfer/tasks.py&quot;</span>, line <span class="m">269</span>, in <span class="n">_main</span>
+<span class="w">    </span><span class="bp">self</span><span class="o">.</span><span class="n">_submit</span><span class="p">(</span><span class="n">transfer_future</span><span class="o">=</span><span class="n">transfer_future</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/s3transfer/download.py&quot;</span>, line <span class="m">354</span>, in <span class="n">_submit</span>
+<span class="w">    </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">head_object</span><span class="p">(</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/client.py&quot;</span>, line <span class="m">530</span>, in <span class="n">_api_call</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_api_call</span><span class="p">(</span><span class="n">operation_name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/client.py&quot;</span>, line <span class="m">947</span>, in <span class="n">_make_api_call</span>
+<span class="w">    </span><span class="n">http</span><span class="p">,</span> <span class="n">parsed_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/client.py&quot;</span>, line <span class="m">970</span>, in <span class="n">_make_request</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_endpoint</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="n">operation_model</span><span class="p">,</span> <span class="n">request_dict</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/endpoint.py&quot;</span>, line <span class="m">119</span>, in <span class="n">make_request</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">request_dict</span><span class="p">,</span> <span class="n">operation_model</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/endpoint.py&quot;</span>, line <span class="m">198</span>, in <span class="n">_send_request</span>
+<span class="w">    </span><span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_request</span><span class="p">(</span><span class="n">request_dict</span><span class="p">,</span> <span class="n">operation_model</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/endpoint.py&quot;</span>, line <span class="m">134</span>, in <span class="n">create_request</span>
+<span class="w">    </span><span class="bp">self</span><span class="o">.</span><span class="n">_event_emitter</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/hooks.py&quot;</span>, line <span class="m">412</span>, in <span class="n">emit</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_emitter</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">aliased_event_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/hooks.py&quot;</span>, line <span class="m">256</span>, in <span class="n">emit</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_emit</span><span class="p">(</span><span class="n">event_name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/hooks.py&quot;</span>, line <span class="m">239</span>, in <span class="n">_emit</span>
+<span class="w">    </span><span class="n">response</span> <span class="o">=</span> <span class="n">handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/signers.py&quot;</span>, line <span class="m">105</span>, in <span class="n">handler</span>
+<span class="w">    </span><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">operation_name</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/signers.py&quot;</span>, line <span class="m">189</span>, in <span class="n">sign</span>
+<span class="w">    </span><span class="n">auth</span><span class="o">.</span><span class="n">add_auth</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+  File <span class="nb">&quot;/Users/meneghini/Coding/atom/mambaforge/lib/python3.10/site-packages/botocore/auth.py&quot;</span>, line <span class="m">418</span>, in <span class="n">add_auth</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">NoCredentialsError</span><span class="p">()</span>
+<span class="gr">botocore.exceptions.NoCredentialsError</span>: <span class="n">Unable to locate credentials</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># load some data from S3</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">load_omas_s3</span><span class="p">(</span><span class="s1">&#39;OMFITprofiles_sample&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;omas_shared&#39;</span><span class="p">)</span>
+
+<span class="c1"># augment ODS with pressure information</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">physics_core_profiles_pressures</span><span class="p">()</span>
+
+<span class="c1"># omas plot for pressures</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">plot_core_profiles_pressures</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># omas plot for core profiles</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">plot_core_profiles_summary</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># omas plot for equilibrium</span>
+<span class="n">omas_plot</span><span class="o">.</span><span class="n">equilibrium_summary</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;my equilibrium&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># omas plot for transport fluxes</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">plot_core_transport_fluxes</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-omas-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/df33520b5e66a08e98eaac716772bbd3/plot_omas.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_omas.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/750e53815899ee4dc807f7509a2fd334/plot_omas.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_omas.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

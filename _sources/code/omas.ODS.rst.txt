@@ -1,0 +1,175 @@
+﻿omas.ODS
+========
+
+.. currentmodule:: omas
+
+.. autoclass:: ODS
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ODS.__init__
+      ~ODS.clear
+      ~ODS.close
+      ~ODS.codeparams2dict
+      ~ODS.codeparams2xml
+      ~ODS.coordinates
+      ~ODS.copy
+      ~ODS.copy_attrs_from
+      ~ODS.dataset
+      ~ODS.diff
+      ~ODS.diff_attrs
+      ~ODS.document
+      ~ODS.flat
+      ~ODS.from_structure
+      ~ODS.full_paths
+      ~ODS.full_pretty_paths
+      ~ODS.get
+      ~ODS.getraw
+      ~ODS.homogeneous_time
+      ~ODS.info
+      ~ODS.items
+      ~ODS.keys
+      ~ODS.list_coordinates
+      ~ODS.load
+      ~ODS.open
+      ~ODS.paths
+      ~ODS.physics_add_phi_to_equilbrium_profiles_1d_ods
+      ~ODS.physics_add_rho_pol_norm_to_equilbrium_profiles_1d_ods
+      ~ODS.physics_check_iter_scenario_requirements
+      ~ODS.physics_consistent_times
+      ~ODS.physics_core_profiles_consistent
+      ~ODS.physics_core_profiles_currents
+      ~ODS.physics_core_profiles_densities
+      ~ODS.physics_core_profiles_pressures
+      ~ODS.physics_core_profiles_zeff
+      ~ODS.physics_core_sources_j_parallel_sum
+      ~ODS.physics_current_from_eq
+      ~ODS.physics_derive_equilibrium_profiles_2d_quantity
+      ~ODS.physics_equilibrium_consistent
+      ~ODS.physics_equilibrium_form_constraints
+      ~ODS.physics_equilibrium_ggd_to_rectangular
+      ~ODS.physics_equilibrium_profiles_2d_map
+      ~ODS.physics_equilibrium_stored_energy
+      ~ODS.physics_equilibrium_transpose_RZ
+      ~ODS.physics_imas_info
+      ~ODS.physics_magnetics_sanitize
+      ~ODS.physics_remap_flux_coordinates
+      ~ODS.physics_resolve_equilibrium_profiles_2d_grid_index
+      ~ODS.physics_summary_consistent_global_quantities
+      ~ODS.physics_summary_currents
+      ~ODS.physics_summary_global_quantities
+      ~ODS.physics_summary_greenwald
+      ~ODS.physics_summary_heating_power
+      ~ODS.physics_summary_lineaverage_density
+      ~ODS.physics_summary_taue
+      ~ODS.physics_summary_thermal_stored_energy
+      ~ODS.physics_wall_add
+      ~ODS.plot_bolometer_overlay
+      ~ODS.plot_charge_exchange_overlay
+      ~ODS.plot_core_profiles_currents_summary
+      ~ODS.plot_core_profiles_pressures
+      ~ODS.plot_core_profiles_summary
+      ~ODS.plot_core_sources_summary
+      ~ODS.plot_core_transport_fluxes
+      ~ODS.plot_ec_launchers_CX
+      ~ODS.plot_ec_launchers_CX_topview
+      ~ODS.plot_equilibrium_CX
+      ~ODS.plot_equilibrium_CX_topview
+      ~ODS.plot_equilibrium_quality
+      ~ODS.plot_equilibrium_summary
+      ~ODS.plot_gas_injection_overlay
+      ~ODS.plot_interferometer_overlay
+      ~ODS.plot_langmuir_probes_overlay
+      ~ODS.plot_lh_antennas_CX
+      ~ODS.plot_lh_antennas_CX_topview
+      ~ODS.plot_magnetics_bpol_probe_data
+      ~ODS.plot_magnetics_diamagnetic_flux_data
+      ~ODS.plot_magnetics_flux_loop_data
+      ~ODS.plot_magnetics_ip_data
+      ~ODS.plot_magnetics_overlay
+      ~ODS.plot_nbi_summary
+      ~ODS.plot_overlay
+      ~ODS.plot_pellets_trajectory_CX
+      ~ODS.plot_pellets_trajectory_CX_topview
+      ~ODS.plot_pf_active_data
+      ~ODS.plot_pf_active_overlay
+      ~ODS.plot_position_control_overlay
+      ~ODS.plot_pulse_schedule_overlay
+      ~ODS.plot_quantity
+      ~ODS.plot_summary
+      ~ODS.plot_tf_b_field_tor_vacuum_r_data
+      ~ODS.plot_thomson_scattering_overlay
+      ~ODS.plot_wall_overlay
+      ~ODS.plot_waves_beam_CX
+      ~ODS.plot_waves_beam_profile
+      ~ODS.plot_waves_beam_summary
+      ~ODS.pop
+      ~ODS.popitem
+      ~ODS.pretty_paths
+      ~ODS.prune
+      ~ODS.relax
+      ~ODS.same_init_ods
+      ~ODS.sample
+      ~ODS.sample_bolometer
+      ~ODS.sample_charge_exchange
+      ~ODS.sample_core_profiles
+      ~ODS.sample_core_sources
+      ~ODS.sample_core_transport
+      ~ODS.sample_dataset_description
+      ~ODS.sample_ec_launchers
+      ~ODS.sample_equilibrium
+      ~ODS.sample_gas_injection
+      ~ODS.sample_ic_antennas
+      ~ODS.sample_interferometer
+      ~ODS.sample_langmuir_probes
+      ~ODS.sample_magnetics
+      ~ODS.sample_nbi
+      ~ODS.sample_pf_active
+      ~ODS.sample_pulse_schedule
+      ~ODS.sample_summary
+      ~ODS.sample_thomson_scattering
+      ~ODS.sample_wall
+      ~ODS.satisfy_imas_requirements
+      ~ODS.save
+      ~ODS.search_paths
+      ~ODS.set_time_array
+      ~ODS.setdefault
+      ~ODS.setraw
+      ~ODS.slice_at_time
+      ~ODS.time
+      ~ODS.time_index
+      ~ODS.to_odx
+      ~ODS.update
+      ~ODS.values
+      ~ODS.xarray
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ODS.active_dynamic
+      ~ODS.cocos
+      ~ODS.cocosio
+      ~ODS.consistency_check
+      ~ODS.coordsio
+      ~ODS.dynamic
+      ~ODS.imas_version
+      ~ODS.location
+      ~ODS.parent
+      ~ODS.structure
+      ~ODS.top
+      ~ODS.ulocation
+      ~ODS.uncertainio
+      ~ODS.unitsio
+   
+   

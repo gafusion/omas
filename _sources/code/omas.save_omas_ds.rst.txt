@@ -1,0 +1,6 @@
+﻿omas.save\_omas\_ds
+===================
+
+.. currentmodule:: omas
+
+.. autofunction:: save_omas_ds

@@ -1,0 +1,6 @@
+﻿omas.save\_omas\_h5
+===================
+
+.. currentmodule:: omas
+
+.. autofunction:: save_omas_h5

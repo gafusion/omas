@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gEQDSK file from IMAS WEST data &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">gEQDSK file from IMAS WEST data</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-west-geqdsk-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="geqdsk-file-from-imas-west-data">
+<span id="sphx-glr-auto-examples-west-geqdsk-py"></span><h1>gEQDSK file from IMAS WEST data<a class="headerlink" href="#geqdsk-file-from-imas-west-data" title="Link to this heading">¶</a></h1>
+<p>This example loads WEST IMAS equilibrium data and generates a gEQDSK file from it.</p>
+<p>NOTE: There is an OMFIT script that does this (works also remotely) and can be called with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omfit</span> <span class="n">gEQDSK_west</span> <span class="s2">&quot;shot=55866, run=0, occurrence=1, time=47, resolution=129&quot;</span>
+</pre></div>
+</div>
+<p>To run this, make sure to first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">omfit</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">IMAS</span><span class="o">/</span><span class="mf">3.30.0</span><span class="o">-</span><span class="mf">4.8.4</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">omfit_eqdsk</span> <span class="kn">import</span> <span class="n">OMFITgeqdsk</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+
+<span class="n">shot</span> <span class="o">=</span> <span class="mi">55866</span>
+<span class="n">run</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">occurrence</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 0:magnetics / 1:MSE</span>
+<span class="n">time</span> <span class="o">=</span> <span class="mi">47</span>  <span class="c1"># in seconds</span>
+<span class="n">resolution</span> <span class="o">=</span> <span class="mi">129</span>  <span class="c1"># grid resolution of the gEQDKS file</span>
+
+<span class="c1"># load the data from IMAS</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s1">&#39;imas&#39;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s1">&#39;public&#39;</span><span class="p">,</span>
+    <span class="n">machine</span><span class="o">=</span><span class="s1">&#39;west&#39;</span><span class="p">,</span>
+    <span class="n">pulse</span><span class="o">=</span><span class="n">shot</span><span class="p">,</span>
+    <span class="n">run</span><span class="o">=</span><span class="n">run</span><span class="p">,</span>
+    <span class="n">occurrence</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">:</span> <span class="n">occurrence</span><span class="p">},</span>
+    <span class="n">paths</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">]],</span>
+    <span class="n">skip_uncertainties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># get the time info for this IDS</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="s1">&#39;time_slice&#39;</span><span class="p">)</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">time</span><span class="p">))</span>  <span class="c1"># nearest time_index in the ODS</span>
+
+<span class="c1"># grid interpolation can be time consuming, so we do it only for the requested time index</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">physics_equilibrium_ggd_to_rectangular</span><span class="p">(</span><span class="n">time_index</span><span class="o">=</span><span class="p">[</span><span class="n">time_index</span><span class="p">],</span> <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;extrapolate&#39;</span><span class="p">)</span>
+
+<span class="c1"># much faster than querying the wall IDS</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">physics_wall_add</span><span class="p">(</span><span class="s1">&#39;west&#39;</span><span class="p">)</span>
+
+<span class="c1"># generate the gEQDSK file</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">OMFITgeqdsk</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">from_omas</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="n">time_index</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+
+<span class="c1"># plot</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-west-geqdsk-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/6ea850c78b215911b9bf192826cc9ab0/west_geqdsk.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">west_geqdsk.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/a5452355a1b5ca64d4c8454a0006dbb8/west_geqdsk.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">west_geqdsk.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

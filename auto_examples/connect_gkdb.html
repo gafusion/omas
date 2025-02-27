@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Interface with GKDB &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Interface with GKDB</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-connect-gkdb-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="interface-with-gkdb">
+<span id="sphx-glr-auto-examples-connect-gkdb-py"></span><h1>Interface with GKDB<a class="headerlink" href="#interface-with-gkdb" title="Link to this heading">¶</a></h1>
+<p>Use OMAS to interface with Gyro-Kinetic DataBase (GKDB) <a class="reference external" href="https://gitlab.com/gkdb/gkdb">https://gitlab.com/gkdb/gkdb</a>
+GKDB is a publicly accessible database of delta-f flux-tube gyro-kinetic simulations of tokamak plasmas
+which stores its data according to the <cite>gyrokinetic</cite> IMAS IDS <a class="reference external" href="https://gafusion.github.io/omas/schema/schema_gyrokinetics.html">https://gafusion.github.io/omas/schema/schema_gyrokinetics.html</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span><span class="p">,</span> <span class="n">omas_dir</span><span class="p">,</span> <span class="n">omas_testdir</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># load a sample GKDB sample json file</span>
+<span class="n">sample_filename</span> <span class="o">=</span> <span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/gkdb_linear_eigenvalue.json&#39;</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="c1"># warn about `gyrokinetics_local.fluxes_integrated_norm = []` and drop it</span>
+<span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gyrokinetics_local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sample_filename</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="s1">&#39;warn_drop&#39;</span><span class="p">)</span>
+
+<span class="c1"># show content</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">ods</span><span class="o">.</span><span class="n">pretty_paths</span><span class="p">())</span>
+
+<span class="c1"># save a copy</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="vm">__file__</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">inspect</span>
+
+    <span class="vm">__file__</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">omas_testdir</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/gkdb_linear_initialvalue.json&#39;</span>
+<span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gyrokinetics_local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># load the newly saved copy</span>
+<span class="n">ods1</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="n">ods1</span><span class="p">[</span><span class="s1">&#39;gyrokinetics_local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># look for differences between original GKDB json and OMAS json</span>
+<span class="n">differences</span> <span class="o">=</span> <span class="n">ods</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ods1</span><span class="p">,</span> <span class="n">ignore_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">differences</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Print no differences found: save/load of GKDB json file worked</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">differences</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Save/Load of GKDB on json file failed&#39;</span><span class="p">)</span>
+
+<span class="c1"># raise error if trying to run GKDB under Python2x</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">gkdb.core.model</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Could not import gkdb library: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_excp</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Check that GKDB file written by OMAS is valid also according to GKDB</span>
+    <span class="k">if</span> <span class="n">gkdb</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ids_checks</span><span class="o">.</span><span class="n">check_json</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">only_input</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;json file saved via OMAS is valid for gkdb&#39;</span><span class="p">)</span>
+
+    <span class="c1"># This requires an account on the GKDB server</span>
+    <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">gkdb</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">connect_to_gkdb</span><span class="p">()</span>
+        <span class="n">gkdb</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Ids_properties</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-connect-gkdb-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/d9665d5211435b0c5f16285a2f56ff97/connect_gkdb.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">connect_gkdb.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/3494cd9cd71a465cbf70a7c0b88b5e59/connect_gkdb.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">connect_gkdb.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

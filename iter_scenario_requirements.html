@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ITER scenario required fields &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="how.html">Concept</a></li>
+                <li><a href="auto_examples/index.html">Examples</a></li>
+                <li><a href="install.html">Installation</a></li>
+                <li><a href="iter.html">ITER</a></li>
+                <li><a href="omfit.html">OMFIT</a></li>
+                <li><a href="schema.html">Data schema</a></li>
+                <li><a href="code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">ITER scenario required fields</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="iter-scenario-required-fields">
+<span id="iter-scenario-requirements"></span><h1>ITER scenario required fields<a class="headerlink" href="#iter-scenario-required-fields" title="Link to this heading">¶</a></h1>
+<p>List IDS fields that have to be present to add datasets to the ITER scenario database,
+as defined <a class="reference external" href="https://confluence.iter.org/x/kQqOE">here</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">equilibrium</span><span class="o">.</span><span class="n">time_slice</span><span class="p">[:]</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">ip</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">time_slice</span><span class="p">[:]</span><span class="o">.</span><span class="n">profiles_2d</span><span class="p">[:]</span><span class="o">.</span><span class="n">phi</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">time_slice</span><span class="p">[:]</span><span class="o">.</span><span class="n">profiles_2d</span><span class="p">[:]</span><span class="o">.</span><span class="n">psi</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">time_slice</span><span class="p">[:]</span><span class="o">.</span><span class="n">profiles_2d</span><span class="p">[:]</span><span class="o">.</span><span class="n">r</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">time_slice</span><span class="p">[:]</span><span class="o">.</span><span class="n">profiles_2d</span><span class="p">[:]</span><span class="o">.</span><span class="n">z</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">vacuum_toroidal_field</span><span class="o">.</span><span class="n">r0</span>
+<span class="n">equilibrium</span><span class="o">.</span><span class="n">vacuum_toroidal_field</span><span class="o">.</span><span class="n">b0</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">beta_pol</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">beta_tor_norm</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">current_bootstrap</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">current_non_inductive</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">energy_diamagnetic</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">ip</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">v_loop</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">e_field</span><span class="o">.</span><span class="n">radial</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">density</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">pressure</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">pressure_fast_parallel</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">pressure_fast_perpendicular</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">pressure_thermal</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">electrons</span><span class="o">.</span><span class="n">temperature</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">rho_tor</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">rho_tor_norm</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">psi</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">volume</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">density</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">element</span><span class="p">[:]</span><span class="o">.</span><span class="n">a</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">element</span><span class="p">[:]</span><span class="o">.</span><span class="n">z_n</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_fast_parallel</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_fast_perpendicular</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_thermal</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">temperature</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">diamagnetic</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">poloidal</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">ion</span><span class="p">[:]</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">toroidal</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">j_bootstrap</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">j_non_inductive</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">j_ohmic</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">j_total</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">magnetic_shear</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_ion_total</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_parallel</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_perpendicular</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">pressure_thermal</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">q</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">t_i_average</span>
+<span class="n">core_profiles</span><span class="o">.</span><span class="n">profiles_1d</span><span class="p">[:]</span><span class="o">.</span><span class="n">zeff</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">b0</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">beta_pol</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">beta_tor_norm</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">current_bootstrap</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">current_non_inductive</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">current_ohm</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">energy_diamagnetic</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">energy_thermal</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">energy_total</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">h_98</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">h_mode</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">tau_energy</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">global_quantities</span><span class="o">.</span><span class="n">v_loop</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">separatrix</span><span class="o">.</span><span class="n">n_e</span><span class="o">.</span><span class="n">value</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">separatrix</span><span class="o">.</span><span class="n">zeff</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

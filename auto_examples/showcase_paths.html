@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>showcase paths &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">showcase paths</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-showcase-paths-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="showcase-paths">
+<span id="sphx-glr-auto-examples-showcase-paths-py"></span><h1>showcase paths<a class="headerlink" href="#showcase-paths" title="Link to this heading">¶</a></h1>
+<p>This example shows how OMAS supports dynamic path crection using different syntaxes.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../_images/dynamic_path_testimonial.png"><img alt="What people say about OMAS dynamic path creation" src="../_images/dynamic_path_testimonial.png" style="width: 100%;" /></a>
+</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+
+<span class="c1"># without dynamic path creation one must use Python approach to create nested dictionaries</span>
+<span class="c1"># this can be extremely tedious!</span>
+<span class="k">with</span> <span class="n">omas_environment</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">dynamic_path_creation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1000.0</span>
+
+<span class="c1"># Dynamic path creation (True by default) makes life easier.</span>
+<span class="c1"># NOTE: OMAS supports different data access syntaxes</span>
+<span class="k">with</span> <span class="n">omas_environment</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">dynamic_path_creation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># access data as dictionary</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1000.0</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1000.0</span>
+
+    <span class="c1"># access data as string</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.1.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2000.0</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.1.time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">2000.0</span>
+
+    <span class="c1"># access data as string (square brackets for arrays of structures)</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice[2].time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.0</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice[2].time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3000.0</span>
+
+    <span class="c1"># access data with path list</span>
+    <span class="n">ods</span><span class="p">[[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">,</span> <span class="s1">&#39;time_slice&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">4000.0</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">,</span> <span class="s1">&#39;time_slice&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">]]</span> <span class="o">==</span> <span class="mf">4000.0</span>
+
+    <span class="c1"># access data with mix and match approach</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice.4.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5000.0</span>
+    <span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice.4.time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">5000.0</span>
+
+<span class="c1"># =============</span>
+<span class="c1"># Data slicing</span>
+<span class="c1"># =============</span>
+
+<span class="c1"># classic ways to access data across an array of structures</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">2000.0</span><span class="p">,</span> <span class="mf">3000.0</span><span class="p">,</span> <span class="mf">4000.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">]))</span>
+
+<span class="c1"># access data across an array of structures via data slicing</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.:.time&#39;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">2000.0</span><span class="p">,</span> <span class="mf">3000.0</span><span class="p">,</span> <span class="mf">4000.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">]))</span>
+
+<span class="c1"># =========================</span>
+<span class="c1"># .setdefault() and .get()</span>
+<span class="c1"># =========================</span>
+
+<span class="c1"># like for Python dictionaries .setdefault() will set an entry with its</span>
+<span class="c1"># default value (second argument) only if that entry does not exists already</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span>
+
+<span class="c1"># like for Python dictionaries .get() return the value of an entry or its</span>
+<span class="c1"># default value (second argument) if that does not exists</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="n">ods</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">assert</span> <span class="s1">&#39;equilibrium.time_slice.0.global_quantities.ip&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span>
+
+<span class="c1"># ========</span>
+<span class="c1"># Cleanup</span>
+<span class="c1"># ========</span>
+
+<span class="c1"># Dynamic path creation can leave empty trees behind in case of bad IMAS location is entered.</span>
+<span class="c1"># This is inevitable when splitting the path in individual pieces.</span>
+<span class="c1"># These leftover are often innocuous, and occur only during the development stages.</span>
+<span class="c1"># Use of .prune() to clean empty branches left behind from dynamic path creation</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium&#39;</span><span class="p">][</span><span class="s1">&#39;time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;global_quantities&#39;</span><span class="p">][</span><span class="s1">&#39;not_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">ods</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="c1"># Note that single string access does not leave empty branches</span>
+<span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.global_quantities.asdasd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-showcase-paths-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/cef4e4da48933e064d3c02301385b844/showcase_paths.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">showcase_paths.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/dd7bcbd5f8449fc9ac3bd9243fd20e22/showcase_paths.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">showcase_paths.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

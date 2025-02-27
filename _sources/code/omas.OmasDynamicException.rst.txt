@@ -1,0 +1,6 @@
+﻿omas.OmasDynamicException
+=========================
+
+.. currentmodule:: omas
+
+.. autoexception:: OmasDynamicException

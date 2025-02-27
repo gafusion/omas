@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.omas_ds &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../how.html">Concept</a></li>
+                <li><a href="../../auto_examples/index.html">Examples</a></li>
+                <li><a href="../../install.html">Installation</a></li>
+                <li><a href="../../iter.html">ITER</a></li>
+                <li><a href="../../omfit.html">OMFIT</a></li>
+                <li><a href="../../schema.html">Data schema</a></li>
+                <li><a href="../../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for omas.omas_ds</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;save/load from xarray dataset routines</span>
+
+<span class="sd">-------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">.omas_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.omas_core</span> <span class="kn">import</span> <span class="n">ODS</span><span class="p">,</span> <span class="n">omas_environment</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+
+<div class="viewcode-block" id="ODX">
+<a class="viewcode-back" href="../../code/omas.ODX.html#omas.ODX">[docs]</a>
+<span class="k">class</span> <span class="nc">ODX</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    OMAS data xarray class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ODX.__init__">
+<a class="viewcode-back" href="../../code/omas.ODX.html#omas.ODX.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DS</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span> <span class="o">=</span> <span class="n">DS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">DS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ucache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">o2u</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># return data if key is exactly in dataset</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># identify which element in DS has the requested data</span>
+        <span class="n">ukey</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucache</span><span class="p">[</span><span class="n">o2u</span><span class="p">(</span><span class="n">key</span><span class="p">)]:</span>
+            <span class="k">if</span> <span class="n">u2o</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">ukey</span> <span class="o">=</span> <span class="n">k</span>
+                <span class="k">break</span>
+
+        <span class="c1"># slice the data as requested</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="p">[</span><span class="n">ukey</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">for</span> <span class="n">uk</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p2l</span><span class="p">(</span><span class="n">ukey</span><span class="p">),</span> <span class="n">p2l</span><span class="p">(</span><span class="n">key</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">uk</span> <span class="o">==</span> <span class="s1">&#39;:&#39;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="c1"># return data</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="c1"># avoid picking up deepcopy and pickling methods from dataset</span>
+        <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;__deepcopy__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getstate__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setstate__&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;bad attribute `</span><span class="si">%s</span><span class="s1">`&#39;</span> <span class="o">%</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">save_omas_dx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">ods</span> <span class="o">=</span> <span class="n">load_omas_dx</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omas_data</span> <span class="o">=</span> <span class="n">ods</span><span class="o">.</span><span class="n">omas_data</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">to_ods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a ODS from current ODX</span>
+
+<span class="sd">        :param consistency_check: use consistency_check flag in ODS</span>
+
+<span class="sd">        :return: ODS</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">odx_2_ods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="n">consistency_check</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_omas_ds">
+<a class="viewcode-back" href="../../code/omas.save_omas_ds.html#omas.save_omas_ds">[docs]</a>
+<span class="k">def</span> <span class="nf">save_omas_ds</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save an ODS to xarray dataset</span>
+
+<span class="sd">    :param ods: OMAS data set</span>
+
+<span class="sd">    :param filename: filename or file descriptor to save to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DS</span> <span class="o">=</span> <span class="n">ods</span><span class="o">.</span><span class="n">dataset</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">DS</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_omas_dx">
+<a class="viewcode-back" href="../../code/omas.load_omas_dx.html#omas.load_omas_dx">[docs]</a>
+<span class="k">def</span> <span class="nf">load_omas_dx</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load ODX from xarray dataset</span>
+
+<span class="sd">    :param filename: filename or file descriptor to load from</span>
+
+<span class="sd">    :param consistency_check: verify that data is consistent with IMAS schema</span>
+
+<span class="sd">    :return: OMAS data xarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">xarray</span>
+
+    <span class="n">DS</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">)</span>
+    <span class="n">DS</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="n">DS</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ODX</span><span class="p">(</span><span class="n">DS</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_omas_dx">
+<a class="viewcode-back" href="../../code/omas.save_omas_dx.html#omas.save_omas_dx">[docs]</a>
+<span class="k">def</span> <span class="nf">save_omas_dx</span><span class="p">(</span><span class="n">odx</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save an ODX to xarray dataset</span>
+
+<span class="sd">    :param odx: OMAS data xarray</span>
+
+<span class="sd">    :param filename: filename or file descriptor to save to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">odx</span><span class="o">.</span><span class="n">omas_data</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ods_2_odx">
+<a class="viewcode-back" href="../../code/omas.ods_2_odx.html#omas.ods_2_odx">[docs]</a>
+<span class="k">def</span> <span class="nf">ods_2_odx</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">homogeneous</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map ODS to an ODX</span>
+
+<span class="sd">    :param ods: OMAS data set</span>
+
+<span class="sd">    :param homogeneous: * False: flat representation of the ODS</span>
+<span class="sd">                                  (data is not collected across arrays of structures)</span>
+<span class="sd">                        * &#39;time&#39;: collect arrays of structures only along the time dimension</span>
+<span class="sd">                                  (always valid for homogeneous_time=True)</span>
+<span class="sd">                        * &#39;full&#39;: collect arrays of structures along all dimensions</span>
+<span class="sd">                                  (may be valid in many situations, especially related to</span>
+<span class="sd">                                   simulation data with homogeneous_time=True and where</span>
+<span class="sd">                                   for example number of ions, sources, etc. do not vary)</span>
+<span class="sd">                        * None: smart setting, uses homogeneous=&#39;time&#39; if homogeneous_time=True else False</span>
+
+<span class="sd">    :return: OMAS data xarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ODX</span><span class="p">(</span><span class="n">ods</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="n">homogeneous</span><span class="o">=</span><span class="n">homogeneous</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="odx_2_ods">
+<a class="viewcode-back" href="../../code/omas.odx_2_ods.html#omas.odx_2_ods">[docs]</a>
+<span class="k">def</span> <span class="nf">odx_2_ods</span><span class="p">(</span><span class="n">odx</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map ODX to ODS</span>
+
+<span class="sd">    :param odx: OMAS data xarray</span>
+
+<span class="sd">    :param consistency_check: verify that data is consistent with IMAS schema</span>
+
+<span class="sd">    :return: OMAS data set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DS</span> <span class="o">=</span> <span class="n">odx</span><span class="o">.</span><span class="n">omas_data</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">(</span><span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">omas_environment</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">dynamic_path_creation</span><span class="o">=</span><span class="s1">&#39;dynamic_array_structures&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">uitem</span> <span class="ow">in</span> <span class="n">DS</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+            <span class="n">depth</span> <span class="o">=</span> <span class="n">uitem</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">DS</span><span class="p">[</span><span class="n">uitem</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">depth</span><span class="p">:</span>
+                <span class="n">ods</span><span class="p">[</span><span class="n">uitem</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">continue</span>
+            <span class="c1"># unroll</span>
+            <span class="k">for</span> <span class="n">kkk</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="n">DS</span><span class="p">[</span><span class="n">uitem</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="n">depth</span><span class="p">])):</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">uitem</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">kkk</span><span class="p">)</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kkk</span><span class="p">:</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">ods</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">consistency_check</span> <span class="o">=</span> <span class="n">consistency_check</span>
+    <span class="k">return</span> <span class="n">ods</span></div>
+
+
+
+<div class="viewcode-block" id="load_omas_ds">
+<a class="viewcode-back" href="../../code/omas.load_omas_ds.html#omas.load_omas_ds">[docs]</a>
+<span class="k">def</span> <span class="nf">load_omas_ds</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load ODS from xarray dataset</span>
+
+<span class="sd">    :param filename: filename or file descriptor to load from</span>
+
+<span class="sd">    :param consistency_check: verify that data is consistent with IMAS schema</span>
+
+<span class="sd">    :return: OMAS data set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">xarray</span>
+
+    <span class="n">DS</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">)</span>
+    <span class="n">DS</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="n">DS</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">odx</span> <span class="o">=</span> <span class="n">ODX</span><span class="p">(</span><span class="n">DS</span><span class="p">)</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">odx_2_ods</span><span class="p">(</span><span class="n">odx</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="n">consistency_check</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ods</span></div>
+
+
+
+<div class="viewcode-block" id="through_omas_ds">
+<a class="viewcode-back" href="../../code/omas.through_omas_ds.html#omas.through_omas_ds">[docs]</a>
+<span class="k">def</span> <span class="nf">through_omas_ds</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;class_method&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test save and load ODS via xarray file format</span>
+
+<span class="sd">    :param ods: OMAS data set</span>
+
+<span class="sd">    :return: OMAS data set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">omas_testdir</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/test.ds&#39;</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>  <span class="c1"># make a copy to make sure save does not alter entering ODS</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span><span class="p">:</span>
+        <span class="n">save_omas_ds</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">ods1</span> <span class="o">=</span> <span class="n">load_omas_ds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">ods1</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ods1</span></div>
+
+
+
+<div class="viewcode-block" id="through_omas_dx">
+<a class="viewcode-back" href="../../code/omas.through_omas_dx.html#omas.through_omas_dx">[docs]</a>
+<span class="k">def</span> <span class="nf">through_omas_dx</span><span class="p">(</span><span class="n">odx</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;class_method&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test save and load OMAS data xarray via xarray file format</span>
+
+<span class="sd">    :param ods: OMAS data xarray</span>
+
+<span class="sd">    :return: OMAS data xarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">omas_testdir</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/test.dx&#39;</span>
+    <span class="n">odx</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">odx</span><span class="p">)</span>  <span class="c1"># make a copy to make sure save does not alter entering ODX</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span><span class="p">:</span>
+        <span class="n">save_omas_dx</span><span class="p">(</span><span class="n">odx</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">odx1</span> <span class="o">=</span> <span class="n">load_omas_dx</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">odx</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">odx1</span> <span class="o">=</span> <span class="n">ODX</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">odx1</span></div>
+
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

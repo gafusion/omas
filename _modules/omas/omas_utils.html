@@ -1,0 +1,1225 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.omas_utils &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../how.html">Concept</a></li>
+                <li><a href="../../auto_examples/index.html">Examples</a></li>
+                <li><a href="../../install.html">Installation</a></li>
+                <li><a href="../../iter.html">ITER</a></li>
+                <li><a href="../../omfit.html">OMFIT</a></li>
+                <li><a href="../../schema.html">Data schema</a></li>
+                <li><a href="../../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for omas.omas_utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;naming convention translation and misc utilities</span>
+
+<span class="sd">-------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">.omas_setup</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.omas_setup</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># --------------------------------------------</span>
+<span class="c1"># ODS utilities</span>
+<span class="c1"># --------------------------------------------</span>
+<span class="n">default_keys_to_ignore</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;dataset_description.data_entry.user&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataset_description.data_entry.run&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataset_description.data_entry.machine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataset_description.ids_properties&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataset_description.imas_version&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dataset_description.time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ids_properties.homogeneous_time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ids_properties.occurrence&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ids_properties.version_put.data_dictionary&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ids_properties.version_put.access_layer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ids_properties.version_put.access_layer_language&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="different_ods">
+<a class="viewcode-back" href="../../code/omas.different_ods.html#omas.different_ods">[docs]</a>
+<span class="k">def</span> <span class="nf">different_ods</span><span class="p">(</span><span class="n">ods1</span><span class="p">,</span> <span class="n">ods2</span><span class="p">,</span> <span class="n">ignore_type</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ignore_empty</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ignore_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">ignore_default_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1.0e-5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1.0e-8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if two ODSs have any difference and returns the string with the cause of the different</span>
+
+<span class="sd">    :param ods1: first ods to check</span>
+
+<span class="sd">    :param ods2: second ods to check</span>
+
+<span class="sd">    :param ignore_type: ignore object type differences</span>
+
+<span class="sd">    :param ignore_empty: ignore emptry nodes</span>
+
+<span class="sd">    :param ignore_keys: ignore the following keys</span>
+
+<span class="sd">    :param ignore_default_keys: ignores the following keys from the comparison</span>
+<span class="sd">                            %s</span>
+
+<span class="sd">    rtol : The relative tolerance parameter</span>
+
+<span class="sd">    atol : The absolute tolerance parameter</span>
+
+<span class="sd">    :return: string with reason for difference, or False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span><span class="p">,</span> <span class="n">CodeParameters</span>
+
+    <span class="n">ods1</span> <span class="o">=</span> <span class="n">ods1</span><span class="o">.</span><span class="n">flat</span><span class="p">(</span><span class="n">return_empty_leaves</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">traverse_code_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ods2</span> <span class="o">=</span> <span class="n">ods2</span><span class="o">.</span><span class="n">flat</span><span class="p">(</span><span class="n">return_empty_leaves</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">traverse_code_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">keys_to_ignore</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">keys_to_ignore</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">ignore_keys</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ignore_default_keys</span><span class="p">:</span>
+        <span class="n">keys_to_ignore</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">default_keys_to_ignore</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_ignored</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">o2u</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">keys_to_ignore</span><span class="p">)</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ods1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ods2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">differences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">k2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;info.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">ignore_empty</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">ODS</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_ignored</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: key `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` missing in 2nd ods&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k2</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">k1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;info.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">ignore_empty</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">ODS</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_ignored</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: key `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` missing in 1st ods&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">k1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">k2</span><span class="p">)):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_ignored</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                    <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in value&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">ignore_type</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">]):</span>
+                <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">}</span><span class="s1"> vs type(ods2[k])&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">is_uncertain</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="ow">or</span> <span class="n">is_uncertain</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">]):</span>
+                <span class="n">v1</span> <span class="o">=</span> <span class="n">nominal_values</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">v2</span> <span class="o">=</span> <span class="n">nominal_values</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">d1</span> <span class="o">=</span> <span class="n">std_devs</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">d2</span> <span class="o">=</span> <span class="n">std_devs</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">s1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">shape</span>
+                <span class="n">s2</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">shape</span>
+                <span class="k">if</span> <span class="n">s1</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">:</span>
+                    <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in shape: </span><span class="si">{</span><span class="n">s1</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">s2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                    <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span>
+                <span class="p">):</span>
+                    <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in value&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">v1</span> <span class="o">=</span> <span class="n">nominal_values</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">v2</span> <span class="o">=</span> <span class="n">nominal_values</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">s1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">shape</span>
+                <span class="n">s2</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">shape</span>
+                <span class="k">if</span> <span class="n">v1</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">v2</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                    <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in shape: </span><span class="si">{</span><span class="n">s1</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">s2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">ods2</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">):</span>
+                    <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DIFF: `</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">` differ in value&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error comparing </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: &#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_excp</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">differences</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">differences</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<span class="n">different_ods</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">different_ods</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">%</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">                            &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">default_keys_to_ignore</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">different_ods_attrs</span><span class="p">(</span><span class="n">ods1</span><span class="p">,</span> <span class="n">ods2</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if two ODSs have any difference in their attributes</span>
+
+<span class="sd">    :param ods1: first ods to check</span>
+
+<span class="sd">    :param ods2: second ods to check</span>
+
+<span class="sd">    :param attrs: list of attributes to compare</span>
+
+<span class="sd">    :param verbose: print differences to stdout</span>
+
+<span class="sd">    :return: dictionary with list of attriibutes that have differences, or False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">attrs</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">attrs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.omas_core</span> <span class="kn">import</span> <span class="n">omas_ods_attrs</span>
+
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">omas_ods_attrs</span>
+
+    <span class="k">if</span> <span class="s1">&#39;_parent&#39;</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;_parent&#39;</span><span class="p">))</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">attrs</span><span class="p">)))</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">l2i</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ods1</span><span class="o">.</span><span class="n">paths</span><span class="p">(</span><span class="n">return_empty_leaves</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">traverse_code_parameters</span><span class="o">=</span><span class="kc">False</span><span class="p">))))</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">l2i</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ods2</span><span class="o">.</span><span class="n">paths</span><span class="p">(</span><span class="n">return_empty_leaves</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">traverse_code_parameters</span><span class="o">=</span><span class="kc">False</span><span class="p">))))</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">l1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">l2</span><span class="p">)))</span>
+
+    <span class="n">differences</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+                <span class="n">a1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ods1</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">a2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ods2</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">a1</span> <span class="o">!=</span> <span class="n">a2</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+                        <span class="n">differences</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">differences</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: * </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">a1</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;`</span><span class="si">%s</span><span class="s1"> * </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">a2</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">differences</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">differences</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="c1"># --------------------------</span>
+<span class="c1"># general utility functions</span>
+<span class="c1"># --------------------------</span>
+<span class="n">_streams</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s1">&#39;STDERR&#39;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">printd</span><span class="p">(</span><span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    debug print</span>
+
+<span class="sd">    Use environmental variable $OMAS_DEBUG_TOPIC to set the topic to be printed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topic</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">topic</span> <span class="o">=</span> <span class="p">[</span><span class="n">topic</span><span class="p">]</span>
+    <span class="n">topic</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">topic</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">topic</span><span class="p">):</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;DEBUG (</span><span class="si">{</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span><span class="si">}</span><span class="s1">):&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DEBUG:&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+    <span class="n">topic_selected</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;OMAS_DEBUG_TOPIC&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">dump</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">topic_selected</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_dump&#39;</span><span class="p">):</span>
+        <span class="n">dump</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">topic_selected</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;_dump$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">topic_selected</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">topic_selected</span> <span class="ow">and</span> <span class="p">(</span><span class="n">topic_selected</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="ow">or</span> <span class="n">topic_selected</span> <span class="ow">in</span> <span class="n">topic</span> <span class="ow">or</span> <span class="s1">&#39;*&#39;</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;OMAS_DEBUG_STDOUT&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)):</span>
+            <span class="n">kw</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kw</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="n">_streams</span><span class="p">[</span><span class="s1">&#39;DEBUG&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dump</span><span class="p">:</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">objects</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">file</span><span class="o">=</span><span class="n">fb</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;omas_dump.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fb</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+            <span class="n">fb</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">printe</span><span class="p">(</span><span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    print to stderr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_streams</span><span class="p">[</span><span class="s1">&#39;STDERR&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_stack</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">traceback</span><span class="o">.</span><span class="n">print_stack</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">__stderr__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_uncertain</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param var: Variable or array to test</span>
+
+<span class="sd">    :return: True if input variable or array is uncertain</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_uncertain_check</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">uncertainties</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AffineScalarFunc</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">numpy</span><span class="o">.</span><span class="n">iterable</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>  <span class="c1"># isinstance needed for 0D arrays from squeeze</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># the argument of any is a generator object (using a list slows things down)</span>
+            <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">_uncertain_check</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">flat</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_uncertain_check</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_numeric</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenience function check if value is numeric</span>
+
+<span class="sd">    :param value: value to check</span>
+
+<span class="sd">    :return: True/False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="mi">0</span> <span class="o">+</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">omas_interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extrapolate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    If xp is not increasing, the results are numpy.interp1d nonsense.</span>
+<span class="sd">    This function wraps numpy.interp1d but makes sure that the x-coordinate sequence xp is increasing.</span>
+
+<span class="sd">    :param extrapolate: linear extrapolation beyond bounds</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xp</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">left</span><span class="o">=</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">right</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">extrapolate</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">period</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">left</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">x</span> <span class="o">&lt;</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="o">*</span> <span class="p">(</span><span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">y</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">period</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">x</span> <span class="o">&gt;</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">*</span> <span class="p">(</span><span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="n">yp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="n">xp</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]]),</span>
+                <span class="n">y</span><span class="p">,</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="n">omas_interp1d</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">+=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">interp</span><span class="o">.</span><span class="vm">__doc__</span>
+
+
+<span class="k">def</span> <span class="nf">json_dumper</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objects_encode</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dump objects to json format</span>
+
+<span class="sd">    :param obj: input ojbect</span>
+
+<span class="sd">    :param objects_encode: how to handle non-standard JSON objects</span>
+<span class="sd">        * True: encode numpy arrays, complex, and uncertain</span>
+<span class="sd">        * None: numpy arrays as lists, encode complex, and uncertain</span>
+<span class="sd">        * False: numpy arrays as lists, fail on complex, and uncertain</span>
+
+<span class="sd">    :return: json-compatible object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ODS</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">omas_data</span>
+
+    <span class="k">if</span> <span class="n">objects_encode</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="nb">map</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">generic</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_uncertain</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">__ufloat__</span><span class="o">=</span><span class="n">nominal_values</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">__ufloat_std__</span><span class="o">=</span><span class="n">std_devs</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nomv</span> <span class="o">=</span> <span class="n">nominal_values</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">__udarray_tolist_avg__</span><span class="o">=</span><span class="n">nomv</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                    <span class="n">__udarray_tolist_std__</span><span class="o">=</span><span class="n">std_devs</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">nomv</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+                    <span class="n">shape</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;complex&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">__ndarray_tolist_real__</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">real</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                    <span class="n">__ndarray_tolist_imag__</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+                    <span class="n">shape</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">objects_encode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">__ndarray_tolist__</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">range</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">generic</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="fm">__complex__</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">convert_int</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Try to convert value to integer and do nothing on error</span>
+
+<span class="sd">    :param value: value to try to convert</span>
+
+<span class="sd">    :return: value, possibly converted to int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">json_loader</span><span class="p">(</span><span class="n">object_pairs</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">null_to</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load json-objects generated by the json_dumper function</span>
+
+<span class="sd">    :param object_pairs: json-compatible [dict/list] object</span>
+
+<span class="sd">    :param cls: dicitonary class to use</span>
+
+<span class="sd">    :param null_to: convert null to user defined value (None by default)</span>
+
+<span class="sd">    :return: ojbect</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span>
+
+    <span class="n">object_pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="p">(</span><span class="n">convert_int</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">object_pairs</span><span class="p">))</span>
+
+    <span class="n">dct</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+    <span class="c1"># for ODSs we can use the setraw() method which does</span>
+    <span class="c1"># not peform any sort of check, nor tries to parse</span>
+    <span class="c1"># special OMAS syntaxes and is thus much faster</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">ODS</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">object_pairs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">null_to</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">null_to</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ODS</span><span class="p">):</span>
+                    <span class="n">dct</span><span class="o">.</span><span class="n">setraw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">cls</span><span class="p">())</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+                        <span class="n">dct</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">setraw</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">null_to</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+                            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">null_to</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># to handle objects_encode=None as used in OMAS</span>
+                    <span class="n">dct</span><span class="o">.</span><span class="n">setraw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dct</span><span class="o">.</span><span class="n">setraw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">object_pairs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">null_to</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">null_to</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ODS</span><span class="p">):</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+                        <span class="n">dct</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">null_to</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+                            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">null_to</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dct</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">if</span> <span class="s2">&quot;dtype&quot;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>  <span class="c1"># python2/3 compatibility</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;__ndarray_tolist__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ndarray_tolist__&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="s1">&#39;__ndarray_tolist_real__&#39;</span> <span class="ow">in</span> <span class="n">dct</span> <span class="ow">and</span> <span class="s1">&#39;__ndarray_tolist_imag__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ndarray_tolist_real__&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+            <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ndarray_tolist_imag__&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;__udarray_tolist_avg__&#39;</span> <span class="ow">in</span> <span class="n">dct</span> <span class="ow">and</span> <span class="s1">&#39;__udarray_tolist_std__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">uarray</span><span class="p">(</span>
+            <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__udarray_tolist_avg__&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]),</span>
+            <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__udarray_tolist_std__&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]),</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;__ufloat__&#39;</span> <span class="ow">in</span> <span class="n">dct</span> <span class="ow">and</span> <span class="s1">&#39;__ufloat_std__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ufloat</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ufloat__&#39;</span><span class="p">],</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ufloat_std__&#39;</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="s1">&#39;__ndarray__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">base64</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;__ndarray__&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="s1">&#39;__complex__&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">complex</span><span class="p">(</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;real&#39;</span><span class="p">],</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;imag&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dct</span>
+
+
+<span class="k">def</span> <span class="nf">recursive_glob</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">rootdir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search recursively for files matching a specified pattern within a rootdir</span>
+
+<span class="sd">    :param pattern: glob pattern to match</span>
+
+<span class="sd">    :param rootdir: top level directory to search under</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">fnmatch</span>
+
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">rootdir</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+            <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">matches</span>
+
+
+<span class="k">def</span> <span class="nf">remove_parentheses</span><span class="p">(</span><span class="n">inv</span><span class="p">,</span> <span class="n">replace_with</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    function used to remove/replace top-level matching parenthesis from a string</span>
+
+<span class="sd">    :param inv: input string</span>
+
+<span class="sd">    :param replace_with: string to replace matching parenthesis with</span>
+
+<span class="sd">    :return: input string without first set of matching parentheses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">inv</span><span class="p">:</span>
+        <span class="c1"># go one level deep</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">lp</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="c1"># go one level up</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">lp</span> <span class="o">+=</span> <span class="n">c</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">+=</span> <span class="n">replace_with</span>
+        <span class="c1"># zero depth: add character to output string</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="n">c</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">def</span> <span class="nf">closest_index</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="n">my_number</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a SORTED iterable (a numeric array or list of numbers) and a numeric scalar my_number,</span>
+<span class="sd">    find the index of the number in the list that is closest to my_number</span>
+
+<span class="sd">    :param my_list: Sorted iterable (list or array) to search for number closest to my_number</span>
+
+<span class="sd">    :param my_number: Number to get close to in my_list</span>
+
+<span class="sd">    :return: Index of my_list element closest to my_number</span>
+
+<span class="sd">    :note: If two numbers are equally close, returns the index of the smallest number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;closestIndex() requires an iterable as the first argument. Got instead: </span><span class="si">{:}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">my_list</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_numeric</span><span class="p">(</span><span class="n">my_number</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;closestIndex() requires a numeric scalar as the second argument. Got instead: </span><span class="si">{:}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">my_number</span><span class="p">))</span>
+
+    <span class="kn">import</span> <span class="nn">bisect</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">bisect</span><span class="o">.</span><span class="n">bisect_left</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="n">my_number</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">before</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">after</span> <span class="o">=</span> <span class="n">pos</span>
+    <span class="k">if</span> <span class="n">my_list</span><span class="p">[</span><span class="n">after</span><span class="p">]</span> <span class="o">-</span> <span class="n">my_number</span> <span class="o">&lt;</span> <span class="n">my_number</span> <span class="o">-</span> <span class="n">my_list</span><span class="p">[</span><span class="n">before</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pos</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">sanitize_version_number</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes common non-numerical characters from version numbers obtained from git tags, such as &#39;_rc&#39;, etc.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;-1&#39;</span> <span class="o">+</span> <span class="n">version</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_rc&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">version</span>
+
+
+<span class="k">def</span> <span class="nf">compare_version</span><span class="p">(</span><span class="n">version1</span><span class="p">,</span> <span class="n">version2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns 1 if version1 &gt; version2, -1 if version1 &lt; version2, or 0 if version1 == version2.&quot;&quot;&quot;</span>
+    <span class="n">version1</span> <span class="o">=</span> <span class="n">sanitize_version_number</span><span class="p">(</span><span class="n">version1</span><span class="p">)</span>
+    <span class="n">version2</span> <span class="o">=</span> <span class="n">sanitize_version_number</span><span class="p">(</span><span class="n">version2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;r&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\.0+)*$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">version1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">normalize</span><span class="p">(</span><span class="n">version2</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">version1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">normalize</span><span class="p">(</span><span class="n">version2</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">underline_last</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility function to underline the last part of a path</span>
+
+<span class="sd">    :param text: text to underline</span>
+
+<span class="sd">    :param offset: add offset to underling</span>
+
+<span class="sd">    :return: original text with underline on a new line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">]][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">underline</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;^&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">underline</span>
+
+
+<span class="k">def</span> <span class="nf">function_arguments</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">discard</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">asString</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the arguments that a function takes</span>
+
+<span class="sd">    :param f: function to inspect</span>
+
+<span class="sd">    :param discard: list of function arguments to discard</span>
+
+<span class="sd">    :param asString: concatenate arguments to a string</span>
+
+<span class="sd">    :return: tuple of four elements</span>
+
+<span class="sd">    * list of compulsory function arguments</span>
+
+<span class="sd">    * dictionary of function arguments that have defaults</span>
+
+<span class="sd">    * True/False if the function allows variable arguments</span>
+
+<span class="sd">    * True/False if the function allows keywords</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">inspect</span>
+
+    <span class="n">the_argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">the_keywords</span> <span class="o">=</span> <span class="n">the_argspec</span><span class="o">.</span><span class="n">varkw</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">kws</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">the_argspec</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">discard</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">arg</span> <span class="ow">in</span> <span class="n">tolist</span><span class="p">(</span><span class="n">discard</span><span class="p">)):</span>
+            <span class="k">continue</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">the_argspec</span><span class="o">.</span><span class="n">defaults</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">the_argspec</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">the_argspec</span><span class="o">.</span><span class="n">defaults</span><span class="p">):</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">the_argspec</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">the_argspec</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span>
+                <span class="n">kws</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">the_argspec</span><span class="o">.</span><span class="n">varargs</span><span class="p">:</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;*[],</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">the_keywords</span><span class="p">:</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;**</span><span class="si">{}</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">asString</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">string</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">,</span> <span class="n">kws</span><span class="p">,</span> <span class="n">the_argspec</span><span class="o">.</span><span class="n">varargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">the_keywords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">args_as_kw</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Move positional arguments to kw arguments</span>
+
+<span class="sd">    :param f: function</span>
+
+<span class="sd">    :param args: positional arguments</span>
+
+<span class="sd">    :param kw: keywords arguments</span>
+
+<span class="sd">    :return: tuple with positional arguments moved to keyword arguments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">astar</span><span class="p">,</span> <span class="n">kstar</span> <span class="o">=</span> <span class="n">function_arguments</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;self&#39;</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">:</span>
+            <span class="n">kw</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="n">n</span><span class="p">:],</span> <span class="n">kw</span>
+
+
+<span class="c1"># ----------------------------------------------</span>
+<span class="c1"># handling of OMAS json structures</span>
+<span class="c1"># ----------------------------------------------</span>
+<span class="c1"># IMAS structure info organized as flat entries</span>
+<span class="c1"># * IMAS syntax with `:` for list of structures</span>
+<span class="c1"># * each entry contains leafs attributes</span>
+<span class="n">_structures</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># IMAS structure info organized in hierarchical dictionaries</span>
+<span class="c1"># * list of structures as `:`</span>
+<span class="c1"># * the leafs are empty dictionaries</span>
+<span class="n">_structures_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># cache structures filenames</span>
+<span class="n">_structures_filenames</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># cache for structure()</span>
+<span class="n">_ods_structure_cache</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># similar to `_structures_dict` but for use in omas_info</span>
+<span class="n">_info_structures</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># dictionary that contains all the coordinates defined within the data dictionary</span>
+<span class="n">_coordinates</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># dictionary that contains all the times defined within the data dictionary</span>
+<span class="n">_times</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># dictionary that contains all the _global_quantities defined within the data dictionary</span>
+<span class="n">_global_quantities</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># extra structures that python modules using omas can define</span>
+<span class="c1"># by setting omas.omas_utils._extra_structures equal to a</span>
+<span class="c1"># dictionary with the definitions of the quantities that are</span>
+<span class="c1"># not (yet) available in IMAS. For example:</span>
+<span class="c1">#</span>
+<span class="c1"># omas.omas_utils._extra_structures = {</span>
+<span class="c1">#     &#39;equilibrium&#39;: {</span>
+<span class="c1">#         &#39;equilibrium.time_slice.:.profiles_1d.centroid.r_max&#39;: {</span>
+<span class="c1">#             &quot;full_path&quot;: &quot;equilibrium/time_slices(itime)/profiles_1d/centroid.r_max(:)&quot;,</span>
+<span class="c1">#             &quot;coordinates&quot;: [&#39;equilibrium.time_slice[:].profiles_1d.psi&#39;],</span>
+<span class="c1">#             &quot;data_type&quot;: &quot;FLT_1D&quot;,</span>
+<span class="c1">#             &quot;description&quot;: &quot;centroid r max&quot;,</span>
+<span class="c1">#             &quot;units&quot;: &#39;m&#39;,</span>
+<span class="c1">#             &quot;cocos_signal&quot;: &#39;?&#39;  # optional</span>
+<span class="c1">#         }</span>
+<span class="c1">#     }</span>
+<span class="c1"># }</span>
+<span class="n">_extra_structures</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="k">def</span> <span class="nf">list_structures</span><span class="p">(</span><span class="n">imas_version</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    list names of structures in imas version</span>
+
+<span class="sd">    :param imas_version: imas version</span>
+
+<span class="sd">    :return: list with names of structures in imas version</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">json_filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">imas_json_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span>
+    <span class="n">json_filenames</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">json_filenames</span><span class="p">)</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span> <span class="n">json_filenames</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">structures</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized IMAS version `</span><span class="si">%s</span><span class="s2">`. Possible options are:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">structures</span>
+
+
+<span class="k">def</span> <span class="nf">structures_filenames</span><span class="p">(</span><span class="n">imas_version</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maps structure names to json filenames</span>
+
+<span class="sd">    :param imas_version: imas version</span>
+
+<span class="sd">    :return: dictionary maps structure names to json filenames</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">imas_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_structures_filenames</span><span class="p">:</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">imas_json_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized IMAS version `</span><span class="si">%s</span><span class="s2">`. Possible options are:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span> <span class="n">paths</span><span class="p">)),</span> <span class="n">paths</span><span class="p">))</span>
+        <span class="n">_structures_filenames</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">structure</span><span class="p">:</span> <span class="n">structures</span><span class="p">[</span><span class="n">structure</span><span class="p">]</span> <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">structures</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">structure</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="n">_structures_filenames</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">load_structure</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    load omas structure from given json filename or IDS name</span>
+
+<span class="sd">    :param filename: full path to json file or IDS name</span>
+
+<span class="sd">    :param imas_version: imas version to load the data schema of (optional if filename is a full path)</span>
+
+<span class="sd">    :return: tuple with structure, hashing mapper, and ods</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">.omas_physics</span> <span class="kn">import</span> <span class="n">cocos_signals</span>
+
+    <span class="c1"># translate DS to filename</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">structures_filenames</span><span class="p">(</span><span class="n">imas_version</span><span class="p">)[</span><span class="n">filename</span><span class="p">]</span>
+
+    <span class="c1"># check if _structures and _structures_dict already have this in cache</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">_structures</span> <span class="ow">and</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">_structures_dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> <span class="n">_structures_dict</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">dump_string</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="c1"># load flat definitions from json file</span>
+        <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">dump_string</span><span class="p">)</span>
+
+        <span class="c1"># add _extra_structures definitions</span>
+        <span class="n">structure_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">structure_name</span> <span class="ow">in</span> <span class="n">_extra_structures</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_extra_structures</span><span class="p">[</span><span class="n">structure_name</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">]:</span>
+                    <span class="n">cs</span> <span class="o">=</span> <span class="n">_extra_structures</span><span class="p">[</span><span class="n">structure_name</span><span class="p">][</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;cocos_signal&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">][</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">_extra_structures</span><span class="p">[</span><span class="n">structure_name</span><span class="p">][</span><span class="n">item</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">cs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">cocos_signals</span><span class="p">[</span><span class="n">i2o</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span> <span class="o">=</span> <span class="n">cs</span>
+
+        <span class="c1"># generate hierarchical structure</span>
+        <span class="n">_structures_dict</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">]:</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">_structures_dict</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">i2o</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">step</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">h</span><span class="p">:</span>
+                    <span class="n">h</span><span class="p">[</span><span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">step</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">_structures</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> <span class="n">_structures_dict</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">imas_structure</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a dictionary with the IMAS structure given a location</span>
+
+<span class="sd">    :param imas_version: imas version</span>
+
+<span class="sd">    :param location: path in OMAS format</span>
+
+<span class="sd">    :return: dictionary as loaded by load_structure() at location</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">imas_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_ods_structure_cache</span><span class="p">:</span>
+        <span class="n">_ods_structure_cache</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">ulocation</span> <span class="o">=</span> <span class="n">o2u</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ulocation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_ods_structure_cache</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ulocation</span><span class="p">:</span>
+            <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">list_structures</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">imas_version</span><span class="p">)}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">p2l</span><span class="p">(</span><span class="n">ulocation</span><span class="p">)</span>
+            <span class="n">structure</span> <span class="o">=</span> <span class="n">load_structure</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">imas_version</span><span class="o">=</span><span class="n">imas_version</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">_ods_structure_cache</span><span class="p">[</span><span class="n">imas_version</span><span class="p">][</span><span class="n">ulocation</span><span class="p">]</span> <span class="o">=</span> <span class="n">structure</span>
+    <span class="k">return</span> <span class="n">_ods_structure_cache</span><span class="p">[</span><span class="n">imas_version</span><span class="p">][</span><span class="n">ulocation</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">omas_coordinates</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return list of coordinates</span>
+
+<span class="sd">    :param imas_version: IMAS version to look up</span>
+
+<span class="sd">    :return: list of strings with IMAS coordinates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># caching</span>
+    <span class="k">if</span> <span class="n">imas_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_coordinates</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">imas_json_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;_coordinates.json&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">_coordinates</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.omas_structure</span> <span class="kn">import</span> <span class="n">extract_coordinates</span>
+
+            <span class="n">_coordinates</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_coordinates</span><span class="p">(</span><span class="n">imas_version</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_coordinates</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">omas_times</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return list of times</span>
+
+<span class="sd">    :param imas_version: IMAS version to look up</span>
+
+<span class="sd">    :return: list of strings with IMAS times</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># caching</span>
+    <span class="k">if</span> <span class="n">imas_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_times</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">imas_json_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;_times.json&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">_times</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.omas_structure</span> <span class="kn">import</span> <span class="n">extract_times</span>
+
+            <span class="n">_times</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_times</span><span class="p">(</span><span class="n">imas_version</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_times</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">omas_global_quantities</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return list of times</span>
+
+<span class="sd">    :param imas_version: IMAS version to look up</span>
+
+<span class="sd">    :return: list of strings with IMAS times</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># caching</span>
+    <span class="k">if</span> <span class="n">imas_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_global_quantities</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">imas_json_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">imas_versions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;_global_quantities.json&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">_global_quantities</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.omas_structure</span> <span class="kn">import</span> <span class="n">extract_global_quantities</span>
+
+            <span class="n">_global_quantities</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_global_quantities</span><span class="p">(</span><span class="n">imas_version</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_global_quantities</span><span class="p">[</span><span class="n">imas_version</span><span class="p">]</span>
+
+
+<span class="c1"># only attempt cython if effective user owns this copy of omas</span>
+<span class="c1"># disabled for Windows: need to add check for file ownership under Windows</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">geteuid</span><span class="p">()</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">st_uid</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;omas_cython.pyx&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">globals</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pyximport</span>
+
+        <span class="n">pyximport</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">language_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">.omas_cython</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;omas cython failed: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_excp</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;omas_cython.pyx&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">globals</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">l2ut</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formats IMAS time lists [&#39;bla&#39;,0,&#39;time_slice&#39;,5,&#39;quantity&#39;] with universal ODS path &#39;bla.0.time_slice.:.quantity&#39;</span>
+
+<span class="sd">    :param path: list of strings and integers</span>
+
+<span class="sd">    :return: ODS path format with time lists in universal format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lpath</span> <span class="o">=</span> <span class="n">p2l</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">opath</span> <span class="o">=</span> <span class="n">l2o</span><span class="p">(</span><span class="n">lpath</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lpath</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">lpath</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">omas_info_node</span><span class="p">(</span><span class="n">l2u</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;coordinates&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">infoc</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">infoc</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.time&#39;</span><span class="p">):</span>
+                    <span class="n">lpath</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span>
+    <span class="k">return</span> <span class="n">l2o</span><span class="p">(</span><span class="n">lpath</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="omas_info">
+<a class="viewcode-back" href="../../code/omas.omas_info.html#omas.omas_info">[docs]</a>
+<span class="k">def</span> <span class="nf">omas_info</span><span class="p">(</span><span class="n">structures</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hide_obsolescent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cumulative_queries</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function returns an ods with the leaf nodes filled with their property informations</span>
+
+<span class="sd">    :param hide_obsolescent: hide obsolescent entries</span>
+
+<span class="sd">    :param structures: list with ids names or string with ids name of which to retrieve the info</span>
+<span class="sd">                       if None, then all structures are returned</span>
+
+<span class="sd">    :param cumulative_queries: return all IDSs that have been queried</span>
+
+<span class="sd">    :param imas_version: IMAS version to look up</span>
+
+<span class="sd">    :return: ods showcasing IDS structure</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">ODS</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">structures</span><span class="p">:</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">structures_filenames</span><span class="p">(</span><span class="n">imas_version</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">structures</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="p">[</span><span class="n">structures</span><span class="p">]</span>
+
+    <span class="c1"># caching based on imas version and obsolescence</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">hide_obsolescent</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_info_structures</span><span class="p">:</span>
+        <span class="n">_info_structures</span><span class="p">[</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">hide_obsolescent</span><span class="p">]</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">_info_structures</span><span class="p">[</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">hide_obsolescent</span><span class="p">]</span>
+
+    <span class="n">ods_out</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># generate ODS with info</span>
+    <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">structures</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">structure</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">load_structure</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">imas_version</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;.*_error_(index|lower|upper)$&#39;</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="k">continue</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]:</span>
+                    <span class="k">if</span> <span class="n">l2u</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;[:]&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+                        <span class="n">parent</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">hide_obsolescent</span> <span class="ow">and</span> <span class="n">omas_info_node</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lifecycle_status&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;obsolescent&#39;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">ods</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="n">ods_out</span><span class="p">[</span><span class="n">structure</span><span class="p">]</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="n">structure</span><span class="p">]</span>
+
+    <span class="c1"># cumulative queries</span>
+    <span class="k">if</span> <span class="n">cumulative_queries</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">structure</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods_out</span><span class="p">:</span>
+                <span class="n">ods_out</span><span class="p">[</span><span class="n">structure</span><span class="p">]</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="n">structure</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ods_out</span></div>
+
+
+
+<div class="viewcode-block" id="omas_info_node">
+<a class="viewcode-back" href="../../code/omas.omas_info_node.html#omas.omas_info_node">[docs]</a>
+<span class="k">def</span> <span class="nf">omas_info_node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return information about a given node</span>
+
+<span class="sd">    :param key: IMAS path</span>
+
+<span class="sd">    :param imas_version: IMAS version to look up</span>
+
+<span class="sd">    :return: dictionary with IMAS information (or an empty dictionary if the node is not found)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">load_structure</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">imas_version</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">o2i</span><span class="p">(</span><span class="n">key</span><span class="p">)])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">recursive_interpreter</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="n">interpret_method</span><span class="o">=</span><span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="n">dict_cls</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Traverse dictionaries and list to convert strings to int/float when appropriate</span>
+
+<span class="sd">    :param me: root of the dictionary to traverse</span>
+
+<span class="sd">    :param interpret_method: method used for conversion (ast.literal_eval by default)</span>
+
+<span class="sd">    :param dict_cls: dictionary class to use</span>
+
+<span class="sd">    :return: root of the dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">me</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">me</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">kid</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="n">dict_cls</span><span class="p">):</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span>
+                <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_cls</span><span class="p">()</span>
+                <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="n">recursive_interpreter</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="n">interpret_method</span><span class="o">=</span><span class="n">interpret_method</span><span class="p">,</span> <span class="n">dict_cls</span><span class="o">=</span><span class="n">dict_cls</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kid</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">kid</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__integer_&#39;</span><span class="p">):</span>
+                <span class="n">me</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;__integer_([0-9]+)__&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1&#39;</span><span class="p">,</span> <span class="n">kid</span><span class="p">))]</span> <span class="o">=</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpret_method</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">])</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">SyntaxError</span><span class="p">)</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39; &#39;</span> <span class="ow">in</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ |\t]+&#39;</span><span class="p">,</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()):</span>
+                        <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+                    <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">me</span>
+
+
+<span class="k">def</span> <span class="nf">recursive_encoder</span><span class="p">(</span><span class="n">me</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Traverse dictionaries and list to convert entries as appropriate</span>
+
+<span class="sd">    :param me: root of the dictionary to traverse</span>
+
+<span class="sd">    :return: root of the dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">me</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">me</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">kid</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+            <span class="n">recursive_encoder</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">repr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">])</span>
+        <span class="c1"># omas encoding of integer keys</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kid</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">me</span><span class="p">[</span><span class="s1">&#39;__integer_</span><span class="si">%d</span><span class="s1">__&#39;</span> <span class="o">%</span> <span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">me</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">me</span>
+
+
+<div class="viewcode-block" id="get_actor_io_ids">
+<a class="viewcode-back" href="../../code/omas.get_actor_io_ids.html#omas.get_actor_io_ids">[docs]</a>
+<span class="k">def</span> <span class="nf">get_actor_io_ids</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse IMAS Python actor script and return actor input and output IDSs</span>
+
+<span class="sd">    :param filename: filename of the IMAS Python actor</span>
+
+<span class="sd">    :return: tuple with list of input IDSs and output IDSs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">ast</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">actor</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">function_definitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">body</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">FunctionDef</span><span class="p">)]</span>
+    <span class="n">docstring</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_docstring</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">function_definitions</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">actor</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ids_in</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ids_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">docstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;codeparams&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:param result:&#39;</span><span class="p">):</span>
+            <span class="n">ids_out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)))</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:param &#39;</span><span class="p">):</span>
+            <span class="n">ids_in</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ids_in</span><span class="p">,</span> <span class="n">ids_out</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">UnittestCaseOmas</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for unittest.TestCase within OMAS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_testMethodName</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;~&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;~&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

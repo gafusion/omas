@@ -1,0 +1,41 @@
+﻿omas.mdsvalue
+=============
+
+.. currentmodule:: omas
+
+.. autoclass:: mdsvalue
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~mdsvalue.__init__
+      ~mdsvalue.clear
+      ~mdsvalue.copy
+      ~mdsvalue.data
+      ~mdsvalue.dim_of
+      ~mdsvalue.error
+      ~mdsvalue.error_dim_of
+      ~mdsvalue.fromkeys
+      ~mdsvalue.get
+      ~mdsvalue.items
+      ~mdsvalue.keys
+      ~mdsvalue.pop
+      ~mdsvalue.popitem
+      ~mdsvalue.raw
+      ~mdsvalue.setdefault
+      ~mdsvalue.size
+      ~mdsvalue.units
+      ~mdsvalue.units_dim_of
+      ~mdsvalue.update
+      ~mdsvalue.values
+   
+   
+
+   
+   
+   

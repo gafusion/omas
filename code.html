@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OMAS users API documentation &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="how.html">Concept</a></li>
+                <li><a href="auto_examples/index.html">Examples</a></li>
+                <li><a href="install.html">Installation</a></li>
+                <li><a href="iter.html">ITER</a></li>
+                <li><a href="omfit.html">OMFIT</a></li>
+                <li><a href="schema.html">Data schema</a></li>
+                <li><a href="#">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">OMAS users API documentation</a><ul>
+<li><a class="reference internal" href="#omas-data-class">OMAS data class</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#misc">Misc</a></li>
+<li><a class="reference internal" href="#modules">Modules</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="omas-users-api-documentation">
+<h1>OMAS users API documentation<a class="headerlink" href="#omas-users-api-documentation" title="Link to this heading">¶</a></h1>
+<p>Following are the classes/routines that are directly available to users within the <cite>omas</cite> library namespace</p>
+<section id="omas-data-class">
+<h2>OMAS data class<a class="headerlink" href="#omas-data-class" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.ODC.html#omas.ODC" title="omas.ODC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.ODC</span></code></a>(*args, **kw)</p></td>
+<td><p>OMAS Data Collection class</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.ODS.html#omas.ODS" title="omas.ODS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.ODS</span></code></a>([imas_version, consistency_check, ...])</p></td>
+<td><p>OMAS Data Structure class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.ODX.html#omas.ODX" title="omas.ODX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.ODX</span></code></a>([DS])</p></td>
+<td><p>OMAS data xarray class</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.browse_imas.html#omas.browse_imas" title="omas.browse_imas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.browse_imas</span></code></a>([user, pretty, quiet, ...])</p></td>
+<td><p>Browse available IMAS data (machine/pulse/run) for given user</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.cocos_transform.html#omas.cocos_transform" title="omas.cocos_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.cocos_transform</span></code></a>(cocosin_index, ...)</p></td>
+<td><p>Returns a dictionary with coefficients for how various quantities should get multiplied in order to go from cocosin_index to cocosout_index</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.codeparams_xml_load.html#omas.codeparams_xml_load" title="omas.codeparams_xml_load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.codeparams_xml_load</span></code></a>(f)</p></td>
+<td><p>Decorator function to be used around the omas_load_XXX methods to enable loading of code.parameters from an XML string</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.codeparams_xml_save.html#omas.codeparams_xml_save" title="omas.codeparams_xml_save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.codeparams_xml_save</span></code></a>(f)</p></td>
+<td><p>Decorator function to be used around the omas_save_XXX methods to enable saving of code.parameters as an XML string</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.define_cocos.html#omas.define_cocos" title="omas.define_cocos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.define_cocos</span></code></a>(cocos_ind)</p></td>
+<td><p>Returns dictionary with COCOS coefficients given a COCOS index</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.del_omas_s3.html#omas.del_omas_s3" title="omas.del_omas_s3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.del_omas_s3</span></code></a>(filename[, user])</p></td>
+<td><p>Delete an OMAS object from S3</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.different_ods.html#omas.different_ods" title="omas.different_ods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.different_ods</span></code></a>(ods1, ods2[, ...])</p></td>
+<td><p>Checks if two ODSs have any difference and returns the string with the cause of the different</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.get_actor_io_ids.html#omas.get_actor_io_ids" title="omas.get_actor_io_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.get_actor_io_ids</span></code></a>(filename)</p></td>
+<td><p>Parse IMAS Python actor script and return actor input and output IDSs</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.get_plot_scale_and_unit.html#omas.get_plot_scale_and_unit" title="omas.get_plot_scale_and_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.get_plot_scale_and_unit</span></code></a>(phys_quant[, ...])</p></td>
+<td><p>Returns normalizing scale for a physical quantity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.identify_cocos.html#omas.identify_cocos" title="omas.identify_cocos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.identify_cocos</span></code></a>(B0, Ip, q, psi[, ...])</p></td>
+<td><p>Utility function to identify COCOS coordinate system If multiple COCOS are possible, then all are returned.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.list_omas_s3.html#omas.list_omas_s3" title="omas.list_omas_s3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.list_omas_s3</span></code></a>([user])</p></td>
+<td><p>List S3 content</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_ascii.html#omas.load_omas_ascii" title="omas.load_omas_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_ascii</span></code></a>(filename[, machine, ...])</p></td>
+<td><p>Load an ODS from ASCII (follows IMAS ASCII_BACKEND convention)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_ds.html#omas.load_omas_ds" title="omas.load_omas_ds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_ds</span></code></a>(filename[, consistency_check])</p></td>
+<td><p>Load ODS from xarray dataset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_dx.html#omas.load_omas_dx" title="omas.load_omas_dx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_dx</span></code></a>(filename[, consistency_check])</p></td>
+<td><p>Load ODX from xarray dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_h5.html#omas.load_omas_h5" title="omas.load_omas_h5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_h5</span></code></a>(filename[, ...])</p></td>
+<td><p>Load ODS or ODC from HDF5</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_hdc.html#omas.load_omas_hdc" title="omas.load_omas_hdc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_hdc</span></code></a>(hdc[, consistency_check])</p></td>
+<td><p>Convert HDC data structure to OMAS</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_imas.html#omas.load_omas_imas" title="omas.load_omas_imas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_imas</span></code></a>([user, machine, pulse, ...])</p></td>
+<td><p>Load OMAS data from IMAS</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_iter_scenario.html#omas.load_omas_iter_scenario" title="omas.load_omas_iter_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_iter_scenario</span></code></a>(pulse[, run, ...])</p></td>
+<td><p>Load ODS from ITER IMAS scenario database</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_json.html#omas.load_omas_json" title="omas.load_omas_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_json</span></code></a>(filename[, ...])</p></td>
+<td><p>Load ODS or ODC from Json</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_machine.html#omas.load_omas_machine" title="omas.load_omas_machine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_machine</span></code></a>(machine, pulse[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_mongo.html#omas.load_omas_mongo" title="omas.load_omas_mongo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_mongo</span></code></a>(find, collection[, ...])</p></td>
+<td><p>Load an ODS from MongoDB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_nc.html#omas.load_omas_nc" title="omas.load_omas_nc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_nc</span></code></a>(filename[, ...])</p></td>
+<td><p>Load ODS or ODC from NetCDF file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.load_omas_pkl.html#omas.load_omas_pkl" title="omas.load_omas_pkl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_pkl</span></code></a>(filename[, ...])</p></td>
+<td><p>Load ODS or ODC from Python pickle</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.load_omas_s3.html#omas.load_omas_s3" title="omas.load_omas_s3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.load_omas_s3</span></code></a>(filename[, user, ...])</p></td>
+<td><p>Download an OMAS object from S3 and read it as pickle</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.machine_mapping_function.html#omas.machine_mapping_function" title="omas.machine_mapping_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.machine_mapping_function</span></code></a>(...)</p></td>
+<td><p>Decorator used to identify machine mapping functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.machine_mappings.html#omas.machine_mappings" title="omas.machine_mappings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.machine_mappings</span></code></a>(machine, branch[, ...])</p></td>
+<td><p>Function to load the json mapping files (local or remote) Allows for merging external mapping rules defined by users.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.machines.html#omas.machines" title="omas.machines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.machines</span></code></a>([machine, branch])</p></td>
+<td><p>Function to get machines that have their mappings defined This function takes care of remote transfer the needed files (both .json and .py) if a remote branch is requested</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.ods_2_odx.html#omas.ods_2_odx" title="omas.ods_2_odx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.ods_2_odx</span></code></a>(ods[, homogeneous])</p></td>
+<td><p>Map ODS to an ODX</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.ods_sample.html#omas.ods_sample" title="omas.ods_sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.ods_sample</span></code></a>([ntimes])</p></td>
+<td><p>Returns an ODS populated with all of the samples</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.odx_2_ods.html#omas.odx_2_ods" title="omas.odx_2_ods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.odx_2_ods</span></code></a>(odx[, consistency_check])</p></td>
+<td><p>Map ODX to ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.omas_environment.html#omas.omas_environment" title="omas.omas_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_environment</span></code></a>(ods[, cocosio, ...])</p></td>
+<td><p>Provides environment for data input/output to/from OMAS</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.omas_info.html#omas.omas_info" title="omas.omas_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_info</span></code></a>([structures, ...])</p></td>
+<td><p>This function returns an ods with the leaf nodes filled with their property informations</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.omas_info_node.html#omas.omas_info_node" title="omas.omas_info_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_info_node</span></code></a>(key[, imas_version])</p></td>
+<td><p>return information about a given node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.omas_testdir.html#omas.omas_testdir" title="omas.omas_testdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_testdir</span></code></a>([filename_topic])</p></td>
+<td><p>Return path to temporary folder where OMAS TEST file are saved/loaded</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.probe_endpoints.html#omas.probe_endpoints" title="omas.probe_endpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.probe_endpoints</span></code></a>(r0, z0, a0, l0, cocos)</p></td>
+<td><p>Transform r,z,a,l arrays commonly used to describe poloidal magnetic probes geometry to actual r,z coordinates of the end-points of the probes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.rcparams_environment.html#omas.rcparams_environment" title="omas.rcparams_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.rcparams_environment</span></code></a>(**kw)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_ascii.html#omas.save_omas_ascii" title="omas.save_omas_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_ascii</span></code></a>(ods, filename[, ...])</p></td>
+<td><p>Save an ODS to ASCII (follows IMAS ASCII_BACKEND convention)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.save_omas_ds.html#omas.save_omas_ds" title="omas.save_omas_ds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_ds</span></code></a>(ods, filename)</p></td>
+<td><p>Save an ODS to xarray dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_dx.html#omas.save_omas_dx" title="omas.save_omas_dx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_dx</span></code></a>(odx, filename)</p></td>
+<td><p>Save an ODX to xarray dataset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.save_omas_h5.html#omas.save_omas_h5" title="omas.save_omas_h5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_h5</span></code></a>(ods, filename)</p></td>
+<td><p>Save an ODS to HDF5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_hdc.html#omas.save_omas_hdc" title="omas.save_omas_hdc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_hdc</span></code></a>(ods)</p></td>
+<td><p>Convert OMAS data structure to HDC</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.save_omas_imas.html#omas.save_omas_imas" title="omas.save_omas_imas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_imas</span></code></a>(ods, *args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_json.html#omas.save_omas_json" title="omas.save_omas_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_json</span></code></a>(ods, filename[, ...])</p></td>
+<td><p>Save an ODS to Json</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.save_omas_mongo.html#omas.save_omas_mongo" title="omas.save_omas_mongo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_mongo</span></code></a>(ods, collection[, ...])</p></td>
+<td><p>Save an ODS to MongoDB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_nc.html#omas.save_omas_nc" title="omas.save_omas_nc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_nc</span></code></a>(ods, filename, **kw)</p></td>
+<td><p>Save an ODS to NetCDF file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.save_omas_pkl.html#omas.save_omas_pkl" title="omas.save_omas_pkl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_pkl</span></code></a>(ods, filename, **kw)</p></td>
+<td><p>Save ODS to Python pickle</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.save_omas_s3.html#omas.save_omas_s3" title="omas.save_omas_s3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.save_omas_s3</span></code></a>(ods, filename[, user, tmp_dir])</p></td>
+<td><p>Save an OMAS object to pickle and upload it to S3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.search_in_array_structure.html#omas.search_in_array_structure" title="omas.search_in_array_structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.search_in_array_structure</span></code></a>(ods, conditions)</p></td>
+<td><p>search for the index in an array structure that matches some conditions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.search_ion.html#omas.search_ion" title="omas.search_ion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.search_ion</span></code></a>(ion_ods[, label, Z, A, ...])</p></td>
+<td><p>utility function used to identify the ion number and element numbers given the ion label and or their Z and/or A</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.test_machine_mapping_functions.html#omas.test_machine_mapping_functions" title="omas.test_machine_mapping_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.test_machine_mapping_functions</span></code></a>(machine, ...)</p></td>
+<td><p>Function used to test python mapping functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_ascii.html#omas.through_omas_ascii" title="omas.through_omas_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_ascii</span></code></a>(ods[, method, ...])</p></td>
+<td><p>Test save and load OMAS ASCII</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.through_omas_ds.html#omas.through_omas_ds" title="omas.through_omas_ds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_ds</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load ODS via xarray file format</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_dx.html#omas.through_omas_dx" title="omas.through_omas_dx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_dx</span></code></a>(odx[, method])</p></td>
+<td><p>Test save and load OMAS data xarray via xarray file format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.through_omas_h5.html#omas.through_omas_h5" title="omas.through_omas_h5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_h5</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load OMAS HDF5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_hdc.html#omas.through_omas_hdc" title="omas.through_omas_hdc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_hdc</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load HDC</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.through_omas_imas.html#omas.through_omas_imas" title="omas.through_omas_imas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_imas</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load OMAS IMAS</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_json.html#omas.through_omas_json" title="omas.through_omas_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_json</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load OMAS Json</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.through_omas_mongo.html#omas.through_omas_mongo" title="omas.through_omas_mongo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_mongo</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load OMAS MongoDB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_nc.html#omas.through_omas_nc" title="omas.through_omas_nc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_nc</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load NetCDF</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.through_omas_pkl.html#omas.through_omas_pkl" title="omas.through_omas_pkl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_pkl</span></code></a>(ods)</p></td>
+<td><p>Test save and load Python pickle</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.through_omas_s3.html#omas.through_omas_s3" title="omas.through_omas_s3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.through_omas_s3</span></code></a>(ods[, method])</p></td>
+<td><p>Test save and load S3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.transform_current.html#omas.transform_current" title="omas.transform_current"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.transform_current</span></code></a>(rho[, JtoR, JparB, ...])</p></td>
+<td><p>Given &lt;Jt/R&gt; returns &lt;J.B&gt;, or vice versa Transformation obeys &lt;J.B&gt; = (1/f)*(&lt;B^2&gt;/&lt;1/R^2&gt;)*(&lt;Jt/R&gt; + dp/dpsi*(1 - f^2*&lt;1/R^2&gt;/&lt;B^2&gt;)) N.B.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.CodeParameters.html#omas.CodeParameters" title="omas.CodeParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.CodeParameters</span></code></a>([string])</p></td>
+<td><p>Class used to interface with IMAS code-parameters XML files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.OmasDynamicException.html#omas.OmasDynamicException" title="omas.OmasDynamicException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.OmasDynamicException</span></code></a></p></td>
+<td><p>Exception raised when dynamic data fetching fails</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.__version__.html#omas.__version__" title="omas.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.__version__</span></code></a></p></td>
+<td><p>str(object='') -&gt; str str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.imas_versions.html#omas.imas_versions" title="omas.imas_versions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.imas_versions</span></code></a></p></td>
+<td><p>Dictionary with list of IMAS version and their sub-folder name in the imas_json_dir</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.latest_imas_version.html#omas.latest_imas_version" title="omas.latest_imas_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.latest_imas_version</span></code></a></p></td>
+<td><p>str(object='') -&gt; str str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.latexit.html#omas.latexit" title="omas.latexit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.latexit</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.machine_expression_types.html#omas.machine_expression_types" title="omas.machine_expression_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.machine_expression_types</span></code></a></p></td>
+<td><p>Built-in mutable sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.mdstree.html#omas.mdstree" title="omas.mdstree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.mdstree</span></code></a>(server, treename, pulse)</p></td>
+<td><p>Class to handle the structure of an MDSplus tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.mdsvalue.html#omas.mdsvalue" title="omas.mdsvalue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.mdsvalue</span></code></a>(server, treename, pulse, TDI)</p></td>
+<td><p>Execute MDSplus TDI functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.omas_dir.html#omas.omas_dir" title="omas.omas_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_dir</span></code></a></p></td>
+<td><p>str(object='') -&gt; str str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.omas_rcparams.html#omas.omas_rcparams" title="omas.omas_rcparams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_rcparams</span></code></a></p></td>
+<td><p>dictionary of parameters that control how OMAS operates</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.omas_physics.html#module-omas.omas_physics" title="omas.omas_physics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_physics</span></code></a></p></td>
+<td><p>physics-based ODS methods and utilities</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.omas_plot.html#module-omas.omas_plot" title="omas.omas_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_plot</span></code></a></p></td>
+<td><p>plotting ODS methods and utilities</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="code/omas.omas_sample.html#module-omas.omas_sample" title="omas.omas_sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_sample</span></code></a></p></td>
+<td><p>sample ODS methods and utilities</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="code/omas.omas_structure.html#module-omas.omas_structure" title="omas.omas_structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omas.omas_structure</span></code></a></p></td>
+<td><p>functions for handling IMAS XML data dictionaries</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

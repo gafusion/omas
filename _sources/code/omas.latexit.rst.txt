@@ -1,0 +1,6 @@
+﻿omas.latexit
+============
+
+.. currentmodule:: omas
+
+.. autodata:: latexit

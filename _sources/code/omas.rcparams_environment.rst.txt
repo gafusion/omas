@@ -1,0 +1,6 @@
+﻿omas.rcparams\_environment
+==========================
+
+.. currentmodule:: omas
+
+.. autofunction:: rcparams_environment

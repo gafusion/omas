@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.utilities.omas_mds &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../../how.html">Concept</a></li>
+                <li><a href="../../../auto_examples/index.html">Examples</a></li>
+                <li><a href="../../../install.html">Installation</a></li>
+                <li><a href="../../../iter.html">ITER</a></li>
+                <li><a href="../../../omfit.html">OMFIT</a></li>
+                <li><a href="../../../schema.html">Data schema</a></li>
+                <li><a href="../../../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for omas.utilities.omas_mds</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">omas.omas_utils</span> <span class="kn">import</span> <span class="n">printd</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;mdstree&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mdsvalue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_pulse_id&#39;</span>
+<span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_pulse_id</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">run_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts the pulse number into a MDSplus run_id</span>
+
+<span class="sd">    :param pulse: Regular shot number</span>
+
+<span class="sd">    :param run_id: Extension that contains the pulse number. E.g.&quot;01&quot;. Should be of type string or None</span>
+
+<span class="sd">    :return: Pulse id, i.e. shot number with run_id extension if available</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">run_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pulse</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span> <span class="o">+</span> <span class="n">run_id</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_for_pulse_id</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">options_with_defaults</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if the tree has a run_id associated with it and returns the pulse id</span>
+
+<span class="sd">    :param pulse: Regular shot number</span>
+
+<span class="sd">    :param treename: Name of tree being loaded</span>
+
+<span class="sd">    :param options_with_defaults: Dictionary with options for the current machine</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;EFIT&#39;</span> <span class="ow">in</span> <span class="n">treename</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_pulse_id</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">options_with_defaults</span><span class="p">[</span><span class="s2">&quot;EFIT_run_id&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pulse</span>
+
+
+<span class="n">_mds_connection_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># ===================</span>
+<span class="c1"># MDSplus functions</span>
+<span class="c1"># ===================</span>
+<span class="k">def</span> <span class="nf">tunnel_mds</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resolve MDSplus server</span>
+<span class="sd">    NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDSplus server.</span>
+
+<span class="sd">    :param server: MDSplus server address:port</span>
+
+<span class="sd">    :param treename: treename (in case treename affects server to be used)</span>
+
+<span class="sd">    :return: string with MDSplus server and port to be used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">omfit_classes.omfit_mds</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ModuleNotFoundError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">server</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">server0</span> <span class="o">=</span> <span class="n">omfit_classes</span><span class="o">.</span><span class="n">omfit_mds</span><span class="o">.</span><span class="n">translate_MDSserver</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">)</span>
+        <span class="n">tunneled_server</span> <span class="o">=</span> <span class="n">omfit_classes</span><span class="o">.</span><span class="n">omfit_mds</span><span class="o">.</span><span class="n">tunneled_MDSserver</span><span class="p">(</span><span class="n">server0</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tunneled_server</span>
+
+    <span class="k">return</span> <span class="n">server</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+
+
+
+
+
+<div class="viewcode-block" id="mdsvalue">
+<a class="viewcode-back" href="../../../code/omas.mdsvalue.html#omas.mdsvalue">[docs]</a>
+<span class="k">class</span> <span class="nc">mdsvalue</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute MDSplus TDI functions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="mdsvalue.__init__">
+<a class="viewcode-back" href="../../../code/omas.mdsvalue.html#omas.mdsvalue.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">TDI</span><span class="p">,</span> <span class="n">old_MDS_server</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">treename</span> <span class="o">=</span> <span class="n">treename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span> <span class="o">=</span> <span class="n">pulse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TDI</span> <span class="o">=</span> <span class="n">TDI</span>
+        <span class="k">if</span> <span class="s1">&#39;nstx&#39;</span> <span class="ow">in</span> <span class="n">server</span><span class="p">:</span>
+            <span class="n">old_MDS_server</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># handle the case that server is just the machine name</span>
+            <span class="n">machine_mappings_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;../&quot;</span><span class="p">,</span> <span class="s2">&quot;machine_mappings&quot;</span><span class="p">)</span>
+            <span class="n">machine_mappings_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">machine_mappings_path</span><span class="p">,</span> <span class="n">server</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">machine_mappings_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">machine_file</span><span class="p">:</span>
+                    <span class="n">server</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">machine_file</span><span class="p">)[</span><span class="s2">&quot;__mdsserver__&quot;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="c1"># hanlde case where server is actually a URL</span>
+            <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">server</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">tunnel_mds</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">)</span>
+        <span class="n">old_servers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;skylark.pppl.gov:8500&#39;</span><span class="p">,</span> <span class="s1">&#39;skylark.pppl.gov:8501&#39;</span><span class="p">,</span> <span class="s1">&#39;skylark.pppl.gov:8000&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">server</span> <span class="ow">in</span> <span class="n">old_servers</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="ow">in</span> <span class="n">old_servers</span><span class="p">:</span>
+            <span class="n">old_MDS_server</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_MDS_server</span> <span class="o">=</span> <span class="n">old_MDS_server</span></div>
+
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dim_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dim_of(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">units</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;units(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">error_dim_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error_dim_of(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">units_dim_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;units_dim_of(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;size(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TDI</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">TDI</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch data from MDSplus with connection caching</span>
+
+<span class="sd">        :param TDI: string, list or dict of strings</span>
+<span class="sd">            MDSplus TDI expression(s) (overrides the one passed when the object was instantiated)</span>
+
+<span class="sd">        :return: result of TDI expression, or dictionary with results of TDI expressions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">time</span>
+
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="kn">import</span> <span class="nn">MDSplus</span>
+
+            <span class="k">def</span> <span class="nf">mdsk</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Translate strings to MDSplus bytes</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">TDI</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">TDI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TDI</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out_results</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="c1"># try connecting and re-try on fail</span>
+                <span class="k">for</span> <span class="n">fallback</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_mds_connection_cache</span><span class="p">:</span>
+                        <span class="n">conn</span> <span class="o">=</span> <span class="n">MDSplus</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">conn</span><span class="o">.</span><span class="n">openTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)</span>
+                        <span class="n">_mds_connection_cache</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)]</span> <span class="o">=</span> <span class="n">conn</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">conn</span> <span class="o">=</span> <span class="n">_mds_connection_cache</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)]</span>
+                        <span class="k">break</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_mds_connection_cache</span><span class="p">:</span>
+                            <span class="k">del</span> <span class="n">_mds_connection_cache</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">)]</span>
+                        <span class="k">if</span> <span class="n">fallback</span><span class="p">:</span>
+                            <span class="k">raise</span>
+
+                <span class="c1"># list of TDI expressions</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">TDI</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                    <span class="n">TDI</span> <span class="o">=</span> <span class="p">{</span><span class="n">expr</span><span class="p">:</span> <span class="n">expr</span> <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">TDI</span><span class="p">}</span>
+
+                <span class="c1"># dictionary of TDI expressions</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">TDI</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="c1"># old versions of MDSplus server do not support getMany</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">old_MDS_server</span><span class="p">:</span>
+                        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="k">for</span> <span class="n">tdi</span> <span class="ow">in</span> <span class="n">TDI</span><span class="p">:</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">results</span><span class="p">[</span><span class="n">tdi</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdsvalue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">treename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse</span><span class="p">,</span> <span class="n">TDI</span><span class="p">[</span><span class="n">tdi</span><span class="p">])</span><span class="o">.</span><span class="n">raw</span><span class="p">()</span>
+                            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                                <span class="n">results</span><span class="p">[</span><span class="n">tdi</span><span class="p">]</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_excp</span><span class="p">))</span>
+                        <span class="n">out_results</span> <span class="o">=</span> <span class="n">results</span>
+
+                    <span class="c1"># more recent MDSplus server</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">conns</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getMany</span><span class="p">()</span>
+                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">TDI</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                            <span class="n">conns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+                        <span class="n">res</span> <span class="o">=</span> <span class="n">conns</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">TDI</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">MDSplus</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">mdsk</span><span class="p">(</span><span class="n">name</span><span class="p">)][</span><span class="n">mdsk</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)])</span>
+                            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">MDSplus</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)][</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)])</span>
+                                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                                    <span class="k">try</span><span class="p">:</span>
+                                        <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">MDSplus</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">mdsk</span><span class="p">(</span><span class="n">name</span><span class="p">)][</span><span class="n">mdsk</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)]))</span>
+                                    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                                        <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">MDSplus</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)][</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)]))</span>
+                        <span class="n">out_results</span> <span class="o">=</span> <span class="n">results</span>
+
+                <span class="c1"># single TDI expression</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out_results</span> <span class="o">=</span> <span class="n">MDSplus</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">TDI</span><span class="p">))</span>
+
+                <span class="c1"># return values</span>
+                <span class="k">return</span> <span class="n">out_results</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                <span class="n">txt</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="s1">&#39;treename&#39;</span><span class="p">,</span> <span class="s1">&#39;pulse&#39;</span><span class="p">]:</span>
+                    <span class="n">txt</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39; - </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="n">txt</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39; - TDI: </span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">_excp</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_excp</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">))</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">out_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out_results</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">out_results</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="ne">Exception</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">out_results</span><span class="p">):</span>
+                        <span class="n">printd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">all NO</span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s1">3.3f</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">out_results</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="ne">Exception</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">out_results</span><span class="p">):</span>
+                        <span class="n">printd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">some OK/NO</span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s1">3.3f</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">printd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">all OK</span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s1">3.3f</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">printd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">OK</span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s1">3.3f</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">printd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">TDI</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">NO</span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s1">3.3f</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mdstree">
+<a class="viewcode-back" href="../../../code/omas.mdstree.html#omas.mdstree">[docs]</a>
+<span class="k">class</span> <span class="nc">mdstree</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to handle the structure of an MDSplus tree.</span>
+<span class="sd">    Nodes in this tree are mdsvalue objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="mdstree.__init__">
+<a class="viewcode-back" href="../../../code/omas.mdstree.html#omas.mdstree.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">pulse</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">TDI</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">mdsvalue</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="sa">rf</span><span class="s1">&#39;getnci(&quot;***&quot;,&quot;FULLPATH&quot;)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">raw</span><span class="p">())[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">TDI</span> <span class="o">=</span> <span class="n">TDI</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="n">TDI</span> <span class="o">=</span> <span class="n">TDI</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">TDI</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;::TOP&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">mdsvalue</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">h</span><span class="p">:</span>
+                <span class="n">h</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">mdsvalue</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">treename</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">TDI</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">h</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">TDI</span> <span class="o">=</span> <span class="n">TDI</span></div>
+</div>
+
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

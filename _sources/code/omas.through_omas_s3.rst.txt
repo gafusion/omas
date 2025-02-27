@@ -1,0 +1,6 @@
+﻿omas.through\_omas\_s3
+======================
+
+.. currentmodule:: omas
+
+.. autofunction:: through_omas_s3

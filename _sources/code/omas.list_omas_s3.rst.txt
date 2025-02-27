@@ -1,0 +1,6 @@
+﻿omas.list\_omas\_s3
+===================
+
+.. currentmodule:: omas
+
+.. autofunction:: list_omas_s3

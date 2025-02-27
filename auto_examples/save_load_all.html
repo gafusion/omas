@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Test all save/load systems &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Test all save/load systems</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-save-load-all-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="test-all-save-load-systems">
+<span id="sphx-glr-auto-examples-save-load-all-py"></span><h1>Test all save/load systems<a class="headerlink" href="#test-all-save-load-systems" title="Link to this heading">¶</a></h1>
+<p>Save and load a sample ODS through the different OMAS save formats and check that information does not get lost or corrupted.
+A final report summarizes if some storage systems combinations have errors.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">omas.omas_utils</span> <span class="kn">import</span> <span class="n">printd</span>
+
+<span class="n">_tests</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;nc&#39;</span><span class="p">,</span> <span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="s1">&#39;h5&#39;</span><span class="p">,</span> <span class="s1">&#39;imas&#39;</span><span class="p">,</span> <span class="s1">&#39;hdc&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">through_omas_suite</span><span class="p">(</span><span class="n">ods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">test_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">do_raise</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param ods: omas structure to test. If None this is set to ods_sample</span>
+
+<span class="sd">    :param test_type: None tests all suite, otherwise choose among %s</span>
+
+<span class="sd">    :param do_raise: raise error if something goes wrong</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">ods</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>  <span class="c1"># make a copy to make sure throuhs do not alter original ODS</span>
+
+    <span class="k">if</span> <span class="n">test_type</span> <span class="ow">in</span> <span class="n">_tests</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OMAS_DEBUG_TOPIC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_type</span>
+        <span class="n">ods1</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;through_omas_&#39;</span> <span class="o">+</span> <span class="n">test_type</span><span class="p">](</span><span class="n">ods</span><span class="p">)</span>
+        <span class="n">difference</span> <span class="o">=</span> <span class="n">ods</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ods1</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;OMAS data got saved and loaded correctly&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diff:&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">difference</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OMAS_DEBUG_TOPIC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+        <span class="n">printd</span><span class="p">(</span><span class="s1">&#39;OMAS is using IMAS data structure version `</span><span class="si">%s</span><span class="s1">` as default&#39;</span> <span class="o">%</span> <span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">],</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">_tests</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">_tests</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">k1</span><span class="p">,</span> <span class="n">t1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_tests</span><span class="p">):</span>
+            <span class="n">failed1</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ods1</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;through_omas_&#39;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">](</span><span class="n">ods</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                <span class="n">failed1</span> <span class="o">=</span> <span class="n">_excp</span>
+                <span class="k">if</span> <span class="n">do_raise</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">for</span> <span class="n">k2</span><span class="p">,</span> <span class="n">t2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_tests</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">failed1</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">failed1</span>
+                    <span class="n">ods2</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;through_omas_&#39;</span> <span class="o">+</span> <span class="n">t2</span><span class="p">](</span><span class="n">ods1</span><span class="p">)</span>
+
+                    <span class="n">different</span> <span class="o">=</span> <span class="n">ods1</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ods2</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">different</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FROM </span><span class="si">%s</span><span class="s1"> TO </span><span class="si">%s</span><span class="s1"> : OK&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">t2</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+                        <span class="n">results</span><span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FROM </span><span class="si">%s</span><span class="s1"> TO </span><span class="si">%s</span><span class="s1"> : NO --&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">t2</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">different</span><span class="p">))</span>
+                        <span class="n">results</span><span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">_excp</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FROM </span><span class="si">%s</span><span class="s1"> TO </span><span class="si">%s</span><span class="s1"> : NO --&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">t2</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_excp</span><span class="p">)))</span>
+                    <span class="k">if</span> <span class="n">do_raise</span><span class="p">:</span>
+                        <span class="k">raise</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+
+
+<span class="n">through_omas_suite</span><span class="p">(</span><span class="n">ods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">test_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">do_raise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the above example <cite>consistency_check = True</cite> result in the following error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>LookupError: Not a valid IMAS 3.18.0 location: `equilibrium.time_slice.:.does_not_exist`
+                                                                         ^^^^^^^^^^^^^^
+Did you mean: [&#39;profiles_2d&#39;, &#39;ggd&#39;, &#39;boundary&#39;, &#39;profiles_1d&#39;, &#39;constraints&#39;, &#39;global_quantities&#39;, &#39;coordinate_system&#39;, &#39;boundary_separatrix&#39;, &#39;time&#39;, &#39;convergence&#39;]
+</pre></div>
+</div>
+<p>If successful, the test should output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>====================
+FROM  pkl  TO  pkl  : OK
+FROM  pkl  TO  json : OK
+FROM  pkl  TO   nc  : OK
+FROM  pkl  TO   s3  : OK
+FROM  pkl  TO  imas : OK
+FROM  json TO  pkl  : OK
+FROM  json TO  json : OK
+FROM  json TO   nc  : OK
+FROM  json TO   s3  : OK
+FROM  json TO  imas : OK
+FROM   nc  TO  pkl  : OK
+FROM   nc  TO  json : OK
+FROM   nc  TO   nc  : OK
+FROM   nc  TO   s3  : OK
+FROM   nc  TO  imas : OK
+FROM   s3  TO  pkl  : OK
+FROM   s3  TO  json : OK
+FROM   s3  TO   nc  : OK
+FROM   s3  TO   s3  : OK
+FROM   s3  TO  imas : OK
+FROM  imas TO  pkl  : OK
+FROM  imas TO  json : OK
+FROM  imas TO   nc  : OK
+FROM  imas TO   s3  : OK
+FROM  imas TO  imas : OK
+====================
+[[1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]]
+====================
+</pre></div>
+</div>
+<p>If for example <cite>imas</cite> is not installed on the system, the test output will look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>====================
+FROM  pkl  TO  pkl  : OK
+FROM  pkl  TO  json : OK
+FROM  pkl  TO   nc  : OK
+FROM  pkl  TO   s3  : OK
+FROM  pkl  TO  imas : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  json TO  pkl  : OK
+FROM  json TO  json : OK
+FROM  json TO   nc  : OK
+FROM  json TO   s3  : OK
+FROM  json TO  imas : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM   nc  TO  pkl  : OK
+FROM   nc  TO  json : OK
+FROM   nc  TO   nc  : OK
+FROM   nc  TO   s3  : OK
+FROM   nc  TO  imas : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM   s3  TO  pkl  : OK
+FROM   s3  TO  json : OK
+FROM   s3  TO   nc  : OK
+FROM   s3  TO   s3  : OK
+FROM   s3  TO  imas : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  imas TO  pkl  : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  imas TO  json : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  imas TO   nc  : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  imas TO   s3  : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+FROM  imas TO  imas : NO --&gt; ImportError(&#39;No module named imas&#39;,)
+====================
+[[1 1 1 1 0]
+ [1 1 1 1 0]
+ [1 1 1 1 0]
+ [1 1 1 1 0]
+ [0 0 0 0 0]]
+====================
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-save-load-all-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/a6869be4638208b34c4df1b0be1d8041/save_load_all.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">save_load_all.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/9a1176c5f8a481a307e2532d4de6a512/save_load_all.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">save_load_all.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

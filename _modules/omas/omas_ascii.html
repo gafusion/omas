@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.omas_ascii &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../how.html">Concept</a></li>
+                <li><a href="../../auto_examples/index.html">Examples</a></li>
+                <li><a href="../../install.html">Installation</a></li>
+                <li><a href="../../iter.html">ITER</a></li>
+                <li><a href="../../omfit.html">OMFIT</a></li>
+                <li><a href="../../schema.html">Data schema</a></li>
+                <li><a href="../../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for omas.omas_ascii</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;save/load from ASCII routines</span>
+
+<span class="sd">-------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">.omas_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.omas_core</span> <span class="kn">import</span> <span class="n">ODS</span><span class="p">,</span> <span class="n">ODC</span><span class="p">,</span> <span class="n">force_imas_type</span>
+
+
+<span class="k">def</span> <span class="nf">identify_imas_type</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bytes_</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">str_</span><span class="p">)):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;50 (CHAR_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">),))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">floating</span><span class="p">)):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;52 (DOUBLE_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">integer</span><span class="p">)):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;51 (INTEGER_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;str&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;50 (CHAR_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;float&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;52 (DOUBLE_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;int&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;51 (INTEGER_DATA)&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; is not a valid IMAS data type&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ODS</span><span class="p">):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; is not a valid IMAS data type&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dtype</span>
+
+
+<span class="n">imas_nan</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9e40</span>
+
+
+<span class="k">def</span> <span class="nf">imas_fmt</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">floating</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%5.16e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">imas_nan</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%5.16e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">imas_eval</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tmp</span> <span class="o">==</span> <span class="n">imas_nan</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+
+
+<span class="k">def</span> <span class="nf">imas_ascii_key_sorter</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">ods_has_location</span><span class="p">):</span>
+    <span class="n">new_order</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;ids_properties.homogeneous_time&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ids_properties.version_put.data_dictionary&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ids_properties.version_put.access_layer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ids_properties.version_put.access_layer_language&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">ods_has_location</span><span class="p">:</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">new_order</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">keys</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">keys</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">keys</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">keys</span>
+
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># save and load OMAS to ASCII</span>
+<span class="c1"># ---------------------------</span>
+<div class="viewcode-block" id="save_omas_ascii">
+<a class="viewcode-back" href="../../code/omas.save_omas_ascii.html#omas.save_omas_ascii">[docs]</a>
+<span class="k">def</span> <span class="nf">save_omas_ascii</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pulse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save an ODS to ASCII (follows IMAS ASCII_BACKEND convention)</span>
+
+<span class="sd">    :param ods: OMAS data set</span>
+
+<span class="sd">    :param filename: filename or file descriptor to save to</span>
+<span class="sd">                     use `None` to save IDSs to multiple files based on machine, pulse, run</span>
+
+<span class="sd">    :param machine: machine name to build filename for saving IDSs to multiple files</span>
+
+<span class="sd">    :param pulse: pulse number to build filename for saving IDSs to multiple files</span>
+
+<span class="sd">    :param run: run number to build filename for saving IDSs to multiple files</span>
+
+<span class="sd">    :param dir: directory where to save multiple IDSs files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">machine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pulse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">run</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">machine</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pulse</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">run</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ds</span><span class="si">}</span><span class="s1">.ids&#39;</span>
+            <span class="k">if</span> <span class="nb">dir</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">filename</span>
+            <span class="n">save_omas_ascii</span><span class="p">(</span><span class="n">ods</span><span class="p">[</span><span class="n">ds</span><span class="p">],</span> <span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pulse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">elif</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">machine</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pulse</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">run</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Either `filename` or `machine, pulse, run` can be specified&#39;</span><span class="p">)</span>
+
+    <span class="n">printd</span><span class="p">(</span><span class="s1">&#39;Saving OMAS data to ASCII: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+    <span class="n">ods</span><span class="o">.</span><span class="n">satisfy_imas_requirements</span><span class="p">()</span>
+
+    <span class="n">ascii_string</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">imas_ascii_key_sorter</span><span class="p">(</span><span class="n">ods</span><span class="o">.</span><span class="n">pretty_paths</span><span class="p">(</span><span class="n">include_structures</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">ods</span><span class="o">.</span><span class="n">location</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="n">path</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ODS</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">omas_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">force_imas_type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">identify_imas_type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">ods</span><span class="o">.</span><span class="n">location</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ods</span><span class="o">.</span><span class="n">location</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;	type: &#39;</span> <span class="o">+</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;	dim: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;	size: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]))))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ODS</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imas_fmt</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">imas_fmt</span><span class="p">,</span> <span class="n">value</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">T</span><span class="p">:</span>
+                <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">imas_fmt</span><span class="p">,</span> <span class="n">row</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> not implemented ASCII support for number of dimensions &gt;2&#39;</span><span class="p">)</span>
+
+        <span class="n">ascii_string</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+    <span class="n">ascii_string</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ascii_string</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ascii_string</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ascii_string</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_omas_ascii">
+<a class="viewcode-back" href="../../code/omas.load_omas_ascii.html#omas.load_omas_ascii">[docs]</a>
+<span class="k">def</span> <span class="nf">load_omas_ascii</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pulse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">]</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load an ODS from ASCII (follows IMAS ASCII_BACKEND convention)</span>
+
+<span class="sd">    :param filename: filename or file descriptor to load from</span>
+<span class="sd">                     use `None` to load IDSs from multiple files based on machine, pulse, run</span>
+
+<span class="sd">    :param machine: machine name to build filename for loading IDSs from multiple files</span>
+
+<span class="sd">    :param pulse: pulse number to build filename for loading IDSs from multiple files</span>
+
+<span class="sd">    :param run: run number to build filename for loading IDSs from multiple files</span>
+
+<span class="sd">    :param dir: directory from where to load multiple IDSs files</span>
+
+<span class="sd">    :param consistency_check: verify that data is consistent with IMAS schema</span>
+
+<span class="sd">    :param imas_version: imas version to use for consistency check</span>
+
+<span class="sd">    :return: OMAS data set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">machine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pulse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">run</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">machine</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pulse</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">run</span><span class="si">}</span><span class="s1">_*.ids&#39;</span>
+        <span class="k">if</span> <span class="nb">dir</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">filename</span>
+        <span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">(</span><span class="n">consistency_check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">imas_version</span><span class="o">=</span><span class="n">omas_rcparams</span><span class="p">[</span><span class="s1">&#39;default_imas_version&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">ods</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_omas_ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pulse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ods</span>
+
+    <span class="k">elif</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">machine</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pulse</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">run</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Either `filename` or `machine, pulse, run` can be specified&#39;</span><span class="p">)</span>
+
+    <span class="n">printd</span><span class="p">(</span><span class="s1">&#39;Loading OMAS data from ASCCI: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">ascii_string</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ascii_string</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">value_lines</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ascii_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">tokens</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">path</span><span class="p">}</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">value_lines</span><span class="p">:</span>
+            <span class="n">token</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">value_lines</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">value_lines</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;	type: &#39;</span><span class="p">):</span>
+            <span class="n">token</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;type:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;	dim: &#39;</span><span class="p">):</span>
+            <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;dim:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;	size: &#39;</span><span class="p">):</span>
+            <span class="n">token</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;size:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+        <span class="c1"># scalar INT or FLOAT</span>
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value_lines</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># string</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;50 (CHAR_DATA)&#39;</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value_lines</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># 1D arrays</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value_lines</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># 2D arrays</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value_lines</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># ODS</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value_lines</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">(</span><span class="n">imas_version</span><span class="o">=</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="n">consistency_check</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span>
+        <span class="c1"># scalar INT or FLOAT</span>
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">imas_eval</span><span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># string</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;50 (CHAR_DATA)&#39;</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 1D arrays</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">imas_eval</span><span class="p">,</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+        <span class="c1"># 2D arrays</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="s1">&#39;size&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">imas_eval</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+        <span class="c1"># ODS</span>
+        <span class="k">elif</span> <span class="s1">&#39;type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">token</span> <span class="ow">and</span> <span class="s1">&#39;dim&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">ods</span></div>
+
+
+
+<div class="viewcode-block" id="through_omas_ascii">
+<a class="viewcode-back" href="../../code/omas.through_omas_ascii.html#omas.through_omas_ascii">[docs]</a>
+<span class="k">def</span> <span class="nf">through_omas_ascii</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;class_method&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">one_or_many_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;many&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test save and load OMAS ASCII</span>
+
+<span class="sd">    :param ods: ods</span>
+
+<span class="sd">    :return: ods</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">one_or_many_files</span> <span class="o">==</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">omas_testdir</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;test.ids&#39;</span>
+        <span class="n">machine</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pulse</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;ascii&#39;</span>
+        <span class="n">machine</span> <span class="o">=</span> <span class="s1">&#39;TEST&#39;</span>
+        <span class="n">pulse</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">omas_testdir</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">ods</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>  <span class="c1"># make a copy to make sure save does not alter entering ODS</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span><span class="p">:</span>
+        <span class="n">save_omas_ascii</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+        <span class="n">ods1</span> <span class="o">=</span> <span class="n">load_omas_ascii</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+        <span class="n">ods1</span> <span class="o">=</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">pulse</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ods1</span></div>
+
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

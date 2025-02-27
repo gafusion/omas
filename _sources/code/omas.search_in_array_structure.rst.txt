@@ -1,0 +1,6 @@
+﻿omas.search\_in\_array\_structure
+=================================
+
+.. currentmodule:: omas
+
+.. autofunction:: search_in_array_structure

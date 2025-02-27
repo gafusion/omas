@@ -1,0 +1,6 @@
+﻿omas.save\_omas\_s3
+===================
+
+.. currentmodule:: omas
+
+.. autofunction:: save_omas_s3

@@ -1,0 +1,6 @@
+﻿omas.identify\_cocos
+====================
+
+.. currentmodule:: omas
+
+.. autofunction:: identify_cocos

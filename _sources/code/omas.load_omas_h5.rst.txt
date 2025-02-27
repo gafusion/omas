@@ -1,0 +1,6 @@
+﻿omas.load\_omas\_h5
+===================
+
+.. currentmodule:: omas
+
+.. autofunction:: load_omas_h5

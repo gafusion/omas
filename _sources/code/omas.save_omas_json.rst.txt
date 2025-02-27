@@ -1,0 +1,6 @@
+﻿omas.save\_omas\_json
+=====================
+
+.. currentmodule:: omas
+
+.. autofunction:: save_omas_json

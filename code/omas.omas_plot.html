@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>omas.omas_plot &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">omas.omas_plot</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="module-omas.omas_plot">
+<span id="omas-omas-plot"></span><h1>omas.omas_plot<a class="headerlink" href="#module-omas.omas_plot" title="Link to this heading">¶</a></h1>
+<p>plotting ODS methods and utilities</p>
+<hr class="docutils" />
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_to__ALL__</span></code>(f)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_to__ODS__</span></code>(f)</p></td>
+<td><p>anything wrapped here will be available as a ODS method with name '<a href="#id1"><span class="problematic" id="id2">plot_</span></a>'+f.__name__</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bolometer_overlay</span></code>(ods[, ax, ...])</p></td>
+<td><p>Overlays bolometer chords</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cached_add_subplot</span></code>(fig, ax_cache, *args, **kw)</p></td>
+<td><p>Utility function that works like matplotlib add_subplot but reuses axes if these were already used before</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">charge_exchange_overlay</span></code>(ods[, ax, which_pos])</p></td>
+<td><p>Overlays Charge Exchange Recombination (CER) spectroscopy channel locations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_currents_summary</span></code>(ods[, ...])</p></td>
+<td><p>Plot currents in core_profiles_1d</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_pressures</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot pressures in <cite>ods['core_profiles']['profiles_1d'][time_index]</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_profiles_summary</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot densities and temperature profiles for electrons and all ion species as per <cite>ods['core_profiles']['profiles_1d'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_sources_summary</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot sources for electrons and all ion species</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">core_transport_fluxes</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ec_launchers_CX</span></code>(ods[, time_index, time, ax, ...])</p></td>
+<td><p>Plot EC launchers in poloidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ec_launchers_CX_topview</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot EC launchers in toroidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_CX</span></code>(ods[, time_index, time, ...])</p></td>
+<td><p>Plot equilibrium cross-section as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_CX_topview</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot equilibrium toroidal cross-section as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_quality</span></code>(ods[, fig])</p></td>
+<td><p>Plot equilibrium convergence error and total Chi-squared as a function of time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">equilibrium_summary</span></code>(ods[, time_index, time, ...])</p></td>
+<td><p>Plot equilibrium cross-section and P, q, P', FF' profiles as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gas_arrow</span></code>(ods, r, z[, direction, r2, z2, ...])</p></td>
+<td><p>Draws an arrow pointing in from the gas inlet</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gas_filter</span></code>(label, which_gas)</p></td>
+<td><p>Utility: processes the mask / which_gas selector for gas_injection_overlay</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gas_injection_overlay</span></code>(ods[, ax, ...])</p></td>
+<td><p>Plots overlays of gas injectors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">geo_type_lookup</span></code>(geometry_type, subsys[, ...])</p></td>
+<td><p>Given a geometry type code</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_channel_count</span></code>(ods, hw_sys[, check_loc, ...])</p></td>
+<td><p>Utility function for CX hardware overlays.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_time</span></code>(ods, time_location, time_index, time)</p></td>
+<td><p>Given either time_index or time returns both time_index and time consistent with one another NOTE: time takes precedence over time_index</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imas_units_to_latex</span></code>(unit)</p></td>
+<td><p>converts units to a nice latex format for plot labels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interferometer_overlay</span></code>(ods[, ax])</p></td>
+<td><p>Plots overlays of interferometer chords.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">label_shifter</span></code>(n, kw)</p></td>
+<td><p>Interprets label shift instructions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">langmuir_probes_overlay</span></code>(ods[, ax, ...])</p></td>
+<td><p>Overlays Langmuir probe locations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lh_antennas_CX</span></code>(ods[, time_index, time, ax, ...])</p></td>
+<td><p>Plot LH antenna position in poloidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lh_antennas_CX_topview</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot LH antenna in toroidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_bpol_probe_data</span></code>(ods[, ...])</p></td>
+<td><p>plot bpol_probe time traces and equilibrium constraints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_diamagnetic_flux_data</span></code>(ods[, ...])</p></td>
+<td><p>plot diamagnetic_flux time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_flux_loop_data</span></code>(ods[, ...])</p></td>
+<td><p>plot flux_loop time traces and equilibrium constraints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_ip_data</span></code>(ods[, ...])</p></td>
+<td><p>plot ip time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnetics_overlay</span></code>(ods[, ax, show_flux_loop, ...])</p></td>
+<td><p>Plot magnetics on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbi_summary</span></code>(ods[, ax])</p></td>
+<td><p>Plot summary of NBI power time traces</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ods_time_plot</span></code>(ods_plot_function, ods, ...)</p></td>
+<td><p>Utility function for generating time dependent plots</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">overlay</span></code>(ods[, ax, allow_autoscale, ...])</p></td>
+<td><p>Plots overlays of hardware/diagnostic locations on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">padded_extension</span></code>(values_in, n, fill_value)</p></td>
+<td><p>Forces values_in to be at least length n by appending copies of fill_value as needed :param values_in: scalar or 1D iterable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pellets_trajectory_CX</span></code>(ods[, time_index, ...])</p></td>
+<td><p>Plot pellets trajectory in poloidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pellets_trajectory_CX_topview</span></code>(ods[, ...])</p></td>
+<td><p>Plot  pellet trajectory in toroidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pf_active_data</span></code>(ods[, ...])</p></td>
+<td><p>plot pf_active time traces</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pf_active_overlay</span></code>(ods[, ax])</p></td>
+<td><p>Plots overlays of active PF coils.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_1d_equilbrium_quantity</span></code>(ax, x, y, ...[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">position_control_overlay</span></code>(ods[, ax, t, ...])</p></td>
+<td><p>Overlays position_control data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulse_schedule_overlay</span></code>(ods[, ax, t])</p></td>
+<td><p>Overlays relevant data from pulse_schedule, such as position control</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantity</span></code>(ods, key[, yname, xname, yunits, ...])</p></td>
+<td><p>Provides convenient way to plot 1D quantities in ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code>(ods[, fig, quantity])</p></td>
+<td><p>Plot summary time traces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">text_alignment_setup</span></code>(n[, default_ha, default_va])</p></td>
+<td><p>Interprets text alignment instructions :param n: int     Number of labels that need alignment instructions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_b_field_tor_vacuum_r_data</span></code>(ods[, ...])</p></td>
+<td><p>plot b_field_tor_vacuum_r time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">thomson_scattering_overlay</span></code>(ods[, ax])</p></td>
+<td><p>Overlays Thomson channel locations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uband</span></code>(x, y[, ax, fill_kw])</p></td>
+<td><p>Given arguments x,y where either or both have uncertainties, plot x,y using pyplt.plot of the nominal values and surround it with with a shaded error band using matplotlib's fill_between and/or fill_betweenx.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uerrorbar</span></code>(x, y[, ax])</p></td>
+<td><p>Given arguments y or x,y where x and/or y have uncertainties, feed the appropriate terms to matplotlib's errorbar function.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_subplot</span></code>(fig, *args, **kw)</p></td>
+<td><p>Same as add_subplot, but if the figure already has a subplot with key (<em>args</em>, <em>kwargs</em>) then it will simply make that subplot current and return it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wall_overlay</span></code>(ods[, ax, component_index, ...])</p></td>
+<td><p>Plot walls on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">waves_beam_CX</span></code>(ods[, time_index, time, ax])</p></td>
+<td><p>Plot waves beams in poloidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">waves_beam_profile</span></code>(ods[, time_index, time, ...])</p></td>
+<td><p>Plot 1d profiles of waves beams given quantity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">waves_beam_summary</span></code>(ods[, time_index, time, fig])</p></td>
+<td><p>Plot waves beam summary: CX, power_density, and current_parallel_density</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Uband</span></code>(line, bands)</p></td>
+<td><p>This class wraps the line and PollyCollection(s) associated with a banded errorbar plot for use in the uband function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

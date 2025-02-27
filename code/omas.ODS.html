@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>omas.ODS &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../how.html">Concept</a></li>
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li><a href="../iter.html">ITER</a></li>
+                <li><a href="../omfit.html">OMFIT</a></li>
+                <li><a href="../schema.html">Data schema</a></li>
+                <li><a href="../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">omas.ODS</a><ul>
+<li><a class="reference internal" href="#omas.ODS"><code class="docutils literal notranslate"><span class="pre">ODS</span></code></a><ul>
+<li><a class="reference internal" href="#omas.ODS.__init__"><code class="docutils literal notranslate"><span class="pre">ODS.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="omas-ods">
+<h1>omas.ODS<a class="headerlink" href="#omas-ods" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="omas.ODS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">omas.</span></span><span class="sig-name descname"><span class="pre">ODS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imas_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'3.41.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consistency_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cocos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cocosio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordsio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unitsio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omas/omas_core.html#ODS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#omas.ODS" title="Link to this definition">¶</a></dt>
+<dd><p>OMAS Data Structure class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="omas.ODS.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imas_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'3.41.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consistency_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cocos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cocosio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordsio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unitsio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omas/omas_core.html#ODS.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#omas.ODS.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imas_version</strong> – IMAS version to use as a constrain for the nodes names</p></li>
+<li><p><strong>consistency_check</strong> – whether to enforce consistency with IMAS schema</p></li>
+<li><p><strong>cocos</strong> – internal COCOS representation (this can only be set when the object is created)</p></li>
+<li><p><strong>cocosio</strong> – COCOS representation of the data that is read/written from/to the ODS</p></li>
+<li><p><strong>coordsio</strong> – ODS with coordinates to use for the data that is read/written from/to the ODS</p></li>
+<li><p><strong>unitsio</strong> – ODS will return data with units if True</p></li>
+<li><p><strong>uncertainio</strong> – ODS will return data with uncertainties if True</p></li>
+<li><p><strong>dynamic</strong> – internal keyword used for dynamic data loading</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#omas.ODS.__init__" title="omas.ODS.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([imas_version, consistency_check, ...])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param imas_version<span class="colon">:</span></dt>
+<dd class="field-odd"><p>IMAS version to use as a constrain for the nodes names</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code>()</p></td>
+<td><p>remove data from a branch</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">codeparams2dict</span></code>()</p></td>
+<td><p>Convert code.parameters to a CodeParameters dictionary object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">codeparams2xml</span></code>()</p></td>
+<td><p>Convert code.parameters to a XML string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coordinates</span></code>([key])</p></td>
+<td><p>return dictionary with coordinates of a given ODS location</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>copy.deepcopy of current ODS object</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_attrs_from</span></code>(ods)</p></td>
+<td><p>copy omas_ods_attrs attributes from input ods</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset</span></code>([homogeneous])</p></td>
+<td><p>Return xarray.Dataset representation of a whole ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">diff</span></code>(ods[, ignore_type, ignore_empty, ...])</p></td>
+<td><p>return differences between this ODS and the one passed</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">diff_attrs</span></code>(ods[, attrs, verbose])</p></td>
+<td><p>Checks if two ODSs have any difference in their attributes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">document</span></code>([what])</p></td>
+<td><p>RST documentation of the ODs content</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flat</span></code>(**kw)</p></td>
+<td><p>Flat dictionary representation of the data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_structure</span></code>(structure[, depth])</p></td>
+<td><p>Generate an ODS starting from a hierarchical structure made of dictionaries and lists</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">full_paths</span></code>(**kw)</p></td>
+<td><p>Traverse the ods and return paths from root of ODS that have data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">full_pretty_paths</span></code>(**kw)</p></td>
+<td><p>Traverse the ods and return paths from root of ODS that have data formatted nicely</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(key[, default])</p></td>
+<td><p>Check if key is present and if not return default value without creating value in omas data structure</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getraw</span></code>(key)</p></td>
+<td><p>Method to access data stored in ODS with no processing of the key, and it is thus faster than the ODS.__getitem__(key) Effectively behaves like a pure Python dictionary/list __getitem__.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">homogeneous_time</span></code>([key, default])</p></td>
+<td><p>Dynamically evaluate whether time is homogeneous or not NOTE: this method does not read ods['ids_properties.homogeneous_time'] instead it uses the time info to figure it out</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">info</span></code>(location)</p></td>
+<td><p>return node info</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">items</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code>([dynamic])</p></td>
+<td><p>Return list of keys</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_coordinates</span></code>([absolute_location])</p></td>
+<td><p>return dictionary with coordinates in a given ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code>(*args, **kw)</p></td>
+<td><p>Load OMAS data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code>(*args, **kw)</p></td>
+<td><p>Dynamically load OMAS data for seekable storage formats</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">paths</span></code>([return_empty_leaves, ...])</p></td>
+<td><p>Traverse the ods and return paths to its leaves</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_add_phi_to_equilbrium_profiles_1d_ods</span></code>(...)</p></td>
+<td><p>Adds <cite>profiles_1d.phi</cite> to an ODS using q :param ods: input ods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_add_rho_pol_norm_to_equilbrium_profiles_1d_ods</span></code>(...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_check_iter_scenario_requirements</span></code>()</p></td>
+<td><p>Check that the current ODS satisfies the ITER scenario database requirements as defined in <a class="reference external" href="https://confluence.iter.org/x/kQqOE">https://confluence.iter.org/x/kQqOE</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_consistent_times</span></code>([attempt_fix, ...])</p></td>
+<td><p>Assign .time and .ids_properties.homogeneous_time info for top-level structures since these are required for writing an IDS to IMAS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_profiles_consistent</span></code>([update, ...])</p></td>
+<td><p>Calls all core_profiles consistency functions including</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_profiles_currents</span></code>([time_index, ...])</p></td>
+<td><p>This function sets currents in ods['core_profiles']['profiles_1d'][time_index]</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_profiles_densities</span></code>([update, ...])</p></td>
+<td><p>Density, density_thermal, and density_fast for electrons and ions are filled and are self-consistent</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_profiles_pressures</span></code>([update])</p></td>
+<td><p>Calculates individual ions pressures</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_profiles_zeff</span></code>([update, ...])</p></td>
+<td><p>calculates effective charge</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_core_sources_j_parallel_sum</span></code>([time_index])</p></td>
+<td><p>ods function used to sum all j_parallel contributions from core_sources (j_actuator)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_current_from_eq</span></code>(time_index)</p></td>
+<td><p>This function sets the currents in ods['core_profiles']['profiles_1d'][time_index] using ods['equilibrium']['time_slice'][time_index]['profiles_1d']['j_tor']</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_derive_equilibrium_profiles_2d_quantity</span></code>(...)</p></td>
+<td><p>This function derives values of empty fields in prpfiles_2d from other parameters in the equilibrium ods Currently only the magnetic field components are supported</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_consistent</span></code>()</p></td>
+<td><p>Calculate missing derived quantities for equilibrium IDS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_form_constraints</span></code>([...])</p></td>
+<td><p>generate equilibrium constraints from experimental data in ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_ggd_to_rectangular</span></code>([...])</p></td>
+<td><p>Convert GGD data to profiles 2D</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_profiles_2d_map</span></code>(...[, ...])</p></td>
+<td><p>This routines creates interpolators for quantities and stores them in the cache for future use.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_stored_energy</span></code>([update])</p></td>
+<td><p>Calculate MHD stored energy from equilibrium pressure and volume</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_equilibrium_transpose_RZ</span></code>([flip_dims])</p></td>
+<td><p>Transpose 2D grid values for RZ grids under equilibrium.time_slice.:.profiles_2d.:.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_imas_info</span></code>()</p></td>
+<td><p>add ids_properties.version_put.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_magnetics_sanitize</span></code>([remove_bpol_probe])</p></td>
+<td><p>Take data in legacy magnetics.bpol_probe and store it in current magnetics.b_field_pol_probe and magnetics.b_field_tor_probe</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_remap_flux_coordinates</span></code>(time_index, ...)</p></td>
+<td><p>Maps from one magnetic coordinate system to another.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_resolve_equilibrium_profiles_2d_grid_index</span></code>(...)</p></td>
+<td><p>Convenience function to identify which of profiles_2d[:].grid_type.index matches the specified grid_identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_consistent_global_quantities</span></code>([...])</p></td>
+<td><p>Generate summary.global_quantities from global_quantities of other IDSs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_currents</span></code>([time_index, update])</p></td>
+<td><p>Calculatess plasma currents from core_profiles for each time slice and stores them in the summary ods</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_global_quantities</span></code>([update])</p></td>
+<td><p>Calculates global quantities for each time slice and stores them in the summary ods:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_greenwald</span></code>([update])</p></td>
+<td><p>Calculates Greenwald Fraction for each time slice and stores them in the summary ods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_heating_power</span></code>([update])</p></td>
+<td><p>Integrate power densities to the total and heating and current drive systems and fills summary.global_quantities</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_lineaverage_density</span></code>([...])</p></td>
+<td><p>Calculates line-average electron density for each time slice and stores them in the summary ods</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_taue</span></code>([thermal, update])</p></td>
+<td><p>Calculates Energy confinement time estimated from the IPB98(y,2) scaling for each time slice and stores them in the summary ods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_summary_thermal_stored_energy</span></code>([update])</p></td>
+<td><p>Calculates the stored energy based on the contents of core_profiles for all time-slices</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">physics_wall_add</span></code>([machine])</p></td>
+<td><p>Add wall information to the ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bolometer_overlay</span></code>([ax, ...])</p></td>
+<td><p>Overlays bolometer chords</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_charge_exchange_overlay</span></code>([ax, which_pos])</p></td>
+<td><p>Overlays Charge Exchange Recombination (CER) spectroscopy channel locations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_core_profiles_currents_summary</span></code>([...])</p></td>
+<td><p>Plot currents in core_profiles_1d</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_core_profiles_pressures</span></code>([time_index, ...])</p></td>
+<td><p>Plot pressures in <cite>ods['core_profiles']['profiles_1d'][time_index]</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_core_profiles_summary</span></code>([time_index, ...])</p></td>
+<td><p>Plot densities and temperature profiles for electrons and all ion species as per <cite>ods['core_profiles']['profiles_1d'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_core_sources_summary</span></code>([time_index, ...])</p></td>
+<td><p>Plot sources for electrons and all ion species</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_core_transport_fluxes</span></code>([time_index, ...])</p></td>
+<td><p>Plot densities and temperature profiles for all species, rotation profile, TGYRO fluxes and fluxes from power_balance per STEP state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ec_launchers_CX</span></code>([time_index, time, ax, ...])</p></td>
+<td><p>Plot EC launchers in poloidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ec_launchers_CX_topview</span></code>([time_index, ...])</p></td>
+<td><p>Plot EC launchers in toroidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_equilibrium_CX</span></code>([time_index, time, ...])</p></td>
+<td><p>Plot equilibrium cross-section as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_equilibrium_CX_topview</span></code>([time_index, ...])</p></td>
+<td><p>Plot equilibrium toroidal cross-section as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_equilibrium_quality</span></code>([fig])</p></td>
+<td><p>Plot equilibrium convergence error and total Chi-squared as a function of time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_equilibrium_summary</span></code>([time_index, time, ...])</p></td>
+<td><p>Plot equilibrium cross-section and P, q, P', FF' profiles as per <cite>ods['equilibrium']['time_slice'][time_index]</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_gas_injection_overlay</span></code>([ax, ...])</p></td>
+<td><p>Plots overlays of gas injectors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_interferometer_overlay</span></code>([ax])</p></td>
+<td><p>Plots overlays of interferometer chords.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_langmuir_probes_overlay</span></code>([ax, ...])</p></td>
+<td><p>Overlays Langmuir probe locations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_lh_antennas_CX</span></code>([time_index, time, ax, ...])</p></td>
+<td><p>Plot LH antenna position in poloidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_lh_antennas_CX_topview</span></code>([time_index, ...])</p></td>
+<td><p>Plot LH antenna in toroidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_magnetics_bpol_probe_data</span></code>([...])</p></td>
+<td><p>plot bpol_probe time traces and equilibrium constraints</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_magnetics_diamagnetic_flux_data</span></code>([...])</p></td>
+<td><p>plot diamagnetic_flux time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_magnetics_flux_loop_data</span></code>([...])</p></td>
+<td><p>plot flux_loop time traces and equilibrium constraints</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_magnetics_ip_data</span></code>([...])</p></td>
+<td><p>plot ip time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_magnetics_overlay</span></code>([ax, show_flux_loop, ...])</p></td>
+<td><p>Plot magnetics on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_nbi_summary</span></code>([ax])</p></td>
+<td><p>Plot summary of NBI power time traces</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_overlay</span></code>([ax, allow_autoscale, ...])</p></td>
+<td><p>Plots overlays of hardware/diagnostic locations on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pellets_trajectory_CX</span></code>([time_index, ...])</p></td>
+<td><p>Plot pellets trajectory in poloidal cross-section</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pellets_trajectory_CX_topview</span></code>([...])</p></td>
+<td><p>Plot  pellet trajectory in toroidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pf_active_data</span></code>([...])</p></td>
+<td><p>plot pf_active time traces</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pf_active_overlay</span></code>([ax])</p></td>
+<td><p>Plots overlays of active PF coils.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_position_control_overlay</span></code>([ax, t, ...])</p></td>
+<td><p>Overlays position_control data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pulse_schedule_overlay</span></code>([ax, t])</p></td>
+<td><p>Overlays relevant data from pulse_schedule, such as position control</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_quantity</span></code>(key[, yname, xname, yunits, ...])</p></td>
+<td><p>Provides convenient way to plot 1D quantities in ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_summary</span></code>([fig, quantity])</p></td>
+<td><p>Plot summary time traces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_tf_b_field_tor_vacuum_r_data</span></code>([...])</p></td>
+<td><p>plot b_field_tor_vacuum_r time trace and equilibrium constraint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_thomson_scattering_overlay</span></code>([ax])</p></td>
+<td><p>Overlays Thomson channel locations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_wall_overlay</span></code>([ax, component_index, ...])</p></td>
+<td><p>Plot walls on a tokamak cross section plot</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_waves_beam_CX</span></code>([time_index, time, ax])</p></td>
+<td><p>Plot waves beams in poloidal cross-section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_waves_beam_profile</span></code>([time_index, time, ...])</p></td>
+<td><p>Plot 1d profiles of waves beams given quantity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_waves_beam_summary</span></code>([time_index, time, fig])</p></td>
+<td><p>Plot waves beam summary: CX, power_density, and current_parallel_density</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code>(k[,d])</p></td>
+<td><p>If key is not found, d is returned if given, otherwise KeyError is raised.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">popitem</span></code>()</p></td>
+<td><p>as a 2-tuple; but raise KeyError if D is empty.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pretty_paths</span></code>(**kw)</p></td>
+<td><p>Traverse the ods and return paths that have data formatted nicely</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune</span></code>()</p></td>
+<td><p>Prune ODS branches that are leafless</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">relax</span></code>(other[, alpha])</p></td>
+<td><p>Blend floating point data in this ODS with corresponding floating point in other ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">same_init_ods</span></code>([cls])</p></td>
+<td><p>Initializes a new ODS with the same attributes as this one</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code>([ntimes, homogeneous_time])</p></td>
+<td><p>Populates the ods with sample data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_bolometer</span></code>([nc])</p></td>
+<td><p>Adds fake bolometer chord locations This method operates in place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_charge_exchange</span></code>([nc])</p></td>
+<td><p>Adds fake CER channel locations This method operates in-place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_core_profiles</span></code>([time_index, ...])</p></td>
+<td><p>Add sample core_profiles data This method operates in in-place.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_core_sources</span></code>([time_index])</p></td>
+<td><p>Add sample core_profiles data This method operates in in-place.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_core_transport</span></code>([time_index])</p></td>
+<td><p>Add sample core_profiles data This method operates in in-place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_dataset_description</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_ec_launchers</span></code>([ngyros, ntimes])</p></td>
+<td><p>Adds fake ec launchers data to support testing This method operates in in-place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_equilibrium</span></code>([time_index, ...])</p></td>
+<td><p>Add sample equilibrium data This method operates in in-place.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_gas_injection</span></code>()</p></td>
+<td><p>Adds fake gas injection locations This method operates in place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_ic_antennas</span></code>()</p></td>
+<td><p>Add sample ic_antennas data This method operates in in-place.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_interferometer</span></code>()</p></td>
+<td><p>Adds fake interferometer locations This method operates in place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_langmuir_probes</span></code>()</p></td>
+<td><p>Adds fake Langmuir probe locations This method operates in place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_magnetics</span></code>()</p></td>
+<td><p>Adds fake magnetic probe locations This method operates in place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_nbi</span></code>([nunits, ntimes])</p></td>
+<td><p>Adds fake nbi data to support testing This method operates in in-place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_pf_active</span></code>([nc_weird, nc_undefined])</p></td>
+<td><p>Adds fake active PF coil locations This method operates in in-place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_pulse_schedule</span></code>()</p></td>
+<td><p>Adds fake control target data to support testing This method operates in in-place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_summary</span></code>()</p></td>
+<td><p>Add sample core_profiles data This method operates in in-place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_thomson_scattering</span></code>([nc])</p></td>
+<td><p>Adds fake Thomson scattering channel locations This method operates in place</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_wall</span></code>()</p></td>
+<td><p>Adds fake wall data This method operates in in-place</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">satisfy_imas_requirements</span></code>([attempt_fix, ...])</p></td>
+<td><p>Assign .time and .ids_properties.homogeneous_time info for top-level structures since these are required for writing an IDS to IMAS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code>(*args, **kw)</p></td>
+<td><p>Save OMAS data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_paths</span></code>(search_pattern[, n, ...])</p></td>
+<td><p>Find ODS locations that match a pattern</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_time_array</span></code>(key, time_index, value)</p></td>
+<td><p>Convenience function for setting time dependent arrays</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setdefault</span></code>(key[, value])</p></td>
+<td><p>Set value if key is not present</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setraw</span></code>(key, value)</p></td>
+<td><p>Method to assign data to an ODS with no processing of the key, and it is thus faster than the ODS.__setitem__(key, value) Effectively behaves like a pure Python dictionary/list __setitem__.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">slice_at_time</span></code>([time, time_index])</p></td>
+<td><p>method for selecting a time slice from an time-dependent ODS (NOTE: this method operates in place)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code>([key, extra_info])</p></td>
+<td><p>Return the time information for a given ODS location</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_index</span></code>(time[, key])</p></td>
+<td><p>Return the index of the closest time-slice for a given ODS location</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_odx</span></code>([homogeneous])</p></td>
+<td><p>Generate a ODX from current ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code>(ods2)</p></td>
+<td><p>Adds ods2's key-values pairs to the ods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">values</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray</span></code>(key)</p></td>
+<td><p>Returns data of an ODS location and correspondnig coordinates as an xarray dataset Note that the Dataset and the DataArrays have their attributes set with the ODSs structure info</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">active_dynamic</span></code></p></td>
+<td><p>property that point to dynamic_ODS object and says if it is active</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cocos</span></code></p></td>
+<td><p>property that tells in what COCOS format the data is stored internally of the ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cocosio</span></code></p></td>
+<td><p>property that tells in what COCOS format the data will be input/output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">consistency_check</span></code></p></td>
+<td><p>property that returns whether consistency with IMAS schema is enabled or not</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coordsio</span></code></p></td>
+<td><p>property that tells in what COCOS format the data will be input/output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic</span></code></p></td>
+<td><p>property that point to dynamic_ODS object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imas_version</span></code></p></td>
+<td><p>Property that returns the imas_version of this ods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">location</span></code></p></td>
+<td><p>Property which returns instance of parent ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">structure</span></code></p></td>
+<td><p>Property which returns structure of current ODS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">top</span></code></p></td>
+<td><p>Property which returns instance of top level ODS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ulocation</span></code></p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string with location of this object in universal ODS path format</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainio</span></code></p></td>
+<td><p>property that if data should be returned with units or not</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">unitsio</span></code></p></td>
+<td><p>property that if data should be returned with units or not</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿omas.through\_omas\_ds
+======================
+
+.. currentmodule:: omas
+
+.. autofunction:: through_omas_ds

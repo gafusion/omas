@@ -1,0 +1,6 @@
+﻿omas.save\_omas\_hdc
+====================
+
+.. currentmodule:: omas
+
+.. autofunction:: save_omas_hdc

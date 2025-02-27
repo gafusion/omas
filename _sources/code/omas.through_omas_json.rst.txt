@@ -1,0 +1,6 @@
+﻿omas.through\_omas\_json
+========================
+
+.. currentmodule:: omas
+
+.. autofunction:: through_omas_json

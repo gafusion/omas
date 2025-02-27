@@ -1,0 +1,933 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>omas.omas_sample &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../how.html">Concept</a></li>
+                <li><a href="../../auto_examples/index.html">Examples</a></li>
+                <li><a href="../../install.html">Installation</a></li>
+                <li><a href="../../iter.html">ITER</a></li>
+                <li><a href="../../omfit.html">OMFIT</a></li>
+                <li><a href="../../schema.html">Data schema</a></li>
+                <li><a href="../../code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for omas.omas_sample</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;sample ODS methods and utilities</span>
+
+<span class="sd">-------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">.omas_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.omas_core</span> <span class="kn">import</span> <span class="n">ODS</span>
+<span class="kn">from</span> <span class="nn">.omas_physics</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">.omas_plot</span> <span class="kn">import</span> <span class="n">geo_type_lookup</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">__ods__</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">def</span> <span class="nf">add_to_ODS</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    anything wrapped here will be available as a ODS method with name &#39;sample_&#39;+f.__name__</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__ods__</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+
+<div class="viewcode-block" id="ods_sample">
+<a class="viewcode-back" href="../../code/omas.ods_sample.html#omas.ods_sample">[docs]</a>
+<span class="k">def</span> <span class="nf">ods_sample</span><span class="p">(</span><span class="n">ntimes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns an ODS populated with all of the samples</span>
+
+<span class="sd">    :param ntimes: number of time slices to generate</span>
+
+<span class="sd">    :return: sample ods</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ODS</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ntimes</span><span class="o">=</span><span class="n">ntimes</span><span class="p">)</span></div>
+
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">dataset_description</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;dataset_description.data_entry.machine&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;dataset_description.data_entry.pulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">equilibrium</span><span class="p">(</span>
+    <span class="n">ods</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">include_profiles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_phi</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_psi</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_wall</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_q</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_xpoint</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample equilibrium data</span>
+<span class="sd">    This method operates in in-place.</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param time_index: int</span>
+<span class="sd">        Under which time index should fake equilibrium data be loaded?</span>
+
+<span class="sd">    :param include_profiles: bool</span>
+<span class="sd">        Include 1D profiles of pressure, q, p&#39;, FF&#39;</span>
+<span class="sd">        They are in the sample set, so not including them means deleting them.</span>
+
+<span class="sd">    :param include_phi: bool</span>
+<span class="sd">        Include 1D and 2D profiles of phi (toroidal flux, for calculating rho)</span>
+<span class="sd">        This is in the sample set, so not including it means deleting it.</span>
+
+<span class="sd">    :param include_psi: bool</span>
+<span class="sd">        Include 1D and 2D profiles of psi (poloidal flux)</span>
+<span class="sd">        This is in the sample set, so not including it means deleting it.</span>
+
+<span class="sd">    :param include_wall: bool</span>
+<span class="sd">        Include the first wall</span>
+<span class="sd">        This is in the sample set, so not including it means deleting it.</span>
+
+<span class="sd">    :param include_q: bool</span>
+<span class="sd">        Include safety factor</span>
+<span class="sd">        This is in the sample set, so not including it means deleting it.</span>
+
+<span class="sd">    :param include_xpoint: bool</span>
+<span class="sd">        Include X-point R-Z coordinates</span>
+<span class="sd">        This is not in the sample set, so including it means making it up</span>
+
+<span class="sd">    :return: ODS instance with equilibrium data added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">eq</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_equilibrium_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.phi&#39;</span><span class="p">]</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.psi&#39;</span><span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.q&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_profiles</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_phi</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;profiles_1d&#39;</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0&#39;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.phi&#39;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_2d.0.phi&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phi</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_psi</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;profiles_1d&#39;</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;psi&#39;</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d&#39;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.psi&#39;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_2d.0.psi&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.psi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">psi</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_q</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;profiles_1d&#39;</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;q&#39;</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d&#39;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.q&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0.profiles_1d.q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_wall</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;wall&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">include_xpoint</span><span class="p">:</span>
+        <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;boundary.x_point.0.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.304</span>
+        <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;boundary.x_point.0.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.222</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice.0&#39;</span><span class="p">])</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.time_slice&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">)</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;equilibrium.vacuum_toroidal_field.r0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.vacuum_toroidal_field.r0&#39;</span><span class="p">]</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;equilibrium.vacuum_toroidal_field.b0&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="n">eq</span><span class="p">[</span><span class="s1">&#39;equilibrium.vacuum_toroidal_field.b0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;equilibrium.time&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">core_profiles</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">add_junk_ion</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_pressure</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample core_profiles data</span>
+<span class="sd">    This method operates in in-place.</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param time_index: int</span>
+
+<span class="sd">    :param add_junk_ion: bool</span>
+<span class="sd">        Flag for adding a junk ion for testing how well functions tolerate problems. This will be missing labels, etc.</span>
+
+<span class="sd">    :param include_pressure: bool</span>
+<span class="sd">        Include pressure profiles when temperature and density are added</span>
+
+<span class="sd">    :return: ODS instance with profiles added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_core_profiles_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_profiles.profiles_1d&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pr</span><span class="p">[</span><span class="s1">&#39;core_profiles.profiles_1d.0&#39;</span><span class="p">])</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_profiles.vacuum_toroidal_field.r0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;core_profiles.vacuum_toroidal_field.r0&#39;</span><span class="p">]</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;core_profiles.vacuum_toroidal_field.b0&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;core_profiles.vacuum_toroidal_field.b0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">add_junk_ion</span><span class="p">:</span>
+        <span class="n">ions</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_profiles.profiles_1d&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">][</span><span class="s1">&#39;ion&#39;</span><span class="p">]</span>
+        <span class="n">ions</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ions</span><span class="p">)]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ions</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ions</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flat</span><span class="p">():</span>
+            <span class="n">ions</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">item</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_pressure</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ods</span><span class="o">.</span><span class="n">physics_core_profiles_pressures</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">p2l</span><span class="p">(</span><span class="n">item</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;core_profiles&#39;</span> <span class="ow">and</span> <span class="n">p2l</span><span class="p">(</span><span class="n">item</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;pres&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">ods</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_profiles.profiles_1d&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">)</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;core_profiles.time&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">ic_antennas</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample ic_antennas data</span>
+<span class="sd">    This method operates in in-place.</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with profiles added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">ods</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_ic_antennas_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">core_sources</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample core_profiles data</span>
+<span class="sd">    This method operates in in-place.</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param time_index: int</span>
+
+<span class="sd">    :return: ODS instance with sources added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_core_sources_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;core_sources&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;core_sources&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_sources&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_sources&#39;</span><span class="p">]:</span>
+                <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_sources&#39;</span><span class="p">][</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_sources.source&#39;</span><span class="p">][</span><span class="n">source</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="n">source</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">])</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_sources.source&#39;</span><span class="p">][</span><span class="n">source</span><span class="p">][</span><span class="s1">&#39;profiles_1d&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="n">source</span><span class="p">][</span><span class="s1">&#39;profiles_1d.0&#39;</span><span class="p">])</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;core_sources.time&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">core_transport</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample core_profiles data</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param time_index: int</span>
+
+<span class="sd">    :return: ODS instance with sources added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_core_transport_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;core_transport&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;core_transport&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_transport&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_transport&#39;</span><span class="p">]:</span>
+                <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_transport&#39;</span><span class="p">][</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_transport.model&#39;</span><span class="p">][</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">])</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;core_transport.model&#39;</span><span class="p">][</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;profiles_1d&#39;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">][</span><span class="s1">&#39;profiles_1d.0&#39;</span><span class="p">])</span>
+    <span class="n">ods</span><span class="o">.</span><span class="n">set_time_array</span><span class="p">(</span><span class="s1">&#39;core_transport.time&#39;</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_index</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add sample core_profiles data</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with sources added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_summary_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">pf_active</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">nc_weird</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nc_undefined</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake active PF coil locations</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param nc_weird: int</span>
+<span class="sd">        Number of coils with badly defined geometry to include for testing plot overlay robustness</span>
+
+<span class="sd">    :param nc_undefined: int</span>
+<span class="sd">        Number of coils with undefined geometry_type (But valid r, z outlines)</span>
+<span class="sd">        to include for testing plot overlay robustness.</span>
+
+<span class="sd">    :return: ODS instance with PF active hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nc_reg</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">nc</span> <span class="o">=</span> <span class="n">nc_reg</span> <span class="o">+</span> <span class="n">nc_weird</span> <span class="o">+</span> <span class="n">nc_undefined</span>
+    <span class="n">fc_dat</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1">#  R        Z       dR      dZ    tilt1  tilt2</span>
+        <span class="p">[</span><span class="mf">0.8608</span><span class="p">,</span> <span class="mf">0.16830</span><span class="p">,</span> <span class="mf">0.0508</span><span class="p">,</span> <span class="mf">0.32106</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">1.0041</span><span class="p">,</span> <span class="mf">1.5169</span><span class="p">,</span> <span class="mf">0.13920</span><span class="p">,</span> <span class="mf">0.11940</span><span class="p">,</span> <span class="mf">45.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.6124</span><span class="p">,</span> <span class="mf">0.4376</span><span class="p">,</span> <span class="mf">0.17320</span><span class="p">,</span> <span class="mf">0.1946</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">92.40</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.3834</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1171</span><span class="p">,</span> <span class="mf">0.1880</span><span class="p">,</span> <span class="mf">0.16920</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">108.06</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="n">rect_code</span> <span class="o">=</span> <span class="n">geo_type_lookup</span><span class="p">(</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="s1">&#39;pf_active&#39;</span><span class="p">,</span> <span class="n">ods</span><span class="o">.</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">outline_code</span> <span class="o">=</span> <span class="n">geo_type_lookup</span><span class="p">(</span><span class="s1">&#39;outline&#39;</span><span class="p">,</span> <span class="s1">&#39;pf_active&#39;</span><span class="p">,</span> <span class="n">ods</span><span class="o">.</span><span class="n">imas_version</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc_reg</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.rectangle&#39;</span><span class="p">]</span>
+            <span class="n">rect</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rect</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">rect</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># Or width in R</span>
+            <span class="n">rect</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># Or height in Z</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.geometry_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rect_code</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">outline</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.outline&#39;</span><span class="p">]</span>
+            <span class="n">fdat</span> <span class="o">=</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">fdat</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
+            <span class="n">fdat</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span> <span class="k">if</span> <span class="n">fc_dat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+            <span class="n">outline</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">5</span><span class="p">])),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">5</span><span class="p">])),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">5</span><span class="p">])),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">5</span><span class="p">])),</span>
+            <span class="p">]</span>
+            <span class="n">outline</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="o">-</span><span class="n">fdat</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="o">-</span><span class="n">fdat</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="o">-</span><span class="n">fdat</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+                <span class="n">fdat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fdat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="o">-</span><span class="n">fdat</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+            <span class="p">]</span>
+            <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.geometry_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outline_code</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc_reg</span><span class="p">,</span> <span class="n">nc_reg</span> <span class="o">+</span> <span class="n">nc_weird</span><span class="p">):</span>
+        <span class="c1"># This isn&#39;t a real geometry_type, so it should trigger the contingency</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.geometry_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc_reg</span> <span class="o">+</span> <span class="n">nc_weird</span><span class="p">,</span> <span class="n">nc</span><span class="p">):</span>
+        <span class="c1"># This one doesn&#39;t have geometry_type defined, so the plot overlay will have trouble looking up which type it is</span>
+        <span class="n">outline</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.geometry.outline&#39;</span><span class="p">]</span>
+        <span class="n">outline</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+        <span class="n">outline</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+        <span class="c1"># Give the dummy coils identifiers so the plot overlay can try to label them; otherwise the labels aren&#39;t tested</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;element.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;samp</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="c1"># Generate some data that are not time homogeneous</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc_reg</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;current.data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;pf_active.coil&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;current.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">magnetics</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake magnetic probe locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with fake magnetics hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">omas</span> <span class="kn">import</span> <span class="n">load_omas_json</span>
+
+    <span class="n">pr</span> <span class="o">=</span> <span class="n">load_omas_json</span><span class="p">(</span><span class="n">omas_dir</span> <span class="o">+</span> <span class="s1">&#39;samples/sample_magnetics_ods.json&#39;</span><span class="p">,</span> <span class="n">consistency_check</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;magnetics&#39;</span><span class="p">]</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;magnetics&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">thomson_scattering</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake Thomson scattering channel locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param nc: Number of channels to add.</span>
+
+<span class="sd">    :return: ODS instance with fake Thomson hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.935</span><span class="p">,</span> <span class="mf">1.945</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;thomson_scattering.channel&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;F_TS_</span><span class="si">{:02d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># F for fake</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fake Thomson channel for testing </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>  <span class="c1"># This angle in rad should look bad to someone who doesn&#39;t notice the Fake labels</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;thomson_scattering.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">charge_exchange</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake CER channel locations</span>
+<span class="sd">    This method operates in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param nc: Number of channels to add</span>
+
+<span class="sd">    :return: ODS instance with fake CER hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;charge_exchange.channel&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_CER_</span><span class="si">{:02d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># F for fake</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fake CER channel for testing </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">]:</span>
+            <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.phi.data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.5</span><span class="p">])</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.r.data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;position.z.data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;charge_exchange.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">interferometer</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake interferometer locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with fake interferometer hardware information addedd</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE horz. interf.&#39;</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel.0.line_of_sight&#39;</span><span class="p">]</span>
+    <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;first_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;second_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">225</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span>
+    <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;first_point.r&#39;</span><span class="p">],</span> <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;second_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.8</span>
+    <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;first_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r0</span><span class="p">[</span><span class="s1">&#39;second_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel&#39;</span><span class="p">][</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE vert. interf.&#39;</span>
+    <span class="n">los</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel&#39;</span><span class="p">][</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;line_of_sight&#39;</span><span class="p">]</span>
+    <span class="n">los</span><span class="p">[</span><span class="s1">&#39;first_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">los</span><span class="p">[</span><span class="s1">&#39;second_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">240</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span>
+    <span class="n">los</span><span class="p">[</span><span class="s1">&#39;first_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">los</span><span class="p">[</span><span class="s1">&#39;second_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.48</span>
+    <span class="n">los</span><span class="p">[</span><span class="s1">&#39;first_point.z&#39;</span><span class="p">],</span> <span class="n">los</span><span class="p">[</span><span class="s1">&#39;second_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.8</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel&#39;</span><span class="p">])):</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.channel&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;line_of_sight.third_point&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="s1">&#39;line_of_sight.first_point&#39;</span><span class="p">])</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;interferometer.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">bolometer</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake bolometer chord locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param nc: 10  # Number of fake channels to make up for testing</span>
+
+<span class="sd">    :return: ODS instance with fake bolometer hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">nc</span><span class="p">)</span>
+
+    <span class="c1"># FAKE origin for the FAKE bolometer fan</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;bolometer.channel&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;line_of_sight&#39;</span><span class="p">]</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;first_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r0</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;first_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">z0</span> <span class="o">+</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;second_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;first_point.r&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;second_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="s1">&#39;first_point.z&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;bolometer.channel&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;fake bolo </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;bolometer.channel&#39;</span><span class="p">][</span><span class="n">nc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bolo fan 2 fake&#39;</span>  <span class="c1"># This tests separate colors per fan in overlay</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;bolometer.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">gas_injection</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake gas injection locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with fake gas injection hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">imas_version</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="s1">&#39;imas_version&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">separate_valves</span> <span class="o">=</span> <span class="n">imas_version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">compare_version</span><span class="p">(</span><span class="n">imas_version</span><span class="p">,</span> <span class="s2">&quot;3.34.0&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">ip</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">iv</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_A&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.exit_position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.25</span>
+    <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.exit_position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.exit_position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>
+    <span class="k">if</span> <span class="n">separate_valves</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.valve_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">iv</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.valve.</span><span class="si">{</span><span class="n">iv</span><span class="si">}</span><span class="s1">.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_A&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.valve.</span><span class="si">{</span><span class="n">iv</span><span class="si">}</span><span class="s1">.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_A&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.valve.</span><span class="si">{</span><span class="n">iv</span><span class="si">}</span><span class="s1">.pipe_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ip</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;gas_injection.pipe.</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1">.valve.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_A&#39;</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_B&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.exit_position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.65</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.exit_position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.1</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.exit_position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.second_point.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.63</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.second_point.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.08</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.second_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>
+    <span class="k">if</span> <span class="n">separate_valves</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.valve_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.1.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_B&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.1.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_B&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.1.pipe_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.1.valve.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_B&#39;</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_C&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.exit_position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.65</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.exit_position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.1</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.exit_position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.second_point.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span>
+    <span class="k">if</span> <span class="n">separate_valves</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.valve_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.2.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_C&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.2.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_C&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.2.pipe_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.2.valve.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_C&#39;</span>
+    <span class="c1"># This one is at the same R,Z as FAKE_GAS_B, but it doesn&#39;t have a second point defined; this supports testing.</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_D&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.exit_position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.1</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.exit_position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.6</span>
+    <span class="k">if</span> <span class="n">separate_valves</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.valve_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.3.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_B&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.3.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_B&#39;</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.valve.3.pipe_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.valve.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_D&#39;</span>
+    <span class="c1"># This one deliberately doesn&#39;t have a phi angle defined, for testing purposes.</span>
+
+    <span class="c1"># Add a second inlet to GASD; let&#39;s pretend that there is a branch after the valve</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.4.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_D_SECOND_INLET&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.4.exit_position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.15</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.4.exit_position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.65</span>
+    <span class="k">if</span> <span class="n">separate_valves</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.4.valve_indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;gas_injection.pipe.3.valve.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FAKE_GAS_VALVE_D&#39;</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">langmuir_probes</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake Langmuir probe locations</span>
+<span class="sd">    This method operates in place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with fake Langmuir probe hardware information added</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.0.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.0.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;p1&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.0.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.0.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.0.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.1.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.1.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;p23&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.1.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.1.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.9</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.1.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.2.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.2.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;blah&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.2.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.5</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.2.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.25</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.2.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.3.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.3.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;donkey!&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.3.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.525</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.3.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.25</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.3.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.4.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.4.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zzz&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.4.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.4</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.4.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.4</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.4.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.5.identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.5.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;it&#39;s just a test&quot;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.5.position.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.45</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.5.position.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;langmuir_probes.embedded.5.position.phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">wall</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake wall data</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with added wall description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.description_2d[0].limiter.type.description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;first wall&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.description_2d[0].limiter.type.index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.description_2d[0].limiter.type.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;first_wall&#39;</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.description_2d[0].limiter.unit[0].outline.r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># fmt: off</span>
+        <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">,</span> <span class="mf">2.35</span><span class="p">,</span> <span class="mf">2.35</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">,</span> <span class="mf">1.800</span><span class="p">,</span> <span class="mf">1.350</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">1.0</span>
+        <span class="c1"># fmt: on</span>
+    <span class="p">]</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;wall.description_2d[0].limiter.unit[0].outline.z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># fmt: off</span>
+        <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="c1"># fmt: on</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">pulse_schedule</span><span class="p">(</span><span class="n">ods</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake control target data to support testing</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :return: ODS instance with added pulse schedule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">add_position_control</span><span class="p">(</span><span class="n">ods_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds sample data for the position control subset&quot;&quot;&quot;</span>
+
+        <span class="c1"># These data are sampled from DIII-D#161558 at the following times:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.52</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">1.29</span><span class="p">,</span> <span class="mf">1.46</span><span class="p">,</span> <span class="mf">2.01</span><span class="p">,</span> <span class="mf">3.91</span><span class="p">,</span> <span class="mf">5.97</span><span class="p">,</span> <span class="mf">6.6</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">])</span>  <span class="c1"># s</span>
+
+        <span class="n">bdry</span> <span class="o">=</span> <span class="n">ods_</span><span class="p">[</span><span class="s1">&#39;pulse_schedule.position_control.boundary_outline&#39;</span><span class="p">]</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.31</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.27</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">])</span>  <span class="c1"># m</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.21</span><span class="p">,</span> <span class="mf">2.17</span><span class="p">,</span> <span class="mf">2.17</span><span class="p">,</span> <span class="mf">2.16</span><span class="p">,</span> <span class="mf">2.16</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">,</span> <span class="mf">2.16</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">,</span> <span class="mf">2.12</span><span class="p">,</span> <span class="mf">2.12</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">1.88</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">,</span> <span class="mf">1.83</span><span class="p">,</span> <span class="mf">1.83</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">,</span> <span class="mf">1.52</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.84</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.44</span><span class="p">,</span> <span class="mf">1.39</span><span class="p">,</span> <span class="mf">1.39</span><span class="p">,</span> <span class="mf">1.41</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.86</span><span class="p">,</span> <span class="mf">0.86</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">1.21</span><span class="p">,</span> <span class="mf">1.21</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.31</span><span class="p">,</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.74</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.73</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.92</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">,</span> <span class="mf">1.17</span><span class="p">,</span> <span class="mf">1.17</span><span class="p">,</span> <span class="mf">1.17</span><span class="p">,</span> <span class="mf">1.17</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.15</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.23</span><span class="p">,</span> <span class="mf">1.12</span><span class="p">,</span> <span class="mf">1.12</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.78</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.94</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">,</span> <span class="mf">1.21</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">1.92</span><span class="p">,</span> <span class="mf">1.92</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.88</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.81</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.81</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.85</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">11</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.23</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">2.18</span><span class="p">,</span> <span class="mf">2.18</span><span class="p">])</span>
+        <span class="n">bdry</span><span class="p">[</span><span class="mi">11</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.43</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.43</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.43</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+            <span class="n">bdry</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bdry</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">bdry</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bdry</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;seg</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="n">strk</span> <span class="o">=</span> <span class="n">ods_</span><span class="p">[</span><span class="s1">&#39;pulse_schedule.position_control.strike_point&#39;</span><span class="p">]</span>
+        <span class="n">strk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+        <span class="n">strk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+        <span class="n">strk</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+        <span class="n">strk</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">strk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">strk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;strk</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="n">xpt</span> <span class="o">=</span> <span class="n">ods_</span><span class="p">[</span><span class="s1">&#39;pulse_schedule.position_control.x_point&#39;</span><span class="p">]</span>
+        <span class="n">xpt</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.34</span><span class="p">,</span> <span class="mf">1.34</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">1.13</span><span class="p">,</span> <span class="mf">1.13</span><span class="p">])</span>
+        <span class="n">xpt</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.21</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.21</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.41</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.41</span><span class="p">])</span>
+        <span class="n">xpt</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;r.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        <span class="n">xpt</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;z.reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">xpt</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpt</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">xpt</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;r.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpt</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;z.reference_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;strk</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="n">ods_</span><span class="p">[</span><span class="s1">&#39;pulse_schedule.position_control.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="n">ods_</span><span class="p">[</span><span class="s1">&#39;pulse_schedule.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+
+    <span class="n">add_position_control</span><span class="p">(</span><span class="n">ods</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">ec_launchers</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">ngyros</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ntimes</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake ec launchers data to support testing</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param ngyros: number of gyrotrons</span>
+
+<span class="sd">    :param ntimes: number of times</span>
+
+<span class="sd">    :return: ODS instance with added ec_launchers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">times</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">ntimes</span><span class="p">)</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ntimes</span><span class="p">)</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers.ids_properties.homogeneous_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">gyro</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ngyros</span><span class="p">):</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;GYRO_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">gyro</span><span class="p">)</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;frequency&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ones</span> <span class="o">*</span> <span class="mf">110e9</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;frequency&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;launching_position&#39;</span><span class="p">][</span><span class="s1">&#39;phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;launching_position&#39;</span><span class="p">][</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.4</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;launching_position&#39;</span><span class="p">][</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.68</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;power_launched&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5e6</span> <span class="o">*</span> <span class="p">(</span><span class="n">ones</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">times</span> <span class="o">+</span> <span class="n">gyro</span> <span class="o">/</span> <span class="n">ngyros</span><span class="p">))</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;power_launched&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;steering_angle_pol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.61</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;ec_launchers&#39;</span><span class="p">][</span><span class="s1">&#39;beam&#39;</span><span class="p">][</span><span class="n">gyro</span><span class="p">][</span><span class="s1">&#39;steering_angle_tor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">ones</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+
+
+<span class="nd">@add_to_ODS</span>
+<span class="k">def</span> <span class="nf">nbi</span><span class="p">(</span><span class="n">ods</span><span class="p">,</span> <span class="n">nunits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ntimes</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds fake nbi data to support testing</span>
+<span class="sd">    This method operates in in-place</span>
+
+<span class="sd">    :param ods: ODS instance</span>
+
+<span class="sd">    :param nunits: number of times</span>
+
+<span class="sd">    :param ntimes: number of times</span>
+
+<span class="sd">    :return: ODS instance with added nbi</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">times</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">ntimes</span><span class="p">)</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ntimes</span><span class="p">)</span>
+
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi.time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+    <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi.ids_properties.homogeneous_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nunits</span><span class="p">):</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beam_current_fraction&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.27032773</span> <span class="o">*</span> <span class="n">ones</span><span class="p">,</span> <span class="mf">0.14438479</span> <span class="o">*</span> <span class="n">ones</span><span class="p">,</span> <span class="mf">0.07613747</span> <span class="o">*</span> <span class="n">ones</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beam_current_fraction&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beam_power_fraction&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.36067036</span> <span class="o">*</span> <span class="n">ones</span><span class="p">,</span> <span class="mf">0.09631886</span> <span class="o">*</span> <span class="n">ones</span><span class="p">,</span> <span class="mf">0.03386079</span> <span class="o">*</span> <span class="n">ones</span><span class="p">]</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beam_power_fraction&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">0</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;divergence_component&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;horizontal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.00873</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;divergence_component&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;particles_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;divergence_component&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;vertical&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.227</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;focus&#39;</span><span class="p">][</span><span class="s1">&#39;focal_length_horizontal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e31</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;focus&#39;</span><span class="p">][</span><span class="s1">&#39;focal_length_vertical&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.0</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;position&#39;</span><span class="p">][</span><span class="s1">&#39;phi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.773</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;position&#39;</span><span class="p">][</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8.11</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;position&#39;</span><span class="p">][</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;tangency_radius&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.146</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;width_vertical&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.48</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;beamlets_group&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;width_horizontal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;beam_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;energy&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">80e3</span> <span class="o">*</span> <span class="n">ones</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;energy&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;power_launched&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0e6</span> <span class="o">*</span> <span class="p">(</span><span class="n">ones</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">times</span> <span class="o">+</span> <span class="n">unit</span> <span class="o">/</span> <span class="n">nunits</span><span class="p">))</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;power_launched&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">times</span>
+
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;species&#39;</span><span class="p">][</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+        <span class="n">ods</span><span class="p">[</span><span class="s1">&#39;nbi&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">][</span><span class="s1">&#39;species&#39;</span><span class="p">][</span><span class="s1">&#39;z_n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">return</span> <span class="n">ods</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿omas.\_\_version\_\_
+====================
+
+.. currentmodule:: omas
+
+.. autodata:: __version__

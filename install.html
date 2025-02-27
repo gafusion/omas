@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Installation &#8212; OMAS</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css?v=49fa7461" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <!-- OMAS-->
+        </a>
+        <!-- <span class="navbar-text navbar-version pull-left"><b></b></span> -->
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="how.html">Concept</a></li>
+                <li><a href="auto_examples/index.html">Examples</a></li>
+                <li><a href="#">Installation</a></li>
+                <li><a href="iter.html">ITER</a></li>
+                <li><a href="omfit.html">OMFIT</a></li>
+                <li><a href="schema.html">Data schema</a></li>
+                <li><a href="code.html">API</a></li>
+            
+            
+              
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">In this page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#optional-dependencies">Optional dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-with-imas">Installation with IMAS</a></li>
+<li><a class="reference internal" href="#testing-installation">Testing installation</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+           <!-- 
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+           -->
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<p id="install">OMAS runs with <em>Python3.6+</em></p>
+<p><strong>PyPI</strong>: To install <a class="reference external" href="https://pypi.python.org/pypi/omas/">OMAS with pip</a> (for users):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install --upgrade omas
+</pre></div>
+</div>
+<p>where <cite>upgrade</cite> is used to update the omas installation to the latest version.</p>
+<p>The development version of omas can also be installed with pip:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install --upgrade -e git+git@github.com:gafusion/omas#egg=omas
+</pre></div>
+</div>
+<p><strong>Conda</strong>: To install <a class="reference external" href="https://anaconda.org/conda-forge/omas">OMAS with conda</a> (for users):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge omas
+conda update  -c conda-forge omas
+</pre></div>
+</div>
+<p><strong>GitHub</strong> To clone <a class="reference external" href="https://github.com/gafusion/omas">OMAS from GitHub</a> (for developers):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:gafusion/omas.git
+cd omas
+pip install --upgrade -e &#39;.[build_structures,build_documentation]&#39;   # Add this `omas` directory to your $PYTHONPATH
+                                                                     # The [build_structures,build_documentation] options
+                                                                     # install packages required for extra development purposes
+</pre></div>
+</div>
+<p>List of <a class="reference external" href="_static/requirements.txt">Python package requirements</a>.</p>
+<section id="optional-dependencies">
+<h2>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">¶</a></h2>
+<p>Some dependencies are not required for the core functionality of OMAS,
+but are needed for some of the additional features.</p>
+<p>Here is a list of optional dependencies:</p>
+<p>Optional dependencies can be installed with the following command:</p>
+<p><strong>PyPI</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install --upgrade omas[optional,optional2,...]
+</pre></div>
+</div>
+<p><strong>Conda</strong>: All optional dependencies are installed by default. To suppress the installation of optional dependencies, use the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge omas --no-deps
+</pre></div>
+</div>
+<p><strong>GitHub</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install --upgrade -e &#39;.[optional,optional2,...]&#39;
+</pre></div>
+</div>
+<p><strong>Note</strong>: Skip the <cite>–upgrade</cite> option if you are installing the package for the first time.</p>
+</section>
+</section>
+<section id="installation-with-imas">
+<h1>Installation with IMAS<a class="headerlink" href="#installation-with-imas" title="Link to this heading">¶</a></h1>
+<p>Different IMAS versions require different Python installations, each of which may not have the Python packages that are needed to run OMAS.
+One may ask the maintainers of the IMAS installation to
+The simplest way to ensure that the <cite>omas</cite> dependencies are always available and up-to-date, is to setup all of the Python packages that <cite>omas</cite> depends on in a standalone folder:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd path_to_omas_installation
+git clone git@github.com:gafusion/omas.git
+cd omas
+pip install --target ./site-packages -r requirements.txt
+</pre></div>
+</div>
+<p>Then update the <cite>omas</cite> UNIX module to include the <cite>omas</cite> and the <cite>omas/site-packages</cite> folders to the $PYTHONPATH environmental variable:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>prepend-path     PYTHONPATH path_to_omas_installation/omas
+prepend-path     PYTHONPATH path_to_omas_installation/omas/site-packages
+</pre></div>
+</div>
+<p>Loading the <cite>imas</cite> module followed by the <cite>omas</cite> module should then give you a fully functional IMAS + OMAS environment:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module load imas # NOTE: the name of the IMAS module may change on different systems
+module load omas # NOTE: the name of the OMAS module may change on different systems
+</pre></div>
+</div>
+</section>
+<section id="testing-installation">
+<h1>Testing installation<a class="headerlink" href="#testing-installation" title="Link to this heading">¶</a></h1>
+<p>The OMAS installation can be tested by running the regression tests:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd omas
+make test
+</pre></div>
+</div>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+      
+    </p>
+    <p>
+        &copy; Copyright 2017-2025 O. Meneghini and collaborators.<br/>
+      Last updated on Feb 27, 2025.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

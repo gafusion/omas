@@ -1,0 +1,6 @@
+﻿omas.load\_omas\_machine
+========================
+
+.. currentmodule:: omas
+
+.. autofunction:: load_omas_machine
