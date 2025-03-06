@@ -1626,6 +1626,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
+    mpulse = pulse
+    if len(str(pulse))>8:
+        mpulse = int(str(pulse)[:6])
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
