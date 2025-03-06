@@ -4,24 +4,58 @@ from omas.omas_utils import printd
 
 __all__ = [
     'mdstree',
-    'mdsvalue'
+    'mdsvalue',
+    'get_pulse_id'
 ]
+
+def get_pulse_id(pulse, run_id=None):
+    """
+    Converts the pulse number into a MDSplus run_id
+
+    :param pulse: Regular shot number
+
+    :param run_id: Extension that contains the pulse number. E.g."01". Should be of type string or None
+
+    :return: Pulse id, i.e. shot number with run_id extension if available
+    """
+    if run_id is None:
+        return pulse
+    else:
+        return int(str(pulse) + run_id)
+
+def check_for_pulse_id(pulse, treename, options_with_defaults):
+    """
+    Checks if the tree has a run_id associated with it and returns the pulse id
+
+    :param pulse: Regular shot number
+
+    :param treename: Name of tree being loaded
+
+    :param options_with_defaults: Dictionary with options for the current machine
+
+
+    """
+    if 'EFIT' in treename:
+        return get_pulse_id(pulse, options_with_defaults["EFIT_run_id"])
+    else:
+        return pulse
+
 
 _mds_connection_cache = {}
 
 # ===================
-# MDS+ functions
+# MDSplus functions
 # ===================
 def tunnel_mds(server, treename):
     """
-    Resolve MDS+ server
-    NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDS+ server.
+    Resolve MDSplus server
+    NOTE: This function makes use of the optional `omfit_classes` dependency to establish a SSH tunnel to the MDSplus server.
 
-    :param server: MDS+ server address:port
+    :param server: MDSplus server address:port
 
     :param treename: treename (in case treename affects server to be used)
 
-    :return: string with MDS+ server and port to be used
+    :return: string with MDSplus server and port to be used
     """
     try:
         import omfit_classes.omfit_mds
@@ -40,7 +74,7 @@ def tunnel_mds(server, treename):
 
 class mdsvalue(dict):
     """
-    Execute MDS+ TDI functions
+    Execute MDSplus TDI functions
     """
 
     def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
@@ -88,10 +122,10 @@ class mdsvalue(dict):
 
     def raw(self, TDI=None):
         """
-        Fetch data from MDS+ with connection caching
+        Fetch data from MDSplus with connection caching
 
         :param TDI: string, list or dict of strings
-            MDS+ TDI expression(s) (overrides the one passed when the object was instantiated)
+            MDSplus TDI expression(s) (overrides the one passed when the object was instantiated)
 
         :return: result of TDI expression, or dictionary with results of TDI expressions
         """
@@ -103,7 +137,7 @@ class mdsvalue(dict):
 
             def mdsk(value):
                 """
-                Translate strings to MDS+ bytes
+                Translate strings to MDSplus bytes
                 """
                 return str(str(value).encode('utf8'))
 
@@ -135,7 +169,7 @@ class mdsvalue(dict):
 
                 # dictionary of TDI expressions
                 if isinstance(TDI, dict):
-                    # old versions of MDS+ server do not support getMany
+                    # old versions of MDSplus server do not support getMany
                     if self.old_MDS_server:
                         results = {}
                         for tdi in TDI:
@@ -145,7 +179,7 @@ class mdsvalue(dict):
                                 results[tdi] = Exception(str(_excp))
                         out_results = results
 
-                    # more recent MDS+ server
+                    # more recent MDSplus server
                     else:
                         conns = conn.getMany()
                         for name, expr in TDI.items():
@@ -195,7 +229,7 @@ class mdsvalue(dict):
 
 class mdstree(dict):
     """
-    Class to handle the structure of an MDS+ tree.
+    Class to handle the structure of an MDSplus tree.
     Nodes in this tree are mdsvalue objects
     """
 

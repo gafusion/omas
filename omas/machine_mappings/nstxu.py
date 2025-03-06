@@ -11,7 +11,7 @@ from omas.omas_physics import omas_environment
 import glob
 
 # NOTES:
-# List of MDS+ signals
+# List of MDSplus signals
 # https://nstx.pppl.gov/nstx/Software/FAQ/signallabels.html
 # magnetics:
 # https://nstx.pppl.gov/DragNDrop/Operations/Physics_Operations_Course/11%20OpsCourse_EquilibriumMagnetics_Rev1.pdf
@@ -272,7 +272,7 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
 
     :param pulse: shot number
 
-    :param EFIT_tree: MDS+ EFIT tree
+    :param EFIT_tree: MDSplus EFIT tree
     """
     TDIs = {
         'r': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
@@ -353,7 +353,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
         Omega is +90 degrees for a radial sightline, assuming MSE port is on the outboard midplane
         Omega is 180 degrees for a tangential sightline that is pointed toward -phi
 
-    NOTE: In this coordinate system, the omega = om_nstx + 180 degrees where om_nstx is the omega recorded in the MDS+ Tree
+    NOTE: In this coordinate system, the omega = om_nstx + 180 degrees where om_nstx is the omega recorded in the MDSplus Tree
     **NOTE: The signs of the A1, A4, A5 and A7 coefficients are reversed compared to DIII-D to reflect the NSTX definition of omega
 
     In NSTX, standard operation is BT<0 (CCW) and Ip>0 (CW) ... identical to standard DIII-D operation
@@ -361,12 +361,12 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
 
     Gamma is the pitch of the local electric field relative to the MSE sightline vector (sigma polization component)
     GA EFIT assumes pitch angle (gamma) is the measured polarization angle
-    NSTX MSE data is saved on the MDS+ tree as the actual field pitch angle = (A2/A1)*tan(gamma)
-    The MSE data from MDS+ is multiplied by A1/A2 to convert the actual field pitch angle into the measured polization angle to be consistent with GA EFIT
+    NSTX MSE data is saved on the MDSplus tree as the actual field pitch angle = (A2/A1)*tan(gamma)
+    The MSE data from MDSplus is multiplied by A1/A2 to convert the actual field pitch angle into the measured polization angle to be consistent with GA EFIT
     A2 and A1 are positive in the NSTX geometry
         For a co-Ip beam (+phi) with CCW BT, EZ = vb x Bphi is positive (+Z), Ephi = vb x Bz is negative (-phi) at outboard midplane
         Thus, on NSTX, with MSE sightline vectors pointing in -phi, postive R, gamma should be positive outboard of the magnetic axis
-        This is consistent with the tan_alpha recorded in MDS+
+        This is consistent with the tan_alpha recorded in MDSplus
 
     The A coefficients modified from for the NSTX convention are A1>0, A2>0, A5>0 for alpha and omega between 0 and 90 degrees
     At outboard midplane, BZ<0, Bphi<0, ER>0
@@ -590,4 +590,4 @@ def charge_exchange_data(ods, pulse, edition='CT1'):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("nstxu", __all__, globals(), locals())

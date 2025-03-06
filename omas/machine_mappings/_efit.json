@@ -2,7 +2,7 @@
  "__cocos_rules__": {
   "EFIT_tree": {
    "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')",
-   "PYTHON": "MDS_gEQDSK_COCOS_identify({machine!r}, {pulse}, {EFIT_tree!r})"
+   "PYTHON": "MDS_gEQDSK_COCOS_identify({machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
   }
  },
  "equilibrium.code.name": {
@@ -16,15 +16,15 @@
    "VALUE": 1
   },
  "equilibrium.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:": {
-  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.outline.r": {

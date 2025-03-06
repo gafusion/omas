@@ -526,9 +526,12 @@ def use_subplot(fig, *args, **kw):
     with key (*args*, *kwargs*) then it will simply make that subplot
     current and return it.
     """
-    from matplotlib import pyplot
-    pyplot.figure(num=fig.number)
-    return pyplot.subplot(*args, **kw)
+    if hasattr(fig, "number"):
+        from matplotlib import pyplot
+        pyplot.figure(num=fig.number)
+        return pyplot.subplot(*args, **kw)
+    else:
+        return fig.add_subplot(*args, **kw)
 
 
 def cached_add_subplot(fig, ax_cache, *args, **kw):
@@ -841,8 +844,11 @@ def equilibrium_CX(
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
-        for collection in cs.collections:
-            collection.set_clip_path(wall_path)
+        if hasattr(cs, "collections"): # Matplotlib < 3.10
+            for collection in cs.collections:
+                collection.set_clip_path(wall_path)
+        else:
+            cs.set_clip_path(wall_path)
 
     # Wall
     if wall is not None and show_wall:
@@ -972,7 +978,7 @@ def equilibrium_quality(ods, fig=None, **kw):
     :param ods: input ods
 
     :param fig: figure to plot in (a new figure is generated if `fig is None`)
-    """
+    """    
     from matplotlib import pyplot
 
     axs = kw.pop('ax', {})
@@ -1011,7 +1017,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
 
     :return: figure handler
     """
-
+    from omas.omas_physics import remap_flux_coordinates
     # caching of ggd data
     if ggd_points_triangles is None and 'equilibrium.grids_ggd' in ods:
         from .omas_physics import grids_ggd_points_triangles
@@ -1048,18 +1054,22 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         x = eq['profiles_1d'][raw_xName]
         xName = nice_names.get(raw_xName, raw_xName)
     else:
-        raw_xName = 'psi'
-        x = ((eq['profiles_1d']['psi'] - eq['global_quantities']['psi_axis'])
+        raw_xName = 'psi_norm'
+        x = ((eq['profiles_1d']['psi'] - eq['global_quantities']['psi_axis']) 
             / (  eq['global_quantities']['psi_boundary'] - eq['global_quantities']['psi_axis']))
         xName = r"$\Psi_\mathrm{n}$"
 
     # pressure
     ax = cached_add_subplot(fig, axs, 2, 3, 2)
     if omas_viewer:
-        ax.plot(-ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.rpress"],
-                ods[f"equilibrium.code.parameters.time_slice.{time_index}.in1.pressr"]/1.e3, ".r")
-    plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['pressure'] * 1.e-3,
-                                xName, r"$p$ [kPa]", r'$\,$ Pressure',
+        x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
+                                          ods[f"equilibrium.time_slice.{time_index}.constraints.pressure.:.position.psi"])
+        plot_1d_equilbrium_quantity(ax, x_constr, ods[f"equilibrium.time_slice.{time_index}.constraints.pressure.:.measured"] * 1.e-3,
+                                    xName, r"$p$ [kPa]", r'$\,$ Pressure', 
+                                    visible_x=omas_viewer, linestyle="None", marker=".",
+                                    color='red')
+    plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['pressure'] * 1.e-3, 
+                                xName, r"$p$ [kPa]", r'$\,$ Pressure', 
                                 visible_x=omas_viewer, **kw)
     kw.setdefault('color', ax.lines[-1].get_color())
 
@@ -1083,19 +1093,31 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     if not omas_viewer:
         pyplot.setp(ax.get_xticklabels(), visible=False)
     if omas_viewer:
-        ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
-        ax.plot(ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.sizeroj"],
-                ods[f"equilibrium.code.parameters.time_slice.{time_index}.inwant.vzeroj"] / 1.e6, ".r")
-        plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
-                                    xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]",
-                                    r"$j_\mathrm{tor}$",
-                                    visible_x=omas_viewer, **kw)
+        try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+            x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
+                                            ods[f"equilibrium.time_slice.{time_index}.constraints.j_tor.:.position.psi"])
+            plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
+                                        r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
+                                        color='red')
+        except ValueError:
+            print("WARNING No data for j_tor constraints")
+        try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
+            plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]",
+                                        r"$j_\mathrm{tor}$",
+                                        visible_x=omas_viewer, **kw)
+        except ValueError:
+            print("WARNING j_tor not yet implemtented.")
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
+        
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['dpressure_dpsi'] * 1.e-3,
-                                xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]',
-                                r"$P\,^\prime$ source function",
-                                visible_x=True, **kw)
+                                    xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
+                                    r"$P\,^\prime$ source function", visible_x=True, **kw)
+
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
     if omas_viewer:
@@ -1612,7 +1634,6 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                 ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask],
                             linestyle='', marker=".", color=(1.0, 0.0, 0.0, 0.3), zorder=-10, **kw)
         uband(x, y, ax=ax, **kw)
-
         species_label = label_name[index].split()[0]
         species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:

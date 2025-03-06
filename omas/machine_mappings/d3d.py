@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from inspect import unwrap
 
@@ -501,8 +500,12 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
+    from scipy.interpolate import interp1d
+    from omas.omas_core import CodeParameters
     setup = '.ECH.'
+    
     # We need three queries in order to retrieve only the fields we need
+    
     # First the amount of systems in use
     query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
     num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
@@ -512,15 +515,22 @@ def ec_launcher_active_hardware(ods, pulse):
         printe('No ECH system found')
         return
 
-    query = {}
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
+
     # Second query the used systems to resolve the gyrotron names
+    query = {}
     for system_no in range(1, system_max):
         cur_system = f'SYSTEM_{system_no}.'
         query[f'GYROTRON_{system_no}'] = setup + cur_system + 'GYROTRON.NAME'
         query[f'FREQUENCY_{system_no}'] = setup + cur_system + 'GYROTRON.FREQUENCY'
         for field in ['LAUNCH_R', 'LAUNCH_Z', 'PORT']:
-            query[field + f'_{system_no}'] = setup + cur_system + f'antenna.{field}'
+            query[field + f'_{system_no}'] = setup + cur_system + f'ANTENNA.{field}'
+        query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    # Final, third query now that we have resolved all the TDIs related to gyrotron names
     query = {}
     gyrotron_names = []
     for system_no in range(1, system_max):
@@ -535,20 +545,28 @@ def ec_launcher_active_hardware(ods, pulse):
         gyr = gyr[:3]
         for field in ['STAT', 'XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
-            if field in ['XMFRAC', 'FPWRC', 'AZIANG', 'POLANG']:
-                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01)"
-    # Final, third query now that we have resolved all the TDIs related to gyrotron names
+            if field in ['FPWRC', 'AZIANG']:
+                query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+
+    if system_max > 0:
+        times = gyrotrons[f'TIME_FPWRC_1']
+        trim_start = np.searchsorted(times, 0.0, side='left')
+        trim_end = np.searchsorted(times, last_time, side='right')
+
+    # assign data to ODS
+    b_half = []
     for system_no in range(1, system_max):
         system_index = system_no - 1
         if gyrotrons[f'STAT_{system_no}'] == 0:
             continue
+        b_half.append(systems["DISPERSION" + f'_{system_no}'])
         beam = ods['ec_launchers.beam'][system_index]
-        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+        time = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}'])
         if len(time) == 1:
             beam['time'] = np.atleast_1d(0)
         else:
-            beam['time'] = np.atleast_1d(gyrotrons[f'TIME_AZIANG_{system_no}']) / 1.0e3
+            beam['time'] = time
         ntime = len(beam['time'])
         beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
         beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
@@ -559,24 +577,20 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
 
         phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
-        phi = -phi - np.pi / 2.0
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
         beam['frequency.time'] = np.atleast_1d(0)
+        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
-        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}']) / 1.0e3
-        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
-
-        if np.iterable(xfrac):
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac)[0])
-        elif type(xfrac) == int or type(xfrac) == float:
-            beam['mode'] = int(np.round(1.0 - 2.0 * xfrac))
+        if isinstance(xfrac, Exception):
+            beam['mode'] = -1 # assume X-mode if XMFRAC is not recorded
         else:
-            printe(f'Invalid mode type returned for beam {system_index}')
-            beam['mode'] = 0
+            beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
+            
 
         # The spot size and radius are computed using the evolution formula for Gaussian beams
         # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
@@ -590,6 +604,82 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['spot.angle'] = np.zeros(ntime)
         beam['spot.size'] = 0.0172 * np.ones([2, ntime])
 
+    # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
+    # For more info look for hlwec in the TORAY documentation
+    cp = CodeParameters()
+    cp["toray.bhalf"] = np.array(b_half)
+    ods['ec_launchers.code.parameters'] = cp
+
+@machine_mapping_function(__regression_arguments__, pulse=180893)
+def nbi_active_hardware(ods, pulse):
+    beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
+
+    e = 1.602176634e-19 #[C]
+    m_u = 1.6605390666e-27 #[kg]
+
+    query = {}
+    for beam_name in beam_names:
+        for field in ["PINJ", "TINJ"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}_{beam_name}"
+            query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}_{beam_name}, 0)/1E3"
+        for field in ["VBEAM"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+            #query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)/1E3"
+        for field in ["GAS"]:
+            query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
+    data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
+
+    # we use last time of EFIT01 to trim data
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
+
+    trim_start = 0
+    trim_end = 0
+    R0 = 1.6955
+    beam_index = 0
+    for beam_name in beam_names:
+        if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
+            continue
+
+        data[f"{beam_name}.VBEAM_time"] = data[f"{beam_name}.PINJ_time"]
+        if isinstance(data[f"{beam_name}.VBEAM"], Exception):
+            data[f"{beam_name}.VBEAM"] = data[f"{beam_name}.VBEAM_time"] * 0.0 + 80E3 # assume 80keV when beam voltage is missing
+
+        if trim_start == 0 and trim_end == 0:
+            times = data[f"{beam_name}.PINJ_time"]
+            trim_start = np.searchsorted(times, 0.0, side='left')
+            trim_end = np.searchsorted(times, last_time, side='right')
+
+        nbu = ods["nbi.unit"][beam_index]
+        nbu["name"] = beam_name
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"][trim_start:trim_end]
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"][trim_start:trim_end]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"][trim_start:trim_end]
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"][trim_start:trim_end]
+        beam_index += 1
+        gas = data[f"{beam_name}.GAS"].strip()
+        if not len(gas):
+            nbu["species.a"] = 2.0
+        else:            
+            nbu["species.a"] = beam_mass = int(gas[1])
+
+        # infer toroidal angle of the beam from torque
+        index = (data[f"{beam_name}.PINJ"] * data[f"{beam_name}.VBEAM"]) > 0.0
+        if sum(index) > 0:
+            torque_tor = data[f"{beam_name}.TINJ"][index]
+            power_launched = data[f"{beam_name}.PINJ"][index]
+            beam_mass = nbu["species.a"]
+            beam_energy = data[f"{beam_name}.VBEAM"][index]
+            particles_per_second = power_launched / (beam_energy * e)
+            velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
+            force = particles_per_second * velocity * beam_mass * m_u
+            torque_tot = force * R0
+            angle = np.arcsin(torque_tor / torque_tot)
+            angle = sorted(angle)
+            angle = angle[int(len(angle)/2)] # median value
+        else:
+            angle = 0.0
+        nbu["beamlets_group[0].angle"] = angle
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -626,7 +716,8 @@ def interferometer_hardware(ods, pulse):
 
     for i in range(len(ods['interferometer.channel'])):
         ch = ods['interferometer.channel'][i]
-        ch['line_of_sight.third_point'] = ch['line_of_sight.first_point']
+        for field in ch['line_of_sight.first_point'].keys():
+            ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -786,8 +877,14 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
         ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+        ece_uncertainty = {}
+        for key in ece_data:
+            # Calculate uncertainties and convert to eV
+            # Assumes 7% calibration error (optimisitic) + Poisson uncertainty
+            ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
+
     ods['ece.ids_properties.homogeneous_time'] = 0
-    # Not in mds+
+    # Not in MDSplus
     if not _measurements:
         points = [{}, {}]
         points[0]['r'] = 2.5
@@ -806,7 +903,8 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     for ich in range(N_ch):
         ch = ods['ece']['channel'][ich]
         if _measurements:
-            ch['t_e']['data'] = ece_data[f'T{ich + 1}'] * 1.0e3
+            ch['t_e']['data'] = unumpy.uarray(ece_data[f'T{ich + 1}'] * 1.0e3,
+                                              ece_uncertainty[f'T{ich + 1}'] )# Already converted
         else:
             ch['name'] = 'ECE' + str(ich + 1)
             ch['identifier'] = TECE + '{0:02d}'.format(ich + 1)
@@ -1039,6 +1137,8 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
         if data_present[i]:
             try:
                 r = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i)).data()
+                if r is None:
+                    raise ValueError()
             except Exception:
                 continue
             if r > 0:
@@ -1358,7 +1458,6 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
-
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
@@ -1383,12 +1482,15 @@ def add_extra_profile_structures():
     add_extra_structures(extra_structures)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=194842001, PROFILES_tree="OMFIT_PROFS")
-def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
+@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
+    from scipy.interpolate import interp1d
+
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
             "electrons.density_thermal": "N_E",
@@ -1409,6 +1511,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
         query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
         query["ion[1].density_fit.psi_norm"] = "PS_N_C"
         query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
+        query["ion[1].density_fit.psi_norm"] = "PS_T_C"
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
         #query["j_total"] = "J_TOT"
         #query["pressure_perpendicular"] = "P_TOT"
@@ -1419,17 +1522,19 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
         if data is None:
-            print("No mds+ data")
-            raise ValueError(f"Could not find any data in MDS+ for {pulse} and {PROFILES_tree}")
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.n_e")
+            print("No MDSplus data")
+            raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
+        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
         # for density_thermal in densities:
         #     data[density_thermal] *= 1.e6
+
         for unc in ["", "_error_upper"]:
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
@@ -1449,8 +1554,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
                     print(data[entry][i_time])
                     print("================ ERROR =================")
                     print(data[entry + "_error_upper"][i_time])
+
                     print(data[entry][i_time].shape,
-                            data[entry + "_error_upper"][i_time].shape)
+                          data[entry + "_error_upper"][i_time].shape)
                     print(e)
         for entry in normal_entries:
             if isinstance(data[entry], Exception):
@@ -1470,59 +1576,93 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS"):
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
-        profiles_node = '\\TOP.PROFILES.'
         query = {
-            "electrons.density_thermal": "EDENSFIT",
-            "electrons.temperature": "ETEMPFIT"#,
-            # "ion[0].density_thermal": "ZDENSFIT", # Need to deal with different times
-            #"ion[0].temperature": "ITEMPFIT",  # Need to deal with different times
-            #"ion[1].velocity.toroidal": "TROTFIT",# Need to check units/meaning rot freq vs velocity
+            "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
+            "electrons.temperature": "\\TOP.PROFILES.ETEMPFIT",
+            "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
+            "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
+            "ion[1].temperature": "\\TOP.PROFILES.ITEMPFIT",
+            #"ion[1].velocity.toroidal": "TROTFIT", # Need to check units/meaning rot freq vs velocityr
         }
-        for entry in query:
-            query[entry] = profiles_node + query[entry]
+        for entry in list(query.keys()):
+            query["time__" + entry] = f"dim_of({query[entry]},1)"
+            query["rho__" + entry] = f"dim_of({query[entry]},0)"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT")
-        data['time'] = dim_info.dim_of(1) * 1.e-3
-        rho_tor_norm = dim_info.dim_of(0)
-        data['grid.rho_tor_norm'] = np.zeros((data['time'].shape + rho_tor_norm.shape))
-        data['grid.rho_tor_norm'][:] = rho_tor_norm
-        ods[f"core_profiles.time"] = data['time']
-        for entry in data:
+
+        for entry in data.keys():
             if isinstance(data[entry], Exception):
                 continue
-            for i_time, time in enumerate(data["time"]):
-                ods[f"core_profiles.profiles_1d[{i_time}]."+entry] = data[entry][i_time]
-        #Needed for ion components
-        #for i_time, time in enumerate(data["time"]):
-        #    ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
-        #    ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
-        #    ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
-        #    ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
-        #    ods[f"{sh}[{i_time}].ion[0].label"] = "D"
-        #    ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            elif "rho" in entry:
+                pass
+            elif "time" in entry:
+                data[entry] *= 1E-3 # in [s]
+            elif "density" in entry:
+                data[entry] *= 1E19 # in [m^-3]
+            elif "temperature" in entry:
+                data[entry] *= 1E3 # in [eV]
+
+        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__")]))
+        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__")])]))
+        rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
+        ods["core_profiles.time"] = time
+        for i_time, time0 in enumerate(time):
+            ods[f"{sh}[{i_time}].time"] = time0
+            ods[f"{sh}[{i_time}].grid.rho_tor_norm"] = rho_tor_norm
+            ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
+            ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
+            ods[f"{sh}[{i_time}].ion[1].element[0].z_n"] = 6
+            ods[f"{sh}[{i_time}].ion[1].element[0].a"] = 12.011
+            ods[f"{sh}[{i_time}].ion[0].label"] = "D"
+            ods[f"{sh}[{i_time}].ion[1].label"] = "C"
+            for entry in data.keys():
+                if "__" in entry or isinstance(data[entry], Exception):
+                    continue
+                time_index = np.argmin(np.abs(data["time__" + entry] - time0))
+                ods[f"{sh}[{i_time}]."+entry] = interp1d(data["rho__" + entry], data[entry][time_index], bounds_error=False, fill_value=np.nan)(rho_tor_norm) 
+            # deuterium from quasineutrality
+            ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221)
-def core_profiles_global_quantities_data(ods, pulse):
+@machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
+def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
     mpulse = pulse
     if len(str(pulse))>8:
         mpulse = int(str(pulse)[:6])
 
     ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1, mpulse)
-
+    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=1):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
+
         if 'time' not in cp:
-            m = mdsvalue('d3d', pulse=mpulse, TDI="\\TOP.PROFILES.EDENSFIT", treename="ZIPFIT01")
-            cp['time'] = m.dim_of(1) * 1e-3
+            if "ZIPFIT0" in PROFILES_tree:
+                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
+                cp['time'] = m.dim_of(1) * 1e-3
+            elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
+                pulse_id = int(str(pulse) + PROFILES_run_id)
+                dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+                cp['time'] = dim_info.dim_of(1) * 1.e-3
+            else:
+                raise ValueError(f"Trying to access global_quantities with unknown profiles tree: {PROFILES_tree}")
         t = cp['time']
 
-        m = mdsvalue('d3d', pulse=mpulse, TDI=f"ptdata2(\"VLOOP\",{mpulse})", treename=None)
-
+        m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
+    run = pulse
+    if EFIT_run_id is not None:
+        run = int(str(pulse) + str(EFIT_run_id))
+    lim = mdsvalue('d3d', treename=EFIT_tree, pulse=run, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
+    ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
+    ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
+    ods["wall.description_2d.0.limiter.type.index"] = 0
+    ods["wall.time"] = [0.0]
+
+if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
