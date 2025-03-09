@@ -512,7 +512,6 @@ def ec_launcher_active_hardware(ods, pulse):
     try:
         system_max = num_systems + 1
     except:
-        printe('No ECH system found')
         return
 
     # we use last time of EFIT01 to trim data
