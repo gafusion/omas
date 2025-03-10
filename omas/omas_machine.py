@@ -131,11 +131,14 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     idm = (machine, branch)
     failed_locations = {}
     if location.endswith(".*"):
+        temp_cache = cache
+        if temp_cache is None:
+            temp_cache = {}
         root = location.split(".*")[0]
         for key in mappings:
             if root in key and key not in ods:
                 try:
-                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=temp_cache)
                 except (TreeNODATA, MdsIpException) as e:
                     if hasattr(e, "eval2TDI"):
                         failed_locations[key] = e.eval2TDI
