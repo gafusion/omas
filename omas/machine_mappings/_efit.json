@@ -16,15 +16,15 @@
    "VALUE": 1
   },
  "equilibrium.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:": {
-  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.outline.r": {
@@ -188,7 +188,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.elongation": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.EOUT)",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.KAPPA)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
@@ -508,7 +508,7 @@
     "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TERROR)",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ERROR)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.index": {

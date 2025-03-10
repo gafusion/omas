@@ -60,6 +60,7 @@
   "lifecycle_status": "active",
   "maxoccur": "unbounded",
   "structure_reference": "core_profiles_profiles_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "core_instant_changes.change[:].profiles_1d[:].conductivity_parallel": {
@@ -2001,7 +2002,7 @@
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "active",
   "type": "dynamic",
@@ -2772,13 +2773,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/ion(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "core_instant_changes.change[:].profiles_1d[:].ion[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only the 'ion' level is considered and the 'state' array of structure is empty; 1-Ion states are considered and are described in the 'state' array of structure",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/ion(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].ion[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H, D, T, He, C, D2, ...)",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/ion(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -3521,6 +3533,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/ion(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].ion[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/ion(i2)/state(i3)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -5169,6 +5192,59 @@
   "type": "dynamic",
   "units": "A/m^2"
  },
+ "core_instant_changes.change[:].profiles_1d[:].j_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Total toroidal current density = average(J_phi/R) / average(1/R)",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].j_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"j_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].j_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"j_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].j_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "j_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"j_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "A/m^2"
+ },
  "core_instant_changes.change[:].profiles_1d[:].j_tor": {
   "coordinates": [
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
@@ -5176,7 +5252,8 @@
   "data_type": "FLT_1D",
   "documentation": "Total toroidal current density = average(J_Tor/R) / average(1/R)",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_tor(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -5195,7 +5272,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"j_tor\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_tor_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -5206,7 +5284,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"j_tor\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/j_tor_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "A/m^2"
  },
@@ -5292,6 +5371,59 @@
   "type": "dynamic",
   "units": "-"
  },
+ "core_instant_changes.change[:].profiles_1d[:].momentum_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_phi(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].momentum_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].momentum_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"momentum_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_phi_error_lower(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].momentum_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"momentum_phi\"",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_phi_error_upper(:)",
+  "lifecycle_status": "active",
+  "type": "dynamic",
+  "units": "kg.m^-1.s^-1"
+ },
  "core_instant_changes.change[:].profiles_1d[:].momentum_tor": {
   "coordinates": [
    "core_instant_changes.change[:].profiles_1d[:].grid.rho_tor_norm"
@@ -5299,7 +5431,8 @@
   "data_type": "FLT_1D",
   "documentation": "Total plasma toroidal momentum, summed over ion species and electrons weighted by their density and major radius, i.e. sum_over_species(n*R*m*Vphi)",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_tor(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -5318,7 +5451,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_tor_error_lower(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -5329,7 +5463,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/momentum_tor_error_upper(:)",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "kg.m^-1.s^-1"
  },
@@ -5677,13 +5812,24 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/label",
-  "lifecycle_status": "active",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic"
  },
  "core_instant_changes.change[:].profiles_1d[:].neutral[:].multiple_states_flag": {
   "data_type": "INT_0D",
   "documentation": "Multiple states calculation flag : 0-Only one state is considered; 1-Multiple states are considered and are described in the state structure",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/multiple_states_flag",
+  "lifecycle_status": "active",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].neutral[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the species (e.g. H, D, T, He, C, D2, DT, CD4, ...)",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -5996,6 +6142,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying state",
   "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "dynamic"
+ },
+ "core_instant_changes.change[:].profiles_1d[:].neutral[:].state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying state",
+  "full_path": "core_instant_changes/change(i1)/profiles_1d(itime)/neutral(i2)/state(i3)/name",
   "lifecycle_status": "active",
   "type": "dynamic"
  },
@@ -7844,6 +8001,14 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_instant_changes.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "core_instant_changes.code.library": {
   "coordinates": [
    "1...N"
@@ -7859,6 +8024,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_instant_changes/code/library(i1)/commit",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_instant_changes.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "active",
   "type": "constant"
  },
@@ -7957,10 +8130,48 @@
   "lifecycle_status": "active",
   "type": "constant"
  },
+ "core_instant_changes.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "core_instant_changes/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
  "core_instant_changes.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "core_instant_changes.ids_properties.occurrence"
+ },
+ "core_instant_changes.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "core_instant_changes/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "active",
+  "structure_reference": "identifier"
+ },
+ "core_instant_changes.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "core_instant_changes/ids_properties/occurrence_type/description",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "core_instant_changes/ids_properties/occurrence_type/index",
+  "lifecycle_status": "active",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "core_instant_changes/ids_properties/occurrence_type/name",
+  "lifecycle_status": "active",
+  "type": "constant"
  },
  "core_instant_changes.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -7982,6 +8193,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_instant_changes/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8017,6 +8236,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_instant_changes/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8068,6 +8295,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_instant_changes/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -8125,6 +8360,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "core_instant_changes.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "core_instant_changes.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -8168,6 +8411,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "core_instant_changes/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "core_instant_changes.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "core_instant_changes/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

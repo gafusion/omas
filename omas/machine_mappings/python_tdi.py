@@ -25,7 +25,7 @@ def nan_where(a, b, n):
 
     a = a.data()
     b = b.data()
-    a[b == n] = np.NaN
+    a[b == n] = np.nan
     return a
 
 def get_largest_axis_value(a, b):

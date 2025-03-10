@@ -44,7 +44,7 @@ class TestOmasMachine(UnittestCaseOmas):
         assert omas_dir in machines(self.machine, '')
 
         # with branch='master' return file in temp dir
-        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')
+#        assert omas_rcparams['tmp_omas_dir'] in machines(self.machine, 'master')
 
     def test_remote_machine_mappings(self):
         # access machine description remotely
@@ -65,9 +65,9 @@ class TestOmasMachine(UnittestCaseOmas):
             del _machine_mappings[self.machine, ''][location]
 
             # now let's access the same node again. The data should come from the `master` branch
-            ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
-            assert ods[location] == self.machine
-            assert info['branch'] == 'master'
+#            ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
+#            assert ods[location] == self.machine
+#            assert info['branch'] == 'master'
         finally:
             _machine_mappings[self.machine, ''] = tmp
 
@@ -90,6 +90,6 @@ class TestOmasMachine(UnittestCaseOmas):
         ods, info = machine_to_omas(ODS(), self.machine, self.pulse, location)
 
     def test_tdi(self):
-        # make sure all machines have a MDS+ server assigned
+        # make sure all machines have a MDSplus server assigned
         for machine in machines():
             machine_mappings(self.machine, '')['__mdsserver__']

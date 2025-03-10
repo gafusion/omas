@@ -100,7 +100,7 @@ testpypi:
 hash:
 	pip hash dist/omas-$(VERSION).tar.gz
 
-release: tests requirements json cocos docs tag
+release: test requirements json cocos docs tag
 	@echo 'Make release done'
 
 fmt:

@@ -839,12 +839,16 @@ def equilibrium_CX(
             except ValueError:
                 pass
             else:
-                ax.plot(xr, xz, **xkw)
+                if xr > 0:
+                    ax.plot(xr, xz, **xkw)
 
     # Internal flux surfaces w/ or w/o masking
     if wall is not None:
-        for collection in cs.collections:
-            collection.set_clip_path(wall_path)
+        if hasattr(cs, "collections"): # Matplotlib < 3.10
+            for collection in cs.collections:
+                collection.set_clip_path(wall_path)
+        else:
+            cs.set_clip_path(wall_path)
 
     # Wall
     if wall is not None and show_wall:
@@ -1075,7 +1079,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
     plot_1d_equilbrium_quantity(ax, x, numpy.abs(eq['profiles_1d']['q']),
-                                xName, r'$q$ Safety factor', r'$q$ Safety factor', 
+                                xName, r'$q$ Safety factor', r'$q$ Safety factor',
                                 visible_x=omas_viewer, **kw)
     #ax.ticklabel_format(style='sci', scilimits=(-1, 2), axis='y')
     if 'label' in kw:
@@ -1100,22 +1104,26 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         except ValueError:
             print("WARNING No data for j_tor constraints")
         try:
+            ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
             plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['j_tor']/1.e6,
-                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
-                                        r"$j_\mathrm{tor}$", visible_x=omas_viewer, **kw)
+                                        xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]",
+                                        r"$j_\mathrm{tor}$",
+                                        visible_x=omas_viewer, **kw)
         except ValueError:
             print("WARNING j_tor not yet implemtented.")
     else:
         ax = cached_add_subplot(fig, axs, 2, 3, 5, sharex=ax)
+        
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['dpressure_dpsi'] * 1.e-3,
-                                xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
-                                r"$P\,^\prime$ source function", visible_x=True, **kw)
+                                    xName, r'$P\,^\prime$ [kPa Wb$^{-1}$]', 
+                                    r"$P\,^\prime$ source function", visible_x=True, **kw)
+
     if raw_xName.endswith('norm'):
         ax.set_xlim([0, 1])
     if omas_viewer:
         ax = cached_add_subplot(fig, axs, 2, 3, 6)
         ax = cached_add_subplot(fig, axs, 2, 3, 6)
-        # ax.plot(eq['profiles_1d']['convergence']['iteration'], 
+        # ax.plot(eq['profiles_1d']['convergence']['iteration'],
         #         eq['profiles_1d']['convergence']['grad_shafranov_deviation_value'], **kw)
         diag_chi_2 = []
         labels = []
@@ -1126,7 +1134,7 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         except:
             printd("Failed to find pf_active chi^2. Skipping pf_active in chi^2 plot.")
         for constraint, imas_mangetics_id, nice_label in zip(["flux_loop", "bpol_probe"],
-                                           ["flux_loop", "b_field_pol_probe"], 
+                                           ["flux_loop", "b_field_pol_probe"],
                                             ["Flux loop ", r"$B_\mathrm{pol}$ Probe "]):
             chi_2 = list(eq[f'constraints.{constraint}[:].chi_squared'])
             for i in range(len(chi_2)):
@@ -1134,11 +1142,11 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
             diag_chi_2 += chi_2
         indices = numpy.array(range(len(diag_chi_2))) + 1
         plot_1d_equilbrium_quantity(ax, indices, diag_chi_2,
-                                    r"Diagnostic #", r"$\chi^2$ convergence", 
-                                    r"Magnetics $\chi^2$", 
+                                    r"Diagnostic #", r"$\chi^2$ convergence",
+                                    r"Magnetics $\chi^2$",
                                     visible_x=True, marker="+", linestyle='', **kw)
         for i_label, label in enumerate(labels):
-            annot = ax.annotate(label, xy=(indices[i_label],diag_chi_2[i_label]), 
+            annot = ax.annotate(label, xy=(indices[i_label],diag_chi_2[i_label]),
                                 xytext=(20,20),textcoords="offset points",
                                 bbox=dict(boxstyle="round", fc="w"),
                                 arrowprops=dict(arrowstyle="->"))
@@ -1148,9 +1156,256 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
         ax = cached_add_subplot(fig, axs, 2, 3, 6, sharex=ax)
         # FdF_dpsi
         plot_1d_equilbrium_quantity(ax, x, eq['profiles_1d']['f_df_dpsi'],
-                                    xName, r'$FF\,^\prime$ [T$^2$ m$^2$ Wb$^{-1}$]', 
-                                    r"$FF\,^\prime$ source function", 
+                                    xName, r'$FF\,^\prime$ [T$^2$ m$^2$ Wb$^{-1}$]',
+                                    r"$FF\,^\prime$ source function",
                                     visible_x=True, **kw)
+    return {'ax': axs}
+
+@add_to__ODS__
+def equilibrium_summary_and_quality_and_core_profiles(ods, time_index=None, time=None,  fig=None, ggd_points_triangles=None, 
+                          ods_species=[-1,1], **kw):
+    """
+    Plot equilibrium cross section, pressure profile and constraints, and convergence error
+
+    :param ods: input ods that has data to plot
+
+    :param time_index: int, list of ints, or None
+        time slice to plot.  If None all timeslices are plotted.
+
+    :param time: float, list of floats, or None
+        time to plot. If None all timeslicess are plotted.
+        if not None, it takes precedence over time_index
+
+    :param fig: matplotlib Figure
+    
+    """
+    from matplotlib import pyplot
+    from omas.omas_physics import get_plot_scale_and_unit
+
+    # caching of ggd data
+    if ggd_points_triangles is None and 'equilibrium.grids_ggd' in ods:
+        from .omas_physics import grids_ggd_points_triangles
+
+        ggd_points_triangles = grids_ggd_points_triangles(ods['equilibrium.grids_ggd[0].grid[0]'])
+
+    
+    axs = kw.pop('ax', {})
+    if axs is None:
+        axs = {}
+    if not len(axs) and fig is None:
+        fig = pyplot.figure()
+
+    # time animation
+    time_index, time = handle_time(ods, 'equilibrium', time_index, time)
+    if isinstance(time_index, (list, numpy.ndarray)):
+        if len(time) == 1:
+            time_index = time_index[0]
+        else:
+            return ods_time_plot(
+                equilibrium_summary_and_quality_and_core_profiles, ods, time_index, time, fig=fig, ggd_points_triangles=ggd_points_triangles, ax=axs, ods_species=ods_species, **kw
+            )
+    
+    eq = ods['equilibrium']['time_slice'][time_index]
+    shot_txt = ''
+    try:
+        shot_txt = f"{ods['dataset_description.data_entry.machine']} "
+        shot_txt = f"{shot_txt}#{ods['dataset_description.data_entry.pulse']}"
+    except:
+        pass
+    shot_txt = f"{shot_txt} @ {eq['time']:.3f} s"
+    shot_comment = ''
+    try:
+        shot_comment = ods['dataset_description.ids_properties.comment']
+    except:
+        pass
+    if not len(fig.texts):
+        fig.text(0.05,0.01,'',ha='left', va='bottom', size='x-large')
+        fig.text(0.95,0.01,'',ha='right',va='bottom', size='small')
+    fig.texts[0].set_text(shot_txt)
+    fig.texts[1].set_text(shot_comment)
+    ax = cached_add_subplot(fig, axs, 1, 4, 1)
+    tmp = equilibrium_CX(
+        ods, time_index=time_index, ax=ax, contour_quantity='psi', ggd_points_triangles=ggd_points_triangles, **kw
+    )
+    overlay(ods, ax=ax, thomson_scattering=True)
+
+    # Work with equilibrium - inspired by equilibrium_summary
+    raw_xName = 'psi'
+    def psi2psin(psix):
+        return (psix-eq['global_quantities']['psi_axis'])/(eq['global_quantities']['psi_boundary']-eq['global_quantities']['psi_axis'])
+    x = psi2psin(eq['profiles_1d']['psi'])
+    xName = r"$\Psi_\mathrm{n}$"
+
+    # pressure
+    ax = cached_add_subplot(fig, axs, 2, 4, 8)
+    pfac = 1.e-3
+    ax.plot(x, eq['profiles_1d']['pressure'] * pfac)
+    ytitle = 0.9
+    ax.set_title('Pressure [kPa]', y=ytitle, va='top')
+    ax.set_xlabel(xName)
+    kw.setdefault('color', ax.lines[-1].get_color())
+    p_x = psi2psin(eq['constraints.pressure.:.position.psi'])
+    p = eq['constraints.pressure.:.measured'] * pfac
+    p_e = eq['constraints.pressure.:.measured_error_upper'] * pfac
+    ax.errorbar(p_x, p, yerr=p_e, color='red', marker='', alpha=0.25)
+
+    # Convergence error - inspired by equilibrium_quality
+    ax = cached_add_subplot(fig, axs, 2, 4, 4)
+    ax.plot(ods['equilibrium.time'], ods['equilibrium.time_slice[:].convergence.grad_shafranov_deviation_value'])
+    ax.axvline(eq['time'],color='black')
+    ax.set_yscale('log')
+    ax.set_title('Convergence error vs time', y=ytitle, va='top')
+
+    # Core profiles (Mostly copy paste from core_profiles_summary)
+    kw.pop('color',None)
+    ptime_index, ptime = handle_time(ods, 'core_profiles', time_index, eq['time'])
+    prof1d = ods['core_profiles']['profiles_1d'][ptime_index]
+    x_axis = "psi_norm"
+    if x_axis == "psi_norm":
+        x = prof1d['grid.rho_pol_norm']**2
+        x_label = r"$\Psi_\mathrm{n}$"
+    else:
+        x = prof1d[f'grid.{x_axis}']
+        if "tor" in x_axis:
+            x_label = r'$\rho$'
+        elif "pol" in x_axis:
+            x_label = r'$\rho_\mathrm{pol}$'
+    # Determine subplot rows x colls
+    if ods_species is None:
+        ncols = len(prof1d['ion']) + 1
+        ods_species = [-1] + list(prof1d['ion'])
+    else:
+        ncols = len(ods_species)
+    nplots = 0
+    quantities = ['density_thermal', 'temperature']
+    for quant in quantities:
+        if 'density' in quant or 'temperature' in quant:
+            nplots += ncols
+        elif 'velocity' in quant:
+            nplots += ncols - 1
+        else:
+            nplots += 1
+    nrows = 2# int(numpy.ceil(nplots / ncols))
+    ncols = ncols+2 # Make room for equilibrium plots
+    nplots = nrows * ncols
+
+    # Generate species with corresponding name
+    species_in_tree = [f"ion.{i}" if i >= 0 else 'electrons' for i in ods_species]
+    names = [f"{prof1d[i]['label']} ion" if i != 'electrons' else "electron" for i in species_in_tree]
+
+    plotting_list = []
+    label_name = []
+    label_name_z = []
+    unit_list = []
+    data_list = []
+    for q in quantities:
+        if 'density' in q or 'temperature' in q or "velocity.toroidal" in q :
+            for index, specie in enumerate(species_in_tree):
+                #unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{specie}.{q}"))['units'])
+                if q in prof1d[specie]:
+                    if "label" in prof1d[specie]:
+                        scale, unit = get_plot_scale_and_unit(q, prof1d[specie]["label"])
+                    else:
+                        scale, unit = get_plot_scale_and_unit(q)
+                    unit_list.append(unit)
+                    try:
+                        if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
+                            plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
+                                                 prof1d[specie][q + "_error_upper"]*scale))
+                        else:
+                            plotting_list.append(prof1d[specie][q]*scale)
+                    except Exception as _excp:
+                        print(f'Error in fetching {q}_error_upper')
+                        plotting_list.append(prof1d[specie][q]*scale)
+
+                    if x_axis == "psi_norm":
+                        try:
+                            qfit = q.replace('_thermal','')
+                            data_list.append([prof1d[specie][f"{qfit}_fit.psi_norm"],
+                                              prof1d[specie][f"{qfit}_fit.measured"]*scale,
+                                              prof1d[specie][f"{qfit}_fit.measured_error_upper"]*scale])
+                        except Exception as e:
+                            if 'has no data' not in str(e):
+                                print(f'Exception getting raw data: {e}')
+                            data_list.append(None)
+                    else:
+                        data_list.append(None)
+                    label_name_z.append("")
+                    label_name.append(f'{names[index]} {q.capitalize()}')
+        elif "e_field.radial" not in q:
+            unit_list.append(omas_info_node(o2u(f"core_profiles.profiles_1d.0.{q}"))['units'])
+            plotting_list.append(prof1d[q])
+            label_name.append(q.capitalize())
+            data_list.append(None)
+    if "e_field.radial" in quantities:
+        try:
+            scale, unit = get_plot_scale_and_unit("e_field.radial")
+            unit_list.append(unit)
+            plotting_list.append(prof1d["e_field.radial"]*scale)
+            label_name_z.append("")
+            label_name.append('e_field.radial')
+            data_list.append(None)
+        except:
+            pass
+    last_quant = None
+    for index, y in enumerate(plotting_list):
+        if index >= len(label_name):
+            break
+        plot = index + 2
+        if plot > ncols-1:
+            plot = plot + 2
+
+        if index == 0:
+            sharey = None
+            sharex = None
+        try:
+            if last_quant.split(" ")[-1] == label_name[index].split(" ")[-1]:
+                sharex = ax
+                sharey = ax
+            else:
+                sharex = ax
+                sharey = None
+        except:
+            sharex = None
+            sharey = None
+        last_quant = label_name[index]
+        ax = cached_add_subplot(fig, axs, nrows, ncols, plot, sharex=sharex, sharey=sharey)
+        species_label = label_name[index].split()[0]
+        if data_list[index] is not None:
+            mask = numpy.ones(data_list[index][0].shape, dtype=bool)
+            # Remove NaNs
+            for j in range(3):
+                mask[numpy.isnan(data_list[index][j])] = False
+            # Remove measuremetns with 100% or more uncertainty
+            x_data = data_list[index][0][mask]
+            y_data = data_list[index][1][mask]
+            y_data_err = data_list[index][2][mask]
+            mask = mask[mask]
+            mask[numpy.abs(y_data_err[mask]) > numpy.abs(y_data[mask])] = False
+            if numpy.any(mask):
+                color = 'orange' if species_label=='electron' else 'green'
+                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask],
+                            linestyle='', marker=".", color=color, zorder=-10, **kw)
+        uband(x, y, ax=ax, **kw)
+
+        species_label = species_label.replace("electron", "e")
+        if "Temp" in label_name[index]:
+            title_label = r'$T_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index])
+        elif "Density" in label_name[index]:
+            title_label = r'$n_{{{}}}$'.format(species_label) + imas_units_to_latex(unit_list[index]) + label_name_z[index]
+        elif "e_field" in label_name[index].lower():
+            title_label = r'$E_\mathrm{r}$' + imas_units_to_latex(unit_list[index])
+        elif "Velocity" in label_name[index]:
+            title_label = r"$v_\mathrm{" + species_label[0] + r"}$" + imas_units_to_latex(unit_list[index])
+        else:
+            title_label = label_name[index][:10] + imas_units_to_latex(unit_list[index])
+        ax.set_title(title_label, y=ytitle, va='top')
+        if (nplots - plot) < ncols:
+            ax.set_xlabel(x_label)
+
+    if 'label' in kw:
+        ax.legend(loc='lower center')
+    #ax.set_xlim(0, 1)
     return {'ax': axs}
 
 @add_to__ODS__
@@ -1205,8 +1460,8 @@ def core_profiles_currents_summary(ods, time_index=None, time=None, ax=None, **k
     return {'ax': ax}
 
 @add_to__ODS__
-def core_profiles_summary(ods, time_index=None, time=None, fig=None, 
-                          ods_species=None, quantities=['density', 'temperature'], 
+def core_profiles_summary(ods, time_index=None, time=None, fig=None,
+                          ods_species=None, quantities=['density_thermal', 'temperature'],
                           x_axis = "rho_tor_norm", **kw):
     """
     Plot densities and temperature profiles for electrons and all ion species
@@ -1242,13 +1497,13 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
         fig = pyplot.figure()
 
     # time animation
-    time_index, time = handle_time(ods, 'core_profiles', time_index, time)
+    time_index, time = handle_time(ods, 'core_profiles.time', time_index, time)
     if isinstance(time_index, (list, numpy.ndarray)):
         if len(time) == 1:
             time_index = time_index[0]
         else:
             return ods_time_plot(
-                core_profiles_summary, ods, time_index, time, fig=fig, ods_species=ods_species, quantities=quantities, ax=axs, **kw
+                core_profiles_summary, ods, time_index, time, fig=fig, ods_species=ods_species, quantities=quantities, x_axis=x_axis, ax=axs, **kw
             )
 
     prof1d = ods['core_profiles']['profiles_1d'][time_index]
@@ -1300,17 +1555,25 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
                     #     plotting_list.append(prof1d[specie][q]*scale * prof1d[specie]['element[0].z_n'])
                     #     label_name_z.append(r'$\times$' + f" {int(prof1d[specie]['element[0].z_n'])}")
                     # else:
-                    if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
-                        plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
-                                             prof1d[specie][q + "_error_upper"]*scale))
-                    else:
+                    try:
+                        if q + "_error_upper" in prof1d[specie] and len(prof1d[specie][q]) == len(prof1d[specie][q + "_error_upper"]):
+                            plotting_list.append(unumpy.uarray(prof1d[specie][q]*scale,
+                                                 prof1d[specie][q + "_error_upper"]*scale))
+                        else:
+                            plotting_list.append(prof1d[specie][q]*scale)
+                    except Exception as _excp:
+                        print(f'Error in fetching {q}_error_upper')
                         plotting_list.append(prof1d[specie][q]*scale)
+
                     if x_axis == "psi_norm":
                         try:
-                            data_list.append([prof1d[specie][q + "_fit.psi_norm"],
-                                              prof1d[specie][q + "_fit.measured"]*scale,
-                                              prof1d[specie][q + "_fit.measured_error_upper"]*scale])
+                            qfit = q.replace('_thermal','')
+                            data_list.append([prof1d[specie][f"{qfit}_fit.psi_norm"],
+                                              prof1d[specie][f"{qfit}_fit.measured"]*scale,
+                                              prof1d[specie][f"{qfit}_fit.measured_error_upper"]*scale])
                         except Exception as e:
+                            if 'has no data' not in str(e):
+                                print(f'Exception getting raw data: {e}')
                             data_list.append(None)
                     else:
                         data_list.append(None)
@@ -1365,13 +1628,12 @@ def core_profiles_summary(ods, time_index=None, time=None, fig=None,
             x_data = data_list[index][0][mask]
             y_data = data_list[index][1][mask]
             y_data_err = data_list[index][2][mask]
-            mask = mask[mask]                    
+            mask = mask[mask]
             mask[numpy.abs(y_data_err[mask]) > numpy.abs(y_data[mask])] = False
             if numpy.any(mask):
-                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask], 
+                ax.errorbar(x_data[mask], y_data[mask], y_data_err[mask],
                             linestyle='', marker=".", color=(1.0, 0.0, 0.0, 0.3), zorder=-10, **kw)
         uband(x, y, ax=ax, **kw)
-        
         species_label = label_name[index].split()[0]
         species_label = species_label.replace("electron", "e")
         if "Temp" in label_name[index]:
@@ -3264,8 +3526,8 @@ def charge_exchange_overlay(ods, ax=None, which_pos='closest', **kw):
     label_dr, label_dz = label_shifter(nc, kw)
 
     # Get channel positions; each channel has a list of positions as it can vary with time as beams switch on/off.
-    r = [[numpy.NaN]] * nc
-    z = [[numpy.NaN]] * nc
+    r = [[numpy.nan]] * nc
+    z = [[numpy.nan]] * nc
     for i in range(nc):
         rs = ods['charge_exchange.channel'][i]['position.r.data']
         zs = ods['charge_exchange.channel'][i]['position.z.data']
@@ -3557,7 +3819,7 @@ def position_control_overlay(
     :param ax: Axes instance
 
     :param t: float
-        Time to display in seconds. If not specified, defaults to the average time of all boundary R coordinate samples.
+        Time to display in seconds. If not specified, defaults to the average time of position control samples.
 
     :param xpoint_marker: string
         Matplotlib marker spec for X-point target(s)
@@ -3595,7 +3857,7 @@ def position_control_overlay(
     shot = ods['dataset_description.data_entry'].get('pulse', 0)
     if t is None:
         try:
-            t = np.nanmean(ods['pulse_schedule.position_control.boundary_outline[:].r.reference.data'])
+            t = np.nanmean(ods['pulse_schedule.position_control.time'])
         except (ValueError, IndexError):
             t = 0
 
@@ -3632,30 +3894,31 @@ def position_control_overlay(
     b = ods['pulse_schedule.position_control.boundary_outline']
     x = ods['pulse_schedule.position_control.x_point']
     s = ods['pulse_schedule.position_control.strike_point']
-    ikw = dict(bounds_error=False, fill_value=np.NaN)
+    ikw = dict(bounds_error=False, fill_value=np.nan)
     try:
-        nbp = np.shape(b['[:].r.reference.data'])[0]
+        nbp = np.shape(b['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nbp = 0
     try:
-        nx = np.shape(x['[:].r.reference.data'])[0]
+        nx = np.shape(x['[:].r.reference'])[0]
     except (IndexError, ValueError):
         nx = 0
     try:
-        ns = np.shape(s['[:].r.reference.data'])[0]
+        ns = np.shape(s['[:].r.reference'])[0]
     except (IndexError, ValueError):
         ns = 0
     if nbp + nx + ns == 0:
         printe('Trouble accessing position_control data in ODS. Aborting plot overlay.')
         return {'ax': ax}
-    r = [interp1d(b[i]['r.reference.time'], b[i]['r.reference.data'], **ikw)(t) for i in range(nbp)]
-    z = [interp1d(b[i]['z.reference.time'], b[i]['z.reference.data'], **ikw)(t) for i in range(nbp)]
+    tt = ods['pulse_schedule.position_control.time']
+    r = [interp1d(tt, b[i]['r.reference'], **ikw)(t) for i in range(nbp)]
+    z = [interp1d(tt, b[i]['z.reference'], **ikw)(t) for i in range(nbp)]
     bname = b['[:].r.reference_name']
-    rx = [interp1d(x[i]['r.reference.time'], x[i]['r.reference.data'], **ikw)(t) for i in range(nx)]
-    zx = [interp1d(x[i]['z.reference.time'], x[i]['z.reference.data'], **ikw)(t) for i in range(nx)]
+    rx = [interp1d(tt, x[i]['r.reference'], **ikw)(t) for i in range(nx)]
+    zx = [interp1d(tt, x[i]['z.reference'], **ikw)(t) for i in range(nx)]
     xname = x['[:].r.reference_name']
-    rs = [interp1d(s[i]['r.reference.time'], s[i]['r.reference.data'], **ikw)(t) for i in range(ns)]
-    zs = [interp1d(s[i]['z.reference.time'], s[i]['z.reference.data'], **ikw)(t) for i in range(ns)]
+    rs = [interp1d(tt, s[i]['r.reference'], **ikw)(t) for i in range(ns)]
+    zs = [interp1d(tt, s[i]['z.reference'], **ikw)(t) for i in range(ns)]
     sname = s['[:].r.reference_name']
     # Measured X-point position from eq might not be present
     nxm = len(ods['equilibrium.time_slice.0.boundary.x_point'])
@@ -3669,7 +3932,7 @@ def position_control_overlay(
             rxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.r'.format(i)], **ikw)(t) for i in range(nxm)]
             zxm = [interp1d(eq['time'], eq['time_slice[:].boundary.x_point.{}.z'.format(i)], **ikw)(t) for i in range(nxm)]
     else:
-        rxm = zxm = np.NaN
+        rxm = zxm = np.nan
     if timing_ref is not None:
         print(time.time() - timing_ref, 'position_control_overlay data unpacked')
 

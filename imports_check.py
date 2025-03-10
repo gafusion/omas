@@ -10,7 +10,7 @@ import warnings
 warnings.simplefilter('ignore', category=DeprecationWarning)
 warnings.simplefilter('ignore', category=FutureWarning)
 
-mapper = {'dnspython': None, 'sphinx-bootstrap-theme': None, 'sphinx-gallery': None, 'Sphinx': 'sphinx', 'Pillow': 'PIL'}
+mapper = {'sphinx-bootstrap-theme': None, 'sphinx-gallery': None, 'Sphinx': 'sphinx', 'Pillow': 'PIL'}
 
 filename = os.path.split(os.path.abspath(__file__))[0] + os.sep + 'requirements.txt'
 with open(filename, 'r') as f:

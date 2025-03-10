@@ -343,9 +343,9 @@ class TestOmasPhysics(UnittestCaseOmas):
         ods5 = ODS()
         ods5['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5
         with omas_environment(ods5, coordsio={'core_profiles.profiles_1d[0].grid.rho_tor_norm': data10}):
-            ods5['core_profiles.profiles_1d[0].electrons.density'] = data10
+            ods5['core_profiles.profiles_1d[0].electrons.density_thermal'] = data10
         assert len(ods5['core_profiles.profiles_1d[0].grid.rho_tor_norm']) == 5
-        assert len(ods5['core_profiles.profiles_1d[0].electrons.density']) == 5
+        assert len(ods5['core_profiles.profiles_1d[0].electrons.density_thermal']) == 5
 
         ods6 = ODS()
         ods6['core_profiles.profiles_1d[0].grid.rho_tor_norm'] = data5

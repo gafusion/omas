@@ -21,6 +21,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "distribution_sources.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "distribution_sources.code.library": {
   "coordinates": [
    "1...N"
@@ -36,6 +44,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -134,10 +150,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "distribution_sources.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "distribution_sources/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "distribution_sources.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "distribution_sources.ids_properties.occurrence"
+ },
+ "distribution_sources.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "distribution_sources/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "distribution_sources.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "distribution_sources/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "distribution_sources/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "distribution_sources/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "distribution_sources.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -159,6 +213,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -194,6 +256,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -245,6 +315,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -302,6 +380,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "distribution_sources.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "distribution_sources.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -345,6 +431,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "distribution_sources/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "distribution_sources.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "distribution_sources/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -575,6 +669,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_ggd",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "distribution_sources.source[:].ggd[:].discrete": {
@@ -753,7 +848,7 @@
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].dimension": {
   "data_type": "INT_0D",
-  "documentation": "Space dimension of the grid subset elements. This must be equal to the sum of the dimensions of the individual objects forming the element.",
+  "documentation": "Space dimension of the grid subset elements, using the convention 1=nodes, 2=edges, 3=faces, 4=cells/volumes",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/dimension",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -782,7 +877,7 @@
  },
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].element[:].object[:].dimension": {
   "data_type": "INT_0D",
-  "documentation": "Dimension of the object",
+  "documentation": "Dimension of the object - using the convention  1=nodes, 2=edges, 3=faces, 4=cells/volumes",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/element(i3)/object(i4)/dimension",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -804,7 +899,7 @@
  "distribution_sources.source[:].ggd[:].grid.grid_subset[:].identifier": {
   "data_type": "STRUCTURE",
   "doc_identifier": "utilities/ggd_subset_identifier.xml",
-  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n200) nodes_combining_spaces : All nodes (0D) belonging to the first space, implicitly extended in other dimensions represented by the other spaces in a structured way. The number of subset elements is thus equal to the number of nodes in the first space. Implicit declaration (no need to replicate the grid elements in the grid_subset structure).\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All edges defining walls, baffles, and targets\n45) outer_sf_leg_entrance_1 : y-aligned edges defining the SOL entrance of the first snowflake outer leg\n46) outer_sf_leg_entrance_2 : y-aligned edges defining the SOL entrance of the third snowflake outer leg\n47) outer_sf_pfr_connection_1 : y-aligned edges defining\u00a0the connection between the outer snowflake entrance and third leg\n48) outer_sf_pfr_connection_2 : y-aligned edges defining the connection between the outer snowflake first and second leg\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
+  "documentation": "Grid subset identifier\n0) unspecified : unspecified\n1) nodes : All nodes (0D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure). In case of a structured grid represented with multiple 1D spaces, the order of the implicit elements in the grid_subset follows Fortran ordering, i.e. iterate always on nodes of the first space first, then move to the second node of the second space, ... : [((s1_1 to s1_end), s2_1, s3_1 ... sN_1), (((s1_1 to s1_end), s2_2, s3_1, ... sN_1)), ... ((s1_1 to s1_end), s2_end, s3_end ... sN_end)]\n2) edges : All edges (1D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n3) x_aligned_edges : All x-aligned (poloidally) aligned edges belonging to the associated spaces\n4) y_aligned_edges : All y-aligned (radially) aligned edges belonging to the associated spaces\n5) cells : All cells (2D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n6) x_points : Nodes defining x-points\n7) core_cut : y-aligned edges inside the separatrix connecting to the active x-point\n8) PFR_cut : y-aligned edges in the private flux region connecting to the active x-point\n9) outer_throat : y-aligned edges in the outer SOL connecting to the active x-point\n10) inner_throat : y-aligned edges in the inner SOL connecting to the active x-point\n11) outer_midplane : y-aligned edges connecting to the node closest to outer midplane on the separatrix\n12) inner_midplane : y-aligned edges connecting to the node closest to inner midplane on the separatrix\n13) outer_target : y-aligned edges defining the outer target\n14) inner_target : y-aligned edges defining the inner target\n15) core_boundary : Innermost x-aligned edges\n16) separatrix : x-aligned edges defining the active separatrix\n17) main_chamber_wall : x-aligned edges defining main chamber wall outside of the divertor regions\n18) outer_baffle : x-aligned edges defining the chamber wall of the outer active divertor region\n19) inner_baffle : x-aligned edges defining the chamber wall of the inner active divertor region\n20) outer_PFR_wall : x-aligned edges defining the private flux region wall of the outer active divertor region\n21) inner_PFR_wall : x-aligned edges defining the private flux region wall of the inner active divertor region\n22) core : Cells inside the active separatrix\n23) sol : Cells defining the main SOL outside of the divertor regions\n24) outer_divertor : Cells defining the outer divertor region\n25) inner_divertor : Cells defining the inner divertor region\n26) core_sol : x-aligned edges defining part of active separatrix separating core and sol\n27) full_main_chamber_wall : main_chamber_wall + outer_baffle(s) + inner_baffle(s)\n28) full_PFR_wall : outer_PFR__wall(s) + inner_PFR_wall(s)\n29) core_cut_X2 : y-aligned edges inside the separatrix connecting to the non-active x-point\n30) PFR_cut_X2 : y-aligned edges in the private flux region connecting to the non-active x-point\n31) outer_throat_X2 : y-aligned edges in the outer SOL connecting to the non-active x-point\n32) inner_throat_X2 : y-aligned edges in the inner SOL connecting to the non-active x-point\n33) separatrix_2 : x-aligned edges defining the non-active separatrix\n34) outer_baffle_2 : x-aligned edges defining the chamber wall of the outer non-active divertor region\n35) inner_baffle_2 : x-aligned edges defining the chamber wall of the inner non-active divertor region\n36) outer_PFR_wall_2 : x-aligned edges defining the private flux region wall of the outer non-active divertor region\n37) inner_PFR_wall_2 : x-aligned edges defining the private flux region wall of the inner non-active divertor region\n38) intra_sep : Cells between the two separatrices\n39) outer_divertor_2 : Cells defining the outer inactive divertor region\n40) inner_divertor_2 : Cells defining the inner inactive divertor region\n41) outer_target_2 : y-aligned edges defining the outer inactive target\n42) inner_target_2 : y-aligned edges defining the inner inactive target\n43) volumes : All volumes (3D) belonging to the associated spaces, implicit declaration (no need to replicate the grid elements in the grid_subset structure)\n44) full_wall : All edges defining walls, baffles, and targets\n45) outer_sf_leg_entrance_1 : y-aligned edges defining the SOL entrance of the first snowflake outer leg\n46) outer_sf_leg_entrance_2 : y-aligned edges defining the SOL entrance of the third snowflake outer leg\n47) outer_sf_pfr_connection_1 : y-aligned edges defining\u00a0the connection between the outer snowflake entrance and third leg\n48) outer_sf_pfr_connection_2 : y-aligned edges defining the connection between the outer snowflake first and second leg\n100) magnetic_axis : Point corresponding to the magnetic axis\n101) outer_mid_plane_separatrix : Point on active separatrix at outer mid-plane\n102) inner_mid_plane_separatrix : Point on active separatrix at inner mid-plane\n103) outer_target_separatrix : Point on active separatrix at outer active target\n104) inner_target_separatrix : Point on active separatrix at inner active target\n105) outer_target_separatrix_2 : Point on non-active separatrix at outer non-active target\n106) inner_target_separatrix_2 : Point on non-active separatrix at inner non-active target",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/grid/grid_subset(i2)/identifier",
   "lifecycle_status": "alpha",
   "structure_reference": "identifier_dynamic_aos3",
@@ -1365,7 +1460,7 @@
  },
  "distribution_sources.source[:].ggd[:].particles[:].grid_subset_index": {
   "data_type": "INT_0D",
-  "documentation": "Index of the grid subset the data is provided on",
+  "documentation": "Index of the grid subset the data is provided on. Corresponds to the index used in the grid subset definition: grid_subset(:)/identifier/index",
   "full_path": "distribution_sources/source(i1)/ggd(itime)/particles(i2)/grid_subset_index",
   "lifecycle_status": "alpha",
   "type": "dynamic"
@@ -1429,6 +1524,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_global_quantities",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "distribution_sources.source[:].global_quantities[:].particles": {
@@ -1566,11 +1662,56 @@
   "type": "dynamic",
   "units": "W"
  },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Toroidal torque losses due to shinethrough",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].shinethrough.torque_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
  "distribution_sources.source[:].global_quantities[:].shinethrough.torque_tor": {
   "data_type": "FLT_0D",
   "documentation": "Toroidal torque losses due to shinethrough",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1586,7 +1727,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1594,7 +1736,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/shinethrough/torque_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1606,11 +1749,56 @@
   "type": "dynamic",
   "units": "s"
  },
+ "distribution_sources.source[:].global_quantities[:].torque_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Total toroidal torque of the source",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_lower",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
+ "distribution_sources.source[:].global_quantities[:].torque_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "torque_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"torque_phi\"",
+  "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_phi_error_upper",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m"
+ },
  "distribution_sources.source[:].global_quantities[:].torque_tor": {
   "data_type": "FLT_0D",
   "documentation": "Total toroidal torque of the source",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1626,7 +1814,8 @@
   "data_type": "FLT_0D",
   "documentation": "Lower error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_lower",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1634,7 +1823,8 @@
   "data_type": "FLT_0D",
   "documentation": "Upper error for \"torque_tor\"",
   "full_path": "distribution_sources/source(i1)/global_quantities(itime)/torque_tor_error_upper",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m"
  },
@@ -1655,6 +1845,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_markers",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "distribution_sources.source[:].markers[:].coordinate_identifier": {
@@ -1663,7 +1854,7 @@
   ],
   "data_type": "STRUCT_ARRAY",
   "doc_identifier": "utilities/coordinate_identifier.xml",
-  "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented\n0) unspecified : unspecified\n1) x : First cartesian coordinate in the horizontal plane\n2) y : Second cartesian coordinate in the horizontal plane (grad(x) x grad(y) = grad(z))\n3) z : Vertical coordinate z\n4) r : Major radius\n5) phi : Toroidal angle\n10) psi : Poloidal magnetic flux\n11) rho_tor : The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field\n12) rho_tor_norm : The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux\n13) rho_pol : The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux\n14) rho_pol_norm : The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux\n20) theta : Geometrical poloidal angle around the magnetic axis\n21) theta_straight : Straight field line poloidal angle\n22) theta_equal_arc : Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane.\n100) velocity : Total velocity; modulus of the velocity vector\n101) velocity_x : Velocity component in the x-direction\n102) velocity_y : Velocity component in the y-direction\n103) velocity_z : Velocity component in the z-direction\n104) velocity_phi : Velocity component in the toroidal direction\n105) velocity_parallel : Velocity component parallel to the magnetic field\n106) velocity_perpendicular : Velocity perpendicular to the magnetic field\n107) velocity_thermal : Velocity normalised to the local thermal velocity of the thermal ions (of the relevant species)\n108) velocity_radial : Velocity component in the radial direction\n200) momentum : Modulus of the relativistic momentum vector\n201) momentum_parallel : Component of the relativistic momentum vector parallel to the magnetic field\n202) momentum_perpendicular : Component of the relativistic momentum vector perpendicular to the magnetic field\n203) canonical_momentum_phi : Canonical toroidal angular momentum\n300) energy_hamiltonian : Hamiltonian energy, including both kinetic and potential energy\n301) energy_kinetic : Kinetic energy\n302) magnetic_moment : magnetic moment\n400) lambda : Ratio, magnetic moment over hamiltonian energy\n402) pitch_angle : Angle between the magnetic field and the velocity vector\n403) pitch : Ratio, parallel velocity over total velocity\n404) pitch_at_min_b : Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit",
+  "documentation": "Set of coordinate identifiers, coordinates on which the markers are represented\n0) unspecified : unspecified\n1) x : First cartesian coordinate in the horizontal plane\n2) y : Second cartesian coordinate in the horizontal plane (grad(x) x grad(y) = grad(z))\n3) z : Vertical coordinate z\n4) r : Major radius\n5) phi : Toroidal angle\n10) psi : Poloidal magnetic flux\n11) rho_tor : The square root of the toroidal flux, sqrt((Phi-Phi_axis)/pi/B0), where Phi is the toroidal flux and B0 is the vaccum magnetic field\n12) rho_tor_norm : The square root of the normalised toroidal flux, sqrt((Phi-Phi_axis)/(Phi_lcf-Phi_axis)), where Phi is the toroidal flux\n13) rho_pol : The square root of the poloidal flux, sqrt(psi-psi_axis), where psi is the poloidal flux\n14) rho_pol_norm : The square root of the normalised poloidal flux, sqrt((psi-psi_axis)/(psi_lcf-psi_axis)), where psi is the poloidal flux\n20) theta : Geometrical poloidal angle around the magnetic axis\n21) theta_straight : Straight field line poloidal angle\n22) theta_equal_arc : Equal-arc poloidal angle; a differential of the angle is proportional to the length of the corresponding arc in the poloidal plane.\n100) velocity : Total velocity; modulus of the velocity vector\n101) velocity_x : Velocity component in the x-direction\n102) velocity_y : Velocity component in the y-direction\n103) velocity_z : Velocity component in the z-direction\n104) velocity_phi : Velocity component in the toroidal direction\n105) velocity_parallel : Velocity component parallel to the magnetic field\n106) velocity_perpendicular : Velocity perpendicular to the magnetic field\n107) velocity_thermal : Velocity normalised to the local thermal velocity of the thermal ions (of the relevant species)\n108) velocity_radial : Velocity component in the radial direction\n200) momentum : Modulus of the relativistic momentum vector\n201) momentum_parallel : Component of the relativistic momentum vector parallel to the magnetic field\n202) momentum_perpendicular : Component of the relativistic momentum vector perpendicular to the magnetic field\n203) canonical_momentum_phi : Canonical toroidal angular momentum\n300) energy_hamiltonian : Hamiltonian energy, including both kinetic and potential energy\n301) energy_kinetic : Kinetic energy\n302) magnetic_moment : magnetic moment\n400) lambda : Ratio, magnetic moment over hamiltonian energy\n402) pitch_angle : Angle between the magnetic field and the velocity vector\n403) pitch : Ratio, parallel velocity over total velocity\n404) pitch_at_min_b : Pitch, ratio between the parallel over the perpendicular velocity, at the minimum value of the magnetic field strength along the guiding centre orbit\n500) n_tor : Toroidal mode number, the wave vector toroidal component being defined as k_tor = n_tor grad phi where phi is the toroidal angle so that a positive n_tor means a wave propagating in the positive phi direction",
   "full_path": "distribution_sources/source(i1)/markers(itime)/coordinate_identifier(i2)",
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
@@ -2118,6 +2309,7 @@
   "lifecycle_status": "alpha",
   "maxoccur": "unbounded",
   "structure_reference": "distribution_sources_source_profiles_1d",
+  "timebasepath": "time",
   "type": "dynamic"
  },
  "distribution_sources.source[:].profiles_1d[:].energy": {
@@ -2369,7 +2561,7 @@
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
   ],
   "data_type": "FLT_1D",
-  "documentation": "Toroidal flux coordinate. rho_tor = sqrt(b_flux_tor/(pi*b0)) ~ sqrt(pi*r^2*b0/(pi*b0)) ~ r [m]. The toroidal field used in its definition is indicated under vacuum_toroidal_field/b0",
+  "documentation": "Toroidal flux coordinate = sqrt(phi/(pi*b0)), where the toroidal magnetic field, b0, corresponds to that stored in vacuum_toroidal_field/b0 and pi can be found in the IMAS constants",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/grid/rho_tor(:)",
   "lifecycle_status": "alpha",
   "type": "dynamic",
@@ -2528,6 +2720,59 @@
   "type": "dynamic",
   "units": "m^3"
  },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Source term for the toroidal momentum equation",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_index": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_index",
+  "change_nbc_version": "3.42.0",
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "dynamic"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_lower": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_lower",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
+ "distribution_sources.source[:].profiles_1d[:].momentum_phi_error_upper": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "momentum_tor_error_upper",
+  "change_nbc_version": "3.42.0",
+  "coordinates": [
+   "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"momentum_phi\"",
+  "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_phi_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "type": "dynamic",
+  "units": "N.m^-2"
+ },
  "distribution_sources.source[:].profiles_1d[:].momentum_tor": {
   "coordinates": [
    "distribution_sources.source[:].profiles_1d[:].grid.rho_tor_norm"
@@ -2535,7 +2780,8 @@
   "data_type": "FLT_1D",
   "documentation": "Source term for the toroidal momentum equation",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2554,7 +2800,8 @@
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_lower(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2565,7 +2812,8 @@
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"momentum_tor\"",
   "full_path": "distribution_sources/source(i1)/profiles_1d(itime)/momentum_tor_error_upper(:)",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "dynamic",
   "units": "N.m^-2"
  },
@@ -2753,6 +3001,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.ion.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion (e.g. H+, D+, T+, He+2, C+, ...)",
+  "full_path": "distribution_sources/source(i1)/species/ion/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -2774,6 +3033,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "distribution_sources/source(i1)/species/ion/state/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.ion.state.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying ion state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "distribution_sources/source(i1)/species/ion/state/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3040,6 +3310,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
   "full_path": "distribution_sources/source(i1)/species/neutral/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.neutral.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral (e.g. H, D, T, He, C, ...)",
+  "full_path": "distribution_sources/source(i1)/species/neutral/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -3061,6 +3342,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying neutral state ",
   "full_path": "distribution_sources/source(i1)/species/neutral/state/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "constant"
+ },
+ "distribution_sources.source[:].species.neutral.state.name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying neutral state ",
+  "full_path": "distribution_sources/source(i1)/species/neutral/state/name",
   "lifecycle_status": "alpha",
   "type": "constant"
  },

@@ -2,7 +2,7 @@
  "amns_data": {
   "documentation": "Atomic, molecular, nuclear and surface physics data. Each occurrence contains the data for a given element (nuclear charge), describing various physical processes. For each process, data tables are organized by charge states. The coordinate system used by the data tables is described under the coordinate_system node.",
   "full_path": "amns_data",
-  "lifecycle_last_change": "3.21.0",
+  "lifecycle_last_change": "3.42.0",
   "lifecycle_status": "alpha",
   "lifecycle_version": "3.0.0",
   "maxoccur": "2"
@@ -53,6 +53,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "amns_data.code.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/code/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "amns_data.code.library": {
   "coordinates": [
    "1...N"
@@ -68,6 +76,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "amns_data/code/library(i1)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.code.library[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/code/library(i1)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -181,6 +197,17 @@
   "data_type": "STR_0D",
   "documentation": "Description of coordinate (e.g. \"Electron temperature\")",
   "full_path": "amns_data/coordinate_system(i1)/coordinate(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.coordinate_system[:].coordinate[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "Name of coordinate (e.g. \"Electron temperature\")",
+  "full_path": "amns_data/coordinate_system(i1)/coordinate(i2)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -284,10 +311,48 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "amns_data.ids_properties.name": {
+  "data_type": "STR_0D",
+  "documentation": "User-defined name for this IDS occurrence",
+  "full_path": "amns_data/ids_properties/name",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "amns_data.ids_properties.occurrence": {
   "data_type": "INT_0D",
   "description": "occurrence number [NOTE: this field only exists in OMAS and is not part of the ITER PDM]",
   "full_path": "amns_data.ids_properties.occurrence"
+ },
+ "amns_data.ids_properties.occurrence_type": {
+  "data_type": "STRUCTURE",
+  "doc_identifier": "utilities/occurrence_type_identifier.xml",
+  "documentation": "Type of data contained in this occurrence\n1) reconstruction : Equilibrium reconstruction\n2) prediction_fixed : Equilibrium prediction, fixed boundary\n3) prediction_free : Equilibrium prediction, free boundary\n4) mapping : Used for mapping equilibrium results from one grid type / resolution to another, or for including variables not present in the first set such as the calculation of magnetic field of other derived parameters",
+  "full_path": "amns_data/ids_properties/occurrence_type",
+  "introduced_after_version": "3.39.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "identifier"
+ },
+ "amns_data.ids_properties.occurrence_type.description": {
+  "data_type": "STR_0D",
+  "documentation": "Verbose description",
+  "full_path": "amns_data/ids_properties/occurrence_type/description",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.occurrence_type.index": {
+  "data_type": "INT_0D",
+  "documentation": "Integer identifier (enumeration index within a list). Private identifier values must be indicated by a negative index.",
+  "full_path": "amns_data/ids_properties/occurrence_type/index",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.occurrence_type.name": {
+  "data_type": "STR_0D",
+  "documentation": "Short string identifier",
+  "full_path": "amns_data/ids_properties/occurrence_type/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "amns_data.ids_properties.plugins": {
   "data_type": "STRUCTURE",
@@ -309,6 +374,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "amns_data/ids_properties/plugins/infrastructure_get/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.plugins.infrastructure_get.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/ids_properties/plugins/infrastructure_get/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -344,6 +417,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "amns_data/ids_properties/plugins/infrastructure_put/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.plugins.infrastructure_put.description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/ids_properties/plugins/infrastructure_put/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -395,6 +476,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "amns_data/ids_properties/plugins/node(i1)/get_operation(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.plugins.node[:].get_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/ids_properties/plugins/node(i1)/get_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -452,6 +541,14 @@
   "lifecycle_status": "alpha",
   "type": "constant"
  },
+ "amns_data.ids_properties.plugins.node[:].put_operation[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/ids_properties/plugins/node(i1)/put_operation(i2)/description",
+  "introduced_after_version": "3.38.1",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
  "amns_data.ids_properties.plugins.node[:].put_operation[:].name": {
   "data_type": "STR_0D",
   "documentation": "Name of software used",
@@ -495,6 +592,14 @@
   "data_type": "STR_0D",
   "documentation": "Unique commit reference of software",
   "full_path": "amns_data/ids_properties/plugins/node(i1)/readback(i2)/commit",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "amns_data.ids_properties.plugins.node[:].readback[:].description": {
+  "data_type": "STR_0D",
+  "documentation": "Short description of the software (type, purpose)",
+  "full_path": "amns_data/ids_properties/plugins/node(i1)/readback(i2)/description",
+  "introduced_after_version": "3.38.1",
   "lifecycle_status": "alpha",
   "type": "constant"
  },
@@ -634,6 +739,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
   "full_path": "amns_data/process(i1)/charge_state(i2)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.process[:].charge_state[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying charge state (e.g. C+, C+2 , C+3, C+4, C+5, C+6, ...)",
+  "full_path": "amns_data/process(i1)/charge_state(i2)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -671,7 +787,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_1D",
   "documentation": "1D table describing the process data",
@@ -690,7 +806,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_1D",
   "documentation": "Lower error for \"table_1d\"",
@@ -701,7 +817,7 @@
  },
  "amns_data.process[:].charge_state[:].table_1d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_1D",
   "documentation": "Upper error for \"table_1d\"",
@@ -712,8 +828,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_2D",
   "documentation": "2D table describing the process data",
@@ -732,8 +848,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_2D",
   "documentation": "Lower error for \"table_2d\"",
@@ -744,8 +860,8 @@
  },
  "amns_data.process[:].charge_state[:].table_2d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_2D",
   "documentation": "Upper error for \"table_2d\"",
@@ -756,9 +872,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_3D",
   "documentation": "3D table describing the process data",
@@ -777,9 +893,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_3D",
   "documentation": "Lower error for \"table_3d\"",
@@ -790,9 +906,9 @@
  },
  "amns_data.process[:].charge_state[:].table_3d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_3D",
   "documentation": "Upper error for \"table_3d\"",
@@ -803,10 +919,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_4D",
   "documentation": "4D table describing the process data",
@@ -825,10 +941,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_4D",
   "documentation": "Lower error for \"table_4d\"",
@@ -839,10 +955,10 @@
  },
  "amns_data.process[:].charge_state[:].table_4d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_4D",
   "documentation": "Upper error for \"table_4d\"",
@@ -853,11 +969,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_5D",
   "documentation": "5D table describing the process data",
@@ -876,11 +992,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Lower error for \"table_5d\"",
@@ -891,11 +1007,11 @@
  },
  "amns_data.process[:].charge_state[:].table_5d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_5D",
   "documentation": "Upper error for \"table_5d\"",
@@ -906,12 +1022,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_6D",
   "documentation": "6D table describing the process data",
@@ -930,12 +1046,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d_error_lower": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_6D",
   "documentation": "Lower error for \"table_6d\"",
@@ -946,12 +1062,12 @@
  },
  "amns_data.process[:].charge_state[:].table_6d_error_upper": {
   "coordinates": [
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate",
-   "amns_data.coordinate_system[:].coordinate"
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values",
+   "amns_data.coordinate_system[:].coordinate[:].values"
   ],
   "data_type": "FLT_6D",
   "documentation": "Upper error for \"table_6d\"",
@@ -1042,6 +1158,17 @@
   "data_type": "STR_0D",
   "documentation": "String identifying the process (e.g. EI, RC, ...)",
   "full_path": "amns_data/process(i1)/label",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
+  "type": "static"
+ },
+ "amns_data.process[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying the process (e.g. EI, RC, ...)",
+  "full_path": "amns_data/process(i1)/name",
   "lifecycle_status": "alpha",
   "type": "static"
  },
@@ -1209,7 +1336,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
   "full_path": "amns_data/process(i1)/products(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static"
  },
  "amns_data.process[:].products[:].mass": {
@@ -1292,6 +1420,16 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
+ },
+ "amns_data.process[:].products[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
+  "full_path": "amns_data/process(i1)/products(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "amns_data.process[:].products[:].relative_charge": {
   "data_type": "INT_0D",
@@ -1499,7 +1637,8 @@
   "data_type": "STR_0D",
   "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
   "full_path": "amns_data/process(i1)/reactants(i2)/label",
-  "lifecycle_status": "alpha",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.42.0",
   "type": "static"
  },
  "amns_data.process[:].reactants[:].mass": {
@@ -1582,6 +1721,16 @@
   "lifecycle_status": "alpha",
   "type": "static",
   "units": "-"
+ },
+ "amns_data.process[:].reactants[:].name": {
+  "change_nbc_description": "leaf_renamed",
+  "change_nbc_previous_name": "label",
+  "change_nbc_version": "3.42.0",
+  "data_type": "STR_0D",
+  "documentation": "String identifying reaction participant (e.g. \"D\", \"e\", \"W\", \"CD4\", \"photon\", \"n\")",
+  "full_path": "amns_data/process(i1)/reactants(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "static"
  },
  "amns_data.process[:].reactants[:].relative_charge": {
   "data_type": "INT_0D",

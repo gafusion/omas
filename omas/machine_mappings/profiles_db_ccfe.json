@@ -10,7 +10,7 @@
  "core_profiles.profiles_1d.:": {
   "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
  },
- "core_profiles.profiles_1d.:.electrons.density": {
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
   "PYTHON": "profile_db_to_ODS(ods, {pulse}, {tok!r}, {db!r}, {ngrid!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature": {

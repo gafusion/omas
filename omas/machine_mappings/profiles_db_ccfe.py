@@ -82,7 +82,7 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
         "['TWOD']['Q']": 'core_profiles.profiles_1d[0].q',
         "['TWOD']['TI']": 'core_profiles.profiles_1d[0].t_i_average',
         "['TWOD']['TE']": 'core_profiles.profiles_1d[0].electrons.temperature',
-        "['TWOD']['NE']": 'core_profiles.profiles_1d[0].electrons.density',
+        "['TWOD']['NE']": 'core_profiles.profiles_1d[0].electrons.density_thermal',
         "['TWOD']['CURTOT']": 'core_profiles.profiles_1d[0].j_tor',
         "['TWOD']['QNBII']": 'q_nbi_i',
         "['TWOD']['QNBIE']": 'q_nbi_e',
@@ -139,4 +139,4 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("profiles_db_ccfe", __all__, globals(), locals())

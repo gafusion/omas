@@ -6,15 +6,16 @@
  ],
  "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
+  "EFIT_run_id": null,
   "EFIT_tree": "EFIT01",
+  "PROFILES_run_id": null,
   "PROFILES_tree": "ZIPFIT01",
   "analysis_type": "CERQUICK",
   "default_tree": "D3D",
   "fast_ece": false,
+  "get_all": true,
   "nref": 0,
-  "revision": "BLESSED",
-  "PROFILES_run_id":  null,
-  "EFIT_run_id":  null
+  "revision": "BLESSED"
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -115,9 +116,12 @@
  "coils_non_axisymmetric.coil.:.name": {
   "PYTHON": "coils_non_axisymmetric_hardware(ods, {pulse})"
  },
+ "core_profiles": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
  "core_profiles.global_quantities.v_loop": {
   "COCOSIO": 11,
-  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse})"
+  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse}, {PROFILES_run_id!r})"
  },
  "core_profiles.ids_properties.homogeneous_time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
@@ -146,6 +150,12 @@
  "core_profiles.profiles_1d.:.electrons.density_fit.psi_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
+ "core_profiles.profiles_1d.:.electrons.density_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.electrons.density_thermal_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
  "core_profiles.profiles_1d.:.electrons.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
@@ -170,12 +180,6 @@
  "core_profiles.profiles_1d.:.ion.:": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
- "core_profiles.profiles_1d.:.ion.:.density": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
- },
- "core_profiles.profiles_1d.:.ion.:.density_error_upper": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
- },
  "core_profiles.profiles_1d.:.ion.:.density_fit.measured": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
@@ -183,6 +187,18 @@
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.density_fit.psi_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_thermal_error_upper": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_thermal_fit.measured": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.ion.:.density_thermal_fit.measured_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.ion.:.element.:": {
@@ -233,6 +249,9 @@
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.profiles_1d.:.pressure_perpendicular": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
+ },
+ "core_profiles.profiles_1d.:.time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.time": {
@@ -297,6 +316,9 @@
  "ec_launchers.beam.:.time": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
+ "ec_launchers.code.parameters.toray.bhalf": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
  "ece": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
@@ -316,6 +338,9 @@
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.channel.:.t_e.data": {
+  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
+ },
+ "ece.channel.:.t_e.data_error_upper": {
   "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "ece.channel.:.time": {
@@ -534,6 +559,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data": {
+  "COCOSIO": 11,
   "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
@@ -575,6 +601,33 @@
  },
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
+ "nbi.unit.:": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.beamlets_group.:": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.beamlets_group.:.angle": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.energy.data": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.energy.time": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.name": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.power_launched.data": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.power_launched.time": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
+ },
+ "nbi.unit.:.species.a": {
+  "PYTHON": "nbi_active_hardware(ods, {pulse})"
  },
  "pf_active.coil.:": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
@@ -679,30 +732,21 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "wall.description_2d.:": {
-  "VALUE": 1
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "wall.description_2d.:.limiter.type.index": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:": {
-  "VALUE": 1
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
-  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[0,])",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
-  "TDI": "transpose(data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.LIM)[1,])",
-  "TRANSPOSE": [
-   1,
-   0,
-   2
-  ],
-  "treename": "{EFIT_tree}"
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "wall.ids_properties.homogeneous_time": {
-  "VALUE": 1
+ "wall.time": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  }
 }

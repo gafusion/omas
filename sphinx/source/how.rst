@@ -102,13 +102,13 @@ The `ODS` class extends native Python dictionary and list classes with:
 
     .. code-block:: python
 
-        ods['core_profiles.profiles_1d.0.electrons.density'].xarray()
+        ods['core_profiles.profiles_1d.0.electrons.densdensity_thermality'].xarray()
 
 14. Conveniently **plot individual quantities**:
 
     .. code-block:: python
 
-        ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density')
+        ods.plot_quantity('core_profiles.profiles_1d.0.electrons.density_thermal')
 
 15. **Use regular expressions** with ``@`` construct for accessing data and plotting:
 
@@ -145,9 +145,9 @@ The `ODS` class extends native Python dictionary and list classes with:
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
 | **HDF5**      | Files using binary HDF5 format (hierarchical data structure)                         | Binary file                   |       no       |          h5py         |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
-| **S3**        | Cloud storage using Amazon Simple Storage Service                                    | Object Store                  |       yes      |         boto3         |
+| **S3**        | Cloud storage using Amazon Simple Storage Service                                    | Object Store                  |       yes      |   boto3 (optional)    |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
-| **MongoDB**   | Document-based distributed database                                                  | MongoDB Database              |       yes      |        pymongo        |
+| **MongoDB**   | Document-based distributed database                                                  | MongoDB Database              |       yes      |  pymongo (optional)   |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+
 | **HDC**       | Hierarchical Dynamic Containers                                                      | Memory                        |       no       |   pyhdc (optional)    |
 +---------------+--------------------------------------------------------------------------------------+-------------------------------+----------------+-----------------------+

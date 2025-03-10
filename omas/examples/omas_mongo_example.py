@@ -44,8 +44,8 @@ print(f' - found {len(odss)} entries')
 print('load a sample GKDB sample json file')
 sample_filename = omas_dir + 'samples/gkdb_linear_eigenvalue.json'
 ods = ODS()
-# warn about `gyrokinetics.fluxes_integrated_norm = []` and drop it
-ods['gyrokinetics'].load(sample_filename, consistency_check='warn_drop')
+# warn about `gyrokinetics_local.fluxes_integrated_norm = []` and drop it
+ods['gyrokinetics_local'].load(sample_filename, consistency_check='warn_drop')
 
 print('write GKDB entry to the database')
 _id = ods.save('mongo', collection='gkdb', database='test')

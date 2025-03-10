@@ -57,6 +57,7 @@ try:
     up = get_mongo_credentials(server=omas_rcparams['default_mongo_server'])
     client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
     client.server_info()
+    client.close()
     failed_MONGO = False
 except (ImportError, ServerSelectionTimeoutError) as _excp:
     failed_MONGO = _excp
@@ -69,6 +70,8 @@ with warnings.catch_warnings():
         failed_OMFIT = False
     except ImportError as _excp:
         failed_OMFIT = _excp
+    except AttributeError as _excp:
+        failed_OMFIT = "omfit_classes, from xarray import * bug "
 
 try:
     import MDSplus
