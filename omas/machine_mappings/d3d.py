@@ -1490,7 +1490,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
-        pulse_id = int(str(pulse) + PROFILES_run_id)
+        pulse_id = pulse
+        if PROFILES_run_id is not None:
+            pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
             "electrons.density_thermal": "N_E",
