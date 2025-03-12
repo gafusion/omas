@@ -568,8 +568,11 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['time'] = time
         ntime = len(beam['time'])
-        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+        phi_tor = np.atleast_1d(np.deg2rad(gyrotrons[f'AZIANG_{system_no}'] - 180.0))
+        theta_pol = np.atleast_1d(np.deg2rad(gyrotrons[f'POLANG_{system_no}'] - 90.0))
+        
+        beam['steering_angle_tor'] = -np.arcsin(np.cos(theta_pol)*np.sin(phi_tor))
+        beam['steering_angle_pol'] = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
 
         beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
@@ -1667,4 +1670,5 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.time"] = [0.0]
 
 if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
     test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
