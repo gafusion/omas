@@ -572,7 +572,10 @@ def ec_launcher_active_hardware(ods, pulse):
         ntime = len(beam['time'])
         phi_tor = np.atleast_1d(np.deg2rad(gyrotrons[f'AZIANG_{system_no}'] - 180.0))
         theta_pol = np.atleast_1d(np.deg2rad(gyrotrons[f'POLANG_{system_no}'] - 90.0))
-        
+        if len(phi_tor) == 1 and len(phi_tor) != len(time):
+            phi_tor = np.ones(len(time)) * phi_tor[0]
+        if len(theta_pol) == 1 and len(theta_pol) != len(time):
+            theta_pol = np.ones(len(time)) * theta_pol[0]
         beam['steering_angle_tor'] = -np.arcsin(np.cos(theta_pol)*np.sin(phi_tor))
         beam['steering_angle_pol'] = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
 
@@ -620,6 +623,7 @@ def ec_launcher_active_hardware(ods, pulse):
     # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
     # For more info look for hlwec in the TORAY documentation
     cp = CodeParameters()
+    cp["toray"] = ODS()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
