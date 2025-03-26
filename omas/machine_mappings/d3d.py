@@ -528,6 +528,8 @@ def ec_launcher_active_hardware(ods, pulse):
         for field in ['LAUNCH_R', 'LAUNCH_Z', 'PORT']:
             query[field + f'_{system_no}'] = setup + cur_system + f'ANTENNA.{field}'
         query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
+        query["GB_RCURVE" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_RCURVE'
+        query["GB_WAIST" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_WAIST'
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
 
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
@@ -568,8 +570,14 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['time'] = time
         ntime = len(beam['time'])
-        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+        phi_tor = np.atleast_1d(np.deg2rad(gyrotrons[f'AZIANG_{system_no}'] - 180.0))
+        theta_pol = np.atleast_1d(np.deg2rad(gyrotrons[f'POLANG_{system_no}'] - 90.0))
+        if len(phi_tor) == 1 and len(phi_tor) != len(time):
+            phi_tor = np.ones(len(time)) * phi_tor[0]
+        if len(theta_pol) == 1 and len(theta_pol) != len(time):
+            theta_pol = np.ones(len(time)) * theta_pol[0]
+        beam['steering_angle_tor'] = -np.arcsin(np.cos(theta_pol)*np.sin(phi_tor))
+        beam['steering_angle_pol'] = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
 
         beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
@@ -591,22 +599,31 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
             
-
-        # The spot size and radius are computed using the evolution formula for Gaussian beams
-        # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
-        # The beam is divergent because the beam waist is focused on to the final launching mirror.
-        # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
-        # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
-        # Hence, the inverse curvature radius is zero
-        # Notably the ECRH beams are astigmatic in reality so this is just an approximation
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
-        beam['spot.size'] = 0.0172 * np.ones([2, ntime])
+        # The spot size and radius are computed using the evolution formula for Gaussian beams
+        # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
+        # Try values from MDSplus first:
+        try:
+            # DIII-D uses negative for divergent which corresponds to a positive sign in IMAS
+            beam['phase.curvature'][:] = -1.0/systems["GB_RCURVE" + f'_{system_no}']
+            beam['spot.size'] = np.zeros([2, ntime])
+            beam['spot.size'][0,:] = systems["GB_WAIST" + f'_{system_no}']
+            beam['spot.size'][1,:] = systems["GB_WAIST" + f'_{system_no}']
+        except Exception:
+            # Use defaults if data not available
+            # The beam is divergent because the beam waist is focused on to the final launching mirror.
+            # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
+            # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
+            # Hence, the inverse curvature radius is zero
+            # Notably the ECRH beams are astigmatic in reality so this is just an approximation
+            beam['spot.size'] = 0.0172 * np.ones([2, ntime])
 
     # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
     # For more info look for hlwec in the TORAY documentation
     cp = CodeParameters()
+    cp["toray"] = ODS()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
@@ -1667,4 +1684,5 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.time"] = [0.0]
 
 if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
     test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
