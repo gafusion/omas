@@ -395,7 +395,12 @@ def pf_active_hardware(ods, pulse):
         ods['pf_active.coil'][k]['identifier'] = fcid
         ods['pf_active.coil'][k]['element.0.name'] = fcid
         ods['pf_active.coil'][k]['element.0.identifier'] = fcid
-
+        if k < 6:
+            # `flux` function
+            ods['pf_active.coil'][k]["function.0.index"] = 0
+        else:
+            # `shaping` function
+            ods['pf_active.coil'][k]["function.0.index"] = 1
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
@@ -512,7 +517,6 @@ def ec_launcher_active_hardware(ods, pulse):
     try:
         system_max = num_systems + 1
     except:
-        printe('No ECH system found')
         return
 
     # we use last time of EFIT01 to trim data
