@@ -639,7 +639,6 @@ def nbi_active_hardware(ods, pulse):
 
     trim_start = 0
     trim_end = 0
-    R0 = 1.6955
     beam_index = 0
     for beam_name in beam_names:
         if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
@@ -665,25 +664,7 @@ def nbi_active_hardware(ods, pulse):
         if not len(gas):
             nbu["species.a"] = 2.0
         else:            
-            nbu["species.a"] = beam_mass = int(gas[1])
-
-        # infer toroidal angle of the beam from torque
-        index = (data[f"{beam_name}.PINJ"] * data[f"{beam_name}.VBEAM"]) > 0.0
-        if sum(index) > 0:
-            torque_tor = data[f"{beam_name}.TINJ"][index]
-            power_launched = data[f"{beam_name}.PINJ"][index]
-            beam_mass = nbu["species.a"]
-            beam_energy = data[f"{beam_name}.VBEAM"][index]
-            particles_per_second = power_launched / (beam_energy * e)
-            velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
-            force = particles_per_second * velocity * beam_mass * m_u
-            torque_tot = force * R0
-            angle = np.arcsin(torque_tor / torque_tot)
-            angle = sorted(angle)
-            angle = angle[int(len(angle)/2)] # median value
-        else:
-            angle = 0.0
-        nbu["beamlets_group[0].angle"] = angle
+            nbu["species.a"] = int(gas[1])
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
