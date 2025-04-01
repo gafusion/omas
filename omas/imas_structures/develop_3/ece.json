@@ -1773,6 +1773,106 @@
   "type": "dynamic",
   "units": "s"
  },
+ "ece.channel[:].calibration_factor": {
+  "data_type": "FLT_0D",
+  "documentation": "Calibration factor, used as t_radiation = calibration_factor * (voltage_t_radiation - calibration_offset)",
+  "full_path": "ece/channel(i1)/calibration_factor",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV.V^-1"
+ },
+ "ece.channel[:].calibration_factor_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"calibration_factor\"",
+  "full_path": "ece/channel(i1)/calibration_factor_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].calibration_factor_error_lower": {
+  "data_type": "FLT_0D",
+  "documentation": "Lower error for \"calibration_factor\"",
+  "full_path": "ece/channel(i1)/calibration_factor_error_lower",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV.V^-1"
+ },
+ "ece.channel[:].calibration_factor_error_upper": {
+  "data_type": "FLT_0D",
+  "documentation": "Upper error for \"calibration_factor\"",
+  "full_path": "ece/channel(i1)/calibration_factor_error_upper",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "type": "static",
+  "units": "eV.V^-1"
+ },
+ "ece.channel[:].calibration_offset": {
+  "data_type": "STRUCTURE",
+  "documentation": "Calibration offset, may be re-evaluated dynamically during long pulses on some experiments",
+  "full_path": "ece/channel(i1)/calibration_offset",
+  "introduced_after_version": "3.41.0",
+  "lifecycle_status": "alpha",
+  "structure_reference": "signal_flt_1d",
+  "units": "V"
+ },
+ "ece.channel[:].calibration_offset.data": {
+  "coordinates": [
+   "ece.channel[:].calibration_offset.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Data",
+  "full_path": "ece/channel(i1)/calibration_offset/data(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "calibration_offset/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].calibration_offset.data_error_index": {
+  "data_type": "INT_TYPE",
+  "documentation": "Index in the error_description list for \"data\"",
+  "full_path": "ece/channel(i1)/calibration_offset/data_error_index",
+  "lifecycle_status": "obsolescent",
+  "lifecycle_version": "3.39.0",
+  "type": "constant"
+ },
+ "ece.channel[:].calibration_offset.data_error_lower": {
+  "coordinates": [
+   "ece.channel[:].calibration_offset.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Lower error for \"data\"",
+  "full_path": "ece/channel(i1)/calibration_offset/data_error_lower(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "calibration_offset/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].calibration_offset.data_error_upper": {
+  "coordinates": [
+   "ece.channel[:].calibration_offset.time"
+  ],
+  "data_type": "FLT_1D",
+  "documentation": "Upper error for \"data\"",
+  "full_path": "ece/channel(i1)/calibration_offset/data_error_upper(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "calibration_offset/time",
+  "type": "dynamic",
+  "units": "V"
+ },
+ "ece.channel[:].calibration_offset.time": {
+  "coordinates": [
+   "1...N"
+  ],
+  "data_type": "FLT_1D_TYPE",
+  "documentation": "Time",
+  "full_path": "ece/channel(i1)/calibration_offset/time(:)",
+  "lifecycle_status": "alpha",
+  "timebasepath": "calibration_offset/time",
+  "type": "dynamic",
+  "units": "s"
+ },
  "ece.channel[:].delta_position_suprathermal": {
   "data_type": "STRUCTURE",
   "documentation": "Simple estimate of the difference in position induced by the presence of suprathermal electrons. Position without corrections = position - delta_position_suprathermal",
@@ -3334,7 +3434,7 @@
    "1...N"
   ],
   "data_type": "FLT_1D_TYPE",
-  "documentation": "Timebase for the processed dynamic data of this channel (outside of the beam structure)",
+  "documentation": "Timebase for the processed dynamic data of this channel (outside of the beam and calibration_offset structures)",
   "full_path": "ece/channel(i1)/time(:)",
   "lifecycle_status": "alpha",
   "timebasepath": "time",
@@ -3917,16 +4017,32 @@
   "type": "constant",
   "url": "utilities/IDS-path-syntax.md"
  },
- "ece.ids_properties.provenance.node[:].sources": {
+ "ece.ids_properties.provenance.node[:].reference": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
-  "full_path": "ece/ids_properties/provenance/node(i1)/sources(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of references used to populate or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the reference is an input to the process described in the \"code\" structure at the root of the IDS. The reference can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the reference, or the persistent identifier of the data reference). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data references.",
+  "full_path": "ece/ids_properties/provenance/node(i1)/reference(i2)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
-  "type": "constant",
+  "maxoccur": "10",
+  "structure_reference": "ids_provenance_node_reference",
   "url": "utilities/IMAS-URI-scheme.md"
+ },
+ "ece.ids_properties.provenance.node[:].reference[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name",
+  "full_path": "ece/ids_properties/provenance/node(i1)/reference(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "ece.ids_properties.provenance.node[:].reference[:].timestamp": {
+  "data_type": "STR_0D",
+  "documentation": "Date and time (UTC) at which the reference was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z",
+  "full_path": "ece/ids_properties/provenance/node(i1)/reference(i2)/timestamp",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "ece.ids_properties.provider": {
   "data_type": "STR_0D",
