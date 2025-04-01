@@ -19,7 +19,7 @@ __regression_arguments__ = {'__all__': __all__}
 
 
 @machine_mapping_function(__regression_arguments__, pulse=4898)
-def pegasus_equil_data(ods, pulse, user_argument='loading data from Pegasus Data Archive'):
+def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+'):
     """
     Loads all of the pegasus magnetics and coil current data into the ods.
     
@@ -76,7 +76,9 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from Pegasus Data
         
         unwrap(pegasus_pf_hardware)(ods1, pulse)
         
-        # wall currents are stored in a single array so need to treat those differently for now - ACS 3-21-2025    
+        # wall currents are stored in a single array so need to treat those differently for now - ACS 3-21-2025
+        # update: all currents are stored in the I_v_t array. The first six in the test
+        #           tree are for EF coils, but need to determine which ones.
         # wall currents are presently set as follows:
             #Wall Coil     I_v_t index
             #  1                6
@@ -96,48 +98,13 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from Pegasus Data
         
         for k in ods1['pf_active.coil']:
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
-            print(identifier)
-            if identifier=='WALL1':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[6][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL2':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[15][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL3':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[22][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL4':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[32][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL5':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[41][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL6':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[48][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALL7':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[58][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALLT1':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[75][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALLT2':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[83][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALLT3':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[91][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            elif identifier=='WALLT4':
-                ods[f'pf_active.coil.{k}.current.data'] = wall_I_v_t[99][:]
-                ods[f'pf_active.coil.{k}.current.time'] = wall_t
-            else:
-                try:
-                    ods[f'pf_active.coil.{k}.current.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
-                    ods[f'pf_active.coil.{k}.current.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
-                    print(identifier+" loaded")
-                except:
-                    print(identifier+" not loaded")
-            
+            try:
+                ods[f'pf_active.coil.{k}.current.data'] = c.get('\\TOP.OMAS:'+identifier).data()
+                ods[f'pf_active.coil.{k}.current.time'] = c.get('dim_of(\\TOP.OMAS:'+identifier+')').data()
+                print(identifier+" loaded")
+            except:
+                print(identifier+" not loaded")
+                
     c.closeTree('p3magtest', pulse)
     c.disconnect()
 
