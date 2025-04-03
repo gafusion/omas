@@ -3,6 +3,7 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
+from omas.utilities.machine_mapping_decorator import machine_mapping_function
 import MDSplus #mdsthin
 from os import path
 from math import pi
