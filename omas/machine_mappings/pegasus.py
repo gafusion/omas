@@ -3,7 +3,7 @@ from inspect import unwrap
 from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
-import mdsthin
+import MDSplus #mdsthin
 from os import path
 from math import pi
 
@@ -19,7 +19,7 @@ __regression_arguments__ = {'__all__': __all__}
 
 
 @machine_mapping_function(__regression_arguments__, pulse=4898)
-def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+'):
+def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbose = False):
     """
     Loads all of the pegasus magnetics and coil current data into the ods.
     
@@ -41,7 +41,8 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+'):
     """
     ods['dataset_description.ids_properties.comment'] = f'Comment for {pulse}: {user_argument}'
 
-    c = mdsthin.Connection('atum.ep.wisc.edu')
+    #c = mdsthin.Connection('atum.ep.wisc.edu')
+    c = MDSplus.Connection('atum.ep.wisc.edu')
     c.openTree('p3magtest', pulse)
     
     # get pf_active hardware description --without-- placing the data in this ods
@@ -60,14 +61,14 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+'):
             if identifier in mdsDiags:
                 ods[f'magnetics.flux_loop.{k}.flux.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
                 ods[f'magnetics.flux_loop.{k}.flux.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
-                print(identifier+' loaded')
+                if verbose: print(identifier+' loaded')
         
         for k in ods1['magnetics.b_field_pol_probe']:
             identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
             if identifier in mdsDiags:
                 ods[f'magnetics.b_field_pol_probe.{k}.field.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
                 ods[f'magnetics.b_field_pol_probe.{k}.field.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
-                print(identifier+' loaded')
+                if verbose: print(identifier+' loaded')
         
         ods['magnetics.ip.0.data'] = c.get('\\TOP.AUTOMAG:PLASMAROGA').data()
         ods['magnetics.ip.0.time'] = c.get('dim_of(\\TOP.AUTOMAG:PLASMAROGA)').data()
@@ -101,9 +102,9 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+'):
             try:
                 ods[f'pf_active.coil.{k}.current.data'] = c.get('\\TOP.OMAS:'+identifier).data()
                 ods[f'pf_active.coil.{k}.current.time'] = c.get('dim_of(\\TOP.OMAS:'+identifier+')').data()
-                print(identifier+" loaded")
+                if verbose: print(identifier+" loaded")
             except:
-                print(identifier+" not loaded")
+                if verbose: print(identifier+" not loaded")
                 
     c.closeTree('p3magtest', pulse)
     c.disconnect()
