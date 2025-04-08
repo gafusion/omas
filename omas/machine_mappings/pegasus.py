@@ -117,8 +117,8 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbo
     #c.disconnect()
 
 
-@machine_mapping_function(__regression_arguments__, pulse=4898)
-def pegasus_pf_hardware(ods, pulse, user_argument='initial Pegasus III model'):
+@machine_mapping_function(__regression_arguments__)
+def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
     """
     Loads Pegasus PF coil hardware geometry.
     
