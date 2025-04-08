@@ -36,6 +36,9 @@
  ,"magnetics.flux_loop.:.position.:.z" : {
  "PYTHON":"magnetics_hardware(ods)"
  }
+ ,"magnetics.b_field_pol_probe.:": {
+  "PYTHON": "magnetics_hardware(ods)"
+ }
  ,"magnetics.b_field_pol_probe.:.field.data" : {
  "PYTHON":"pegasus_equil_data(ods, {pulse})"
  ,"COCOSIO":1
@@ -68,7 +71,7 @@
  ,"pf_active.coil.:.identifier" : {
  "PYTHON":"pegasus_pf_hardware(ods)"
  }
- ,"pf_active.coil.name:" : {
+ ,"pf_active.coil.:.name" : {
  "PYTHON":"pegasus_pf_hardware(ods)"
  }
  ,"pf_active.coil.:element.:" : {
