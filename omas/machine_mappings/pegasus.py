@@ -53,63 +53,68 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbo
     unwrap(magnetics_hardware)(ods1)
     
     # get list of diagnostic names in tree to avoid node not found errors while loading
-    diags = c.tcl('dir \\P3MAGTEST::TOP.AUTOMAG.**********')
-    dList = diags.split()
-    dList = dList[1:-4]
-    mdsDiags = [s[1:] for s in dList]
-    with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
-        for k in ods1['magnetics.flux_loop']:
-            identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
-            if identifier in mdsDiags:
-                ods[f'magnetics.flux_loop.{k}.flux.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
-                ods[f'magnetics.flux_loop.{k}.flux.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
-                if verbose: print(identifier+' loaded')
+    #diags = c.tcl('dir \\P3MAGTEST::TOP.AUTOMAG.**********')
+    #dList = diags.split()
+    #dList = dList[1:-4]
+    #mdsDiags = [s[1:] for s in dList]
+    #with omas_environment(ods, dynamic_path_creation='dynamic_array_structures'):
+    verbose = False
+    for k in ods1['magnetics.flux_loop']:
+        identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
+        try:
+            ods[f'magnetics.flux_loop.{k}.flux.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
+            ods[f'magnetics.flux_loop.{k}.flux.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
+            if verbose: print(identifier+' loaded')
+        except:
+            if verbose: print(identifier+' not loaded')
+    
+    for k in ods1['magnetics.b_field_pol_probe']:
+        identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
+        try:
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
+            ods[f'magnetics.b_field_pol_probe.{k}.field.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
+            if verbose: print(identifier+' loaded')
+        except:
+            if verbose: print(identifier+' not loaded')
+    
+    ods['magnetics.ip.0.data'] = c.get('\\TOP.AUTOMAG:PLASMAROGA').data()*-1
+    ods['magnetics.ip.0.time'] = c.get('dim_of(\\TOP.AUTOMAG:PLASMAROGA)').data()
+    ods['magnetics.ip.1.data'] = c.get('\\TOP.AUTOMAG:PLASMAROGB').data()*-1
+    ods['magnetics.ip.1.time'] = c.get('dim_of(\\TOP.AUTOMAG:PLASMAROGB)').data()
+    
+    unwrap(pegasus_pf_hardware)(ods1, pulse)
+    
+    # wall currents are stored in a single array so need to treat those differently for now - ACS 3-21-2025
+    # update: all currents are stored in the I_v_t array. The first six in the test
+    #           tree are for EF coils, but need to determine which ones.
+    # wall currents are presently set as follows:
+        #Wall Coil     I_v_t index
+        #  1                6
+        #  2                15
+        #  3                22
+        #  4                32
+        #  5                41
+        #  6                48
+        #  7                58
+        #  T1               75
+        #  T2               83
+        #  T3               91
+        #  T4               99
         
-        for k in ods1['magnetics.b_field_pol_probe']:
-            identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
-            if identifier in mdsDiags:
-                ods[f'magnetics.b_field_pol_probe.{k}.field.data'] = c.get('\\TOP.AUTOMAG:'+identifier).data()
-                ods[f'magnetics.b_field_pol_probe.{k}.field.time'] = c.get('dim_of(\\TOP.AUTOMAG:'+identifier+')').data()
-                if verbose: print(identifier+' loaded')
-        
-        ods['magnetics.ip.0.data'] = c.get('\\TOP.AUTOMAG:PLASMAROGA').data()
-        ods['magnetics.ip.0.time'] = c.get('dim_of(\\TOP.AUTOMAG:PLASMAROGA)').data()
-        ods['magnetics.ip.1.data'] = c.get('\\TOP.AUTOMAG:PLASMAROGB').data()
-        ods['magnetics.ip.1.time'] = c.get('dim_of(\\TOP.AUTOMAG:PLASMAROGB)').data()
-        
-        unwrap(pegasus_pf_hardware)(ods1, pulse)
-        
-        # wall currents are stored in a single array so need to treat those differently for now - ACS 3-21-2025
-        # update: all currents are stored in the I_v_t array. The first six in the test
-        #           tree are for EF coils, but need to determine which ones.
-        # wall currents are presently set as follows:
-            #Wall Coil     I_v_t index
-            #  1                6
-            #  2                15
-            #  3                22
-            #  4                32
-            #  5                41
-            #  6                48
-            #  7                58
-            #  T1               75
-            #  T2               83
-            #  T3               91
-            #  T4               99
-            
-        wall_I_v_t = c.get('\\TOP.WC2:'+'I_v_t').data()
-        wall_t = c.get('dim_of(\\TOP.WC2:'+'I_v_t)').data()
-        
-        for k in ods1['pf_active.coil']:
-            identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
-            try:
-                ods[f'pf_active.coil.{k}.current.data'] = c.get('\\TOP.OMAS:'+identifier).data()
-                ods[f'pf_active.coil.{k}.current.time'] = c.get('dim_of(\\TOP.OMAS:'+identifier+')').data()
-                if verbose: print(identifier+" loaded")
-            except:
-                if verbose: print(identifier+" not loaded")
+    wall_I_v_t = c.get('\\TOP.WC2:'+'I_v_t').data()
+    wall_t = c.get('dim_of(\\TOP.WC2:'+'I_v_t)').data()
+    
+    for k in ods1['pf_active.coil']:
+        identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
+        try:
+            ods[f'pf_active.coil.{k}.current.data'] = c.get('\\TOP.OMAS:'+identifier).data()
+            ods[f'pf_active.coil.{k}.current.time'] = c.get('dim_of(\\TOP.OMAS:'+identifier+')').data()
+            if verbose: print(identifier+" loaded")
+        except:
+            if verbose: print(identifier+" not loaded")
                 
     c.closeTree('p3magtest', pulse)
-    c.disconnect()
+    #c.disconnect()
 
 
 @machine_mapping_function(__regression_arguments__, pulse=4898)
@@ -557,4 +562,4 @@ def magnetics_hardware(ods):
 
 # =====================
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions('pegasus',__all__, globals(), locals())
