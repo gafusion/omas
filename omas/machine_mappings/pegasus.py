@@ -408,11 +408,13 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
         
         # coil geometric specifications
         if (coil[4] == 0.0 and coil[5] == 0.0): #rectangular coil geometry
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.geometry_type'] = 2
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.r'] = coil[0]
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.z'] = coil[1]
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.width'] = coil[2]
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.height'] = coil[3]
         else: #oblique coil geometry - parallelogram 
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.geometry_type'] = 3
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.r'] = coil[0]
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.z'] = coil[1]
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.length_alpha'] = coil[2]
