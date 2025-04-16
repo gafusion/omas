@@ -391,6 +391,7 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
         #check if new coil name, if so, reset element counter
         try:
             if last_coil != coil[8]:
+                print(last_coil,count)
                 count=0
         except NameError:
             last_coil = coil[8]
@@ -404,23 +405,24 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
         ename = coil[8]+'_'+str(count)
         ods['pf_active']['coil'][coil[6]]['element'][count]['name'] = ename
         ods['pf_active']['coil'][coil[6]]['element'][count]['identifier'] = ename
-        ods['pf_active']['coil'][coil[6]]['element'][count]['turns_with_sign'] = coil[7]
+        ods['pf_active']['coil'][coil[6]]['element'][count]['turns_with_sign'] = float(coil[7])
         
         # coil geometric specifications
-        if (coil[4] == 0.0 and coil[5] == 0.0): #rectangular coil geometry
+        if (float(coil[4])==0.0 and float(coil[5])==0.0): #rectangular coil geometry
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.geometry_type'] = 2
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.r'] = coil[0]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.z'] = coil[1]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.width'] = coil[2]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.height'] = coil[3]
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.r'] = float(coil[0])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.z'] = float(coil[1])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.width'] = float(coil[2])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.rectangle.height'] = float(coil[3])
         else: #oblique coil geometry - parallelogram 
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.geometry_type'] = 3
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.r'] = coil[0]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.z'] = coil[1]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.length_alpha'] = coil[2]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.length_beta'] = coil[3]
-            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.alpha'] = coil[4]
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.r'] = float(coil[0])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.z'] = float(coil[1])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.length_alpha'] = float(coil[2])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.length_beta'] = float(coil[3])
+            ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.alpha'] = float(coil[4])
             ods['pf_active']['coil'][coil[6]]['element'][count]['geometry.oblique.beta'] = (float(coil[5])-90.0)*pi/180.0
+        count+=1
             
         
 
@@ -549,16 +551,16 @@ def magnetics_hardware(ods):
     for k,fl in enumerate(silop):
         ods['magnetics']['flux_loop'][k]['name'] = fl[2]
         ods['magnetics']['flux_loop'][k]['identifier'] = fl[2]
-        ods['magnetics']['flux_loop'][k]['position.0.r'] = fl[0]
-        ods['magnetics']['flux_loop'][k]['position.0.z'] = fl[1]
+        ods['magnetics']['flux_loop'][k]['position.0.r'] = float(fl[0])
+        ods['magnetics']['flux_loop'][k]['position.0.z'] = float(fl[1])
         
     for k,bdot in enumerate(mprobes):
         ods['magnetics']['b_field_pol_probe'][k]['name'] = bdot[4]
         ods['magnetics']['b_field_pol_probe'][k]['identifier'] = bdot[4]
-        ods['magnetics']['b_field_pol_probe'][k]['position.r'] = bdot[0]
-        ods['magnetics']['b_field_pol_probe'][k]['position.z'] = bdot[1]
-        ods['magnetics']['b_field_pol_probe'][k]['position.phi'] = bdot[2]
-        ods['magnetics']['b_field_pol_probe'][k]['poloidal_angle'] = bdot[3]
+        ods['magnetics']['b_field_pol_probe'][k]['position.r'] = float(bdot[0])
+        ods['magnetics']['b_field_pol_probe'][k]['position.z'] = float(bdot[1])
+        ods['magnetics']['b_field_pol_probe'][k]['position.phi'] = float(bdot[2])
+        ods['magnetics']['b_field_pol_probe'][k]['poloidal_angle'] = float(bdot[3])
     
 
 
