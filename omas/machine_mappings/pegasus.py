@@ -42,6 +42,7 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbo
 
     """
     ods['dataset_description.ids_properties.comment'] = f'Comment for {pulse}: {user_argument}'
+    ods['dataset_description.data_entry.machine'] = 'pegasus'
 
     #c = mdsthin.Connection('atum.ep.wisc.edu')
     c = MDSplus.Connection('atum.ep.wisc.edu')
@@ -140,6 +141,9 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
     None.
 
     """
+    
+    ods['dataset_description.data_entry.machine'] = 'pegasus'
+    
     #   R   Z   dR  dZ  tilt1   tilt2   FCID   FCturn   Name
     
     fc_dat = np.array(
@@ -391,7 +395,7 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
         #check if new coil name, if so, reset element counter
         try:
             if last_coil != coil[8]:
-                print(last_coil,count)
+                #print(last_coil,count)
                 count=0
         except NameError:
             last_coil = coil[8]
@@ -426,7 +430,25 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
             
         
 
+@machine_mapping_function(__regression_arguments__)
+def pegasus_limiter(ods, user_argument='initial Pegasus III model'):
+    """
+    2D definition of limiter box
+
+    Parameters
+    ----------
+    ods : TYPE
+        DESCRIPTION.
+    user_argument : TYPE, optional
+        DESCRIPTION. The default is 'initial Pegasus III model'.
+
+    Returns
+    -------
+    None.
+
+    """
     
+    ods['dataset_description.data_entry.machine'] = 'pegasus'
     limiter = np.array([[0.055, 0.66],
                        [0.074, 0.66],
                        [0.122, 0.746],
@@ -441,10 +463,23 @@ def pegasus_pf_hardware(ods, user_argument='initial Pegasus III model'):
                        [0.122, -0.746],
                        [0.074, -0.66],
                        [0.055, -0.66]])
-
+    
+    ods['wall.description_2d.0.limiter.type.index'] = 0
+    ods['wall.description_2d.0.limiter.type.name'] = 'first_wall'
+    ods['wall.description_2d.0.limiter.type.description'] = 'first_wall'
+    r=[]
+    z=[]
+    for p in limiter:
+        r.append(p[0])
+        z.append(p[1])
+    ods['wall.description_2d.0.limiter.unit.0.outline.r'] = r
+    ods['wall.description_2d.0.limiter.unit.0.outline.z'] = z
+    
     
 @machine_mapping_function(__regression_arguments__,)
 def magnetics_hardware(ods):
+    
+    ods['dataset_description.data_entry.machine'] = 'pegasus'
     
     # flux loops [RSI, ZSI, SILOP_NAME]
     silop = [[0.0606, 0.696, 'CFL01'],
@@ -549,6 +584,7 @@ def magnetics_hardware(ods):
         ]
     
     for k,fl in enumerate(silop):
+        ods['magnetics']['flux_loop'][k]['type.index'] = 1
         ods['magnetics']['flux_loop'][k]['name'] = fl[2]
         ods['magnetics']['flux_loop'][k]['identifier'] = fl[2]
         ods['magnetics']['flux_loop'][k]['position.0.r'] = float(fl[0])
@@ -561,6 +597,10 @@ def magnetics_hardware(ods):
         ods['magnetics']['b_field_pol_probe'][k]['position.z'] = float(bdot[1])
         ods['magnetics']['b_field_pol_probe'][k]['position.phi'] = float(bdot[2])
         ods['magnetics']['b_field_pol_probe'][k]['poloidal_angle'] = float(bdot[3])
+        if 'PDX' in bdot[4]:
+            ods['magnetics']['b_field_pol_probe'][k]['length'] = 0.027
+        else:
+            ods['magnetics']['b_field_pol_probe'][k]['length'] = 0.018
     
 
 
