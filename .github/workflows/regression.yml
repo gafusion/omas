@@ -24,7 +24,7 @@ jobs:
           options: -v ${{ github.workspace }}:/workspace -w /workspace
           run: |
             apt-get update
-            apt-get install -y libhdf5-dev libnetcdf-dev
+            apt-get install -y libhdf5-dev libnetcdf-dev gfortran
             python -m pip install --upgrade pip
             python -m pip install numpy
             python -m pip install -r requirements.txt
