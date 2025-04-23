@@ -3,67 +3,34 @@ name: Regression tests
 on:
   push:
     branches: [ master ]
-
   pull_request:
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip github]')"
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11']
-    # 3.12 does not yet work because numpy removed numpy.distutils that pygacode relies on
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-
-
-    - name: Extra dependencies required for 3.7
-      if: ${{matrix.python-version == '3.7'}}
-      run: |
-        sudo apt-get update
-        sudo apt-get install libhdf5-dev libnetcdf-dev
-
-    - name: Install numpy
-      run: |
-        python3 -m pip install numpy
-
-    - name: Install dependencies
-      run: |
-        python3 -m pip install -r requirements.txt
-        python3 -m pip install boto3 pymongo xmltodict
-
-    # numpy is a build time dependency of pygacode
-    # but before pygacode 1.0 it did not specify its build dependencies correctly
-    # and pygacode requires python >= 3.8,
-    # so for 3.7 we need to build without build isolation and manually install numpy
-    - name: Install OMAS (Py 3.7, 3.8, 3.9)
-      if: ${{matrix.python-version == '3.7' || matrix.python-version == '3.8' || matrix.python-version == '3.9'}}
-      run: |
-        python3 -m pip install wheel
-        python3 -m pip install --no-build-isolation .[machine]
-
-    - name: Install OMAS (Py 3.6, 3.10, 3.11)
-      if: ${{matrix.python-version == '3.6' || matrix.python-version == '3.10' || matrix.python-version == '3.11' }}
-      run: |
-        python3 -m pip install .[machine]
-
-    - name: Move to root and try importing OMAS
-      run: |
-        cd /
-        python3 -c "import omas; print(omas.__version__)"
-
-    - name: Run OMAS tests
-      run: |
-        make test
+      - name: Run tests in Python ${{ matrix.python-version }} container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: python:${{ matrix.python-version }}
+          options: -v ${{ github.workspace }}:/workspace -w /workspace
+          run: |
+            apt-get update
+            apt-get install -y libhdf5-dev libnetcdf-dev
+            python -m pip install --upgrade pip
+            python -m pip install numpy
+            python -m pip install -r requirements.txt
+            python -m pip install boto3 pymongo xmltodict
+            python -m pip install wheel
+            python -m pip install --no-build-isolation .[machine]
+            cd /
+            python -c "import omas; print(omas.__version__)"
+            make test
