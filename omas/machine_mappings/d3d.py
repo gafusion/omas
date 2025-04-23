@@ -532,6 +532,8 @@ def ec_launcher_active_hardware(ods, pulse):
         for field in ['LAUNCH_R', 'LAUNCH_Z', 'PORT']:
             query[field + f'_{system_no}'] = setup + cur_system + f'ANTENNA.{field}'
         query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
+        query["GB_RCURVE" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_RCURVE'
+        query["GB_WAIST" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_WAIST'
     systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
 
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
@@ -572,8 +574,14 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['time'] = time
         ntime = len(beam['time'])
-        beam['steering_angle_tor'] = np.atleast_1d(np.deg2rad((gyrotrons[f'AZIANG_{system_no}'] - 180.0)))
-        beam['steering_angle_pol'] = np.atleast_1d(np.deg2rad((gyrotrons[f'POLANG_{system_no}'] - 90.0)))
+        phi_tor = np.atleast_1d(np.deg2rad(gyrotrons[f'AZIANG_{system_no}'] - 180.0))
+        theta_pol = np.atleast_1d(np.deg2rad(gyrotrons[f'POLANG_{system_no}'] - 90.0))
+        if len(phi_tor) == 1 and len(phi_tor) != len(time):
+            phi_tor = np.ones(len(time)) * phi_tor[0]
+        if len(theta_pol) == 1 and len(theta_pol) != len(time):
+            theta_pol = np.ones(len(time)) * theta_pol[0]
+        beam['steering_angle_tor'] = -np.arcsin(np.cos(theta_pol)*np.sin(phi_tor))
+        beam['steering_angle_pol'] = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
 
         beam['identifier'] = beam['name'] = gyrotron_names[system_index]
 
@@ -595,22 +603,31 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
             
-
-        # The spot size and radius are computed using the evolution formula for Gaussian beams
-        # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
-        # The beam is divergent because the beam waist is focused on to the final launching mirror.
-        # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
-        # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
-        # Hence, the inverse curvature radius is zero
-        # Notably the ECRH beams are astigmatic in reality so this is just an approximation
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
-        beam['spot.size'] = 0.0172 * np.ones([2, ntime])
+        # The spot size and radius are computed using the evolution formula for Gaussian beams
+        # see: https://en.wikipedia.org/wiki/Gaussian_beam#Beam_waist
+        # Try values from MDSplus first:
+        try:
+            # DIII-D uses negative for divergent which corresponds to a positive sign in IMAS
+            beam['phase.curvature'][:] = -1.0/systems["GB_RCURVE" + f'_{system_no}']
+            beam['spot.size'] = np.zeros([2, ntime])
+            beam['spot.size'][0,:] = systems["GB_WAIST" + f'_{system_no}']
+            beam['spot.size'][1,:] = systems["GB_WAIST" + f'_{system_no}']
+        except Exception:
+            # Use defaults if data not available
+            # The beam is divergent because the beam waist is focused on to the final launching mirror.
+            # The values of the ECRH group are the beam waist w_0 = 1.72 cm and
+            # the beam is focused onto the mirror meaning that it is paraxial at the launching point.
+            # Hence, the inverse curvature radius is zero
+            # Notably the ECRH beams are astigmatic in reality so this is just an approximation
+            beam['spot.size'] = 0.0172 * np.ones([2, ntime])
 
     # bhalf is the fake diffration ray divergence that TORAY uses. It is also known as HLWEC in onetwo
     # For more info look for hlwec in the TORAY documentation
     cp = CodeParameters()
+    cp["toray"] = ODS()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
@@ -639,7 +656,6 @@ def nbi_active_hardware(ods, pulse):
 
     trim_start = 0
     trim_end = 0
-    R0 = 1.6955
     beam_index = 0
     for beam_name in beam_names:
         if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
@@ -665,25 +681,7 @@ def nbi_active_hardware(ods, pulse):
         if not len(gas):
             nbu["species.a"] = 2.0
         else:            
-            nbu["species.a"] = beam_mass = int(gas[1])
-
-        # infer toroidal angle of the beam from torque
-        index = (data[f"{beam_name}.PINJ"] * data[f"{beam_name}.VBEAM"]) > 0.0
-        if sum(index) > 0:
-            torque_tor = data[f"{beam_name}.TINJ"][index]
-            power_launched = data[f"{beam_name}.PINJ"][index]
-            beam_mass = nbu["species.a"]
-            beam_energy = data[f"{beam_name}.VBEAM"][index]
-            particles_per_second = power_launched / (beam_energy * e)
-            velocity = np.sqrt(2.0 * beam_energy * e / (beam_mass * m_u))
-            force = particles_per_second * velocity * beam_mass * m_u
-            torque_tot = force * R0
-            angle = np.arcsin(torque_tor / torque_tot)
-            angle = sorted(angle)
-            angle = angle[int(len(angle)/2)] # median value
-        else:
-            angle = 0.0
-        nbu["beamlets_group[0].angle"] = angle
+            nbu["species.a"] = int(gas[1])
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1495,7 +1493,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
-        pulse_id = int(str(pulse) + PROFILES_run_id)
+        pulse_id = pulse
+        if PROFILES_run_id is not None:
+            pulse_id = int(str(pulse) + PROFILES_run_id)
         omfit_profiles_node = '\\TOP.'
         query = {
             "electrons.density_thermal": "N_E",
@@ -1631,6 +1631,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
+    mpulse = pulse
+    if len(str(pulse))>8:
+        mpulse = int(str(pulse)[:6])
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
@@ -1667,4 +1670,5 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.time"] = [0.0]
 
 if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
     test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
