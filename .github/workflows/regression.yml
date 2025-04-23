@@ -21,7 +21,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: python:${{ matrix.python-version }}
-          options: -v ${{ github.workspace }}:/workspace -w /workspace
+          options: -v ${{ github.workspace }}:/workspace -w /workspace -e USER=ci_user
           run: |
             apt-get update
             apt-get install -y libhdf5-dev libnetcdf-dev gfortran
