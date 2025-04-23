@@ -31,6 +31,5 @@ jobs:
             python -m pip install boto3 pymongo xmltodict
             python -m pip install wheel
             python -m pip install --no-build-isolation .[machine]
-            cd /
             python -c "import omas; print(omas.__version__)"
             make test
