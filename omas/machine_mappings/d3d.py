@@ -1387,6 +1387,7 @@ def magnetics_probes_data(ods, pulse):
             tdi_expression='ptdata2("{signal}",{pulse})',
             time_norm=0.001,
             data_norm=1.0,
+            homogeneous_time=False
         )
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
