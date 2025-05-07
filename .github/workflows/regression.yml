@@ -12,11 +12,11 @@ on:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip github]')"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
     # 3.12 does not yet work because numpy removed numpy.distutils that pygacode relies on
 
     steps:
@@ -54,8 +54,8 @@ jobs:
         python3 -m pip install wheel
         python3 -m pip install --no-build-isolation .[machine]
 
-    - name: Install OMAS (Py 3.6, 3.10, 3.11)
-      if: ${{matrix.python-version == '3.6' || matrix.python-version == '3.10' || matrix.python-version == '3.11' }}
+    - name: Install OMAS (Py 3.10, 3.11)
+      if: ${{matrix.python-version == '3.10' || matrix.python-version == '3.11' }}
       run: |
         python3 -m pip install .[machine]
 
