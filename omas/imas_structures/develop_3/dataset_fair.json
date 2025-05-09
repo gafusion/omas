@@ -390,16 +390,32 @@
   "type": "constant",
   "url": "utilities/IDS-path-syntax.md"
  },
- "dataset_fair.ids_properties.provenance.node[:].sources": {
+ "dataset_fair.ids_properties.provenance.node[:].reference": {
   "coordinates": [
    "1...N"
   ],
-  "data_type": "STR_1D",
-  "documentation": "List of sources used to import or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the source is an input to the process described in the \"code\" structure at the root of the IDS. The source can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the source, or the persistent identifier of the data source). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data sources.",
-  "full_path": "dataset_fair/ids_properties/provenance/node(i1)/sources(:)",
+  "data_type": "STRUCT_ARRAY",
+  "documentation": "List of references used to populate or calculate this node, identified as explained below. In case the node is the result of of a calculation / data processing, the reference is an input to the process described in the \"code\" structure at the root of the IDS. The reference can be an IDS (identified by a URI or a persitent identifier, see syntax in the link below) or non-IDS data imported directly from an non-IMAS database (identified by the command used to import the reference, or the persistent identifier of the data reference). Often data are obtained by a chain of processes, however only the last process input are recorded here. The full chain of provenance has then to be reconstructed recursively from the provenance information contained in the data references.",
+  "full_path": "dataset_fair/ids_properties/provenance/node(i1)/reference(i2)",
+  "introduced_after_version": "3.41.0",
   "lifecycle_status": "alpha",
-  "type": "constant",
+  "maxoccur": "10",
+  "structure_reference": "ids_provenance_node_reference",
   "url": "utilities/IMAS-URI-scheme.md"
+ },
+ "dataset_fair.ids_properties.provenance.node[:].reference[:].name": {
+  "data_type": "STR_0D",
+  "documentation": "Reference name",
+  "full_path": "dataset_fair/ids_properties/provenance/node(i1)/reference(i2)/name",
+  "lifecycle_status": "alpha",
+  "type": "constant"
+ },
+ "dataset_fair.ids_properties.provenance.node[:].reference[:].timestamp": {
+  "data_type": "STR_0D",
+  "documentation": "Date and time (UTC) at which the reference was created, expressed in a human readable form (ISO 8601) : the format of the string shall be : YYYY-MM-DDTHH:MM:SSZ. Example : 2020-07-24T14:19:00Z",
+  "full_path": "dataset_fair/ids_properties/provenance/node(i1)/reference(i2)/timestamp",
+  "lifecycle_status": "alpha",
+  "type": "constant"
  },
  "dataset_fair.ids_properties.provider": {
   "data_type": "STR_0D",
