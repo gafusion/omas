@@ -8,6 +8,19 @@ __all__ = [
     'get_pulse_id'
 ]
 
+last_tree = None
+current_conn = None
+
+def manage_open_tree(conn, treename, pulse):
+    global last_tree
+    if last_tree == (treename, pulse):
+        return
+    elif last_tree is not None:
+        conn.closeTree(*last_tree)
+    conn.openTree(treename, pulse)
+    last_tree = (treename, pulse)
+
+
 def get_pulse_id(pulse, run_id=None):
     """
     Converts the pulse number into a MDSplus run_id
@@ -67,9 +80,6 @@ def tunnel_mds(server, treename):
         return tunneled_server
 
     return server.format(**os.environ)
-
-
-
 
 
 class mdsvalue(dict):
@@ -146,22 +156,18 @@ class mdsvalue(dict):
 
             try:
                 out_results = None
-
-                # try connecting and re-try on fail
+                global current_conn
                 for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                        conn = MDSplus.Connection(self.server)
-                        if self.treename is not None:
-                            conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                    if current_conn is None:
+                        current_conn = MDSplus.Connection(self.server)
                     try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        manage_open_tree(current_conn, self.treename, self.pulse)
                         break
-                    except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                    except Exception as e:
                         if fallback:
-                            raise
+                            raise e
+                        else:
+                            current_conn.reconnect()
 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
@@ -181,7 +187,7 @@ class mdsvalue(dict):
 
                     # more recent MDSplus server
                     else:
-                        conns = conn.getMany()
+                        conns = current_conn.getMany()
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
@@ -201,7 +207,7 @@ class mdsvalue(dict):
 
                 # single TDI expression
                 else:
-                    out_results = MDSplus.Data.data(conn.get(TDI))
+                    out_results = MDSplus.Data.data(current_conn.get(TDI))
 
                 # return values
                 return out_results
