@@ -176,7 +176,7 @@ class mdsvalue(dict):
 
                     # more recent MDSplus server
                     else:
-                        conns = current_conn.getMany()
+                        conns = _mds_connection_cache[self.server].getMany()
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
@@ -196,7 +196,7 @@ class mdsvalue(dict):
 
                 # single TDI expression
                 else:
-                    out_results = MDSplus.Data.data(current_conn.get(TDI))
+                    out_results = MDSplus.Data.data(_mds_connection_cache[self.server].get(TDI))
 
                 # return values
                 return out_results
