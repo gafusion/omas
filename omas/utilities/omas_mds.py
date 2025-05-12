@@ -69,9 +69,6 @@ def tunnel_mds(server, treename):
     return server.format(**os.environ)
 
 
-
-
-
 class mdsvalue(dict):
     """
     Execute MDSplus TDI functions
@@ -146,20 +143,18 @@ class mdsvalue(dict):
 
             try:
                 out_results = None
-
-                # try connecting and re-try on fail
                 for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
+                    if self.server not in _mds_connection_cache:
                         conn = MDSplus.Connection(self.server)
                         if self.treename is not None:
                             conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                        _mds_connection_cache[self.server] = conn
                     try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        conn = _mds_connection_cache[self.server]
                         break
                     except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        if self.server in _mds_connection_cache:
+                            _mds_connection_cache[self.server].reconnect()
                         if fallback:
                             raise
 
@@ -181,7 +176,7 @@ class mdsvalue(dict):
 
                     # more recent MDSplus server
                     else:
-                        conns = conn.getMany()
+                        conns = _mds_connection_cache[self.server].getMany()
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
@@ -201,7 +196,7 @@ class mdsvalue(dict):
 
                 # single TDI expression
                 else:
-                    out_results = MDSplus.Data.data(conn.get(TDI))
+                    out_results = MDSplus.Data.data(_mds_connection_cache[self.server].get(TDI))
 
                 # return values
                 return out_results
