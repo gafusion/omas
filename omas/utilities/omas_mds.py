@@ -8,9 +8,6 @@ __all__ = [
     'get_pulse_id'
 ]
 
-current_conn = None
-
-
 def get_pulse_id(pulse, run_id=None):
     """
     Converts the pulse number into a MDSplus run_id
@@ -146,18 +143,20 @@ class mdsvalue(dict):
 
             try:
                 out_results = None
-                global current_conn
                 for fallback in [0, 1]:
-                    if current_conn is None:
-                        current_conn = MDSplus.Connection(self.server)
+                    if self.server not in _mds_connection_cache:
+                        conn = MDSplus.Connection(self.server)
+                        if self.treename is not None:
+                            conn.openTree(self.treename, self.pulse)
+                        _mds_connection_cache[self.server] = conn
                     try:
-                        current_conn.openTree(self.treename, self.pulse)
+                        conn = _mds_connection_cache[self.server]
                         break
-                    except Exception as e:
+                    except Exception as _excp:
+                        if self.server in _mds_connection_cache:
+                            _mds_connection_cache[self.server].reconnect()
                         if fallback:
-                            raise e
-                        else:
-                            current_conn.reconnect()
+                            raise
 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
