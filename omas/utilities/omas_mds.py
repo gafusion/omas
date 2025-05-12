@@ -8,17 +8,7 @@ __all__ = [
     'get_pulse_id'
 ]
 
-last_tree = None
 current_conn = None
-
-def manage_open_tree(conn, treename, pulse):
-    global last_tree
-    if last_tree == (treename, pulse):
-        return
-    elif last_tree is not None:
-        conn.closeTree(*last_tree)
-    conn.openTree(treename, pulse)
-    last_tree = (treename, pulse)
 
 
 def get_pulse_id(pulse, run_id=None):
@@ -161,7 +151,7 @@ class mdsvalue(dict):
                     if current_conn is None:
                         current_conn = MDSplus.Connection(self.server)
                     try:
-                        manage_open_tree(current_conn, self.treename, self.pulse)
+                        current_conn.openTree(self.treename, self.pulse)
                         break
                     except Exception as e:
                         if fallback:
