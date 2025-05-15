@@ -681,6 +681,12 @@
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
+ "summary.global_quantities.power_radiated_inside_lcfs.value": {
+  "PYTHON": "summary(ods, {pulse})"
+ },
+ "summary.time": {
+  "PYTHON": "summary(ods, {pulse})"
+ },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 11,
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"

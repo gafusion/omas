@@ -1656,7 +1656,6 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
-
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
@@ -1669,6 +1668,18 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.description_2d.0.limiter.type.index"] = 0
     ods["wall.time"] = [0.0]
 
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221)
+def summary(ods, pulse):
+    with omas_environment(ods):
+
+        TDIs = {}
+        TDIs["prad.data"] = f"ptdata2(\"prad_tot\",{pulse})"
+        TDIs["prad.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
+        data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+        ods['summary.time'] = data["prad.time"]
+        ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = data["prad.data"]
+
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
-    test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["summary"], globals(), locals())
