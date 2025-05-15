@@ -1669,17 +1669,22 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.time"] = [0.0]
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221)
+@machine_mapping_function(__regression_arguments__, pulse=194306)
 def summary(ods, pulse):
     with omas_environment(ods):
 
-        TDIs = {}
-        TDIs["prad.data"] = f"ptdata2(\"prad_tot\",{pulse})"
-        TDIs["prad.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
-        data = mdsvalue('d3d', None, pulse, TDIs).raw()
-
-        ods['summary.time'] = data["prad.time"]
-        ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = data["prad.data"]
+        # prad_tot
+        try: # eg for 133221
+            prad_tot = mdsvalue('d3d', "BOLOM", pulse, "\\BOLOM::PRAD_TOT")
+            ods['summary.time'] = prad_tot.dim_of(0)/1000.0
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = prad_tot.data()
+        except Exception:
+            TDIs = {} # eg for 194306
+            TDIs["prad_tot.data"] = f"ptdata2(\"prad_tot\",{pulse})"
+            TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
+            data = mdsvalue('d3d', None, pulse, TDIs).raw()
+            ods['summary.time'] = data["prad_tot.time"]
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = data["prad_tot.data"]
 
 if __name__ == '__main__':
     test_machine_mapping_functions('d3d', ["summary"], globals(), locals())
