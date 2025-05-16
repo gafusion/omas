@@ -1684,7 +1684,7 @@ def summary(ods, pulse):
             TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
             data = mdsvalue('d3d', None, pulse, TDIs).raw()
             ods['summary.time'] = data["prad_tot.time"]
-            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = data["prad_tot.data"]
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
     test_machine_mapping_functions('d3d', ["summary"], globals(), locals())
