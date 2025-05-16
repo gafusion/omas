@@ -1677,7 +1677,7 @@ def summary(ods, pulse):
         try: # eg for 133221
             prad_tot = mdsvalue('d3d', "BOLOM", pulse, "\\BOLOM::PRAD_TOT")
             ods['summary.time'] = prad_tot.dim_of(0)/1000.0
-            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = prad_tot.data()
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -prad_tot.data()
         except Exception:
             TDIs = {} # eg for 194306
             TDIs["prad_tot.data"] = f"ptdata2(\"prad_tot\",{pulse})"
