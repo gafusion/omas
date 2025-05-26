@@ -6,7 +6,7 @@ from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, mdstree
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
@@ -820,15 +820,14 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         # Assign data to ODS
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
-            if not _get_measurements:
-                ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
-                    system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
-                )
-                ch['identifier'] = f'{system[0]}{j:02d}'
-                ch['position']['r'] = tsdat[f'{system}_R'][j]
-                ch['position']['z'] = tsdat[f'{system}_Z'][j]
-                ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
-            else:
+            ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
+                system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
+            )
+            ch['identifier'] = f'{system[0]}{j:02d}'
+            ch['position']['r'] = tsdat[f'{system}_R'][j]
+            ch['position']['z'] = tsdat[f'{system}_Z'][j]
+            ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
+            if _get_measurements:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
                 ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
@@ -1206,13 +1205,10 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     :param analysis_type: string
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
-    import MDSplus
 
     printd('Setting up DIII-D CER data...', topic='machine')
 
-    cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
-
-    subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
+    subsystems = ['RADIAL', 'TANGENTIAL', 'VERTICAL']
 
     measurements = []
     if _measurements:
@@ -1228,22 +1224,14 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     # fetch
     TDIs = {}
     for sub in subsystems:
-        try:
-            channels = sorted([k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k])
-        except (TypeError, KeyError):
-            continue
-        for k, channel in enumerate(channels):
+        for k, channel in enumerate(range(99)):
             for pos in fetch_keys:
-                TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
+                TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{k:02d}.{pos}"
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
 
     # assign
     for sub in subsystems:
-        try:
-            channels = sorted([k for k in list(cerdat[sub].keys()) if 'CHANNEL' in k])
-        except (TypeError, KeyError):
-            continue
-        for k, channel in enumerate(channels):
+        for k, channel in enumerate(range(99)):
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
@@ -1687,4 +1675,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["summary"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["charge_exchange_data"], globals(), locals())
