@@ -70,6 +70,9 @@
  "charge_exchange.channel.:.ion.:.t_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.t_i.time": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
