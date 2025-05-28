@@ -79,6 +79,9 @@ def tunnel_mds(server, treename):
     return server.format(**os.environ)
 
 
+
+
+
 class mdsvalue(dict):
     """
     Execute MDSplus TDI functions
@@ -153,6 +156,8 @@ class mdsvalue(dict):
 
             try:
                 out_results = None
+
+                # try connecting and re-try on fail
                 for fallback in [0, 1]:
                     if self.server not in _mds_connection_cache:
                         _mds_connection_cache[self.server] = MDSplus.Connection(self.server)
@@ -187,7 +192,7 @@ class mdsvalue(dict):
 
                     # more recent MDSplus server
                     else:
-                        conns = _mds_connection_cache[self.server].getMany()
+                        conns = conn.getMany()
                         for name, expr in TDI.items():
                             conns.append(name, expr)
                         res = conns.execute()
@@ -207,7 +212,7 @@ class mdsvalue(dict):
 
                 # single TDI expression
                 else:
-                    out_results = MDSplus.Data.data(_mds_connection_cache[self.server].get(TDI))
+                    out_results = MDSplus.Data.data(conn.get(TDI))
 
                 # return values
                 return out_results
