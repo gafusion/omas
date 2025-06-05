@@ -355,8 +355,8 @@ class TestOmasCore(UnittestCaseOmas):
         except LookupError:
             pass
 
-        # check support for development version is there
-        ODS(imas_version='develop.3')
+        # check support for main version is there
+        ODS(imas_version='main')
 
         try:
             tmp = ODS(imas_version='does_not_exist')
