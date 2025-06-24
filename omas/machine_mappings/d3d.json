@@ -68,6 +68,12 @@
  "charge_exchange.channel.:.ion.:": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.n_i_over_n_e.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.n_i_over_n_e.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.t_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },

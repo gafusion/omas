@@ -1218,10 +1218,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR']:
-                    TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                for pos in ['ZEFF']:
-                    print(f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}")
-                    TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                for pos in ['FZ', 'ZEFF']:
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
 
     # fetch
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
@@ -1242,21 +1243,22 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 chpos['time'] = postime
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
             if _measurements:
-                if not isinstance(data[f'{sub}_{channel}_TEMP'], Exception):
-                    ch['ion.0.t_i.time'] = postime
-                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP'], data[f'{sub}_{channel}_TEMP_ERR'])
+                if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
+                    ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
+                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
                 # ch['ion.0.velocity_pol.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
                 # ch['ion.0.velocity_pol.time'] = postime
                 # ch['ion.0.velocity_tor.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
                 # ch['ion.0.velocity_tor.time'] = postime
-                # ch['ion.0.n_i_over_n_e.data'] = impdata['ZEFF']/(impdata['ZIMP'])^2 # not sure what is required to make this work
-                #                ch['ion.0.n_i_over_n_e.data.time'] = postime
+                if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
+                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
-                # ch['zeff.time'] = postime
-                if not isinstance(data[f'{sub}_{channel}_ZEFF'], Exception):
-                    ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF']
+                if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
+                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
+                    ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
                 # print(f'{sub}_{channel}_ZEFF')
                 # print(data[f'{sub}_{channel}_ZEFF'])
 
