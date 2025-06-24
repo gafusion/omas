@@ -1478,14 +1478,16 @@ def add_extra_profile_structures():
     add_extra_structures(extra_structures)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
-def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
+@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001',
+                          core_profiles_strict_grid=True)
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None, core_profiles_strict_grid=True):
     from scipy.interpolate import interp1d
 
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        # May extend beyond rho = 1.0
         pulse_id = pulse
         if PROFILES_run_id is not None:
             pulse_id = int(str(pulse) + PROFILES_run_id)
@@ -1524,7 +1526,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             print("No MDSplus data")
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
-
+        if core_profiles_strict_grid:
+            mask = data["grid.rho_tor_norm"] < 1.0
+        else:
+            mask = np.ones(data["grid.rho_tor_norm"].shape, dtype=bool)
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
@@ -1537,14 +1542,19 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
         for i_time, time in enumerate(data["time"]):
-            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
+            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time][mask[i_time]]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
                 try:
-                    ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
-                    ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    if "_fit" in entry:
+                        # No mask for measurements and fit
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    else:
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][mask[i_time]]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][mask[i_time]]
                 except Exception as e:
                     print("Uncertain entry", entry)
                     print("================ DATA =================")
@@ -1560,7 +1570,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 continue
             for i_time, time in enumerate(data["time"]):
                 try:
-                    ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    if "_fit" in entry:
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    else:
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][mask[i_time]]
                 except:
                     print("Normal entry", entry)
                     print("================ DATA =================")
@@ -1573,6 +1586,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
+        # ZIPFIT uses conventional rho_tor < 1.0
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
             "electrons.temperature": "\\TOP.PROFILES.ETEMPFIT",
