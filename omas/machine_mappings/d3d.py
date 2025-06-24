@@ -1529,7 +1529,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
         if core_profiles_strict_grid:
-            mask = data["grid.rho_tor_norm"] < 1.0
+            mask = data["grid.rho_tor_norm"] <= 1.0
         else:
             mask = np.ones(data["grid.rho_tor_norm"].shape, dtype=bool)
         data['time'] = dim_info.dim_of(1) * 1.e-3
