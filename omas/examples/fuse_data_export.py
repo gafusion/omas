@@ -71,8 +71,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     # 3 mandatory arguments (positional)
-    parser.add_argument('device')
     parser.add_argument('save_path')
+    parser.add_argument('device')
     parser.add_argument('shot', type=int)
     parser.add_argument('EFIT_TREE')
     parser.add_argument('PROFILES_TREE')
@@ -84,5 +84,5 @@ if __name__ == "__main__":
     # Parse the arguments
     args = parser.parse_args()
 
-    fuse_export(args.save_path, args. device, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
+    fuse_export(args.save_path, args.device, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
     
