@@ -1218,10 +1218,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR']:
-                    TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                for pos in ['ZEFF']:
-                    print(f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}")
-                    TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                for pos in ['FZ', 'ZEFF']:
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
 
     # fetch
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
@@ -1242,21 +1243,22 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 chpos['time'] = postime
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
             if _measurements:
-                if not isinstance(data[f'{sub}_{channel}_TEMP'], Exception):
-                    ch['ion.0.t_i.time'] = postime
-                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP'], data[f'{sub}_{channel}_TEMP_ERR'])
+                if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
+                    ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
+                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
                 # ch['ion.0.velocity_pol.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
                 # ch['ion.0.velocity_pol.time'] = postime
                 # ch['ion.0.velocity_tor.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
                 # ch['ion.0.velocity_tor.time'] = postime
-                # ch['ion.0.n_i_over_n_e.data'] = impdata['ZEFF']/(impdata['ZIMP'])^2 # not sure what is required to make this work
-                #                ch['ion.0.n_i_over_n_e.data.time'] = postime
+                if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
+                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
-                # ch['zeff.time'] = postime
-                if not isinstance(data[f'{sub}_{channel}_ZEFF'], Exception):
-                    ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF']
+                if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
+                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
+                    ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
                 # print(f'{sub}_{channel}_ZEFF')
                 # print(data[f'{sub}_{channel}_ZEFF'])
 
@@ -1478,14 +1480,16 @@ def add_extra_profile_structures():
     add_extra_structures(extra_structures)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001')
-def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None):
+@machine_mapping_function(__regression_arguments__, pulse=194844, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id='001',
+                          core_profiles_strict_grid=True)
+def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None, core_profiles_strict_grid=True):
     from scipy.interpolate import interp1d
 
     add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        # May extend beyond rho = 1.0
         pulse_id = pulse
         if PROFILES_run_id is not None:
             pulse_id = int(str(pulse) + PROFILES_run_id)
@@ -1524,7 +1528,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             print("No MDSplus data")
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
         dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
-
+        if core_profiles_strict_grid:
+            mask = data["grid.rho_tor_norm"] <= 1.0
+        else:
+            mask = np.ones(data["grid.rho_tor_norm"].shape, dtype=bool)
         data['time'] = dim_info.dim_of(1) * 1.e-3
         psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
@@ -1537,14 +1544,19 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
         for i_time, time in enumerate(data["time"]):
-            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time]
+            ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time][mask[i_time]]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
                 try:
-                    ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
-                    ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    if "_fit" in entry:
+                        # No mask for measurements and fit
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    else:
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][mask[i_time]]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][mask[i_time]]
                 except Exception as e:
                     print("Uncertain entry", entry)
                     print("================ DATA =================")
@@ -1560,7 +1572,10 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 continue
             for i_time, time in enumerate(data["time"]):
                 try:
-                    ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    if "_fit" in entry:
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    else:
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][mask[i_time]]
                 except:
                     print("Normal entry", entry)
                     print("================ DATA =================")
@@ -1573,6 +1588,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
+        # ZIPFIT uses conventional rho_tor < 1.0
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
             "electrons.temperature": "\\TOP.PROFILES.ETEMPFIT",
