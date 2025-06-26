@@ -4,9 +4,10 @@ import sys
 from omas.omas_utils import printe
 from omas.machine_mappings import d3d
 from numpy import *
+import argparse
 
 
-def fuse_export(shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID=None, PROFILES_RUN_ID=None):
+def fuse_export(save_path, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, PROFILES_RUN_ID):
     ods = omas.ODS()
 
     tic = time.time()
@@ -18,7 +19,7 @@ def fuse_export(shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID=None, PROFILES_RUN_I
 
     printe("- Fetching core_profiles data")
     d3d.core_profiles_profile_1d(ods, shot, PROFILES_tree=PROFILES_TREE, 
-                                 PROFILES_RUN_ID=PROFILES_RUN_ID)
+                                 PROFILES_run_id=PROFILES_RUN_ID)
 
     printe("- Fetching wall data")
     d3d.wall(ods, shot)
@@ -43,7 +44,7 @@ def fuse_export(shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID=None, PROFILES_RUN_I
     d3d.summary(ods, shot)
 
     printe("- Fetching equilibrium data")
-    with ods.open('d3d', shot, options={'EFIT_tree': EFIT_TREE, "EFIT_RUN_ID": EFIT_RUN_ID}):
+    with ods.open('d3d', shot, options={'EFIT_tree': EFIT_TREE, "EFIT_run_id": EFIT_RUN_ID}):
         for k in range(len(ods["equilibrium.time"])):
             ods["equilibrium.time_slice"][k]["time"]
             ods["equilibrium.time_slice"][k]["global_quantities.ip"]
@@ -61,8 +62,24 @@ def fuse_export(shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID=None, PROFILES_RUN_I
 
     printe("Saving ODS to $filename", end="")
     tic = time.time()
-    ods.save("$filename")
+    ods.save(save_path)
     printe(f" Done in {time.time()-tic:.2f} [s]")
 
 if __name__ == "__main__":
-    fuse_export(*sys.argv, *sys.kwargs)
+    parser = argparse.ArgumentParser()
+
+    # 3 mandatory arguments (positional)
+    parser.add_argument('save_path')
+    parser.add_argument('shot', type=int)
+    parser.add_argument('EFIT_TREE')
+    parser.add_argument('PROFILES_TREE')
+
+    # 2 optional arguments (with -- prefix, default to None)
+    parser.add_argument('--EFIT_RUN_ID', default=None)
+    parser.add_argument('--PROFILES_RUN_ID', default=None)
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    fuse_export(args.save_path, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
+    
