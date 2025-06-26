@@ -7,10 +7,12 @@ from numpy import *
 import argparse
 
 
-def fuse_export(save_path, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, PROFILES_RUN_ID):
+def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, PROFILES_RUN_ID):
     ods = omas.ODS()
 
     tic = time.time()
+    if device.lower() != "d3d":
+        raise ValueError(f"Unsupported device {device}. Only 'd3d' supported at present.")
     printe("- Fetching ec_launcher data")
     d3d.ec_launcher_active_hardware(ods, shot)
 
@@ -44,7 +46,7 @@ def fuse_export(save_path, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, PROFILES
     d3d.summary(ods, shot)
 
     printe("- Fetching equilibrium data")
-    with ods.open('d3d', shot, options={'EFIT_tree': EFIT_TREE, "EFIT_run_id": EFIT_RUN_ID}):
+    with ods.open(device, shot, options={'EFIT_tree': EFIT_TREE, "EFIT_run_id": EFIT_RUN_ID}):
         for k in range(len(ods["equilibrium.time"])):
             ods["equilibrium.time_slice"][k]["time"]
             ods["equilibrium.time_slice"][k]["global_quantities.ip"]
@@ -69,6 +71,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     # 3 mandatory arguments (positional)
+    parser.add_argument('device')
     parser.add_argument('save_path')
     parser.add_argument('shot', type=int)
     parser.add_argument('EFIT_TREE')
@@ -81,5 +84,5 @@ if __name__ == "__main__":
     # Parse the arguments
     args = parser.parse_args()
 
-    fuse_export(args.save_path, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
+    fuse_export(args.save_path, args. device, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
     
