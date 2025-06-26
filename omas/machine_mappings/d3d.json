@@ -70,6 +70,9 @@
  "charge_exchange.channel.:.ion.:.t_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.t_i.time": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
@@ -680,6 +683,12 @@
  },
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "summary.global_quantities.power_radiated_inside_lcfs.value": {
+  "PYTHON": "summary(ods, {pulse})"
+ },
+ "summary.time": {
+  "PYTHON": "summary(ods, {pulse})"
  },
  "tf.b_field_tor_vacuum_r.data": {
   "COCOSIO": 11,
