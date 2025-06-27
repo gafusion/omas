@@ -1217,7 +1217,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
-                for pos in ['TEMP', 'TEMP_ERR']:
+                for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
@@ -1246,10 +1246,9 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
                     ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
                     ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
-                # ch['ion.0.velocity_pol.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
-                # ch['ion.0.velocity_pol.time'] = postime
-                # ch['ion.0.velocity_tor.data'] = data[f'{sub}_{channel}_ROT'] # need to extract direction and add COCOS
-                # ch['ion.0.velocity_tor.time'] = postime
+                if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
+                    ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'], data[f'{sub}_{channel}_ROT_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
@@ -1259,8 +1258,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
                     ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
                     ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
-                # print(f'{sub}_{channel}_ZEFF')
-                # print(data[f'{sub}_{channel}_ZEFF'])
 
 
 # ================================

@@ -11,11 +11,11 @@
   "PROFILES_run_id": null,
   "PROFILES_tree": "ZIPFIT01",
   "analysis_type": "CERQUICK",
+  "core_profiles_strict_grid": true,
   "default_tree": "D3D",
   "fast_ece": false,
   "get_all": true,
-  "revision": "BLESSED",
-  "core_profiles_strict_grid": true
+  "revision": "BLESSED"
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -80,6 +80,16 @@
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.ion.:.t_i.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.velocity_tor.data": {
+  "COCOSIO": 11,
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.velocity_tor.data_error_upper": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.velocity_tor.time": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
