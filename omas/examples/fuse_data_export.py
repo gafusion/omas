@@ -7,7 +7,8 @@ from numpy import *
 import argparse
 
 
-def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, PROFILES_RUN_ID):
+def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, 
+                EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK"):
     ods = omas.ODS()
 
     tic = time.time()
@@ -40,7 +41,7 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, 
     d3d.thomson_scattering_data(ods, shot)
 
     printe("- Fetching charge exchange data")
-    d3d.charge_exchange_data(ods, shot, analysis_type="$(CER_analysis_type)")
+    d3d.charge_exchange_data(ods, shot, analysis_type=CER_analysis_type)
 
     printe("- Fetching summary data")
     d3d.summary(ods, shot)
@@ -62,7 +63,7 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, EFIT_RUN_ID, 
 
     printe(f"Data fetched via OMAS in {time.time()-tic:.2f} [s]")
 
-    printe("Saving ODS to $filename", end="")
+    printe(f"Saving ODS to {save_path}", end="")
     tic = time.time()
     ods.save(save_path)
     printe(f" Done in {time.time()-tic:.2f} [s]")
@@ -80,9 +81,12 @@ if __name__ == "__main__":
     # 2 optional arguments (with -- prefix, default to None)
     parser.add_argument('--EFIT_RUN_ID', default=None)
     parser.add_argument('--PROFILES_RUN_ID', default=None)
+    parser.add_argument('--CER_ANALYSIS_TYPE', default="CERQUICK")
 
     # Parse the arguments
     args = parser.parse_args()
 
-    fuse_export(args.save_path, args.device, args.shot, args.EFIT_TREE, args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID)
+    fuse_export(args.save_path, args.device, args.shot, args.EFIT_TREE, 
+                args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID,
+                args.CER_ANALYSIS_TYPE)
     
