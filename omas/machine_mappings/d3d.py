@@ -1299,7 +1299,7 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse, nref=0):
+def magnetics_floops_data(ods, pulse):
     from scipy.interpolate import interp1d
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 

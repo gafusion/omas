@@ -14,7 +14,6 @@
   "default_tree": "D3D",
   "fast_ece": false,
   "get_all": true,
-  "nref": 0,
   "revision": "BLESSED",
   "core_profiles_strict_grid": true
  },
@@ -570,16 +569,16 @@
  },
  "magnetics.flux_loop.:.flux.data": {
   "COCOSIO": 11,
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {nref!r})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
