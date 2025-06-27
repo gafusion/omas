@@ -1332,9 +1332,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
             data_norm=1.0,
         )
 
-    # Set reference flux loop to zero before
-    ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.0
-
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
@@ -1590,7 +1587,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
             "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
             "ion[1].temperature": "\\TOP.PROFILES.ITEMPFIT",
-            #"ion[1].velocity.toroidal": "TROTFIT", # Need to check units/meaning rot freq vs velocityr
+            "ion[1].velocity.rotation_frequency_tor": "TROTFIT",
         }
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
@@ -1608,6 +1605,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 data[entry] *= 1E19 # in [m^-3]
             elif "temperature" in entry:
                 data[entry] *= 1E3 # in [eV]
+            elif "rotation" in entry:
+                data[entry] *= 1E3 # in [rad/s]
+
 
         time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__")]))
         rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__")])]))
