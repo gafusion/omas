@@ -10,7 +10,12 @@ import argparse
 def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, 
                 EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK"):
     ods = omas.ODS()
-
+    
+    if int(EFIT_RUN_ID) < 1:
+        EFIT_RUN_ID = None
+    if int(PROFILES_RUN_ID) < 1:
+        PROFILES_RUN_ID = None
+    
     tic = time.time()
     if device.lower() != "d3d":
         raise ValueError(f"Unsupported device {device}. Only 'd3d' supported at present.")
@@ -79,8 +84,8 @@ if __name__ == "__main__":
     parser.add_argument('PROFILES_TREE')
 
     # 2 optional arguments (with -- prefix, default to None)
-    parser.add_argument('--EFIT_RUN_ID', default=None)
-    parser.add_argument('--PROFILES_RUN_ID', default=None)
+    parser.add_argument('--EFIT_RUN_ID', default=0)
+    parser.add_argument('--PROFILES_RUN_ID', default=0)
     parser.add_argument('--CER_ANALYSIS_TYPE', default="CERQUICK")
 
     # Parse the arguments
