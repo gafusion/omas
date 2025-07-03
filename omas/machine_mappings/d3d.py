@@ -1589,7 +1589,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
             "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
             "ion[1].temperature": "\\TOP.PROFILES.ITEMPFIT",
-            "ion[1].velocity.rotation_frequency_tor": "TROTFIT",
+            "ion[1].rotation_frequency_tor": "\\TOP.PROFILES.TROTFIT",
         }
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
