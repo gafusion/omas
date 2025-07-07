@@ -197,6 +197,44 @@ class BaseProvider:
     def raw(self, treename, pulse, TDI):
         """Fetch raw data - to be implemented by subclasses"""
         raise NotImplementedError("Subclasses must implement raw() method")
+    
+    def mds_tree(self, treename, pulse):
+        """
+        Create tree structure for the given tree and pulse
+        
+        :param treename: MDSplus tree name
+        :param pulse: pulse number
+        :return: dictionary representing the tree structure
+        """
+        # Get all node paths in the tree
+        node_paths = self.raw(treename, pulse, rf'getnci("***","FULLPATH")')
+        
+        # Build hierarchical tree structure
+        tree = {}
+        for path in sorted(node_paths)[::-1]:
+            try:
+                path = path.decode('utf8')
+            except AttributeError:
+                pass
+            path = path.strip()
+            
+            # Parse the path into components
+            path_parts = path.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
+            # Filter out empty parts
+            path_parts = [part for part in path_parts if part]
+            
+            # Navigate/create the tree structure
+            current = tree
+            for part in path_parts[:-1]:
+                current = current.setdefault(part, {})
+            
+            # Set the final node with its TDI expression
+            if path_parts[-1] not in current:
+                current[path_parts[-1]] = {'TDI': path}
+            else:
+                current[path_parts[-1]]['TDI'] = path
+        # Return only the elements of the requested tree
+        return tree[treename]
 
 
 class mdsvalue(dict):

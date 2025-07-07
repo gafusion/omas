@@ -1221,19 +1221,20 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
     printd('Setting up DIII-D CER data...', topic='machine')
 
-    cerdat = mdstree('d3d', 'IONS', pulse=pulse)['CER'][analysis_type]
+    provider = ods.get_mds_provider('d3d')
+    tree = provider.mds_tree('IONS', pulse)
+    cerdat = tree['CER'][analysis_type]
 
-    subsystems = np.array([k for k in list(cerdat.keys()) if 'CHANNEL01' in list(cerdat[k].keys())])
+    subsystems = np.array([k for k in list(cerdat.keys()) if type(cerdat[k]) is dict and 'CHANNEL01' in list(cerdat[k].keys())])
 
     measurements = []
-    provider = ods.get_mds_provider('d3d')
     if _measurements:
         measurements.extend(['TEMP', 'ROT'])
-        impdat = mdstree('d3d', 'IONS', pulse=pulse)['IMPDENS'][analysis_type]
+        impdat = tree['IMPDENS'][analysis_type]
         signals = ['TIME', 'ZEFF', 'ZIMP']
         TDIs = {}
         for pos in signals:
-            TDIs[f'{pos}'] = impdat[pos].TDI
+            TDIs[f'{pos}'] = impdat[pos]['TDI']
         impdata = provider.raw('IONS', pulse, TDIs)
     fetch_keys = ['TIME', 'R', 'Z', 'VIEW_PHI'] + measurements
 
@@ -1246,7 +1247,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             continue
         for k, channel in enumerate(channels):
             for pos in fetch_keys:
-                TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos].TDI
+                TDIs[f'{sub}_{channel}_{pos}'] = cerdat[sub][channel][pos]['TDI']
     data = provider.raw('IONS', pulse, TDIs)
 
     # assign
