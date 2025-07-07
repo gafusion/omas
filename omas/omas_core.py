@@ -205,6 +205,7 @@ class ODS(MutableMapping):
         unitsio=None,
         uncertainio=None,
         dynamic=None,
+        mds_backend=None,
     ):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -222,6 +223,8 @@ class ODS(MutableMapping):
         :param uncertainio: ODS will return data with uncertainties if True
 
         :param dynamic: internal keyword used for dynamic data loading
+
+        :param mds_backend: MDS backend to use ('mdsvalue' or 'toksearch'). If None, uses global default
         """
         self.omas_data = None
         self._consistency_check = consistency_check
@@ -235,6 +238,48 @@ class ODS(MutableMapping):
         self.unitsio = unitsio
         self.uncertainio = uncertainio
         self.dynamic = dynamic
+        
+        # Store MDS backend choice for this ODS instance
+        if mds_backend is not None:
+            from .utilities.omas_mds import get_mds_backend
+            valid_backends = ['mdsvalue', 'toksearch']
+            if mds_backend not in valid_backends:
+                raise ValueError(f"mds_backend must be one of {valid_backends}, got '{mds_backend}'")
+        self.mds_backend = mds_backend
+        
+        # Cache for MDS providers (server -> provider instance)
+        self._mds_providers = {}
+
+    def get_mds_backend(self):
+        """
+        Get the effective MDS backend for this ODS instance
+        
+        :return: backend name ('mdsvalue' or 'toksearch')
+        """
+        if self.mds_backend is not None:
+            return self.mds_backend
+        else:
+            # Fall back to global default
+            from .utilities.omas_mds import get_mds_backend
+            return get_mds_backend()
+    
+    def get_mds_provider(self, server):
+        """
+        Get or create a cached MDS provider for the given server
+        
+        :param server: server name/address
+        :return: MDS provider instance (mds_provider or toksearch_provider)
+        """
+        # Check if we already have a cached provider for this server
+        if server in self._mds_providers:
+            return self._mds_providers[server]
+        
+        # Create new provider and cache it
+        from .utilities.omas_mds import create_mds_provider
+        backend = self.get_mds_backend()
+        provider = create_mds_provider(server, backend=backend)
+        self._mds_providers[server] = provider
+        return provider
 
     def homogeneous_time(self, key='', default=True):
         """

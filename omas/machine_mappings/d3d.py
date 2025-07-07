@@ -6,7 +6,7 @@ from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, create_mds_backend
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
@@ -1530,14 +1530,15 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
+        # Get MDS provider from ODS instance (cached per server)
+        provider = ods.get_mds_provider('d3d')
+        data = provider.raw(PROFILES_tree, pulse_id, query)
         if data is None:
             print("No MDSplus data")
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
 
-        data['time'] = dim_info.dim_of(1) * 1.e-3
-        psi_n = dim_info.dim_of(0)
+        data['time'] = provider.dim_of(PROFILES_tree, pulse_id, "\\TOP.n_e", 1) * 1.e-3
+        psi_n = provider.dim_of(PROFILES_tree, pulse_id, "\\TOP.n_e", 0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
         # for density_thermal in densities:
@@ -1595,7 +1596,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        data_fetcher = create_mds_backend('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query, backend=backend)
+        data = data_fetcher.raw()
 
         for entry in data.keys():
             if isinstance(data[entry], Exception):
