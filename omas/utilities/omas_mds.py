@@ -4,8 +4,7 @@ from omas.omas_utils import printd
 
 __all__ = [
     'mdstree',
-    'mdsvalue',  # Legacy compatibility
-    'toksearch',  # Legacy compatibility
+    'mdsvalue',
     'mds_provider',
     'toksearch_provider', 
     'BaseProvider',
@@ -81,7 +80,7 @@ def create_mds_backend(server, treename, pulse, TDI, backend=None, **kwargs):
     if backend == 'mdsvalue':
         return mdsvalue(server, treename, pulse, TDI, **kwargs)
     elif backend == 'toksearch':
-        return toksearch(server, treename, pulse, TDI, **kwargs)
+        raise ValueError("Legacy toksearch class removed - use toksearch_provider instead")
     else:
         raise ValueError(f"Unknown backend: {backend}")
 
@@ -200,22 +199,18 @@ class BaseProvider:
         raise NotImplementedError("Subclasses must implement raw() method")
 
 
-# Legacy base class for backward compatibility
-class BaseDataValue(dict):
+class mdsvalue(dict):
     """
-    Legacy base class for backward compatibility
+    Execute MDSplus TDI functions
     """
 
     def __init__(self, server, treename, pulse, TDI, **kwargs):
+        super().__init__()
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
         self.server = server
         self._init_server_connection(**kwargs)
-
-    def _init_server_connection(self, **kwargs):
-        """Initialize server connection - to be implemented by subclasses"""
-        raise NotImplementedError("Subclasses must implement _init_server_connection")
 
     def data(self):
         """Get data from the signal"""
@@ -245,17 +240,18 @@ class BaseDataValue(dict):
         """Get size of dimension"""
         return self.raw(f'size({self.TDI})')
 
-    def raw(self, TDI=None):
-        """Fetch raw data - to be implemented by subclasses"""
-        raise NotImplementedError("Subclasses must implement raw() method")
-
-
-class mdsvalue(BaseDataValue):
-    """
-    Execute MDSplus TDI functions
-    """
-
     def _init_server_connection(self, old_MDS_server=False, **kwargs):
+        # Check if server is already resolved (modern provider-based usage)
+        if '.' in self.server and ':' in self.server:
+            # Server appears to be already resolved (has dots and port)
+            old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
+            if self.server in old_servers:
+                old_MDS_server = True
+            self.old_MDS_server = old_MDS_server
+            return
+        
+        # Legacy path: resolve server from scratch (for backward compatibility only)
+        # NOTE: This is inefficient and should be avoided - use mds_provider instead
         if 'nstx' in self.server:
             old_MDS_server = True
         try:
@@ -265,7 +261,7 @@ class mdsvalue(BaseDataValue):
             with open(machine_mappings_path, "r") as machine_file:
                     self.server = json.load(machine_file)["__mdsserver__"]
         except Exception:
-            # hanlde case where server is actually a URL
+            # handle case where server is actually a URL
             if '.' not in self.server:
                 raise
         self.server = tunnel_mds(self.server, self.treename)
@@ -405,111 +401,9 @@ class mdstree(dict):
                 h[path[-1]].TDI = TDI
 
 
-class toksearch(BaseDataValue):
-    """
-    TokSearch-based data value retrieval using toksearch MdsSignal backend
-    """
-    
-    def _init_server_connection(self, **kwargs):
-        """Initialize toksearch connection and import MdsSignal"""
-        # Import and cache MdsSignal class
-        try:
-            from toksearch import MdsSignal
-            self.MdsSignal = MdsSignal
-        except ImportError:
-            raise ImportError("toksearch package is required for toksearch backend")
-        
-        # Set up server mapping for MdsSignal
-        # Map common server names to their MDS server locations
-        server_map = {
-            'd3d': 'remote://atlas.gat.com:8000'
-        }
-        
-        # Get the actual server location
-        if self.server in server_map:
-            self.mds_server = server_map[self.server]
-        else:
-            # Assume it's already a proper server specification
-            self.mds_server = self.server
-    
-    def _get_mds_signal(self, expression):
-        """Create an MdsSignal for the given TDI expression"""
-        return self.MdsSignal(expression, self.treename, location=self.mds_server)
-    
-    def raw(self, TDI=None):
-        """
-        Fetch data using toksearch MdsSignal backend
-        
-        :param TDI: string, list or dict of strings
-            TDI expression(s) to fetch (overrides the one passed when the object was instantiated)
-        
-        :return: result of TDI expression, or dictionary with results of TDI expressions
-        """
-        try:
-            import time
-            
-            t0 = time.time()
-            
-            if TDI is None:
-                TDI = self.TDI
-            
-            # Handle different TDI input types
-            if isinstance(TDI, (list, tuple)):
-                TDI = {expr: expr for expr in TDI}
-            
-            # Dictionary of TDI expressions
-            if isinstance(TDI, dict):
-                results = {}
-                for name, expr in TDI.items():
-                    try:
-                        signal = self._get_mds_signal(expr)
-                        result = signal.gather(self.pulse)
-                        # Extract the data component
-                        if isinstance(result, dict) and 'data' in result:
-                            results[name] = result['data']
-                        else:
-                            results[name] = result
-                        # Clean up the signal
-                        signal.cleanup_shot(self.pulse)
-                    except Exception as _excp:
-                        results[name] = Exception(str(_excp))
-                return results
-            
-            # Single TDI expression
-            else:
-                signal = self._get_mds_signal(TDI)
-                result = signal.gather(self.pulse)
-                # Clean up the signal
-                signal.cleanup_shot(self.pulse)
-                # Extract the data component
-                if isinstance(result, dict) and 'data' in result:
-                    return result['data']
-                else:
-                    return result
-                    
-        except Exception as _excp:
-            txt = []
-            for item in ['server', 'treename', 'pulse']:
-                txt += [f' - {item}: {getattr(self, item)}']
-            txt += [f' - TDI: {TDI}']
-            raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
-        
-        finally:
-            if 'results' in locals():
-                if isinstance(results, dict):
-                    if all(isinstance(results[k], Exception) for k in results):
-                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(isinstance(results[k], Exception) for k in results):
-                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    else:
-                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
-            else:
-                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
 
 # ===============================
-# New Provider-based Architecture  
+# New Provider-based Architecture
 # ===============================
 
 class mds_provider(BaseProvider):
@@ -519,6 +413,9 @@ class mds_provider(BaseProvider):
     
     def _init_server_connection(self, old_MDS_server=False, **kwargs):
         """Initialize MDSplus server connection"""
+        # Store original server name for reference
+        self.original_server = self.server
+        
         if 'nstx' in self.server:
             old_MDS_server = True
         try:
@@ -532,11 +429,15 @@ class mds_provider(BaseProvider):
             if '.' not in self.server:
                 raise
         
+        # Resolve server URL with tunneling (done once at provider initialization)
+        self.resolved_server = tunnel_mds(self.server, None)
+        
         old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-        if self.server in old_servers:
+        if self.resolved_server in old_servers:
             old_MDS_server = True
         self.old_MDS_server = old_MDS_server
     
+
     def raw(self, treename, pulse, TDI):
         """
         Fetch data from MDSplus with connection caching
@@ -561,7 +462,7 @@ class mds_provider(BaseProvider):
                 out_results = None
                 
                 # Resolve server for this specific tree
-                server = tunnel_mds(self.server, treename)
+                server = self.resolved_server
                 
                 # try connecting and re-try on fail
                 for fallback in [0, 1]:
@@ -590,9 +491,9 @@ class mds_provider(BaseProvider):
                         results = {}
                         for tdi in TDI:
                             try:
-                                # Create temporary mdsvalue for legacy compatibility
-                                temp_mds = mdsvalue(server, treename, pulse, TDI[tdi])
-                                results[tdi] = temp_mds.raw()
+                                # Use direct MDSplus connection for legacy servers (avoid creating temporary mdsvalue)
+                                result = MDSplus.Data.data(conn.get(TDI[tdi]))
+                                results[tdi] = result
                             except Exception as _excp:
                                 results[tdi] = Exception(str(_excp))
                         out_results = results

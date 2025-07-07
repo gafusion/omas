@@ -62,7 +62,7 @@
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.identifier": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.ion.:": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
@@ -74,26 +74,26 @@
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.data": {
   "COCOSIO": 11,
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.phi.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.r.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.data": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.position.z.time": {
-  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+  "PYTHON": "charge_exchange_hardware(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.zeff.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
@@ -347,7 +347,7 @@
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
  "ece.ids_properties.homogeneous_time": {
-  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+  "PYTHON": "electron_cyclotron_emission_data(ods, {pulse}, {fast_ece!r})"
  },
  "ece.line_of_sight.first_point.phi": {
   "COCOSIO": 11,

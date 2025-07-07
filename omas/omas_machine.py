@@ -625,13 +625,19 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 
 
 
-def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace):
+def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace, compare_to_toksearch=False, skip_omfit_tests=False):
     """
     Function used to test python mapping functions
 
-    :param __all__: list of functionss to test
+    :param __all__: list of functions to test
 
     :param namespace: testing namespace
+    
+    :param compare_to_toksearch: if True, execute functions twice (once with mdsvalue, 
+                                once with toksearch) and compare time data for consistency
+                                
+    :param skip_omfit_tests: if True, skip all functions that require OMFIT dependencies
+                            (useful for environments without OMFIT installed)
     """
     from pprint import pprint
 
@@ -645,34 +651,175 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
     print('OK')
 
     __regression_arguments__ = global_namespace['__regression_arguments__']
+    
+    def _execute_function_with_backend(func_name, regression_kw, backend='mdsvalue'):
+        """Helper function to execute a mapping function with specified backend"""
+        ods = ODS(mds_backend=backend)
+        func = eval(func_name, global_namespace, local_namespace)
+        try:
+            try:
+                regression_kw_copy = regression_kw.copy()
+                regression_kw_copy["update_callback"] = update_mapping
+                func(ods, **regression_kw_copy)
+            except Exception:
+                raise
+        except TypeError as _excp:
+            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
+                raise _excp.__class__(
+                    str(_excp)
+                    + '\n'
+                    + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
+                )
+            else:
+                raise
+        return ods
+    
+    def _find_time_data_for_function(ods, func_name):
+        """Helper function to find time data in ODS using machine mapping JSON"""
+        try:
+            # Load the machine mappings to get the JSON data
+            mappings = machine_mappings(machine, '', raise_errors=False)
+            
+            # Find all IMAS fields that map to this Python function
+            function_call_pattern = f"{func_name}(ods, "
+            mapped_time_fields = []
+            
+            for imas_field, mapping_info in mappings.items():
+                if isinstance(mapping_info, dict) and 'PYTHON' in mapping_info:
+                    python_call = mapping_info['PYTHON']
+                    # Check if this field maps to our function and contains '.time'
+                    if function_call_pattern in python_call and '.time' in imas_field:
+                        mapped_time_fields.append(imas_field)
+            
+            # Convert IMAS field notation to ODS key notation
+            # (e.g., "core_profiles.time" stays the same, "bolometer.channel.:.power.time" becomes "bolometer.channel.0.power.time")
+            ods_time_keys = []
+            for field in mapped_time_fields:
+                # Replace array notation .:. with .0. for first element
+                ods_key = field.replace('.:.', '.0.')
+                ods_time_keys.append(ods_key)
+            
+            # Check which of these keys actually exist in the ODS
+            available_keys = ods.flat().keys()
+            for ods_key in ods_time_keys:
+                if ods_key in available_keys:
+                    try:
+                        data = ods[ods_key]
+                        if hasattr(data, '__len__') and len(data) > 0:
+                            # Successfully found time data using JSON mapping
+                            return ods_key, data
+                    except:
+                        continue
+            
+            # If no mapped time fields found, fall back to any time data
+            time_keys = [key for key in available_keys if 'time' in key.lower() and not key.lower().endswith('homogeneous_time')]
+            for key in time_keys:
+                try:
+                    data = ods[key]
+                    if hasattr(data, '__len__') and len(data) > 0:
+                        return key, data
+                except:
+                    continue
+                    
+        except Exception as e:
+            # If JSON parsing fails, fall back to simple search
+            all_keys = ods.flat().keys()
+            time_keys = [key for key in all_keys if 'time' in key.lower() and not key.lower().endswith('homogeneous_time')]
+            for key in time_keys:
+                try:
+                    data = ods[key]
+                    if hasattr(data, '__len__') and len(data) > 0:
+                        return key, data
+                except:
+                    continue
+        
+        return None, None
+    
+    def _compare_backends(func_name, regression_kw):
+        """Compare function execution between mdsvalue and toksearch backends"""
+        print(f"\n--- Backend Comparison for {func_name} ---")
+        
+        try:
+            # Execute with mdsvalue backend
+            print("  Executing with mdsvalue backend...")
+            ods_mds = _execute_function_with_backend(func_name, regression_kw, 'mdsvalue')
+            time_key_mds, time_data_mds = _find_time_data_for_function(ods_mds, func_name)
+            
+            if time_key_mds is None:
+                print("  ⚠ No time data found in mdsvalue results")
+                return
+            
+            print(f"    ✓ mdsvalue: {time_key_mds} with {len(time_data_mds)} points")
+            
+            # Execute with toksearch backend  
+            print("  Executing with toksearch backend...")
+            ods_toks = _execute_function_with_backend(func_name, regression_kw, 'toksearch')
+            time_key_toks, time_data_toks = _find_time_data_for_function(ods_toks, func_name)
+            
+            if time_key_toks is None:
+                print("  ⚠ No time data found in toksearch results")
+                return
+                
+            print(f"    ✓ toksearch: {time_key_toks} with {len(time_data_toks)} points")
+            
+            # Compare time data
+            if time_key_mds == time_key_toks:
+                if len(time_data_mds) == len(time_data_toks):
+                    # Compare values (allow small numerical differences)
+                    if numpy.allclose(time_data_mds, time_data_toks, rtol=1e-10, atol=1e-12):
+                        print(f"    ✅ Time data MATCHES between backends")
+                    else:
+                        max_diff = numpy.max(numpy.abs(time_data_mds - time_data_toks))
+                        print(f"    ⚠ Time data differs (max diff: {max_diff:.2e})")
+                else:
+                    print(f"    ⚠ Different time array lengths: {len(time_data_mds)} vs {len(time_data_toks)}")
+            else:
+                print(f"    ⚠ Different time keys: {time_key_mds} vs {time_key_toks}")
+                
+        except Exception as e:
+            expected_errors = ["toksearch package is required", "No module named 'toksearch'"]
+            if any(err in str(e) for err in expected_errors):
+                print("    ⚠ toksearch backend: Expected failure (package not installed)")
+            else:
+                print(f"    ✗ Backend comparison failed: {e}")
+    
     try:
+        # Get list of functions that require OMFIT
+        requires_omfit = __regression_arguments__.get("requires_omfit", [])
+        
+        # Filter functions based on skip_omfit_tests parameter
+        functions_to_test = []
+        omfit_functions_skipped = []
+        
         for func_name in __all__:
+            if skip_omfit_tests and func_name in requires_omfit:
+                omfit_functions_skipped.append(func_name)
+            else:
+                functions_to_test.append(func_name)
+        
+        # Report what functions are being tested
+        if skip_omfit_tests and omfit_functions_skipped:
+            print(f"⚠️  Skipping {len(omfit_functions_skipped)} OMFIT-dependent functions:")
+            for func_name in omfit_functions_skipped:
+                print(f"    - {func_name}")
+            print(f"✅ Testing {len(functions_to_test)} compatible functions")
+            print()
+        
+        for func_name in functions_to_test:
             regression_kw = {item: value for item, value in __regression_arguments__.get(func_name, {}).items() if item != '__all__'}
             print('=' * len(func_name))
             print(func_name)
             pprint(regression_kw)
             print('=' * len(func_name))
-            ods = ODS() #consistency_check= not break_schema
-            func = eval(func_name, global_namespace, local_namespace)
-            try:
-                try:
-                    regression_kw["update_callback"] = update_mapping
-                    func(ods, **regression_kw)
-                except Exception:
-                    raise
-            except TypeError as _excp:
-                if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
-                    raise _excp.__class__(
-                        str(_excp)
-                        + '\n'
-                        + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
-                    )
-                else:
-                    raise
+            
+            # Execute with default backend for main test
+            ods = _execute_function_with_backend(func_name, regression_kw)
+            
             tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
             if not len(tmp):
                 print('No data assigned to ODS')
                 return
+                
             n = max(map(lambda x: len(x), tmp))
             for item in tmp:
                 try:
@@ -681,6 +828,13 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
                         print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
                 except Exception:
                     print(f'{item.ljust(n)}   mixed')
+            
+            # Optional backend comparison - skip functions that require OMFIT
+            if compare_to_toksearch and machine == 'd3d':  # Only for d3d for now
+                if func_name in requires_omfit:
+                    print(f"    ⚠️  Skipping backend comparison for {func_name} (requires OMFIT)")
+                else:
+                    _compare_backends(func_name, regression_kw)
     finally:
         if old_OMAS_DEBUG_TOPIC is None:
             del os.environ['OMAS_DEBUG_TOPIC']
