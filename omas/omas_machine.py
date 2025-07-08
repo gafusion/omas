@@ -2,6 +2,7 @@
 
 import subprocess
 import functools
+import numpy as np
 import shutil
 from omas.omas_utils import *
 from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
@@ -673,120 +674,31 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             else:
                 raise
         return ods
-    
-    def _find_time_data_for_function(ods, func_name):
-        """Helper function to find time data in ODS using machine mapping JSON"""
-        try:
-            # Load the machine mappings to get the JSON data
-            mappings = machine_mappings(machine, '', raise_errors=False)
-            
-            # Find all IMAS fields that map to this Python function
-            function_call_pattern = f"{func_name}(ods, "
-            mapped_time_fields = []
-            
-            for imas_field, mapping_info in mappings.items():
-                if isinstance(mapping_info, dict) and 'PYTHON' in mapping_info:
-                    python_call = mapping_info['PYTHON']
-                    # Check if this field maps to our function and contains '.time'
-                    if function_call_pattern in python_call and '.time' in imas_field:
-                        mapped_time_fields.append(imas_field)
-            
-            # Convert IMAS field notation to ODS key notation
-            # (e.g., "core_profiles.time" stays the same, "bolometer.channel.:.power.time" becomes "bolometer.channel.0.power.time")
-            ods_time_keys = []
-            for field in mapped_time_fields:
-                # Replace array notation .:. with .0. for first element
-                ods_key = field.replace('.:.', '.0.')
-                ods_time_keys.append(ods_key)
-            
-            # Check which of these keys actually exist in the ODS
-            available_keys = ods.flat().keys()
-            for ods_key in ods_time_keys:
-                if ods_key in available_keys:
-                    try:
-                        data = ods[ods_key]
-                        if hasattr(data, '__len__') and len(data) > 0:
-                            # Successfully found time data using JSON mapping
-                            return ods_key, data
-                    except:
-                        continue
-            
-            # If no mapped time fields found, fall back to any time data
-            time_keys = [key for key in available_keys if 'time' in key.lower() and not key.lower().endswith('homogeneous_time')]
-            for key in time_keys:
-                try:
-                    data = ods[key]
-                    if hasattr(data, '__len__') and len(data) > 0:
-                        return key, data
-                except:
-                    continue
-                    
-        except Exception as e:
-            # If JSON parsing fails, fall back to simple search
-            all_keys = ods.flat().keys()
-            time_keys = [key for key in all_keys if 'time' in key.lower() and not key.lower().endswith('homogeneous_time')]
-            for key in time_keys:
-                try:
-                    data = ods[key]
-                    if hasattr(data, '__len__') and len(data) > 0:
-                        return key, data
-                except:
-                    continue
-        
-        return None, None
-    
-    def _compare_backends(func_name, regression_kw):
+
+    def _compare_backends(ref_ods, func_name, regression_kw):
         """Compare function execution between mdsvalue and toksearch backends"""
         print(f"\n--- Backend Comparison for {func_name} ---")
         
-        try:
-            # Execute with mdsvalue backend
-            print("  Executing with mdsvalue backend...")
-            ods_mds = _execute_function_with_backend(func_name, regression_kw, 'mdsvalue')
-            time_key_mds, time_data_mds = _find_time_data_for_function(ods_mds, func_name)
-            
-            if time_key_mds is None:
-                print("  ⚠ No time data found in mdsvalue results")
-                return
-            
-            print(f"    ✓ mdsvalue: {time_key_mds} with {len(time_data_mds)} points")
-            
-            # Execute with toksearch backend  
-            print("  Executing with toksearch backend...")
-            ods_toks = _execute_function_with_backend(func_name, regression_kw, 'toksearch')
-            time_key_toks, time_data_toks = _find_time_data_for_function(ods_toks, func_name)
-            
-            if time_key_toks is None:
-                print("  ⚠ No time data found in toksearch results")
-                return
-                
-            print(f"    ✓ toksearch: {time_key_toks} with {len(time_data_toks)} points")
-            
-            # Compare time data
-            if time_key_mds == time_key_toks:
-                if len(time_data_mds) == len(time_data_toks):
-                    # Compare values (allow small numerical differences)
-                    if numpy.allclose(time_data_mds, time_data_toks, rtol=1e-10, atol=1e-12):
-                        print(f"    ✅ Time data MATCHES between backends")
-                    else:
-                        max_diff = numpy.max(numpy.abs(time_data_mds - time_data_toks))
-                        print(f"    ⚠ Time data differs (max diff: {max_diff:.2e})")
-                else:
-                    print(f"    ⚠ Different time array lengths: {len(time_data_mds)} vs {len(time_data_toks)}")
+        # Execute with mdsvalue backend
+        print("  Executing with mdsvalue backend...")
+        toks_ods = _execute_function_with_backend(func_name, regression_kw, 'toksearch')
+        
+        for path in ref_ods.paths():
+            if issubclass(type(ref_ods[path]), np.ndarray):
+                assert len(ref_ods[path]) == len(toks_ods[path]), f"Different time array lengths: {len(ref_ods[path])} vs {toks_ods[path]}"
+        
+                # Compare values (allow small numerical differences)
+                assert numpy.allclose(ref_ods[path], toks_ods[path], rtol=1e-10, atol=1e-12, equal_nan=True), f"{path} data differs between backends (max diff: {numpy.max(numpy.abs(ref_ods[path] -  toks_ods[path])):.2e})"
+            elif type(ref_ods[path]) != str and np.isnan(ref_ods[path]):
+                assert np.isnan(toks_ods[path]), f"{path} data differs between backends. Toksearch does not reproduce nan"
             else:
-                print(f"    ⚠ Different time keys: {time_key_mds} vs {time_key_toks}")
-                
-        except Exception as e:
-            expected_errors = ["toksearch package is required", "No module named 'toksearch'"]
-            if any(err in str(e) for err in expected_errors):
-                print("    ⚠ toksearch backend: Expected failure (package not installed)")
-            else:
-                print(f"    ✗ Backend comparison failed: {e}")
+                assert ref_ods[path] == toks_ods[path], f"{path} data differs between backends. {ref_ods[path]} {toks_ods[path]}"
+        print(f"    ✅ Data MATCHES between backends")
     
     try:
         # Get list of functions that require OMFIT
         requires_omfit = __regression_arguments__.get("requires_omfit", [])
-        
+        requires_ptdata = __regression_arguments__.get("requires_ptdata", [])
         # Filter functions based on skip_omfit_tests parameter
         functions_to_test = []
         omfit_functions_skipped = []
@@ -833,8 +745,10 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             if compare_to_toksearch and machine == 'd3d':  # Only for d3d for now
                 if func_name in requires_omfit:
                     print(f"    ⚠️  Skipping backend comparison for {func_name} (requires OMFIT)")
+                elif func_name in requires_ptdata:
+                    print(f"    ⚠️  Skipping backend comparison for {func_name} (requires ptdata)")
                 else:
-                    _compare_backends(func_name, regression_kw)
+                    _compare_backends(ods, func_name, regression_kw)
     finally:
         if old_OMAS_DEBUG_TOPIC is None:
             del os.environ['OMAS_DEBUG_TOPIC']

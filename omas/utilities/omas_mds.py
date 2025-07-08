@@ -594,24 +594,17 @@ class toksearch_provider(BaseProvider):
     def _init_server_connection(self, **kwargs):
         """Initialize toksearch connection and import MdsSignal"""
         # Import and cache MdsSignal class
-        try:
-            from toksearch import MdsSignal
-            self.MdsSignal = MdsSignal
-        except ImportError:
-            raise ImportError("toksearch package is required for toksearch backend")
-        
-        # Set up server mapping for MdsSignal
-        server_map = {
-            'd3d': 'remote://atlas.gat.com:8000'
-        }
-        
+        from toksearch import MdsSignal
+        self.mds_server = "remote://atlas.gat.com"
+        self.MdsSignal = MdsSignal
         # Get the actual server location
-        if self.server in server_map:
-            self.mds_server = server_map[self.server]
-        else:
-            # Assume it's already a proper server specification
-            self.mds_server = self.server
-    
+
+    def clean_up(self, pulse):
+        from toksearch.signal import SignalRegistry
+        SignalRegistry().cleanup_shot(pulse)
+        SignalRegistry().cleanup()
+
+
     def raw(self, treename, pulse, TDI):
         """
         Fetch data using toksearch MdsSignal backend
@@ -636,8 +629,8 @@ class toksearch_provider(BaseProvider):
                 results = {}
                 for name, expr in TDI.items():
                     try:
-                        signal = self.MdsSignal(expr, treename, location=self.mds_server)
-                        result = signal.gather(pulse)
+                        signal = self.MdsSignal(expr, treename, location=self.mds_server, dims=[])
+                        result = signal.fetch(pulse)
                         # Extract the data component
                         if isinstance(result, dict) and 'data' in result:
                             results[name] = result['data']
@@ -651,8 +644,8 @@ class toksearch_provider(BaseProvider):
             
             # Single TDI expression
             else:
-                signal = self.MdsSignal(TDI, treename, location=self.mds_server)
-                result = signal.gather(pulse)
+                signal = self.MdsSignal(TDI, treename, location=self.mds_server, dims=[])
+                result = signal.fetch(pulse)
                 # Clean up the signal
                 signal.cleanup_shot(pulse)
                 # Extract the data component
@@ -673,12 +666,17 @@ class toksearch_provider(BaseProvider):
             if 'results' in locals():
                 if isinstance(results, dict):
                     if all(isinstance(results[k], Exception) for k in results):
-                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                        printd(f'toksearch: {TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
                     elif any(isinstance(results[k], Exception) for k in results):
-                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                        printd(f'toksearch: {TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
                     else:
-                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
+                        printd(f'toksearch: {TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
                 else:
-                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
+                    printd(f'toksearch: {TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
+            elif 'result' in locals():
+                if isinstance(result, Exception):
+                    printd(f'toksearch: {TDI} \t NO\t {time.time() - t0:3.3f} secs', topic='machine')
+                else:
+                    printd(f'toksearch: {TDI} \t OK\t {time.time() - t0:3.3f} secs', topic='machine')
             else:
-                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
+                printd(f'toksearch: {TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')

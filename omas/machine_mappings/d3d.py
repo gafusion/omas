@@ -11,7 +11,7 @@ from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
 
 __all__ = []
-__regression_arguments__ = {'__all__': __all__, "requires_omfit": []}
+__regression_arguments__ = {'__all__': __all__, "requires_omfit": [], "requires_ptdata": []}
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -402,6 +402,7 @@ def pf_active_hardware(ods, pulse):
             # `shaping` function
             ods['pf_active.coil'][k]["function.0.index"] = 1
 
+__regression_arguments__["requires_ptdata"].append("pf_active_coil_current_data")
 __regression_arguments__["requires_omfit"].append("pf_active_coil_current_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
@@ -478,7 +479,7 @@ def coils_non_axisymmetric_hardware(ods, pulse):
         ods['coils_non_axisymmetric.coil'][k]['name'] = fcid
         ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
 
-
+__regression_arguments__["requires_ptdata"].append("coils_non_axisymmetric_current_data")
 __regression_arguments__["requires_omfit"].append("coils_non_axisymmetric_current_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_current_data(ods, pulse):
@@ -1320,6 +1321,7 @@ def magnetics_hardware(ods, pulse):
     mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
 
+__regression_arguments__["requires_ptdata"].append("magnetics_floops_data")
 __regression_arguments__["requires_omfit"].append("magnetics_floops_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_floops_data(ods, pulse, nref=0):
@@ -1383,6 +1385,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
 
+__regression_arguments__["requires_ptdata"].append("magnetics_probes_data")
 __regression_arguments__["requires_omfit"].append("magnetics_probes_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_probes_data(ods, pulse):
@@ -1447,7 +1450,7 @@ def magnetics_probes_data(ods, pulse):
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
-
+__regression_arguments__["requires_ptdata"].append("ip_bt_dflux_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def ip_bt_dflux_data(ods, pulse):
     r"""
@@ -1649,6 +1652,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
 
 # ================================
+__regression_arguments__["requires_ptdata"].append("core_profiles_global_quantities_data")
 __regression_arguments__["requires_omfit"].append("core_profiles_global_quantities_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
@@ -1695,7 +1699,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
 
 if __name__ == '__main__':
     # Test ALL machine mapping functions (skip OMFIT-dependent ones in test environments)
-    test_machine_mapping_functions('d3d', __all__, globals(), locals(), skip_omfit_tests=True)
+    test_machine_mapping_functions('d3d', __all__, globals(), locals(), skip_omfit_tests=True, compare_to_toksearch=True)
     
     # Backend comparison testing (new feature)
     # Uncomment the line below to test backend consistency for compatible functions
