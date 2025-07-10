@@ -814,32 +814,6 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
             except Exception as e:
                 return ods, None, e
     
-    def _should_skip_mapping(location, mappings):
-        """Determine if a mapping should be skipped (OMFIT/ptdata requirements)"""
-        if not skip_omfit_mappings:
-            return False
-            
-        mapping = mappings.get(location, {})
-        
-        # Skip PYTHON mappings that require OMFIT/ptdata
-        if 'PYTHON' in mapping:
-            # Check if the Python function requires OMFIT
-            python_call = mapping['PYTHON']
-            # Extract function name from call like "d3d.some_function(ods, pulse)"
-            if '.' in python_call:
-                python_call.split(".")[1]
-            
-            func_name = python_call.split('(')[0]
-            # Check regression arguments for requirements
-            namespace = _namespace_mappings.get((machine, '', 'mdsplus'), {})
-            if '__regression_arguments__' in namespace:
-                requires_omfit = namespace['__regression_arguments__'].get('requires_omfit', [])
-                requires_ptdata = namespace['__regression_arguments__'].get('requires_ptdata', [])
-                if func_name in requires_omfit or func_name in requires_ptdata:
-                    return True
-            
-        return False
-    
     try:
         # Load all mappings for the machine
         mappings_mds = machine_mappings(machine, '', mds_backend='mdsplus') 
@@ -854,7 +828,7 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
         ids_groups = {}
         for location in all_locations:
             if location[-1] in [":", "*"]:
-                # Skip structure declarations - they'll be loaded implicitly
+                # Skip structure declarations - they'll be tested implicitly
                 continue
             ids_name = location.split('.')[0]  # 'equilibrium', 'core_profiles', etc.
             if ids_name not in ids_groups:
@@ -891,13 +865,6 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
             
             for location in locations:
                 print(f'\n--- Testing: {location} ---')
-                
-                # Check if we should skip this mapping
-                if _should_skip_mapping(location, mappings_mds):
-                    print(f'  ⚠️  Skipping (requires OMFIT/ptdata)')
-                    skipped_tests += 1
-                    skipped_mappings.append((location, 'OMFIT/ptdata requirement'))
-                    continue
                 
                 # Test with mdsplus backend using persistent ODS
                 persistent_ods_mds, data_mds, error_mds = _load_mapping_with_backend(

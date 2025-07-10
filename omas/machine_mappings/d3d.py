@@ -11,7 +11,7 @@ from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
 
 __all__ = []
-__regression_arguments__ = {'__all__': __all__, "requires_omfit": [], "requires_ptdata": []}
+__regression_arguments__ = {'__all__': __all__}
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -352,7 +352,6 @@ def gas_injection_hardware(ods, pulse):
 
 
 # ================================
-__regression_arguments__["requires_omfit"].append("pf_active_hardware")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_hardware(ods, pulse):
     r"""
@@ -404,8 +403,6 @@ def pf_active_hardware(ods, pulse):
             ods['pf_active.coil'][k]["function.0.index"] = 1
     return ods
 
-__regression_arguments__["requires_ptdata"].append("pf_active_coil_current_data")
-__regression_arguments__["requires_omfit"].append("pf_active_coil_current_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
     # get pf_active hardware description --without-- placing the data in this ods
@@ -457,7 +454,6 @@ def pf_active_coil_current_data(ods, pulse):
 
 
 # ================================
-__regression_arguments__["requires_omfit"].append("coils_non_axisymmetric_hardware")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_hardware(ods, pulse):
     r"""
@@ -483,8 +479,6 @@ def coils_non_axisymmetric_hardware(ods, pulse):
         ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
     return ods
 
-__regression_arguments__["requires_ptdata"].append("coils_non_axisymmetric_current_data")
-__regression_arguments__["requires_omfit"].append("coils_non_axisymmetric_current_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_current_data(ods, pulse):
     # get pf_active hardware description --without-- placing the data in this ods
@@ -1305,7 +1299,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
 
 # ================================
-__regression_arguments__["requires_omfit"].append("magnetics_weights")
 def magnetics_weights(ods, pulse, time_index):
     r"""
     Load DIII-D tokamak magnetics equilibrium weights
@@ -1323,7 +1316,6 @@ def magnetics_weights(ods, pulse, time_index):
     ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
     return ods
 
-__regression_arguments__["requires_omfit"].append("magnetics_hardware")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_hardware(ods, pulse):
     r"""
@@ -1341,8 +1333,6 @@ def magnetics_hardware(ods, pulse):
     mhdin.to_omas(ods, update='magnetics')
     return ods
 
-__regression_arguments__["requires_ptdata"].append("magnetics_floops_data")
-__regression_arguments__["requires_omfit"].append("magnetics_floops_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_floops_data(ods, pulse, nref=0):
     from scipy.interpolate import interp1d
@@ -1406,8 +1396,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
         ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
     return ods
 
-__regression_arguments__["requires_ptdata"].append("magnetics_probes_data")
-__regression_arguments__["requires_omfit"].append("magnetics_probes_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_probes_data(ods, pulse):
     from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
@@ -1675,8 +1663,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
     return ods
 
 # ================================
-__regression_arguments__["requires_ptdata"].append("core_profiles_global_quantities_data")
-__regression_arguments__["requires_omfit"].append("core_profiles_global_quantities_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
 def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None):
     from scipy.interpolate import interp1d
