@@ -1472,7 +1472,6 @@ def magnetics_probes_data(ods, pulse):
         ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
     return ods
 
-__regression_arguments__["requires_ptdata"].append("ip_bt_dflux_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def ip_bt_dflux_data(ods, pulse):
     r"""

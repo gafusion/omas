@@ -96,6 +96,7 @@ class TestOmasMachine(UnittestCaseOmas):
         for machine in machines():
             machine_mappings(self.machine, '')['__mdsserver__']
 
+    @unittest.skipIf(failed_D3D_MDS, str(failed_D3D_MDS))
     def test_machine_mappings_json(self):
         """Test JSON mappings with both backends"""
         compare_backends = True
@@ -120,5 +121,6 @@ class TestOmasMachine(UnittestCaseOmas):
             self.pulse, 
             compare_backends=compare_backends,
             skip_omfit_mappings=skip_omfit_mappings,
-            options=self.options
+            options=self.options,
+            fail_fast=True  # For debugging individual failures
         )

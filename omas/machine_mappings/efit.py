@@ -181,9 +181,6 @@ def pf_current_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id
         for i in range(n_times):
             time_slice = ods['equilibrium']['time_slice'][i]
             
-            # Set array size
-            time_slice['constraints']['pf_current'][:] = n_pf
-            
             # Set data for all PF coils
             for j in range(n_pf):
                 if len(measured.shape) > 1:
@@ -304,18 +301,13 @@ def grid_2d_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     r_tiled = np.array([r_grid for k in range(n_times)])
     z_tiled = np.array([z_grid for k in range(n_times)])
     
-    # Apply transpose as specified in _efit.json: [1,0,2]
-    r_tiled = np.transpose(r_tiled, [1, 0, 2])
-    z_tiled = np.transpose(z_tiled, [1, 0, 2])
     with omas_environment(ods, cocosio=MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)):
         # Set 2D grid data
-        ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid']['dim1'] = r_tiled
-        ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid']['dim2'] = z_tiled
-        
-        # Set grid type index (tiled constant 1 following tile algorithm)
-        # tile(1, size(BCENTR)) with transpose [1,0] - creates array of 1s for each time
-        grid_type_index = np.array([1 for k in range(n_times)])
-        ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid_type']['index'] = grid_type_index
+        for itime in range(n_times):
+            ods['equilibrium']['time_slice'][itime]['profiles_2d'][0]['grid']['dim1'] = r_tiled[itime]
+            ods['equilibrium']['time_slice'][itime]['profiles_2d'][0]['grid']['dim2'] = z_tiled[itime]
+            
+            ods['equilibrium']['time_slice'][itime]['profiles_2d'][0]['grid_type']['index'] = 1
     return ods
 
 # ================================

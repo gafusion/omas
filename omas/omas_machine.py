@@ -775,7 +775,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
 
 
-def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_mappings=False, options=None):
+def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_mappings=False, options=None, fail_fast=False):
     """
     Test all JSON mappings for a machine with both backends (mdsplus vs toksearch)
     
@@ -786,7 +786,8 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
     :param pulse: pulse number for testing
     :param compare_backends: if True, compare mdsplus vs toksearch results
     :param skip_omfit_mappings: if True, skip mappings that require OMFIT
-    :param sample_mappings: if provided, only test these specific mapping paths
+    :param options: options dictionary to pass to machine_to_omas
+    :param fail_fast: if True, raise error immediately on first failure (for debugging)
     """
     from pprint import pprint
     import numpy
@@ -796,14 +797,22 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
     
     print(f'Testing JSON mappings for {machine} machine (pulse {pulse})')
     
-    def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options):
+    def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options, ods=None):
         """Helper to load a single mapping with specified backend"""
-        try:
+        if ods is None:
             ods = ODS(mds_backend=backend)
+            
+        if fail_fast:
+            # Don't catch exceptions in fail_fast mode - let debugger stop at original error
             ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
             return ods, data_info, None
-        except Exception as e:
-            return None, None, e
+        else:
+            # Catch exceptions for summary reporting
+            try:
+                ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
+                return ods, data_info, None
+            except Exception as e:
+                return ods, None, e
     
     def _should_skip_mapping(location, mappings):
         """Determine if a mapping should be skipped (OMFIT/ptdata requirements)"""
@@ -818,22 +827,16 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
             python_call = mapping['PYTHON']
             # Extract function name from call like "d3d.some_function(ods, pulse)"
             if '.' in python_call:
-                func_name = python_call.split('(')[0].split('.')[-1]
-                # Check regression arguments for requirements
-                try:
-                    mappings_module = machine_mappings(machine, '', mds_backend='mdsplus')
-                    namespace = _namespace_mappings.get((machine, '', 'mdsplus'), {})
-                    if '__regression_arguments__' in namespace:
-                        requires_omfit = namespace['__regression_arguments__'].get('requires_omfit', [])
-                        requires_ptdata = namespace['__regression_arguments__'].get('requires_ptdata', [])
-                        if func_name in requires_omfit or func_name in requires_ptdata:
-                            return True
-                except:
-                    pass
-        
-        # Skip eval2TDI mappings (these are complex TDI expressions that may require OMFIT)
-        if 'eval2TDI' in mapping:
-            return True
+                python_call.split(".")[1]
+            
+            func_name = python_call.split('(')[0]
+            # Check regression arguments for requirements
+            namespace = _namespace_mappings.get((machine, '', 'mdsplus'), {})
+            if '__regression_arguments__' in namespace:
+                requires_omfit = namespace['__regression_arguments__'].get('requires_omfit', [])
+                requires_ptdata = namespace['__regression_arguments__'].get('requires_ptdata', [])
+                if func_name in requires_omfit or func_name in requires_ptdata:
+                    return True
             
         return False
     
@@ -847,6 +850,27 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
         all_locations = [loc for loc in mappings_mds.keys() 
                         if not loc.startswith('__') and not loc.endswith('__')]
         
+        # Group mappings by IDS (top-level identifier)
+        ids_groups = {}
+        for location in all_locations:
+            if location[-1] in [":", "*"]:
+                # Skip structure declarations - they'll be loaded implicitly
+                continue
+            ids_name = location.split('.')[0]  # 'equilibrium', 'core_profiles', etc.
+            if ids_name not in ids_groups:
+                ids_groups[ids_name] = []
+            ids_groups[ids_name].append(location)
+        
+        def mapping_sort_key(location):
+            """Sort mappings for logical loading order"""
+            parts = location.split('.')
+            # Convert numeric parts to zero-padded strings for proper sorting
+            return [part if not part.isdigit() else f"{int(part):03d}" for part in parts]
+        
+        # Sort mappings within each IDS group
+        for ids_name in ids_groups:
+            ids_groups[ids_name].sort(key=mapping_sort_key)
+        
         successful_tests = 0
         failed_tests = 0
         skipped_tests = 0
@@ -857,71 +881,95 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
         comparison_failures = []
         skipped_mappings = []
         
-        for location in all_locations:
-            print(f'\n--- Testing: {location} ---')
+        # Test each IDS group with persistent ODS
+        for ids_name, locations in ids_groups.items():
+            print(f'\n=== Testing IDS: {ids_name} ({len(locations)} mappings) ===')
             
-            # Check if we should skip this mapping
-            if _should_skip_mapping(location, mappings_mds):
-                print(f'  ⚠️  Skipping (requires OMFIT/ptdata)')
-                skipped_tests += 1
-                skipped_mappings.append((location, 'OMFIT/ptdata requirement'))
-                continue
+            # Create persistent ODS instances for this IDS
+            persistent_ods_mds = ODS(mds_backend='mdsplus')
+            persistent_ods_toks = ODS(mds_backend='toksearch') if compare_backends else None
             
-            # Test with mdsplus backend
-            ods_mds, data_mds, error_mds = _load_mapping_with_backend(
-                machine, pulse, location, 'mdsplus'
-            )
-            
-            if error_mds:
-                error_msg = str(error_mds)[:100]
-                print(f'  ❌ MDSplus failed: {error_msg}...')
-                failed_tests += 1
-                mdsplus_failures.append((location, error_msg))
-                continue
+            for location in locations:
+                print(f'\n--- Testing: {location} ---')
                 
-            print(f'  ✅ MDSplus loaded successfully')
-            
-            # Test with toksearch backend if requested
-            if compare_backends:
-                ods_toks, data_toks, error_toks = _load_mapping_with_backend(
-                    machine, pulse, location, 'toksearch'
+                # Check if we should skip this mapping
+                if _should_skip_mapping(location, mappings_mds):
+                    print(f'  ⚠️  Skipping (requires OMFIT/ptdata)')
+                    skipped_tests += 1
+                    skipped_mappings.append((location, 'OMFIT/ptdata requirement'))
+                    continue
+                
+                # Test with mdsplus backend using persistent ODS
+                persistent_ods_mds, data_mds, error_mds = _load_mapping_with_backend(
+                    machine, pulse, location, 'mdsplus', ods=persistent_ods_mds
                 )
                 
-                if error_toks:
-                    error_msg = str(error_toks)[:100]
-                    print(f'  ❌ TokSearch failed: {error_msg}...')
+                if error_mds:
+                    error_msg = str(error_mds)[:100]
+                    print(f'  ❌ MDSplus failed: {error_msg}...')
                     failed_tests += 1
-                    toksearch_failures.append((location, error_msg))
+                    mdsplus_failures.append((location, error_msg))
                     continue
                     
-                print(f'  ✅ TokSearch loaded successfully')
+                print(f'  ✅ MDSplus loaded successfully')
                 
-                # Compare results between backends
-                try:
-                    # Get the actual data path that was loaded
-                    if location in ods_mds.paths() and location in ods_toks.paths():
-                        mds_data = ods_mds[location]
-                        toks_data = ods_toks[location]
-                        
-                        if isinstance(mds_data, np.ndarray) and isinstance(toks_data, np.ndarray):
-                            if not numpy.allclose(mds_data, toks_data, rtol=1e-10, atol=1e-12, equal_nan=True):
-                                print(f'  ⚠️  Data differs between backends')
-                                failed_tests += 1
-                                comparison_failures.append((location, 'Array data mismatch'))
-                                continue
-                        elif mds_data != toks_data:
-                            print(f'  ⚠️  Data differs between backends') 
-                            failed_tests += 1
-                            comparison_failures.append((location, f'Scalar data mismatch: {mds_data} vs {toks_data}'))
-                            continue
-                            
-                    print(f'  ✅ Data matches between backends')
-                except Exception as e:
-                    error_msg = str(e)[:50]
-                    print(f'  ⚠️  Could not compare data: {error_msg}...')
-                    comparison_failures.append((location, f'Comparison error: {error_msg}'))
+                # Test with toksearch backend if requested
+                if compare_backends:
+                    persistent_ods_toks, data_toks, error_toks = _load_mapping_with_backend(
+                        machine, pulse, location, 'toksearch', ods=persistent_ods_toks
+                    )
                     
-            successful_tests += 1
+                    if error_toks:
+                        error_msg = str(error_toks)[:100]
+                        print(f'  ❌ TokSearch failed: {error_msg}...')
+                        failed_tests += 1
+                        toksearch_failures.append((location, error_msg))
+                        continue
+                        
+                    print(f'  ✅ TokSearch loaded successfully')
+                    
+                    # Compare results between backends
+                    if fail_fast:
+                        # Don't catch exceptions in fail_fast mode
+                        if location in persistent_ods_mds.paths() and location in persistent_ods_toks.paths():
+                            mds_data = persistent_ods_mds[location]
+                            toks_data = persistent_ods_toks[location]
+                            
+                            if isinstance(mds_data, np.ndarray) and isinstance(toks_data, np.ndarray):
+                                if not numpy.allclose(mds_data, toks_data, rtol=1e-10, atol=1e-12, equal_nan=True):
+                                    print(f'  ⚠️  Data differs between backends')
+                                    raise AssertionError(f'Backend comparison failed for {location}: Array data mismatch')
+                            elif mds_data != toks_data:
+                                print(f'  ⚠️  Data differs between backends') 
+                                raise AssertionError(f'Backend comparison failed for {location}: Scalar data mismatch: {mds_data} vs {toks_data}')
+                        print(f'  ✅ Data matches between backends')
+                    else:
+                        # Catch exceptions for summary reporting
+                        try:
+                            # Get the actual data path that was loaded
+                            if location in persistent_ods_mds.paths() and location in persistent_ods_toks.paths():
+                                mds_data = persistent_ods_mds[location]
+                                toks_data = persistent_ods_toks[location]
+                                
+                                if isinstance(mds_data, np.ndarray) and isinstance(toks_data, np.ndarray):
+                                    if not numpy.allclose(mds_data, toks_data, rtol=1e-10, atol=1e-12, equal_nan=True):
+                                        print(f'  ⚠️  Data differs between backends')
+                                        failed_tests += 1
+                                        comparison_failures.append((location, 'Array data mismatch'))
+                                        continue
+                                elif mds_data != toks_data:
+                                    print(f'  ⚠️  Data differs between backends') 
+                                    failed_tests += 1
+                                    comparison_failures.append((location, f'Scalar data mismatch: {mds_data} vs {toks_data}'))
+                                    continue
+                                    
+                            print(f'  ✅ Data matches between backends')
+                        except Exception as e:
+                            error_msg = str(e)[:50]
+                            print(f'  ⚠️  Could not compare data: {error_msg}...')
+                            comparison_failures.append((location, f'Comparison error: {error_msg}'))
+                        
+                successful_tests += 1
             
         print(f'\n=== SUMMARY ===')
         print(f'✅ Successful: {successful_tests}')
