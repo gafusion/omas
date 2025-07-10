@@ -241,7 +241,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
             # By supplying the function to the decorator we avoid a ring inclusion
             if call.startswith('efit.'):
                 # Already comes with the module
-                call_w_update_mapping = call[:-1] + ", update_callback=update_mapping)"
+                call_w_update_mapping = call
             else:
                 # Add machine specific module
                 call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
