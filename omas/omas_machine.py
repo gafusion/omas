@@ -7,10 +7,10 @@ import shutil
 from omas.omas_utils import *
 from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from omas.omas_physics import cocos_signals
-from omas.machine_mappings import d3d, nstx, nstxu, east
+from omas.machine_mappings import d3d, nstx, nstxu, east, efit, _common
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
+from omas.utilities.omas_mds import check_for_pulse_id
 try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
@@ -114,7 +114,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     location = l2o(p2l(location))
     for branch in [branch, 'master']:
-        mappings = machine_mappings(machine, branch, user_machine_mappings)
+        mappings = machine_mappings(machine, branch, user_machine_mappings, mds_backend=ods.mds_backend)
         options_with_defaults = copy.copy(mappings['__options__'])
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
@@ -129,7 +129,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 print(f"Failed to load {location} from head. Attempting to resolve using the master branch.")
                 print(f"Error was:")
                 print(e)
-    idm = (machine, branch)
+    idm = (machine, branch, ods.mds_backend)
     failed_locations = {}
     if location.endswith(".*"):
         temp_cache = cache
@@ -190,21 +190,28 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         if isinstance(mapped['COCOSIO'], int):
             cocosio = mapped['COCOSIO']
     elif 'COCOSIO_PYTHON' in mapped:
-        call = mapped['COCOSIO_PYTHON'].format(**options_with_defaults)
+        call = copy.copy(mapped['COCOSIO_PYTHON'].format(**options_with_defaults))
         if cache and call in cache:
             cocosio = cache[call]
         else:
-            namespace = {}
-            namespace.update(_namespace_mappings[idm])
-            namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            tmp = compile(call, machines(machine, branch)[:-5] + '.py', 'eval')
-            cocosio = eval(tmp, namespace)
+            if hasattr(_common, call.split("(")[0]):
+                # Cannot update mappings here either because we are using a function that is outside of {machine}.py
+                call_w_update_mapping = "_common" + "." + call
+            elif call.startswith('efit.'):
+                # Never update these mappings since they are hand generated (and update_mapping does not work here anyway)
+                call_w_update_mapping = call[:-1] + ", update_callback=None)"
+            else:
+                call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
+            local_vars = {"ods": ods, "cocosio": cocosio}
+            exec('cocosio = ' + call_w_update_mapping, globals(), local_vars)
+            cocosio = local_vars.get("cocosio", None)
             if isinstance(cache, dict):
                 cache[call] = cocosio
     elif 'COCOSIO_TDI' in mapped:
         TDI = mapped['COCOSIO_TDI'].format(**options_with_defaults)
         treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-        cocosio = int(mdsvalue(machine, treename, pulse, TDI).raw())
+        provider = ods.get_mds_provider(machine)
+        cocosio = int(provider.raw(treename, pulse, TDI))
 
     # CONSTANT VALUE
     if 'VALUE' in mapped:
@@ -224,21 +231,21 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     # PYTHON
     elif 'PYTHON' in mapped:
-        call = mapped['PYTHON'].format(**options_with_defaults)
+        call = copy.copy(mapped['PYTHON'].format(**options_with_defaults))
         # python functions tend to set multiple locations at once
         # it is thus very beneficial to cache that
         if cache and call in cache:
             ods = cache[call]
         else:
-            namespace = {}
-            namespace.update(_namespace_mappings[idm])
-            namespace['ods'] = ODS()
-            namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            printd(f"Calling `{call}` in {os.path.basename(namespace['__file__'])}", topic='machine')
             # Add the callback for mapping updates
-            # By supplyinh the function to the decorator we avoid a ringinclusion
-            call_w_update_mapping = call[:-1] + ", update_callback=update_mapping)"
-            exec( machine + "." + call_w_update_mapping)
+            # By supplying the function to the decorator we avoid a ring inclusion
+            if call.startswith('efit.'):
+                # Already comes with the module
+                call_w_update_mapping = call[:-1] + ", update_callback=update_mapping)"
+            else:
+                # Add machine specific module
+                call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
+            exec(call_w_update_mapping)
             if isinstance(cache, dict):
                 cache[call] = ods
         if location.endswith(':'):
@@ -258,7 +265,8 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                 pulse_id = pulse
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine, treename, pulse_id, TDI).raw()
+            provider = ods.get_mds_provider(machine)
+            data0 = data = provider.raw(treename, pulse_id, TDI)
             if data is None:
                 raise ValueError('data is None')
         except Exception as e:
@@ -317,7 +325,7 @@ _user_machine_mappings = {}
 _python_tdi_namespace = {}
 
 
-def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False):
+def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False, mds_backend=None):
     """
     Function to load the json mapping files (local or remote)
     Allows for merging external mapping rules defined by users.
@@ -339,7 +347,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
-    idm = (machine, branch)
+    idm = (machine, branch, mds_backend)
 
     if (
         return_raw_mappings
@@ -362,6 +370,9 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         go_deep = ['__cocos_rules__', '__options__']
         mappings = {k: {} for k in go_deep}
         mappings.setdefault('__include__', ['_common'])
+        if mds_backend is not None and mds_backend == 'toksearch':
+            if '_efit' in top.get('__include__', ['_common']):
+                top['__include__'] += top.get('__toksearch_overrides__', [])
         if not return_raw_mappings:
             for item in top.get('__include__', ['_common']):
                 include_filename = os.path.split(filename)[0] + os.sep + f'{item}.json'
@@ -550,7 +561,8 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
         m = os.path.splitext(os.path.split(filename)[1])[0]
-        if not m.startswith('_'):
+        # Allow backend-specific mappings (e.g., _efit_toksearch.json) alongside regular machine mappings
+        if not m.startswith('_') or m.startswith('_efit_toksearch'):
             _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines
@@ -634,7 +646,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
 
     :param namespace: testing namespace
     
-    :param compare_to_toksearch: if True, execute functions twice (once with mdsvalue, 
+    :param compare_to_toksearch: if True, execute functions twice (once with mdsplus, 
                                 once with toksearch) and compare time data for consistency
                                 
     :param skip_omfit_tests: if True, skip all functions that require OMFIT dependencies
@@ -648,12 +660,16 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
     # call machine mapping to make sure the json file is properly formatted
     # machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
-    machine_mappings(machine, '', raise_errors=True)
+    if compare_to_toksearch:
+        # Toksearch backend is additive so only need to do this with it
+        machine_mappings(machine, '', raise_errors=True, mds_backend='toksearch')
+    else:
+        machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
     __regression_arguments__ = global_namespace['__regression_arguments__']
     
-    def _execute_function_with_backend(func_name, regression_kw, backend='mdsvalue'):
+    def _execute_function_with_backend(func_name, regression_kw, backend='mdsplus'):
         """Helper function to execute a mapping function with specified backend"""
         ods = ODS(mds_backend=backend)
         func = eval(func_name, global_namespace, local_namespace)
@@ -676,11 +692,11 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
         return ods
 
     def _compare_backends(ref_ods, func_name, regression_kw):
-        """Compare function execution between mdsvalue and toksearch backends"""
+        """Compare function execution between mdsplus and toksearch backends"""
         print(f"\n--- Backend Comparison for {func_name} ---")
         
-        # Execute with mdsvalue backend
-        print("  Executing with mdsvalue backend...")
+        # Execute with mdsplus backend
+        print("  Executing with mdsplus backend...")
         toks_ods = _execute_function_with_backend(func_name, regression_kw, 'toksearch')
         
         for path in ref_ods.paths():
@@ -765,10 +781,11 @@ class dynamic_omas_machine(dynamic_ODS):
     This class is not to be used by itself, but via the ODS.open() method.
     """
 
-    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
+    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True, mds_backend=None):
         self.kw = {'machine': machine, 'pulse': int(pulse), 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
         self.active = False
         self.cache = {}
+        self.mds_backend = mds_backend
 
     def open(self):
         printd('Dynamic open  %s' % self.kw, topic='dynamic')
@@ -787,7 +804,7 @@ class dynamic_omas_machine(dynamic_ODS):
         if o2u(key) not in self.cache:
             printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
             ods, _ = machine_to_omas(
-                ODS(),
+                ODS(mds_backend=self.mds_backend),
                 self.kw['machine'],
                 self.kw['pulse'],
                 o2u(key),
@@ -808,11 +825,11 @@ class dynamic_omas_machine(dynamic_ODS):
         ulocation = o2u(location)
         if ulocation.endswith(':'):
             return False
-        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend)
 
     def keys(self, location):
         ulocation = (o2u(location) + ".").lstrip('.')
-        if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
+        if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend):
             try:
                 return list(range(self[ulocation + ':']))
             except Exception as _excp:
@@ -822,7 +839,7 @@ class dynamic_omas_machine(dynamic_ODS):
             tmp = numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
-                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend)
                     if not k.startswith('_') and k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
                 ]
             )
@@ -843,7 +860,7 @@ def load_omas_machine(
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
-    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
+    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings, mds_backend=self.mds_backend) if not location.startswith('__')]:
         if location.endswith(':'):
             continue
         print(location)

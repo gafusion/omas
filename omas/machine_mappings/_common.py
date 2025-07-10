@@ -4,7 +4,7 @@ from omas.omas_utils import printd
 import os
 import glob
 from omas.omas_setup import omas_dir
-from omas.utilities.omas_mds import mdsvalue, get_pulse_id
+from omas.utilities.omas_mds import get_pulse_id
 
 __support_files_cache__ = {}
 
@@ -47,7 +47,7 @@ def get_support_file(object_type, filename):
 __MDS_gEQDSK_COCOS_identify_cache__ = {}
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
+def MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id):
     """
     Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
@@ -66,7 +66,8 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
     if (machine, pulse_id, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
         return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
-    res = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    provider = ods.get_mds_provider(machine)
+    res = provider.raw(EFIT_tree, pulse_id, TDIs)
     bt = res['bt']
     ip = res['ip']
     g_cocos = {(+1, +1): 1, (+1, -1): 3, (-1, +1): 5, (-1, -1): 7, (+1, 0): 1, (-1, 0): 3}
@@ -77,7 +78,7 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
     return cocosio
 
 
-def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
+def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree, EFIT_run_id):
     """
     evaluate EFIT psi
 
@@ -91,14 +92,16 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
     :return: integer cocos convention
     """
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         TDIs = {
             'psi_axis': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG',
             'psi_boundary': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY',
             'rho_tor_norm': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN',
         }
-        res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+        provider = ods.get_mds_provider(machine)
+        res = provider.raw(EFIT_tree, pulse_id, TDIs)
         n = res['rho_tor_norm'].shape[1]
         for k in range(len(res['psi_axis'])):
             ods[f'equilibrium.time_slice.{k}.global_quantities.psi_axis'] = res['psi_axis'][k]
@@ -229,7 +232,9 @@ def fetch_assign(
                 TDIs.append(f'dim_of({TDI},0)')
             elif stage == 'fetch' and t is None:
                 try:
-                    t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
+                    provider = ods.get_mds_provider(mds_server)
+                    result = provider.raw(mds_tree, pulse, TDI)
+                    t = provider.raw(mds_tree, pulse, f'dim_of({TDI},0)')
                     if len(t) <= 1:
                         t = None
                 except Exception:
@@ -260,5 +265,6 @@ def fetch_assign(
                 elif validity is not None:
                     ods[validity.format(**locals())] = -2
         if stage == 'fetch':
-            tmp = mdsvalue(mds_server, mds_tree, pulse, TDI=TDIs).raw()
+            provider = ods.get_mds_provider(mds_server)
+            tmp = provider.raw(mds_tree, pulse, TDIs)
     return ods

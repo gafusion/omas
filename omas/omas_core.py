@@ -224,7 +224,7 @@ class ODS(MutableMapping):
 
         :param dynamic: internal keyword used for dynamic data loading
 
-        :param mds_backend: MDS backend to use ('mdsvalue' or 'toksearch'). If None, uses global default
+        :param mds_backend: MDS backend to use ('mdsplus' or 'toksearch'). If None, uses global default
         """
         self.omas_data = None
         self._consistency_check = consistency_check
@@ -242,7 +242,7 @@ class ODS(MutableMapping):
         # Store MDS backend choice for this ODS instance
         if mds_backend is not None:
             from .utilities.omas_mds import get_mds_backend
-            valid_backends = ['mdsvalue', 'toksearch']
+            valid_backends = ['mdsplus', 'toksearch']
             if mds_backend not in valid_backends:
                 raise ValueError(f"mds_backend must be one of {valid_backends}, got '{mds_backend}'")
         self.mds_backend = mds_backend
@@ -254,7 +254,7 @@ class ODS(MutableMapping):
         """
         Get the effective MDS backend for this ODS instance
         
-        :return: backend name ('mdsvalue' or 'toksearch')
+        :return: backend name ('mdsplus' or 'toksearch')
         """
         if self.mds_backend is not None:
             return self.mds_backend
@@ -2245,7 +2245,7 @@ class ODS(MutableMapping):
             elif ext == 'machine':
                 from omas.omas_machine import dynamic_omas_machine
 
-                self.dynamic = dynamic_omas_machine(*args, **kw)
+                self.dynamic = dynamic_omas_machine(*args, **kw, mds_backend=self.mds_backend)
 
             self.dynamic.open()
             return self

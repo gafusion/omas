@@ -1,0 +1,115 @@
+{
+ "__options__": {
+  "EFIT_run_id": null,
+  "EFIT_tree": "EFIT01"
+ },
+ "__cocos_rules__": {
+  "EFIT_tree": {
+    "PYTHON": "MDS_gEQDSK_COCOS_identify(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+  }
+ },
+ 
+ "equilibrium.time_slice.:.boundary.outline.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary.outline.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.0.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.1.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.0.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary.x_point.1.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.outline.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.outline.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.1.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.0.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.1.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.0.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.0.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+
+ "equilibrium.time_slice.:.constraints.pf_current.:": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.measured_error_upper": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.weight": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.reconstructed": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pf_current.:.chi_squared": {
+  "PYTHON": "efit.pf_current_measurements(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+
+ "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
+  "PYTHON": "efit.psi_profiles(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
+  "PYTHON": "efit.psi_profiles(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.psi": {
+  "PYTHON": "efit.psi_profiles(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
+  "PYTHON": "efit.grid_2d_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
+  "PYTHON": "efit.grid_2d_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
+  "PYTHON": "efit.grid_2d_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+
+ "equilibrium.time_slice.:.convergence.iterations_n": {
+  "PYTHON": "efit.convergence_data(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ }
+}

@@ -4,6 +4,9 @@
   "_common",
   "_efit"
  ],
+ "__toksearch_overrides__": [
+    "_efit_toksearch"
+ ],
  "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
   "EFIT_run_id": null,

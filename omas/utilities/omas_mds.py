@@ -16,13 +16,13 @@ __all__ = [
 ]
 
 # Global variable to store the default backend
-_default_mds_backend = 'mdsvalue'
+_default_mds_backend = 'mdsplus'
 
 def get_mds_backend():
     """
     Get the current default MDS backend
     
-    :return: string with backend name ('mdsvalue' or 'toksearch')
+    :return: string with backend name ('mdsplus' or 'toksearch')
     """
     return _default_mds_backend
 
@@ -30,10 +30,10 @@ def set_default_mds_backend(backend):
     """
     Set the default MDS backend for data retrieval
     
-    :param backend: string with backend name ('mdsvalue' or 'toksearch')
+    :param backend: string with backend name ('mdsplus' or 'toksearch')
     """
     global _default_mds_backend
-    valid_backends = ['mdsvalue', 'toksearch']
+    valid_backends = ['mdsplus', 'toksearch']
     if backend not in valid_backends:
         raise ValueError(f"Backend must be one of {valid_backends}, got '{backend}'")
     _default_mds_backend = backend
@@ -44,7 +44,7 @@ def create_mds_provider(server, backend=None, **kwargs):
     Factory function to create the appropriate MDS provider instance
     
     :param server: MDSplus server address or machine name
-    :param backend: specific backend to use ('mdsvalue' or 'toksearch'), 
+    :param backend: specific backend to use ('mdsplus' or 'toksearch'), 
                    uses default if None
     :param kwargs: additional arguments passed to provider constructor
     
@@ -53,7 +53,7 @@ def create_mds_provider(server, backend=None, **kwargs):
     if backend is None:
         backend = _default_mds_backend
     
-    if backend == 'mdsvalue':
+    if backend == 'mdsplus':
         return mds_provider(server, **kwargs)
     elif backend == 'toksearch':
         return toksearch_provider(server, **kwargs)
@@ -71,22 +71,6 @@ def auto_mds_provider(server, **kwargs):
     """
     return create_mds_provider(server, **kwargs)
 
-# Legacy factory functions for backward compatibility
-def create_mds_backend(server, treename, pulse, TDI, backend=None, **kwargs):
-    """Legacy function - creates old-style backend instance"""
-    if backend is None:
-        backend = _default_mds_backend
-    
-    if backend == 'mdsvalue':
-        return mdsvalue(server, treename, pulse, TDI, **kwargs)
-    elif backend == 'toksearch':
-        raise ValueError("Legacy toksearch class removed - use toksearch_provider instead")
-    else:
-        raise ValueError(f"Unknown backend: {backend}")
-
-def auto_mds_backend(server, treename, pulse, TDI, **kwargs):
-    """Legacy function - creates old-style backend instance"""
-    return create_mds_backend(server, treename, pulse, TDI, **kwargs)
 
 def get_pulse_id(pulse, run_id=None):
     """
