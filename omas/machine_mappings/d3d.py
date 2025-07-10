@@ -348,6 +348,7 @@ def gas_injection_hardware(ods, pulse):
     # pipe_cpmid['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
     ip += 1
     iv += 1
+    return ods
 
 
 # ================================
@@ -401,6 +402,7 @@ def pf_active_hardware(ods, pulse):
         else:
             # `shaping` function
             ods['pf_active.coil'][k]["function.0.index"] = 1
+    return ods
 
 __regression_arguments__["requires_ptdata"].append("pf_active_coil_current_data")
 __regression_arguments__["requires_omfit"].append("pf_active_coil_current_data")
@@ -451,6 +453,7 @@ def pf_active_coil_current_data(ods, pulse):
                     ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
             else:
                 print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
+    return ods
 
 
 # ================================
@@ -478,6 +481,7 @@ def coils_non_axisymmetric_hardware(ods, pulse):
     for k, fcid in enumerate(coil_names):
         ods['coils_non_axisymmetric.coil'][k]['name'] = fcid
         ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
+    return ods
 
 __regression_arguments__["requires_ptdata"].append("coils_non_axisymmetric_current_data")
 __regression_arguments__["requires_omfit"].append("coils_non_axisymmetric_current_data")
@@ -505,6 +509,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
+    return ods
 
 
 # ================================
@@ -636,6 +641,7 @@ def ec_launcher_active_hardware(ods, pulse):
     cp["toray"] = ODS()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
+    return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=180893)
 def nbi_active_hardware(ods, pulse):
@@ -689,6 +695,7 @@ def nbi_active_hardware(ods, pulse):
             nbu["species.a"] = 2.0
         else:            
             nbu["species.a"] = int(gas[1])
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -727,6 +734,7 @@ def interferometer_hardware(ods, pulse):
         ch = ods['interferometer.channel'][i]
         for field in ch['line_of_sight.first_point'].keys():
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -764,6 +772,7 @@ def interferometer_data(ods, pulse):
             fill_value=(-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]),
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
+    return ods
 
 
 # ================================
@@ -778,6 +787,7 @@ def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
     unwrap(thomson_scattering_data)(ods, pulse, revision, _get_measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -843,6 +853,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
                 ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], tsdat[f'{system}_TEMP_E'][j])
             i += 1
+    return ods
 
 
 # ================================
@@ -857,6 +868,7 @@ def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
         Use data sampled at high frequency
     """
     unwrap(electron_cyclotron_emission_data)(ods, pulse, fast_ece=fast_ece, _measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=170325)
@@ -924,6 +936,7 @@ def electron_cyclotron_emission_data(ods, pulse=170325, fast_ece=False, _measure
             f[:] = ece_map['FREQ'][ich]
             ch['frequency']['data'] = f * 1.0e9
             ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1057,7 +1070,7 @@ def bolometer_hardware(ods, pulse):
         power int(Prad,dl) in cm**-2 needs to be divided by the
         etendue to compare to reported power in Watts.'''
 
-    return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=149472)
@@ -1095,6 +1108,7 @@ def bolometer_data(ods, pulse):
             ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
         except:
             printe(f'bolometer data was not found for channel {ch}')
+    return ods
 
 
 # ================================
@@ -1112,6 +1126,7 @@ def langmuir_probes_hardware(ods, pulse):
     """
 
     unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=176235)
@@ -1196,6 +1211,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                         else:
                             raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
+    return ods
 
 
 # ================================
@@ -1208,6 +1224,7 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
     unwrap(charge_exchange_data)(ods, pulse, analysis_type, _measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1284,6 +1301,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
                 ch['zeff.data'] = impdata['ZEFF']
                 ch['zeff.time'] = impdata['TIME'] / 1000.0  # Convert ms to s
+    return ods
 
 
 # ================================
@@ -1303,6 +1321,7 @@ def magnetics_weights(ods, pulse, time_index):
             weight_ishot = ishot
     ods['equilibrium.time_slice.{time_index}.constraints.bpol_probe.:.weight'] = fitweight[weight_ishot]['fwtmp2']
     ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
+    return ods
 
 __regression_arguments__["requires_omfit"].append("magnetics_hardware")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1320,6 +1339,7 @@ def magnetics_hardware(ods, pulse):
 
     mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
     mhdin.to_omas(ods, update='magnetics')
+    return ods
 
 __regression_arguments__["requires_ptdata"].append("magnetics_floops_data")
 __regression_arguments__["requires_omfit"].append("magnetics_floops_data")
@@ -1384,6 +1404,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
         identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
+    return ods
 
 __regression_arguments__["requires_ptdata"].append("magnetics_probes_data")
 __regression_arguments__["requires_omfit"].append("magnetics_probes_data")
@@ -1449,6 +1470,7 @@ def magnetics_probes_data(ods, pulse):
         identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+    return ods
 
 __regression_arguments__["requires_ptdata"].append("ip_bt_dflux_data")
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1483,6 +1505,7 @@ def ip_bt_dflux_data(ods, pulse):
                 ods[key] *= 1e-3
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
+    return ods
 
 def add_extra_profile_structures():
     extra_structures = {}
@@ -1650,6 +1673,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 ods[f"{sh}[{i_time}]."+entry] = interp1d(data["rho__" + entry], data[entry][time_index], bounds_error=False, fill_value=np.nan)(rho_tor_norm) 
             # deuterium from quasineutrality
             ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
+    return ods
 
 # ================================
 __regression_arguments__["requires_ptdata"].append("core_profiles_global_quantities_data")
@@ -1682,6 +1706,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         vloop_time = provider.dim_of(None, pulse, f"ptdata2(\"VLOOP\",{pulse})", 0) * 1e-3
         vloop_data = provider.data(None, pulse, f"ptdata2(\"VLOOP\",{pulse})")
         gq['v_loop'] = interp1d(vloop_time, vloop_data, bounds_error=False, fill_value=np.nan)(t)
+    return ods
 
 
 # ================================
@@ -1696,6 +1721,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
     ods["wall.time"] = [0.0]
+    return ods
 
 if __name__ == '__main__':
     # Test ALL machine mapping functions (skip OMFIT-dependent ones in test environments)

@@ -40,15 +40,15 @@ def equilibrium_time_slice_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
         'zxpt1': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1', 
         'rxpt2': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',
         'zxpt2': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',
-        # Strike point data requiring NaN filtering
-        'rvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID',
-        'zvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID',
-        'rvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD',
-        'zvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD',
-        'rvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU',
-        'zvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU',
-        'rvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU',
-        'zvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU'
+        # Strike point data requiring NaN filtering (with /100. conversion)
+        'rvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID/100.',
+        'zvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID/100.',
+        'rvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD/100.',
+        'zvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD/100.',
+        'rvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU/100.',
+        'zvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU/100.',
+        'rvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU/100.',
+        'zvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU/100.'
     }
     
     # Single provider call for all data
@@ -97,10 +97,46 @@ def equilibrium_time_slice_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
             time_slice['boundary']['x_point'][1]['r'] = rxpt2[i] 
             time_slice['boundary']['x_point'][1]['z'] = zxpt2[i]
     
+    # Process strike point data with NaN filtering (nan_where with -0.89 threshold)
+    strike_data = {
+        'rvsid': efit_data['rvsid'], 'zvsid': efit_data['zvsid'],
+        'rvsod': efit_data['rvsod'], 'zvsod': efit_data['zvsod'], 
+        'rvsiu': efit_data['rvsiu'], 'zvsiu': efit_data['zvsiu'],
+        'rvsou': efit_data['rvsou'], 'zvsou': efit_data['zvsou']
+    }
+    
+    # Apply nan_where logic: set NaN where data equals -0.89
+    for key in strike_data:
+        strike_data[key][strike_data[key] == -0.89] = np.nan
+    
+    # Set strike point data for all time slices (4 strike points)
+    for i in range(n_times):
+        time_slice = ods['equilibrium']['time_slice'][i]
+        
+        # Strike point 0 (RVSID, ZVSID)
+        if i < strike_data['rvsid'].shape[0]:
+            time_slice['boundary_separatrix']['strike_point'][0]['r'] = strike_data['rvsid'][i]
+            time_slice['boundary_separatrix']['strike_point'][0]['z'] = strike_data['zvsid'][i]
+        
+        # Strike point 1 (RVSOD, ZVSOD)
+        if i < strike_data['rvsod'].shape[0]:
+            time_slice['boundary_separatrix']['strike_point'][1]['r'] = strike_data['rvsod'][i]
+            time_slice['boundary_separatrix']['strike_point'][1]['z'] = strike_data['zvsod'][i]
+        
+        # Strike point 2 (RVSIU, ZVSIU)
+        if i < strike_data['rvsiu'].shape[0]:
+            time_slice['boundary_separatrix']['strike_point'][2]['r'] = strike_data['rvsiu'][i]
+            time_slice['boundary_separatrix']['strike_point'][2]['z'] = strike_data['zvsiu'][i]
+        
+        # Strike point 3 (RVSOU, ZVSOU)
+        if i < strike_data['rvsou'].shape[0]:
+            time_slice['boundary_separatrix']['strike_point'][3]['r'] = strike_data['rvsou'][i]
+            time_slice['boundary_separatrix']['strike_point'][3]['z'] = strike_data['zvsou'][i]
+    
     # Note: Global quantities, vacuum field, COCOS, and code info are handled by simple TDI expressions
     
     printd(f'Successfully loaded EFIT data for {n_times} time slices', topic='machine')
-
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
@@ -131,12 +167,12 @@ def pf_current_measurements(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     
     efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
     
-    # Stack E-coil and F-coil data along outer dimension
-    measured = np.concatenate([efit_data['eccurt'], efit_data['fccurt']], axis=0)
-    measured_error = np.concatenate([efit_data['sigecc'], efit_data['sigfcc']], axis=0)
-    weight = np.concatenate([efit_data['fwtec'], efit_data['fwtfc']], axis=0)
-    reconstructed = np.concatenate([efit_data['cecurr'], efit_data['ccbrsp']], axis=0)
-    chi_squared = np.concatenate([efit_data['chiecc'], efit_data['chifcc']], axis=0)
+    # Stack E-coil and F-coil data along outer dimension (axis=1 as per stack_outer_2 function)
+    measured = np.concatenate([efit_data['eccurt'], efit_data['fccurt']], axis=1)
+    measured_error = np.concatenate([efit_data['sigecc'], efit_data['sigfcc']], axis=1)
+    weight = np.concatenate([efit_data['fwtec'], efit_data['fwtfc']], axis=1)
+    reconstructed = np.concatenate([efit_data['cecurr'], efit_data['ccbrsp']], axis=1)
+    chi_squared = np.concatenate([efit_data['chiecc'], efit_data['chifcc']], axis=1)
     
     # Set PF current constraint data
     n_times = measured.shape[1] if len(measured.shape) > 1 else 1
@@ -162,6 +198,7 @@ def pf_current_measurements(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
                 time_slice['constraints']['pf_current'][j]['weight'] = weight[j]
                 time_slice['constraints']['pf_current'][j]['reconstructed'] = reconstructed[j]
                 time_slice['constraints']['pf_current'][j]['chi_squared'] = chi_squared[j]
+    return ods
 
 
 # ================================
@@ -188,13 +225,14 @@ def psi_profiles(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     
     efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
     
-    # Convert EFIT PSI to real PSI
-    ssimag = efit_data['ssimag'].reshape(-1, 1)
-    ssibry = efit_data['ssibry'].reshape(-1, 1)
-    psin = efit_data['psin'].reshape(1, -1)
+    # Convert EFIT PSI to real PSI (following geqdsk_psi algorithm from python_tdi.py)
+    ssimag = efit_data['ssimag']  # a
+    ssibry = efit_data['ssibry']  # b  
+    psin = efit_data['psin']      # c
     
-    # Calculate normalized PSI for profiles (geqdsk_psi function replacement)
-    geqdsk_psi = ssimag + (ssibry - ssimag) * psin
+    # geqdsk_psi algorithm: a[:, None] + np.linspace(0, 1, n).T * (b[:, None] - a[:, None])
+    n = len(psin)
+    geqdsk_psi = ssimag[:, None] + np.linspace(0, 1, n).T * (ssibry[:, None] - ssimag[:, None])
     
     # Set PSI profiles
     n_times = len(ssimag) if hasattr(ssimag, '__len__') else 1
@@ -207,17 +245,18 @@ def psi_profiles(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
             time_slice['profiles_1d']['psi'] = geqdsk_psi[i] if len(geqdsk_psi.shape) > 1 else geqdsk_psi
         
         # Set pressure constraint positions (efit_psi_to_real_psi_2d replacement)
+        # efit_psi_to_real_psi_2d algorithm: (a.T * (c - b) + b).T
         if 'rpress' in efit_data and len(efit_data['rpress']) > 0:
-            rpress = -efit_data['rpress'] if i < len(efit_data['rpress']) else -efit_data['rpress'][0]
-            pressure_psi = ssimag[i] + (ssibry[i] - ssimag[i]) * rpress
-            time_slice['constraints']['pressure'][:]['position']['psi'] = pressure_psi
+            rpress = -efit_data['rpress']  # a (note: negative sign from TDI)
+            pressure_psi = (rpress.T * (ssibry[i] - ssimag[i]) + ssimag[i]).T
+            time_slice['constraints.pressure.:.position']['psi'] = pressure_psi
         
         # Set j_tor constraint positions (efit_psi_to_real_psi_2d replacement)  
         if 'sizeroj' in efit_data and len(efit_data['sizeroj']) > 0:
-            sizeroj = efit_data['sizeroj'][i] if i < len(efit_data['sizeroj']) else efit_data['sizeroj'][0]
-            jtor_psi = ssimag[i] + (ssibry[i] - ssimag[i]) * sizeroj
-            time_slice['constraints']['j_tor'][:]['position']['psi'] = jtor_psi
-
+            sizeroj = efit_data['sizeroj']  # a
+            jtor_psi = (sizeroj.T * (ssibry[i] - ssimag[i]) + ssimag[i]).T
+            time_slice['constraints.j_tor.:.position']['psi'] = jtor_psi
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
@@ -241,23 +280,28 @@ def grid_2d_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     
     efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
     
-    # Tile R and Z grids across time dimension
+    # Tile R and Z grids across time dimension (following tile algorithm from python_tdi.py)
     r_grid = efit_data['r_grid']
     z_grid = efit_data['z_grid']
     n_times = len(efit_data['bcentr'])
     
-    # Create tiled grids: tile(R, size(BCENTR)) and tile(Z, size(BCENTR))
-    r_tiled = np.tile(r_grid, (n_times, 1, 1)).transpose(1, 0, 2)
-    z_tiled = np.tile(z_grid, (n_times, 1, 1)).transpose(1, 0, 2)
+    # tile algorithm: np.array([a for k in range(n)])
+    r_tiled = np.array([r_grid for k in range(n_times)])
+    z_tiled = np.array([z_grid for k in range(n_times)])
+    
+    # Apply transpose as specified in _efit.json: [1,0,2]
+    r_tiled = np.transpose(r_tiled, [1, 0, 2])
+    z_tiled = np.transpose(z_tiled, [1, 0, 2])
     
     # Set 2D grid data
     ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid']['dim1'] = r_tiled
     ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid']['dim2'] = z_tiled
     
-    # Set grid type index (tiled constant 1)
-    grid_type_index = np.tile(1, n_times).transpose(1, 0)
+    # Set grid type index (tiled constant 1 following tile algorithm)
+    # tile(1, size(BCENTR)) with transpose [1,0] - creates array of 1s for each time
+    grid_type_index = np.array([1 for k in range(n_times)])
     ods['equilibrium']['time_slice'][:]['profiles_2d'][:]['grid_type']['index'] = grid_type_index
-
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
@@ -280,20 +324,26 @@ def convergence_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     
     efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
     
-    # Get largest axis value (equivalent to get_largest_axis_value function)
-    cerror_dim = efit_data['cerror_dim']
-    cerror = efit_data['cerror']
+    # get_largest_axis_value algorithm from python_tdi.py
+    cerror_dim = efit_data['cerror_dim']  # a
+    cerror = efit_data['cerror']          # b
     
-    # Find the largest axis value
-    max_axis_value = np.max(cerror_dim) if hasattr(cerror_dim, '__len__') else cerror_dim
+    # get_largest_axis_value algorithm:
+    # a = np.array([a for k in range(b.shape[0])])
+    # a[b == 0] = 0  
+    # return np.nanmax(a, axis=1)
+    a = np.array([cerror_dim for k in range(cerror.shape[0])])
+    a[cerror == 0] = 0
+    max_axis_values = np.nanmax(a, axis=1)
     
     # Set convergence data
-    n_times = len(cerror) if hasattr(cerror, '__len__') else 1
+    n_times = len(max_axis_values) if hasattr(max_axis_values, '__len__') else 1
     
     for i in range(n_times):
         time_slice = ods['equilibrium']['time_slice'][i]
-        time_slice['convergence']['iterations_n'] = max_axis_value
-
+        iterations_n = max_axis_values[i] if hasattr(max_axis_values, '__len__') else max_axis_values
+        time_slice['convergence']['iterations_n'] = iterations_n
+    return ods
 
 # ================================
 # Add test function call
