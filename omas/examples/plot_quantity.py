@@ -8,6 +8,7 @@ conveniently and rapidly plot individual ODS quantities
 """
 
 from matplotlib import pyplot
+from matplotlib.backend_bases import NonGuiException
 import os
 from omas import *
 
@@ -49,4 +50,4 @@ ods.plot_quantity('@core.*zeff', t, **kw)
 ax.set_title(t, y=0.8)
 
 fig.subplots_adjust(hspace=0)
-pyplot.show()
+
