@@ -4,6 +4,7 @@
  nmselp=69
  nsilop=44
  nvesel=28
+ nvsum=28
  /
  &INCHECK
  li_max=2.5
