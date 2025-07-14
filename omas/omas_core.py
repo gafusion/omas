@@ -1735,12 +1735,38 @@ class ODS(MutableMapping):
                     tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
+    def __eq__(self, ods):
+        for key in self.keys():
+            if type(self[key]) == ODS:
+                if self[key] != ods[key]:
+                    return False
+            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                if not numpy.allclose(self[key],ods[key]):
+                    return False
+            else:
+                if self[key] != ods[key]:
+                    return False
+        return True
+    
+    def find_mismatching_locations(self, ods, mismatching_locations):
+        for key in self.keys():
+            if type(self[key]) == ODS:
+                if self[key] != ods[key]:
+                    mismatching_locations = self[key].find_mismatching_locations(ods[key], mismatching_locations)
+            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                if not numpy.allclose(self[key],ods[key]):
+                    mismatching_locations.append(self.location + f".{key}")
+            else:
+                if self[key] != ods[key]:
+                    mismatching_locations.append(self.location + f".{key}")
+        return mismatching_locations
+
     def copy(self):
         """
         :return: copy.deepcopy of current ODS object
         """
-        return copy.deepcopy(self)
 
+        return copy.deepcopy(self)
     def clear(self):
         """
         remove data from a branch
