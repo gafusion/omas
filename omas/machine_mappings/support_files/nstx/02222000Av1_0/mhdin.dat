@@ -115,7 +115,6 @@
  RRIGHT = 2.15
  ZBOTTO = -2.2
  ZTOP = 2.2
- ISLPFC = 0
  IFCOIL = 1
  IECOIL = 1
  IACOIL = 0
@@ -277,6 +276,7 @@
  TURNFC = 41*1.0
  /
  &machinein
+ device = 'NSTX'
  nfcoil = 81
  nfsum = 41
  nsilop = 66

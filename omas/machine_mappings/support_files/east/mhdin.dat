@@ -1,4 +1,5 @@
  &machinein
+ device = 'EAST'
  nfcoil = 14
  nfsum = 12
  nsilop = 35

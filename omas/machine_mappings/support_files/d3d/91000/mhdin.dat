@@ -1,4 +1,5 @@
  &MACHINEIN
+ device = 'DIII-D'
  magpri=76
  nmselp=69
  nsilop=44
