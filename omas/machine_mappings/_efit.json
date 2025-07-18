@@ -340,19 +340,19 @@
    "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.weight": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
@@ -360,7 +360,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:": {
@@ -372,7 +372,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)*1.e6",
+  "eval2TDI": "py2tdi(convert_from_mega_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {
