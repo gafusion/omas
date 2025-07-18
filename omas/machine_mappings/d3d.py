@@ -1592,16 +1592,17 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
             "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
             "ion[1].temperature": "\\TOP.PROFILES.ITEMPFIT",
-            "ion[1].velocity.rotation_frequency_tor": "TROTFIT",
+            "ion[1].rotation_frequency_tor": "\\TOP.PROFILES.TROTFIT",
         }
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
 
-        for entry in query.keys():
+        # processing
+        for entry in data.keys():
             if isinstance(data[entry], Exception):
-                data.pop(entry)
+                continue
             elif "rho" in entry:
                 pass
             elif "time" in entry:
@@ -1613,8 +1614,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = np.unique(np.concatenate([np.atleast_1d(data[entry]) for entry in data.keys() if entry.startswith("time__")]))
-        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in data.keys() if entry.startswith("rho__")])]))
+        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__") and not isinstance(data[entry], Exception) and len(data[entry])>0]))
+        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0])]))
         rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
