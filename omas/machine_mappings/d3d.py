@@ -743,6 +743,9 @@ def interferometer_data(ods, pulse):
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
+    if isinstance(data['time'], Exception):
+        print('WARNING: interferometer data is missing')
+        return
     # assign
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
@@ -1596,9 +1599,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
 
-        for entry in data.keys():
+        for entry in query.keys():
             if isinstance(data[entry], Exception):
-                continue
+                data.pop(entry)
             elif "rho" in entry:
                 pass
             elif "time" in entry:
@@ -1610,9 +1613,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-
-        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__")]))
-        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__")])]))
+        time = np.unique(np.concatenate([np.atleast_1d(data[entry]) for entry in data.keys() if entry.startswith("time__")]))
+        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in data.keys() if entry.startswith("rho__")])]))
         rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
