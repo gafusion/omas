@@ -32,6 +32,9 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
     printe("- Fetching wall data")
     d3d.wall(ods, shot)
 
+        printe("- Fetching magnetic hardware data")
+        d3d.magnetics_hardware(ods, $shot)
+
     printe("- Fetching coils data")
     d3d.pf_active_hardware(ods, shot)
     d3d.pf_active_coil_current_data(ods, shot)
