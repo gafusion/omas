@@ -1656,7 +1656,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
                 raise ValueError(f"Trying to access global_quantities with unknown profiles tree: {PROFILES_tree}")
         t = cp['time']
 
-        m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
+        m = mdsvalue('d3d', pulse=mpulse, TDI=f"ptdata2(\"VLOOP\",{mpulse})", treename=None)
         gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
 
 
