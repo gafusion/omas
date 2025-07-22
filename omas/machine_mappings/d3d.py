@@ -743,6 +743,9 @@ def interferometer_data(ods, pulse):
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
+    if isinstance(data['time'], Exception):
+        printe('WARNING: interferometer data is missing')
+        return
     # assign
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
