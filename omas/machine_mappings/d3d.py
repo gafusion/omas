@@ -359,10 +359,11 @@ def pf_active_hardware(ods, pulse):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_efund import OMFITmhdin
 
-    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
-    mhdin.to_omas(ods, update='pf_active')
+    filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
+    tmp_ods = ODS()
+    tmp_ods.load(filename)
+    ods["magnetics"] = tmp_ods["magnetics"].copy()
 
     coil_names = [
         'ECOILA',
@@ -459,11 +460,10 @@ def coils_non_axisymmetric_hardware(ods, pulse):
     :param ods: ODS instance
     """
 
-    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 
     coil_names = []
     for compfile in ['ccomp', 'icomp']:
-        comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
+        comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
         for shot in comp:
             if pulse > compshot:
@@ -1279,9 +1279,8 @@ def magnetics_weights(ods, pulse, time_index):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_omas_d3d import OMFITd3dfitweight
 
-    fitweight = get_support_file(OMFITd3dfitweight, support_filenames('d3d', 'fitweight', pulse))
+    fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
     weight_ishot = -1
     for ishot in fitweight:
         if pulse > ishot and ishot > weight_ishot:
@@ -1297,20 +1296,20 @@ def magnetics_hardware(ods, pulse):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_efund import OMFITmhdin
-
     # Handle cases where an MDSplus ID is passed instead of the pulse
     if len(str(pulse)) > 6:
         pulse = int(str(pulse)[:6])
-
-    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
-    mhdin.to_omas(ods, update='magnetics')
+    
+    filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
+    tmp_ods = ODS()
+    tmp_ods.load(filename)
+    ods["magnetics"] = tmp_ods["magnetics"].copy()
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_floops_data(ods, pulse, nref=0):
     from scipy.interpolate import interp1d
-    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
@@ -1336,7 +1335,7 @@ def magnetics_floops_data(ods, pulse, nref=0):
     ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.0
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
-        comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
+        comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
         for shot in comp:
             if pulse > compshot:
@@ -1371,7 +1370,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_probes_data(ods, pulse):
-    from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
@@ -1395,7 +1393,7 @@ def magnetics_probes_data(ods, pulse):
         )
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
-        comp = get_support_file(OMFITd3dcompfile, support_filenames('d3d', compfile, pulse))
+        comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
         for shot in comp:
             if pulse > compshot:
