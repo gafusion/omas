@@ -1281,6 +1281,8 @@ def magnetics_weights(ods, pulse, time_index):
     """
 
     fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
+    if len(fitweight) == 0:
+        raise ValueError(f"Could not find d3d fitweight for shot {pulse}")
     weight_ishot = -1
     for ishot in fitweight:
         if pulse > ishot and ishot > weight_ishot:
