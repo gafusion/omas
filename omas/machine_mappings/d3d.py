@@ -1338,6 +1338,8 @@ def magnetics_floops_data(ods, pulse, nref=0):
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
+        if len(comp) == 0:
+            raise ValueError(f"Could not find d3d {compfile} for shot {pulse}")
         compshot = -1
         for shot in comp:
             if pulse > compshot:
