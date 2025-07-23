@@ -44,7 +44,7 @@ class D3DFitweight(dict):
         for i in data:
             ifloat = float(i)
             if ifloat > 100:
-                ishot = ifloat
+                ishot = int(ifloat)
                 self[ifloat] = []
             else:
                 self[ishot].append(ifloat)

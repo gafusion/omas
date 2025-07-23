@@ -1288,8 +1288,11 @@ def magnetics_weights(ods, pulse, time_index):
     for ishot in fitweight:
         if pulse > ishot and ishot > weight_ishot:
             weight_ishot = ishot
-    ods['equilibrium.time_slice.{time_index}.constraints.bpol_probe.:.weight'] = fitweight[weight_ishot]['fwtmp2']
-    ods['equilibrium.time_slice.{time_index}.constraints.flux_loop.:.weight'] = fitweight[weight_ishot]['fwtsi']
+    for i_probe in range(len(fitweight[weight_ishot]['fwtmp2'])):
+        ods[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{i_probe}.weight'] = fitweight[weight_ishot]['fwtmp2'][i_probe]
+    for i_loop in range(len(fitweight[weight_ishot]['fwtsi'])):
+        ods[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{i_loop}.weight'] = fitweight[weight_ishot]['fwtsi'][i_loop]
+    
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)

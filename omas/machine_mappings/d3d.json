@@ -369,6 +369,21 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "equilibrium.time_slice.:": {
+  "PYTHON": "magnetics_weights(ods, {pulse}, {time_index!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:": {
+  "PYTHON": "magnetics_weights(ods, {pulse}, {time_index!r})"
+ },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:.weight": {
+  "PYTHON": "magnetics_weights(ods, {pulse}, {time_index!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:": {
+  "PYTHON": "magnetics_weights(ods, {pulse}, {time_index!r})"
+ },
+ "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
+  "PYTHON": "magnetics_weights(ods, {pulse}, {time_index!r})"
+ },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
