@@ -1273,6 +1273,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=133221, time_index=0)
 def magnetics_weights(ods, pulse, time_index):
     r"""
     Load DIII-D tokamak magnetics equilibrium weights
@@ -1671,5 +1672,8 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.time"] = [0.0]
 
 if __name__ == '__main__':
+    test_machine_mapping_functions('d3d', ["magnetics_weights"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["magnetics_floops_data"], globals(), locals())
     test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())
     test_machine_mapping_functions('d3d', ["ec_launcher_active_hardware"], globals(), locals())
+
