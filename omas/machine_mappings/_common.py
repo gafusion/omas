@@ -23,7 +23,6 @@ class D3DFitweight(dict):
         :param \**kw: arguments passed to __init__ of OMFITascii
         """
         self.filename = filename
-        self.load()
 
     def load(self):
         self.clear()
@@ -87,7 +86,6 @@ class D3DCompfile(dict):
         :param \**kw: arguments passed to __init__ of OMFITascii
         """
         self.filename=filename
-        self.load()
 
     def load(self):
         self.clear()
