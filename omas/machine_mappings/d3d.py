@@ -1282,6 +1282,8 @@ def magnetics_weights(ods, pulse, time_index):
     """
 
     fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
+    if len(fitweight) == 0:
+        raise ValueError(f"Could not find d3d fitweight for shot {pulse}")
     weight_ishot = -1
     for ishot in fitweight:
         if pulse > ishot and ishot > weight_ishot:
@@ -1337,6 +1339,8 @@ def magnetics_floops_data(ods, pulse, nref=0):
 
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
+        if len(comp) == 0:
+            raise ValueError(f"Could not find d3d {compfile} for shot {pulse}")
         compshot = -1
         for shot in comp:
             if pulse > compshot:
