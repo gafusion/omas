@@ -69,7 +69,12 @@ def efit_psi_to_real_psi_2d(a, b, c):
     return (a.T * (c - b) + b).T
 
 def convert_from_mega_2d(a):
-    return ensure_2d(a)*1.e6
+    import numpy as np
+
+    a = a.data()
+    if len(a.shape) < 2:
+        a = np.atleast_2d(a)
+    return a*1.e6
 
 def ensure_2d(a):
     import numpy as np
