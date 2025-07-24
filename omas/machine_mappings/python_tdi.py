@@ -58,17 +58,32 @@ def geqdsk_psi(a, b, c):
     M = a[:, None] + np.linspace(0, 1, n).T * (b[:, None] - a[:, None])
     return M
 
-def efit_psi_to_psi(a, b, c):
-    a = a.data()
-    b = b.data()
-    c = c.data()
-    return (a - b)/(c - b)
-
 def efit_psi_to_real_psi_2d(a, b, c):
+    import numpy as np
+
     a = a.data()
+    if len(a.shape) < 2:
+        a = np.atleast_2d(a)
     b = b.data()
     c = c.data()
     return (a.T * (c - b) + b).T
+
+def convert_from_mega_2d(a):
+    import numpy as np
+
+    a = a.data()
+    if len(a.shape) < 2:
+        a = np.atleast_2d(a)
+    return a*1.e6
+
+def ensure_2d(a):
+    import numpy as np
+    
+    a = a.data()
+    if len(a.shape) < 2:
+        return np.atleast_2d(a)
+    else:
+        return a
 
 def py2tdi(func, *args):
     import inspect

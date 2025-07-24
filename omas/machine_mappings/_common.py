@@ -43,7 +43,7 @@ class D3DFitweight(dict):
         for i in data:
             ifloat = float(i)
             if ifloat > 100:
-                ishot = ifloat
+                ishot = int(ifloat)
                 self[ifloat] = []
             else:
                 self[ishot].append(ifloat)
@@ -145,6 +145,33 @@ def get_support_file(object_type, filename):
 
 
 __MDS_gEQDSK_COCOS_identify_cache__ = {}
+
+
+def D3Dmagnetics_weights(pulse, name=None):
+    r"""
+    Load DIII-D tokamak magnetics equilibrium weights
+
+    :param pulse: pulse number
+
+    :param name: name of the type of weights to return
+
+    :return: dictionary with the requested weights or both if name=None
+    """
+
+    fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
+    if len(fitweight) == 0:
+        raise ValueError(f"Could not find d3d fitweight for shot {pulse}")
+    weight_ishot = -1
+    for ishot in fitweight:
+        if pulse > ishot and ishot > weight_ishot:
+            weight_ishot = ishot
+
+    if name is None:
+        return fitweight[weight_ishot]['fwtmp2'], fitweight[weight_ishot]['fwtsi']
+    elif name in fitweight[weight_ishot]:
+        return fitweight[weight_ishot][name]
+    else:
+        raise ValueError(f"{name} is part of the d3d fitweight")
 
 
 def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
