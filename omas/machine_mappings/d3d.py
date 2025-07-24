@@ -359,10 +359,11 @@ def pf_active_hardware(ods, pulse):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_efund import OMFITmhdin
 
-    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
-    mhdin.to_omas(ods, update='pf_active')
+    filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
+    tmp_ods = ODS()
+    tmp_ods.load(filename)
+    ods["pf_active"] = tmp_ods["pf_active"].copy()
 
     coil_names = [
         'ECOILA',
@@ -1320,14 +1321,14 @@ def magnetics_hardware(ods, pulse):
 
     :param ods: ODS instance
     """
-    from omfit_classes.omfit_efund import OMFITmhdin
-
     # Handle cases where an MDSplus ID is passed instead of the pulse
     if len(str(pulse)) > 6:
         pulse = int(str(pulse)[:6])
 
-    mhdin = get_support_file(OMFITmhdin, support_filenames('d3d', 'mhdin', pulse))
-    mhdin.to_omas(ods, update='magnetics')
+    filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
+    tmp_ods = ODS()
+    tmp_ods.load(filename)
+    ods["magnetics"] = tmp_ods["magnetics"].copy()
     return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
