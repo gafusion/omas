@@ -241,7 +241,7 @@
  /
 0.169100E+000.267000E+000.004000E+000.533900E+000.000000E+000.000000E+00 Unused
  &MACHINEIN
- device = 'device'
+ device = 'MAST'
  nfcoil = 170
  nfsum = 38
  nsilop = 46
