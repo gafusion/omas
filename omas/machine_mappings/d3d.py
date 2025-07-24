@@ -363,7 +363,7 @@ def pf_active_hardware(ods, pulse):
     filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
     tmp_ods = ODS()
     tmp_ods.load(filename)
-    ods["magnetics"] = tmp_ods["magnetics"].copy()
+    ods["pf_active"] = tmp_ods["pf_active"].copy()
 
     coil_names = [
         'ECOILA',
