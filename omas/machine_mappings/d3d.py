@@ -1273,28 +1273,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221, time_index=0)
-def magnetics_weights(ods, pulse, time_index):
-    r"""
-    Load DIII-D tokamak magnetics equilibrium weights
-
-    :param ods: ODS instance
-    """
-
-    fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
-    if len(fitweight) == 0:
-        raise ValueError(f"Could not find d3d fitweight for shot {pulse}")
-    weight_ishot = -1
-    for ishot in fitweight:
-        if pulse > ishot and ishot > weight_ishot:
-            weight_ishot = ishot
-    for i_probe in range(len(fitweight[weight_ishot]['fwtmp2'])):
-        ods[f'equilibrium.time_slice.{time_index}.constraints.bpol_probe.{i_probe}.weight'] = fitweight[weight_ishot]['fwtmp2'][i_probe]
-    for i_loop in range(len(fitweight[weight_ishot]['fwtsi'])):
-        ods[f'equilibrium.time_slice.{time_index}.constraints.flux_loop.{i_loop}.weight'] = fitweight[weight_ishot]['fwtsi'][i_loop]
-    
-
-
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def magnetics_hardware(ods, pulse):
     r"""
@@ -1314,7 +1292,7 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse, nref=0):
+def magnetics_floops_data(ods, pulse, nref=None):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
@@ -1337,9 +1315,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
             data_norm=1.0,
         )
 
-    # Set reference flux loop to zero before
-    ods[f'magnetics.flux_loop.{nref}.flux.data'] *= 0.0
-
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         if len(comp) == 0:
@@ -1358,7 +1333,6 @@ def magnetics_floops_data(ods, pulse, nref=0):
             for channel in ods['magnetics.flux_loop']:
                 if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    sigraw_data = ods[f'magnetics.flux_loop.{channel}.flux.data']
                     sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
                     compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
                     ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
@@ -1370,10 +1344,33 @@ def magnetics_floops_data(ods, pulse, nref=0):
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
 
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
+    weights = D3Dmagnetics_weights(pulse, 'fwtsi')
     for k in ods1['magnetics.flux_loop']:
-        identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
-        ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
+        if ods[f'magnetics.flux_loop.{k}.flux.validity'] == -2:
+            # Set large uncertainty for invalid data
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+        elif weights[k] < 0.5:
+            # Use static weight to mark sensor invalid and set large uncertainty
+            ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+        else:
+            # Convert digitizer counts (bit uncertainty) to flux
+            identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
+
+    # Use reference flux loop to convert to relative flux if wanted
+    if nref is not None:
+        ref_data = ods[f'magnetics.flux_loop.{nref}.flux.data']
+        len_ref = len(ref_data)
+        for k in ods1['magnetics.flux_loop']:
+            if len(ods[f'magnetics.flux_loop.{k}.flux.data']) < 2:
+                continue
+            elif len(ods[f'magnetics.flux_loop.{k}.flux.data']) == len_ref:
+                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_data
+            else:
+                ref_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_data, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
+                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_interp
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1420,7 +1417,6 @@ def magnetics_probes_data(ods, pulse):
                     and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
                 ):
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
-                    sigraw_data = ods[f'magnetics.b_field_pol_probe.{channel}.field.data']
                     sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
                     compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
@@ -1432,11 +1428,20 @@ def magnetics_probes_data(ods, pulse):
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
 
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
-
+    weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
     for k in ods1['magnetics.b_field_pol_probe']:
-        identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
-        ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+        if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
+            # Set large uncertainty for invalid data
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+        elif weights[k] < 0.5:
+            # Use static weight to mark sensor invalid and set large uncertainty
+            ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+        else:
+            # Convert digitizer counts (bit uncertainty) to field
+            identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
