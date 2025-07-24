@@ -641,7 +641,7 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 
 
 
-def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace, compare_to_toksearch=False, skip_omfit_tests=False):
+def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace, compare_to_toksearch=False):
     """
     Function used to test python mapping functions
 
@@ -652,8 +652,6 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
     :param compare_to_toksearch: if True, execute functions twice (once with mdsplus, 
                                 once with toksearch) and compare time data for consistency
                                 
-    :param skip_omfit_tests: if True, skip all functions that require OMFIT dependencies
-                            (useful for environments without OMFIT installed)
     """
     from pprint import pprint
 
@@ -715,28 +713,9 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
         print(f"    ✅ Data MATCHES between backends")
     
     try:
-        # Get list of functions that require OMFIT
-        requires_omfit = __regression_arguments__.get("requires_omfit", [])
-        requires_ptdata = __regression_arguments__.get("requires_ptdata", [])
-        # Filter functions based on skip_omfit_tests parameter
-        functions_to_test = []
-        omfit_functions_skipped = []
+        # Report what functions are being tested
         
         for func_name in __all__:
-            if skip_omfit_tests and func_name in requires_omfit:
-                omfit_functions_skipped.append(func_name)
-            else:
-                functions_to_test.append(func_name)
-        
-        # Report what functions are being tested
-        if skip_omfit_tests and omfit_functions_skipped:
-            print(f"⚠️  Skipping {len(omfit_functions_skipped)} OMFIT-dependent functions:")
-            for func_name in omfit_functions_skipped:
-                print(f"    - {func_name}")
-            print(f"✅ Testing {len(functions_to_test)} compatible functions")
-            print()
-        
-        for func_name in functions_to_test:
             regression_kw = {item: value for item, value in __regression_arguments__.get(func_name, {}).items() if item != '__all__'}
             print('=' * len(func_name))
             print(func_name)
@@ -762,12 +741,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             
             # Optional backend comparison - skip functions that require OMFIT
             if compare_to_toksearch and machine == 'd3d':  # Only for d3d for now
-                if func_name in requires_omfit:
-                    print(f"    ⚠️  Skipping backend comparison for {func_name} (requires OMFIT)")
-                elif func_name in requires_ptdata:
-                    print(f"    ⚠️  Skipping backend comparison for {func_name} (requires ptdata)")
-                else:
-                    _compare_backends(ods, func_name, regression_kw)
+                _compare_backends(ods, func_name, regression_kw)
     finally:
         if old_OMAS_DEBUG_TOPIC is None:
             del os.environ['OMAS_DEBUG_TOPIC']
@@ -775,7 +749,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
 
 
-def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_mappings=False, options=None, fail_fast=False):
+def test_machine_mappings(machine, pulse, compare_backends=False, options=None, fail_fast=False):
     """
     Test all JSON mappings for a machine with both backends (mdsplus vs toksearch)
     
@@ -785,7 +759,6 @@ def test_machine_mappings(machine, pulse, compare_backends=False, skip_omfit_map
     :param machine: machine name (e.g., 'd3d')
     :param pulse: pulse number for testing
     :param compare_backends: if True, compare mdsplus vs toksearch results
-    :param skip_omfit_mappings: if True, skip mappings that require OMFIT
     :param options: options dictionary to pass to machine_to_omas
     :param fail_fast: if True, raise error immediately on first failure (for debugging)
     """

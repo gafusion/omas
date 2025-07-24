@@ -1743,8 +1743,8 @@ def summary(ods, pulse):
 
 if __name__ == '__main__':
     # Test ALL machine mapping functions (skip OMFIT-dependent ones in test environments)
-    test_machine_mapping_functions('d3d', __all__, globals(), locals(), skip_omfit_tests=True, compare_to_toksearch=True)
+    test_machine_mapping_functions('d3d', __all__, globals(), locals(), compare_to_toksearch=True)
     
     # Backend comparison testing (new feature)
     # Uncomment the line below to test backend consistency for compatible functions
-    # test_machine_mapping_functions('d3d', __all__, globals(), locals(), compare_to_toksearch=True, skip_omfit_tests=True)
+    # test_machine_mapping_functions('d3d', __all__, globals(), locals(), compare_to_toksearch=True)
