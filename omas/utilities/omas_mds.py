@@ -588,6 +588,29 @@ class toksearch_provider(BaseProvider):
         SignalRegistry().cleanup_shot(pulse)
         SignalRegistry().cleanup()
 
+    def single_fetch(self, treename, pulse, expression, dims=None):
+        if dims is None:
+            dims = []
+        signal = self.MdsSignal(expression, treename, location=self.mds_server, dims=dims)
+        result = signal.fetch(pulse)
+        signal.cleanup_shot(pulse)
+        return result
+    
+    def dim_of(self, treename, pulse, TDI, dim):
+        """Get dimension of the signal"""
+        dims = list(range(dim+1))
+        results = self.single_fetch(treename, pulse, TDI, dims)
+        return results[dim]
+    
+    def dispatch_expression(self, treename, pulse, TDI):
+        if "dim_of" in TDI:
+            start = TDI.find("(") + 1
+            end = TDI.rfind(",")
+            dim = int(TDI.split(",")[-1].replace(")", ""))
+            return self.dim_of(treename, pulse, TDI[start:end], dim)
+        else:
+            return self.single_fetch(treename, pulse, TDI)
+        
 
     def raw(self, treename, pulse, TDI):
         """
@@ -613,25 +636,20 @@ class toksearch_provider(BaseProvider):
                 results = {}
                 for name, expr in TDI.items():
                     try:
-                        signal = self.MdsSignal(expr, treename, location=self.mds_server, dims=[])
-                        result = signal.fetch(pulse)
+                        result= self.dispatch_expression(treename, pulse, expr)
                         # Extract the data component
                         if isinstance(result, dict) and 'data' in result:
                             results[name] = result['data']
                         else:
                             results[name] = result
                         # Clean up the signal
-                        signal.cleanup_shot(pulse)
                     except Exception as _excp:
                         results[name] = Exception(str(_excp))
                 return results
             
             # Single TDI expression
             else:
-                signal = self.MdsSignal(TDI, treename, location=self.mds_server, dims=[])
-                result = signal.fetch(pulse)
-                # Clean up the signal
-                signal.cleanup_shot(pulse)
+                result= self.dispatch_expression(treename, pulse, TDI)
                 # Extract the data component
                 if isinstance(result, dict) and 'data' in result:
                     return result['data']
