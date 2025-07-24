@@ -1,0 +1,3782 @@
+{
+"dataset_description": {
+"data_entry": {
+"machine": "KSTAR"
+}
+},
+"magnetics": {
+"b_field_pol_probe": [
+{
+"identifier": "MP5P01Z",
+"length": 0.07,
+"name": "MP5P01Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": 0.0635
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P02Z",
+"length": 0.07,
+"name": "MP5P02Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": 0.1905
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P03Z",
+"length": 0.07,
+"name": "MP5P03Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": 0.3175
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P04Z",
+"length": 0.07,
+"name": "MP5P04Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": 0.4445
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P05Z",
+"length": 0.07,
+"name": "MP5P05Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": 0.5715
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P06Z",
+"length": 0.07,
+"name": "MP5P06Z",
+"poloidal_angle": 1.1780972450961724,
+"position": {
+"r": 2.75272,
+"z": 0.87782
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P07Z",
+"length": 0.07,
+"name": "MP5P07Z",
+"poloidal_angle": 0.9075712110370513,
+"position": {
+"r": 2.67103,
+"z": 1.01323
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P08Z",
+"length": 0.07,
+"name": "MP5P08Z",
+"poloidal_angle": 0.8028514559173915,
+"position": {
+"r": 2.56888,
+"z": 1.13064
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P09Z",
+"length": 0.07,
+"name": "MP5P09Z",
+"poloidal_angle": 0.6981317007977318,
+"position": {
+"r": 2.45514,
+"z": 1.23663
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P10Z",
+"length": 0.07,
+"name": "MP5P10Z",
+"poloidal_angle": 0.47123889803846897,
+"position": {
+"r": 2.17529,
+"z": 1.42181
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P11Z",
+"length": 0.07,
+"name": "MP5P11Z",
+"poloidal_angle": 0.3665191429188092,
+"position": {
+"r": 2.03333,
+"z": 1.48497
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P12Z",
+"length": 0.07,
+"name": "MP5P12Z",
+"poloidal_angle": 0.2617993877991494,
+"position": {
+"r": 1.88564,
+"z": 1.53301
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P13Z",
+"length": 0.07,
+"name": "MP5P13Z",
+"poloidal_angle": 0.05235987755982988,
+"position": {
+"r": 1.72943,
+"z": 1.55909
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P14Z",
+"length": 0.07,
+"name": "MP5P14Z",
+"poloidal_angle": -0.2775073510670984,
+"position": {
+"r": 1.5567,
+"z": 1.53907
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P15Z",
+"length": 0.07,
+"name": "MP5P15Z",
+"poloidal_angle": -0.6859143960337715,
+"position": {
+"r": 1.37253,
+"z": 1.44288
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P16Z",
+"length": 0.07,
+"name": "MP5P16Z",
+"poloidal_angle": -1.2566370614359172,
+"position": {
+"r": 1.20378,
+"z": 1.19788
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P17Z",
+"length": 0.07,
+"name": "MP5P17Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": 0.912
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P18Z",
+"length": 0.07,
+"name": "MP5P18Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": 0.785
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P19Z",
+"length": 0.07,
+"name": "MP5P19Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": 0.3175
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P20Z",
+"length": 0.07,
+"name": "MP5P20Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": 0.1905
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P21Z",
+"length": 0.07,
+"name": "MP5P21Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": 0.0635
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P22Z",
+"length": 0.07,
+"name": "MP5P22Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": -0.0635
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P23Z",
+"length": 0.07,
+"name": "MP5P23Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": -0.1905
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P24Z",
+"length": 0.07,
+"name": "MP5P24Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": -0.3175
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P25Z",
+"length": 0.07,
+"name": "MP5P25Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": -0.785
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P26Z",
+"length": 0.07,
+"name": "MP5P26Z",
+"poloidal_angle": -1.5707963267948966,
+"position": {
+"r": 1.17297,
+"z": -0.912
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P27Z",
+"length": 0.07,
+"name": "MP5P27Z",
+"poloidal_angle": -1.8849555921538759,
+"position": {
+"r": 1.20378,
+"z": -1.19788
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P28Z",
+"length": 0.07,
+"name": "MP5P28Z",
+"poloidal_angle": -2.4556782575560216,
+"position": {
+"r": 1.37253,
+"z": -1.44288
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P29Z",
+"length": 0.07,
+"name": "MP5P29Z",
+"poloidal_angle": -2.8640853025226947,
+"position": {
+"r": 1.5567,
+"z": -1.53907
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P30Z",
+"length": 0.07,
+"name": "MP5P30Z",
+"poloidal_angle": 3.089232776029963,
+"position": {
+"r": 1.72943,
+"z": -1.55909
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P31Z",
+"length": 0.07,
+"name": "MP5P31Z",
+"poloidal_angle": 2.8797932657906435,
+"position": {
+"r": 1.88564,
+"z": -1.53301
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P32Z",
+"length": 0.07,
+"name": "MP5P32Z",
+"poloidal_angle": 2.7750735106709836,
+"position": {
+"r": 2.03333,
+"z": -1.48497
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P33Z",
+"length": 0.07,
+"name": "MP5P33Z",
+"poloidal_angle": 2.670353755551324,
+"position": {
+"r": 2.17529,
+"z": -1.42181
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P34Z",
+"length": 0.07,
+"name": "MP5P34Z",
+"poloidal_angle": 2.443460952792061,
+"position": {
+"r": 2.45514,
+"z": -1.23663
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P35Z",
+"length": 0.07,
+"name": "MP5P35Z",
+"poloidal_angle": 2.3387411976724017,
+"position": {
+"r": 2.56888,
+"z": -1.13064
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P36Z",
+"length": 0.07,
+"name": "MP5P36Z",
+"poloidal_angle": 2.234021442552742,
+"position": {
+"r": 2.67103,
+"z": -1.01323
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P37Z",
+"length": 0.07,
+"name": "MP5P37Z",
+"poloidal_angle": 1.9634954084936207,
+"position": {
+"r": 2.75272,
+"z": -0.87782
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P38Z",
+"length": 0.07,
+"name": "MP5P38Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": -0.5715
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P39Z",
+"length": 0.07,
+"name": "MP5P39Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": -0.4445
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P40Z",
+"length": 0.07,
+"name": "MP5P40Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": -0.3175
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P41Z",
+"length": 0.07,
+"name": "MP5P41Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": -0.1905
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P42Z",
+"length": 0.07,
+"name": "MP5P42Z",
+"poloidal_angle": 1.5707963267948966,
+"position": {
+"r": 2.78702,
+"z": -0.0635
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P06R",
+"length": 0.012,
+"name": "MP5P06R",
+"poloidal_angle": -0.39269908169872414,
+"position": {
+"r": 2.75272,
+"z": 0.87782
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P07R",
+"length": 0.012,
+"name": "MP5P07R",
+"poloidal_angle": -0.6632251157578453,
+"position": {
+"r": 2.67103,
+"z": 1.01323
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P08R",
+"length": 0.012,
+"name": "MP5P08R",
+"poloidal_angle": -0.767944870877505,
+"position": {
+"r": 2.56888,
+"z": 1.13064
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P09R",
+"length": 0.012,
+"name": "MP5P09R",
+"poloidal_angle": -0.8726646259971648,
+"position": {
+"r": 2.45514,
+"z": 1.23663
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P10R",
+"length": 0.012,
+"name": "MP5P10R",
+"poloidal_angle": -1.0995574287564276,
+"position": {
+"r": 2.17529,
+"z": 1.42181
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P11R",
+"length": 0.012,
+"name": "MP5P11R",
+"poloidal_angle": -1.2042771838760875,
+"position": {
+"r": 2.03333,
+"z": 1.48497
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P12R",
+"length": 0.012,
+"name": "MP5P12R",
+"poloidal_angle": -1.3089969389957472,
+"position": {
+"r": 1.88564,
+"z": 1.53301
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P13R",
+"length": 0.012,
+"name": "MP5P13R",
+"poloidal_angle": -1.5184364492350666,
+"position": {
+"r": 1.72943,
+"z": 1.55909
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P14R",
+"length": 0.012,
+"name": "MP5P14R",
+"poloidal_angle": -1.848303677861995,
+"position": {
+"r": 1.5567,
+"z": 1.53907
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P15R",
+"length": 0.012,
+"name": "MP5P15R",
+"poloidal_angle": -2.256710722828668,
+"position": {
+"r": 1.37253,
+"z": 1.44288
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P16R",
+"length": 0.012,
+"name": "MP5P16R",
+"poloidal_angle": -2.827433388230814,
+"position": {
+"r": 1.20378,
+"z": 1.19788
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P27R",
+"length": 0.012,
+"name": "MP5P27R",
+"poloidal_angle": 2.827433388230814,
+"position": {
+"r": 1.20378,
+"z": -1.19788
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P28R",
+"length": 0.012,
+"name": "MP5P28R",
+"poloidal_angle": 2.256710722828668,
+"position": {
+"r": 1.37253,
+"z": -1.44288
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P29R",
+"length": 0.012,
+"name": "MP5P29R",
+"poloidal_angle": 1.848303677861995,
+"position": {
+"r": 1.5567,
+"z": -1.53907
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P30R",
+"length": 0.012,
+"name": "MP5P30R",
+"poloidal_angle": 1.5184364492350666,
+"position": {
+"r": 1.72943,
+"z": -1.55909
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P31R",
+"length": 0.012,
+"name": "MP5P31R",
+"poloidal_angle": 1.3089969389957472,
+"position": {
+"r": 1.88564,
+"z": -1.53301
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P32R",
+"length": 0.012,
+"name": "MP5P32R",
+"poloidal_angle": 1.2042771838760875,
+"position": {
+"r": 2.03333,
+"z": -1.48497
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P33R",
+"length": 0.012,
+"name": "MP5P33R",
+"poloidal_angle": 1.0995574287564276,
+"position": {
+"r": 2.17529,
+"z": -1.42181
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P34R",
+"length": 0.012,
+"name": "MP5P34R",
+"poloidal_angle": 0.8726646259971648,
+"position": {
+"r": 2.45514,
+"z": -1.23663
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P35R",
+"length": 0.012,
+"name": "MP5P35R",
+"poloidal_angle": 0.767944870877505,
+"position": {
+"r": 2.56888,
+"z": -1.13064
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P36R",
+"length": 0.012,
+"name": "MP5P36R",
+"poloidal_angle": 0.6632251157578453,
+"position": {
+"r": 2.67103,
+"z": -1.01323
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "MP5P37R",
+"length": 0.012,
+"name": "MP5P37R",
+"poloidal_angle": 0.39269908169872414,
+"position": {
+"r": 2.75272,
+"z": -0.87782
+},
+"toroidal_angle": 0.0,
+"turns": 1,
+"type": {
+"index": 1
+}
+}
+],
+"flux_loop": [
+{
+"identifier": "FL01",
+"name": "FL01",
+"position": [
+{
+"r": 2.79381,
+"z": 0.80762
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "FL12",
+"name": "FL12",
+"position": [
+{
+"r": 1.21916,
+"z": 1.28202
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "FL23",
+"name": "FL23",
+"position": [
+{
+"r": 1.16,
+"z": 0.0
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "FL34",
+"name": "FL34",
+"position": [
+{
+"r": 1.21916,
+"z": -1.28202
+}
+],
+"type": {
+"index": 1
+}
+},
+{
+"identifier": "FL45",
+"name": "FL45",
+"position": [
+{
+"r": 2.79381,
+"z": -0.80762
+}
+],
+"type": {
+"index": 1
+}
+}
+]
+},
+"pf_active": {
+"coil": [
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.07442,
+"r": 0.6875,
+"width": 0.05867,
+"z": 0.0382
+}
+},
+"identifier": "OH_0_0",
+"name": "OH_0_0",
+"turns_with_sign": 1.0
+}
+],
+"identifier": "OH_0",
+"name": "OH_0"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.47878,
+"r": 0.57,
+"width": 0.21366,
+"z": 0.2578
+}
+},
+"identifier": "PF_0_0",
+"name": "PF_0_0",
+"turns_with_sign": 180.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.47878,
+"r": 0.57,
+"width": 0.21366,
+"z": -0.2578
+}
+},
+"identifier": "PF_0_1",
+"name": "PF_0_1",
+"turns_with_sign": 180.0
+}
+],
+"identifier": "PF_0",
+"name": "PF_0"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3827,
+"r": 0.57,
+"width": 0.21366,
+"z": 0.72536
+}
+},
+"identifier": "PF_1_0",
+"name": "PF_1_0",
+"turns_with_sign": 144.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3827,
+"r": 0.57,
+"width": 0.21366,
+"z": -0.72536
+}
+},
+"identifier": "PF_1_1",
+"name": "PF_1_1",
+"turns_with_sign": 144.0
+}
+],
+"identifier": "PF_1",
+"name": "PF_1"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.19054,
+"r": 0.57,
+"width": 0.21366,
+"z": 1.0488
+}
+},
+"identifier": "PF_2_0",
+"name": "PF_2_0",
+"turns_with_sign": 72.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.19054,
+"r": 0.57,
+"width": 0.21366,
+"z": -1.0488
+}
+},
+"identifier": "PF_2_1",
+"name": "PF_2_1",
+"turns_with_sign": 72.0
+}
+],
+"identifier": "PF_2",
+"name": "PF_2"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.28662,
+"r": 0.57,
+"width": 0.21366,
+"z": 1.3242
+}
+},
+"identifier": "PF_3_0",
+"name": "PF_3_0",
+"turns_with_sign": 108.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.28662,
+"r": 0.57,
+"width": 0.21366,
+"z": -1.3242
+}
+},
+"identifier": "PF_3_1",
+"name": "PF_3_1",
+"turns_with_sign": 108.0
+}
+],
+"identifier": "PF_3",
+"name": "PF_3"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3811,
+"r": 1.073,
+"width": 0.30934,
+"z": 2.295
+}
+},
+"identifier": "PF_4_0",
+"name": "PF_4_0",
+"turns_with_sign": 208.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3811,
+"r": 1.073,
+"width": 0.30934,
+"z": -2.295
+}
+},
+"identifier": "PF_4_1",
+"name": "PF_4_1",
+"turns_with_sign": 208.0
+}
+],
+"identifier": "PF_4",
+"name": "PF_4"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3811,
+"r": 3.09,
+"width": 0.18974,
+"z": 1.92
+}
+},
+"identifier": "PF_5_0",
+"name": "PF_5_0",
+"turns_with_sign": 128.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.3811,
+"r": 3.09,
+"width": 0.18974,
+"z": -1.92
+}
+},
+"identifier": "PF_5_1",
+"name": "PF_5_1",
+"turns_with_sign": 128.0
+}
+],
+"identifier": "PF_5",
+"name": "PF_5"
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.28542,
+"r": 3.73,
+"width": 0.1419,
+"z": 0.98
+}
+},
+"identifier": "PF_6_0",
+"name": "PF_6_0",
+"turns_with_sign": 72.0
+},
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.28542,
+"r": 3.73,
+"width": 0.1419,
+"z": -0.98
+}
+},
+"identifier": "PF_6_1",
+"name": "PF_6_1",
+"turns_with_sign": 72.0
+}
+],
+"identifier": "PF_6",
+"name": "PF_6"
+}
+]
+},
+"pf_passive": {
+"loop": [
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9837,
+2.9837000000000002,
+2.9957000000000003,
+2.9957
+],
+"z": [
+0.0,
+0.280898,
+0.280898,
+0.0
+]
+}
+},
+"identifier": "VS01_0",
+"name": "VS01_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS01",
+"resistance": 0.0043468252,
+"resistivity": 0.08165441203378987
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9837,
+2.9837000000000002,
+2.9957000000000003,
+2.9957
+],
+"z": [
+0.28089800000000004,
+0.561796,
+0.561796,
+0.28089800000000004
+]
+}
+},
+"identifier": "VS02_0",
+"name": "VS02_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS02",
+"resistance": 0.0043468252,
+"resistivity": 0.08165441203378987
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9836963876697244,
+2.973523612330276,
+2.9855316123302758,
+2.9957043876697242
+],
+"z": [
+0.5617965,
+0.8419855,
+0.8419855,
+0.5617965
+]
+}
+},
+"identifier": "VS03_0",
+"name": "VS03_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS03",
+"resistance": 0.0043475431,
+"resistivity": 0.08152896636311993
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9728123035671667,
+2.8481466964328326,
+2.861575696432833,
+2.986241303567167
+],
+"z": [
+0.8419855,
+1.0901425,
+1.0901425,
+0.8419855
+]
+}
+},
+"identifier": "VS04_0",
+"name": "VS04_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS04",
+"resistance": 0.0042900759,
+"resistivity": 0.07863396154650694
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.846535409506741,
+2.6520435904932587,
+2.6686945904932586,
+2.863186409506741
+],
+"z": [
+1.0901425,
+1.2923335,
+1.2923335,
+1.0901425
+]
+}
+},
+"identifier": "VS05_0",
+"name": "VS05_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS05",
+"resistance": 0.004014356,
+"resistivity": 0.06955516495989826
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.4344004999999997,
+2.4344004999999997,
+2.6603695,
+2.6603695
+],
+"z": [
+1.4511643410724553,
+1.4660633410724553,
+1.2997836589275449,
+1.2848846589275449
+]
+}
+},
+"identifier": "VS06_0",
+"name": "VS06_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS06",
+"resistance": 0.0037082546,
+"resistivity": 0.05935318099901376
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.1835199999999997,
+2.1835199999999997,
+2.4344,
+2.4344
+],
+"z": [
+1.5774702339491768,
+1.590889233949177,
+1.4653237660508234,
+1.4519047660508233
+]
+}
+},
+"identifier": "VS07_0",
+"name": "VS07_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS07",
+"resistance": 0.00336126,
+"resistivity": 0.04876389472313671
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.9150035,
+1.9150035,
+2.1835205,
+2.1835205
+],
+"z": [
+1.659191516362239,
+1.671729516362239,
+1.5904484836377608,
+1.5779104836377609
+]
+}
+},
+"identifier": "VS08_0",
+"name": "VS08_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS08",
+"resistance": 0.0029831897,
+"resistivity": 0.038411231044653056
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6364375,
+1.6364375,
+1.9150025,
+1.9150025
+],
+"z": [
+1.683684845357439,
+1.6957298453574388,
+1.671483154642561,
+1.6594381546425612
+]
+}
+},
+"identifier": "VS09_0",
+"name": "VS09_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS09",
+"resistance": 0.0025935962,
+"resistivity": 0.028937213980245683
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.3749,
+1.3749,
+1.6364379999999998,
+1.6364379999999998
+],
+"z": [
+1.5883884886204842,
+1.6011544886204843,
+1.6960895113795158,
+1.6833235113795157
+]
+}
+},
+"identifier": "VS10_0",
+"name": "VS10_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS10",
+"resistance": 0.0022100929,
+"resistivity": 0.020908356988502203
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1773744435452655,
+1.3667125564547344,
+1.3830875564547342,
+1.1937494435452654
+],
+"z": [
+1.390858,
+1.594772,
+1.594772,
+1.390858
+]
+}
+},
+"identifier": "VS11_0",
+"name": "VS11_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS11",
+"resistance": 0.0018790038,
+"resistivity": 0.015114572423231875
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1043175933341254,
+1.1793314066658747,
+1.1917924066658747,
+1.1167785933341254
+],
+"z": [
+1.122908,
+1.390858,
+1.390858,
+1.122908
+]
+}
+},
+"identifier": "VS12_0",
+"name": "VS12_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS12",
+"resistance": 0.001685065,
+"resistivity": 0.0121551191624504
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.0979985313699518,
+1.1045464686300484,
+1.1165494686300483,
+1.1100015313699518
+],
+"z": [
+0.842694,
+1.122908,
+1.122908,
+0.842694
+]
+}
+},
+"identifier": "VS13_0",
+"name": "VS13_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS13",
+"resistance": 0.0016133942,
+"resistivity": 0.011224718596263146
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+0.561796,
+0.842694,
+0.842694,
+0.561796
+]
+}
+},
+"identifier": "VS14_0",
+"name": "VS14_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS14",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+0.28089800000000004,
+0.561796,
+0.561796,
+0.28089800000000004
+]
+}
+},
+"identifier": "VS15_0",
+"name": "VS15_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS15",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+0.0,
+0.280898,
+0.280898,
+0.0
+]
+}
+},
+"identifier": "VS16_0",
+"name": "VS16_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS16",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+-0.280898,
+0.0,
+0.0,
+-0.280898
+]
+}
+},
+"identifier": "VS17_0",
+"name": "VS17_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS17",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+-0.561796,
+-0.28089800000000004,
+-0.28089800000000004,
+-0.561796
+]
+}
+},
+"identifier": "VS18_0",
+"name": "VS18_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS18",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.098,
+1.098,
+1.11,
+1.11
+],
+"z": [
+-0.842694,
+-0.561796,
+-0.561796,
+-0.842694
+]
+}
+},
+"identifier": "VS19_0",
+"name": "VS19_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS19",
+"resistance": 0.0016051427,
+"resistivity": 0.011134291567537495
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1045464686300484,
+1.0979985313699518,
+1.1100015313699518,
+1.1165494686300483
+],
+"z": [
+-1.122908,
+-0.842694,
+-0.842694,
+-1.122908
+]
+}
+},
+"identifier": "VS20_0",
+"name": "VS20_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS20",
+"resistance": 0.0016133942,
+"resistivity": 0.011224718596263146
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1793314066658747,
+1.1043175933341254,
+1.1167785933341254,
+1.1917924066658747
+],
+"z": [
+-1.390858,
+-1.122908,
+-1.122908,
+-1.390858
+]
+}
+},
+"identifier": "VS21_0",
+"name": "VS21_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS21",
+"resistance": 0.001685065,
+"resistivity": 0.0121551191624504
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.3667125564547344,
+1.1773744435452655,
+1.1937494435452654,
+1.3830875564547342
+],
+"z": [
+-1.594772,
+-1.390858,
+-1.390858,
+-1.594772
+]
+}
+},
+"identifier": "VS22_0",
+"name": "VS22_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS22",
+"resistance": 0.0018790038,
+"resistivity": 0.015114572423231875
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.3749,
+1.3749,
+1.6364379999999998,
+1.6364379999999998
+],
+"z": [
+-1.6011544886204843,
+-1.5883884886204842,
+-1.6833235113795157,
+-1.6960895113795158
+]
+}
+},
+"identifier": "VS23_0",
+"name": "VS23_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS23",
+"resistance": 0.0022100929,
+"resistivity": 0.020908356988502203
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6364375,
+1.6364375,
+1.9150025,
+1.9150025
+],
+"z": [
+-1.6957298453574388,
+-1.683684845357439,
+-1.6594381546425612,
+-1.671483154642561
+]
+}
+},
+"identifier": "VS24_0",
+"name": "VS24_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS24",
+"resistance": 0.0025935962,
+"resistivity": 0.028937213980245683
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.9150035,
+1.9150035,
+2.1835205,
+2.1835205
+],
+"z": [
+-1.671729516362239,
+-1.659191516362239,
+-1.5779104836377609,
+-1.5904484836377608
+]
+}
+},
+"identifier": "VS25_0",
+"name": "VS25_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS25",
+"resistance": 0.0029831897,
+"resistivity": 0.038411231044653056
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.1835199999999997,
+2.1835199999999997,
+2.4344,
+2.4344
+],
+"z": [
+-1.590889233949177,
+-1.5774702339491768,
+-1.4519047660508233,
+-1.4653237660508234
+]
+}
+},
+"identifier": "VS26_0",
+"name": "VS26_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS26",
+"resistance": 0.00336126,
+"resistivity": 0.04876389472313671
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.4344004999999997,
+2.4344004999999997,
+2.6603695,
+2.6603695
+],
+"z": [
+-1.4660633410724553,
+-1.4511643410724553,
+-1.2848846589275449,
+-1.2997836589275449
+]
+}
+},
+"identifier": "VS27_0",
+"name": "VS27_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS27",
+"resistance": 0.0037082546,
+"resistivity": 0.05935318099901376
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.6520435904932587,
+2.846535409506741,
+2.863186409506741,
+2.6686945904932586
+],
+"z": [
+-1.2923335,
+-1.0901425,
+-1.0901425,
+-1.2923335
+]
+}
+},
+"identifier": "VS28_0",
+"name": "VS28_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS28",
+"resistance": 0.004014356,
+"resistivity": 0.06955516495989826
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.8481466964328326,
+2.9728123035671667,
+2.986241303567167,
+2.861575696432833
+],
+"z": [
+-1.0901425,
+-0.8419855,
+-0.8419855,
+-1.0901425
+]
+}
+},
+"identifier": "VS29_0",
+"name": "VS29_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS29",
+"resistance": 0.0042900759,
+"resistivity": 0.07863396154650694
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.973523612330276,
+2.9836963876697244,
+2.9957043876697242,
+2.9855316123302758
+],
+"z": [
+-0.8419855,
+-0.5617965,
+-0.5617965,
+-0.8419855
+]
+}
+},
+"identifier": "VS30_0",
+"name": "VS30_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS30",
+"resistance": 0.0043475431,
+"resistivity": 0.08152896636311993
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9837,
+2.9837000000000002,
+2.9957000000000003,
+2.9957
+],
+"z": [
+-0.561796,
+-0.28089800000000004,
+-0.28089800000000004,
+-0.561796
+]
+}
+},
+"identifier": "VS31_0",
+"name": "VS31_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS31",
+"resistance": 0.0043468252,
+"resistivity": 0.08165441203378987
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.9837,
+2.9837000000000002,
+2.9957000000000003,
+2.9957
+],
+"z": [
+-0.280898,
+0.0,
+0.0,
+-0.280898
+]
+}
+},
+"identifier": "VS32_0",
+"name": "VS32_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS32",
+"resistance": 0.0043468252,
+"resistivity": 0.08165441203378987
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.7937,
+2.7937000000000003,
+2.8057000000000003,
+2.8057
+],
+"z": [
+4.999999999866223e-07,
+0.31536149999999996,
+0.31536149999999996,
+4.999999999866223e-07
+]
+}
+},
+"identifier": "VS33_0",
+"name": "VS33_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS33",
+"resistance": 0.0036257373,
+"resistivity": 0.06378046777314905
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.7937,
+2.7937000000000003,
+2.8057000000000003,
+2.8057
+],
+"z": [
+0.3153615,
+0.6307225000000001,
+0.6307225000000001,
+0.3153615
+]
+}
+},
+"identifier": "VS34_0",
+"name": "VS34_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS34",
+"resistance": 0.0036257373,
+"resistivity": 0.06378046777314905
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.793604733956702,
+2.7391252660432985,
+2.7513152660432985,
+2.8057947339567018
+],
+"z": [
+0.6307225000000001,
+0.9360415,
+0.9360415,
+0.6307225000000001
+]
+}
+},
+"identifier": "VS35_0",
+"name": "VS35_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS35",
+"resistance": 0.0036508936,
+"resistivity": 0.06359812817382385
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.737410368024595,
+2.5359606319754056,
+2.5515816319754054,
+2.753031368024595
+],
+"z": [
+0.9360415000000001,
+1.1777765,
+1.1777765,
+0.9360415000000001
+]
+}
+},
+"identifier": "VS36_0",
+"name": "VS36_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS36",
+"resistance": 0.0034322472,
+"resistivity": 0.057029733510510154
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.295696,
+2.295696,
+2.54377,
+2.54377
+],
+"z": [
+1.3639018176746909,
+1.3791278176746908,
+1.185390182325309,
+1.170164182325309
+]
+}
+},
+"identifier": "VS37_0",
+"name": "VS37_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS37",
+"resistance": 0.0031396288,
+"resistivity": 0.04773375722753324
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.0127355,
+2.0127355,
+2.2956965,
+2.2956965
+],
+"z": [
+1.502747312456614,
+1.516096312456614,
+1.3781886875433862,
+1.3648396875433861
+]
+}
+},
+"identifier": "VS38_0",
+"name": "VS38_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS38",
+"resistance": 0.0027949743,
+"resistivity": 0.03783092274534203
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.7063085,
+1.7063085,
+2.0127355,
+2.0127355
+],
+"z": [
+1.571746013326975,
+1.5840420133269748,
+1.515569986673025,
+1.5032739866730251
+]
+}
+},
+"identifier": "VS39_0",
+"name": "VS39_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS39",
+"resistance": 0.0024187286,
+"resistivity": 0.02825975088396884
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4077994999999999,
+1.4077994999999999,
+1.7063085,
+1.7063085
+],
+"z": [
+1.4847428784890755,
+1.4972408784890756,
+1.5841431215109245,
+1.5716451215109244
+]
+}
+},
+"identifier": "VS40_0",
+"name": "VS40_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS40",
+"resistance": 0.0020453809,
+"resistivity": 0.020010490720540983
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1983123787664498,
+1.39991662123355,
+1.4156816212335501,
+1.2140773787664498
+],
+"z": [
+1.2543624999999998,
+1.4909915,
+1.4909915,
+1.2543624999999998
+]
+}
+},
+"identifier": "VS41_0",
+"name": "VS41_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS41",
+"resistance": 0.001717098,
+"resistivity": 0.014100987949901028
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.1479149151514747,
+1.2001100848485255,
+1.2122810848485255,
+1.1600859151514746
+],
+"z": [
+0.9460835,
+1.2543625,
+1.2543625,
+0.9460835
+]
+}
+},
+"identifier": "VS42_0",
+"name": "VS42_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS42",
+"resistance": 0.0015414513,
+"resistivity": 0.01142951366064126
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+0.6307225,
+0.9460835,
+0.9460835,
+0.6307225
+]
+}
+},
+"identifier": "VS43_0",
+"name": "VS43_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS43",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+0.3153615,
+0.6307225000000001,
+0.6307225000000001,
+0.3153615
+]
+}
+},
+"identifier": "VS44_0",
+"name": "VS44_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS44",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+4.999999999866223e-07,
+0.31536149999999996,
+0.31536149999999996,
+4.999999999866223e-07
+]
+}
+},
+"identifier": "VS45_0",
+"name": "VS45_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS45",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+-0.31536149999999996,
+-4.999999999866223e-07,
+-4.999999999866223e-07,
+-0.31536149999999996
+]
+}
+},
+"identifier": "VS46_0",
+"name": "VS46_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS46",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+-0.6307225000000001,
+-0.3153615,
+-0.3153615,
+-0.6307225000000001
+]
+}
+},
+"identifier": "VS47_0",
+"name": "VS47_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS47",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.148,
+1.148,
+1.16,
+1.16
+],
+"z": [
+-0.9460835,
+-0.6307225,
+-0.6307225,
+-0.9460835
+]
+}
+},
+"identifier": "VS48_0",
+"name": "VS48_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS48",
+"resistance": 0.0014944819,
+"resistivity": 0.010836183150178409
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.2001100848485255,
+1.1479149151514747,
+1.1600859151514746,
+1.2122810848485255
+],
+"z": [
+-1.2543625,
+-0.9460835,
+-0.9460835,
+-1.2543625
+]
+}
+},
+"identifier": "VS49_0",
+"name": "VS49_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS49",
+"resistance": 0.0015414513,
+"resistivity": 0.01142951366064126
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.39991662123355,
+1.1983123787664498,
+1.2140773787664498,
+1.4156816212335501
+],
+"z": [
+-1.4909915,
+-1.2543624999999998,
+-1.2543624999999998,
+-1.4909915
+]
+}
+},
+"identifier": "VS50_0",
+"name": "VS50_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS50",
+"resistance": 0.001717098,
+"resistivity": 0.014100987949901028
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4077994999999999,
+1.4077994999999999,
+1.7063085,
+1.7063085
+],
+"z": [
+-1.4972408784890756,
+-1.4847428784890755,
+-1.5716451215109244,
+-1.5841431215109245
+]
+}
+},
+"identifier": "VS51_0",
+"name": "VS51_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS51",
+"resistance": 0.0020453809,
+"resistivity": 0.020010490720540983
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.7063085,
+1.7063085,
+2.0127355,
+2.0127355
+],
+"z": [
+-1.5840420133269748,
+-1.571746013326975,
+-1.5032739866730251,
+-1.515569986673025
+]
+}
+},
+"identifier": "VS52_0",
+"name": "VS52_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS52",
+"resistance": 0.0024187286,
+"resistivity": 0.02825975088396884
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.0127355,
+2.0127355,
+2.2956965,
+2.2956965
+],
+"z": [
+-1.516096312456614,
+-1.502747312456614,
+-1.3648396875433861,
+-1.3781886875433862
+]
+}
+},
+"identifier": "VS53_0",
+"name": "VS53_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS53",
+"resistance": 0.0027949743,
+"resistivity": 0.03783092274534203
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.295696,
+2.295696,
+2.54377,
+2.54377
+],
+"z": [
+-1.3791278176746908,
+-1.3639018176746909,
+-1.170164182325309,
+-1.185390182325309
+]
+}
+},
+"identifier": "VS54_0",
+"name": "VS54_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS54",
+"resistance": 0.0031396288,
+"resistivity": 0.04773375722753324
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.5359606319754056,
+2.737410368024595,
+2.753031368024595,
+2.5515816319754054
+],
+"z": [
+-1.1777765,
+-0.9360415000000001,
+-0.9360415000000001,
+-1.1777765
+]
+}
+},
+"identifier": "VS55_0",
+"name": "VS55_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS55",
+"resistance": 0.0034322472,
+"resistivity": 0.057029733510510154
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.7391252660432985,
+2.793604733956702,
+2.8057947339567018,
+2.7513152660432985
+],
+"z": [
+-0.9360415,
+-0.6307225000000001,
+-0.6307225000000001,
+-0.9360415
+]
+}
+},
+"identifier": "VS56_0",
+"name": "VS56_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS56",
+"resistance": 0.0036508936,
+"resistivity": 0.06359812817382385
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.7937,
+2.7937000000000003,
+2.8057000000000003,
+2.8057
+],
+"z": [
+-0.6307225000000001,
+-0.3153615,
+-0.3153615,
+-0.6307225000000001
+]
+}
+},
+"identifier": "VS57_0",
+"name": "VS57_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS57",
+"resistance": 0.0036257373,
+"resistivity": 0.06378046777314905
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.7937,
+2.7937000000000003,
+2.8057000000000003,
+2.8057
+],
+"z": [
+-0.31536149999999996,
+-4.999999999866223e-07,
+-4.999999999866223e-07,
+-0.31536149999999996
+]
+}
+},
+"identifier": "VS58_0",
+"name": "VS58_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS58",
+"resistance": 0.0036257373,
+"resistivity": 0.06378046777314905
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.731774,
+1.731774,
+1.8116999999999999,
+1.8116999999999999
+],
+"z": [
+1.0504933163600685,
+1.0769423163600684,
+1.0077746836399315,
+0.9813256836399316
+]
+}
+},
+"identifier": "VS59_0",
+"name": "VS59_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS59",
+"resistance": 0.0041074713,
+"resistivity": 0.04572499438139465
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.655803,
+1.655803,
+1.731775,
+1.731775
+],
+"z": [
+1.122346665581785,
+1.149982665581785,
+1.077535334418215,
+1.049899334418215
+]
+}
+},
+"identifier": "VS60_0",
+"name": "VS60_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS60",
+"resistance": 0.0039537385,
+"resistivity": 0.04207722770074315
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6454656291794396,
+1.6192693708205605,
+1.6399443708205605,
+1.6661406291794396
+],
+"z": [
+1.136164,
+1.236186,
+1.236186,
+1.136164
+]
+}
+},
+"identifier": "VS61_0",
+"name": "VS61_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS61",
+"resistance": 0.0038931742,
+"resistivity": 0.04018308574002859
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6195603387410942,
+1.6094536612589057,
+1.6295456612589057,
+1.6396523387410942
+],
+"z": [
+1.236186,
+1.3414000000000001,
+1.3414000000000001,
+1.236186
+]
+}
+},
+"identifier": "VS62_0",
+"name": "VS62_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS62",
+"resistance": 0.0037662536,
+"resistivity": 0.038443534745308025
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.02,
+"r": 1.632,
+"width": 0.0784,
+"z": 1.4745
+}
+},
+"identifier": "VS63_0",
+"name": "VS63_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS63",
+"resistance": 0.0051009206,
+"resistivity": 0.0523056479269598
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4949435,
+1.4949435,
+1.5718005,
+1.5718005
+],
+"z": [
+1.3752164525912502,
+1.4030794525912502,
+1.4776315474087496,
+1.4497685474087496
+]
+}
+},
+"identifier": "VS64_0",
+"name": "VS64_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS64",
+"resistance": 0.0035091769,
+"resistivity": 0.03380902595277803
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4180365000000001,
+1.4180365000000001,
+1.4949435,
+1.4949435
+],
+"z": [
+1.3007250360044154,
+1.3285700360044155,
+1.4030709639955847,
+1.3752259639955846
+]
+}
+},
+"identifier": "VS65_0",
+"name": "VS65_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS65",
+"resistance": 0.0033332284,
+"resistivity": 0.03050369494030011
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.3411795,
+1.3411795,
+1.4180365,
+1.4180365
+],
+"z": [
+1.2261646517634923,
+1.2540276517634923,
+1.3285793482365076,
+1.3007163482365076
+]
+}
+},
+"identifier": "VS66_0",
+"name": "VS66_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS66",
+"resistance": 0.0031572831,
+"resistivity": 0.027368380387090916
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.2642725000000001,
+1.2642725000000001,
+1.3411795,
+1.3411795
+],
+"z": [
+1.151671836959562,
+1.179516836959562,
+1.254018163040438,
+1.2261731630404378
+]
+}
+},
+"identifier": "VS67_0",
+"name": "VS67_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS67",
+"resistance": 0.0029813347,
+"resistivity": 0.02440302608854364
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.2036500256927758,
+1.252922974307224,
+1.2756219743072241,
+1.2263490256927758
+],
+"z": [
+1.0737995,
+1.1655944999999999,
+1.1655944999999999,
+1.0737995
+]
+}
+},
+"identifier": "VS68_0",
+"name": "VS68_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS68",
+"resistance": 0.0029156959,
+"resistivity": 0.022709955044283234
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.252922974307224,
+1.2036500256927758,
+1.2263490256927758,
+1.2756219743072241
+],
+"z": [
+-1.1655944999999999,
+-1.0737995,
+-1.0737995,
+-1.1655944999999999
+]
+}
+},
+"identifier": "VS69_0",
+"name": "VS69_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS69",
+"resistance": 0.0029156959,
+"resistivity": 0.022709955044283234
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.2642725000000001,
+1.2642725000000001,
+1.3411795,
+1.3411795
+],
+"z": [
+-1.179516836959562,
+-1.151671836959562,
+-1.2261731630404378,
+-1.254018163040438
+]
+}
+},
+"identifier": "VS70_0",
+"name": "VS70_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS70",
+"resistance": 0.0029813347,
+"resistivity": 0.02440302608854364
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.3411795,
+1.3411795,
+1.4180365,
+1.4180365
+],
+"z": [
+-1.2540276517634923,
+-1.2261646517634923,
+-1.3007163482365076,
+-1.3285793482365076
+]
+}
+},
+"identifier": "VS71_0",
+"name": "VS71_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS71",
+"resistance": 0.0031572831,
+"resistivity": 0.027368380387090916
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4180365000000001,
+1.4180365000000001,
+1.4949435,
+1.4949435
+],
+"z": [
+-1.3285700360044155,
+-1.3007250360044154,
+-1.3752259639955846,
+-1.4030709639955847
+]
+}
+},
+"identifier": "VS72_0",
+"name": "VS72_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS72",
+"resistance": 0.0033332284,
+"resistivity": 0.03050369494030011
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.4949435,
+1.4949435,
+1.5718005,
+1.5718005
+],
+"z": [
+-1.4030794525912502,
+-1.3752164525912502,
+-1.4497685474087496,
+-1.4776315474087496
+]
+}
+},
+"identifier": "VS73_0",
+"name": "VS73_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS73",
+"resistance": 0.0035091769,
+"resistivity": 0.03380902595277803
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 2,
+"rectangle": {
+"height": 0.02,
+"r": 1.632,
+"width": 0.0784,
+"z": -1.4745
+}
+},
+"identifier": "VS74_0",
+"name": "VS74_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS74",
+"resistance": 0.0051009206,
+"resistivity": 0.0523056479269598
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6094536612589057,
+1.6195603387410942,
+1.6396523387410942,
+1.6295456612589057
+],
+"z": [
+-1.3414000000000001,
+-1.236186,
+-1.236186,
+-1.3414000000000001
+]
+}
+},
+"identifier": "VS75_0",
+"name": "VS75_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS75",
+"resistance": 0.0037662536,
+"resistivity": 0.038443534745308025
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.6192693708205605,
+1.6454656291794396,
+1.6661406291794396,
+1.6399443708205605
+],
+"z": [
+-1.236186,
+-1.136164,
+-1.136164,
+-1.236186
+]
+}
+},
+"identifier": "VS76_0",
+"name": "VS76_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS76",
+"resistance": 0.0038931742,
+"resistivity": 0.04018308574002859
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.655803,
+1.655803,
+1.731775,
+1.731775
+],
+"z": [
+-1.149982665581785,
+-1.122346665581785,
+-1.049899334418215,
+-1.077535334418215
+]
+}
+},
+"identifier": "VS77_0",
+"name": "VS77_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS77",
+"resistance": 0.0039537385,
+"resistivity": 0.04207722770074315
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.731774,
+1.731774,
+1.8116999999999999,
+1.8116999999999999
+],
+"z": [
+-1.0769423163600684,
+-1.0504933163600685,
+-0.9813256836399316,
+-1.0077746836399315
+]
+}
+},
+"identifier": "VS78_0",
+"name": "VS78_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS78",
+"resistance": 0.0041074713,
+"resistivity": 0.04572499438139465
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.8288004999999998,
+1.8288004999999998,
+1.9581735,
+1.9581735
+],
+"z": [
+-0.9963842386397708,
+-0.9644762386397707,
+-0.8618757613602293,
+-0.8937837613602293
+]
+}
+},
+"identifier": "VS79_0",
+"name": "VS79_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS79",
+"resistance": 6.1388111e-05,
+"resistivity": 0.0007303423184659867
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.9581735000000002,
+1.9581735000000002,
+2.0768285000000004,
+2.0768285000000004
+],
+"z": [
+-0.8951094772269316,
+-0.8605484772269316,
+-0.7472865227730684,
+-0.7818475227730683
+]
+}
+},
+"identifier": "VS80_0",
+"name": "VS80_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS80",
+"resistance": 6.5841057e-05,
+"resistivity": 0.0008346231399288618
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.0613342641651644,
+2.1589027358348356,
+2.1898917358348355,
+2.0923232641651643
+],
+"z": [
+-0.764567,
+-0.631357,
+-0.631357,
+-0.764567
+]
+}
+},
+"identifier": "VS81_0",
+"name": "VS81_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS81",
+"resistance": 6.8913724e-05,
+"resistivity": 0.0009203855360510724
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.1589085554930083,
+2.2564114445069916,
+2.2873894445069913,
+2.189886555493008
+],
+"z": [
+-0.6313575,
+-0.49810050000000006,
+-0.49810050000000006,
+-0.6313575
+]
+}
+},
+"identifier": "VS82_0",
+"name": "VS82_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS82",
+"resistance": 7.2075942e-05,
+"resistivity": 0.0010067897061094653
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.2564114445069916,
+2.1589085554930083,
+2.189886555493008,
+2.2873894445069913
+],
+"z": [
+0.49810050000000006,
+0.6313575,
+0.6313575,
+0.49810050000000006
+]
+}
+},
+"identifier": "VS83_0",
+"name": "VS83_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS83",
+"resistance": 7.2075942e-05,
+"resistivity": 0.0010067897061094653
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+2.1589027358348356,
+2.0613342641651644,
+2.0923232641651643,
+2.1898917358348355
+],
+"z": [
+0.631357,
+0.764567,
+0.764567,
+0.631357
+]
+}
+},
+"identifier": "VS84_0",
+"name": "VS84_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS84",
+"resistance": 6.8913724e-05,
+"resistivity": 0.0009203855360510724
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.9581735000000002,
+1.9581735000000002,
+2.0768285000000004,
+2.0768285000000004
+],
+"z": [
+0.8605484772269316,
+0.8951094772269316,
+0.7818475227730683,
+0.7472865227730684
+]
+}
+},
+"identifier": "VS85_0",
+"name": "VS85_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS85",
+"resistance": 6.5841057e-05,
+"resistivity": 0.0008346231399288618
+},
+{
+"element": [
+{
+"geometry": {
+"geometry_type": 1,
+"outline": {
+"r": [
+1.8288004999999998,
+1.8288004999999998,
+1.9581735,
+1.9581735
+],
+"z": [
+0.9644762386397707,
+0.9963842386397708,
+0.8937837613602293,
+0.8618757613602293
+]
+}
+},
+"identifier": "VS86_0",
+"name": "VS86_0",
+"turns_with_sign": 1.0
+}
+],
+"name": "VS86",
+"resistance": 6.1388111e-05,
+"resistivity": 0.0007303423184659867
+}
+]
+}
+}
