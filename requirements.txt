@@ -7,16 +7,11 @@ numpy<2;python_version=='3.9'                      # required to use pint
 uncertainties                                      # required
 pint                                               # required
 netCDF4                                            # required
-boto3                                              # required
 matplotlib                                         # required
 scipy                                              # required
 h5py                                               # required
-pymongo                                            # required
-dnspython                                          # required
-xmltodict                                          # required
 xarray                                             # required
 setuptools>=41.2                                   # required
-tqdm                                               # required
 Cython                                             # required
 importlib_metadata <5;python_version=='3.7'        # required
 
@@ -28,10 +23,16 @@ importlib_metadata <5;python_version=='3.7'        # required
 # pyhdc                    # hdc
 
 # imas                     # imas
+# tqdm                     # imas
 
 # pyuda                    # uda
 
+# pymongo                  # mongo
+
+# boto3                    # aws
+
 # bs4                      # build_structures
+# xmltodict                # build_structures
 
 # Sphinx                   # build_documentation
 # sphinx-bootstrap-theme   # build_documentation

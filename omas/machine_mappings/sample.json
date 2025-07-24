@@ -22,12 +22,12 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {
-  "COMMENT": "TDI functions to access MDS+",
+  "COMMENT": "TDI functions to access MDSplus",
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_1d.psi": {
-  "COMMENT": "eval2TDI allows defining python functions can be evaluated on the MDS+ server side. These functions are defined in python_tdi.py",
+  "COMMENT": "eval2TDI allows defining python functions can be evaluated on the MDSplus server side. These functions are defined in python_tdi.py",
   "eval2TDI": "py2tdi(geqdsk_psi,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
   "treename": "{EFIT_tree}"
  }

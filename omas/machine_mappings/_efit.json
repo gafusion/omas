@@ -2,7 +2,7 @@
  "__cocos_rules__": {
   "EFIT_tree": {
    "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')",
-   "PYTHON": "MDS_gEQDSK_COCOS_identify({machine!r}, {pulse}, {EFIT_tree!r})"
+   "PYTHON": "MDS_gEQDSK_COCOS_identify({machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
   }
  },
  "equilibrium.code.name": {
@@ -16,15 +16,15 @@
    "VALUE": 1
   },
  "equilibrium.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.time": {
-  "TDI": "dim_of(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)/1000.",
+  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:": {
-  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
+  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary.outline.r": {
@@ -340,19 +340,19 @@
    "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.weight": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
@@ -360,7 +360,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE)",
+  "eval2TDI": "py2tdi(ensure_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:": {
@@ -372,7 +372,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
-  "TDI": "data(\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ)*1.e6",
+  "eval2TDI": "py2tdi(convert_from_mega_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {

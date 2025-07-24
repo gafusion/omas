@@ -5,7 +5,7 @@ Installation
 
 OMAS runs with *Python3.6+*
 
-**Pypi**: To install `OMAS with pip <https://pypi.python.org/pypi/omas/>`_ (for users):
+**PyPI**: To install `OMAS with pip <https://pypi.python.org/pypi/omas/>`_ (for users):
 
 .. code-block:: none
 
@@ -37,6 +37,50 @@ The development version of omas can also be installed with pip:
                                                                          # install packages required for extra development purposes
 
 List of `Python package requirements <_static/requirements.txt>`_.
+
+Optional dependencies
+---------------------
+
+Some dependencies are not required for the core functionality of OMAS,
+but are needed for some of the additional features.
+
+Here is a list of optional dependencies:
+
+.. Table of optional dependencies: mongo, s3, build_structures, build_documentation
+
++----------------------+----------------------+
+| **Package**          | **Description**      |
++======================+======================+
+| `mongo`              | Support for MongoDB  |
++----------------------+----------------------+
+| `s3`                 | Support for AWS S3   |
++----------------------+----------------------+
+| `build_structures`   | Support for building IMAS structures |
++----------------------+----------------------+
+| `build_documentation`| Support for building Sphinx documentation |
++----------------------+----------------------+
+
+Optional dependencies can be installed with the following command:
+
+**PyPI**:
+
+.. code-block:: none
+
+    pip install --upgrade omas[optional,optional2,...]
+
+**Conda**: All optional dependencies are installed by default. To suppress the installation of optional dependencies, use the following command:
+
+.. code-block:: none
+
+    conda install -c conda-forge omas --no-deps
+
+**GitHub**:
+
+.. code-block:: none
+
+    pip install --upgrade -e '.[optional,optional2,...]'
+
+**Note**: Skip the `--upgrade` option if you are installing the package for the first time.
 
 Installation with IMAS
 ======================

@@ -3,13 +3,13 @@
 import subprocess
 import functools
 import shutil
-from .omas_utils import *
-from .omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
-from .omas_physics import cocos_signals
+from omas.omas_utils import *
+from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
+from omas.omas_physics import cocos_signals
 from omas.machine_mappings import d3d, nstx, nstxu, east
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
 try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
@@ -20,7 +20,6 @@ try:
     from omas.machine_mappings import mast
 except ImportError:
     pass
-
 
 __all__ = [
     'machine_expression_types',
@@ -102,7 +101,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     :param user_mappings: allow specification of external mappings
 
-    :param cache: if cache is a dictionary, this will be used to establiish a cash
+    :param cache: if cache is a dictionary, this will be used to establish a cash
 
     :return: updated ODS and data before being assigned to the ODS
     """
@@ -119,7 +118,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
         try:
-            if not location.endswith(".*"):
+            if not location.endswith(".*"): # location = "core_profiles.*"
                 mapped = mappings[location]
             break
         except KeyError as e:
@@ -132,11 +131,14 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
     idm = (machine, branch)
     failed_locations = {}
     if location.endswith(".*"):
+        temp_cache = cache
+        if temp_cache is None:
+            temp_cache = {}
         root = location.split(".*")[0]
         for key in mappings:
-            if root in key:
+            if root in key and key not in ods:
                 try:
-                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=cache)
+                    resolve_mapped(ods, machine, pulse, mappings, key, idm, options_with_defaults, branch, cache=temp_cache)
                 except (TreeNODATA, MdsIpException) as e:
                     if hasattr(e, "eval2TDI"):
                         failed_locations[key] = e.eval2TDI
@@ -176,7 +178,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     :param branch: load machine mappings and mapping functions from a specific GitHub branch
 
-    :param cache: if cache is a dictionary, this will be used to establiish a cash
+    :param cache: if cache is a dictionary, this will be used to establish a cash
 
     :return: updated ODS and data before being assigned to the ODS
     """
@@ -246,12 +248,16 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         else:
             return ods, {'raw_data': ods, 'processed_data': ods, 'cocosio': cocosio, 'branch': mappings['__branch__']}
 
-    # MDS+
+    # MDSplus
     elif 'TDI' in mapped:
         try:
+            if 'treename' in  mapped:
+                pulse_id = check_for_pulse_id(pulse, mapped['treename'], options_with_defaults)
+            else:
+                pulse_id = pulse
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine, treename, pulse, TDI).raw()
+            data0 = data = mdsvalue(machine, treename, pulse_id, TDI).raw()
             if data is None:
                 raise ValueError('data is None')
         except Exception as e:
@@ -285,10 +291,10 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         ods[location] = data
     else:
         with omas_environment(ods, cocosio=cocosio):
-            dsize = len(data.shape)  # size of the data fetched from MDS+
+            dsize = len(data.shape)  # size of the data fetched from MDSplus
             csize = len(mapped.get('COORDINATES', []))  # number of coordinates
             osize = len([c for c in mapped.get('COORDINATES', []) if c != '1...N'])  # number of named coordinates
-            asize = location.count(':') + csize  # data size required from MDS+ to make the assignement
+            asize = location.count(':') + csize  # data size required from MDSplus to make the assignement
             if asize != dsize:
                 raise Exception(
                     f"Experiment data {data.shape} does not fit in `{location}` [{', '.join([':'] * location.count(':') + mapped.get('COORDINATES', []))}]"
@@ -647,7 +653,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             pprint(regression_kw)
             print('=' * len(func_name))
             ods = ODS() #consistency_check= not break_schema
-            func = eval(machine + "." + func_name, global_namespace, local_namespace)
+            func = eval(func_name, global_namespace, local_namespace)
             try:
                 try:
                     regression_kw["update_callback"] = update_mapping
@@ -775,6 +781,3 @@ def load_omas_machine(
         print(location)
         machine_to_omas(ods, machine, pulse, location, options, branch)
     return ods
-
-if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["core_profiles_profile_1d"], globals(), locals())

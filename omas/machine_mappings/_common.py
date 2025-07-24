@@ -4,10 +4,110 @@ from omas.omas_utils import printd
 import os
 import glob
 from omas.omas_setup import omas_dir
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, get_pulse_id
 
 __support_files_cache__ = {}
 
+
+class D3DFitweight(dict):
+    """
+    OMFIT class to read DIII-D fitweight file
+    """
+
+    def __init__(self, filename):
+        r"""
+        OMFIT class to parse DIII-D device files
+
+        :param filename: filename
+
+        :param \**kw: arguments passed to __init__ of OMFITascii
+        """
+        self.filename = filename
+
+    def load(self):
+        self.clear()
+
+        magpri67 = 29
+        magpri322 = 31
+        magprirdp = 8
+        magudom = 5
+        maglds = 3
+        nsilds = 3
+        nsilol = 41
+
+        with open(self.filename, 'r') as f:
+            data = f.read()
+
+        data = data.strip().split()
+
+        for i in data:
+            ifloat = float(i)
+            if ifloat > 100:
+                ishot = int(ifloat)
+                self[ifloat] = []
+            else:
+                self[ishot].append(ifloat)
+
+        for irshot in self:
+            if irshot < 124985:
+                mloop = nsilol
+            else:
+                mloop = nsilol + nsilds
+
+            if irshot < 59350:
+                mprobe = magpri67
+            elif irshot < 91000:
+                mprobe = magpri67 + magpri322
+            elif irshot < 100771:
+                mprobe = magpri67 + magpri322 + magprirdp
+            elif irshot < 124985:
+                mprobe = magpri67 + magpri322 + magprirdp + magudom
+            else:
+                mprobe = magpri67 + magpri322 + magprirdp + magudom + maglds
+            fwtmp2 = self[irshot][mloop : mloop + mprobe]
+            fwtsi = self[irshot][0:mloop]
+            self[irshot] = {}
+            self[irshot]['fwtmp2'] = fwtmp2
+            self[irshot]['fwtsi'] = fwtsi
+
+        return self
+
+class D3DCompfile(dict):
+    """
+    OMFIT class to read DIII-D compensation files such as btcomp.dat ccomp.dat and icomp.dat
+    """
+
+    def __init__(self, filename):
+        r"""
+        OMFIT class to parse DIII-D MHD device files
+
+        :param filename: filename
+
+        :param \**kw: arguments passed to __init__ of OMFITascii
+        """
+        self.filename=filename
+
+    def load(self):
+        self.clear()
+        with open(self.filename, 'r') as f:
+            lines = f.readlines()
+
+        for line in lines:
+            linesplit = line.split()
+
+            try:
+                compshot = int(eval(linesplit[0]))
+                self[compshot] = {}
+                for compsig in linesplit[1:]:
+                    self[compshot][compsig.strip("'")] = {}
+
+            except Exception:
+                sig = linesplit[0][1:].strip()
+                comps = [float(i) for i in linesplit[2:]]
+                for comp, compsig in zip(comps, self[compshot]):
+                    self[compshot][compsig][sig] = comp
+
+        return self
 
 def support_filenames(device, filename, pulse):
     topdir = os.sep.join([omas_dir, 'machine_mappings', 'support_files', device])
@@ -47,30 +147,60 @@ def get_support_file(object_type, filename):
 __MDS_gEQDSK_COCOS_identify_cache__ = {}
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree):
+def D3Dmagnetics_weights(pulse, name=None):
+    r"""
+    Load DIII-D tokamak magnetics equilibrium weights
+
+    :param pulse: pulse number
+
+    :param name: name of the type of weights to return
+
+    :return: dictionary with the requested weights or both if name=None
     """
-    Python function that queries MDS+ EFIT tree to figure
+
+    fitweight = get_support_file(D3DFitweight, support_filenames('d3d', 'fitweight', pulse))
+    if len(fitweight) == 0:
+        raise ValueError(f"Could not find d3d fitweight for shot {pulse}")
+    weight_ishot = -1
+    for ishot in fitweight:
+        if pulse > ishot and ishot > weight_ishot:
+            weight_ishot = ishot
+
+    if name is None:
+        return fitweight[weight_ishot]['fwtmp2'], fitweight[weight_ishot]['fwtsi']
+    elif name in fitweight[weight_ishot]:
+        return fitweight[weight_ishot][name]
+    else:
+        raise ValueError(f"{name} is part of the d3d fitweight")
+
+
+def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
+    """
+    Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
 
     :param machine: machine name
 
-    :param pulse: pulse
+    :param pulse: pulse number
 
-    :param EFIT_tree: MDS+ EFIT tree name
+    :param EFIT_tree: MDSplus EFIT tree name
+
+    :param EFIT_run_id:  with id extension for non-standard shot numbers. E.g. 19484401 for EFIT tree
 
     :return: integer cocos convention
     """
-    if (machine, pulse, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
-        return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)]
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+    if (machine, pulse_id, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
+        return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
-    res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+    res = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
     bt = res['bt']
     ip = res['ip']
     g_cocos = {(+1, +1): 1, (+1, -1): 3, (-1, +1): 5, (-1, -1): 7, (+1, 0): 1, (-1, 0): 3}
     sign_Bt = int(np.sign(bt))
     sign_Ip = int(np.sign(ip))
     cocosio = g_cocos.get((sign_Bt, sign_Ip), None)
-    __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse, EFIT_tree)] = cocosio
+    __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)] = cocosio
     return cocosio
 
 
@@ -84,7 +214,7 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
     :param pulse: pulse
 
-    :param EFIT_tree: MDS+ EFIT tree name
+    :param EFIT_tree: MDSplus EFIT tree name
 
     :return: integer cocos convention
     """
@@ -197,9 +327,9 @@ def fetch_assign(
 
     :param validity: location in `ods` where to set the validity flag
 
-    :param mds_server: MDS+ server to connect to
+    :param mds_server: MDSplus server to connect to
 
-    :param mds_tree: MDS+ tree from where to get the data
+    :param mds_tree: MDSplus tree from where to get the data
 
     :param tdi_expression: string with tdi_expression to use
 

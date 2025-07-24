@@ -218,4 +218,4 @@ def setup_gas_injection_hardware_description_east(ods, pulse):
 
 
 if __name__ == '__main__':
-    test_machine_mapping_functions(__all__, globals(), locals())
+    test_machine_mapping_functions("east", __all__, globals(), locals())
