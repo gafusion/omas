@@ -1,4 +1,9 @@
 {
+"dataset_description": {
+"data_entry": {
+"machine": "DIII-D"
+}
+},
 "magnetics": {
 "b_field_pol_probe": [
 {
@@ -1731,8 +1736,8 @@
 "z": 0.0382
 }
 },
-"identifier": "OH0_0",
-"name": "OH0_0",
+"identifier": "ECOILA_0",
+"name": "ECOILA_0",
 "turns_with_sign": 1.0
 },
 {
@@ -1745,8 +1750,8 @@
 "z": 0.1147
 }
 },
-"identifier": "OH0_1",
-"name": "OH0_1",
+"identifier": "ECOILA_1",
+"name": "ECOILA_1",
 "turns_with_sign": 1.0
 },
 {
@@ -1759,8 +1764,8 @@
 "z": 0.1912
 }
 },
-"identifier": "OH0_2",
-"name": "OH0_2",
+"identifier": "ECOILA_2",
+"name": "ECOILA_2",
 "turns_with_sign": 1.0
 },
 {
@@ -1773,8 +1778,8 @@
 "z": 0.2677
 }
 },
-"identifier": "OH0_3",
-"name": "OH0_3",
+"identifier": "ECOILA_3",
+"name": "ECOILA_3",
 "turns_with_sign": 1.0
 },
 {
@@ -1787,8 +1792,8 @@
 "z": 0.3442
 }
 },
-"identifier": "OH0_4",
-"name": "OH0_4",
+"identifier": "ECOILA_4",
+"name": "ECOILA_4",
 "turns_with_sign": 1.0
 },
 {
@@ -1801,8 +1806,8 @@
 "z": 0.4207
 }
 },
-"identifier": "OH0_5",
-"name": "OH0_5",
+"identifier": "ECOILA_5",
+"name": "ECOILA_5",
 "turns_with_sign": 1.0
 },
 {
@@ -1815,8 +1820,8 @@
 "z": 0.4972
 }
 },
-"identifier": "OH0_6",
-"name": "OH0_6",
+"identifier": "ECOILA_6",
+"name": "ECOILA_6",
 "turns_with_sign": 1.0
 },
 {
@@ -1829,8 +1834,8 @@
 "z": 0.5737
 }
 },
-"identifier": "OH0_7",
-"name": "OH0_7",
+"identifier": "ECOILA_7",
+"name": "ECOILA_7",
 "turns_with_sign": 1.0
 },
 {
@@ -1843,8 +1848,8 @@
 "z": 0.6502
 }
 },
-"identifier": "OH0_8",
-"name": "OH0_8",
+"identifier": "ECOILA_8",
+"name": "ECOILA_8",
 "turns_with_sign": 1.0
 },
 {
@@ -1857,8 +1862,8 @@
 "z": 0.7267
 }
 },
-"identifier": "OH0_9",
-"name": "OH0_9",
+"identifier": "ECOILA_9",
+"name": "ECOILA_9",
 "turns_with_sign": 1.0
 },
 {
@@ -1871,8 +1876,8 @@
 "z": 0.8032
 }
 },
-"identifier": "OH0_10",
-"name": "OH0_10",
+"identifier": "ECOILA_10",
+"name": "ECOILA_10",
 "turns_with_sign": 1.0
 },
 {
@@ -1885,8 +1890,8 @@
 "z": 0.8797
 }
 },
-"identifier": "OH0_11",
-"name": "OH0_11",
+"identifier": "ECOILA_11",
+"name": "ECOILA_11",
 "turns_with_sign": 1.0
 },
 {
@@ -1899,8 +1904,8 @@
 "z": 0.9562
 }
 },
-"identifier": "OH0_12",
-"name": "OH0_12",
+"identifier": "ECOILA_12",
+"name": "ECOILA_12",
 "turns_with_sign": 1.0
 },
 {
@@ -1913,8 +1918,8 @@
 "z": 1.0326
 }
 },
-"identifier": "OH0_13",
-"name": "OH0_13",
+"identifier": "ECOILA_13",
+"name": "ECOILA_13",
 "turns_with_sign": 1.0
 },
 {
@@ -1927,8 +1932,8 @@
 "z": 1.1091
 }
 },
-"identifier": "OH0_14",
-"name": "OH0_14",
+"identifier": "ECOILA_14",
+"name": "ECOILA_14",
 "turns_with_sign": 1.0
 },
 {
@@ -1941,8 +1946,8 @@
 "z": 1.1853
 }
 },
-"identifier": "OH0_15",
-"name": "OH0_15",
+"identifier": "ECOILA_15",
+"name": "ECOILA_15",
 "turns_with_sign": 1.0
 },
 {
@@ -1955,8 +1960,8 @@
 "z": 1.2615
 }
 },
-"identifier": "OH0_16",
-"name": "OH0_16",
+"identifier": "ECOILA_16",
+"name": "ECOILA_16",
 "turns_with_sign": 1.0
 },
 {
@@ -1969,8 +1974,8 @@
 "z": 1.3351
 }
 },
-"identifier": "OH0_17",
-"name": "OH0_17",
+"identifier": "ECOILA_17",
+"name": "ECOILA_17",
 "turns_with_sign": 1.0
 },
 {
@@ -1983,8 +1988,8 @@
 "z": 1.4095
 }
 },
-"identifier": "OH0_18",
-"name": "OH0_18",
+"identifier": "ECOILA_18",
+"name": "ECOILA_18",
 "turns_with_sign": 1.0
 },
 {
@@ -1997,8 +2002,8 @@
 "z": 1.4801
 }
 },
-"identifier": "OH0_19",
-"name": "OH0_19",
+"identifier": "ECOILA_19",
+"name": "ECOILA_19",
 "turns_with_sign": 1.0
 },
 {
@@ -2011,8 +2016,8 @@
 "z": 1.5482
 }
 },
-"identifier": "OH0_20",
-"name": "OH0_20",
+"identifier": "ECOILA_20",
+"name": "ECOILA_20",
 "turns_with_sign": 1.0
 },
 {
@@ -2025,8 +2030,8 @@
 "z": 1.6108
 }
 },
-"identifier": "OH0_21",
-"name": "OH0_21",
+"identifier": "ECOILA_21",
+"name": "ECOILA_21",
 "turns_with_sign": 1.0
 },
 {
@@ -2039,8 +2044,8 @@
 "z": 1.6684
 }
 },
-"identifier": "OH0_22",
-"name": "OH0_22",
+"identifier": "ECOILA_22",
+"name": "ECOILA_22",
 "turns_with_sign": 1.0
 },
 {
@@ -2053,8 +2058,8 @@
 "z": 1.7255
 }
 },
-"identifier": "OH0_23",
-"name": "OH0_23",
+"identifier": "ECOILA_23",
+"name": "ECOILA_23",
 "turns_with_sign": 1.0
 },
 {
@@ -2067,8 +2072,8 @@
 "z": -0.0382
 }
 },
-"identifier": "OH0_24",
-"name": "OH0_24",
+"identifier": "ECOILA_24",
+"name": "ECOILA_24",
 "turns_with_sign": 1.0
 },
 {
@@ -2081,8 +2086,8 @@
 "z": -0.1147
 }
 },
-"identifier": "OH0_25",
-"name": "OH0_25",
+"identifier": "ECOILA_25",
+"name": "ECOILA_25",
 "turns_with_sign": 1.0
 },
 {
@@ -2095,8 +2100,8 @@
 "z": -0.1912
 }
 },
-"identifier": "OH0_26",
-"name": "OH0_26",
+"identifier": "ECOILA_26",
+"name": "ECOILA_26",
 "turns_with_sign": 1.0
 },
 {
@@ -2109,8 +2114,8 @@
 "z": -0.2677
 }
 },
-"identifier": "OH0_27",
-"name": "OH0_27",
+"identifier": "ECOILA_27",
+"name": "ECOILA_27",
 "turns_with_sign": 1.0
 },
 {
@@ -2123,8 +2128,8 @@
 "z": -0.3442
 }
 },
-"identifier": "OH0_28",
-"name": "OH0_28",
+"identifier": "ECOILA_28",
+"name": "ECOILA_28",
 "turns_with_sign": 1.0
 },
 {
@@ -2137,8 +2142,8 @@
 "z": -0.4207
 }
 },
-"identifier": "OH0_29",
-"name": "OH0_29",
+"identifier": "ECOILA_29",
+"name": "ECOILA_29",
 "turns_with_sign": 1.0
 },
 {
@@ -2151,8 +2156,8 @@
 "z": -0.4972
 }
 },
-"identifier": "OH0_30",
-"name": "OH0_30",
+"identifier": "ECOILA_30",
+"name": "ECOILA_30",
 "turns_with_sign": 1.0
 },
 {
@@ -2165,8 +2170,8 @@
 "z": -0.5737
 }
 },
-"identifier": "OH0_31",
-"name": "OH0_31",
+"identifier": "ECOILA_31",
+"name": "ECOILA_31",
 "turns_with_sign": 1.0
 },
 {
@@ -2179,8 +2184,8 @@
 "z": -0.6502
 }
 },
-"identifier": "OH0_32",
-"name": "OH0_32",
+"identifier": "ECOILA_32",
+"name": "ECOILA_32",
 "turns_with_sign": 1.0
 },
 {
@@ -2193,8 +2198,8 @@
 "z": -0.7267
 }
 },
-"identifier": "OH0_33",
-"name": "OH0_33",
+"identifier": "ECOILA_33",
+"name": "ECOILA_33",
 "turns_with_sign": 1.0
 },
 {
@@ -2207,8 +2212,8 @@
 "z": -0.8032
 }
 },
-"identifier": "OH0_34",
-"name": "OH0_34",
+"identifier": "ECOILA_34",
+"name": "ECOILA_34",
 "turns_with_sign": 1.0
 },
 {
@@ -2221,8 +2226,8 @@
 "z": -0.8797
 }
 },
-"identifier": "OH0_35",
-"name": "OH0_35",
+"identifier": "ECOILA_35",
+"name": "ECOILA_35",
 "turns_with_sign": 1.0
 },
 {
@@ -2235,8 +2240,8 @@
 "z": -0.9562
 }
 },
-"identifier": "OH0_36",
-"name": "OH0_36",
+"identifier": "ECOILA_36",
+"name": "ECOILA_36",
 "turns_with_sign": 1.0
 },
 {
@@ -2249,8 +2254,8 @@
 "z": -1.0326
 }
 },
-"identifier": "OH0_37",
-"name": "OH0_37",
+"identifier": "ECOILA_37",
+"name": "ECOILA_37",
 "turns_with_sign": 1.0
 },
 {
@@ -2263,8 +2268,8 @@
 "z": -1.1091
 }
 },
-"identifier": "OH0_38",
-"name": "OH0_38",
+"identifier": "ECOILA_38",
+"name": "ECOILA_38",
 "turns_with_sign": 1.0
 },
 {
@@ -2277,8 +2282,8 @@
 "z": -1.1853
 }
 },
-"identifier": "OH0_39",
-"name": "OH0_39",
+"identifier": "ECOILA_39",
+"name": "ECOILA_39",
 "turns_with_sign": 1.0
 },
 {
@@ -2291,8 +2296,8 @@
 "z": -1.2615
 }
 },
-"identifier": "OH0_40",
-"name": "OH0_40",
+"identifier": "ECOILA_40",
+"name": "ECOILA_40",
 "turns_with_sign": 1.0
 },
 {
@@ -2305,8 +2310,8 @@
 "z": -1.3351
 }
 },
-"identifier": "OH0_41",
-"name": "OH0_41",
+"identifier": "ECOILA_41",
+"name": "ECOILA_41",
 "turns_with_sign": 1.0
 },
 {
@@ -2319,8 +2324,8 @@
 "z": -1.4095
 }
 },
-"identifier": "OH0_42",
-"name": "OH0_42",
+"identifier": "ECOILA_42",
+"name": "ECOILA_42",
 "turns_with_sign": 1.0
 },
 {
@@ -2333,8 +2338,8 @@
 "z": -1.4801
 }
 },
-"identifier": "OH0_43",
-"name": "OH0_43",
+"identifier": "ECOILA_43",
+"name": "ECOILA_43",
 "turns_with_sign": 1.0
 },
 {
@@ -2347,8 +2352,8 @@
 "z": -1.5482
 }
 },
-"identifier": "OH0_44",
-"name": "OH0_44",
+"identifier": "ECOILA_44",
+"name": "ECOILA_44",
 "turns_with_sign": 1.0
 },
 {
@@ -2361,8 +2366,8 @@
 "z": -1.6108
 }
 },
-"identifier": "OH0_45",
-"name": "OH0_45",
+"identifier": "ECOILA_45",
+"name": "ECOILA_45",
 "turns_with_sign": 1.0
 },
 {
@@ -2375,8 +2380,8 @@
 "z": -1.6684
 }
 },
-"identifier": "OH0_46",
-"name": "OH0_46",
+"identifier": "ECOILA_46",
+"name": "ECOILA_46",
 "turns_with_sign": 1.0
 },
 {
@@ -2389,13 +2394,13 @@
 "z": -1.7255
 }
 },
-"identifier": "OH0_47",
-"name": "OH0_47",
+"identifier": "ECOILA_47",
+"name": "ECOILA_47",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH0",
-"name": "OH0"
+"identifier": "ECOILA",
+"name": "ECOILA"
 },
 {
 "element": [
@@ -2409,8 +2414,8 @@
 "z": 0.0382
 }
 },
-"identifier": "OH1_0",
-"name": "OH1_0",
+"identifier": "ECOILB_0",
+"name": "ECOILB_0",
 "turns_with_sign": 1.0
 },
 {
@@ -2423,8 +2428,8 @@
 "z": 0.1147
 }
 },
-"identifier": "OH1_1",
-"name": "OH1_1",
+"identifier": "ECOILB_1",
+"name": "ECOILB_1",
 "turns_with_sign": 1.0
 },
 {
@@ -2437,8 +2442,8 @@
 "z": 0.1912
 }
 },
-"identifier": "OH1_2",
-"name": "OH1_2",
+"identifier": "ECOILB_2",
+"name": "ECOILB_2",
 "turns_with_sign": 1.0
 },
 {
@@ -2451,8 +2456,8 @@
 "z": 0.2677
 }
 },
-"identifier": "OH1_3",
-"name": "OH1_3",
+"identifier": "ECOILB_3",
+"name": "ECOILB_3",
 "turns_with_sign": 1.0
 },
 {
@@ -2465,8 +2470,8 @@
 "z": 0.3442
 }
 },
-"identifier": "OH1_4",
-"name": "OH1_4",
+"identifier": "ECOILB_4",
+"name": "ECOILB_4",
 "turns_with_sign": 1.0
 },
 {
@@ -2479,8 +2484,8 @@
 "z": 0.4207
 }
 },
-"identifier": "OH1_5",
-"name": "OH1_5",
+"identifier": "ECOILB_5",
+"name": "ECOILB_5",
 "turns_with_sign": 1.0
 },
 {
@@ -2493,8 +2498,8 @@
 "z": 0.4972
 }
 },
-"identifier": "OH1_6",
-"name": "OH1_6",
+"identifier": "ECOILB_6",
+"name": "ECOILB_6",
 "turns_with_sign": 1.0
 },
 {
@@ -2507,8 +2512,8 @@
 "z": 0.5737
 }
 },
-"identifier": "OH1_7",
-"name": "OH1_7",
+"identifier": "ECOILB_7",
+"name": "ECOILB_7",
 "turns_with_sign": 1.0
 },
 {
@@ -2521,8 +2526,8 @@
 "z": 0.6502
 }
 },
-"identifier": "OH1_8",
-"name": "OH1_8",
+"identifier": "ECOILB_8",
+"name": "ECOILB_8",
 "turns_with_sign": 1.0
 },
 {
@@ -2535,8 +2540,8 @@
 "z": 0.7267
 }
 },
-"identifier": "OH1_9",
-"name": "OH1_9",
+"identifier": "ECOILB_9",
+"name": "ECOILB_9",
 "turns_with_sign": 1.0
 },
 {
@@ -2549,8 +2554,8 @@
 "z": 0.8032
 }
 },
-"identifier": "OH1_10",
-"name": "OH1_10",
+"identifier": "ECOILB_10",
+"name": "ECOILB_10",
 "turns_with_sign": 1.0
 },
 {
@@ -2563,8 +2568,8 @@
 "z": 0.8797
 }
 },
-"identifier": "OH1_11",
-"name": "OH1_11",
+"identifier": "ECOILB_11",
+"name": "ECOILB_11",
 "turns_with_sign": 1.0
 },
 {
@@ -2577,8 +2582,8 @@
 "z": 0.9562
 }
 },
-"identifier": "OH1_12",
-"name": "OH1_12",
+"identifier": "ECOILB_12",
+"name": "ECOILB_12",
 "turns_with_sign": 1.0
 },
 {
@@ -2591,8 +2596,8 @@
 "z": 1.0326
 }
 },
-"identifier": "OH1_13",
-"name": "OH1_13",
+"identifier": "ECOILB_13",
+"name": "ECOILB_13",
 "turns_with_sign": 1.0
 },
 {
@@ -2605,8 +2610,8 @@
 "z": 1.1091
 }
 },
-"identifier": "OH1_14",
-"name": "OH1_14",
+"identifier": "ECOILB_14",
+"name": "ECOILB_14",
 "turns_with_sign": 1.0
 },
 {
@@ -2619,8 +2624,8 @@
 "z": 1.1853
 }
 },
-"identifier": "OH1_15",
-"name": "OH1_15",
+"identifier": "ECOILB_15",
+"name": "ECOILB_15",
 "turns_with_sign": 1.0
 },
 {
@@ -2633,8 +2638,8 @@
 "z": 1.2615
 }
 },
-"identifier": "OH1_16",
-"name": "OH1_16",
+"identifier": "ECOILB_16",
+"name": "ECOILB_16",
 "turns_with_sign": 1.0
 },
 {
@@ -2647,8 +2652,8 @@
 "z": 1.3351
 }
 },
-"identifier": "OH1_17",
-"name": "OH1_17",
+"identifier": "ECOILB_17",
+"name": "ECOILB_17",
 "turns_with_sign": 1.0
 },
 {
@@ -2661,8 +2666,8 @@
 "z": 1.4095
 }
 },
-"identifier": "OH1_18",
-"name": "OH1_18",
+"identifier": "ECOILB_18",
+"name": "ECOILB_18",
 "turns_with_sign": 1.0
 },
 {
@@ -2675,8 +2680,8 @@
 "z": 1.4801
 }
 },
-"identifier": "OH1_19",
-"name": "OH1_19",
+"identifier": "ECOILB_19",
+"name": "ECOILB_19",
 "turns_with_sign": 1.0
 },
 {
@@ -2689,8 +2694,8 @@
 "z": 1.5482
 }
 },
-"identifier": "OH1_20",
-"name": "OH1_20",
+"identifier": "ECOILB_20",
+"name": "ECOILB_20",
 "turns_with_sign": 1.0
 },
 {
@@ -2703,8 +2708,8 @@
 "z": 1.6108
 }
 },
-"identifier": "OH1_21",
-"name": "OH1_21",
+"identifier": "ECOILB_21",
+"name": "ECOILB_21",
 "turns_with_sign": 1.0
 },
 {
@@ -2717,8 +2722,8 @@
 "z": 1.6684
 }
 },
-"identifier": "OH1_22",
-"name": "OH1_22",
+"identifier": "ECOILB_22",
+"name": "ECOILB_22",
 "turns_with_sign": 1.0
 },
 {
@@ -2731,8 +2736,8 @@
 "z": 1.7255
 }
 },
-"identifier": "OH1_23",
-"name": "OH1_23",
+"identifier": "ECOILB_23",
+"name": "ECOILB_23",
 "turns_with_sign": 1.0
 },
 {
@@ -2745,8 +2750,8 @@
 "z": -0.0382
 }
 },
-"identifier": "OH1_24",
-"name": "OH1_24",
+"identifier": "ECOILB_24",
+"name": "ECOILB_24",
 "turns_with_sign": 1.0
 },
 {
@@ -2759,8 +2764,8 @@
 "z": -0.1147
 }
 },
-"identifier": "OH1_25",
-"name": "OH1_25",
+"identifier": "ECOILB_25",
+"name": "ECOILB_25",
 "turns_with_sign": 1.0
 },
 {
@@ -2773,8 +2778,8 @@
 "z": -0.1912
 }
 },
-"identifier": "OH1_26",
-"name": "OH1_26",
+"identifier": "ECOILB_26",
+"name": "ECOILB_26",
 "turns_with_sign": 1.0
 },
 {
@@ -2787,8 +2792,8 @@
 "z": -0.2677
 }
 },
-"identifier": "OH1_27",
-"name": "OH1_27",
+"identifier": "ECOILB_27",
+"name": "ECOILB_27",
 "turns_with_sign": 1.0
 },
 {
@@ -2801,8 +2806,8 @@
 "z": -0.3442
 }
 },
-"identifier": "OH1_28",
-"name": "OH1_28",
+"identifier": "ECOILB_28",
+"name": "ECOILB_28",
 "turns_with_sign": 1.0
 },
 {
@@ -2815,8 +2820,8 @@
 "z": -0.4207
 }
 },
-"identifier": "OH1_29",
-"name": "OH1_29",
+"identifier": "ECOILB_29",
+"name": "ECOILB_29",
 "turns_with_sign": 1.0
 },
 {
@@ -2829,8 +2834,8 @@
 "z": -0.4972
 }
 },
-"identifier": "OH1_30",
-"name": "OH1_30",
+"identifier": "ECOILB_30",
+"name": "ECOILB_30",
 "turns_with_sign": 1.0
 },
 {
@@ -2843,8 +2848,8 @@
 "z": -0.5737
 }
 },
-"identifier": "OH1_31",
-"name": "OH1_31",
+"identifier": "ECOILB_31",
+"name": "ECOILB_31",
 "turns_with_sign": 1.0
 },
 {
@@ -2857,8 +2862,8 @@
 "z": -0.6502
 }
 },
-"identifier": "OH1_32",
-"name": "OH1_32",
+"identifier": "ECOILB_32",
+"name": "ECOILB_32",
 "turns_with_sign": 1.0
 },
 {
@@ -2871,8 +2876,8 @@
 "z": -0.7267
 }
 },
-"identifier": "OH1_33",
-"name": "OH1_33",
+"identifier": "ECOILB_33",
+"name": "ECOILB_33",
 "turns_with_sign": 1.0
 },
 {
@@ -2885,8 +2890,8 @@
 "z": -0.8032
 }
 },
-"identifier": "OH1_34",
-"name": "OH1_34",
+"identifier": "ECOILB_34",
+"name": "ECOILB_34",
 "turns_with_sign": 1.0
 },
 {
@@ -2899,8 +2904,8 @@
 "z": -0.8797
 }
 },
-"identifier": "OH1_35",
-"name": "OH1_35",
+"identifier": "ECOILB_35",
+"name": "ECOILB_35",
 "turns_with_sign": 1.0
 },
 {
@@ -2913,8 +2918,8 @@
 "z": -0.9562
 }
 },
-"identifier": "OH1_36",
-"name": "OH1_36",
+"identifier": "ECOILB_36",
+"name": "ECOILB_36",
 "turns_with_sign": 1.0
 },
 {
@@ -2927,8 +2932,8 @@
 "z": -1.0326
 }
 },
-"identifier": "OH1_37",
-"name": "OH1_37",
+"identifier": "ECOILB_37",
+"name": "ECOILB_37",
 "turns_with_sign": 1.0
 },
 {
@@ -2941,8 +2946,8 @@
 "z": -1.1091
 }
 },
-"identifier": "OH1_38",
-"name": "OH1_38",
+"identifier": "ECOILB_38",
+"name": "ECOILB_38",
 "turns_with_sign": 1.0
 },
 {
@@ -2955,8 +2960,8 @@
 "z": -1.1853
 }
 },
-"identifier": "OH1_39",
-"name": "OH1_39",
+"identifier": "ECOILB_39",
+"name": "ECOILB_39",
 "turns_with_sign": 1.0
 },
 {
@@ -2969,8 +2974,8 @@
 "z": -1.2615
 }
 },
-"identifier": "OH1_40",
-"name": "OH1_40",
+"identifier": "ECOILB_40",
+"name": "ECOILB_40",
 "turns_with_sign": 1.0
 },
 {
@@ -2983,8 +2988,8 @@
 "z": -1.3351
 }
 },
-"identifier": "OH1_41",
-"name": "OH1_41",
+"identifier": "ECOILB_41",
+"name": "ECOILB_41",
 "turns_with_sign": 1.0
 },
 {
@@ -2997,8 +3002,8 @@
 "z": -1.4095
 }
 },
-"identifier": "OH1_42",
-"name": "OH1_42",
+"identifier": "ECOILB_42",
+"name": "ECOILB_42",
 "turns_with_sign": 1.0
 },
 {
@@ -3011,8 +3016,8 @@
 "z": -1.4801
 }
 },
-"identifier": "OH1_43",
-"name": "OH1_43",
+"identifier": "ECOILB_43",
+"name": "ECOILB_43",
 "turns_with_sign": 1.0
 },
 {
@@ -3025,8 +3030,8 @@
 "z": -1.5482
 }
 },
-"identifier": "OH1_44",
-"name": "OH1_44",
+"identifier": "ECOILB_44",
+"name": "ECOILB_44",
 "turns_with_sign": 1.0
 },
 {
@@ -3039,8 +3044,8 @@
 "z": -1.6108
 }
 },
-"identifier": "OH1_45",
-"name": "OH1_45",
+"identifier": "ECOILB_45",
+"name": "ECOILB_45",
 "turns_with_sign": 1.0
 },
 {
@@ -3053,8 +3058,8 @@
 "z": -1.6684
 }
 },
-"identifier": "OH1_46",
-"name": "OH1_46",
+"identifier": "ECOILB_46",
+"name": "ECOILB_46",
 "turns_with_sign": 1.0
 },
 {
@@ -3067,13 +3072,13 @@
 "z": -1.7255
 }
 },
-"identifier": "OH1_47",
-"name": "OH1_47",
+"identifier": "ECOILB_47",
+"name": "ECOILB_47",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH1",
-"name": "OH1"
+"identifier": "ECOILB",
+"name": "ECOILB"
 },
 {
 "element": [
@@ -3087,8 +3092,8 @@
 "z": 1.7123
 }
 },
-"identifier": "OH2_0",
-"name": "OH2_0",
+"identifier": "E567UP_0",
+"name": "E567UP_0",
 "turns_with_sign": 1.0
 },
 {
@@ -3101,8 +3106,8 @@
 "z": 1.7437
 }
 },
-"identifier": "OH2_1",
-"name": "OH2_1",
+"identifier": "E567UP_1",
+"name": "E567UP_1",
 "turns_with_sign": 1.0
 },
 {
@@ -3115,8 +3120,8 @@
 "z": 1.7751
 }
 },
-"identifier": "OH2_2",
-"name": "OH2_2",
+"identifier": "E567UP_2",
+"name": "E567UP_2",
 "turns_with_sign": 1.0
 },
 {
@@ -3129,8 +3134,8 @@
 "z": 1.8064
 }
 },
-"identifier": "OH2_3",
-"name": "OH2_3",
+"identifier": "E567UP_3",
+"name": "E567UP_3",
 "turns_with_sign": 1.0
 },
 {
@@ -3143,8 +3148,8 @@
 "z": 1.2286
 }
 },
-"identifier": "OH2_4",
-"name": "OH2_4",
+"identifier": "E567UP_4",
+"name": "E567UP_4",
 "turns_with_sign": 1.0
 },
 {
@@ -3157,13 +3162,13 @@
 "z": 0.5603
 }
 },
-"identifier": "OH2_5",
-"name": "OH2_5",
+"identifier": "E567UP_5",
+"name": "E567UP_5",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH2",
-"name": "OH2"
+"identifier": "E567UP",
+"name": "E567UP"
 },
 {
 "element": [
@@ -3177,8 +3182,8 @@
 "z": -1.7128
 }
 },
-"identifier": "OH3_0",
-"name": "OH3_0",
+"identifier": "E567DN_0",
+"name": "E567DN_0",
 "turns_with_sign": 1.0
 },
 {
@@ -3191,8 +3196,8 @@
 "z": -1.7441
 }
 },
-"identifier": "OH3_1",
-"name": "OH3_1",
+"identifier": "E567DN_1",
+"name": "E567DN_1",
 "turns_with_sign": 1.0
 },
 {
@@ -3205,8 +3210,8 @@
 "z": -1.7755
 }
 },
-"identifier": "OH3_2",
-"name": "OH3_2",
+"identifier": "E567DN_2",
+"name": "E567DN_2",
 "turns_with_sign": 1.0
 },
 {
@@ -3219,8 +3224,8 @@
 "z": -1.8069
 }
 },
-"identifier": "OH3_3",
-"name": "OH3_3",
+"identifier": "E567DN_3",
+"name": "E567DN_3",
 "turns_with_sign": 1.0
 },
 {
@@ -3233,8 +3238,8 @@
 "z": -1.2286
 }
 },
-"identifier": "OH3_4",
-"name": "OH3_4",
+"identifier": "E567DN_4",
+"name": "E567DN_4",
 "turns_with_sign": 1.0
 },
 {
@@ -3247,13 +3252,13 @@
 "z": -0.5603
 }
 },
-"identifier": "OH3_5",
-"name": "OH3_5",
+"identifier": "E567DN_5",
+"name": "E567DN_5",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH3",
-"name": "OH3"
+"identifier": "E567DN",
+"name": "E567DN"
 },
 {
 "element": [
@@ -3267,8 +3272,8 @@
 "z": -1.9454
 }
 },
-"identifier": "OH4_0",
-"name": "OH4_0",
+"identifier": "E89DN_0",
+"name": "E89DN_0",
 "turns_with_sign": 1.0
 },
 {
@@ -3281,8 +3286,8 @@
 "z": -1.9581
 }
 },
-"identifier": "OH4_1",
-"name": "OH4_1",
+"identifier": "E89DN_1",
+"name": "E89DN_1",
 "turns_with_sign": 1.0
 },
 {
@@ -3295,8 +3300,8 @@
 "z": -1.9851
 }
 },
-"identifier": "OH4_2",
-"name": "OH4_2",
+"identifier": "E89DN_2",
+"name": "E89DN_2",
 "turns_with_sign": 1.0
 },
 {
@@ -3309,8 +3314,8 @@
 "z": -1.9851
 }
 },
-"identifier": "OH4_3",
-"name": "OH4_3",
+"identifier": "E89DN_3",
+"name": "E89DN_3",
 "turns_with_sign": 1.0
 },
 {
@@ -3323,8 +3328,8 @@
 "z": -1.8735
 }
 },
-"identifier": "OH4_4",
-"name": "OH4_4",
+"identifier": "E89DN_4",
+"name": "E89DN_4",
 "turns_with_sign": 1.0
 },
 {
@@ -3337,8 +3342,8 @@
 "z": -1.9505
 }
 },
-"identifier": "OH4_5",
-"name": "OH4_5",
+"identifier": "E89DN_5",
+"name": "E89DN_5",
 "turns_with_sign": 1.0
 },
 {
@@ -3351,13 +3356,13 @@
 "z": -1.7477
 }
 },
-"identifier": "OH4_6",
-"name": "OH4_6",
+"identifier": "E89DN_6",
+"name": "E89DN_6",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH4",
-"name": "OH4"
+"identifier": "E89DN",
+"name": "E89DN"
 },
 {
 "element": [
@@ -3371,8 +3376,8 @@
 "z": 1.9458
 }
 },
-"identifier": "OH5_0",
-"name": "OH5_0",
+"identifier": "E89UP_0",
+"name": "E89UP_0",
 "turns_with_sign": 1.0
 },
 {
@@ -3385,8 +3390,8 @@
 "z": 1.9585
 }
 },
-"identifier": "OH5_1",
-"name": "OH5_1",
+"identifier": "E89UP_1",
+"name": "E89UP_1",
 "turns_with_sign": 1.0
 },
 {
@@ -3399,8 +3404,8 @@
 "z": 1.9855
 }
 },
-"identifier": "OH5_2",
-"name": "OH5_2",
+"identifier": "E89UP_2",
+"name": "E89UP_2",
 "turns_with_sign": 1.0
 },
 {
@@ -3413,8 +3418,8 @@
 "z": 1.9855
 }
 },
-"identifier": "OH5_3",
-"name": "OH5_3",
+"identifier": "E89UP_3",
+"name": "E89UP_3",
 "turns_with_sign": 1.0
 },
 {
@@ -3427,8 +3432,8 @@
 "z": 1.8745
 }
 },
-"identifier": "OH5_4",
-"name": "OH5_4",
+"identifier": "E89UP_4",
+"name": "E89UP_4",
 "turns_with_sign": 1.0
 },
 {
@@ -3441,8 +3446,8 @@
 "z": 1.9515
 }
 },
-"identifier": "OH5_5",
-"name": "OH5_5",
+"identifier": "E89UP_5",
+"name": "E89UP_5",
 "turns_with_sign": 1.0
 },
 {
@@ -3455,13 +3460,13 @@
 "z": 1.7479
 }
 },
-"identifier": "OH5_6",
-"name": "OH5_6",
+"identifier": "E89UP_6",
+"name": "E89UP_6",
 "turns_with_sign": 1.0
 }
 ],
-"identifier": "OH5",
-"name": "OH5"
+"identifier": "E89UP",
+"name": "E89UP"
 },
 {
 "element": [
@@ -3475,13 +3480,13 @@
 "z": 0.1683
 }
 },
-"identifier": "PF6_0",
-"name": "PF6_0",
+"identifier": "F1A_0",
+"name": "F1A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF6",
-"name": "PF6"
+"identifier": "F1A",
+"name": "F1A"
 },
 {
 "element": [
@@ -3495,13 +3500,13 @@
 "z": 0.5081
 }
 },
-"identifier": "PF7_0",
-"name": "PF7_0",
+"identifier": "F2A_0",
+"name": "F2A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF7",
-"name": "PF7"
+"identifier": "F2A",
+"name": "F2A"
 },
 {
 "element": [
@@ -3515,13 +3520,13 @@
 "z": 0.8491
 }
 },
-"identifier": "PF8_0",
-"name": "PF8_0",
+"identifier": "F3A_0",
+"name": "F3A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF8",
-"name": "PF8"
+"identifier": "F3A",
+"name": "F3A"
 },
 {
 "element": [
@@ -3535,13 +3540,13 @@
 "z": 1.1899
 }
 },
-"identifier": "PF9_0",
-"name": "PF9_0",
+"identifier": "F4A_0",
+"name": "F4A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF9",
-"name": "PF9"
+"identifier": "F4A",
+"name": "F4A"
 },
 {
 "element": [
@@ -3563,13 +3568,13 @@
 ]
 }
 },
-"identifier": "PF10_0",
-"name": "PF10_0",
+"identifier": "F5A_0",
+"name": "F5A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF10",
-"name": "PF10"
+"identifier": "F5A",
+"name": "F5A"
 },
 {
 "element": [
@@ -3591,13 +3596,13 @@
 ]
 }
 },
-"identifier": "PF11_0",
-"name": "PF11_0",
+"identifier": "F6A_0",
+"name": "F6A_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF11",
-"name": "PF11"
+"identifier": "F6A",
+"name": "F6A"
 },
 {
 "element": [
@@ -3619,13 +3624,13 @@
 ]
 }
 },
-"identifier": "PF12_0",
-"name": "PF12_0",
+"identifier": "F7A_0",
+"name": "F7A_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF12",
-"name": "PF12"
+"identifier": "F7A",
+"name": "F7A"
 },
 {
 "element": [
@@ -3639,13 +3644,13 @@
 "z": 1.6019
 }
 },
-"identifier": "PF13_0",
-"name": "PF13_0",
+"identifier": "F8A_0",
+"name": "F8A_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF13",
-"name": "PF13"
+"identifier": "F8A",
+"name": "F8A"
 },
 {
 "element": [
@@ -3659,13 +3664,13 @@
 "z": 1.5874
 }
 },
-"identifier": "PF14_0",
-"name": "PF14_0",
+"identifier": "F9A_0",
+"name": "F9A_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF14",
-"name": "PF14"
+"identifier": "F9A",
+"name": "F9A"
 },
 {
 "element": [
@@ -3679,13 +3684,13 @@
 "z": -0.1737
 }
 },
-"identifier": "PF15_0",
-"name": "PF15_0",
+"identifier": "F1B_0",
+"name": "F1B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF15",
-"name": "PF15"
+"identifier": "F1B",
+"name": "F1B"
 },
 {
 "element": [
@@ -3699,13 +3704,13 @@
 "z": -0.5135
 }
 },
-"identifier": "PF16_0",
-"name": "PF16_0",
+"identifier": "F2B_0",
+"name": "F2B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF16",
-"name": "PF16"
+"identifier": "F2B",
+"name": "F2B"
 },
 {
 "element": [
@@ -3719,13 +3724,13 @@
 "z": -0.8543
 }
 },
-"identifier": "PF17_0",
-"name": "PF17_0",
+"identifier": "F3B_0",
+"name": "F3B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF17",
-"name": "PF17"
+"identifier": "F3B",
+"name": "F3B"
 },
 {
 "element": [
@@ -3739,13 +3744,13 @@
 "z": -1.1957
 }
 },
-"identifier": "PF18_0",
-"name": "PF18_0",
+"identifier": "F4B_0",
+"name": "F4B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF18",
-"name": "PF18"
+"identifier": "F4B",
+"name": "F4B"
 },
 {
 "element": [
@@ -3767,13 +3772,13 @@
 ]
 }
 },
-"identifier": "PF19_0",
-"name": "PF19_0",
+"identifier": "F5B_0",
+"name": "F5B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF19",
-"name": "PF19"
+"identifier": "F5B",
+"name": "F5B"
 },
 {
 "element": [
@@ -3795,13 +3800,13 @@
 ]
 }
 },
-"identifier": "PF20_0",
-"name": "PF20_0",
+"identifier": "F6B_0",
+"name": "F6B_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF20",
-"name": "PF20"
+"identifier": "F6B",
+"name": "F6B"
 },
 {
 "element": [
@@ -3823,13 +3828,13 @@
 ]
 }
 },
-"identifier": "PF21_0",
-"name": "PF21_0",
+"identifier": "F7B_0",
+"name": "F7B_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF21",
-"name": "PF21"
+"identifier": "F7B",
+"name": "F7B"
 },
 {
 "element": [
@@ -3843,13 +3848,13 @@
 "z": -1.6027
 }
 },
-"identifier": "PF22_0",
-"name": "PF22_0",
+"identifier": "F8B_0",
+"name": "F8B_0",
 "turns_with_sign": 58.0
 }
 ],
-"identifier": "PF22",
-"name": "PF22"
+"identifier": "F8B",
+"name": "F8B"
 },
 {
 "element": [
@@ -3863,13 +3868,13 @@
 "z": -1.578
 }
 },
-"identifier": "PF23_0",
-"name": "PF23_0",
+"identifier": "F9B_0",
+"name": "F9B_0",
 "turns_with_sign": 55.0
 }
 ],
-"identifier": "PF23",
-"name": "PF23"
+"identifier": "F9B",
+"name": "F9B"
 }
 ]
 },
@@ -3887,12 +3892,12 @@
 "z": 0.212
 }
 },
-"identifier": "VS0_0",
-"name": "VS0_0",
+"identifier": "V-1A_0",
+"name": "V-1A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS0",
+"name": "V-1A",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -3908,12 +3913,12 @@
 "z": 0.636
 }
 },
-"identifier": "VS1_0",
-"name": "VS1_0",
+"identifier": "V-2A_0",
+"name": "V-2A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS1",
+"name": "V-2A",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -3929,12 +3934,12 @@
 "z": 1.0599
 }
 },
-"identifier": "VS2_0",
-"name": "VS2_0",
+"identifier": "V-3A_0",
+"name": "V-3A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS2",
+"name": "V-3A",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -3958,12 +3963,12 @@
 ]
 }
 },
-"identifier": "VS3_0",
-"name": "VS3_0",
+"identifier": "V-4A_0",
+"name": "V-4A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS3",
+"name": "V-4A",
 "resistance": 0.0036784,
 "resistivity": 0.023761517968162806
 },
@@ -3979,12 +3984,12 @@
 "z": 1.4422
 }
 },
-"identifier": "VS4_0",
-"name": "VS4_0",
+"identifier": "V-5A_0",
+"name": "V-5A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS4",
+"name": "V-5A",
 "resistance": 0.0037424,
 "resistivity": 0.029576151569996097
 },
@@ -4000,12 +4005,12 @@
 "z": 1.4422
 }
 },
-"identifier": "VS5_0",
-"name": "VS5_0",
+"identifier": "V-6A_0",
+"name": "V-6A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS5",
+"name": "V-6A",
 "resistance": 0.0046093,
 "resistivity": 0.044797007881077024
 },
@@ -4029,12 +4034,12 @@
 ]
 }
 },
-"identifier": "VS6_0",
-"name": "VS6_0",
+"identifier": "V-7A_0",
+"name": "V-7A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS6",
+"name": "V-7A",
 "resistance": 0.0048872,
 "resistivity": 0.05575810331493186
 },
@@ -4058,12 +4063,12 @@
 ]
 }
 },
-"identifier": "VS7_0",
-"name": "VS7_0",
+"identifier": "V-8A_0",
+"name": "V-8A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS7",
+"name": "V-8A",
 "resistance": 0.0055595,
 "resistivity": 0.07212978326015053
 },
@@ -4087,12 +4092,12 @@
 ]
 }
 },
-"identifier": "VS8_0",
-"name": "VS8_0",
+"identifier": "V-9A_0",
+"name": "V-9A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS8",
+"name": "V-9A",
 "resistance": 0.0058032,
 "resistivity": 0.08216113371012154
 },
@@ -4116,12 +4121,12 @@
 ]
 }
 },
-"identifier": "VS9_0",
-"name": "VS9_0",
+"identifier": "V-10A_0",
+"name": "V-10A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS9",
+"name": "V-10A",
 "resistance": 0.0061324,
 "resistivity": 0.09173847118006044
 },
@@ -4137,12 +4142,12 @@
 "z": 0.3538
 }
 },
-"identifier": "VS10_0",
-"name": "VS10_0",
+"identifier": "V-11A_0",
+"name": "V-11A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS10",
+"name": "V-11A",
 "resistance": 0.0055482,
 "resistivity": 0.08522662944981903
 },
@@ -4158,12 +4163,12 @@
 "z": 0.1442
 }
 },
-"identifier": "VS11_0",
-"name": "VS11_0",
+"identifier": "V-12A_0",
+"name": "V-12A_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS11",
+"name": "V-12A",
 "resistance": 0.00503212,
 "resistivity": 0.0772990567367837
 },
@@ -4179,12 +4184,12 @@
 "z": -0.212
 }
 },
-"identifier": "VS12_0",
-"name": "VS12_0",
+"identifier": "V-1B_0",
+"name": "V-1B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS12",
+"name": "V-1B",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -4200,12 +4205,12 @@
 "z": -0.636
 }
 },
-"identifier": "VS13_0",
-"name": "VS13_0",
+"identifier": "V-2B_0",
+"name": "V-2B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS13",
+"name": "V-2B",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -4221,12 +4226,12 @@
 "z": -1.0599
 }
 },
-"identifier": "VS14_0",
-"name": "VS14_0",
+"identifier": "V-3B_0",
+"name": "V-3B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS14",
+"name": "V-3B",
 "resistance": 0.0019209,
 "resistivity": 0.011381416529137274
 },
@@ -4250,12 +4255,12 @@
 ]
 }
 },
-"identifier": "VS15_0",
-"name": "VS15_0",
+"identifier": "V-4B_0",
+"name": "V-4B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS15",
+"name": "V-4B",
 "resistance": 0.0036784,
 "resistivity": 0.023761517968162806
 },
@@ -4271,12 +4276,12 @@
 "z": -1.4422
 }
 },
-"identifier": "VS16_0",
-"name": "VS16_0",
+"identifier": "V-5B_0",
+"name": "V-5B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS16",
+"name": "V-5B",
 "resistance": 0.0030229,
 "resistivity": 0.024642090178345934
 },
@@ -4292,12 +4297,12 @@
 "z": -1.4422
 }
 },
-"identifier": "VS17_0",
-"name": "VS17_0",
+"identifier": "V-6B_0",
+"name": "V-6B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS17",
+"name": "V-6B",
 "resistance": 0.0038912,
 "resistivity": 0.0407200271263835
 },
@@ -4321,12 +4326,12 @@
 ]
 }
 },
-"identifier": "VS18_0",
-"name": "VS18_0",
+"identifier": "V-7B_0",
+"name": "V-7B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS18",
+"name": "V-7B",
 "resistance": 0.0063351,
 "resistivity": 0.07700599316556261
 },
@@ -4350,12 +4355,12 @@
 ]
 }
 },
-"identifier": "VS19_0",
-"name": "VS19_0",
+"identifier": "V-8B_0",
+"name": "V-8B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS19",
+"name": "V-8B",
 "resistance": 0.0068921,
 "resistivity": 0.09113398659333634
 },
@@ -4379,12 +4384,12 @@
 ]
 }
 },
-"identifier": "VS20_0",
-"name": "VS20_0",
+"identifier": "V-9B_0",
+"name": "V-9B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS20",
+"name": "V-9B",
 "resistance": 0.0058032,
 "resistivity": 0.08216113371012154
 },
@@ -4408,12 +4413,12 @@
 ]
 }
 },
-"identifier": "VS21_0",
-"name": "VS21_0",
+"identifier": "V-10B_0",
+"name": "V-10B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS21",
+"name": "V-10B",
 "resistance": 0.0061324,
 "resistivity": 0.09173847118006044
 },
@@ -4429,12 +4434,12 @@
 "z": -0.3538
 }
 },
-"identifier": "VS22_0",
-"name": "VS22_0",
+"identifier": "V-11B_0",
+"name": "V-11B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS22",
+"name": "V-11B",
 "resistance": 0.0055482,
 "resistivity": 0.08522662944981903
 },
@@ -4450,12 +4455,12 @@
 "z": -0.1442
 }
 },
-"identifier": "VS23_0",
-"name": "VS23_0",
+"identifier": "V-12B_0",
+"name": "V-12B_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS23",
+"name": "V-12B",
 "resistance": 0.00503212,
 "resistivity": 0.0772990567367837
 },
@@ -4471,12 +4476,12 @@
 "z": -1.321
 }
 },
-"identifier": "VS24_0",
-"name": "VS24_0",
+"identifier": "ADP_0",
+"name": "ADP_0",
 "turns_with_sign": 1.0
 }
 ],
-"name": "VS24",
+"name": "ADP",
 "resistance": 0.0090705,
 "resistivity": 0.09893747372274896
 }
