@@ -524,8 +524,8 @@ def ec_launcher_active_hardware(ods, pulse):
         return
 
     # we use last time of EFIT01 to trim data
-    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = provider.raw('EFIT01', pulse, query)['ip_time'][-1]
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME'}
+    last_time = provider.raw('EFIT01', pulse, query)['ip_time'][-1]/1000.
 
     # Second query the used systems to resolve the gyrotron names
     query = {}
@@ -657,8 +657,8 @@ def nbi_active_hardware(ods, pulse):
     data = provider.raw('NB', pulse, query)
 
     # we use last time of EFIT01 to trim data
-    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = provider.raw('EFIT01', pulse, query)['ip_time'][-1]
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME'}
+    last_time = provider.raw('EFIT01', pulse, query)['ip_time'][-1]/1000.
 
     trim_start = 0
     trim_end = 0
@@ -1244,10 +1244,10 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)"
                 for pos in ['FZ', 'ZEFF']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)"
 
     # fetch
     data = provider.raw('IONS', pulse, TDIs)
@@ -1265,7 +1265,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
                 chpos = ch['position'][pos.lower().split('_')[-1]]
-                chpos['time'] = postime
+                chpos['time'] = postime / 1000.0
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
             if _measurements:
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
@@ -1275,13 +1275,13 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
                     ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'], data[f'{sub}_{channel}_ROT_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
-                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']/1000.0
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
-                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
+                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time'] / 1000.0
                     ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
     return ods
 
@@ -1422,7 +1422,7 @@ def magnetics_probes_data(ods, pulse):
                 continue
             provider = ods.get_mds_provider('d3d')
             compsig_data = provider.data(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]")
-            compsig_time = provider.dim_of(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]", 0) / 1000
+            compsig_time = provider.dim_of(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]", 0) / 1000.0
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if (
                     'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
@@ -1441,7 +1441,6 @@ def magnetics_probes_data(ods, pulse):
 
     provider = ods.get_mds_provider('d3d')
     data = provider.raw(None, pulse, TDIs)
-    data = mdsvalue('d3d', None, pulse, TDIs).raw()
     weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
 
     for k in ods1['magnetics.b_field_pol_probe']:
@@ -1475,7 +1474,7 @@ def ip_bt_dflux_data(ods, pulse):
         TDIs = {}
         for key, val in mappings.items():
             TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
-            TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
+            TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)'
             TDIs[key + '.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
 
         provider = ods.get_mds_provider('d3d')
@@ -1484,6 +1483,8 @@ def ip_bt_dflux_data(ods, pulse):
             if 'data_error_upper' in key:
                 nt = len(ods[key[:-12]])
                 ods[key] = abs(data[key][3] * data[key][4]) * np.ones(nt) * 10.0
+            elif 'time' in key:
+                ods[key] = data[key] / 1000.0
             else:
                 ods[key] = data[key]
 
@@ -1729,16 +1730,18 @@ def summary(ods, pulse):
     with omas_environment(ods):
 
         # prad_tot
+        provider = ods.get_mds_provider('d3d')
         try: # eg for 133221
-            prad_tot = mdsvalue('d3d', "BOLOM", pulse, "\\BOLOM::PRAD_TOT")
-            ods['summary.time'] = prad_tot.dim_of(0)/1000.0
-            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -prad_tot.data()
+            prad_tot_data = provider.data("BOLOM", pulse, "\\BOLOM::PRAD_TOT")
+            prad_tot_time = provider.dim_of("BOLOM", pulse, "\\BOLOM::PRAD_TOT", 0)
+            ods['summary.time'] = prad_tot_time/1000.0
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -prad_tot_data
         except Exception:
             TDIs = {} # eg for 194306
             TDIs["prad_tot.data"] = f"ptdata2(\"prad_tot\",{pulse})"
-            TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
-            data = mdsvalue('d3d', None, pulse, TDIs).raw()
-            ods['summary.time'] = data["prad_tot.time"]
+            TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)"
+            data = provider.raw(None, pulse, TDIs)
+            ods['summary.time'] = data["prad_tot.time"] / 1000.0
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':

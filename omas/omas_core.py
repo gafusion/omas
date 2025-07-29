@@ -23,7 +23,7 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
-    'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
+    'machine_mapping_function', 'test_machine_mapping_functions',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit', 'OmasDynamicException'

@@ -353,6 +353,111 @@ def convergence_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     return ods
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
+def pressure_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
+    """
+    Load pressure measurements that require ensure_2d transformation
+    
+    Replaces py2tdi(ensure_2d, -...) expressions for TokSearch compatibility
+    """
+    printd(f'Loading pressure measurements from {EFIT_tree}...', topic='machine')
+    
+    provider = ods.get_mds_provider('d3d')
+    pulse_id = get_pulse_id(pulse, EFIT_run_id)
+    
+    # Get pressure measurement data  
+    TDIs = {
+        'pressr': f'\\{EFIT_tree}::TOP.MEASUREMENTS.PRESSR',
+        'sigpre': f'\\{EFIT_tree}::TOP.MEASUREMENTS.SIGPRE',
+        'fwtpre': f'\\{EFIT_tree}::TOP.MEASUREMENTS.FWTPRE', 
+        'cpress': f'\\{EFIT_tree}::TOP.MEASUREMENTS.CPRESS',
+        'saipre': f'\\{EFIT_tree}::TOP.MEASUREMENTS.SAIPRE'
+    }
+    
+    efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
+    
+    # Apply ensure_2d transformation: ensure array has at least 2 dimensions
+    # Note: negative sign applied as per TDI expressions
+    measured = -efit_data['pressr']
+    measured_error = -efit_data['sigpre']
+    weight = -efit_data['fwtpre']
+    reconstructed = -efit_data['cpress']
+    chi_squared = -efit_data['saipre']
+    
+    # Ensure 2D: if 1D, add singleton dimension
+    for data in [measured, measured_error, weight, reconstructed, chi_squared]:
+        if len(data.shape) == 1:
+            data = data[:, np.newaxis]
+    
+    # Set pressure constraint data
+    n_times = measured.shape[0] if len(measured.shape) > 1 else 1
+    n_pressure = measured.shape[1] if len(measured.shape) > 1 else len(measured)
+    
+    with omas_environment(ods, cocosio=MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)):
+        for i in range(n_times):
+            time_slice = ods['equilibrium']['time_slice'][i]
+            
+            # Set data for all pressure measurements
+            for j in range(n_pressure):
+                if len(measured.shape) > 1:
+                    time_slice['constraints']['pressure'][j]['measured'] = measured[i, j]
+                    time_slice['constraints']['pressure'][j]['measured_error_upper'] = measured_error[i, j] 
+                    time_slice['constraints']['pressure'][j]['weight'] = weight[i, j]
+                    time_slice['constraints']['pressure'][j]['reconstructed'] = reconstructed[i, j]
+                    time_slice['constraints']['pressure'][j]['chi_squared'] = chi_squared[i, j]
+                else:
+                    time_slice['constraints']['pressure'][j]['measured'] = measured[j]
+                    time_slice['constraints']['pressure'][j]['measured_error_upper'] = measured_error[j]
+                    time_slice['constraints']['pressure'][j]['weight'] = weight[j]
+                    time_slice['constraints']['pressure'][j]['reconstructed'] = reconstructed[j]
+                    time_slice['constraints']['pressure'][j]['chi_squared'] = chi_squared[j]
+    return ods
+
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
+def jtor_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
+    """
+    Load j_tor measurements that require convert_from_mega_2d transformation
+    
+    Replaces py2tdi(convert_from_mega_2d, -...) expressions for TokSearch compatibility
+    """
+    printd(f'Loading j_tor measurements from {EFIT_tree}...', topic='machine')
+    
+    provider = ods.get_mds_provider('d3d')
+    pulse_id = get_pulse_id(pulse, EFIT_run_id)
+    
+    # Get j_tor measurement data
+    TDIs = {
+        'vzeroj': f'\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ'
+    }
+    
+    efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
+    
+    # Apply convert_from_mega_2d transformation: divide by 1e6 and ensure 2D
+    # Note: negative sign applied as per TDI expression
+    measured = -efit_data['vzeroj'] / 1e6
+    
+    # Ensure 2D: if 1D, add singleton dimension  
+    if len(measured.shape) == 1:
+        measured = measured[:, np.newaxis]
+    
+    # Set j_tor constraint data
+    n_times = measured.shape[0] if len(measured.shape) > 1 else 1
+    n_jtor = measured.shape[1] if len(measured.shape) > 1 else len(measured)
+    
+    with omas_environment(ods, cocosio=MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)):
+        for i in range(n_times):
+            time_slice = ods['equilibrium']['time_slice'][i]
+            
+            # Set data for all j_tor measurements
+            for j in range(n_jtor):
+                if len(measured.shape) > 1:
+                    time_slice['constraints']['j_tor'][j]['measured'] = measured[i, j]
+                else:
+                    time_slice['constraints']['j_tor'][j]['measured'] = measured[j]
+    return ods
+
+# ================================
 # Add test function call
 if __name__ == '__main__':
     # Test with d3d pulse

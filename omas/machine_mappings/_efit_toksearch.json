@@ -85,8 +85,26 @@
   "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
 
+ "equilibrium.time_slice.:.constraints.pressure.:.measured": {
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.weight": {
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
   "PYTHON": "efit.psi_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
+  "PYTHON": "efit.jtor_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
   "PYTHON": "efit.psi_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"

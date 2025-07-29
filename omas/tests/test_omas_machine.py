@@ -106,21 +106,12 @@ class TestOmasMachine(UnittestCaseOmas):
             compare_backends = False
 
         
-        if not compare_backends:
-            skip_omfit_mappings = False
-            try:
-                from omfit_classes.omfit_omas_d3d import OMFITd3dcompfile
-            except ImportError:
-                skip_omfit_mappings = True
-        else:
-            skip_omfit_mappings = True
         
         # Test basic functionality with mdsplus only
         test_machine_mappings(
             self.machine, 
             self.pulse, 
             compare_backends=compare_backends,
-            skip_omfit_mappings=skip_omfit_mappings,
             options=self.options,
             fail_fast=True  # For debugging individual failures
         )

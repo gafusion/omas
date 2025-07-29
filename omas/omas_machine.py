@@ -749,7 +749,7 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
             os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
 
 
-def test_machine_mappings(machine, pulse, compare_backends=False, options=None, fail_fast=False):
+def test_machine_mappings(machine, pulse, compare_backends=False, options=None, fail_fast=False, checkpoint_filename=None):
     """
     Test all JSON mappings for a machine with both backends (mdsplus vs toksearch)
     
@@ -761,37 +761,169 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
     :param compare_backends: if True, compare mdsplus vs toksearch results
     :param options: options dictionary to pass to machine_to_omas
     :param fail_fast: if True, raise error immediately on first failure (for debugging)
+    :param checkpoint_filename: path to YAML checkpoint file for resuming tests (default: None, disables checkpointing)
     """
     from pprint import pprint
     import numpy
+    import yaml
+    import tempfile
+    import shutil
+    from datetime import datetime
     
     old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
     os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
     
+    # Set up checkpointing (only if explicitly requested)
+    checkpoint_enabled = checkpoint_filename is not None
+    
+    def load_checkpoint():
+        """Load existing checkpoint file or create new one (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return {'tested_locations': {}}
+            
+        try:
+            with open(checkpoint_filename, 'r') as f:
+                checkpoint = yaml.safe_load(f) or {}
+        except (FileNotFoundError, yaml.YAMLError):
+            checkpoint = {}
+        
+        # Initialize checkpoint structure
+        if 'test_config' not in checkpoint:
+            checkpoint['test_config'] = {
+                'machine': machine,
+                'pulse': pulse,
+                'compare_backends': compare_backends,
+                'timestamp': datetime.now().isoformat()
+            }
+        if 'tested_locations' not in checkpoint:
+            checkpoint['tested_locations'] = {}
+        
+        return checkpoint
+    
+    def save_checkpoint(checkpoint):
+        """Atomically save checkpoint to prevent corruption (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+            
+        try:
+            # Write to temporary file first
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as temp_f:
+                yaml.dump(checkpoint, temp_f, default_flow_style=False, sort_keys=True)
+                temp_filename = temp_f.name
+            
+            # Atomically move temp file to final location
+            shutil.move(temp_filename, checkpoint_filename)
+        except Exception as e:
+            print(f"Warning: Could not save checkpoint: {e}")
+    
+    def mark_location_testing(checkpoint, location, backend, status='testing'):
+        """Mark a location as currently being tested (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+        if location not in checkpoint["tested_locations"]:
+            checkpoint['tested_locations'][location] = {}
+
+        checkpoint['tested_locations'][location][backend] = {
+            'status': status,
+            'timestamp': datetime.now().isoformat()
+        }
+        save_checkpoint(checkpoint)
+    
+    def mark_location_result(checkpoint, location, backend, status, error_msg=None, detailed_report=None, side_effects=None):
+        """Mark final test result for a location (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+        if location not in checkpoint["tested_locations"]:
+            checkpoint['tested_locations'][location] = {}
+        result = {
+            'status': status,
+            'timestamp': datetime.now().isoformat()
+        }
+        if error_msg:
+            result['error'] = error_msg[:200]  # Truncate long errors
+        if detailed_report:
+            result['detailed_report'] = detailed_report
+        if side_effects:
+            result['side_effects'] = side_effects
+        checkpoint['tested_locations'][location][backend] = result
+        save_checkpoint(checkpoint)
+    
+    def should_skip_location(checkpoint, location):
+        """Check if location was already successfully tested (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return False
+            
+        loc_data = checkpoint['tested_locations'].get(location, {})
+        return loc_data.get('status') == 'success'
+    
+    # Load existing checkpoint (or empty structure if disabled)
+    checkpoint = load_checkpoint()
+    
     print(f'Testing JSON mappings for {machine} machine (pulse {pulse})')
+    if checkpoint_enabled:
+        print(f'Checkpoint file: {checkpoint_filename}')
+    else:
+        print('Checkpointing disabled (no checkpoint file provided)')
     
     def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options, ods=None):
         """Helper to load a single mapping with specified backend"""
         if ods is None:
             ods = ODS(mds_backend=backend)
+        
+        # Capture ODS keys before data fetch (for side effects tracking)
+        keys_before = set([tuple(k) for k in ods.paths()])
+        
+        # Initialize detailed report and side effects
+        detailed_report = None
+        side_effects = None
             
         if fail_fast:
             # Don't catch exceptions in fail_fast mode - let debugger stop at original error
             ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
-            return ods, data_info, None
+            
+            # Capture side effects and detailed report after successful fetch
+            keys_after = set([tuple(k) for k in ods.paths()])
+            side_effects = list(sorted(keys_after - keys_before - set(location)))
+            
+            # Get detailed report from provider's last_status if available
+            provider = ods.get_mds_provider(machine)
+            if hasattr(provider, 'last_status'):
+                detailed_report = provider.last_status
+            
+            return ods, data_info, None, detailed_report, side_effects
         else:
             # Catch exceptions for summary reporting
             try:
                 ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
-                return ods, data_info, None
+                
+                # Capture side effects and detailed report after successful fetch
+                keys_after = set([tuple(k) for k in ods.paths()])
+                side_effects = list(sorted(keys_after - keys_before - set(location)))
+                
+                # Get detailed report from provider's last_status if available
+                provider = ods.get_mds_provider(machine)
+                if hasattr(provider, 'last_status'):
+                    detailed_report = provider.last_status
+                
+                return ods, data_info, None, detailed_report, side_effects
             except Exception as e:
-                return ods, None, e
+                # Even on failure, capture what we can
+                keys_after = set([tuple(k) for k in ods.paths()])
+                side_effects = list(sorted(keys_after - keys_before - set(location)))
+                
+                # Try to get detailed report even on failure
+                try:
+                    provider = ods.get_mds_provider(machine)
+                    if hasattr(provider, 'last_status'):
+                        detailed_report = provider.last_status
+                except:
+                    detailed_report = None
+                
+                return ods, None, e, detailed_report, side_effects
     
     try:
         # Load all mappings for the machine
         mappings_mds = machine_mappings(machine, '', mds_backend='mdsplus') 
-        if compare_backends:
-            mappings_toks = machine_mappings(machine, '', mds_backend='toksearch')
         
         # Get all mapping locations (exclude internal keys)
         all_locations = [loc for loc in mappings_mds.keys() 
@@ -837,10 +969,20 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
             persistent_ods_toks = ODS(mds_backend='toksearch') if compare_backends else None
             
             for location in locations:
+                # Check if location was already successfully tested
+                if should_skip_location(checkpoint, location):
+                    print(f'\n--- Skipping: {location} (already tested successfully) ---')
+                    successful_tests += 1
+                    skipped_tests += 1
+                    continue
+                
                 print(f'\n--- Testing: {location} ---')
                 
+                # Mark location as being tested (checkpoint before test for fail_fast safety)
+                mark_location_testing(checkpoint, location, 'mdsplus', f'testing')
+                
                 # Test with mdsplus backend using persistent ODS
-                persistent_ods_mds, data_mds, error_mds = _load_mapping_with_backend(
+                persistent_ods_mds, data_mds, error_mds, detailed_report_mds, side_effects_mds = _load_mapping_with_backend(
                     machine, pulse, location, 'mdsplus', ods=persistent_ods_mds
                 )
                 
@@ -849,13 +991,16 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                     print(f'  ❌ MDSplus failed: {error_msg}...')
                     failed_tests += 1
                     mdsplus_failures.append((location, error_msg))
+                    mark_location_result(checkpoint, location, 'mdsplus', 'failed', error_msg, detailed_report_mds, side_effects_mds)
                     continue
                     
                 print(f'  ✅ MDSplus loaded successfully')
+                mark_location_result(checkpoint, location, 'mdsplus', 'success', None, detailed_report_mds, side_effects_mds)
                 
                 # Test with toksearch backend if requested
                 if compare_backends:
-                    persistent_ods_toks, data_toks, error_toks = _load_mapping_with_backend(
+                    mark_location_testing(checkpoint, location, 'toksearch', f'testing')
+                    persistent_ods_toks, data_toks, error_toks, detailed_report_toks, side_effects_toks = _load_mapping_with_backend(
                         machine, pulse, location, 'toksearch', ods=persistent_ods_toks
                     )
                     
@@ -864,8 +1009,10 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                         print(f'  ❌ TokSearch failed: {error_msg}...')
                         failed_tests += 1
                         toksearch_failures.append((location, error_msg))
+                        mark_location_result(checkpoint, location, 'toksearch', 'failed', error_msg, detailed_report_toks, side_effects_toks)
                         continue
-                        
+                    
+                    mark_location_result(checkpoint, location, 'toksearch', 'success', None, detailed_report_toks, side_effects_toks)
                     print(f'  ✅ TokSearch loaded successfully')
                     
                     # Compare results between backends
@@ -883,6 +1030,7 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                                 print(f'  ⚠️  Data differs between backends') 
                                 raise AssertionError(f'Backend comparison failed for {location}: Scalar data mismatch: {mds_data} vs {toks_data}')
                         print(f'  ✅ Data matches between backends')
+                        mark_location_result(checkpoint, location, 'comparison', 'match')
                     else:
                         # Catch exceptions for summary reporting
                         try:
@@ -896,19 +1044,26 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                                         print(f'  ⚠️  Data differs between backends')
                                         failed_tests += 1
                                         comparison_failures.append((location, 'Array data mismatch'))
+                                        mark_location_result(checkpoint, location, "comparison", 'failed', 'Array data mismatch')
                                         continue
                                 elif mds_data != toks_data:
                                     print(f'  ⚠️  Data differs between backends') 
                                     failed_tests += 1
                                     comparison_failures.append((location, f'Scalar data mismatch: {mds_data} vs {toks_data}'))
+                                    mark_location_result(checkpoint, location, 'comparison', 'failed', f'Scalar data mismatch: {mds_data} vs {toks_data}')
                                     continue
-                                    
+                            mark_location_result(checkpoint, location, 'comparison', 'match')        
                             print(f'  ✅ Data matches between backends')
                         except Exception as e:
                             error_msg = str(e)[:50]
                             print(f'  ⚠️  Could not compare data: {error_msg}...')
                             comparison_failures.append((location, f'Comparison error: {error_msg}'))
+                            mark_location_result(checkpoint, location, 'comparison', 'failed', f'Comparison error: {error_msg}')
+                else:
+                    # Single backend mode - just MDSplus success
+                    pass
                         
+                # Mark successful test
                 successful_tests += 1
             
         print(f'\n=== SUMMARY ===')
@@ -916,6 +1071,8 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
         print(f'❌ Failed: {failed_tests}') 
         print(f'⚠️  Skipped: {skipped_tests}')
         print(f'📊 Total: {len(all_locations)}')
+        if checkpoint_enabled:
+            print(f'💾 Checkpoint: {checkpoint_filename}')
         
         # Detailed failure reporting
         if mdsplus_failures:
@@ -952,8 +1109,8 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
         
         # Raise error if any tests failed
         if failed_tests > 0:
-            raise AssertionError(f'Machine mapping tests failed: {failed_tests} out of {len(all_locations)} tests failed')
         
+            raise AssertionError(f'Machine mapping tests failed: {failed_tests} out of {len(all_locations)} tests failed')
     finally:
         if old_OMAS_DEBUG_TOPIC is None:
             del os.environ['OMAS_DEBUG_TOPIC']
@@ -1049,7 +1206,7 @@ def load_omas_machine(
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
-    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings, mds_backend=self.mds_backend) if not location.startswith('__')]:
+    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings, mds_backend=ods.mds_backend) if not location.startswith('__')]:
         if location.endswith(':'):
             continue
         print(location)

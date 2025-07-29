@@ -1,12 +1,11 @@
 import json
 import os
 from omas.omas_utils import printd
+import time
 
 __all__ = [
-    'mdstree',
-    'mdsvalue',
-    'mds_provider',
-    'toksearch_provider', 
+    'MdsProvider',
+    'ToksearchProvider', 
     'BaseProvider',
     'get_pulse_id',
     'get_mds_backend',
@@ -17,6 +16,11 @@ __all__ = [
 
 # Global variable to store the default backend
 _default_mds_backend = 'mdsplus'
+
+class TDIFailedException(Exception):
+    def set_entry_status(self, status):
+        # A dictionary of TDIs that could not be fulfilled
+        self.status = status
 
 def get_mds_backend():
     """
@@ -54,9 +58,9 @@ def create_mds_provider(server, backend=None, **kwargs):
         backend = _default_mds_backend
     
     if backend == 'mdsplus':
-        return mds_provider(server, **kwargs)
+        return MdsProvider(server, **kwargs)
     elif backend == 'toksearch':
-        return toksearch_provider(server, **kwargs)
+        return ToksearchProvider(server, **kwargs)
     else:
         raise ValueError(f"Unknown backend: {backend}")
 
@@ -142,8 +146,9 @@ class BaseProvider:
     Provider is instantiated once per server and reused for multiple signal fetches
     """
 
-    def __init__(self, server, **kwargs):
+    def __init__(self, server, allow_failures=False, **kwargs):
         self.server = server
+        self.allow_failures = allow_failures
         self._init_server_connection(**kwargs)
 
     def _init_server_connection(self, **kwargs):
@@ -219,216 +224,27 @@ class BaseProvider:
                 current[path_parts[-1]]['TDI'] = path
         # Return only the elements of the requested tree
         return tree[treename]
-
-
-class mdsvalue(dict):
-    """
-    Execute MDSplus TDI functions
-    """
-
-    def __init__(self, server, treename, pulse, TDI, **kwargs):
-        super().__init__()
-        self.treename = treename
-        self.pulse = pulse
-        self.TDI = TDI
-        self.server = server
-        self._init_server_connection(**kwargs)
-
-    def data(self):
-        """Get data from the signal"""
-        return self.raw(f'data({self.TDI})')
-
-    def dim_of(self, dim):
-        """Get dimension of the signal"""
-        return self.raw(f'dim_of({self.TDI},{dim})')
-
-    def units(self):
-        """Get units of the signal"""
-        return self.raw(f'units({self.TDI})')
-
-    def error(self):
-        """Get error/uncertainty of the signal"""
-        return self.raw(f'error({self.TDI})')
-
-    def error_dim_of(self, dim):
-        """Get error of dimension"""
-        return self.raw(f'error_dim_of({self.TDI},{dim})')
-
-    def units_dim_of(self, dim):
-        """Get units of dimension"""
-        return self.raw(f'units_dim_of({self.TDI},{dim})')
-
-    def size(self, dim):
-        """Get size of dimension"""
-        return self.raw(f'size({self.TDI})')
-
-    def _init_server_connection(self, old_MDS_server=False, **kwargs):
-        # Check if server is already resolved (modern provider-based usage)
-        if '.' in self.server and ':' in self.server:
-            # Server appears to be already resolved (has dots and port)
-            old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-            if self.server in old_servers:
-                old_MDS_server = True
-            self.old_MDS_server = old_MDS_server
-            return
-        
-        # Legacy path: resolve server from scratch (for backward compatibility only)
-        # NOTE: This is inefficient and should be avoided - use mds_provider instead
-        if 'nstx' in self.server:
-            old_MDS_server = True
-        try:
-            # handle the case that server is just the machine name
-            machine_mappings_path = os.path.join(os.path.dirname(__file__), "../", "machine_mappings")
-            machine_mappings_path = os.path.join(machine_mappings_path, self.server + ".json")
-            with open(machine_mappings_path, "r") as machine_file:
-                    self.server = json.load(machine_file)["__mdsserver__"]
-        except Exception:
-            # handle case where server is actually a URL
-            if '.' not in self.server:
-                raise
-        self.server = tunnel_mds(self.server, self.treename)
-        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-        if self.server in old_servers:
-            old_MDS_server = True
-        self.old_MDS_server = old_MDS_server
-
-
-    def raw(self, TDI=None):
-        """
-        Fetch data from MDSplus with connection caching
-
-        :param TDI: string, list or dict of strings
-            MDSplus TDI expression(s) (overrides the one passed when the object was instantiated)
-
-        :return: result of TDI expression, or dictionary with results of TDI expressions
-        """
-        try:
-            import time
-
-            t0 = time.time()
-            import MDSplus
-
-            def mdsk(value):
-                """
-                Translate strings to MDSplus bytes
-                """
-                return str(str(value).encode('utf8'))
-
-            if TDI is None:
-                TDI = self.TDI
-
-            try:
-                out_results = None
-
-                # try connecting and re-try on fail
-                for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                        conn = MDSplus.Connection(self.server)
-                        if self.treename is not None:
-                            conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
-                    try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        break
-                    except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
-                        if fallback:
-                            raise
-
-                # list of TDI expressions
-                if isinstance(TDI, (list, tuple)):
-                    TDI = {expr: expr for expr in TDI}
-
-                # dictionary of TDI expressions
-                if isinstance(TDI, dict):
-                    # old versions of MDSplus server do not support getMany
-                    if self.old_MDS_server:
-                        results = {}
-                        for tdi in TDI:
-                            try:
-                                results[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
-                            except Exception as _excp:
-                                results[tdi] = Exception(str(_excp))
-                        out_results = results
-
-                    # more recent MDSplus server
-                    else:
-                        conns = conn.getMany()
-                        for name, expr in TDI.items():
-                            conns.append(name, expr)
-                        res = conns.execute()
-                        results = {}
-                        for name, expr in TDI.items():
-                            try:
-                                results[name] = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
-                            except KeyError:
-                                try:
-                                    results[name] = MDSplus.Data.data(res[str(name)][str('value')])
-                                except KeyError:
-                                    try:
-                                        results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
-                                    except KeyError:
-                                        results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
-                        out_results = results
-
-                # single TDI expression
-                else:
-                    out_results = MDSplus.Data.data(conn.get(TDI))
-
-                # return values
-                return out_results
-
-            except Exception as _excp:
-                txt = []
-                for item in ['server', 'treename', 'pulse']:
-                    txt += [f' - {item}: {getattr(self, item)}']
-                txt += [f' - TDI: {TDI}']
-                raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
-
-        finally:
-            if out_results is not None:
-                if isinstance(out_results, dict):
-                    if all(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    else:
-                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
-            else:
-                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
-
-class mdstree(dict):
-    """
-    Class to handle the structure of an MDSplus tree.
-    Nodes in this tree are mdsvalue objects
-    """
-
-    def __init__(self, server, treename, pulse):
-        for TDI in sorted(mdsvalue(server, treename, pulse, rf'getnci("***","FULLPATH")').raw())[::-1]:
-            try:
-                TDI = TDI.decode('utf8')
-            except AttributeError:
-                pass
-            TDI = TDI.strip()
-            path = TDI.replace('::TOP', '').lstrip('\\').replace(':', '.').split('.')
-            h = self
-            for p in path[1:-1]:
-                h = h.setdefault(p, mdsvalue(server, treename, pulse, ''))
-            if path[-1] not in h:
-                h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
-            else:
-                h[path[-1]].TDI = TDI
-
+    
+    def handle_fetch_status(self, TDI, t0, results):
+        if all(isinstance(results[k], Exception) for k in results):
+            printd(f'toksearch: {TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')           
+        elif any(isinstance(results[k], Exception) for k in results):
+            printd(f'toksearch: {TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')  
+        else:
+            printd(f'toksearch: {TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
+        status = {k: ('failed' if isinstance(results[k], Exception) else 'passed') for k in results}
+        self.last_status = status
+        if not self.allow_failures and any(isinstance(results[k], Exception) for k in results):
+            tdi_failed_exception = TDIFailedException()
+            tdi_failed_exception.set_entry_status(status)
+            raise tdi_failed_exception
 
 
 # ===============================
 # New Provider-based Architecture
 # ===============================
 
-class mds_provider(BaseProvider):
+class MdsProvider(BaseProvider):
     """
     MDSplus provider - instantiated once per server, reused for multiple signals
     """
@@ -542,10 +358,11 @@ class mds_provider(BaseProvider):
                 
                 # single TDI expression
                 else:
-                    out_results = MDSplus.Data.data(conn.get(TDI))
+                    out_results = {}
+                    out_results[TDI] = MDSplus.Data.data(conn.get(TDI))
                 
                 # return values
-                return out_results
+                return out_results[TDI]
             
             except Exception as _excp:
                 txt = []
@@ -556,21 +373,10 @@ class mds_provider(BaseProvider):
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
         
         finally:
-            if 'out_results' in locals() and out_results is not None:
-                if isinstance(out_results, dict):
-                    if all(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(isinstance(out_results[k], Exception) for k in out_results):
-                        printd(f'{TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    else:
-                        printd(f'{TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'{TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
-            else:
-                printd(f'{TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
+            self.handle_fetch_status(TDI, t0, out_results)
 
 
-class toksearch_provider(BaseProvider):
+class ToksearchProvider(BaseProvider):
     """
     TokSearch provider - instantiated once per server, reused for multiple signals
     """
@@ -632,8 +438,8 @@ class toksearch_provider(BaseProvider):
                 TDI = {expr: expr for expr in TDI}
             
             # Dictionary of TDI expressions
+            results = {}
             if isinstance(TDI, dict):
-                results = {}
                 for name, expr in TDI.items():
                     try:
                         result= self.dispatch_expression(treename, pulse, expr)
@@ -649,12 +455,12 @@ class toksearch_provider(BaseProvider):
             
             # Single TDI expression
             else:
-                result= self.dispatch_expression(treename, pulse, TDI)
+                results[TDI] = self.dispatch_expression(treename, pulse, TDI)
                 # Extract the data component
-                if isinstance(result, dict) and 'data' in result:
-                    return result['data']
+                if isinstance(results[TDI], dict) and 'data' in results[TDI]:
+                    return results[TDI]['data']
                 else:
-                    return result
+                    return results[TDI]
                     
         except Exception as _excp:
             txt = []
@@ -665,20 +471,4 @@ class toksearch_provider(BaseProvider):
             raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
         
         finally:
-            if 'results' in locals():
-                if isinstance(results, dict):
-                    if all(isinstance(results[k], Exception) for k in results):
-                        printd(f'toksearch: {TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    elif any(isinstance(results[k], Exception) for k in results):
-                        printd(f'toksearch: {TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                    else:
-                        printd(f'toksearch: {TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'toksearch: {TDI} \tOK\t {time.time() - t0:3.3f} secs', topic='machine')
-            elif 'result' in locals():
-                if isinstance(result, Exception):
-                    printd(f'toksearch: {TDI} \t NO\t {time.time() - t0:3.3f} secs', topic='machine')
-                else:
-                    printd(f'toksearch: {TDI} \t OK\t {time.time() - t0:3.3f} secs', topic='machine')
-            else:
-                printd(f'toksearch: {TDI} \tNO\t {time.time() - t0:3.3f} secs', topic='machine')
+            self.handle_fetch_status(TDI, t0, results)
