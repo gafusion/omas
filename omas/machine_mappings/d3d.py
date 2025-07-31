@@ -592,7 +592,10 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.time'] = np.atleast_1d(0)
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        if isinstance(systems[f'FREQUENCY_{system_no}'], Exception):
+            beam['frequency.data'] = beam['frequency.time'] * 0.0 + 110e9 # old shots did not record the frequency, since they were all at 110 GHz
+        else:
+            beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
         beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
@@ -1319,14 +1322,17 @@ def magnetics_floops_data(ods, pulse, nref=None):
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
             m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000.0
-            for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
-                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
-                    ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            try:
+                compsig_data = m.data()
+                compsig_time = m.dim_of(0) / 1000.0
+                for channel in ods['magnetics.flux_loop']:
+                    if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
+                        sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                        sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                        compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
+                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            except Exception:
+                printe(f"NO {compsig}")
 
     # fetch uncertainties
     TDIs = {}
