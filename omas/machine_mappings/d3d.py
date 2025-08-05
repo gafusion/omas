@@ -1283,7 +1283,7 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse, store_differential=False, nref=1):
+def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
@@ -1364,13 +1364,13 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=1):
                 ods[f'magnetics.flux_loop.{k}.type.index'] = 1
                 ods[f'magnetics.flux_loop.{k}.flux.data'] += ref_data
                 uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
-                uncertainty = np.sqrt(uncertainty**2 + ref_uncertainty**2)
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_uncertainty**2)
             else:
                 ods[f'magnetics.flux_loop.{k}.type.index'] = 1
                 ref_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_data, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
                 ref_un_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_uncertainty, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
                 uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
-                uncertainty = np.sqrt(uncertainty**2 + ref_un_interp**2)
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
