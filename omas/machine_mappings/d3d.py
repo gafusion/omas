@@ -411,7 +411,7 @@ def pf_active_coil_current_data(ods, pulse):
     unwrap(pf_active_hardware)(ods1, pulse)
 
     # fetch the actual pf_active currents data
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1289,7 +1289,7 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1379,7 +1379,7 @@ def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1456,7 +1456,7 @@ def ip_bt_dflux_data(ods, pulse):
 
     mappings = {'magnetics.ip.0': 'IP', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         TDIs = {}
         for key, val in mappings.items():
             TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
@@ -1668,7 +1668,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
 
