@@ -362,7 +362,7 @@ class MdsProvider(BaseProvider):
                     out_results[TDI] = MDSplus.Data.data(conn.get(TDI))
                 
                 # return values
-                return out_results[TDI]
+                return out_results
             
             except Exception as _excp:
                 txt = []
