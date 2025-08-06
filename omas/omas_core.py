@@ -1780,18 +1780,25 @@ class ODS(MutableMapping):
                     tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
-    def __eq__(self, ods):
-        for key in self.keys():
-            if type(self[key]) == ODS:
-                if self[key] != ods[key]:
-                    return False
-            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
-                if not numpy.allclose(self[key],ods[key]):
-                    return False
-            else:
-                if self[key] != ods[key]:
-                    return False
-        return True
+    def __eq__(self, comp):
+        if type(comp) != ODS:
+            # For comparison against non-ODS we use the mutuable mapping __eq__ method
+            result = super().__eq__(comp)
+            # If this does not have a valid result we return False
+            if result == NotImplemented:
+                return False
+        else:
+            for key in self.keys():
+                if type(self[key]) == ODS:
+                    if self[key] != comp[key]:
+                        return False
+                elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                    if not numpy.allclose(self[key],comp[key]):
+                        return False
+                else:
+                    if self[key] != comp[key]:
+                        return False
+            return True
     
     def find_mismatching_locations(self, ods, mismatching_locations):
         for key in self.keys():
