@@ -1282,7 +1282,7 @@ def magnetics_hardware(ods, pulse):
     return ods
 
 
-@machine_mapping_function(__regression_arguments__, pulse=133221)
+@machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     from scipy.interpolate import interp1d
 
@@ -1340,7 +1340,7 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
+            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
             compsig_data = m.data()
             compsig_time = m.dim_of(0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
@@ -1373,7 +1373,7 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
                 ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=133221)
+@machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
 
     ods1 = ODS()
@@ -1459,7 +1459,7 @@ def ip_bt_dflux_data(ods, pulse):
     with omas_environment(ods, cocosio=7):
         TDIs = {}
         for key, val in mappings.items():
-            TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
+            TDIs[key + '.data'] = f'ptdata2("{val}",{pulse})'
             TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
             TDIs[key + '.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
 
