@@ -146,9 +146,9 @@ class BaseProvider:
     Provider is instantiated once per server and reused for multiple signal fetches
     """
 
-    def __init__(self, server, allow_failures=False, **kwargs):
+    def __init__(self, server, except_fetch_failures=True, **kwargs):
         self.server = server
-        self.allow_failures = allow_failures
+        self.except_fetch_failures = except_fetch_failures
         self._init_server_connection(**kwargs)
 
     def _init_server_connection(self, **kwargs):
@@ -226,15 +226,20 @@ class BaseProvider:
         return tree[treename]
     
     def handle_fetch_status(self, TDI, t0, results):
-        if all(isinstance(results[k], Exception) for k in results):
-            printd(f'toksearch: {TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')           
-        elif any(isinstance(results[k], Exception) for k in results):
-            printd(f'toksearch: {TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')  
+        if type(results) != dict:
+            # Rename to avoid overriding the original results
+            check = {TDI: results}
         else:
-            printd(f'toksearch: {TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
-        status = {k: ('failed' if isinstance(results[k], Exception) else 'passed') for k in results}
+            check = results
+        if all(isinstance(check[k], Exception) for k in check):
+            printd(f'mdsplus: {TDI} \tall NO\t {time.time() - t0:3.3f} secs', topic='machine')           
+        elif any(isinstance(check[k], Exception) for k in check):
+            printd(f'mdsplus: {TDI} \tsome OK/NO\t {time.time() - t0:3.3f} secs', topic='machine')  
+        else:
+            printd(f'mdsplus: {TDI} \tall OK\t {time.time() - t0:3.3f} secs', topic='machine')
+        status = {k: ('failed' if isinstance(check[k], Exception) else 'passed') for k in check}
         self.last_status = status
-        if not self.allow_failures and any(isinstance(results[k], Exception) for k in results):
+        if not self.except_fetch_failures and any(isinstance(check[k], Exception) for k in check):
             tdi_failed_exception = TDIFailedException()
             tdi_failed_exception.set_entry_status(status)
             raise tdi_failed_exception
@@ -355,14 +360,12 @@ class MdsProvider(BaseProvider):
                                     except KeyError:
                                         results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
                         out_results = results
-                
+
                 # single TDI expression
                 else:
-                    out_results = {}
-                    out_results[TDI] = MDSplus.Data.data(conn.get(TDI))
-                
-                # return values
-                return out_results[TDI]
+                    # return values
+                    out_results = MDSplus.Data.data(conn.get(TDI))
+                return out_results
             
             except Exception as _excp:
                 txt = []

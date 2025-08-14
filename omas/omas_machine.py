@@ -884,7 +884,7 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
     def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options, ods=None):
         """Helper to load a single mapping with specified backend"""
         if ods is None:
-            ods = ODS(mds_backend=backend)
+            ods = ODS(mds_backend=backend, except_fetch_failure=False)
         
         # Capture ODS keys before data fetch (for side effects tracking)
         keys_before = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])

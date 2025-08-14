@@ -206,6 +206,7 @@ class ODS(MutableMapping):
         uncertainio=None,
         dynamic=None,
         mds_backend=None,
+        except_fetch_failures=True
     ):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -225,6 +226,9 @@ class ODS(MutableMapping):
         :param dynamic: internal keyword used for dynamic data loading
 
         :param mds_backend: MDS backend to use ('mdsplus' or 'toksearch'). If None, uses global default
+
+        :param except_fetch_failures: Setting this to True will allow smooth operation when fetching potentially missing data.
+                                      The main purpose of except_fetch_failures=False is for regression tests
         """
         self.omas_data = None
         self._consistency_check = consistency_check
@@ -246,7 +250,7 @@ class ODS(MutableMapping):
             if mds_backend not in valid_backends:
                 raise ValueError(f"mds_backend must be one of {valid_backends}, got '{mds_backend}'")
         self.mds_backend = mds_backend
-        
+        self.except_fetch_failures = except_fetch_failures
         # Cache for MDS providers (server -> provider instance)
         self._mds_providers = {}
 
@@ -277,7 +281,8 @@ class ODS(MutableMapping):
         # Create new provider and cache it
         from .utilities.omas_mds import create_mds_provider
         backend = self.get_mds_backend()
-        provider = create_mds_provider(server, backend=backend)
+        provider = create_mds_provider(server, backend=backend, 
+                                       except_fetch_failures=self.except_fetch_failures)
         self._mds_providers[server] = provider
         return provider
 
@@ -1609,6 +1614,11 @@ class ODS(MutableMapping):
 
         for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
+            if type(h) == CodeParameters:
+                for item in h.flat().keys():
+                    if item == l2o(key):
+                        return True
+                return False
             if h.omas_data is not None and k in h.keys(dynamic=0):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
@@ -1780,18 +1790,25 @@ class ODS(MutableMapping):
                     tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
-    def __eq__(self, ods):
-        for key in self.keys():
-            if type(self[key]) == ODS:
-                if self[key] != ods[key]:
-                    return False
-            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
-                if not numpy.allclose(self[key],ods[key]):
-                    return False
-            else:
-                if self[key] != ods[key]:
-                    return False
-        return True
+    def __eq__(self, comp):
+        if type(comp) != ODS:
+            # For comparison against non-ODS we use the mutuable mapping __eq__ method
+            result = super().__eq__(comp)
+            # If this does not have a valid result we return False
+            if result == NotImplemented:
+                return False
+        else:
+            for key in self.keys():
+                if type(self[key]) == ODS:
+                    if self[key] != comp[key]:
+                        return False
+                elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                    if not numpy.allclose(self[key],comp[key]):
+                        return False
+                else:
+                    if self[key] != comp[key]:
+                        return False
+            return True
     
     def find_mismatching_locations(self, ods, mismatching_locations):
         for key in self.keys():
