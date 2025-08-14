@@ -737,12 +737,17 @@ def interferometer_data(ods, pulse):
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
+    if pulse <= 197528:
+        BCI = "BCI::TOP"
+    else:
+        BCI = "BCI::TOP.MAIN"
+
     # fetch
     TDIs = {}
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
-        TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
+        TDIs[identifier] = f"\\{BCI}.DEN{identifier}"
+        TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
