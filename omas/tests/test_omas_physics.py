@@ -202,6 +202,20 @@ class TestOmasPhysics(UnittestCaseOmas):
         ods = ODS().sample_equilibrium()
         ods.physics_current_from_eq(0)
         return
+    
+    def test_add_volume_profile(self):
+        ods = ODS().sample_equilibrium()
+        volume_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.volume'])
+        dvolume_dpsi_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        del(ods['equilibrium.time_slice.0.profiles_1d.volume'])
+        del(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        ods.physics_add_volume_profile()
+        print(ods['equilibrium.time_slice.0.profiles_1d.volume'])
+        print(volume_check)
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.volume'], volume_check)
+        print(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        print(dvolume_dpsi_check)
+        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'], dvolume_dpsi_check)
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
@@ -452,6 +466,7 @@ class TestOmasPhysics(UnittestCaseOmas):
             index = numpy.argsort(psi11)
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
         return
+
 
     @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):

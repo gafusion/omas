@@ -2,8 +2,8 @@
 
 -------
 '''
-
-from scipy.interpolate import RectBivariateSpline
+from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
+import contourpy
 from .omas_utils import *
 from .omas_core import ODS
 
@@ -440,7 +440,8 @@ def resolve_equilibrium_profiles_2d_grid_index(ods, time_index, grid_identifier)
 
 @add_to__ODS__
 @preprocess_ods('equilibrium')
-def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity):
+def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity, cache=None, 
+    return_cache=False):
     """
     This function derives values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
     Currently only the magnetic field components are supported
@@ -453,6 +454,11 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
 
     :param quantity: Member of profiles_2d to be derived
 
+    :param cache: Cache of Splines of profiles_2d quantities. Right now used to 
+                  to cash psi to reduce recalculation for Br/Bz calculation
+
+    :param return cache: Whether to return the Cache
+
     :return: updated ods
     """
     from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
@@ -462,22 +468,30 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
         indexing="ij",
     )
-    psi_spl = RectBivariateSpline(
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
-    )
-    cocos = define_cocos(11)
-    if quantity == "b_field_r":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
-            psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
-        )
-        return ods
-    elif quantity == "b_field_z":
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
-            -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
-        )
-        return ods
+    if quantity in ["b_field_r", "b_field_z"]:
+        psi_spl = get_cached_interpolator(cache, time_index, grid_index, "psi")
+        if psi_spl is None:
+            psi_spl = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
+            )
+            cache = cache_interpolator(cache, time_index, grid_index, "psi", psi_spl)
+        cocos = define_cocos(11)
+        if quantity == "b_field_r":
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
+                psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+            )
+            if return_cache:
+                return ods, cache
+            return ods
+        elif quantity == "b_field_z":
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
+                -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+            )
+            if return_cache:
+                return ods, cache
+            return ods
     elif quantity == "b_field_tor":
         mask = numpy.logical_and(
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
@@ -496,7 +510,8 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
             ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
         )
         return ods
-    raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
+    else:
+        raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
 
 
 def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
@@ -518,18 +533,36 @@ def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
     """
     if cache is None:
         cache = {}
-    if time_index not in cache:
-        cache[time_index] = {}
-    if grid_index not in cache[time_index]:
-        cache[time_index][grid_index] = {}
-    cache[time_index][grid_index][quantity] = interpolator
+    id = (time_index, grid_index, quantity)
+    cache[id] = interpolator
     return cache
+
+def get_cached_interpolator(cache, time_index, grid_index, quantity):
+    """
+    Utility function for equilibrium_profiles_2d_map. Creates a tree dictionary structure to store interpolators.
+
+    :param cache: cache object to add tree entry to
+
+    :param time_index: time slices to process
+
+    :param grid_index: Index of grid to map
+
+    :param quantity: Member of profiles_2d[:]
+
+    :return: RectBivariateSpline instance or None if not cached
+    """
+
+    if cache is None:
+        return None
+    id = (time_index, grid_index, quantity)
+    return cache.get(id, None) 
 
 
 @add_to__ODS__
 @preprocess_ods('equilibrium')
 def equilibrium_profiles_2d_map(
-    ods, time_index, grid_index, quantity, dim1=None, dim2=None, cache=None, return_cache=False, out_of_bounds_value=numpy.nan
+    ods, time_index, grid_index, quantity, dim1=None, dim2=None, cache=None, 
+    return_cache=False, out_of_bounds_value=numpy.nan
 ):
     """
     This routines creates interpolators for quantities and stores them in the cache for future use.
@@ -559,28 +592,22 @@ def equilibrium_profiles_2d_map(
     if dim1 is None or dim2 is None:
         return ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.{quantity}']
     # Try to use an interpolator from the cache
-    if cache is not None:
-        try:
-            if return_cache:
-                return cache[time_index][quantity](dim1, dim2, grid=False), cache
-            else:
-                return cache[time_index][quantity](dim1, dim2, grid=False)
-        except KeyError:
-            pass
-    if ods[f'equilibrium.time_slice[{time_index}].profiles_2d[{grid_index}].grid_type.index'] == 91:
-        interpolator = create_scatter_interpolator(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'],
-            method='cubic',
-            return_cache=False,
-        )
-    else:
-        interpolator = RectBivariateSpline(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'],
-        )
+    interpolator = get_cached_interpolator(cache, time_index, grid_index, quantity)
+    if interpolator is None:
+        if ods[f'equilibrium.time_slice[{time_index}].profiles_2d[{grid_index}].grid_type.index'] == 91:
+            interpolator = create_scatter_interpolator(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.0.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'],
+                method='cubic',
+                return_cache=False,
+            )
+        else:
+            interpolator = RectBivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.{quantity}'],
+            )
     mapped_values = numpy.zeros(dim1.shape)
     mapped_values[:] = numpy.nan
     mask = numpy.logical_and(
@@ -600,6 +627,57 @@ def equilibrium_profiles_2d_map(
     mapped_values[mask] = interpolator(dim1[mask], dim2[mask], grid=False)
     return mapped_values
 
+@add_to__ODS__
+def add_volume_profile(ods, grid_index=0):
+    with omas_environment(ods, cocosio=11):
+        cocos = define_cocos(11)
+        for time_index in range(len(ods['equilibrium']['time'])):
+            eq_slice = ods['equilibrium']['time_slice'][time_index]
+            eq1d_psi = eq_slice['profiles_1d']['psi']
+            cache = {}
+
+            ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_r", 
+                                                                cache=cache, return_cache=True)
+            ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_z", 
+                                                                cache=cache, return_cache=True)
+            b_pol_spline = RectBivariateSpline(
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
+                    numpy.sqrt(eq_slice[f'profiles_2d.{grid_index}.b_field_r']**2
+                            + eq_slice[f'profiles_2d.{grid_index}.b_field_z']**2))
+            # Lifted from OMFIT but don't use the outdated contouring algorithm
+            contgen = contourpy.contour_generator(
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
+                    eq_slice[f'profiles_2d.{grid_index}.psi'], 
+                    corner_mask=True)
+            eq_slice['profiles_1d.dvolume_dpsi'] = numpy.zeros(len(eq1d_psi))
+            for k, psi in enumerate(eq1d_psi[1:]):
+                contours = contgen.lines(psi)
+                npts = 0
+                # Since we are on a regularly spaced grid
+                # and the flux matrix is reasonably smooth the number of grid points
+                # should be enough to identify the longest contour (also we really should not find two closed contours for the same flux surface)
+                i_contour = 0
+                for i, contour in enumerate(contours):
+                    if numpy.all(contour[0] == contour[-1]):
+                        if len(contour) > npts:
+                            i_contour = i
+                            npts = len(contour)
+                r, z = contours[i_contour].T
+                dl = numpy.sqrt(numpy.ediff1d(r, to_begin=0.0) ** 2 + numpy.ediff1d(z, to_begin=0.0) ** 2)
+                bp = b_pol_spline(r, z, grid=False)
+                int_fluxexpansion_dl = numpy.sum(dl/bp)
+                eq_slice['profiles_1d.dvolume_dpsi'][k] = (
+                            cocos['sigma_rhotp']
+                            * cocos['sigma_Bp']
+                            * numpy.sign(numpy.mean(bp))
+                            * int_fluxexpansion_dl
+                            * (2.0 * numpy.pi) ** (1.0 - cocos['exp_Bp']))
+
+            volume_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
+            eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi)
+    return ods
 
 def remove_integrator_drift(time, data, time_after_shot):
     # assume that the drift is zero at time[0]
