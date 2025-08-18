@@ -2,7 +2,7 @@
 
 -------
 '''
-from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
+from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
 import contourpy
 from .omas_utils import *
 from .omas_core import ODS
@@ -441,9 +441,9 @@ def resolve_equilibrium_profiles_2d_grid_index(ods, time_index, grid_identifier)
 @add_to__ODS__
 @preprocess_ods('equilibrium')
 def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantity, cache=None, 
-    return_cache=False):
+    return_cache=False, force_linear_interpolation=False):
     """
-    This function derives values of empty fields in prpfiles_2d from other parameters in the equilibrium ods
+    This function derives values of empty fields in profiles_2d from other parameters in the equilibrium ods
     Currently only the magnetic field components are supported
 
     :param ods: input ods
@@ -463,31 +463,39 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
     """
     from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
     with omas_environment(ods, cocosio=11):
+        cocos = define_cocos(11)
         r, z = numpy.meshgrid(
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
             indexing="ij",
         )
         if quantity in ["b_field_r", "b_field_z"]:
-            psi_spl = get_cached_interpolator(cache, time_index, grid_index, "psi")
-            if psi_spl is None:
-                psi_spl = RectBivariateSpline(
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
-                )
-                cache = cache_interpolator(cache, time_index, grid_index, "psi", psi_spl)
-            cocos = define_cocos(11)
+            if force_linear_interpolation:
+                [dPSIdR, dPSIdZ] = numpy.gradient(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
+                                                  ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'][1]
+                                                  - ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'][0], 
+                                                  ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'][1]
+                                                  - ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'][0])
+            else:
+                psi_spl = get_cached_interpolator(cache, time_index, grid_index, "psi")
+                if psi_spl is None:
+                    psi_spl = RectBivariateSpline(
+                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                    )
+                    cache = cache_interpolator(cache, time_index, grid_index, "psi", psi_spl)
+                [dPSIdZ, dPSIdR] = [psi_spl(r, z, dy=1, grid=False), psi_spl(r, z, dx=1, grid=False)]
             if quantity == "b_field_r":
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
-                    psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+                    dPSIdZ * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
                 )
                 if return_cache:
                     return ods, cache
                 return ods
             elif quantity == "b_field_z":
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
-                    -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+                    -dPSIdR * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
                 )
                 if return_cache:
                     return ods, cache
@@ -499,16 +507,25 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
                 > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
             )
-            f_spl = InterpolatedUnivariateSpline(
-                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
-            )
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
-                f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
-            )
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
-                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
-            )
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
+                )
+            if force_linear_interpolation:
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
+                    interp1d(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], 
+                            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'], 
+                            kind='linear'
+                            )(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'][mask])/ r[mask]
+                )
+            else:
+                f_spl = InterpolatedUnivariateSpline(
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], 
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
+                )
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
+                    f_spl(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'][mask] / r[mask])
+                )
             return ods
         else:
             raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
