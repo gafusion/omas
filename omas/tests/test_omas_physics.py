@@ -203,6 +203,19 @@ class TestOmasPhysics(UnittestCaseOmas):
         ods.physics_current_from_eq(0)
         return
     
+    def test_derive_equilibrium_profiles_2d_quantity(self):
+        ods = ODS().sample_equilibrium()
+        cache = {}
+        for b_component in ['b_field_r', 'b_field_tor', 'b_field_z']:
+            b_check = copy.copy(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
+            del(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
+            ods, cache = ods.physics_derive_equilibrium_profiles_2d_quantity(0, 0, b_component, 
+                                                                             cache=cache, return_cache=True)
+            print(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
+            print(b_check)
+            assert numpy.allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check)
+
+
     def test_add_volume_profile(self):
         ods = ODS().sample_equilibrium()
         volume_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.volume'])

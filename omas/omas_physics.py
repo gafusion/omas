@@ -462,56 +462,56 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
     :return: updated ods
     """
     from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline
-
-    r, z = numpy.meshgrid(
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-        indexing="ij",
-    )
-    if quantity in ["b_field_r", "b_field_z"]:
-        psi_spl = get_cached_interpolator(cache, time_index, grid_index, "psi")
-        if psi_spl is None:
-            psi_spl = RectBivariateSpline(
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
-                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
+    with omas_environment(ods, cocosio=11):
+        r, z = numpy.meshgrid(
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+            indexing="ij",
+        )
+        if quantity in ["b_field_r", "b_field_z"]:
+            psi_spl = get_cached_interpolator(cache, time_index, grid_index, "psi")
+            if psi_spl is None:
+                psi_spl = RectBivariateSpline(
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim1'],
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.grid.dim2'],
+                    ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'],
+                )
+                cache = cache_interpolator(cache, time_index, grid_index, "psi", psi_spl)
+            cocos = define_cocos(11)
+            if quantity == "b_field_r":
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
+                    psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+                )
+                if return_cache:
+                    return ods, cache
+                return ods
+            elif quantity == "b_field_z":
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
+                    -psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+                )
+                if return_cache:
+                    return ods, cache
+                return ods
+        elif quantity == "b_field_tor":
+            mask = numpy.logical_and(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
+                ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
+                > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
             )
-            cache = cache_interpolator(cache, time_index, grid_index, "psi", psi_spl)
-        cocos = define_cocos(11)
-        if quantity == "b_field_r":
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_r'] = (
-                psi_spl(r, z, dy=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
+            f_spl = InterpolatedUnivariateSpline(
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
             )
-            if return_cache:
-                return ods, cache
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
+                f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
+            )
+            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
+                ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
+            )
             return ods
-        elif quantity == "b_field_z":
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_z'] = (
-                -psi_spl(r, z, dx=1, grid=False) * cocos['sigma_RpZ'] * cocos['sigma_Bp'] / ((2.0 * numpy.pi) ** cocos['exp_Bp'] * r)
-            )
-            if return_cache:
-                return ods, cache
-            return ods
-    elif quantity == "b_field_tor":
-        mask = numpy.logical_and(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
-            < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
-            ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
-            > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
-        )
-        f_spl = InterpolatedUnivariateSpline(
-            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi'], ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
-        )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
-            f_spl(psi_spl(r[mask], z[mask], grid=False)) / r[mask]
-        )
-        ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
-            ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f'][-1] / r[mask == False]
-        )
-        return ods
-    else:
-        raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
+        else:
+            raise NotImplementedError(f"Cannot add {quantity}. Not yet implemented.")
 
 
 def cache_interpolator(cache, time_index, grid_index, quantity, interpolator):
