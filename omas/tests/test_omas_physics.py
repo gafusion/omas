@@ -233,9 +233,11 @@ class TestOmasPhysics(UnittestCaseOmas):
         print(ods['equilibrium.time_slice.0.profiles_1d.volume'][1:]/volume_check[1:])
         print(volume_check)
         assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.volume'], volume_check)
-        print(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        print(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi']/dvolume_dpsi_check)
         print(dvolume_dpsi_check)
         assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'], dvolume_dpsi_check)
+        
+        
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)

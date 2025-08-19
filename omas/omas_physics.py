@@ -3,6 +3,7 @@
 -------
 '''
 from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
+from scipy.integrate import cumulative_trapezoid
 import contourpy
 from .omas_utils import *
 from .omas_core import ODS
@@ -652,25 +653,33 @@ def add_volume_profile(ods, grid_index=0):
             eq_slice = ods['equilibrium']['time_slice'][time_index]
             eq1d_psi = eq_slice['profiles_1d']['psi']
             cache = {}
-
-            ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_r", 
-                                                                cache=cache, return_cache=True)
-            ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_z", 
-                                                                cache=cache, return_cache=True)
-            b_pol_spline = RectBivariateSpline(
+            if not "b_field_r" in eq_slice[f'profiles_2d.0']:
+                ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_r", 
+                                                                    cache=cache, return_cache=True)
+            if not "b_field_z" in eq_slice[f'profiles_2d.0']:
+                ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_z", 
+                                                                    cache=cache, return_cache=True)
+            b_field_r_spline = RectBivariateSpline(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
-                    numpy.sqrt(eq_slice[f'profiles_2d.{grid_index}.b_field_r']**2
-                            + eq_slice[f'profiles_2d.{grid_index}.b_field_z']**2))
+                    eq_slice[f'profiles_2d.{grid_index}.b_field_r'])
+            
+            b_field_z_spline = RectBivariateSpline(
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
+                    eq_slice[f'profiles_2d.{grid_index}.b_field_z'])
+            
             # Lifted from OMFIT but don't use the outdated contouring algorithm
             contgen = contourpy.contour_generator(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
-                    eq_slice[f'profiles_2d.{grid_index}.psi'], 
+                    eq_slice[f'profiles_2d.{grid_index}.psi'], name="mpl2014",
                     corner_mask=True)
             eq_slice['profiles_1d.dvolume_dpsi'] = numpy.zeros(len(eq1d_psi))
-            for k, psi in enumerate(eq1d_psi[1:]):
-                contours = contgen.lines(psi)
+            for k, psi in enumerate(eq1d_psi):
+                if k == 0:
+                    continue
+                contours,_ = contgen.lines(psi)
                 npts = 0
                 # Since we are on a regularly spaced grid
                 # and the flux matrix is reasonably smooth the number of grid points
@@ -681,9 +690,9 @@ def add_volume_profile(ods, grid_index=0):
                         if len(contour) > npts:
                             i_contour = i
                             npts = len(contour)
-                r, z = contours[i_contour].T
+                r, z = numpy.array(contours[i_contour]).T
                 dl = numpy.sqrt(numpy.ediff1d(r, to_begin=0.0) ** 2 + numpy.ediff1d(z, to_begin=0.0) ** 2)
-                bp = b_pol_spline(r, z, grid=False)
+                bp = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2)
                 int_fluxexpansion_dl = numpy.sum(dl/bp)
                 eq_slice['profiles_1d.dvolume_dpsi'][k] = (
                             cocos['sigma_rhotp']
