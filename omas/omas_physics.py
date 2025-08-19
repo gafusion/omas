@@ -7,7 +7,6 @@ from scipy.integrate import cumulative_trapezoid
 import contourpy
 from .omas_utils import *
 from .omas_core import ODS
-
 __all__ = []
 __ods__ = []
 
@@ -673,25 +672,38 @@ def add_volume_profile(ods, grid_index=0):
             contgen = contourpy.contour_generator(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
-                    eq_slice[f'profiles_2d.{grid_index}.psi'], name="mpl2014",
+                    eq_slice[f'profiles_2d.{grid_index}.psi'].T,
                     corner_mask=True)
             eq_slice['profiles_1d.dvolume_dpsi'] = numpy.zeros(len(eq1d_psi))
             for k, psi in enumerate(eq1d_psi):
                 if k == 0:
+                    # Skip the axis
                     continue
-                contours,_ = contgen.lines(psi)
-                npts = 0
-                # Since we are on a regularly spaced grid
-                # and the flux matrix is reasonably smooth the number of grid points
-                # should be enough to identify the longest contour (also we really should not find two closed contours for the same flux surface)
-                i_contour = 0
-                for i, contour in enumerate(contours):
-                    if numpy.all(contour[0] == contour[-1]):
-                        if len(contour) > npts:
-                            i_contour = i
-                            npts = len(contour)
-                r, z = numpy.array(contours[i_contour]).T
+                # This produces bp close to zero throwing things off
+                # elif k == len(eq1d_psi) - 1:
+                #     # Avoid manual contouring at the edge, it's hard
+                #     r = ods[f'equilibrium.time_slice.{time_index}.boundary.outline.r']
+                #     z = ods[f'equilibrium.time_slice.{time_index}.boundary.outline.z']
+                else:
+                    if k == len(eq1d_psi) - 1:
+                        contours = contgen.lines(psi * (1.0 - 1.e-3))
+                    else:
+                        contours = contgen.lines(psi)
+                    npts = 0
+                    # Since we are on a regularly spaced grid
+                    # and the flux matrix is reasonably smooth the number of grid points
+                    # should be enough to identify the longest contour (also we really should not find two closed contours for the same flux surface)
+                    i_contour = 0
+                    for i, contour in enumerate(contours):
+                        if numpy.all(contour[0] == contour[-1]):
+                            if len(contour) > npts:
+                                i_contour = i
+                                npts = len(contour)
+                    r, z = numpy.array(contours[i_contour]).T
                 dl = numpy.sqrt(numpy.ediff1d(r, to_begin=0.0) ** 2 + numpy.ediff1d(z, to_begin=0.0) ** 2)
+                # Linear correction for the reduction in psi above
+                if k == len(eq1d_psi) - 1:
+                    dl /= (1.0 - 1.e-3)
                 bp = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2)
                 int_fluxexpansion_dl = numpy.sum(dl/bp)
                 eq_slice['profiles_1d.dvolume_dpsi'][k] = (

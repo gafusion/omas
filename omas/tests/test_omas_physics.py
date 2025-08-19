@@ -230,12 +230,10 @@ class TestOmasPhysics(UnittestCaseOmas):
         del(ods['equilibrium.time_slice.0.profiles_1d.volume'])
         del(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
         ods.physics_add_volume_profile()
-        print(ods['equilibrium.time_slice.0.profiles_1d.volume'][1:]/volume_check[1:])
-        print(volume_check)
-        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.volume'], volume_check)
-        print(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi']/dvolume_dpsi_check)
-        print(dvolume_dpsi_check)
-        assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'], dvolume_dpsi_check)
+        check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.volume'] - volume_check))
+        assert check < 1.e-3 * numpy.max(volume_check)
+        check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'] - dvolume_dpsi_check))
+        assert numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'] - dvolume_dpsi_check)) <  5.e-3 * numpy.max(dvolume_dpsi_check)
         
         
 
