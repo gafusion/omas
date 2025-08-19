@@ -395,6 +395,12 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "equilibrium.time_slice.:.profiles_1d.volume": {
+  "PYTHON": "add_volume_profile(ods, )"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dvolume_dpsi": {
+  "PYTHON": "add_volume_profile(ods, )"
+ },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
