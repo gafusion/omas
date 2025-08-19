@@ -865,13 +865,29 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
     else:
         print('Checkpointing disabled (no checkpoint file provided)')
     
+    def normalize_path_for_side_effects(path_tuple):
+        """
+        Normalize ODS path by replacing numerical indices with ':' 
+        to avoid spam from individual array indices
+        
+        Example: ('equilibrium', 'time_slice', 50, 'boundary_separatrix', 'strike_point', 0, 'r')
+        becomes: ('equilibrium', 'time_slice', ':', 'boundary_separatrix', 'strike_point', ':', 'r')
+        """
+        normalized = []
+        for element in path_tuple:
+            if isinstance(element, (int, float)) and str(element).replace('.', '').replace('-', '').isdigit():
+                normalized.append(':')
+            else:
+                normalized.append(element)
+        return tuple(normalized)
+
     def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options, ods=None):
         """Helper to load a single mapping with specified backend"""
         if ods is None:
             ods = ODS(mds_backend=backend, except_fetch_failure=False)
         
         # Capture ODS keys before data fetch (for side effects tracking)
-        keys_before = set([tuple(k) for k in ods.paths()])
+        keys_before = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
         
         # Initialize detailed report and side effects
         detailed_report = None
@@ -882,8 +898,12 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
             ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
             
             # Capture side effects and detailed report after successful fetch
-            keys_after = set([tuple(k) for k in ods.paths()])
-            side_effects = list(sorted(keys_after - keys_before - set(location)))
+            keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+            new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+            side_effects = {
+                'count': len(new_keys),
+                'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+            }
             
             # Get detailed report from provider's last_status if available
             provider = ods.get_mds_provider(machine)
@@ -897,8 +917,12 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                 ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
                 
                 # Capture side effects and detailed report after successful fetch
-                keys_after = set([tuple(k) for k in ods.paths()])
-                side_effects = list(sorted(keys_after - keys_before - set(location)))
+                keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+                new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+                side_effects = {
+                    'count': len(new_keys),
+                    'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+                }
                 
                 # Get detailed report from provider's last_status if available
                 provider = ods.get_mds_provider(machine)
@@ -908,8 +932,12 @@ def test_machine_mappings(machine, pulse, compare_backends=False, options=None, 
                 return ods, data_info, None, detailed_report, side_effects
             except Exception as e:
                 # Even on failure, capture what we can
-                keys_after = set([tuple(k) for k in ods.paths()])
-                side_effects = list(sorted(keys_after - keys_before - set(location)))
+                keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+                new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+                side_effects = {
+                    'count': len(new_keys),
+                    'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+                }
                 
                 # Try to get detailed report even on failure
                 try:
