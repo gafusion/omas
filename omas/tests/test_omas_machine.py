@@ -26,7 +26,9 @@ class TestOmasMachine(UnittestCaseOmas):
     """
 
     machine = 'd3d'
-    pulse = 168830
+    pulse = 193843
+    options = {'EFIT_tree': 'EFIT', 'EFIT_run_id': '08', 
+               "OMFIT_PROFS": "007"}
 
     def test_machines(self):
         # list local machines
@@ -93,3 +95,23 @@ class TestOmasMachine(UnittestCaseOmas):
         # make sure all machines have a MDSplus server assigned
         for machine in machines():
             machine_mappings(self.machine, '')['__mdsserver__']
+
+    @unittest.skipIf(failed_D3D_MDS, str(failed_D3D_MDS))
+    def test_machine_mappings_json(self):
+        """Test JSON mappings with both backends"""
+        compare_backends = True
+        try:
+            import toksearch
+        except ImportError:
+            compare_backends = False
+
+        
+        
+        # Test basic functionality with mdsplus only
+        test_machine_mappings(
+            self.machine, 
+            self.pulse, 
+            compare_backends=compare_backends,
+            options=self.options,
+            fail_fast=True  # For debugging individual failures
+        )

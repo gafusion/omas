@@ -4,7 +4,6 @@ from omas import *
 from omas.omas_utils import printd
 from omas.machine_mappings._common import *
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -125,7 +124,8 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse):
     except (ValueError, KeyError):
         # Don't have rlim and zlim yet
         printd('No limiter in ods. Gathering it from MDSplus to support ', topic='machine')
-        lim = mdsvalue('east', 'EFIT_EAST', pulse, TDI=r'\top.results.geqdsk.lim').data()
+        provider = ods.get_mds_provider('east')
+        lim = provider.data('EFIT_EAST', pulse, r'\top.results.geqdsk.lim')
         rlim = lim[:, 0]
         zlim = lim[:, 1]
 
@@ -135,16 +135,14 @@ def setup_langmuir_probes_hardware_description_east(ods, pulse):
             corner = '{}{}'.format(ul[0], oi[0])
             pointname = r'\{}LPS'.format(corner.upper())
             # These are distance along the wall from a reference point in m for a group of probes
-            m = mdsvalue('east', 'ANALYSIS', pulse, TDI=pointname)
             try:
-                s = m.data()
-            except Exception:
-                printd('Failed MDSplus data check for {}; data invalid. Halting.'.format(pointname), topic='machine')
-            else:
+                s = provider.raw('ANALYSIS', pulse, pointname)
                 # Data appear to be valid; proceed
                 printd('Processing data for probe group {}; {}'.format(corner.upper(), pointname), topic='machine')
 
                 r, z, _ = east_coords_along_wall(s, rlim, zlim, corner)
+            except Exception:
+                printd('Failed MDSplus data check for {}; data invalid. Halting.'.format(pointname), topic='machine')
 
                 numbering_starts_at = 1
                 for i in range(len(r)):

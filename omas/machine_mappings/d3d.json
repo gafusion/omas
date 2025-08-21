@@ -17,6 +17,9 @@
   "get_all": true,
   "revision": "BLESSED"
  },
+ "__toksearch_overrides__": [
+  "_efit_toksearch"
+ ],
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
  },
@@ -232,6 +235,10 @@
  "core_profiles.profiles_1d.:.ion.:.label": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.ion.:.rotation_frequency_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.ion.:.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
@@ -387,6 +394,12 @@
  },
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
+ "equilibrium.time_slice.:.profiles_1d.volume": {
+  "PYTHON": "add_volume_profile(ods, )"
+ },
+ "equilibrium.time_slice.:.profiles_1d.dvolume_dpsi": {
+  "PYTHON": "add_volume_profile(ods, )"
  },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
@@ -692,6 +705,12 @@
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "pf_active.coil.:.element.:.turns_with_sign": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.function.:": {
+  "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "pf_active.coil.:.function.:.index": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
  "pf_active.coil.:.identifier": {
