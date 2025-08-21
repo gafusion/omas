@@ -4,7 +4,6 @@
 '''
 from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
 from scipy.integrate import cumulative_trapezoid
-import contourpy
 from .omas_utils import *
 from .omas_core import ODS
 __all__ = []
@@ -646,6 +645,7 @@ def equilibrium_profiles_2d_map(
 
 @add_to__ODS__
 def add_volume_profile(ods, grid_index=0):
+    import contourpy
     with omas_environment(ods, cocosio=11):
         cocos = define_cocos(11)
         for time_index in range(len(ods['equilibrium']['time'])):
