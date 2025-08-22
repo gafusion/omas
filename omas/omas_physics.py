@@ -523,7 +523,7 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
                     ods[f'equilibrium.time_slice.{time_index}.profiles_1d.f']
                 )
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask] = (
-                    f_spl(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'][mask] / r[mask])
+                    f_spl(ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi'][mask]) / r[mask]
                 )
             return ods
         else:
@@ -638,7 +638,7 @@ def equilibrium_profiles_2d_map(
     )
     if return_cache:
         cache = cache_interpolator(cache, time_index, grid_index, quantity, interpolator)
-        mapped_values[mask] = cache[time_index][grid_index][quantity](dim1[mask], dim2[mask], grid=False)
+        mapped_values[mask] = interpolator(dim1[mask], dim2[mask], grid=False)
         return mapped_values, cache
     mapped_values[mask] = interpolator(dim1[mask], dim2[mask], grid=False)
     return mapped_values

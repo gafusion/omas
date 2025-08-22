@@ -1689,6 +1689,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
     ods["wall.time"] = [0.0]
+    ods["wall.ids_properties.homogeneous_time"] = 1
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194306)

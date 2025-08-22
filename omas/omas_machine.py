@@ -146,7 +146,8 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                         failed_locations[key] = e.TDI
                 except TreeNNF as e:
                     failed_locations[key] = e.TDI
-                    if key != 'equilibrium.time_slice.:.constraints.j_tor.:.measured':
+                    if key not in ['equilibrium.time_slice.:.constraints.j_tor.:.measured',
+                                   'equilibrium.time_slice.:.constraints.j_tor.:']:
                         raise e
         if len(failed_locations) > 0:
             import yaml
