@@ -202,6 +202,40 @@ class TestOmasPhysics(UnittestCaseOmas):
         ods = ODS().sample_equilibrium()
         ods.physics_current_from_eq(0)
         return
+    
+    def test_derive_equilibrium_profiles_2d_quantity(self):
+        # Cannot use the sample equilibrium because the resolution is horrendous (17x17)
+        sample_path = os.path.dirname(__file__)
+        sample_path = os.path.join(sample_path, os.pardir, "samples", "D3D_standard_Lmode.json")
+        ods = load_omas_json(sample_path)
+        with omas_environment(ods, cocosio=11):
+            for (b_component, atol) in zip(['b_field_r', 'b_field_tor', 'b_field_z'], [5.e-3, 0.1, 5.e-3]):
+                print(f"Testing {b_component}")
+                b_check = copy.copy(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
+                del(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
+                ods = ods.physics_derive_equilibrium_profiles_2d_quantity(0, 0, b_component, 
+                                                                                force_linear_interpolation=True)
+                check = numpy.abs(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}']-b_check)
+                if numpy.any(check>atol):
+                    print(check[check>atol])
+                assert numpy.allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check, atol=atol)
+
+
+    def test_add_volume_profile(self):
+        sample_path = os.path.dirname(__file__)
+        sample_path = os.path.join(sample_path, os.pardir, "samples", "D3D_standard_Lmode.json")
+        ods = load_omas_json(sample_path)
+        volume_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.volume'])
+        dvolume_dpsi_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        del(ods['equilibrium.time_slice.0.profiles_1d.volume'])
+        del(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
+        ods.physics_add_volume_profile()
+        check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.volume'] - volume_check))
+        assert check < 1.e-3 * numpy.max(volume_check)
+        check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'] - dvolume_dpsi_check))
+        assert numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'] - dvolume_dpsi_check)) <  5.e-3 * numpy.max(dvolume_dpsi_check)
+        
+        
 
     def test_define_cocos(self):
         cocos_none = define_cocos(None)
@@ -452,6 +486,7 @@ class TestOmasPhysics(UnittestCaseOmas):
             index = numpy.argsort(psi11)
             assert numpy.allclose(ods['equilibrium.time_slice.0.profiles_1d.pressure'], numpy.interp(psi11__, psi11[index], p[index]))
         return
+
 
     @unittest.skipIf(failed_PINT, str(failed_PINT))
     def test_handle_units(self):
