@@ -12,8 +12,8 @@ import warnings
 from uncertainties.unumpy import uarray, std_devs, nominal_values
 import pickle
 import xarray
-from omas.omas_machine import mdstree, mdsvalue
 from omas.omas_core import ODS
+from omas.utilities.omas_mds import MdsProvider
 
 
 def d3d_cer(
@@ -98,6 +98,7 @@ def d3d_cer(
         return True
 
     def get_data(mdsstring, verbose, get_time=False):
+        provider = MdsProvider('d3d')
         if verbose:
             print_fun = printi
         else:
@@ -107,7 +108,7 @@ def d3d_cer(
         mdsstring = mdsstring.lower()
         if (mdsstring.find('.calibration') >= 0) or (mdsstring.find('date_loaded') >= 0) or (nc_data_loc is None):
             print_fun(' ' * 6 + 'System: %s \t Measurement: %s \t MDS: %s' % (sys_name, mdsstring.split('.')[-1], mdsstring))
-            tmp = mdsvalue('d3d', treename, shot, TDI=mdsstring)
+            tmp = provider.raw(treename, shot, TDI=mdsstring)
             # Check if the returned data is valid, if not, return None
             try:
                 dat = tmp.data()
@@ -686,12 +687,13 @@ def d3d_cer(
     # Get the beam powers as a function of time
     # Here we are using pinjf which is power in watts
     # This should be replaced with a dedicated get_NBI at some point
+    provider = MdsProvider('d3d')
     if 'beam_dat_{}'.format(shot) not in scratch:
         beam_dat = {}
         for i in ['30', '33', '21', '15']:
             for j in ['l', 'r']:
                 try:
-                    tmp = mdsvalue('d3d', 'nb', shot, TDI='.nb{}{}.pinjf_{}{}'.format(i, j, i, j))
+                    tmp = provider.raw('d3d', 'nb', shot, TDI='.nb{}{}.pinjf_{}{}'.format(i, j, i, j))
                     beam_dat['{}{}'.format(i, j)] = [tmp.dim_of(0), tmp.data()]
                 except Exception:
                     raise
@@ -700,7 +702,7 @@ def d3d_cer(
     beam_dat_dict = scratch['beam_dat_{}'.format(shot)]
 
     # Get the CER tree structure through OMFIT so we can find the maximum channel number
-    CER_tree = mdstree('d3d', treename, shot)
+    CER_tree = provider.mds_tree(treename, shot)
 
     # Loop through each of the systems (imp vert, imp tang, MI tang)
     pinj_dict = scratch.setdefault('pinj', {})

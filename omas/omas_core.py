@@ -23,7 +23,7 @@ __all__ = [
     'save_omas_imas', 'load_omas_imas', 'through_omas_imas', 'load_omas_iter_scenario', 'browse_imas',
     'save_omas_s3', 'load_omas_s3', 'through_omas_s3', 'list_omas_s3', 'del_omas_s3',
     'machine_expression_types', 'machines', 'machine_mappings', 'load_omas_machine',
-    'machine_mapping_function', 'test_machine_mapping_functions', 'mdstree', 'mdsvalue',
+    'machine_mapping_function', 'test_machine_mapping_functions',
     'omas_dir', 'imas_versions', 'latest_imas_version', 'omas_info', 'omas_info_node', 'get_actor_io_ids',
     'omas_rcparams', 'rcparams_environment', 'omas_testdir', '__version__',
     'latexit', 'OmasDynamicException'
@@ -205,6 +205,8 @@ class ODS(MutableMapping):
         unitsio=None,
         uncertainio=None,
         dynamic=None,
+        mds_backend=None,
+        except_fetch_failures=True
     ):
         """
         :param imas_version: IMAS version to use as a constrain for the nodes names
@@ -222,6 +224,11 @@ class ODS(MutableMapping):
         :param uncertainio: ODS will return data with uncertainties if True
 
         :param dynamic: internal keyword used for dynamic data loading
+
+        :param mds_backend: MDS backend to use ('mdsplus' or 'toksearch'). If None, uses global default
+
+        :param except_fetch_failures: Setting this to True will allow smooth operation when fetching potentially missing data.
+                                      The main purpose of except_fetch_failures=False is for regression tests
         """
         self.omas_data = None
         self._consistency_check = consistency_check
@@ -235,6 +242,49 @@ class ODS(MutableMapping):
         self.unitsio = unitsio
         self.uncertainio = uncertainio
         self.dynamic = dynamic
+        
+        # Store MDS backend choice for this ODS instance
+        if mds_backend is not None:
+            from .utilities.omas_mds import get_mds_backend
+            valid_backends = ['mdsplus', 'toksearch']
+            if mds_backend not in valid_backends:
+                raise ValueError(f"mds_backend must be one of {valid_backends}, got '{mds_backend}'")
+        self.mds_backend = mds_backend
+        self.except_fetch_failures = except_fetch_failures
+        # Cache for MDS providers (server -> provider instance)
+        self._mds_providers = {}
+
+    def get_mds_backend(self):
+        """
+        Get the effective MDS backend for this ODS instance
+        
+        :return: backend name ('mdsplus' or 'toksearch')
+        """
+        if self.mds_backend is not None:
+            return self.mds_backend
+        else:
+            # Fall back to global default
+            from .utilities.omas_mds import get_mds_backend
+            return get_mds_backend()
+    
+    def get_mds_provider(self, server):
+        """
+        Get or create a cached MDS provider for the given server
+        
+        :param server: server name/address
+        :return: MDS provider instance (mds_provider or toksearch_provider)
+        """
+        # Check if we already have a cached provider for this server
+        if server in self._mds_providers:
+            return self._mds_providers[server]
+        
+        # Create new provider and cache it
+        from .utilities.omas_mds import create_mds_provider
+        backend = self.get_mds_backend()
+        provider = create_mds_provider(server, backend=backend, 
+                                       except_fetch_failures=self.except_fetch_failures)
+        self._mds_providers[server] = provider
+        return provider
 
     def homogeneous_time(self, key='', default=True):
         """
@@ -1564,6 +1614,11 @@ class ODS(MutableMapping):
 
         for c, k in enumerate(key):
             # h.omas_data is None when dict/list behaviour is not assigned
+            if type(h) == CodeParameters:
+                for item in h.flat().keys():
+                    if item == l2o(key):
+                        return True
+                return False
             if h.omas_data is not None and k in h.keys(dynamic=0):
                 h = h.__getitem__(k, False)
                 continue  # continue to the next key
@@ -1735,18 +1790,25 @@ class ODS(MutableMapping):
                     tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
-    def __eq__(self, ods):
-        for key in self.keys():
-            if type(self[key]) == ODS:
-                if self[key] != ods[key]:
-                    return False
-            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
-                if not numpy.allclose(self[key],ods[key]):
-                    return False
-            else:
-                if self[key] != ods[key]:
-                    return False
-        return True
+    def __eq__(self, comp):
+        if type(comp) != ODS:
+            # For comparison against non-ODS we use the mutuable mapping __eq__ method
+            result = super().__eq__(comp)
+            # If this does not have a valid result we return False
+            if result == NotImplemented:
+                return False
+        else:
+            for key in self.keys():
+                if type(self[key]) == ODS:
+                    if self[key] != comp[key]:
+                        return False
+                elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                    if not numpy.allclose(self[key],comp[key]):
+                        return False
+                else:
+                    if self[key] != comp[key]:
+                        return False
+            return True
     
     def find_mismatching_locations(self, ods, mismatching_locations):
         for key in self.keys():
@@ -2226,7 +2288,7 @@ class ODS(MutableMapping):
             elif ext == 'machine':
                 from omas.omas_machine import dynamic_omas_machine
 
-                self.dynamic = dynamic_omas_machine(*args, **kw)
+                self.dynamic = dynamic_omas_machine(*args, **kw, mds_backend=self.mds_backend)
 
             self.dynamic.open()
             return self

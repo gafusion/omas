@@ -2,14 +2,15 @@
 
 import subprocess
 import functools
+import numpy as np
 import shutil
 from omas.omas_utils import *
 from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from omas.omas_physics import cocos_signals
-from omas.machine_mappings import d3d, nstx, nstxu, east
+from omas.machine_mappings import d3d, nstx, nstxu, east, efit, _common
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id
+from omas.utilities.omas_mds import check_for_pulse_id
 try:
     from MDSplus.connection import MdsIpException
     from MDSplus.mdsExceptions import TreeNODATA, TreeNNF
@@ -27,6 +28,7 @@ __all__ = [
     'machine_mappings',
     'load_omas_machine',
     'test_machine_mapping_functions',
+    'test_machine_mappings',
     'reload_machine_mappings'
 ]
 
@@ -113,7 +115,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
 
     location = l2o(p2l(location))
     for branch in [branch, 'master']:
-        mappings = machine_mappings(machine, branch, user_machine_mappings)
+        mappings = machine_mappings(machine, branch, user_machine_mappings, mds_backend=ods.mds_backend)
         options_with_defaults = copy.copy(mappings['__options__'])
         options_with_defaults.update(options)
         options_with_defaults.update({'machine': machine, 'pulse': pulse, 'location': location})
@@ -128,7 +130,7 @@ def machine_to_omas(ods, machine, pulse, location, options={}, branch='', user_m
                 print(f"Failed to load {location} from head. Attempting to resolve using the master branch.")
                 print(f"Error was:")
                 print(e)
-    idm = (machine, branch)
+    idm = (machine, branch, ods.mds_backend)
     failed_locations = {}
     if location.endswith(".*"):
         temp_cache = cache
@@ -189,21 +191,28 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
         if isinstance(mapped['COCOSIO'], int):
             cocosio = mapped['COCOSIO']
     elif 'COCOSIO_PYTHON' in mapped:
-        call = mapped['COCOSIO_PYTHON'].format(**options_with_defaults)
+        call = copy.copy(mapped['COCOSIO_PYTHON'].format(**options_with_defaults))
         if cache and call in cache:
             cocosio = cache[call]
         else:
-            namespace = {}
-            namespace.update(_namespace_mappings[idm])
-            namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            tmp = compile(call, machines(machine, branch)[:-5] + '.py', 'eval')
-            cocosio = eval(tmp, namespace)
+            if hasattr(_common, call.split("(")[0]):
+                # Cannot update mappings here either because we are using a function that is outside of {machine}.py
+                call_w_update_mapping = "_common" + "." + call
+            elif call.startswith('efit.'):
+                # Never update these mappings since they are hand generated (and update_mapping does not work here anyway)
+                call_w_update_mapping = call[:-1] + ", update_callback=None)"
+            else:
+                call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
+            local_vars = {"ods": ods, "cocosio": cocosio}
+            exec('cocosio = ' + call_w_update_mapping, globals(), local_vars)
+            cocosio = local_vars["cocosio"]
             if isinstance(cache, dict):
                 cache[call] = cocosio
     elif 'COCOSIO_TDI' in mapped:
         TDI = mapped['COCOSIO_TDI'].format(**options_with_defaults)
         treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-        cocosio = int(mdsvalue(machine, treename, pulse, TDI).raw())
+        provider = ods.get_mds_provider(machine)
+        cocosio = int(provider.raw(treename, pulse, TDI))
 
     # CONSTANT VALUE
     if 'VALUE' in mapped:
@@ -223,21 +232,23 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
 
     # PYTHON
     elif 'PYTHON' in mapped:
-        call = mapped['PYTHON'].format(**options_with_defaults)
+        call = copy.copy(mapped['PYTHON'].format(**options_with_defaults))
         # python functions tend to set multiple locations at once
         # it is thus very beneficial to cache that
         if cache and call in cache:
             ods = cache[call]
         else:
-            namespace = {}
-            namespace.update(_namespace_mappings[idm])
-            namespace['ods'] = ODS()
-            namespace['__file__'] = machines(machine, branch)[:-5] + '.py'
-            printd(f"Calling `{call}` in {os.path.basename(namespace['__file__'])}", topic='machine')
             # Add the callback for mapping updates
-            # By supplyinh the function to the decorator we avoid a ringinclusion
-            call_w_update_mapping = call[:-1] + ", update_callback=update_mapping)"
-            exec( machine + "." + call_w_update_mapping)
+            # By supplying the function to the decorator we avoid a ring inclusion
+            if call.startswith('efit.'):
+                # Already comes with the module
+                call_w_update_mapping = call
+            else:
+                # Add machine specific module
+                call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
+            local_vars = {"ods": ods}
+            exec("ods = " +  call_w_update_mapping, globals(), local_vars)
+            ods = local_vars['ods']
             if isinstance(cache, dict):
                 cache[call] = ods
         if location.endswith(':'):
@@ -257,7 +268,8 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                 pulse_id = pulse
             TDI = mapped['TDI'].format(**options_with_defaults)
             treename = mapped['treename'].format(**options_with_defaults) if 'treename' in mapped else None
-            data0 = data = mdsvalue(machine, treename, pulse_id, TDI).raw()
+            provider = ods.get_mds_provider(machine)
+            data0 = data = provider.raw(treename, pulse_id, TDI)
             if data is None:
                 raise ValueError('data is None')
         except Exception as e:
@@ -316,7 +328,7 @@ _user_machine_mappings = {}
 _python_tdi_namespace = {}
 
 
-def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False):
+def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_mappings=False, raise_errors=False, mds_backend=None):
     """
     Function to load the json mapping files (local or remote)
     Allows for merging external mapping rules defined by users.
@@ -338,7 +350,7 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
     if user_machine_mappings is None:
         user_machine_mappings = {}
 
-    idm = (machine, branch)
+    idm = (machine, branch, mds_backend)
 
     if (
         return_raw_mappings
@@ -361,6 +373,9 @@ def machine_mappings(machine, branch, user_machine_mappings=None, return_raw_map
         go_deep = ['__cocos_rules__', '__options__']
         mappings = {k: {} for k in go_deep}
         mappings.setdefault('__include__', ['_common'])
+        if mds_backend is not None and mds_backend == 'toksearch':
+            if '_efit' in top.get('__include__', ['_common']):
+                top['__include__'] += top.get('__toksearch_overrides__', [])
         if not return_raw_mappings:
             for item in top.get('__include__', ['_common']):
                 include_filename = os.path.split(filename)[0] + os.sep + f'{item}.json'
@@ -549,7 +564,8 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
         m = os.path.splitext(os.path.split(filename)[1])[0]
-        if not m.startswith('_'):
+        # Allow backend-specific mappings (e.g., _efit_toksearch.json) alongside regular machine mappings
+        if not m.startswith('_') or m.startswith('_efit_toksearch'):
             _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines
@@ -625,13 +641,17 @@ def update_mapping(machine, location, value, cocosio=None, default_options=None,
 
 
 
-def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace):
+def test_machine_mapping_functions(machine, __all__, global_namespace, local_namespace, compare_to_toksearch=False):
     """
     Function used to test python mapping functions
 
-    :param __all__: list of functionss to test
+    :param __all__: list of functions to test
 
     :param namespace: testing namespace
+    
+    :param compare_to_toksearch: if True, execute functions twice (once with mdsplus, 
+                                once with toksearch) and compare time data for consistency
+                                
     """
     from pprint import pprint
 
@@ -641,38 +661,75 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
     # call machine mapping to make sure the json file is properly formatted
     # machine = os.path.splitext(os.path.split(local_namespace['__file__'])[1])[0]
     print(f'Sanity check of `{machine}` mapping files: ... ', end='')
-    machine_mappings(machine, '', raise_errors=True)
+    if compare_to_toksearch:
+        # Toksearch backend is additive so only need to do this with it
+        machine_mappings(machine, '', raise_errors=True, mds_backend='toksearch')
+    else:
+        machine_mappings(machine, '', raise_errors=True)
     print('OK')
 
     __regression_arguments__ = global_namespace['__regression_arguments__']
+    
+    def _execute_function_with_backend(func_name, regression_kw, backend='mdsplus'):
+        """Helper function to execute a mapping function with specified backend"""
+        ods = ODS(mds_backend=backend)
+        func = eval(func_name, global_namespace, local_namespace)
+        try:
+            try:
+                regression_kw_copy = regression_kw.copy()
+                regression_kw_copy["update_callback"] = update_mapping
+                func(ods, **regression_kw_copy)
+            except Exception:
+                raise
+        except TypeError as _excp:
+            if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
+                raise _excp.__class__(
+                    str(_excp)
+                    + '\n'
+                    + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
+                )
+            else:
+                raise
+        return ods
+
+    def _compare_backends(ref_ods, func_name, regression_kw):
+        """Compare function execution between mdsplus and toksearch backends"""
+        print(f"\n--- Backend Comparison for {func_name} ---")
+        
+        # Execute with mdsplus backend
+        print("  Executing with mdsplus backend...")
+        toks_ods = _execute_function_with_backend(func_name, regression_kw, 'toksearch')
+        
+        for path in ref_ods.paths():
+            if issubclass(type(ref_ods[path]), np.ndarray):
+                assert len(ref_ods[path]) == len(toks_ods[path]), f"Different time array lengths: {len(ref_ods[path])} vs {toks_ods[path]}"
+        
+                # Compare values (allow small numerical differences)
+                assert numpy.allclose(ref_ods[path], toks_ods[path], rtol=1e-10, atol=1e-12, equal_nan=True), f"{path} data differs between backends (max diff: {numpy.max(numpy.abs(ref_ods[path] -  toks_ods[path])):.2e})"
+            elif type(ref_ods[path]) != str and np.isnan(ref_ods[path]):
+                assert np.isnan(toks_ods[path]), f"{path} data differs between backends. Toksearch does not reproduce nan"
+            else:
+                assert ref_ods[path] == toks_ods[path], f"{path} data differs between backends. {ref_ods[path]} {toks_ods[path]}"
+        print(f"    ✅ Data MATCHES between backends")
+    
     try:
+        # Report what functions are being tested
+        
         for func_name in __all__:
             regression_kw = {item: value for item, value in __regression_arguments__.get(func_name, {}).items() if item != '__all__'}
             print('=' * len(func_name))
             print(func_name)
             pprint(regression_kw)
             print('=' * len(func_name))
-            ods = ODS() #consistency_check= not break_schema
-            func = eval(func_name, global_namespace, local_namespace)
-            try:
-                try:
-                    regression_kw["update_callback"] = update_mapping
-                    func(ods, **regression_kw)
-                except Exception:
-                    raise
-            except TypeError as _excp:
-                if re.match('.*missing [0-9]+ required positional argument.*', str(_excp)):
-                    raise _excp.__class__(
-                        str(_excp)
-                        + '\n'
-                        + 'For testing purposes, make sure to provide default arguments for your mapping functions via the decorator @machine_mapping_function(__regression_arguments__, ...)'
-                    )
-                else:
-                    raise
+            
+            # Execute with default backend for main test
+            ods = _execute_function_with_backend(func_name, regression_kw)
+            
             tmp = numpy.unique(list(map(o2u, ods.flat().keys()))).tolist()
             if not len(tmp):
                 print('No data assigned to ODS')
                 return
+                
             n = max(map(lambda x: len(x), tmp))
             for item in tmp:
                 try:
@@ -681,6 +738,407 @@ def test_machine_mapping_functions(machine, __all__, global_namespace, local_nam
                         print(f'{item.ljust(n)}   {numpy.array(ods[item]).shape}')
                 except Exception:
                     print(f'{item.ljust(n)}   mixed')
+            
+            # Optional backend comparison - skip functions that require OMFIT
+            if compare_to_toksearch and machine == 'd3d':  # Only for d3d for now
+                _compare_backends(ods, func_name, regression_kw)
+    finally:
+        if old_OMAS_DEBUG_TOPIC is None:
+            del os.environ['OMAS_DEBUG_TOPIC']
+        else:
+            os.environ['OMAS_DEBUG_TOPIC'] = old_OMAS_DEBUG_TOPIC
+
+
+def test_machine_mappings(machine, pulse, compare_backends=False, options=None, fail_fast=False, checkpoint_filename=None):
+    """
+    Test all JSON mappings for a machine with both backends (mdsplus vs toksearch)
+    
+    This function tests the actual mappings defined in JSON files (including included 
+    files like _efit.json), not just Python functions.
+    
+    :param machine: machine name (e.g., 'd3d')
+    :param pulse: pulse number for testing
+    :param compare_backends: if True, compare mdsplus vs toksearch results
+    :param options: options dictionary to pass to machine_to_omas
+    :param fail_fast: if True, raise error immediately on first failure (for debugging)
+    :param checkpoint_filename: path to YAML checkpoint file for resuming tests (default: None, disables checkpointing)
+    """
+    from pprint import pprint
+    import numpy
+    import yaml
+    import tempfile
+    import shutil
+    from datetime import datetime
+    
+    old_OMAS_DEBUG_TOPIC = os.environ.get('OMAS_DEBUG_TOPIC', None)
+    os.environ['OMAS_DEBUG_TOPIC'] = 'machine'
+    
+    # Set up checkpointing (only if explicitly requested)
+    checkpoint_enabled = checkpoint_filename is not None
+    
+    def load_checkpoint():
+        """Load existing checkpoint file or create new one (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return {'tested_locations': {}}
+            
+        try:
+            with open(checkpoint_filename, 'r') as f:
+                checkpoint = yaml.safe_load(f) or {}
+        except (FileNotFoundError, yaml.YAMLError):
+            checkpoint = {}
+        
+        # Initialize checkpoint structure
+        if 'test_config' not in checkpoint:
+            checkpoint['test_config'] = {
+                'machine': machine,
+                'pulse': pulse,
+                'compare_backends': compare_backends,
+                'timestamp': datetime.now().isoformat()
+            }
+        if 'tested_locations' not in checkpoint:
+            checkpoint['tested_locations'] = {}
+        
+        return checkpoint
+    
+    def save_checkpoint(checkpoint):
+        """Atomically save checkpoint to prevent corruption (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+            
+        try:
+            # Write to temporary file first
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as temp_f:
+                yaml.dump(checkpoint, temp_f, default_flow_style=False, sort_keys=True)
+                temp_filename = temp_f.name
+            
+            # Atomically move temp file to final location
+            shutil.move(temp_filename, checkpoint_filename)
+        except Exception as e:
+            print(f"Warning: Could not save checkpoint: {e}")
+    
+    def mark_location_testing(checkpoint, location, backend, status='testing'):
+        """Mark a location as currently being tested (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+        if location not in checkpoint["tested_locations"]:
+            checkpoint['tested_locations'][location] = {}
+
+        checkpoint['tested_locations'][location][backend] = {
+            'status': status,
+            'timestamp': datetime.now().isoformat()
+        }
+        save_checkpoint(checkpoint)
+    
+    def mark_location_result(checkpoint, location, backend, status, error_msg=None, detailed_report=None, side_effects=None):
+        """Mark final test result for a location (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return
+        if location not in checkpoint["tested_locations"]:
+            checkpoint['tested_locations'][location] = {}
+        result = {
+            'status': status,
+            'timestamp': datetime.now().isoformat()
+        }
+        if error_msg:
+            result['error'] = error_msg[:200]  # Truncate long errors
+        if detailed_report:
+            result['detailed_report'] = detailed_report
+        if side_effects:
+            result['side_effects'] = side_effects
+        checkpoint['tested_locations'][location][backend] = result
+        save_checkpoint(checkpoint)
+    
+    def should_skip_location(checkpoint, location):
+        """Check if location was already successfully tested (only if checkpointing enabled)"""
+        if not checkpoint_enabled:
+            return False
+            
+        loc_data = checkpoint['tested_locations'].get(location, {})
+        return loc_data.get('status') == 'success'
+    
+    # Load existing checkpoint (or empty structure if disabled)
+    checkpoint = load_checkpoint()
+    
+    print(f'Testing JSON mappings for {machine} machine (pulse {pulse})')
+    if checkpoint_enabled:
+        print(f'Checkpoint file: {checkpoint_filename}')
+    else:
+        print('Checkpointing disabled (no checkpoint file provided)')
+    
+    def normalize_path_for_side_effects(path_tuple):
+        """
+        Normalize ODS path by replacing numerical indices with ':' 
+        to avoid spam from individual array indices
+        
+        Example: ('equilibrium', 'time_slice', 50, 'boundary_separatrix', 'strike_point', 0, 'r')
+        becomes: ('equilibrium', 'time_slice', ':', 'boundary_separatrix', 'strike_point', ':', 'r')
+        """
+        normalized = []
+        for element in path_tuple:
+            if isinstance(element, (int, float)) and str(element).replace('.', '').replace('-', '').isdigit():
+                normalized.append(':')
+            else:
+                normalized.append(element)
+        return tuple(normalized)
+
+    def _load_mapping_with_backend(machine, pulse, location, backend='mdsplus', options=options, ods=None):
+        """Helper to load a single mapping with specified backend"""
+        if ods is None:
+            ods = ODS(mds_backend=backend, except_fetch_failure=False)
+        
+        # Capture ODS keys before data fetch (for side effects tracking)
+        keys_before = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+        
+        # Initialize detailed report and side effects
+        detailed_report = None
+        side_effects = None
+            
+        if fail_fast:
+            # Don't catch exceptions in fail_fast mode - let debugger stop at original error
+            ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
+            
+            # Capture side effects and detailed report after successful fetch
+            keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+            new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+            side_effects = {
+                'count': len(new_keys),
+                'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+            }
+            
+            # Get detailed report from provider's last_status if available
+            provider = ods.get_mds_provider(machine)
+            if hasattr(provider, 'last_status'):
+                detailed_report = provider.last_status
+            
+            return ods, data_info, None, detailed_report, side_effects
+        else:
+            # Catch exceptions for summary reporting
+            try:
+                ods, data_info = machine_to_omas(ods, machine, pulse, location, options)
+                
+                # Capture side effects and detailed report after successful fetch
+                keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+                new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+                side_effects = {
+                    'count': len(new_keys),
+                    'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+                }
+                
+                # Get detailed report from provider's last_status if available
+                provider = ods.get_mds_provider(machine)
+                if hasattr(provider, 'last_status'):
+                    detailed_report = provider.last_status
+                
+                return ods, data_info, None, detailed_report, side_effects
+            except Exception as e:
+                # Even on failure, capture what we can
+                keys_after = set([normalize_path_for_side_effects(tuple(k)) for k in ods.paths()])
+                new_keys = keys_after - keys_before - set([normalize_path_for_side_effects(tuple(p2l(location)))])
+                side_effects = {
+                    'count': len(new_keys),
+                    'normalized_paths': sorted(['.'.join(str(elem) for elem in path) for path in new_keys])
+                }
+                
+                # Try to get detailed report even on failure
+                try:
+                    provider = ods.get_mds_provider(machine)
+                    if hasattr(provider, 'last_status'):
+                        detailed_report = provider.last_status
+                except:
+                    detailed_report = None
+                
+                return ods, None, e, detailed_report, side_effects
+    
+    try:
+        # Load all mappings for the machine
+        mappings_mds = machine_mappings(machine, '', mds_backend='mdsplus') 
+        
+        # Get all mapping locations (exclude internal keys)
+        all_locations = [loc for loc in mappings_mds.keys() 
+                        if not loc.startswith('__') and not loc.endswith('__')]
+        
+        # Group mappings by IDS (top-level identifier)
+        ids_groups = {}
+        for location in all_locations:
+            if location[-1] in [":", "*"]:
+                # Skip structure declarations - they'll be tested implicitly
+                continue
+            ids_name = location.split('.')[0]  # 'equilibrium', 'core_profiles', etc.
+            if ids_name not in ids_groups:
+                ids_groups[ids_name] = []
+            ids_groups[ids_name].append(location)
+        
+        def mapping_sort_key(location):
+            """Sort mappings for logical loading order"""
+            parts = location.split('.')
+            # Convert numeric parts to zero-padded strings for proper sorting
+            return [part if not part.isdigit() else f"{int(part):03d}" for part in parts]
+        
+        # Sort mappings within each IDS group
+        for ids_name in ids_groups:
+            ids_groups[ids_name].sort(key=mapping_sort_key)
+        
+        successful_tests = 0
+        failed_tests = 0
+        skipped_tests = 0
+        
+        # Lists to track failures for detailed reporting
+        mdsplus_failures = []
+        toksearch_failures = []
+        comparison_failures = []
+        skipped_mappings = []
+        
+        # Test each IDS group with persistent ODS
+        for ids_name, locations in ids_groups.items():
+            print(f'\n=== Testing IDS: {ids_name} ({len(locations)} mappings) ===')
+            
+            # Create persistent ODS instances for this IDS
+            persistent_ods_mds = ODS(mds_backend='mdsplus')
+            persistent_ods_toks = ODS(mds_backend='toksearch') if compare_backends else None
+            
+            for location in locations:
+                # Check if location was already successfully tested
+                if should_skip_location(checkpoint, location):
+                    print(f'\n--- Skipping: {location} (already tested successfully) ---')
+                    successful_tests += 1
+                    skipped_tests += 1
+                    continue
+                
+                print(f'\n--- Testing: {location} ---')
+                
+                # Mark location as being tested (checkpoint before test for fail_fast safety)
+                mark_location_testing(checkpoint, location, 'mdsplus', f'testing')
+                
+                # Test with mdsplus backend using persistent ODS
+                persistent_ods_mds, data_mds, error_mds, detailed_report_mds, side_effects_mds = _load_mapping_with_backend(
+                    machine, pulse, location, 'mdsplus', ods=persistent_ods_mds
+                )
+                
+                if error_mds:
+                    error_msg = str(error_mds)[:100]
+                    print(f'  ❌ MDSplus failed: {error_msg}...')
+                    failed_tests += 1
+                    mdsplus_failures.append((location, error_msg))
+                    mark_location_result(checkpoint, location, 'mdsplus', 'failed', error_msg, detailed_report_mds, side_effects_mds)
+                    continue
+                    
+                print(f'  ✅ MDSplus loaded successfully')
+                mark_location_result(checkpoint, location, 'mdsplus', 'success', None, detailed_report_mds, side_effects_mds)
+                
+                # Test with toksearch backend if requested
+                if compare_backends:
+                    mark_location_testing(checkpoint, location, 'toksearch', f'testing')
+                    persistent_ods_toks, data_toks, error_toks, detailed_report_toks, side_effects_toks = _load_mapping_with_backend(
+                        machine, pulse, location, 'toksearch', ods=persistent_ods_toks
+                    )
+                    
+                    if error_toks:
+                        error_msg = str(error_toks)[:100]
+                        print(f'  ❌ TokSearch failed: {error_msg}...')
+                        failed_tests += 1
+                        toksearch_failures.append((location, error_msg))
+                        mark_location_result(checkpoint, location, 'toksearch', 'failed', error_msg, detailed_report_toks, side_effects_toks)
+                        continue
+                    
+                    mark_location_result(checkpoint, location, 'toksearch', 'success', None, detailed_report_toks, side_effects_toks)
+                    print(f'  ✅ TokSearch loaded successfully')
+                    
+                    # Compare results between backends
+                    if fail_fast:
+                        # Don't catch exceptions in fail_fast mode
+                        if location in persistent_ods_mds.paths() and location in persistent_ods_toks.paths():
+                            mds_data = persistent_ods_mds[location]
+                            toks_data = persistent_ods_toks[location]
+                            
+                            if isinstance(mds_data, np.ndarray) and isinstance(toks_data, np.ndarray):
+                                if not numpy.allclose(mds_data, toks_data, rtol=1e-10, atol=1e-12, equal_nan=True):
+                                    print(f'  ⚠️  Data differs between backends')
+                                    raise AssertionError(f'Backend comparison failed for {location}: Array data mismatch')
+                            elif mds_data != toks_data:
+                                print(f'  ⚠️  Data differs between backends') 
+                                raise AssertionError(f'Backend comparison failed for {location}: Scalar data mismatch: {mds_data} vs {toks_data}')
+                        print(f'  ✅ Data matches between backends')
+                        mark_location_result(checkpoint, location, 'comparison', 'match')
+                    else:
+                        # Catch exceptions for summary reporting
+                        try:
+                            # Get the actual data path that was loaded
+                            if location in persistent_ods_mds.paths() and location in persistent_ods_toks.paths():
+                                mds_data = persistent_ods_mds[location]
+                                toks_data = persistent_ods_toks[location]
+                                
+                                if isinstance(mds_data, np.ndarray) and isinstance(toks_data, np.ndarray):
+                                    if not numpy.allclose(mds_data, toks_data, rtol=1e-10, atol=1e-12, equal_nan=True):
+                                        print(f'  ⚠️  Data differs between backends')
+                                        failed_tests += 1
+                                        comparison_failures.append((location, 'Array data mismatch'))
+                                        mark_location_result(checkpoint, location, "comparison", 'failed', 'Array data mismatch')
+                                        continue
+                                elif mds_data != toks_data:
+                                    print(f'  ⚠️  Data differs between backends') 
+                                    failed_tests += 1
+                                    comparison_failures.append((location, f'Scalar data mismatch: {mds_data} vs {toks_data}'))
+                                    mark_location_result(checkpoint, location, 'comparison', 'failed', f'Scalar data mismatch: {mds_data} vs {toks_data}')
+                                    continue
+                            mark_location_result(checkpoint, location, 'comparison', 'match')        
+                            print(f'  ✅ Data matches between backends')
+                        except Exception as e:
+                            error_msg = str(e)[:50]
+                            print(f'  ⚠️  Could not compare data: {error_msg}...')
+                            comparison_failures.append((location, f'Comparison error: {error_msg}'))
+                            mark_location_result(checkpoint, location, 'comparison', 'failed', f'Comparison error: {error_msg}')
+                else:
+                    # Single backend mode - just MDSplus success
+                    pass
+                        
+                # Mark successful test
+                successful_tests += 1
+            
+        print(f'\n=== SUMMARY ===')
+        print(f'✅ Successful: {successful_tests}')
+        print(f'❌ Failed: {failed_tests}') 
+        print(f'⚠️  Skipped: {skipped_tests}')
+        print(f'📊 Total: {len(all_locations)}')
+        if checkpoint_enabled:
+            print(f'💾 Checkpoint: {checkpoint_filename}')
+        
+        # Detailed failure reporting
+        if mdsplus_failures:
+            print(f'\n🔴 MDSplus Failures ({len(mdsplus_failures)}):')
+            for location, error in mdsplus_failures:
+                print(f'  • {location}: {error}')
+                
+        if toksearch_failures:
+            print(f'\n🟠 TokSearch Failures ({len(toksearch_failures)}):')
+            for location, error in toksearch_failures:
+                print(f'  • {location}: {error}')
+                
+        if comparison_failures:
+            print(f'\n🟡 Backend Comparison Failures ({len(comparison_failures)}):')
+            for location, error in comparison_failures:
+                print(f'  • {location}: {error}')
+                
+        if skipped_mappings and len(skipped_mappings) > 10:  # Only show if many skipped
+            print(f'\n⚠️  Skipped Mappings (showing first 10 of {len(skipped_mappings)}):')
+            for location, reason in skipped_mappings[:10]:
+                print(f'  • {location}: {reason}')
+        elif skipped_mappings:
+            print(f'\n⚠️  Skipped Mappings ({len(skipped_mappings)}):')
+            for location, reason in skipped_mappings:
+                print(f'  • {location}: {reason}')
+        
+        # Analysis by mapping type
+        if failed_tests > 0:
+            print(f'\n📊 Failure Analysis:')
+            total_failures = len(mdsplus_failures) + len(toksearch_failures) + len(comparison_failures)
+            print(f'  • MDSplus backend: {len(mdsplus_failures)}/{total_failures} ({100*len(mdsplus_failures)/total_failures:.1f}%)')
+            print(f'  • TokSearch backend: {len(toksearch_failures)}/{total_failures} ({100*len(toksearch_failures)/total_failures:.1f}%)')
+            print(f'  • Backend comparison: {len(comparison_failures)}/{total_failures} ({100*len(comparison_failures)/total_failures:.1f}%)')
+        
+        # Raise error if any tests failed
+        if failed_tests > 0:
+        
+            raise AssertionError(f'Machine mapping tests failed: {failed_tests} out of {len(all_locations)} tests failed')
     finally:
         if old_OMAS_DEBUG_TOPIC is None:
             del os.environ['OMAS_DEBUG_TOPIC']
@@ -697,10 +1155,11 @@ class dynamic_omas_machine(dynamic_ODS):
     This class is not to be used by itself, but via the ODS.open() method.
     """
 
-    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True):
+    def __init__(self, machine, pulse, options={}, branch='', user_machine_mappings=None, verbose=True, mds_backend=None):
         self.kw = {'machine': machine, 'pulse': int(pulse), 'options': options, 'branch': branch, 'user_machine_mappings': user_machine_mappings}
         self.active = False
         self.cache = {}
+        self.mds_backend = mds_backend
 
     def open(self):
         printd('Dynamic open  %s' % self.kw, topic='dynamic')
@@ -719,7 +1178,7 @@ class dynamic_omas_machine(dynamic_ODS):
         if o2u(key) not in self.cache:
             printd('Dynamic read  %s: %s' % (self.kw, key), topic='dynamic')
             ods, _ = machine_to_omas(
-                ODS(),
+                ODS(mds_backend=self.mds_backend),
                 self.kw['machine'],
                 self.kw['pulse'],
                 o2u(key),
@@ -740,11 +1199,11 @@ class dynamic_omas_machine(dynamic_ODS):
         ulocation = o2u(location)
         if ulocation.endswith(':'):
             return False
-        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+        return ulocation in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend)
 
     def keys(self, location):
         ulocation = (o2u(location) + ".").lstrip('.')
-        if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings']):
+        if ulocation + ':' in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend):
             try:
                 return list(range(self[ulocation + ':']))
             except Exception as _excp:
@@ -754,7 +1213,7 @@ class dynamic_omas_machine(dynamic_ODS):
             tmp = numpy.unique(
                 [
                     convert_int(k[len(ulocation) :].lstrip('.').split('.')[0])
-                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'])
+                    for k in machine_mappings(self.kw['machine'], self.kw['branch'], self.kw['user_machine_mappings'], mds_backend=self.mds_backend)
                     if not k.startswith('_') and k.startswith(ulocation) and len(k[len(ulocation) :].lstrip('.').split('.')[0])
                 ]
             )
@@ -775,7 +1234,7 @@ def load_omas_machine(
 ):
     printd('Loading from %s' % machine, topic='machine')
     ods = cls(imas_version=imas_version, consistency_check=consistency_check)
-    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings) if not location.startswith('__')]:
+    for location in [location for location in machine_mappings(machine, branch, user_machine_mappings, mds_backend=ods.mds_backend) if not location.startswith('__')]:
         if location.endswith(':'):
             continue
         print(location)
