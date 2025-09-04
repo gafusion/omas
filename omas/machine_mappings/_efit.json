@@ -372,7 +372,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
-  "eval2TDI": "py2tdi(convert_from_mega_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ')",
+  "eval2TDI": "py2tdi(ensure_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.VZEROJ')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {

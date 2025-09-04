@@ -725,6 +725,15 @@ def structures_filenames(imas_version):
         }
     return _structures_filenames[imas_version]
 
+def rebuild_structure(id):
+    _structures_dict[id] = {}
+    for item in _structures[id]:
+        h = _structures_dict[id]
+        for step in i2o(item).split('.'):
+            if step not in h:
+                h[step] = {}
+            h = h[step]
+
 
 def load_structure(filename, imas_version):
     """
@@ -766,12 +775,7 @@ def load_structure(filename, imas_version):
 
         # generate hierarchical structure
         _structures_dict[id] = {}
-        for item in _structures[id]:
-            h = _structures_dict[id]
-            for step in i2o(item).split('.'):
-                if step not in h:
-                    h[step] = {}
-                h = h[step]
+        rebuild_structure(id)
 
     return _structures[id], _structures_dict[id]
 
