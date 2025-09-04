@@ -43,6 +43,16 @@ def check_for_pulse_id(pulse, treename, options_with_defaults):
 
 _mds_connection_cache = {}
 
+_last_open_tree = {} # Tracks the last opened tree to avoid reopening trees
+
+def open_tree_cached(conn, server, shot, tree):
+    global _last_open_tree
+    if (shot, tree) == _last_open_tree.get(server, None):
+        return
+    else:
+        conn.openTree(tree, shot)
+        _last_open_tree[server] = (shot, tree)
+
 # ===================
 # MDSplus functions
 # ===================
@@ -149,20 +159,21 @@ class mdsvalue(dict):
 
                 # try connecting and re-try on fail
                 for fallback in [0, 1]:
-                    if (self.server, self.treename, self.pulse) not in _mds_connection_cache:
-                        conn = MDSplus.Connection(self.server)
-                        if self.treename is not None:
-                            conn.openTree(self.treename, self.pulse)
-                        _mds_connection_cache[(self.server, self.treename, self.pulse)] = conn
+                    if self.server not in _mds_connection_cache:
+                        _mds_connection_cache[self.server] = MDSplus.Connection(self.server)
+                        _last_open_tree[self.server] = None
                     try:
-                        conn = _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        conn = _mds_connection_cache[self.server]
+                        if self.treename is not None:
+                            open_tree_cached(conn, self.server, self.pulse, self.treename)
                         break
                     except Exception as _excp:
-                        if (self.server, self.treename, self.pulse) in _mds_connection_cache:
-                            del _mds_connection_cache[(self.server, self.treename, self.pulse)]
+                        if self.server in _mds_connection_cache:
+                            _last_open_tree[self.server] = None
+                            _mds_connection_cache[self.server].reconnect()
                         if fallback:
                             raise
-
+                
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
                     TDI = {expr: expr for expr in TDI}

@@ -10,6 +10,8 @@ from omas.utilities.omas_mds import mdsvalue, mdstree
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
+from collections import OrderedDict
+from scipy.interpolate import InterpolatedUnivariateSpline
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -603,6 +605,7 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
             
+        beam['o_mode_fraction'] = 1.0 - xfrac
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
@@ -1470,24 +1473,31 @@ def ip_bt_dflux_data(ods, pulse):
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
+    # Need to use IMAS structure here
     sh = "core_profiles.profiles_1d"
-    for quant in ["ion.:.density_fit.psi_norm", "electrons.density_fit.psi_norm",
-                  "ion.:.temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
-                  "ion.:.velocity.toroidal_fit.psi_norm"]:
+    for quant in ["ion[:].density_fit.psi_norm", "electrons.density_fit.psi_norm",
+                  "ion[:].temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
+                  "ion[:].velocity.toroidal_fit.psi_norm"]:
         if "velocity" in quant:
             psi_struct = {"coordinates": "1- 1...N"}
         else:
-            psi_struct = {"coordinates": sh + ".:." + quant.replace("psi_norm", "rho_tor_norm")}
+            psi_struct = {"coordinates": sh + "[:]." + quant.replace("psi_norm", "rho_tor_norm")}
         psi_struct["documentation"] = "Normalized Psi for fit data."
         psi_struct["data_type"] =  "FLT_1D"
         psi_struct["units"] = ""
-        extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.{quant}"] = psi_struct
-    velo_struct = {"coordinates": sh + ".:." + "ion.:.velocity.toroidal_fit.psi_norm"}
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = psi_struct
+    velo_axis = {}
+    velo_axis["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
+    velo_axis["data_type"] =  "FLT_1D"
+    velo_axis["units"] = "m.s^-1"
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.rho_tor_norm"] = velo_axis
+    velo_struct = {"coordinates": sh + "[:]." + "ion[:].velocity.toroidal_fit.rho_tor_norm"}
     velo_struct["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
     velo_struct["data_type"] =  "FLT_1D"
     velo_struct["units"] = "m.s^-1"
-    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
-    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.psi_norm"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured_error_upper"] = velo_struct
     add_extra_structures(extra_structures)
 
 
@@ -1504,32 +1514,35 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         pulse_id = pulse
         if PROFILES_run_id is not None:
             pulse_id = int(str(pulse) + PROFILES_run_id)
-        omfit_profiles_node = '\\TOP.'
-        query = {
-            "electrons.density_thermal": "N_E",
-            "electrons.density_fit.measured": "RW_N_E",
-            "electrons.temperature": "T_E",
-            "electrons.temperature_fit.measured": "RW_T_E",
-            "ion[0].density_thermal": "N_D",
-            "ion[0].temperature": "T_D",
-            "ion[1].velocity.toroidal": "V_TOR_C",
-            "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
-            "ion[1].density_thermal": "N_C",
-            "ion[1].density_fit.measured": "RW_N_C",
-            "ion[1].temperature": "T_C",
-            "ion[1].temperature_fit.measured": "RW_T_C",
-        }
+        query = OrderedDict()
+        
+        # These quantities have an uncertainty associated with them
+        query["electrons.density_thermal"] = "N_E"
+        query["electrons.density_fit.measured"] = "RW_N_E"
+        query["electrons.temperature"] = "T_E"
+        query["electrons.temperature_fit.measured"] = "RW_T_E"
+        query["ion[0].density_thermal"] = "N_D"
+        query["ion[0].temperature"] = "T_D"
+        query["ion[1].velocity.toroidal"] = "V_TOR_C"
+        query["ion[1].velocity.toroidal_fit.measured"] = "RW_V_TOR_C"
+        query["ion[1].density_thermal"] = "N_C"
+        query["ion[1].density_fit.measured"] = "RW_N_C"
+        query["ion[1].temperature"] = "T_C"
+        query["ion[1].temperature_fit.measured"] = "RW_T_C"
+
         uncertain_entries = list(query.keys())
         query["electrons.density_fit.psi_norm"] = "PS_N_E"
         query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
         query["ion[1].density_fit.psi_norm"] = "PS_N_C"
         query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
-        #query["j_total"] = "J_TOT"
-        #query["pressure_perpendicular"] = "P_TOT"
         query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
+        #query["j_total"] = "J_TOT"
+        #query["pressur_perpendicular"] = "P_TOT"
+        
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        omfit_profiles_node = '\\TOP.'
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
@@ -1554,17 +1567,27 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
+        rho_spl = []
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time][mask[i_time]]
+            # We will need this spline later to calculate the mandatory rho_tor_norm of the measurements
+            rho_spl.append(InterpolatedUnivariateSpline(psi_n, data["grid.rho_tor_norm"][i_time]))
+        
+        # Do these first because we need to make sure that "ion[0]" is filled before we touch ion[1]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
             if isinstance(data[entry], Exception):
                 continue
+            # Need to set _fit.rho_tor_norm first otherwise the IMAS consistency checker complains
+                #
             for i_time, time in enumerate(data["time"]):
                 try:
-                    if "_fit" in entry:
-                        # No mask for measurements and fit
-                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
-                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    if "_fit.measured" in entry:
+                        data_mask = np.isfinite(data[entry][i_time])
+                        # Set rho_tor before we set anything else
+                        ods[f"{sh}[{i_time}]." + entry.replace("measured", "rho_tor_norm")] = rho_spl[i_time](data[entry.replace("measured", "psi_norm")][i_time][data_mask])
+                        # Isfinite mask for measurements and fit
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][data_mask]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][data_mask]
                     else:
                         ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][mask[i_time]]
                         ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][mask[i_time]]
@@ -1582,15 +1605,18 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
+                # Make sure all the grids are set before we set the actual entries
                 try:
-                    if "_fit" in entry:
-                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    if "_fit.psi_norm" in entry:
+                        data_mask = np.isfinite(data[entry.replace("psi_norm","measured")][i_time])
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][data_mask]
                     else:
                         ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][mask[i_time]]
-                except:
+                except Exception as e:
                     print("Normal entry", entry)
                     print("================ DATA =================")
                     print(data[entry][i_time])
+                    print(e)
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
