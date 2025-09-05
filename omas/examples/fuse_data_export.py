@@ -54,7 +54,7 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
     d3d.interferometer_data(ods, shot)
 
     printe("- Fetching charge exchange data")
-    d3d.charge_exchange_data(ods, shot, analysis_type="$(CER_analysis_type)")
+    d3d.charge_exchange_data(ods, shot, analysis_type=CER_analysis_type)
 
     printe("- Fetching summary data")
     d3d.summary(ods, shot)
