@@ -127,10 +127,12 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     elif 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
         txt = f'{location} is of type {type(value)} must be a scalar of type {info["data_type"]}'
     # check consistency for number of dimensions
+    # NOTE: Checking coordinate dimensions is broken because we only have the string of the coordinates here
+    # not the actual values
     elif (
         'coordinates' in info
         and len(info['coordinates'])
-        and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
+        and (not isinstance(value, numpy.ndarray))
     ):
         txt = f'{location} shape {numpy.asarray(value).shape} is inconsistent with coordinates: {info["coordinates"]}'
 
@@ -1735,12 +1737,38 @@ class ODS(MutableMapping):
                     tmp.omas_data[key] = copy.deepcopy(self[key], memo=memo)
         return tmp
 
+    def __eq__(self, ods):
+        for key in self.keys():
+            if type(self[key]) == ODS:
+                if self[key] != ods[key]:
+                    return False
+            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                if not numpy.allclose(self[key],ods[key]):
+                    return False
+            else:
+                if self[key] != ods[key]:
+                    return False
+        return True
+    
+    def find_mismatching_locations(self, ods, mismatching_locations):
+        for key in self.keys():
+            if type(self[key]) == ODS:
+                if self[key] != ods[key]:
+                    mismatching_locations = self[key].find_mismatching_locations(ods[key], mismatching_locations)
+            elif issubclass(type(self[key]), numpy.ndarray) or not type(self[key]) == str:
+                if not numpy.allclose(self[key],ods[key]):
+                    mismatching_locations.append(self.location + f".{key}")
+            else:
+                if self[key] != ods[key]:
+                    mismatching_locations.append(self.location + f".{key}")
+        return mismatching_locations
+
     def copy(self):
         """
         :return: copy.deepcopy of current ODS object
         """
-        return copy.deepcopy(self)
 
+        return copy.deepcopy(self)
     def clear(self):
         """
         remove data from a branch
