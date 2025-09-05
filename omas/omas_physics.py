@@ -677,24 +677,24 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
                     eq_slice[f'profiles_2d.{grid_index}.b_field_tor'])
             
-            # import matplotlib.pyplot as plt
-            # plt.figure(33)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_tor'].T)
-            # plt.colorbar(pc)
-            # plt.title('Btor')
-            # plt.savefig('Btor.png',dpi=300,bbox_inches='tight')
+            import matplotlib.pyplot as plt
+            plt.figure(33)
+            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_tor'].T)
+            plt.colorbar(pc)
+            plt.title('Btor')
+            plt.savefig('Btor.png',dpi=300,bbox_inches='tight')
 
-            # plt.figure(34)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_z'].T)
-            # plt.colorbar(pc)
-            # plt.title('Bz')
-            # plt.savefig('Bz.png',dpi=300,bbox_inches='tight')
+            plt.figure(34)
+            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_z'].T)
+            plt.colorbar(pc)
+            plt.title('Bz')
+            plt.savefig('Bz.png',dpi=300,bbox_inches='tight')
 
-            # plt.figure(35)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_r'].T)
-            # plt.colorbar(pc)
-            # plt.title('Br')
-            # plt.savefig('Br.png',dpi=300,bbox_inches='tight')
+            plt.figure(35)
+            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_r'].T)
+            plt.colorbar(pc)
+            plt.title('Br')
+            plt.savefig('Br.png',dpi=300,bbox_inches='tight')
 
             # Lifted from OMFIT but don't use the outdated contouring algorithm
             contgen = contourpy.contour_generator(
