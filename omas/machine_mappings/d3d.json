@@ -792,6 +792,9 @@
  "wall.description_2d.:.limiter.unit.:.outline.z": {
   "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
+ "wall.ids_properties.homogeneous_time": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
  "wall.time": {
   "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  }

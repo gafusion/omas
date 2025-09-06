@@ -677,24 +677,24 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
                     eq_slice[f'profiles_2d.{grid_index}.b_field_tor'])
             
-            import matplotlib.pyplot as plt
-            plt.figure(33)
-            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_tor'].T)
-            plt.colorbar(pc)
-            plt.title('Btor')
-            plt.savefig('Btor.png',dpi=300,bbox_inches='tight')
+            # import matplotlib.pyplot as plt
+            # plt.figure(33)
+            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_tor'].T)
+            # plt.colorbar(pc)
+            # plt.title('Btor')
+            # plt.savefig('Btor.png',dpi=300,bbox_inches='tight')
 
-            plt.figure(34)
-            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_z'].T)
-            plt.colorbar(pc)
-            plt.title('Bz')
-            plt.savefig('Bz.png',dpi=300,bbox_inches='tight')
+            # plt.figure(34)
+            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_z'].T)
+            # plt.colorbar(pc)
+            # plt.title('Bz')
+            # plt.savefig('Bz.png',dpi=300,bbox_inches='tight')
 
-            plt.figure(35)
-            pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_r'].T)
-            plt.colorbar(pc)
-            plt.title('Br')
-            plt.savefig('Br.png',dpi=300,bbox_inches='tight')
+            # plt.figure(35)
+            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_r'].T)
+            # plt.colorbar(pc)
+            # plt.title('Br')
+            # plt.savefig('Br.png',dpi=300,bbox_inches='tight')
 
             # Lifted from OMFIT but don't use the outdated contouring algorithm
             contgen = contourpy.contour_generator(
@@ -708,8 +708,10 @@ def add_volume_profile(ods, grid_index=0):
             # fluxexpansion_dl = []
             # int_fluxexpansion_dl = []
             # dl = []
+            Bmax = []
             Btot2_avg = []
             R_avg = []
+            hf = []
             for k, psi in enumerate(eq1d_psi):
                 if k == 0:
                     # Skip the axis
@@ -756,8 +758,10 @@ def add_volume_profile(ods, grid_index=0):
                 
                 # define integrand for flux surface integral of B_tot**2
                 Btot = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2 + b_field_tor_spline(r, z, grid=False)**2)
-                Btot2_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot**2))
+                Bmax.append(numpy.max(Btot))
 
+                hf.append(numpy.trapz(numpy.sqrt(1.0 - (b_field_tor_spline(r, z, grid=False) / Bmax[k-1])) * dl) / numpy.sum(dl))
+                Btot2_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot**2))
                 R_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,r))
             
             # put quantities in omas object
@@ -777,7 +781,7 @@ def add_volume_profile(ods, grid_index=0):
             # R_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dB2']).antiderivative()
             # eq_slice('profiles_1d.gm5') = B2_spline(eq1d_psi)
 
-    return ods
+    return ods, hf
 
 def flxAvg(fluxexpansion_dl,int_fluxexpansion_dl, input):
 # define function for flux-surface averaging (based on function of same name in omfit_classes fluxSurface.py)
