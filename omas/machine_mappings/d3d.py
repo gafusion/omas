@@ -595,7 +595,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
         beam['frequency.time'] = np.atleast_1d(0)
         if isinstance(systems[f'FREQUENCY_{system_no}'], Exception):
-            beam['frequency.data'] = beam['frequency.time'] * 0.0 + 110e9 # old shots did not record the frequency, since they were all at 110 GHz
+            beam['frequency.data'] = np.ones(beam['frequency.time'].shape) * 110e9 # old shots did not record the frequency, since they were all at 110 GHz
         else:
             beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
