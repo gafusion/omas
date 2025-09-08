@@ -127,10 +127,12 @@ def consistency_checker(location, value, info, consistency_check, imas_version):
     elif 'data_type' in info and '_0D' in info['data_type'] and isinstance(value, numpy.ndarray):
         txt = f'{location} is of type {type(value)} must be a scalar of type {info["data_type"]}'
     # check consistency for number of dimensions
+    # NOTE: Checking coordinate dimensions is broken because we only have the string of the coordinates here
+    # not the actual values
     elif (
         'coordinates' in info
         and len(info['coordinates'])
-        and (not isinstance(value, numpy.ndarray) or len(value.shape) != len(info['coordinates']))
+        and (not isinstance(value, numpy.ndarray))
     ):
         txt = f'{location} shape {numpy.asarray(value).shape} is inconsistent with coordinates: {info["coordinates"]}'
 

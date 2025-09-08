@@ -14,7 +14,7 @@ xarray                                             # required
 setuptools>=41.2                                   # required
 Cython                                             # required
 importlib_metadata <5;python_version=='3.7'        # required
-
+contourpy
 # omfit_classes            # machine
 # pexpect                  # machine
 # fortranformat            # machine
