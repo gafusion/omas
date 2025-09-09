@@ -6,6 +6,7 @@ from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline,
 from scipy.integrate import cumulative_trapezoid
 from .omas_utils import *
 from .omas_core import ODS
+from omas.omas_structure import add_extra_structures
 __all__ = []
 __ods__ = []
 
@@ -644,8 +645,19 @@ def equilibrium_profiles_2d_map(
     return mapped_values
 
 @add_to__ODS__
-def add_volume_profile(ods, grid_index=0):
+def add_flux_surface_averages(ods, grid_index=0):
     import contourpy
+
+    # adding gm10 to ODS structure to handle HF (helical flux function)
+    extra_structures = {}
+    extra_structures["equilibrium"] = {}
+    hf_struct = {"coordinates": "equilibrium.time_slice[:].profiles_1d.psi"}
+    hf_struct["documentation"] = "Helical Flux function"
+    hf_struct["data_type"] = "FLT_1D"
+    hf_struct["units"] = ""
+    extra_structures["equilibrium"][f"equilibrium.time_slice[:].profiles_1d.gm10"] = hf_struct
+    add_extra_structures(extra_structures)
+
     with omas_environment(ods, cocosio=11):
         cocos = define_cocos(11)
         for time_index in range(len(ods['equilibrium']['time'])):
@@ -677,25 +689,6 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
                     eq_slice[f'profiles_2d.{grid_index}.b_field_tor'])
             
-            # import matplotlib.pyplot as plt
-            # plt.figure(33)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_tor'].T)
-            # plt.colorbar(pc)
-            # plt.title('Btor')
-            # plt.savefig('Btor.png',dpi=300,bbox_inches='tight')
-
-            # plt.figure(34)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_z'].T)
-            # plt.colorbar(pc)
-            # plt.title('Bz')
-            # plt.savefig('Bz.png',dpi=300,bbox_inches='tight')
-
-            # plt.figure(35)
-            # pc = plt.pcolormesh(eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],eq_slice[f'profiles_2d.{grid_index}.b_field_r'].T)
-            # plt.colorbar(pc)
-            # plt.title('Br')
-            # plt.savefig('Br.png',dpi=300,bbox_inches='tight')
-
             # Lifted from OMFIT but don't use the outdated contouring algorithm
             contgen = contourpy.contour_generator(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
@@ -703,12 +696,9 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.psi'].T,
                     corner_mask=True)
             eq_slice['profiles_1d.dvolume_dpsi'] = numpy.zeros(len(eq1d_psi))
-            
-            # fluxexpansion = []
-            # fluxexpansion_dl = []
-            # int_fluxexpansion_dl = []
-            # dl = []
+                        
             Bmax = []
+            Btot_avg = []
             Btot2_avg = []
             R_avg = []
             hf = []
@@ -756,32 +746,25 @@ def add_volume_profile(ods, grid_index=0):
                             * int_fluxexpansion_dl
                             * (2.0 * numpy.pi) ** (1.0 - cocos['exp_Bp']))
                 
-                # define integrand for flux surface integral of B_tot**2
+                # determine flux-surface-averaged quantities
                 Btot = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2 + b_field_tor_spline(r, z, grid=False)**2)
                 Bmax.append(numpy.max(Btot))
-
                 hf.append(numpy.trapz(numpy.sqrt(1.0 - (b_field_tor_spline(r, z, grid=False) / Bmax[k-1])) * dl) / numpy.sum(dl))
+                Btot_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot))
                 Btot2_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot**2))
                 R_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,r))
             
-            # put quantities in omas object
+            # put flux-surface-averaged quantities in ODS object
             eq_slice['profiles_1d.gm5'] = Btot2_avg
             eq_slice['profiles_1d.gm8'] = R_avg
+            eq_slice['profiles_1d.gm10'] = hf
+            eq_slice['profiles_1d.b_field_average'] = Btot_avg
 
+            # integrate to determine volume
+            volume_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
+            eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi)
 
-                # define R integrand for flux surface integral of R
-
-
-            # volume_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
-            # eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi)
-
-            # B2_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dB2']).antiderivative()
-            # eq_slice('profiles_1d.gm5') = B2_spline(eq1d_psi)
-
-            # R_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dB2']).antiderivative()
-            # eq_slice('profiles_1d.gm5') = B2_spline(eq1d_psi)
-
-    return ods, hf
+    return ods
 
 def flxAvg(fluxexpansion_dl,int_fluxexpansion_dl, input):
 # define function for flux-surface averaging (based on function of same name in omfit_classes fluxSurface.py)
