@@ -413,7 +413,7 @@ def pf_active_coil_current_data(ods, pulse):
     unwrap(pf_active_hardware)(ods1, pulse)
 
     # fetch the actual pf_active currents data
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -594,7 +594,10 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.time'] = np.atleast_1d(0)
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        if isinstance(systems[f'FREQUENCY_{system_no}'], Exception):
+            beam['frequency.data'] = np.ones(beam['frequency.time'].shape) * 110e9 # old shots did not record the frequency, since they were all at 110 GHz
+        else:
+            beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
         beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
@@ -737,12 +740,17 @@ def interferometer_data(ods, pulse):
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
+    if pulse <= 197528:
+        BCI = "BCI::TOP"
+    else:
+        BCI = "BCI::TOP.MAIN"
+
     # fetch
     TDIs = {}
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
-        TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
+        TDIs[identifier] = f"\\{BCI}.DEN{identifier}"
+        TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
@@ -827,7 +835,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
             ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
-                system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
+                system=system.lower(), ch=j, lens=lenses[min(j,len(lenses)-1)]
             )
             ch['identifier'] = f'{system[0]}{j:02d}'
             ch['position']['r'] = tsdat[f'{system}_R'][j]
@@ -1224,8 +1232,12 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                    if sub == 'TANGENTIAL' and pos == 'ROT':
+                        pos1 = 'ROTC'
+                    else:
+                        pos1 = pos
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
@@ -1254,7 +1266,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
-                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'], data[f'{sub}_{channel}_ROT_ERR__data'])
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
@@ -1286,13 +1298,13 @@ def magnetics_hardware(ods, pulse):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse, nref=None):
+def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1309,34 +1321,11 @@ def magnetics_floops_data(ods, pulse, nref=None):
             data_norm=1.0,
         )
 
-    for compfile in ['btcomp', 'ccomp', 'icomp']:
-        comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
-        if len(comp) == 0:
-            raise ValueError(f"Could not find d3d {compfile} for shot {pulse}")
-        compshot = -1
-        for shot in comp:
-            if pulse > compshot:
-                compshot = shot
-                break
-        for compsig in comp[compshot]:
-            if compsig == 'N1COIL' and pulse > 112962:
-                continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000.0
-            for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
-                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
-                    ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
-
-    # fetch uncertainties
+    # Fetch uncertainties
     TDIs = {}
     for k in ods1['magnetics.flux_loop']:
         identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
     weights = D3Dmagnetics_weights(pulse, 'fwtsi')
     for k in ods1['magnetics.flux_loop']:
@@ -1353,18 +1342,53 @@ def magnetics_floops_data(ods, pulse, nref=None):
             identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
             ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
 
-    # Use reference flux loop to convert to relative flux if wanted
-    if nref is not None:
+    # Apply compensations
+    for compfile in ['btcomp', 'ccomp', 'icomp']:
+        comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
+        if len(comp) == 0:
+            raise ValueError(f"Could not find d3d {compfile} for shot {pulse}")
+        compshot = -1
+        for shot in comp:
+            if pulse > compshot:
+                compshot = shot
+                break
+        for compsig in comp[compshot]:
+            if compsig == 'N1COIL' and pulse > 112962:
+                continue
+            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
+            try:
+                compsig_data = m.data()
+                compsig_time = m.dim_of(0) / 1000.0
+                for channel in ods['magnetics.flux_loop']:
+                    if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
+                        sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                        sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                        compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
+                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            except Exception:
+                printe(f"NO {compsig}")
+
+    # Convert the differential fluxes to total
+    # This is how DIII-D data has been stored since at least 1988, but IMAS does not support this type of flux loops
+    ods[f'magnetics.flux_loop.{nref}.type.index'] = 1
+    if not store_differential:
         ref_data = ods[f'magnetics.flux_loop.{nref}.flux.data']
+        ref_uncertainty = ods[f'magnetics.flux_loop.{nref}.flux.data_error_upper']
         len_ref = len(ref_data)
         for k in ods1['magnetics.flux_loop']:
-            if len(ods[f'magnetics.flux_loop.{k}.flux.data']) < 2:
+            if k == nref or len(ods[f'magnetics.flux_loop.{k}.flux.data']) < 2:
                 continue
             elif len(ods[f'magnetics.flux_loop.{k}.flux.data']) == len_ref:
-                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_data
+                ods[f'magnetics.flux_loop.{k}.type.index'] = 1
+                ods[f'magnetics.flux_loop.{k}.flux.data'] += ref_data
+                uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_uncertainty**2)
             else:
+                ods[f'magnetics.flux_loop.{k}.type.index'] = 1
                 ref_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_data, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
-                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_interp
+                ref_un_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_uncertainty, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
+                uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1373,7 +1397,7 @@ def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1391,6 +1415,28 @@ def magnetics_probes_data(ods, pulse):
             homogeneous_time=False
         )
 
+    # Fetch uncertainties
+    TDIs = {}
+    for k in ods1['magnetics.b_field_pol_probe']:
+        identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
+        TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
+    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+    weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
+    for k in ods1['magnetics.b_field_pol_probe']:
+        nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
+        if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
+            # Set large uncertainty for invalid data
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+        elif weights[k] < 0.5:
+            # Use static weight to mark sensor invalid and set large uncertainty
+            ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+        else:
+            # Convert digitizer counts (bit uncertainty) to field
+            identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+
+    # Apply compensations
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
@@ -1415,28 +1461,6 @@ def magnetics_probes_data(ods, pulse):
                     compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
-    # fetch uncertainties
-    TDIs = {}
-    for k in ods1['magnetics.b_field_pol_probe']:
-        identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
-        TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-
-    data = mdsvalue('d3d', None, pulse, TDIs).raw()
-    weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
-    for k in ods1['magnetics.b_field_pol_probe']:
-        nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
-        if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
-            # Set large uncertainty for invalid data
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
-        elif weights[k] < 0.5:
-            # Use static weight to mark sensor invalid and set large uncertainty
-            ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
-        else:
-            # Convert digitizer counts (bit uncertainty) to field
-            identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
-
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def ip_bt_dflux_data(ods, pulse):
@@ -1450,7 +1474,7 @@ def ip_bt_dflux_data(ods, pulse):
 
     mappings = {'magnetics.ip.0': 'IP', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         TDIs = {}
         for key, val in mappings.items():
             TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
@@ -1685,7 +1709,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
 

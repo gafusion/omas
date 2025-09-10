@@ -15,7 +15,9 @@
   "default_tree": "D3D",
   "fast_ece": false,
   "get_all": true,
-  "revision": "BLESSED"
+  "nref": 0,
+  "revision": "BLESSED",
+  "store_differential": false
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -594,16 +596,16 @@
  },
  "magnetics.flux_loop.:.flux.data": {
   "COCOSIO": 11,
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -621,7 +623,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "magnetics_hardware(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.ip.:": {
   "VALUE": 1
