@@ -10,6 +10,8 @@ from omas.utilities.omas_mds import mdsvalue, mdstree
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
+from collections import OrderedDict
+from scipy.interpolate import InterpolatedUnivariateSpline
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -592,7 +594,10 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.time'] = np.atleast_1d(0)
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        if isinstance(systems[f'FREQUENCY_{system_no}'], Exception):
+            beam['frequency.data'] = np.ones(beam['frequency.time'].shape) * 110e9 # old shots did not record the frequency, since they were all at 110 GHz
+        else:
+            beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
         beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
         beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
@@ -603,6 +608,7 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
             
+        beam['o_mode_fraction'] = 1.0 - xfrac
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
@@ -734,12 +740,17 @@ def interferometer_data(ods, pulse):
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
+    if pulse <= 197528:
+        BCI = "BCI::TOP"
+    else:
+        BCI = "BCI::TOP.MAIN"
+
     # fetch
     TDIs = {}
     for k, channel in enumerate(ods1['interferometer.channel']):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
-        TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
+        TDIs[identifier] = f"\\{BCI}.DEN{identifier}"
+        TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
@@ -824,7 +835,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
             ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
-                system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
+                system=system.lower(), ch=j, lens=lenses[min(j,len(lenses)-1)]
             )
             ch['identifier'] = f'{system[0]}{j:02d}'
             ch['position']['r'] = tsdat[f'{system}_R'][j]
@@ -1221,8 +1232,12 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                    if sub == 'TANGENTIAL' and pos == 'ROT':
+                        pos1 = 'ROTC'
+                    else:
+                        pos1 = pos
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
@@ -1251,7 +1266,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
-                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'], data[f'{sub}_{channel}_ROT_ERR__data'])
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
@@ -1321,14 +1336,17 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
             m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000.0
-            for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
-                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
-                    ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            try:
+                compsig_data = m.data()
+                compsig_time = m.dim_of(0) / 1000.0
+                for channel in ods['magnetics.flux_loop']:
+                    if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
+                        sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                        sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                        compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
+                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            except Exception:
+                printe(f"NO {compsig}")
 
     # Fetch uncertainties
     TDIs = {}
@@ -1491,24 +1509,31 @@ def ip_bt_dflux_data(ods, pulse):
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
+    # Need to use IMAS structure here
     sh = "core_profiles.profiles_1d"
-    for quant in ["ion.:.density_fit.psi_norm", "electrons.density_fit.psi_norm",
-                  "ion.:.temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
-                  "ion.:.velocity.toroidal_fit.psi_norm"]:
+    for quant in ["ion[:].density_fit.psi_norm", "electrons.density_fit.psi_norm",
+                  "ion[:].temperature_fit.psi_norm", "electrons.temperature_fit.psi_norm",
+                  "ion[:].velocity.toroidal_fit.psi_norm"]:
         if "velocity" in quant:
             psi_struct = {"coordinates": "1- 1...N"}
         else:
-            psi_struct = {"coordinates": sh + ".:." + quant.replace("psi_norm", "rho_tor_norm")}
+            psi_struct = {"coordinates": sh + "[:]." + quant.replace("psi_norm", "rho_tor_norm")}
         psi_struct["documentation"] = "Normalized Psi for fit data."
         psi_struct["data_type"] =  "FLT_1D"
         psi_struct["units"] = ""
-        extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.{quant}"] = psi_struct
-    velo_struct = {"coordinates": sh + ".:." + "ion.:.velocity.toroidal_fit.psi_norm"}
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = psi_struct
+    velo_axis = {}
+    velo_axis["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
+    velo_axis["data_type"] =  "FLT_1D"
+    velo_axis["units"] = "m.s^-1"
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.rho_tor_norm"] = velo_axis
+    velo_struct = {"coordinates": sh + "[:]." + "ion[:].velocity.toroidal_fit.rho_tor_norm"}
     velo_struct["documentation"] = "Information on the fit used to obtain the toroidal velocity profile [m/s]"
     velo_struct["data_type"] =  "FLT_1D"
     velo_struct["units"] = "m.s^-1"
-    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured"] = velo_struct
-    extra_structures["core_profiles"][f"core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.psi_norm"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured"] = velo_struct
+    extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured_error_upper"] = velo_struct
     add_extra_structures(extra_structures)
 
 
@@ -1525,32 +1550,35 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         pulse_id = pulse
         if PROFILES_run_id is not None:
             pulse_id = int(str(pulse) + PROFILES_run_id)
-        omfit_profiles_node = '\\TOP.'
-        query = {
-            "electrons.density_thermal": "N_E",
-            "electrons.density_fit.measured": "RW_N_E",
-            "electrons.temperature": "T_E",
-            "electrons.temperature_fit.measured": "RW_T_E",
-            "ion[0].density_thermal": "N_D",
-            "ion[0].temperature": "T_D",
-            "ion[1].velocity.toroidal": "V_TOR_C",
-            "ion[1].velocity.toroidal_fit.measured": "RW_V_TOR_C",
-            "ion[1].density_thermal": "N_C",
-            "ion[1].density_fit.measured": "RW_N_C",
-            "ion[1].temperature": "T_C",
-            "ion[1].temperature_fit.measured": "RW_T_C",
-        }
+        query = OrderedDict()
+        
+        # These quantities have an uncertainty associated with them
+        query["electrons.density_thermal"] = "N_E"
+        query["electrons.density_fit.measured"] = "RW_N_E"
+        query["electrons.temperature"] = "T_E"
+        query["electrons.temperature_fit.measured"] = "RW_T_E"
+        query["ion[0].density_thermal"] = "N_D"
+        query["ion[0].temperature"] = "T_D"
+        query["ion[1].velocity.toroidal"] = "V_TOR_C"
+        query["ion[1].velocity.toroidal_fit.measured"] = "RW_V_TOR_C"
+        query["ion[1].density_thermal"] = "N_C"
+        query["ion[1].density_fit.measured"] = "RW_N_C"
+        query["ion[1].temperature"] = "T_C"
+        query["ion[1].temperature_fit.measured"] = "RW_T_C"
+
         uncertain_entries = list(query.keys())
         query["electrons.density_fit.psi_norm"] = "PS_N_E"
         query["electrons.temperature_fit.psi_norm"] = "PS_T_E"
         query["ion[1].density_fit.psi_norm"] = "PS_N_C"
         query["ion[1].temperature_fit.psi_norm"] = "PS_T_C"
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
-        #query["j_total"] = "J_TOT"
-        #query["pressure_perpendicular"] = "P_TOT"
         query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
+        #query["j_total"] = "J_TOT"
+        #query["pressur_perpendicular"] = "P_TOT"
+        
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        omfit_profiles_node = '\\TOP.'
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
@@ -1575,17 +1603,27 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             data[f"ion[0].velocity.toroidal{unc}"] = data[f"ion[1].velocity.toroidal{unc}"]
         ods["core_profiles.time"] = data['time']
         sh = "core_profiles.profiles_1d"
+        rho_spl = []
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].grid.rho_pol_norm"] = data['grid.rho_pol_norm'][i_time][mask[i_time]]
+            # We will need this spline later to calculate the mandatory rho_tor_norm of the measurements
+            rho_spl.append(InterpolatedUnivariateSpline(psi_n, data["grid.rho_tor_norm"][i_time]))
+        
+        # Do these first because we need to make sure that "ion[0]" is filled before we touch ion[1]
         for entry in uncertain_entries + ["ion[0].velocity.toroidal"]:
             if isinstance(data[entry], Exception):
                 continue
+            # Need to set _fit.rho_tor_norm first otherwise the IMAS consistency checker complains
+                #
             for i_time, time in enumerate(data["time"]):
                 try:
-                    if "_fit" in entry:
-                        # No mask for measurements and fit
-                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time]
-                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time]
+                    if "_fit.measured" in entry:
+                        data_mask = np.isfinite(data[entry][i_time])
+                        # Set rho_tor before we set anything else
+                        ods[f"{sh}[{i_time}]." + entry.replace("measured", "rho_tor_norm")] = rho_spl[i_time](data[entry.replace("measured", "psi_norm")][i_time][data_mask])
+                        # Isfinite mask for measurements and fit
+                        ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][data_mask]
+                        ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][data_mask]
                     else:
                         ods[f"{sh}[{i_time}]." + entry] = data[entry][i_time][mask[i_time]]
                         ods[f"{sh}[{i_time}]." + entry + "_error_upper"] = data[entry + "_error_upper"][i_time][mask[i_time]]
@@ -1603,15 +1641,18 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             if isinstance(data[entry], Exception):
                 continue
             for i_time, time in enumerate(data["time"]):
+                # Make sure all the grids are set before we set the actual entries
                 try:
-                    if "_fit" in entry:
-                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time]
+                    if "_fit.psi_norm" in entry:
+                        data_mask = np.isfinite(data[entry.replace("psi_norm","measured")][i_time])
+                        ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][data_mask]
                     else:
                         ods[f"{sh}[{i_time}]."+entry] = data[entry][i_time][mask[i_time]]
-                except:
+                except Exception as e:
                     print("Normal entry", entry)
                     print("================ DATA =================")
                     print(data[entry][i_time])
+                    print(e)
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
@@ -1710,6 +1751,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
     ods["wall.time"] = [0.0]
+    ods["wall.ids_properties.homogeneous_time"] = 1
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194306)
@@ -1730,5 +1772,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["magnetics_floops_data"], globals(), locals())
-    test_machine_mapping_functions('d3d', ["magnetics_probes_data"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["charge_exchange_data"], globals(), locals())
