@@ -704,6 +704,14 @@ def add_flux_surface_averages(ods, grid_index=0):
             hf = []
             for k, psi in enumerate(eq1d_psi):
                 if k == 0:
+                    RMAXIS = ods['equilibrium.time_slice.'+str(time_index)+'.global_quantities.magnetic_axis.r']
+                    ZMAXIS = ods['equilibrium.time_slice.'+str(time_index)+'.global_quantities.magnetic_axis.z']
+                    Btot = numpy.sqrt(b_field_r_spline(RMAXIS, ZMAXIS, grid=False)**2 + b_field_z_spline(RMAXIS, ZMAXIS, grid=False)**2 + b_field_tor_spline(RMAXIS, ZMAXIS, grid=False)**2)
+                    Btot_avg.append(Btot)
+                    Btot2_avg.append(Btot**2)
+                    R_avg.append(RMAXIS)
+                    hf.append(0)
+                    Bmax.append(Btot)
                     # Skip the axis
                     continue
                 # This produces bp close to zero throwing things off
