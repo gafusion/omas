@@ -605,10 +605,11 @@ def ec_launcher_active_hardware(ods, pulse):
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
         if isinstance(xfrac, Exception):
             beam['mode'] = -1 # assume X-mode if XMFRAC is not recorded
+            beam['o_mode_fraction'] = np.zeros(beam['time'].shape)
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
+            beam['o_mode_fraction'] = 1.0 - xfrac
             
-        beam['o_mode_fraction'] = 1.0 - xfrac
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
