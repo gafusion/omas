@@ -1543,10 +1543,10 @@ def add_extra_profile_structures():
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None, core_profiles_strict_grid=True):
     from scipy.interpolate import interp1d
 
-    add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        add_extra_profile_structures()
         # May extend beyond rho = 1.0
         pulse_id = pulse
         if PROFILES_run_id is not None:
