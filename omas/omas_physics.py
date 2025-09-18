@@ -757,7 +757,7 @@ def add_flux_surface_averages(ods, grid_index=0):
                 # determine flux-surface-averaged quantities
                 Btot = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2 + b_field_tor_spline(r, z, grid=False)**2)
                 Bmax.append(numpy.max(Btot))
-                hf.append(numpy.trapz(numpy.sqrt(1.0 - (b_field_tor_spline(r, z, grid=False) / Bmax[k-1])) * dl) / numpy.sum(dl))
+                hf.append(numpy.trapz(numpy.sqrt(1.0 - (b_field_tor_spline(r, z, grid=False) / Bmax[k])) * dl) / numpy.sum(dl))
                 Btot_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot))
                 Btot2_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot**2))
                 R_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,r))
