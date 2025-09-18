@@ -3430,14 +3430,21 @@ _cocos_signals = {}
         _extra_structures.clear()
         _extra_structures.update(_extra_structures_bkp)
 
-def convert_IMAS_launch_angles_to_DIII_D(beam, itime):
-    beta = -beam['steering_angle_tor'][itime]
-    alpha = beam['steering_angle_pol'][itime]
+def convert_IMAS_launch_angles_to_DIII_D(beam, itime=None):
+    import numpy as np
+    if itime is None:
+        beta = -beam['steering_angle_tor'][:]
+        alpha = beam['steering_angle_pol'][:]
+    else:
+        beta = -beam['steering_angle_tor'][itime]
+        alpha = beam['steering_angle_pol'][itime]
+        
     AZIANG = np.rad2deg(np.arctan2(np.tan(beta), np.cos(alpha))) + 180.0e0
     POLANG = np.rad2deg(np.arcsin(np.sin(alpha) * np.cos(beta))) + 90.0e0
     return AZIANG, POLANG
 
 def convert_DIII_D_to_IMAS_launch_angles(AZIANG, POLANG):
+    import numpy as np
     phi_tor = np.deg2rad(AZIANG - 180.0)
     theta_pol = np.deg2rad(POLANG - 90.0)
     steering_angle_tor = -np.arcsin(np.cos(theta_pol) * np.sin(phi_tor))

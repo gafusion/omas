@@ -322,6 +322,9 @@
  "ec_launchers.beam.:.name": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
+ "ec_launchers.beam.:.o_mode_fraction": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
  "ec_launchers.beam.:.phase.angle": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
