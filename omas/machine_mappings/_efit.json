@@ -467,6 +467,14 @@
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RHOVN)",
   "treename": "{EFIT_tree}"
  },
+ "equilibrium.time_slice.:.profiles_1d.j_tor": {
+  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JEFF','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.volume": {
+  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.VOL','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
+  "treename": "{EFIT_tree}"
+ },
  "equilibrium.time_slice.:.profiles_2d.:": {
   "VALUE": 1
  },

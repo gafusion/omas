@@ -11,15 +11,6 @@ def stack_outer_2(a, b):
     b = b.data()
     return np.concatenate([a, b],axis=1)
 
-def stack_outer_3(a, b, c):
-    import numpy as np
-
-    a = a.data()
-    b = b.data()
-    c = c.data()
-    return np.concatenate([a, b, c],axis=1)
-
-
 def nan_where(a, b, n):
     import numpy as np
 
@@ -47,7 +38,6 @@ def MDS_gEQDSK_COCOS_identify(bt, ip):
     sign_Ip = int(np.sign(ip))
     return g_cocos.get((sign_Bt, sign_Ip), None)
 
-
 def geqdsk_psi(a, b, c):
     import numpy as np
 
@@ -61,6 +51,7 @@ def geqdsk_psi(a, b, c):
 def efit_psi_to_real_psi_2d(a, b, c):
     import numpy as np
 
+    # a = ensure_2d(a)
     a = a.data()
     if len(a.shape) < 2:
         a = np.atleast_2d(a)
@@ -71,6 +62,7 @@ def efit_psi_to_real_psi_2d(a, b, c):
 def convert_from_mega_2d(a):
     import numpy as np
 
+    #return ensure_2d(a)*1.e6
     a = a.data()
     if len(a.shape) < 2:
         a = np.atleast_2d(a)
@@ -84,6 +76,23 @@ def ensure_2d(a):
         return np.atleast_2d(a)
     else:
         return a
+
+def interpolate_psi_1d(x1, y1, a, b, c):
+    import numpy as np
+    from scipy.interpolate import interp1d
+   
+    #x2 = geqdsk_psi(a, b, c)
+    a = a.data()
+    b = b.data()
+    c = c.data()
+    n = len(c)
+    x2 = a[:, None] + np.linspace(0, 1, n).T * (b[:, None] - a[:, None])
+    y2 = np.zeros(np.shape(x2))
+    x1 = x1.data().T
+    y1 = y1.data().T
+    for i in range(len(x1[:, 0])):
+        y2[i] = interp1d(x1[i], y1[i], kind='cubic', bounds_error=False, fill_value=(0, 0))(x2[i])
+    return y2
 
 def py2tdi(func, *args):
     import inspect

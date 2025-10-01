@@ -11,7 +11,6 @@ from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
 from collections import OrderedDict
-from scipy.interpolate import InterpolatedUnivariateSpline
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -507,7 +506,6 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
-    from scipy.interpolate import interp1d
     from omas.omas_core import CodeParameters
     setup = '.ECH.'
     
@@ -1542,6 +1540,7 @@ def add_extra_profile_structures():
                           core_profiles_strict_grid=True)
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None, core_profiles_strict_grid=True):
     from scipy.interpolate import interp1d
+    from scipy.interpolate import InterpolatedUnivariateSpline
 
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
