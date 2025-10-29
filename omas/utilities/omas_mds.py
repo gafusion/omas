@@ -228,7 +228,6 @@ class mdsvalue(dict):
                     out_results = MDSplus.Data.data(conn.get(TDI))
 
                     # Convert float32 arrays to float64 to preserve precision
-                    import numpy as np
                     if isinstance(out_results, np.ndarray) and out_results.dtype == np.float32:
                         out_results = out_results.astype(np.float64)
 
