@@ -91,7 +91,9 @@ def interpolate_psi_1d(x1, y1, a, b, c):
     x1 = x1.data().T
     y1 = y1.data().T
     for i in range(len(x1[:, 0])):
-        y2[i] = interp1d(x1[i], y1[i], kind='cubic', bounds_error=False, fill_value=(0, 0))(x2[i])
+        # Use constant extrapolation: first and last values for out-of-bounds
+        fill_value = (y1[i][0], y1[i][-1])
+        y2[i] = interp1d(x1[i], y1[i], kind='cubic', bounds_error=False, fill_value=fill_value)(x2[i])
     return y2
 
 def py2tdi(func, *args):

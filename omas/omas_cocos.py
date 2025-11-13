@@ -673,6 +673,7 @@ _cocos_signals['equilibrium.time_slice.:.constraints.q.:.reconstructed']='Q'    
 _cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.measured']='TOR'                                          # 0.000000 # 
 _cocos_signals['equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed']='TOR'                                     # 0.000000 # 
 _cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.measured']='PSI'                                               # 0.000000 # 
+_cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.measured_error_upper']='PSI'         
 _cocos_signals['equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed']='PSI'                                          # 0.000000 # 
 
 # FERRITIC
