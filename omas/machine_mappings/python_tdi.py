@@ -4,13 +4,6 @@ def tile(a, n):
     a = a.data()
     return np.array([a for k in range(n)])
 
-def stack_outer_2(a, b):
-    import numpy as np
-
-    a = a.data()
-    b = b.data()
-    return np.concatenate([a, b],axis=1)
-
 def nan_where(a, b, n):
     import numpy as np
 
