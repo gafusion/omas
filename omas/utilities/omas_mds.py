@@ -1,6 +1,7 @@
 import json
 import os
 from omas.omas_utils import printd
+import numpy as np
 
 __all__ = [
     'mdstree',
@@ -185,7 +186,12 @@ class mdsvalue(dict):
                         results = {}
                         for tdi in TDI:
                             try:
-                                results[tdi] = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                                data = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+
+                                # Convert float32 arrays to float64 to preserve precision
+                                if isinstance(data, np.ndarray) and data.dtype == np.float32:
+                                    data = data.astype(np.float64)
+                                results[tdi] = data
                             except Exception as _excp:
                                 results[tdi] = Exception(str(_excp))
                         out_results = results
@@ -199,20 +205,31 @@ class mdsvalue(dict):
                         results = {}
                         for name, expr in TDI.items():
                             try:
-                                results[name] = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
+                                data = MDSplus.Data.data(res[mdsk(name)][mdsk('value')])
                             except KeyError:
                                 try:
-                                    results[name] = MDSplus.Data.data(res[str(name)][str('value')])
+                                    data = MDSplus.Data.data(res[str(name)][str('value')])
                                 except KeyError:
                                     try:
                                         results[name] = Exception(MDSplus.Data.data(res[mdsk(name)][mdsk('error')]))
+                                        continue
                                     except KeyError:
                                         results[name] = Exception(MDSplus.Data.data(res[str(name)][str('error')]))
+                                        continue
+
+                            # Convert float32 arrays to float64 to preserve precision
+                            if isinstance(data, np.ndarray) and data.dtype == np.float32:
+                                data = data.astype(np.float64)
+                            results[name] = data
                         out_results = results
 
                 # single TDI expression
                 else:
                     out_results = MDSplus.Data.data(conn.get(TDI))
+
+                    # Convert float32 arrays to float64 to preserve precision
+                    if isinstance(out_results, np.ndarray) and out_results.dtype == np.float32:
+                        out_results = out_results.astype(np.float64)
 
                 # return values
                 return out_results

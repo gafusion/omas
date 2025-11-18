@@ -2,11 +2,11 @@ import numpy as np
 from inspect import unwrap
 
 from omas import *
-from omas.omas_utils import printd, printe, unumpy
+from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, mdstree
+from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment

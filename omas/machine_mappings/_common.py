@@ -1,9 +1,10 @@
 import numpy as np
 from omas import *
-from omas.omas_utils import printd
+from omas.omas_utils import printd, printe
 import os
 import glob
 from omas.omas_setup import omas_dir
+from omas.omas_physics import omas_environment
 from omas.utilities.omas_mds import mdsvalue, get_pulse_id
 
 __support_files_cache__ = {}
@@ -174,7 +175,7 @@ def D3Dmagnetics_weights(pulse, name=None):
         raise ValueError(f"{name} is part of the d3d fitweight")
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id):
+def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id=None):
     """
     Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
@@ -290,6 +291,155 @@ def pf_coils_to_ods(ods, coil_data):
             ods['pf_active.coil'][i]['element.0.geometry.geometry_type'] = outline_code
 
     return ods
+
+
+def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+    """
+    Loads EFIT scalar constraint data
+    """
+
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+
+    # first form a list of signals to fetch
+    TDIs = {}
+    TDIs['measured'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured})'
+    if measured_error_upper is not None:
+        TDIs['measured_error_upper'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured_error_upper})'
+    if weight is not None:
+        TDIs['weight'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{weight})'
+    if reconstructed is not None:
+        TDIs['reconstructed'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{reconstructed})'
+    if chi_squared is not None:
+        TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
+
+    # fetch the data for all signals
+    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+
+    # assign the data to the ods
+    ntimes = len(all_data['measured'])
+    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    with omas_environment(ods, cocosio=cocosio):
+        for entry, data in all_data.items():
+            try:
+                for k in range(ntimes):
+                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{entry}'] = data[k]
+            except:
+                printe(f'EFIT data was not found for {base} {entry}')
+
+
+def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+    """
+    Loads EFIT vector constraint data
+    """
+
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+
+    # first form a list of signals to fetch
+    operation = 'data'
+    if base == 'mse_polarisation_angle':
+        operation = 'ATAN'
+    TDIs = {}
+    TDIs['ntimes'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA,0)'
+    TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured},0)'
+    TDIs['measured'] = f'{operation}(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured})'
+    if measured_error_upper is not None:
+        TDIs['measured_error_upper'] = f'{operation}(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured_error_upper})'
+    if weight is not None:
+        TDIs['weight'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{weight})'
+    if reconstructed is not None:
+        TDIs['reconstructed'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{reconstructed})'
+    if chi_squared is not None:
+        TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
+
+    # fetch the data for all signals
+    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+
+    # assign the data to the ods
+    ntimes = all_data['ntimes']
+    del all_data['ntimes']
+    ndata = all_data['ndata']
+    del all_data['ndata']
+    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    with omas_environment(ods, cocosio=cocosio):
+        for entry, data in all_data.items():
+            try:
+                for k in range(ntimes):
+                    for n in range(ndata):
+                        ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[k][n]
+            except:
+                printe(f'EFIT data was not found for {base} {entry}')
+
+        #ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
+
+
+def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+    """
+    Loads EFIT constraint data and concatonates muliple arrays
+    """
+
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+
+    # first form a list of signals to fetch
+    TDIs = {}
+    TDIs['ntimes'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA,0)'
+    n = len(np.atleast_1d(measured))
+    for i in range(n):
+        TDIs[f'ndata_{i}'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured[i]},0)'
+        TDIs[f'measured_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured[i]})'
+        if measured_error_upper is not None:
+            TDIs[f'measured_error_upper_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured_error_upper[i]})'
+        if weight is not None:
+            TDIs[f'weight_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{weight[i]})'
+        if reconstructed is not None:
+            TDIs[f'reconstructed_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{reconstructed[i]})'
+        if chi_squared is not None:
+            TDIs[f'chi_squared_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared[i]})'
+
+    # fetch the data for all signals
+    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+
+    # concatonate data
+    ntimes = all_data['ntimes']
+    concat_data = {}
+    concat_data['ndata'] = 0
+    concat_data['measured'] = np.empty((ntimes,0))
+    if measured_error_upper is not None:
+        concat_data['measured_error_upper'] = np.empty((ntimes,0))
+    if weight is not None:
+        concat_data['weight'] = np.empty((ntimes,0))
+    if reconstructed is not None:
+        concat_data['reconstructed'] = np.empty((ntimes,0))
+    if chi_squared is not None:
+        concat_data['chi_squared'] = np.empty((ntimes,0))
+    for entry in concat_data.keys():
+        for i in range(n):
+            if entry == 'ndata':
+                try:
+                    concat_data[entry] += all_data[f'{entry}_{i}']
+                except:
+                    printe(f'could not find EFIT constraint {base}')
+                    return
+            else:
+                try:
+                    concat_data[entry] = np.concatenate([concat_data[entry], all_data[f'{entry}_{i}']], axis=1)
+                except:
+                    printe(f'EFIT data was not found for {base} {entry}')
+                    break
+
+    # assign the data to the ods
+    if concat_data['ndata'] <= 0:
+        printe(f'could not find EFIT constraint {base}')
+        return
+    ndata = concat_data['ndata']
+    del concat_data['ndata']
+    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    with omas_environment(ods, cocosio=cocosio):
+        for entry, data in concat_data.items():
+            if len(np.atleast_1d(data)) == 0:
+                continue
+            for k in range(ntimes):
+                for n in range(ndata):
+                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[k][n]
 
 
 def fetch_assign(

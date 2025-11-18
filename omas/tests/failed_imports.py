@@ -53,13 +53,15 @@ try:
     from pymongo import MongoClient
     from pymongo.errors import ServerSelectionTimeoutError
     from omas.omas_mongo import get_mongo_credentials
-
-    up = get_mongo_credentials(server=omas_rcparams['default_mongo_server'])
-    client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
-    client.server_info()
-    client.close()
-    failed_MONGO = False
-except (ImportError, ServerSelectionTimeoutError) as _excp:
+    try:
+        up = get_mongo_credentials(server=omas_rcparams['default_mongo_server'])
+        client = MongoClient(omas_rcparams['default_mongo_server'].format(**up), serverSelectionTimeoutMS=1000)
+        client.server_info()
+        client.close()
+        failed_MONGO = False
+    except ServerSelectionTimeoutError as _excp:
+        failed_MONGO = _excp
+except ImportError as _excp:
     failed_MONGO = _excp
 
 with warnings.catch_warnings():
