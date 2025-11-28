@@ -444,52 +444,79 @@
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "interferometer.channel.:": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.identifier": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.first_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.second_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.line_of_sight.third_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "interferometer.channel.:.n_e_line.data": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
  },
  "interferometer.channel.:.n_e_line.time": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.n_e_line.validity": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
  },
  "interferometer.channel.:.n_e_line.validity_timed": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
  },
  "interferometer.channel.:.name": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.fringe_jump_correction": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.fringe_jump_correction_times": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.data": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.time": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_to_n_e_line": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
@@ -722,6 +749,60 @@
  },
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.faraday_angle.data": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "polarimeter.channel.:.faraday_angle.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "polarimeter.channel.:.faraday_angle.time": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "polarimeter.channel.:.faraday_angle.validity": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "polarimeter.channel.:.faraday_angle.validity_timed": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse})"
+ },
+ "polarimeter.channel.:.identifier": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
+ "polarimeter.channel.:.name": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
  "summary.global_quantities.power_radiated_inside_lcfs.value": {
   "PYTHON": "summary(ods, {pulse})"
