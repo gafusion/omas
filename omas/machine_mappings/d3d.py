@@ -1832,11 +1832,11 @@ def reflectometer_data(ods, pulse):
             it = np.minimum(time_.searchsorted(time), len(time)-1)
             phase = phase[it]
         
-        phase = phase
         invalid = np.any(np.abs(phase) > 2e3,axis=1)
         phase[invalid] = 0
 
         ods[f'reflectometer_profile.channel.{k}.phase.time'] = time
+        ods[f'reflectometer_profile.channel.{k}.frequencies'] = freq
         ods[f'reflectometer_profile.channel.{k}.phase.data'] = phase.T
 
     if isinstance(data['full_profile_time'], Exception):
