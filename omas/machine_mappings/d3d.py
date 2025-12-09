@@ -723,6 +723,7 @@ def interferometer_hardware(ods, pulse):
 
     for i in ods['interferometer.channel']:
         ch = ods['interferometer.channel'][i]
+        ch['wavelength.0.value'] = 10.6e-6 #m
         for field in ch['line_of_sight.first_point'].keys():
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
@@ -760,7 +761,6 @@ def interferometer_data(ods, pulse):
     # assign
     for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        ods[f'interferometer.channel.{k}.wavelength.0.value'] = 10.6e-6
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(
@@ -812,15 +812,15 @@ def rip_hardware(ods, pulse):
     for i, ch in enumerate(channels):
         if pulse < 177052:
             #some channels are wierd for old shot... is it a phase difference??
-            ods['polarimeter.channel'][i]['identifier'] = f'rpich{2*i+1}phi'.upper()
-            ods['interferometer.channel'][i]['identifier'] = f'rpich{2*i+2}phi'.upper()
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rpich{2*i+1}phi'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rpich{2*i+2}phi'.upper()
             #availible also slow data at 10kHz
             if pulse > 169007:
                 ods['polarimeter.channel'][i]['identifier'] += 'S'
                 ods['interferometer.channel'][i]['identifier'] += 'S'
         else:
-            ods['polarimeter.channel'][i]['identifier'] = f'rip{ch}'.upper()
-            ods['interferometer.channel'][i]['identifier'] = f'rip{ch}'.upper()
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rip{ch}'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rip{ch}'.upper()
 
         if ch == 'T':
             phi = 283 * (-np.pi / 180.0)
@@ -832,11 +832,12 @@ def rip_hardware(ods, pulse):
         los['first_point.phi'] = los['second_point.phi'] = phi
         los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
         los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
         los = ods['interferometer.channel'][i]['line_of_sight']
         los['first_point.phi'] = los['second_point.phi'] = phi
         los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
         los['first_point.z'] = los['second_point.z'] = z[i]
-        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6
+        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6 #m
         ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
 
 
@@ -991,18 +992,24 @@ def interferometer_polarimeter_hardware(ods, pulse, include_CO2=True, include_RI
         n_CO2 = len(ods1['interferometer.channel'])
         for i in ods1['interferometer.channel']:
             ods['interferometer.channel'][i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][i]['name'] = ods1['interferometer.channel'][i]['name']
             ods['interferometer.channel'][i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
 
     if include_RIP:
         ods1 = ODS()
         unwrap(rip_hardware)(ods1, pulse=pulse)
         for i in ods1['interferometer.channel']:
             ods['interferometer.channel'][n_CO2 + i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][n_CO2 + i]['name'] = ods1['interferometer.channel'][i]['name']
             ods['interferometer.channel'][n_CO2 + i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
             ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = ods1['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line']
         for i in ods1['polarimeter.channel']:
             ods['polarimeter.channel'][i]['identifier'] = ods1['polarimeter.channel'][i]['identifier']
+            ods['polarimeter.channel'][i]['name'] = ods1['polarimeter.channel'][i]['name']
             ods['polarimeter.channel'][i]['line_of_sight'] = ods1['polarimeter.channel'][i]['line_of_sight']
+            ods['polarimeter.channel'][i]['wavelength'] = ods1['polarimeter.channel'][i]['wavelength']
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
 def interferometer_polarimeter_data(ods, pulse, include_CO2=True, include_RIP=True):
@@ -2045,4 +2052,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["interferometer_polarimeter_data"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["interferometer_polarimeter_hardware"], globals(), locals())
