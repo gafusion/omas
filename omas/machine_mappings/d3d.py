@@ -767,7 +767,7 @@ def interferometer_data(ods, pulse):
             -data[f'{identifier}_validity'],
             kind='nearest',
             bounds_error=False,
-            fill_value=(-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]),
+            fill_value='extrapolate',
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
 
@@ -835,6 +835,7 @@ def rip_hardware(ods, pulse):
         los['first_point.phi'] = los['second_point.phi'] = phi
         los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
         los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6
         ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
 
 

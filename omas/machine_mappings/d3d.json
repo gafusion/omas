@@ -518,6 +518,9 @@
  "interferometer.channel.:.wavelength.:.phase_to_n_e_line": {
   "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
  },
+ "interferometer.channel.:.wavelength.:.value": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse})"
+ },
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
  },
