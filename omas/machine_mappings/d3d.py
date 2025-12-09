@@ -1777,6 +1777,10 @@ def reflectometer_hardware(ods, pulse):
     # phi angles are compliant with odd COCOS
     for i, band in enumerate(bands):
         ods['reflectometer_profile.channel'][i]['identifier'] = ods['reflectometer_profile.channel'][i]['name'] = f'{band}BAND'
+        if 'O' in band:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'O'
+        else:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'X'
         los = ods['reflectometer_profile.channel'][i]['line_of_sight_emission']
         los['first_point.r'], los['second_point.r'] = R_out, R_in  # End points from IDA-lite
         # TODO: is this correct? publications suggest the antennas (emission and detection) are tilted...
@@ -1811,14 +1815,15 @@ def reflectometer_data(ods, pulse):
     TDIs['full_profile_density'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:DENSITY'
 
     data = mdsvalue('d3d', 'ELECTRONS', pulse, TDIs).raw()
-    if isinstance(data[f'{identifier}_time'], Exception):
-        printe('WARNING: reflectometer data is missing')
-        return
 
     # assign
     time = None
     for k in ods1['reflectometer_profile.channel']:
         identifier = ods1[f'reflectometer_profile.channel.{k}.identifier'].upper()
+
+        if isinstance(data[f'{identifier}_time'], Exception):
+            printe(f'WARNING: reflectometer data is missing for {identifier}')
+            continue
 
         time_ = data[f'{identifier}_time']/1e3 #s
         freq = data[f'{identifier}_frequency'] #Hz

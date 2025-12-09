@@ -726,6 +726,9 @@
  "reflectometer_profile.channel.:": {
   "PYTHON": "reflectometer_hardware(ods, {pulse})"
  },
+ "reflectometer_profile.channel.:.frequencies": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
  "reflectometer_profile.channel.:.identifier": {
   "PYTHON": "reflectometer_hardware(ods, {pulse})"
  },
@@ -747,6 +750,9 @@
   "PYTHON": "reflectometer_hardware(ods, {pulse})"
  },
  "reflectometer_profile.channel.:.line_of_sight_emission.second_point.z": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.mode": {
   "PYTHON": "reflectometer_hardware(ods, {pulse})"
  },
  "reflectometer_profile.channel.:.name": {
