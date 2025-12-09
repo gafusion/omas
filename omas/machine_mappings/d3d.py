@@ -760,6 +760,7 @@ def interferometer_data(ods, pulse):
     # assign
     for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
+        ods[f'interferometer.channel.{k}.wavelength.0.value'] = 10.6e-6
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(
@@ -892,7 +893,7 @@ def rip_data(ods, pulse):
     n_time = len(time)
     ioff = time.searchsorted(0)
 
-    #downsample to 1kHz
+    # downsample to 1kHz
     #freq_down = 1000 #Hz
     #nt = len(time)
     #n_down = int(round((nt-1)/(time[-1]-time[0]) / freq_down)) // 2 * 2 + 1
@@ -901,7 +902,7 @@ def rip_data(ods, pulse):
         offset = data[s][1:ioff].mean()
         data[s] -= offset
 
-        #use median to keep the fringe jumps sharp
+        # use median to keep the fringe jumps sharp
         #data[s] = np.median(data[s][:nt//n_down*n_down].reshape(-1, n_down), 1)
     #time = time[:nt//n_down*n_down].reshape(-1, n_down).mean(1)
 
@@ -917,6 +918,7 @@ def rip_data(ods, pulse):
                 phases[i] = data[f'{iden}{m}'] * np.sign(data[f'{iden}{m}'].mean()) # ensure positivity
                 
             # make fringe jumps corrections
+            # note: these corrections have only been tested on downsampled data (should be checked again)
             phases = np.rad2deg(np.unwrap(np.deg2rad(phases))) # unwrapped phase
             jumps = phases - np.median(phases, 1)[:, None]
             jumps = jumps - np.rad2deg(np.unwrap(np.deg2rad(jumps)))
