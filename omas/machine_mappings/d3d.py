@@ -521,7 +521,6 @@ def ec_launcher_active_hardware(ods, pulse):
 
     # we use last time of EFIT01 to trim data
     query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
 
     # Second query the used systems to resolve the gyrotron names
     query = {}
@@ -554,11 +553,6 @@ def ec_launcher_active_hardware(ods, pulse):
             if field in ['FPWRC', 'AZIANG']:
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
-
-    if system_max > 0:
-        times = gyrotrons[f'TIME_FPWRC_1']
-        trim_start = np.searchsorted(times, 0.0, side='left')
-        trim_end = np.searchsorted(times, last_time, side='right')
 
     # assign data to ODS
     b_half = []
@@ -597,8 +591,8 @@ def ec_launcher_active_hardware(ods, pulse):
         else:
             beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
-        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
-        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
         if isinstance(xfrac, Exception):

@@ -324,6 +324,9 @@
  "ec_launchers.beam.:.name": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
+ "ec_launchers.beam.:.o_mode_fraction": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
  "ec_launchers.beam.:.phase.angle": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
@@ -746,7 +749,7 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.n_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
@@ -758,17 +761,17 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.t_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
