@@ -539,7 +539,7 @@ def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw
     TDIs = {}
     TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
     TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
-    TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR,0)'
+    TDIs['ndim'] = f'dim_of(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR,0)'
     TDIs['error'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)'
 
     # fetch the data for all signals
@@ -555,9 +555,9 @@ def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw
 
     # find the number of iterations taken
     try:
-        ndata = data['ndata']
+        ndim = data['ndim']
         error = data['error']
-        n = np.array([ndata for k in range(error.shape[0])])
+        n = np.array([ndim for k in range(error.shape[0])])
         n[error == 0] = 0
         iterations = np.nanmax(n, axis=1)
     except:
