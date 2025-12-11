@@ -12,15 +12,6 @@ def nan_where(a, b, n):
     a[b == n] = np.nan
     return a
 
-def get_largest_axis_value(a, b):
-    import numpy as np
-
-    a = a.data()
-    b = b.data()
-    a = np.array([a for k in range(b.shape[0])])
-    a[b == 0] = 0
-    return np.nanmax(a, axis=1)
-
 def MDS_gEQDSK_COCOS_identify(bt, ip):
     import numpy as np
 
@@ -40,17 +31,6 @@ def geqdsk_psi(a, b, c):
     n = len(c)
     M = a[:, None] + np.linspace(0, 1, n).T * (b[:, None] - a[:, None])
     return M
-
-def efit_psi_to_real_psi_2d(a, b, c):
-    import numpy as np
-
-    # a = ensure_2d(a)
-    a = a.data()
-    if len(a.shape) < 2:
-        a = np.atleast_2d(a)
-    b = b.data()
-    c = c.data()
-    return (a.T * (c - b) + b).T
 
 def convert_from_mega_2d(a):
     import numpy as np

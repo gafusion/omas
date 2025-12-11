@@ -302,6 +302,8 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
 
     # first form a list of signals to fetch
     TDIs = {}
+    TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
+    TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
     TDIs['measured'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured})'
     if measured_error_upper is not None:
         TDIs['measured_error_upper'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured_error_upper})'
@@ -315,14 +317,23 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # fetch the data for all signals
     all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
 
+    # determine common times for equilibrium data
+    # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
+    ntimes = len(all_data['time'])
+    if ntimes == len(all_data['mtime']):
+        it = np.arange(ntimes)
+    else:
+        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+
     # assign the data to the ods
-    ntimes = len(all_data['measured'])
+    del all_data['time']
+    del all_data['mtime']
     cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
-                for k in range(ntimes):
-                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{entry}'] = data[k]
+                for k, ind in enumerate(it):
+                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{entry}'] = data[ind]
             except:
                 printe(f'EFIT data was not found for {base} {entry}')
 
@@ -339,7 +350,8 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     if base == 'mse_polarisation_angle':
         operation = 'ATAN'
     TDIs = {}
-    TDIs['ntimes'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA,0)'
+    TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
+    TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
     TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured},0)'
     TDIs['measured'] = f'{operation}(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured})'
     if measured_error_upper is not None:
@@ -354,22 +366,28 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # fetch the data for all signals
     all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
 
+    # determine common times for equilibrium data
+    # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
+    ntimes = len(all_data['time'])
+    if ntimes == len(all_data['mtime']):
+        it = np.arange(ntimes)
+    else:
+        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+
     # assign the data to the ods
-    ntimes = all_data['ntimes']
-    del all_data['ntimes']
+    del all_data['time']
+    del all_data['mtime']
     ndata = all_data['ndata']
     del all_data['ndata']
     cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
-                for k in range(ntimes):
+                for k, ind in enumerate(it):
                     for n in range(ndata):
-                        ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[k][n]
+                        ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[ind][n]
             except:
                 printe(f'EFIT data was not found for {base} {entry}')
-
-        #ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
 
 
 def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
@@ -381,7 +399,8 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
 
     # first form a list of signals to fetch
     TDIs = {}
-    TDIs['ntimes'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.PLASMA,0)'
+    TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
+    TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
     n = len(np.atleast_1d(measured))
     for i in range(n):
         TDIs[f'ndata_{i}'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured[i]},0)'
@@ -398,19 +417,27 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # fetch the data for all signals
     all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
 
+    # determine common times for equilibrium data
+    # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
+    ntimes = len(all_data['time'])
+    mtimes = len(all_data['mtime'])
+    if ntimes == mtimes:
+        it = np.arange(ntimes)
+    else:
+        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+
     # concatonate data
-    ntimes = all_data['ntimes']
     concat_data = {}
     concat_data['ndata'] = 0
-    concat_data['measured'] = np.empty((ntimes,0))
+    concat_data['measured'] = np.empty((mtimes,0))
     if measured_error_upper is not None:
-        concat_data['measured_error_upper'] = np.empty((ntimes,0))
+        concat_data['measured_error_upper'] = np.empty((mtimes,0))
     if weight is not None:
-        concat_data['weight'] = np.empty((ntimes,0))
+        concat_data['weight'] = np.empty((mtimes,0))
     if reconstructed is not None:
-        concat_data['reconstructed'] = np.empty((ntimes,0))
+        concat_data['reconstructed'] = np.empty((mtimes,0))
     if chi_squared is not None:
-        concat_data['chi_squared'] = np.empty((ntimes,0))
+        concat_data['chi_squared'] = np.empty((mtimes,0))
     for entry in concat_data.keys():
         for i in range(n):
             if entry == 'ndata':
@@ -437,9 +464,92 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         for entry, data in concat_data.items():
             if len(np.atleast_1d(data)) == 0:
                 continue
-            for k in range(ntimes):
+            for k, ind in enumerate(it):
                 for n in range(ndata):
-                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[k][n]
+                    ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.{entry}'] = np.atleast_2d(data)[ind][n]
+
+
+def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_run_id=None, **kw):
+    """
+    Loads psi_norm for constraints, converts to physical psi, and stores at equilibrium times
+    """
+
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+
+    # first form a list of signals to fetch
+    TDIs = {}
+    TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
+    TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
+    TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{psin},0)'
+    TDIs['psia'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG)'
+    TDIs['psib'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)'
+    TDIs['psin'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{psin})'
+
+    # fetch the data for all signals
+    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+
+    # determine common times for equilibrium data
+    # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
+    ntimes = len(data['time'])
+    if ntimes == len(data['mtime']):
+        it = np.arange(ntimes)
+    else:
+        it = np.minimum(data['mtime'].searchsorted(data['time']), ntimes-1)
+
+    # convert from normalized to real psi
+    try:
+        psi = (np.atleast_2d(abs(data['psin'])).T * (data['psib'] - data['psia']) + data['psia']).T
+    except:
+        printe(f'EFIT data was not found for {base} position.psi')
+
+    # assign the data to the ods
+    ndata = data['ndata']
+    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    with omas_environment(ods, cocosio=cocosio):
+        for k, ind in enumerate(it):
+            for n in range(ndata):
+                ods[f'equilibrium.time_slice.{k}.constraints.{base}.{n}.position.psi'] = psi[ind][n]
+
+
+def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw):
+    """
+    Determines the number of EFIT iterations taken for each time and stores in the ods 
+    """
+
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
+
+    # first form a list of signals to fetch
+    TDIs = {}
+    TDIs['time'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)'
+    TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
+    TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR,0)'
+    TDIs['error'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)'
+
+    # fetch the data for all signals
+    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+
+    # determine common times for equilibrium data
+    # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
+    ntimes = len(data['time'])
+    if ntimes == len(data['mtime']):
+        it = np.arange(ntimes)
+    else:
+        it = np.minimum(data['mtime'].searchsorted(data['time']), ntimes-1)
+
+    # find the number of iterations taken
+    try:
+        ndata = data['ndata']
+        error = data['error']
+        n = np.array([ndata for k in range(error.shape[0])])
+        n[error == 0] = 0
+        iterations = np.nanmax(n, axis=1)
+    except:
+        printe(f'could not determine the number of EFIT iterations taken')
+        return
+
+    # assign the data to the ods
+    for k, ind in enumerate(it):
+        ods[f'equilibrium.time_slice.{k}.convergence.iterations_n'] = iterations[ind]
 
 
 def fetch_assign(

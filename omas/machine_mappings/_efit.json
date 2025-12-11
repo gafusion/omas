@@ -305,15 +305,13 @@
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
-  "eval2TDI": "py2tdi(efit_psi_to_real_psi_2d,'-\\{EFIT_tree}::TOP.MEASUREMENTS.RPRESS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "constraint_psi_to_real_psi(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'RPRESS', EFIT_run_id={EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'VZEROJ', EFIT_run_id={EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
-  "eval2TDI": "py2tdi(efit_psi_to_real_psi_2d,'\\{EFIT_tree}::TOP.MEASUREMENTS.SIZEROJ','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY')",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "constraint_psi_to_real_psi(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'SIZEROJ', EFIT_run_id={EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.global_quantities.ip": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
@@ -452,8 +450,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.convergence.iterations_n": {
-    "eval2TDI": "py2tdi(get_largest_axis_value,'dim_of(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR,0)','\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR')",
-    "treename": "{EFIT_tree}"
+  "PYTHON": "efit_iteration_number(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
   "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ERROR)",
