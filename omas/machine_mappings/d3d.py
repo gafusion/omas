@@ -721,8 +721,9 @@ def interferometer_hardware(ods, pulse):
         los['first_point.r'] = los['second_point.r'] = r
         los['first_point.z'], los['second_point.z'] = Z_top, Z_bottom  # End points from OMFITprofiles
 
-    for i in range(len(ods['interferometer.channel'])):
+    for i in ods['interferometer.channel']:
         ch = ods['interferometer.channel'][i]
+        ch['wavelength.0.value'] = 10.6e-6 #m
         for field in ch['line_of_sight.first_point'].keys():
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
@@ -730,7 +731,7 @@ def interferometer_hardware(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_data(ods, pulse):
     """
-    Loads DIII-D interferometer measurement data
+    Loads DIII-D CO2 interferometer measurement data
 
     :param pulse: int
     """
@@ -746,7 +747,7 @@ def interferometer_data(ods, pulse):
 
     # fetch
     TDIs = {}
-    for k, channel in enumerate(ods1['interferometer.channel']):
+    for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         TDIs[identifier] = f"\\{BCI}.DEN{identifier}"
         TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
@@ -754,10 +755,11 @@ def interferometer_data(ods, pulse):
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
     if isinstance(data['time'], Exception):
-        printe('WARNING: interferometer data is missing')
+        printe('WARNING: CO2 interferometer data is missing')
         return
+
     # assign
-    for k, channel in enumerate(ods1['interferometer.channel']):
+    for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
@@ -766,9 +768,286 @@ def interferometer_data(ods, pulse):
             -data[f'{identifier}_validity'],
             kind='nearest',
             bounds_error=False,
-            fill_value=(-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]),
+            fill_value='extrapolate',
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def rip_hardware(ods, pulse):
+    """
+    Sets the DIII-D Radial Interferometer Polarimeter (RIP) chord locations
+    and channel information.
+
+    The chord endpoints are approximative. They do not take into account
+    the vessel wall contour of the pulse.
+
+    Data source: IDA-lite
+    https://github.com/GA-IDA/ida_lite/blob/c1398c826b7a327d6629b5518c3219b8870436ce/D3D/synt_diags/RIP.py#L47
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    if pulse < 168823 :
+        printe('WARNING: no RIP dignostic for this shot')
+        return
+
+    channels = ['Z','P', 'N'] 
+    #T is availible since FY25 Fall run
+    if pulse > 202680:
+        channels.append('T')
+
+    Rin  = 1.017
+    Rout = 2.36
+    z = 0, 0.135, -0.135 #m vertical position
+    #T channel is at  283, but else it is the same as 0  
+    if 'T' in channels:
+        z = z + (0,)
+    # phi angles are compliant with odd COCOS
+    phi0 = 286.6 * (-np.pi / 180.0)
+    conv0 = 6.71e15#m^-2/rad
+
+    for i, ch in enumerate(channels):
+        if pulse < 177052:
+            #some channels are wierd for old shot... is it a phase difference??
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rpich{2*i+1}phi'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rpich{2*i+2}phi'.upper()
+            #availible also slow data at 10kHz
+            if pulse > 169007:
+                ods['polarimeter.channel'][i]['identifier'] += 'S'
+                ods['interferometer.channel'][i]['identifier'] += 'S'
+        else:
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rip{ch}'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rip{ch}'.upper()
+
+        if ch == 'T':
+            phi = 283 * (-np.pi / 180.0)
+            conv = 1.436
+        else: 
+            phi = phi0
+            conv = conv0
+        los = ods['polarimeter.channel'][i]['line_of_sight']
+        los['first_point.phi'] = los['second_point.phi'] = phi
+        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
+        los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
+        los = ods['interferometer.channel'][i]['line_of_sight']
+        los['first_point.phi'] = los['second_point.phi'] = phi
+        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
+        los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6 #m
+        ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def rip_data(ods, pulse):
+    """
+    Loads DIII-D Radial Interferometer Polarimeter (RIP) measurement data
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    if pulse < 168823 :
+        printe('WARNING: no RIP data for this shot')
+        return
+    
+    ods1 = ODS()
+    unwrap(rip_hardware)(ods1, pulse=pulse)
+
+    tree = 'RPI'
+    TDIs = {}
+
+    # Each channel has 6 measurements: a1, a2, a3, b1, b2, and b3. Interferometric measurements are a1, a3, b1, and b3. Polarimetric measurements are a2 and b2. Noise in each measurement may differ, allowing one to perform cross-correlation to suppress noise.
+    interferometer_measurements = ['a1', 'a3', 'b1', 'b3']
+    n_int = len(interferometer_measurements)
+    polarimeter_measurements = ['a2', 'b2']
+    n_pol = len(polarimeter_measurements)
+
+    for ch in ods1['interferometer.channel']:
+        identifier = ods1['interferometer.channel'][ch]['identifier']
+        if pulse < 177052:
+            TDIs[identifier] = f"\\{tree}::{identifier}"
+        else:
+            for m in interferometer_measurements:
+                TDIs[f'{identifier}{m}'] = f"\\{tree}::{identifier}{m}phis".upper()
+            
+    for ch in ods1['polarimeter.channel']:
+        identifier = ods1['polarimeter.channel'][ch]['identifier']
+        if pulse < 177052:
+            TDIs[identifier] = f"\\{tree}::{identifier}"
+        else:
+            for m in polarimeter_measurements:
+                TDIs[f'{identifier}{m}'] = f"\\{tree}::{identifier}{m}phis".upper()
+
+    TDIs['time'] = f'dim_of({next(iter(TDIs.values()))})'
+
+    data = mdsvalue('d3d', tree, pulse, TDIs).raw()
+    if isinstance(data['time'], Exception):
+        printe('WARNING: RIP data is missing')
+        return
+
+    time = data['time'] / 1e3 #s
+    n_time = len(time)
+    ioff = time.searchsorted(0)
+
+    # downsample to 1kHz
+    #freq_down = 1000 #Hz
+    #nt = len(time)
+    #n_down = int(round((nt-1)/(time[-1]-time[0]) / freq_down)) // 2 * 2 + 1
+
+    for s in data:
+        offset = data[s][1:ioff].mean()
+        data[s] -= offset
+
+        # use median to keep the fringe jumps sharp
+        #data[s] = np.median(data[s][:nt//n_down*n_down].reshape(-1, n_down), 1)
+    #time = time[:nt//n_down*n_down].reshape(-1, n_down).mean(1)
+
+    for ch in ods1['interferometer.channel']:
+        iden = ods1['interferometer.channel'][ch]['identifier']
+        ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.time'] = time
+        ods['interferometer.channel'][ch]['n_e_line.time'] = time
+        if pulse < 177052:
+            phase = data[iden] * np.sign(data[iden].mean()) # ensure positivity
+        else:
+            phases = np.zeros([n_int, n_time])
+            for i, m in enumerate(interferometer_measurements):
+                phases[i] = data[f'{iden}{m}'] * np.sign(data[f'{iden}{m}'].mean()) # ensure positivity
+                
+            # make fringe jumps corrections
+            # note: these corrections have only been tested on downsampled data (should be checked again)
+            phases = np.rad2deg(np.unwrap(np.deg2rad(phases))) # unwrapped phase
+            jumps = phases - np.median(phases, 1)[:, None]
+            jumps = jumps - np.rad2deg(np.unwrap(np.deg2rad(jumps)))
+            phases -= jumps
+            ods['interferometer.channel'][ch]['wavelength.0.fringe_jump_correction_times'] = time
+            ods['interferometer.channel'][ch]['wavelength.0.fringe_jump_correction'] = np.median(jumps, 0)
+
+            phase = np.median(phases, 0)
+            phase_err = phases.std(0) + phases[:,1:ioff].std(1).mean()
+            ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data_error_upper'] = phase_err
+            ne_line_err = phase_err * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+
+        ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data'] = phase
+        # translates density phase to single-pass, line-integral density in m^-2.
+        ne_line = phase * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+        ods['interferometer.channel'][ch]['n_e_line.data'] = ne_line
+
+        valid = np.zeros(n_time)
+        if ne_line.mean() < 1e18:
+            # issue with old discharges (175492), wrong calibration of the edge chords??
+            ods['interferometer.channel'][ch]['n_e_line.validity'] = -1
+            valid = -1
+        else:
+            ods['interferometer.channel'][ch]['n_e_line.validity'] = 0
+            # enforce positivivity
+            valid[ne_line < 0] = -1
+        ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
+        if pulse >= 177052:
+            ne_line_err[ne_line < 0] = np.infty
+            ods['interferometer.channel'][ch]['n_e_line.data_error_upper'] = ne_line_err
+
+    for ch in ods1['polarimeter.channel']:
+        iden = ods1['polarimeter.channel'][ch]['identifier']
+        ods['polarimeter.channel'][ch]['faraday_angle.time'] = time
+        ods['polarimeter.channel'][ch]['faraday_angle.validity'] = 0
+        valid = np.zeros(n_time)
+        if pulse < 177052:
+            ods['polarimeter.channel'][ch]['faraday_angle.data'] = data[iden]
+        else:
+            angles = np.zeros([n_pol, n_time])
+            for i, m in enumerate(polarimeter_measurements):
+                angles[i] = data[f'{iden}{m}']
+            #TODO do it better??
+            ods['polarimeter.channel'][ch]['faraday_angle.data'] = angles.mean(0)
+            angle_err = angles.std(0)# + angles[:, 1:ioff].std(1).mean()
+            angle_err[angle_err <= 0] = np.inf
+            ods['polarimeter.channel'][ch]['faraday_angle.data_error_upper'] = angle_err
+            valid[angle_err <= 0] = -1
+        ods['polarimeter.channel'][ch]['faraday_angle.validity_timed'] = valid
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def interferometer_polarimeter_hardware(ods, pulse, include_CO2=True, include_RIP=True):
+    """
+    Combines the interferometer and polarimeter hardware for CO2 and RIP diagnostics
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+
+    :param include_CO2: boolean
+
+    :param include_RIP: boolean
+    """
+
+    n_CO2 = 0
+    if include_CO2:
+        ods1 = ODS()
+        unwrap(interferometer_hardware)(ods1, pulse=pulse)
+        n_CO2 = len(ods1['interferometer.channel'])
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][i]['name'] = ods1['interferometer.channel'][i]['name']
+            ods['interferometer.channel'][i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
+
+    if include_RIP:
+        ods1 = ODS()
+        unwrap(rip_hardware)(ods1, pulse=pulse)
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][n_CO2 + i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][n_CO2 + i]['name'] = ods1['interferometer.channel'][i]['name']
+            ods['interferometer.channel'][n_CO2 + i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = ods1['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line']
+        for i in ods1['polarimeter.channel']:
+            ods['polarimeter.channel'][i]['identifier'] = ods1['polarimeter.channel'][i]['identifier']
+            ods['polarimeter.channel'][i]['name'] = ods1['polarimeter.channel'][i]['name']
+            ods['polarimeter.channel'][i]['line_of_sight'] = ods1['polarimeter.channel'][i]['line_of_sight']
+            ods['polarimeter.channel'][i]['wavelength'] = ods1['polarimeter.channel'][i]['wavelength']
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def interferometer_polarimeter_data(ods, pulse, include_CO2=True, include_RIP=True):
+    """
+    Loads DIII-D interferometer and polarimter measurement data for CO2 and RIP
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+
+    :param include_CO2: boolean
+
+    :param include_RIP: boolean
+    """
+
+    n_CO2 = 0
+    if include_CO2:
+        ods1 = ODS()
+        unwrap(interferometer_data)(ods1, pulse=pulse)
+        n_CO2 = len(ods1['interferometer.channel'])
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][i]['n_e_line'] = ods1['interferometer.channel'][i]['n_e_line']
+
+    if include_RIP:
+        ods1 = ODS()
+        unwrap(rip_data)(ods1, pulse=pulse)
+        for i in ods1['interferometer.channel']:
+            if 'phase_to_n_e_line' in ods['interferometer.channel'][n_CO2 + i]['wavelength.0']:
+                conv = ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line']
+            else:
+                conv = None
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0'] = ods1['interferometer.channel'][i]['wavelength.0']
+            ods['interferometer.channel'][n_CO2 + i]['n_e_line'] = ods1['interferometer.channel'][i]['n_e_line']
+            if not conv is None:
+                ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = conv
+
+        for i in ods1['polarimeter.channel']:
+            ods['polarimeter.channel'][i]['faraday_angle'] = ods1['polarimeter.channel'][i]['faraday_angle']
 
 
 # ================================
@@ -928,6 +1207,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
 
 
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def bolometer_hardware(ods, pulse):
     """
@@ -1505,6 +1785,8 @@ def ip_bt_dflux_data(ods, pulse):
 
         ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
 
+
+# ================================
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
@@ -1719,8 +2001,6 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
     if len(str(pulse))>8:
         mpulse = int(str(pulse)[:6])
 
-    ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1, pulse)
     with omas_environment(ods, cocosio=7):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
