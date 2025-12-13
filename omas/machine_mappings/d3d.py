@@ -2034,6 +2034,114 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.ids_properties.homogeneous_time"] = 1
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=174436)
+def reflectometer_hardware(ods, pulse):
+    """
+    Loads DIII-D reflectometer chord locations
+
+    The chord endpoints are approximative. They do not take into account
+    the vessel wall contour of the shot. The values have been taken from IDA-lite.
+
+    Data sources: https://github.com/GA-IDA/ida_lite/blob/c1398c826b7a327d6629b5518c3219b8870436ce/D3D/synt_diags/REFL.py#L41
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+    bands=['Q','V','QO', 'VO']
+
+    # reflectometer LOS, not actual location of measured density!
+    R_in, R_out = 1.6, 2.377
+    Z0 =  0.0254
+
+    # phi angles are compliant with odd COCOS
+    for i, band in enumerate(bands):
+        ods['reflectometer_profile.channel'][i]['identifier'] = ods['reflectometer_profile.channel'][i]['name'] = f'{band}BAND'
+        if 'O' in band:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'O'
+        else:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'X'
+        los = ods['reflectometer_profile.channel'][i]['line_of_sight_emission']
+        los['first_point.r'], los['second_point.r'] = R_out, R_in  # End points from IDA-lite
+        # TODO: is this correct? publications suggest the antennas (emission and detection) are tilted...
+        los['first_point.z'] = los['second_point.z'] = Z0
+        # TODO: add todoidal position
+        #los['first_point.phi'] = los['second_point.phi'] = 240 * (-np.pi / 180.0)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=174436)
+def reflectometer_data(ods, pulse):
+    """
+    Loads DIII-D reflectometer measurement data
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    ods1 = ODS()
+    unwrap(reflectometer_hardware)(ods1, pulse=pulse)
+
+    # fetch
+    TDIs = {}
+    for k in ods1['reflectometer_profile.channel']:
+        identifier = ods1[f'reflectometer_profile.channel.{k}.identifier'].upper()
+        path = f'\\ELECTRONS::TOP.REFLECT.{identifier}.PROCESSED:'
+        TDIs[f'{identifier}_frequency'] = path + 'FREQUENCY'
+        TDIs[f'{identifier}_phase'] = path + 'PHASE'
+        TDIs[f'{identifier}_time'] = path + 'TIME'
+    TDIs['full_profile_time'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:TIME'
+    TDIs['full_profile_R'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:R'
+    TDIs['full_profile_density'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:DENSITY'
+
+    data = mdsvalue('d3d', 'ELECTRONS', pulse, TDIs).raw()
+
+    # assign
+    time = None
+    for k in ods1['reflectometer_profile.channel']:
+        identifier = ods1[f'reflectometer_profile.channel.{k}.identifier'].upper()
+
+        if isinstance(data[f'{identifier}_time'], Exception):
+            printe(f'WARNING: reflectometer data is missing for {identifier}')
+            continue
+
+        time_ = data[f'{identifier}_time']/1e3 #s
+        freq = data[f'{identifier}_frequency'] #Hz
+        phase = data[f'{identifier}_phase'].T #rad
+        assert np.size(phase) > 2
+
+        # ensure all bands have equal size - sometimes a single slice can miss
+        if time is None:
+            time = time_
+        else:
+            it = np.minimum(time_.searchsorted(time), len(time)-1)
+            phase = phase[it]
+        
+        invalid = np.any(np.abs(phase) > 2e3,axis=1)
+        phase[invalid] = 0
+
+        ods[f'reflectometer_profile.channel.{k}.phase.time'] = time
+        ods[f'reflectometer_profile.channel.{k}.frequencies'] = freq
+        ods[f'reflectometer_profile.channel.{k}.phase.data'] = phase.T
+
+    if isinstance(data['full_profile_time'], Exception):
+        printe('WARNING: reflectometer density is missing')
+        return
+
+    _time = data['full_profile_time']/1e3
+    R = data['full_profile_R'].T
+    density = data['full_profile_density'].T
+    it = np.argmin(abs(_time - time[:,None]),axis=1)
+
+    ods[f'reflectometer_profile.position.r'] = R[it].T
+    ods[f'reflectometer_profile.position.z'] = 0.0254 + 0 * R[it].T
+    # TODO: add todoidal position
+    #ods[f'reflectometer_profile.position.phi'] = ... + 0 * R[it].T
+    ods[f'reflectometer_profile.n_e.time'] = _time[it]
+    ods[f'reflectometer_profile.n_e.data'] = density[it].T
+
+
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=194306)
 def summary(ods, pulse):
     with omas_environment(ods):
@@ -2052,4 +2160,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["interferometer_polarimeter_hardware"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["reflectometer_data"], globals(), locals())

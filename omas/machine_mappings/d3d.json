@@ -812,6 +812,63 @@
  "polarimeter.channel.:.wavelength": {
   "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
+ "reflectometer_profile.channel.:": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.frequencies": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.identifier": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.r": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.z": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.r": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.z": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.mode": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.name": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.phase.data": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.phase.time": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.n_e.data": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.n_e.time": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.r": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.z": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
  "summary.global_quantities.power_radiated_inside_lcfs.value": {
   "PYTHON": "summary(ods, {pulse})"
  },
