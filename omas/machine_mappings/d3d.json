@@ -811,6 +811,7 @@
  },
  "polarimeter.channel.:.wavelength": {
   "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
  "reflectometer_profile.channel.:": {
   "PYTHON": "reflectometer_hardware(ods, {pulse})"
  },
