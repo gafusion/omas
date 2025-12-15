@@ -1610,6 +1610,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             # Need to set _fit.rho_tor_norm first otherwise the IMAS consistency checker complains
                 #
             for i_time, time in enumerate(data["time"]):
+                ods[f'{sh}[{i_time}].time'] = data['time'][i_time]
                 try:
                     if "_fit.measured" in entry:
                         data_mask = np.isfinite(data[entry][i_time])
