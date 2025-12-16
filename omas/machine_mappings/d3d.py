@@ -634,9 +634,6 @@ def ec_launcher_active_hardware(ods, pulse):
 def nbi_active_hardware(ods, pulse):
     beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
 
-    e = 1.602176634e-19 #[C]
-    m_u = 1.6605390666e-27 #[kg]
-
     query = {}
     for beam_name in beam_names:
         for field in ["PINJ", "TINJ"]:
@@ -649,12 +646,6 @@ def nbi_active_hardware(ods, pulse):
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
     data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
 
-    # we use last time of EFIT01 to trim data
-    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
-
-    trim_start = 0
-    trim_end = 0
     beam_index = 0
     for beam_name in beam_names:
         if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
@@ -664,17 +655,12 @@ def nbi_active_hardware(ods, pulse):
         if isinstance(data[f"{beam_name}.VBEAM"], Exception):
             data[f"{beam_name}.VBEAM"] = data[f"{beam_name}.VBEAM_time"] * 0.0 + 80E3 # assume 80keV when beam voltage is missing
 
-        if trim_start == 0 and trim_end == 0:
-            times = data[f"{beam_name}.PINJ_time"]
-            trim_start = np.searchsorted(times, 0.0, side='left')
-            trim_end = np.searchsorted(times, last_time, side='right')
-
         nbu = ods["nbi.unit"][beam_index]
         nbu["name"] = beam_name
-        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"][trim_start:trim_end]
-        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"][trim_start:trim_end]
-        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"][trim_start:trim_end]
-        nbu["energy.data"] = data[f"{beam_name}.VBEAM"][trim_start:trim_end]
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"]
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"]
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"]
         beam_index += 1
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
