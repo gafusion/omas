@@ -20,10 +20,10 @@
  "charge_exchange.channel.:.ion.:.t_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
  },
- "charge_exchange.channel.:.ion.:.t_i.time": {
+ "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
  },
- "charge_exchange.channel.:.ion.:.t_i.data_error_upper": {
+ "charge_exchange.channel.:.ion.:.t_i.time": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {edition!r})"
  },
  "charge_exchange.channel.:.ion.:.velocity_tor.data": {
