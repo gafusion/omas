@@ -2092,8 +2092,7 @@ def reflectometer_hardware(ods, pulse):
         los['first_point.r'], los['second_point.r'] = R_out, R_in  # End points from IDA-lite
         # TODO: is this correct? publications suggest the antennas (emission and detection) are tilted...
         los['first_point.z'] = los['second_point.z'] = Z0
-        # TODO: add todoidal position
-        #los['first_point.phi'] = los['second_point.phi'] = 240 * (-np.pi / 180.0)
+        los['first_point.phi'] = los['second_point.phi'] = 255 * (-np.pi / 180.0)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=174436)
@@ -2135,7 +2134,10 @@ def reflectometer_data(ods, pulse):
         time_ = data[f'{identifier}_time']/1e3 #s
         freq = data[f'{identifier}_frequency'] #Hz
         phase = data[f'{identifier}_phase'].T #rad
-        assert np.size(phase) > 2
+
+        if np.size(phase) < 3:
+            printe(f'WARNING: reflectometer data is missing for {identifier}')
+            continue
 
         # ensure all bands have equal size - sometimes a single slice can miss
         if time is None:
@@ -2154,11 +2156,18 @@ def reflectometer_data(ods, pulse):
     if isinstance(data['full_profile_time'], Exception):
         printe('WARNING: reflectometer density is missing')
         return
-
     _time = data['full_profile_time']/1e3
     R = data['full_profile_R'].T
     density = data['full_profile_density'].T
-    it = np.argmin(abs(_time - time[:,None]),axis=1)
+
+    if np.size(_time) < 3:
+        printe('WARNING: reflectometer density is missing')
+        return
+
+    if time is None:
+        it = np.arange(_time.shape[0])
+    else:
+        it = np.argmin(abs(_time - time[:,None]),axis=1)
 
     ods[f'reflectometer_profile.position.r'] = R[it].T
     ods[f'reflectometer_profile.position.z'] = 0.0254 + 0 * R[it].T
