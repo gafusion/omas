@@ -245,6 +245,10 @@
  "core_profiles.profiles_1d.:.ion.:.label": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.ion.:.rotation_frequency_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.ion.:.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
@@ -324,6 +328,9 @@
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ec_launchers.beam.:.name": {
+  "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
+ },
+ "ec_launchers.beam.:.o_mode_fraction": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
  },
  "ec_launchers.beam.:.phase.angle": {
@@ -892,7 +899,7 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.n_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
@@ -904,17 +911,17 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.t_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
