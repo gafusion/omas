@@ -3,7 +3,6 @@
 -------
 '''
 from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
-from scipy.integrate import cumulative_trapezoid
 try:
     from numpy import trapezoid as trapz
 except ImportError:
