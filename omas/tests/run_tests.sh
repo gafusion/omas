@@ -2,5 +2,5 @@
 # which is useful to debug when `-m unittest` gives cryptic error messages
 set -e
 for testfile in omas/tests/test_*.py ; do
-    python3 -W "ignore::DeprecationWarning:pyparsing.*" $testfile
+    python3 $testfile
 done
