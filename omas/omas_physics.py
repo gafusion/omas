@@ -5,7 +5,7 @@
 from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
 from scipy.integrate import cumulative_trapezoid
 try:
-    from numpy import trapz as trapz
+    from numpy import trapezoid as trapz
 except ImportError:
     from numpy import trapz
 from .omas_utils import *
