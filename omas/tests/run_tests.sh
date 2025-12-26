@@ -2,5 +2,5 @@
 # which is useful to debug when `-m unittest` gives cryptic error messages
 set -e
 for testfile in omas/tests/test_*.py ; do
-    python3 $testfile
+    python3 -W "ignore::DeprecationWarning:matplotlib.*" $testfile
 done
