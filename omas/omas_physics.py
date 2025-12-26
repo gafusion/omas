@@ -1966,7 +1966,7 @@ def core_profiles_currents(
         try:
             from scipy.integrate import cumtrapz
         except ImportError:
-            from scipy.integrate import cumulative_trapezoid
+            from scipy.integrate import cumulative_trapezoid as cumtrapz
 
     prof1d = ods['core_profiles.profiles_1d'][time_index]
 
