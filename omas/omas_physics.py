@@ -1323,7 +1323,7 @@ def summary_thermal_stored_energy(ods, update=True):
     for time_index in ods['core_profiles.profiles_1d']:
         eq = ods[f'equilibrium.time_slice[{time_index}].profiles_1d']
         volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'], xp=eq['rho_tor_norm'], fp=eq['volume'])
-        thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
+        thermal_energy.append(trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
 
     ods_n['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
     ods_n['summary.time'] = ods['equilibrium.time']
