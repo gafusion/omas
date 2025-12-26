@@ -3,7 +3,10 @@
 -------
 '''
 from scipy.interpolate import RectBivariateSpline, InterpolatedUnivariateSpline, interp1d
-from scipy.integrate import cumulative_trapezoid
+try:
+    from numpy import trapezoid as trapz
+except ImportError:
+    from numpy import trapz
 from .omas_utils import *
 from .omas_core import ODS
 __all__ = []
@@ -152,7 +155,7 @@ def equilibrium_stored_energy(ods, update=True):
         volume_equil = ods['equilibrium']['time_slice'][time_index]['profiles_1d']['volume']
 
         ods_n['equilibrium.time_slice'][time_index]['.global_quantities.energy_mhd'] = (
-            3.0 / 2.0 * numpy.trapz(pressure_equil, x=volume_equil)
+            3.0 / 2.0 *trapz(pressure_equil, x=volume_equil)
         )  # [J]
 
     return ods_n
@@ -1115,7 +1118,7 @@ def summary_greenwald(ods, update=True):
         ):
             ne = ods['core_profiles.profiles_1d.%d.electrons.density_thermal' % time_index]
             volume = ods['equilibrium.time_slice.%d.profiles_1d.volume' % time_index]
-            ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
+            ne_vol_avg =trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
                 ods.physics_summary_lineaverage_density()
@@ -1233,7 +1236,7 @@ def summary_lineaverage_density(ods, line_grid=2000, time_index=None, update=Tru
 
             psival = [psi_spl(Rline[i], Zline[i], grid=False).item() for i in range(i1, i2, numpy.sign(i2 - i1))]
             ne_interp = scipy.interpolate.splev(psival, tck)
-            ne_line = numpy.trapz(ne_interp)
+            ne_line =trapz(ne_interp)
             ne_line /= abs(i2 - i1)
             ne_line_paths.append(ne_line)
             dist_paths.append(numpy.sqrt((xline[i2] - xline[i1]) ** 2 + (yline[i2] - yline[i1]) ** 2 + (Zline[i2] - Zline[i1]) ** 2))
@@ -1287,7 +1290,7 @@ def summary_currents(ods, time_index=None, update=True):
                     JparB=ods['core_profiles']['profiles_1d'][time_index][jname_cp] * Bt,
                     equilibrium=ods['equilibrium.time_slice'][time_index],
                 )
-                Ip = numpy.trapz(JtoR, ods['equilibrium.time_slice[0].profiles_1d.volume']) / 2 / numpy.pi
+                Ip =trapz(JtoR, ods['equilibrium.time_slice[0].profiles_1d.volume']) / 2 / numpy.pi
 
                 if f'summary.global_quantities.{jname_sum}' not in ods:
                     ods_n['summary.global_quantities'][jname_sum] = numpy.zeros(time_index + 1)
@@ -1320,7 +1323,7 @@ def summary_thermal_stored_energy(ods, update=True):
     for time_index in ods['core_profiles.profiles_1d']:
         eq = ods[f'equilibrium.time_slice[{time_index}].profiles_1d']
         volume = numpy.interp(x=ods[f'core_profiles.profiles_1d.{time_index}.grid.rho_tor_norm'], xp=eq['rho_tor_norm'], fp=eq['volume'])
-        thermal_energy.append(numpy.trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
+        thermal_energy.append(trapz(3 / 2 * ods['core_profiles.profiles_1d[0].pressure_thermal'], x=volume))
 
     ods_n['summary.global_quantities.energy_thermal.value'] = numpy.array(thermal_energy)
     ods_n['summary.time'] = ods['equilibrium.time']
@@ -1366,7 +1369,7 @@ def summary_taue(ods, thermal=True, update=True):
             volume = equilibrium_ods['profiles_1d']['volume']
             kappa = volume[-1] / 2 / numpy.pi / numpy.pi / a / a / r_major
             ne = ods['core_profiles']['profiles_1d'][time_index]['electrons']['density_thermal']
-            ne_vol_avg = numpy.trapz(ne, x=volume) / volume[-1]
+            ne_vol_avg =trapz(ne, x=volume) / volume[-1]
 
             if 'interferometer' in ods:
                 ods.physics_summary_lineaverage_density()
@@ -1382,9 +1385,9 @@ def summary_taue(ods, thermal=True, update=True):
             ions = ods['core_profiles']['profiles_1d'][time_index]['ion']
             for ion in ods['core_profiles']['profiles_1d'][time_index]['ion']:
                 if ions[ion]['label'] == 'D' or 'd':
-                    n_deuterium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
+                    n_deuterium_avg =trapz(ions[ion]['density_thermal'], x=volume)
                 elif ions[ion]['label'] == 'T' or 't':
-                    n_tritium_avg = numpy.trapz(ions[ion]['density_thermal'], x=volume)
+                    n_tritium_avg =trapz(ions[ion]['density_thermal'], x=volume)
             isotope_factor = (2.014102 * n_deuterium_avg + 3.016049 * n_tritium_avg) / (n_deuterium_avg + n_tritium_avg)
 
             info_string = ''
@@ -1491,7 +1494,7 @@ def summary_heating_power(ods, update=True):
                         q_dict[index_dict[sources[source]['identifier.index']]][time_index,:] += source_1d['total_ion_energy']
 
     for key, value in power_dict.items():
-        power_dict[key] = numpy.trapz(q_dict[key], x=vol,axis=1)
+        power_dict[key] =trapz(q_dict[key], x=vol,axis=1)
         if numpy.sum(power_dict[key]) > 0:
             if key == 'total_heating':
                 ods_n['summary.global_quantities.power_steady.value'] = numpy.array(power_dict[key])
@@ -1958,9 +1961,12 @@ def core_profiles_currents(
         return
 
     try:
-        from scipy.integrate import cumulative_trapezoid as cumtrapz
+        from scipy.integrate import cumulative_trapz as cumtrapz
     except ImportError:
-        from scipy.integrate import cumtrapz
+        try:
+            from scipy.integrate import cumtrapz
+        except ImportError:
+            from scipy.integrate import cumulative_trapezoid as cumtrapz
 
     prof1d = ods['core_profiles.profiles_1d'][time_index]
 
