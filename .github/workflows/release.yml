@@ -1,0 +1,93 @@
+name: Create Release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.changed }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed
+        id: check
+        run: |
+          CURRENT_VERSION=$(cat omas/version | tr -d '\n')
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+
+          # Check if this is the first commit or if version file changed
+          if git diff HEAD^ HEAD --name-only | grep -q "omas/version"; then
+            PREVIOUS_VERSION=$(git show HEAD^:omas/version | tr -d '\n')
+            if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+              echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+              echo "changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "Version file changed but version is the same"
+              echo "changed=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "Version file not changed"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  create-release:
+    needs: check-version
+    if: needs.check-version.outputs.version_changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get previous tag
+        id: prev_tag
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            echo "No previous tag found, using initial commit"
+            echo "prev_tag=$(git rev-list --max-parents=0 HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "prev_tag=$PREV_TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate release notes
+        id: notes
+        run: |
+          VERSION="${{ needs.check-version.outputs.version }}"
+          PREV_TAG="${{ steps.prev_tag.outputs.prev_tag }}"
+
+          echo "# Release v$VERSION" > release_notes.md
+          echo "" >> release_notes.md
+
+          # Get merged PRs since last tag
+          echo "## Changes" >> release_notes.md
+          echo "" >> release_notes.md
+
+          # Get commit messages between tags
+          git log $PREV_TAG..HEAD --pretty=format:"- %s (%h)" --merges >> release_notes.md || \
+          git log --pretty=format:"- %s (%h)" >> release_notes.md
+
+          echo "" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/$PREV_TAG...v$VERSION" >> release_notes.md
+
+          cat release_notes.md
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.check-version.outputs.version }}
+          name: Release v${{ needs.check-version.outputs.version }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
