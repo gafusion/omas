@@ -974,7 +974,7 @@ def rip_data(ods, pulse):
             valid[ne_line < 0] = -1
         ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
         if pulse >= 177052:
-            ne_line_err[ne_line < 0] = np.infty
+            ne_line_err[ne_line < 0] = np.inf
             ods['interferometer.channel'][ch]['n_e_line.data_error_upper'] = ne_line_err
 
     for ch in ods1['polarimeter.channel']:
