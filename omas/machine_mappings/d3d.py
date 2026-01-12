@@ -963,13 +963,13 @@ def rip_data(ods, pulse):
         ne_line = phase * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
         ods['interferometer.channel'][ch]['n_e_line.data'] = ne_line
 
-        valid = np.zeros(n_time)
+        valid = np.zeros(n_time, dtype=int)
+        ods['interferometer.channel'][ch]['n_e_line.validity'] = 0
         if ne_line.mean() < 1e18:
             # issue with old discharges (175492), wrong calibration of the edge chords??
             ods['interferometer.channel'][ch]['n_e_line.validity'] = -1
-            valid = -1
+            valid[:] = -1
         else:
-            ods['interferometer.channel'][ch]['n_e_line.validity'] = 0
             # enforce positivivity
             valid[ne_line < 0] = -1
         ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
@@ -1071,6 +1071,7 @@ def interferometer_polarimeter_data(ods, pulse, include_CO2=True, include_RIP=Tr
             ods['interferometer.channel'][n_CO2 + i]['n_e_line'] = ods1['interferometer.channel'][i]['n_e_line']
             if not conv is None:
                 ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = conv
+            
 
         for i in ods1['polarimeter.channel']:
             ods['polarimeter.channel'][i]['faraday_angle'] = ods1['polarimeter.channel'][i]['faraday_angle']
