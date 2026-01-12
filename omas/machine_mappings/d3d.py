@@ -789,7 +789,7 @@ def interferometer_data(ods, pulse):
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
-        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(
+        valid = interp1d(
             data['time_valid'] / 1.0e3,
             -data[f'{identifier}_validity'],
             kind='nearest',
@@ -797,6 +797,11 @@ def interferometer_data(ods, pulse):
             fill_value='extrapolate',
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = valid
+        ne_err = np.zeros(data[identifier].shape)
+        ne_err[:] = np.median(np.abs(data[identifier][data['time']<0])) * 1e6
+        ne_err[valid<0] = np.inf
+        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = ne_err
 
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
@@ -2197,4 +2202,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["reflectometer_data"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["interferometer_data"], globals(), locals())
