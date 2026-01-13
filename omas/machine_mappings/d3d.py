@@ -1186,16 +1186,16 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
     fast_ece = 'F' if fast_ece else ''
     setup = '\\ECE::TOP.SETUP.'
     cal = '\\ECE::TOP.CAL%s.' % fast_ece
-    TECE = '\\ECE::TOP.TECE.TECE' + fast_ece
+    TECE = '\\ECE::TOP.TECE' + fast_ece + '.TECE' + fast_ece
 
     query = {}
-    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ', "FLTRWID"], ['NUMCH']]):
+    for node, quantities in zip([setup, cal], [['ECEPHI', 'ECETHETA', 'ECEZH', 'FREQ', "FLTRWID"], ['NUMCH' + fast_ece]]):
         for quantity in quantities:
             query[quantity] = node + quantity
     query['TIME'] = f"dim_of({TECE + '01'})"
     ece_map = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
     N_time = len(ece_map['TIME'])
-    N_ch = ece_map['NUMCH'].item()
+    N_ch = ece_map['NUMCH' + fast_ece].item()
 
     if _measurements:
         query = {}
