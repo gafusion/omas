@@ -1814,7 +1814,8 @@ def ip_bt_dflux_data(ods, pulse):
             if 'magnetics.diamagnetic_flux.0.data' in key:
                 ods[key] *= 1e-3
 
-        ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
+            if 'tf.b_field_tor_vacuum_r.data' in key:
+                ods[key] *= 1.6955
 
 
 # ================================
