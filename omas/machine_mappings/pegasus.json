@@ -83,6 +83,13 @@
  ,"pf_active.coil.:.name" : {
  "PYTHON":"pegasus_pf_hardware(ods)"
  }
+ ,"pf_active.coil.:.current.data" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ ,"COCOSIO":1
+ }
+ ,"pf_active.coil.:.current.time" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ }
  ,"pf_active.coil.:.element.:" : {
  "PYTHON":"pegasus_pf_hardware(ods)"
  }
@@ -125,25 +132,25 @@
  ,"pf_active.coil.:.element.:.geometry.oblique.length_beta" : {
  "PYTHON":"pegasus_pf_hardware(ods)"
  }
- "wall.description_2d.:": {
+ ,"wall.description_2d.:": {
   "VALUE": 1
  },
  "wall.description_2d.:.limiter.type.description": {
-  "PYTHON": "pegasus_limiter"
+  "PYTHON": "pegasus_limiter(ods)"
  },
  "wall.description_2d.:.limiter.type.index": {
-  "PYTHON": "pegasus_limiter"
+  "PYTHON": "pegasus_limiter(ods)"
  },
  "wall.description_2d.:.limiter.type.name": {
-  "PYTHON": "pegasus_limiter"
+  "PYTHON": "pegasus_limiter(ods)"
  },
  "wall.description_2d.:.limiter.unit.:": {
   "VALUE": 1
  },
  "wall.description_2d.:.limiter.unit.:.outline.r": {
-  "PYTHON": "pegasus_limiter"
+  "PYTHON": "pegasus_limiter(ods)"
  },
  "wall.description_2d.:.limiter.unit.:.outline.z": {
-  "PYTHON": "pegasus_limiter"
- },
+  "PYTHON": "pegasus_limiter(ods)"
+ }
 }
