@@ -647,10 +647,13 @@ def equilibrium_profiles_2d_map(
 @add_to__ODS__
 def add_flux_surface_averages(ods, grid_index=0):
     import contourpy
+    import numpy as np
+
+    # Safe alias for trapz across versions
     try:
-        from numpy import trapezoid as trapz
-    except ImportError:
-        from numpy import trapz
+        trapz = np.trapezoid  # modern NumPy >=1.20
+    except AttributeError:
+        trapz = np.trapz      # older NumPy
 
     # adding gm10 to ODS structure to handle HF (helical flux function)
     extra_structures = {}
