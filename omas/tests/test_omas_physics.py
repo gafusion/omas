@@ -221,7 +221,7 @@ class TestOmasPhysics(UnittestCaseOmas):
                 assert numpy.allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check, atol=atol)
 
 
-    def test_add_volume_profile(self):
+    def test_add_flux_surface_averages(self):
         sample_path = os.path.dirname(__file__)
         sample_path = os.path.join(sample_path, os.pardir, "samples", "D3D_standard_Lmode.json")
         ods = load_omas_json(sample_path)
@@ -229,7 +229,7 @@ class TestOmasPhysics(UnittestCaseOmas):
         dvolume_dpsi_check = copy.copy(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
         del(ods['equilibrium.time_slice.0.profiles_1d.volume'])
         del(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'])
-        ods.physics_add_volume_profile()
+        ods.physics_add_flux_surface_averages()
         check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.volume'] - volume_check))
         assert check < 1.e-3 * numpy.max(volume_check)
         check = numpy.mean(numpy.abs(ods['equilibrium.time_slice.0.profiles_1d.dvolume_dpsi'] - dvolume_dpsi_check))
