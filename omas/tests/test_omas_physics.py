@@ -221,7 +221,7 @@ class TestOmasPhysics(UnittestCaseOmas):
                 assert numpy.allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check, atol=atol)
 
 
-    def test_add_volume_profile(self):
+    def test_add_flux_surface_averages(self):
         sample_path = os.path.dirname(__file__)
         sample_path = os.path.join(sample_path, os.pardir, "samples", "D3D_standard_Lmode.json")
         ods = load_omas_json(sample_path)
