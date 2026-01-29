@@ -28,7 +28,7 @@ jobs:
             python -m pip install --upgrade pip
             python -m pip install numpy
             python -m pip install -r requirements.txt
-            python -m pip install boto3 pymongo xmltodict
+            python -m pip install boto3 xmltodict
             python -m pip install wheel
             python -m pip install --no-build-isolation .[machine]
             python -c "import omas; print(omas.__version__)"

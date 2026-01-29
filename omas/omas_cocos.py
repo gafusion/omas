@@ -1225,8 +1225,8 @@ _cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.first_poi
 _cocos_signals['reflectometer_profile.channel.:.line_of_sight_emission.second_point.phi']='TOR'                # 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.channel.:.position.phi']='TOR'                                           # 2.000000 # phi  [rad]
 _cocos_signals['reflectometer_profile.channel.:.position.psi']='PSI'                                           # 2.000000 # psi  [W]
-_cocos_signals['reflectometer_profile.position.phi']='?'                                                #[ADD?]# 2.000000 # phi  [rad]
-_cocos_signals['reflectometer_profile.position.psi']='?'                                                #[ADD?]# 2.000000 # psi  [W]
+_cocos_signals['reflectometer_profile.position.phi']='TOR'                                                     # 2.000000 # phi  [rad]
+_cocos_signals['reflectometer_profile.position.psi']='PSI'                                                     # 2.000000 # psi  [W]
 _cocos_signals['reflectometer_profile.psi_normalization.psi_boundary']='PSI'                                   # 2.000000 # psi  [Wb]
 _cocos_signals['reflectometer_profile.psi_normalization.psi_magnetic_axis']='PSI'                              # 2.000000 # psi  [Wb]
 

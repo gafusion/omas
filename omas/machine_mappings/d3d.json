@@ -15,7 +15,11 @@
   "default_tree": "D3D",
   "fast_ece": false,
   "get_all": true,
-  "revision": "BLESSED"
+  "include_CO2": true,
+  "include_RIP": true,
+  "nref": 0,
+  "revision": "BLESSED",
+  "store_differential": false
  },
  "bolometer.channel.:": {
   "PYTHON": "bolometer_hardware(ods, {pulse})"
@@ -449,52 +453,82 @@
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
  "interferometer.channel.:": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.identifier": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.first_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.first_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.first_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.second_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.second_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.second_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.third_point.phi": {
   "COCOSIO": 11,
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.third_point.r": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.line_of_sight.third_point.z": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.n_e_line.data": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.n_e_line.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.n_e_line.time": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.n_e_line.validity": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.n_e_line.validity_timed": {
-  "PYTHON": "interferometer_data(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "interferometer.channel.:.name": {
-  "PYTHON": "interferometer_hardware(ods, {pulse})"
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.fringe_jump_correction": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.fringe_jump_correction_times": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.data": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_corrected.time": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.phase_to_n_e_line": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "interferometer.channel.:.wavelength.:.value": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "langmuir_probes.embedded.:": {
   "PYTHON": "langmuir_probes_hardware(ods, {pulse})"
@@ -601,16 +635,16 @@
  },
  "magnetics.flux_loop.:.flux.data": {
   "COCOSIO": 11,
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.data_error_upper": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.time": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.flux.validity": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.flux_loop.:.identifier": {
   "PYTHON": "magnetics_hardware(ods, {pulse})"
@@ -628,7 +662,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "magnetics_hardware(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
  },
  "magnetics.ip.:": {
   "VALUE": 1
@@ -728,6 +762,120 @@
  "pf_active.coil.:.name": {
   "PYTHON": "pf_active_hardware(ods, {pulse})"
  },
+ "polarimeter.channel.:": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.data": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.time": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.validity": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.validity_timed": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.identifier": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.first_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.second_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.r": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.line_of_sight.third_point.z": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.name": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.wavelength": {
+  "PYTHON": "interferometer_polarimeter_hardware(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "reflectometer_profile.channel.:": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.frequencies": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.identifier": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.r": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.first_point.z": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.r": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.line_of_sight_emission.second_point.z": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.mode": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.name": {
+  "PYTHON": "reflectometer_hardware(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.phase.data": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.channel.:.phase.time": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.n_e.data": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.n_e.time": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.phi": {
+  "COCOSIO": 11,
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.r": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
+ "reflectometer_profile.position.z": {
+  "PYTHON": "reflectometer_data(ods, {pulse})"
+ },
  "summary.global_quantities.power_radiated_inside_lcfs.value": {
   "PYTHON": "summary(ods, {pulse})"
  },
@@ -751,7 +899,7 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.identifier": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.n_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
@@ -763,17 +911,17 @@
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.name": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.phi": {
   "COCOSIO": 11,
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.r": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.position.z": {
-  "PYTHON": "thomson_scattering_hardware(ods, {pulse}, {revision!r})"
+  "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"
  },
  "thomson_scattering.channel.:.t_e.data": {
   "PYTHON": "thomson_scattering_data(ods, {pulse}, {revision!r})"

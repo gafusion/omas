@@ -2,16 +2,15 @@ import numpy as np
 from inspect import unwrap
 
 from omas import *
-from omas.omas_utils import printd, printe, unumpy
+from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, mdstree
+from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
 from collections import OrderedDict
-from scipy.interpolate import InterpolatedUnivariateSpline
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -42,8 +41,9 @@ def gas_injection_hardware(ods, pulse):
 
     def pipe_copy(pipe_in):
         pipe_out = ods['gas_injection']['pipe'][ip]
-        for field in ['name', 'exit_position.r', 'exit_position.z', 'exit_position.phi']:
-            pipe_out[field] = pipe_in[field]
+        for field in ['name', 'exit_position.r', 'exit_position.z', 'exit_position.phi', 'second_point.r', 'second_point.z', 'second_point.phi']:
+            if field in pipe_in:
+                pipe_out[field] = pipe_in[field]
         return
 
     # PFX1
@@ -140,6 +140,7 @@ def gas_injection_hardware(ods, pulse):
     piped['valve_indices'] = [iv]
     piped['second_point']['phi'] = piped['exit_position']['phi']
     ip += 1
+
     # Spare 225 is an extra branch of the GASD line after the GASD piezo
     pipe_copy(piped)
     pipes225 = ods['gas_injection']['pipe'][ip]
@@ -147,6 +148,7 @@ def gas_injection_hardware(ods, pulse):
     pipes225['valve_indices'] = [iv]  # Seems right, but previous unset
     valved['pipe_indices'] = np.append(valved['pipe_indices'], [ip])
     ip += 1
+
     # RF_170 and RF_190: gas ports near the 180 degree antenna, on the GASD line
     for angle in [170, 190]:
         pipe_rf = ods['gas_injection']['pipe'][ip]
@@ -156,6 +158,10 @@ def gas_injection_hardware(ods, pulse):
         pipe_rf['exit_position']['phi'] = -np.pi / 180.0 * angle  # rad
         pipe_rf['valve_indices'] = [iv]
         valved['pipe_indices'] = np.append(valved['pipe_indices'], [ip])
+        # pipe_rf['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
+        pipe_rf['second_point']['phi'] = pipe_rf['exit_position']['phi']
+        pipe_rf['second_point']['r'] = pipe_rf['exit_position']['r'] + 0.1
+        pipe_rf['second_point']['z'] = pipe_rf['exit_position']['z']
         ip += 1
     iv += 1
 
@@ -189,6 +195,9 @@ def gas_injection_hardware(ods, pulse):
         pipe_uob['valve_indices'] = [iv]
         valve_uob['pipe_indices'] = np.append(valve_uob['pipe_indices'], [ip])
         # pipe_uob['exit_position']['direction'] = 270.  # degrees, giving dir of pipe leading to injector, up is 90
+        pipe_uob['second_point']['phi'] = pipe_uob['exit_position']['phi']
+        pipe_uob['second_point']['r'] = pipe_uob['exit_position']['r']
+        pipe_uob['second_point']['z'] = pipe_uob['exit_position']['z'] - 0.01
         ip += 1
     iv += 1
 
@@ -205,17 +214,25 @@ def gas_injection_hardware(ods, pulse):
         pipe_lob1['valve_indices'] = [iv]
         valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
         # pipe_lob1['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading to injector; up is 90
+        pipe_lob1['second_point']['phi'] = pipe_lob1['exit_position']['phi']
+        pipe_lob1['second_point']['r'] = pipe_lob1['exit_position']['r'] + 0.1
+        pipe_lob1['second_point']['z'] = pipe_lob1['exit_position']['z']
         ip += 1
+
     # Spare 75 is an extra branch of the GASC line after the LOB1 piezo
     pipes75 = ods['gas_injection']['pipe'][ip]
     pipes75['name'] = 'Spare_075'
     pipes75['exit_position']['r'] = 2.249  # m (approximate / estimated from still image)
     pipes75['exit_position']['z'] = -0.797  # m (approximate / estimated from still image)
-    pipes75['exit_position']['phi'] = 75  # degrees, DIII-D hardware left handed coords
+    pipes75['exit_position']['phi'] = np.pi / 180.0 * 75  # degrees, DIII-D hardware left handed coords
     pipes75['valve_indices'] = [iv]
     valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
     # pipes75['exit_position']['direction'] = 180.  # degrees, giving direction of pipe leading towards injector
+    pipes75['second_point']['phi'] = pipes75['exit_position']['phi']
+    pipes75['second_point']['r'] = pipes75['exit_position']['r'] + 0.1
+    pipes75['second_point']['z'] = pipes75['exit_position']['z']
     ip += 1
+
     # RF_010 & 350
     for angle in [10, 350]:
         pipe_rf_lob1 = ods['gas_injection']['pipe'][ip]
@@ -225,7 +242,10 @@ def gas_injection_hardware(ods, pulse):
         pipe_rf_lob1['exit_position']['phi'] = -np.pi / 180.0 * angle
         pipe_rf_lob1['valve_indices'] = [iv]
         valve_lob1['pipe_indices'] = np.append(valve_lob1['pipe_indices'], [ip])
-        # pipe_rf10['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading to injector; up is 90
+        # pipe_rf_lob1['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading to injector; up is 90
+        pipe_rf_lob1['second_point']['phi'] = pipe_rf_lob1['exit_position']['phi']
+        pipe_rf_lob1['second_point']['r'] = pipe_rf_lob1['exit_position']['r'] + 0.1
+        pipe_rf_lob1['second_point']['z'] = pipe_rf_lob1['exit_position']['z']
         ip += 1
     iv += 1
 
@@ -241,7 +261,11 @@ def gas_injection_hardware(ods, pulse):
     pipe_dimesc['exit_position']['phi'] = -np.pi / 180.0 * 165
     pipe_dimesc['valve_indices'] = [iv]
     # pipe_dimesc['exit_position']['direction'] = 90.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_dimesc['second_point']['phi'] = pipe_dimesc['exit_position']['phi']
+    pipe_dimesc['second_point']['r'] = pipe_dimesc['exit_position']['r']
+    pipe_dimesc['second_point']['z'] = pipe_dimesc['exit_position']['z'] + 0.01
     ip += 1
+
     # CPBOT
     pipe_cpbot = ods['gas_injection']['pipe'][ip]
     pipe_cpbot['name'] = 'CPBOT_150'
@@ -250,6 +274,9 @@ def gas_injection_hardware(ods, pulse):
     pipe_cpbot['exit_position']['phi'] = -np.pi / 180.0 * 150
     pipe_cpbot['valve_indices'] = [iv]
     # pipe_cpbot['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_cpbot['second_point']['phi'] = pipe_cpbot['exit_position']['phi']
+    pipe_cpbot['second_point']['r'] = pipe_cpbot['exit_position']['r'] - 0.1
+    pipe_cpbot['second_point']['z'] = pipe_cpbot['exit_position']['z']
     ip += 1
     iv += 1
 
@@ -264,7 +291,9 @@ def gas_injection_hardware(ods, pulse):
         pipe_lob2['exit_position']['phi'] = -np.pi / 180.0 * angle  # degrees, DIII-D hardware left handed coords
         pipe_lob2['valve_indices'] = [iv]
         valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
+        pipe_lob2['second_point']['phi'] = pipe_lob2['exit_position']['phi']
         ip += 1
+
     # Dimes floor tile 165
     pipe_copy(pipec)
     pipe_dimesf = ods['gas_injection']['pipe'][ip]
@@ -272,7 +301,9 @@ def gas_injection_hardware(ods, pulse):
     pipe_dimesf['exit_position']['phi'] = -np.pi / 180.0 * 165
     pipe_dimesf['valve_indices'] = [iv]
     valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
+    pipe_dimesf['second_point']['phi'] = pipe_dimesf['exit_position']['phi']
     ip += 1
+
     # RF COMB
     pipe_rfcomb = ods['gas_injection']['pipe'][ip]
     pipe_rfcomb['name'] = 'RF_COMB_'
@@ -281,8 +312,12 @@ def gas_injection_hardware(ods, pulse):
     pipe_rfcomb['exit_position']['phi'] = np.nan  # Unknown, sorry
     pipe_rfcomb['valve_indices'] = [iv]
     valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
-    # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
+    # pipe_rfcomb['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_rfcomb['second_point']['phi'] = pipe_rfcomb['exit_position']['phi']
+    pipe_rfcomb['second_point']['r'] = pipe_rfcomb['exit_position']['r'] + 0.1
+    pipe_rfcomb['second_point']['z'] = pipe_rfcomb['exit_position']['z']
     ip += 1
+
     # RF307
     pipe_rf307 = ods['gas_injection']['pipe'][ip]
     pipe_rf307['name'] = 'RF_307'
@@ -292,7 +327,11 @@ def gas_injection_hardware(ods, pulse):
     pipe_rf307['valve_indices'] = [iv]
     valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
     # pipe_rf307['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_rf307['second_point']['phi'] = pipe_rf307['exit_position']['phi']
+    pipe_rf307['second_point']['r'] = pipe_rf307['exit_position']['r'] + 0.1
+    pipe_rf307['second_point']['z'] = pipe_rf307['exit_position']['z']
     ip += 1
+
     # RF260
     pipe_rf260 = ods['gas_injection']['pipe'][ip]
     pipe_rf260['name'] = 'RF_260'
@@ -302,6 +341,9 @@ def gas_injection_hardware(ods, pulse):
     pipe_rf260['valve_indices'] = [iv]  # Seems to have been removed. May have been on LOB2, though.
     valve_lob2['pipe_indices'] = np.append(valve_lob2['pipe_indices'], [ip])
     # pipe_rf260['exit_position']['direction'] = 180.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_rf260['second_point']['phi'] = pipe_rf260['exit_position']['phi']
+    pipe_rf260['second_point']['r'] = pipe_rf260['exit_position']['r'] + 0.1
+    pipe_rf260['second_point']['z'] = pipe_rf260['exit_position']['z']
     ip += 1
     iv += 1
 
@@ -349,6 +391,9 @@ def gas_injection_hardware(ods, pulse):
     pipe_cpmid['exit_position']['phi'] = np.nan  # Unknown, sorry
     pipe_cpmid['valve_indices'] = [iv]
     # pipe_cpmid['exit_position']['direction'] = 0.  # degrees, giving dir of pipe leading towards injector, up is 90
+    pipe_cpmid['second_point']['phi'] = pipe_cpmid['exit_position']['phi']
+    pipe_cpmid['second_point']['r'] = pipe_cpmid['exit_position']['r'] - 0.1
+    pipe_cpmid['second_point']['z'] = pipe_cpmid['exit_position']['z']
     ip += 1
     iv += 1
 
@@ -413,7 +458,7 @@ def pf_active_coil_current_data(ods, pulse):
     unwrap(pf_active_hardware)(ods1, pulse)
 
     # fetch the actual pf_active currents data
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -507,7 +552,6 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
-    from scipy.interpolate import interp1d
     from omas.omas_core import CodeParameters
     setup = '.ECH.'
     
@@ -523,7 +567,6 @@ def ec_launcher_active_hardware(ods, pulse):
 
     # we use last time of EFIT01 to trim data
     query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
 
     # Second query the used systems to resolve the gyrotron names
     query = {}
@@ -557,11 +600,6 @@ def ec_launcher_active_hardware(ods, pulse):
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
     gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
 
-    if system_max > 0:
-        times = gyrotrons[f'TIME_FPWRC_1']
-        trim_start = np.searchsorted(times, 0.0, side='left')
-        trim_end = np.searchsorted(times, last_time, side='right')
-
     # assign data to ODS
     b_half = []
     for system_no in range(1, system_max):
@@ -594,18 +632,22 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.time'] = np.atleast_1d(0)
-        beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
+        if isinstance(systems[f'FREQUENCY_{system_no}'], Exception):
+            beam['frequency.data'] = np.ones(beam['frequency.time'].shape) * 110e9 # old shots did not record the frequency, since they were all at 110 GHz
+        else:
+            beam['frequency.data'] = np.atleast_1d(systems[f'FREQUENCY_{system_no}'])
 
-        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])[trim_start:trim_end]
-        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])[trim_start:trim_end]
+        beam['power_launched.time'] = np.atleast_1d(gyrotrons[f'TIME_FPWRC_{system_no}'])
+        beam['power_launched.data'] = np.atleast_1d(gyrotrons[f'FPWRC_{system_no}'])
 
         xfrac = gyrotrons[f'XMFRAC_{system_no}']
         if isinstance(xfrac, Exception):
             beam['mode'] = -1 # assume X-mode if XMFRAC is not recorded
+            beam['o_mode_fraction'] = np.zeros(beam['time'].shape)
         else:
             beam['mode'] = int(np.round(1.0 - 2.0 * max(np.atleast_1d(xfrac))))
+            beam['o_mode_fraction'] = 1.0 - xfrac
             
-        beam['o_mode_fraction'] = 1.0 - xfrac
         beam['phase.angle'] = np.zeros(ntime)
         beam['phase.curvature'] = np.zeros([2, ntime])
         beam['spot.angle'] = np.zeros(ntime)
@@ -638,9 +680,6 @@ def ec_launcher_active_hardware(ods, pulse):
 def nbi_active_hardware(ods, pulse):
     beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
 
-    e = 1.602176634e-19 #[C]
-    m_u = 1.6605390666e-27 #[kg]
-
     query = {}
     for beam_name in beam_names:
         for field in ["PINJ", "TINJ"]:
@@ -653,12 +692,6 @@ def nbi_active_hardware(ods, pulse):
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
     data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
 
-    # we use last time of EFIT01 to trim data
-    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
-    last_time = mdsvalue('d3d', treename='EFIT01', pulse=pulse, TDI=query).raw()['ip_time'][-1]
-
-    trim_start = 0
-    trim_end = 0
     beam_index = 0
     for beam_name in beam_names:
         if isinstance(data[f"{beam_name}.PINJ_time"], Exception):
@@ -668,17 +701,12 @@ def nbi_active_hardware(ods, pulse):
         if isinstance(data[f"{beam_name}.VBEAM"], Exception):
             data[f"{beam_name}.VBEAM"] = data[f"{beam_name}.VBEAM_time"] * 0.0 + 80E3 # assume 80keV when beam voltage is missing
 
-        if trim_start == 0 and trim_end == 0:
-            times = data[f"{beam_name}.PINJ_time"]
-            trim_start = np.searchsorted(times, 0.0, side='left')
-            trim_end = np.searchsorted(times, last_time, side='right')
-
         nbu = ods["nbi.unit"][beam_index]
         nbu["name"] = beam_name
-        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"][trim_start:trim_end]
-        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"][trim_start:trim_end]
-        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"][trim_start:trim_end]
-        nbu["energy.data"] = data[f"{beam_name}.VBEAM"][trim_start:trim_end]
+        nbu["power_launched.time"] = data[f"{beam_name}.PINJ_time"]
+        nbu["power_launched.data"] = data[f"{beam_name}.PINJ"]
+        nbu["energy.time"] = data[f"{beam_name}.VBEAM_time"]
+        nbu["energy.data"] = data[f"{beam_name}.VBEAM"]
         beam_index += 1
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
@@ -719,8 +747,9 @@ def interferometer_hardware(ods, pulse):
         los['first_point.r'] = los['second_point.r'] = r
         los['first_point.z'], los['second_point.z'] = Z_top, Z_bottom  # End points from OMFITprofiles
 
-    for i in range(len(ods['interferometer.channel'])):
+    for i in ods['interferometer.channel']:
         ch = ods['interferometer.channel'][i]
+        ch['wavelength.0.value'] = 10.6e-6 #m
         for field in ch['line_of_sight.first_point'].keys():
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
@@ -728,7 +757,7 @@ def interferometer_hardware(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_data(ods, pulse):
     """
-    Loads DIII-D interferometer measurement data
+    Loads DIII-D CO2 interferometer measurement data
 
     :param pulse: int
     """
@@ -737,31 +766,319 @@ def interferometer_data(ods, pulse):
     ods1 = ODS()
     unwrap(interferometer_hardware)(ods1, pulse=pulse)
 
+    if pulse <= 197528:
+        BCI = "BCI::TOP"
+    else:
+        BCI = "BCI::TOP.MAIN"
+
     # fetch
     TDIs = {}
-    for k, channel in enumerate(ods1['interferometer.channel']):
+    for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
-        TDIs[identifier] = f"\\BCI::TOP.DEN{identifier}"
-        TDIs[f'{identifier}_validity'] = f"\\BCI::TOP.STAT{identifier}"
+        TDIs[identifier] = f"\\{BCI}.DEN{identifier}"
+        TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
     data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
     if isinstance(data['time'], Exception):
-        printe('WARNING: interferometer data is missing')
+        printe('WARNING: CO2 interferometer data is missing')
         return
+
     # assign
-    for k, channel in enumerate(ods1['interferometer.channel']):
+    for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
         ods[f'interferometer.channel.{k}.n_e_line.data'] = data[identifier] * 1e6
-        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = interp1d(
+        valid = interp1d(
             data['time_valid'] / 1.0e3,
             -data[f'{identifier}_validity'],
             kind='nearest',
             bounds_error=False,
-            fill_value=(-data[f'{identifier}_validity'][0], -data[f'{identifier}_validity'][-1]),
+            fill_value='extrapolate',
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
+        ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = valid
+        ne_err = np.zeros(data[identifier].shape)
+        ne_err[:] = np.median(np.abs(data[identifier][data['time']<0])) * 1e6
+        ne_err[valid<0] = np.inf
+        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = ne_err
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def rip_hardware(ods, pulse):
+    """
+    Sets the DIII-D Radial Interferometer Polarimeter (RIP) chord locations
+    and channel information.
+
+    The chord endpoints are approximative. They do not take into account
+    the vessel wall contour of the pulse.
+
+    Data source: IDA-lite
+    https://github.com/GA-IDA/ida_lite/blob/c1398c826b7a327d6629b5518c3219b8870436ce/D3D/synt_diags/RIP.py#L47
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    if pulse < 168823 :
+        printe('WARNING: no RIP dignostic for this shot')
+        return
+
+    channels = ['Z','P', 'N'] 
+    #T is availible since FY25 Fall run
+    if pulse > 202680:
+        channels.append('T')
+
+    Rin  = 1.017
+    Rout = 2.36
+    z = 0, 0.135, -0.135 #m vertical position
+    #T channel is at  283, but else it is the same as 0  
+    if 'T' in channels:
+        z = z + (0,)
+    # phi angles are compliant with odd COCOS
+    phi0 = 286.6 * (-np.pi / 180.0)
+    conv0 = 6.71e15#m^-2/rad
+
+    for i, ch in enumerate(channels):
+        if pulse < 177052:
+            #some channels are wierd for old shot... is it a phase difference??
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rpich{2*i+1}phi'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rpich{2*i+2}phi'.upper()
+            #availible also slow data at 10kHz
+            if pulse > 169007:
+                ods['polarimeter.channel'][i]['identifier'] += 'S'
+                ods['interferometer.channel'][i]['identifier'] += 'S'
+        else:
+            ods['polarimeter.channel'][i]['identifier'] = ods['polarimeter.channel'][i]['name'] = f'rip{ch}'.upper()
+            ods['interferometer.channel'][i]['identifier'] = ods['interferometer.channel'][i]['name'] = f'rip{ch}'.upper()
+
+        if ch == 'T':
+            phi = 283 * (-np.pi / 180.0)
+            conv = 1.436
+        else: 
+            phi = phi0
+            conv = conv0
+        los = ods['polarimeter.channel'][i]['line_of_sight']
+        los['first_point.phi'] = los['second_point.phi'] = phi
+        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
+        los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
+        los = ods['interferometer.channel'][i]['line_of_sight']
+        los['first_point.phi'] = los['second_point.phi'] = phi
+        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
+        los['first_point.z'] = los['second_point.z'] = z[i]
+        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6 #m
+        ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def rip_data(ods, pulse):
+    """
+    Loads DIII-D Radial Interferometer Polarimeter (RIP) measurement data
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    if pulse < 168823 :
+        printe('WARNING: no RIP data for this shot')
+        return
+    
+    ods1 = ODS()
+    unwrap(rip_hardware)(ods1, pulse=pulse)
+
+    tree = 'RPI'
+    TDIs = {}
+
+    # Each channel has 6 measurements: a1, a2, a3, b1, b2, and b3. Interferometric measurements are a1, a3, b1, and b3. Polarimetric measurements are a2 and b2. Noise in each measurement may differ, allowing one to perform cross-correlation to suppress noise.
+    interferometer_measurements = ['a1', 'a3', 'b1', 'b3']
+    n_int = len(interferometer_measurements)
+    polarimeter_measurements = ['a2', 'b2']
+    n_pol = len(polarimeter_measurements)
+
+    for ch in ods1['interferometer.channel']:
+        identifier = ods1['interferometer.channel'][ch]['identifier']
+        if pulse < 177052:
+            TDIs[identifier] = f"\\{tree}::{identifier}"
+        else:
+            for m in interferometer_measurements:
+                TDIs[f'{identifier}{m}'] = f"\\{tree}::{identifier}{m}phis".upper()
+            
+    for ch in ods1['polarimeter.channel']:
+        identifier = ods1['polarimeter.channel'][ch]['identifier']
+        if pulse < 177052:
+            TDIs[identifier] = f"\\{tree}::{identifier}"
+        else:
+            for m in polarimeter_measurements:
+                TDIs[f'{identifier}{m}'] = f"\\{tree}::{identifier}{m}phis".upper()
+
+    TDIs['time'] = f'dim_of({next(iter(TDIs.values()))})'
+
+    data = mdsvalue('d3d', tree, pulse, TDIs).raw()
+    if isinstance(data['time'], Exception):
+        printe('WARNING: RIP data is missing')
+        return
+
+    time = data['time'] / 1e3 #s
+    n_time = len(time)
+    ioff = time.searchsorted(0)
+
+    # downsample to 1kHz
+    #freq_down = 1000 #Hz
+    #nt = len(time)
+    #n_down = int(round((nt-1)/(time[-1]-time[0]) / freq_down)) // 2 * 2 + 1
+
+    for s in data:
+        offset = data[s][1:ioff].mean()
+        data[s] -= offset
+
+        # use median to keep the fringe jumps sharp
+        #data[s] = np.median(data[s][:nt//n_down*n_down].reshape(-1, n_down), 1)
+    #time = time[:nt//n_down*n_down].reshape(-1, n_down).mean(1)
+
+    for ch in ods1['interferometer.channel']:
+        iden = ods1['interferometer.channel'][ch]['identifier']
+        ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.time'] = time
+        ods['interferometer.channel'][ch]['n_e_line.time'] = time
+        if pulse < 177052:
+            phase = data[iden] * np.sign(data[iden].mean()) # ensure positivity
+        else:
+            phases = np.zeros([n_int, n_time])
+            for i, m in enumerate(interferometer_measurements):
+                phases[i] = data[f'{iden}{m}'] * np.sign(data[f'{iden}{m}'].mean()) # ensure positivity
+                
+            # make fringe jumps corrections
+            # note: these corrections have only been tested on downsampled data (should be checked again)
+            phases = np.rad2deg(np.unwrap(np.deg2rad(phases))) # unwrapped phase
+            jumps = phases - np.median(phases, 1)[:, None]
+            jumps = jumps - np.rad2deg(np.unwrap(np.deg2rad(jumps)))
+            phases -= jumps
+            ods['interferometer.channel'][ch]['wavelength.0.fringe_jump_correction_times'] = time
+            ods['interferometer.channel'][ch]['wavelength.0.fringe_jump_correction'] = np.median(jumps, 0)
+
+            phase = np.median(phases, 0)
+            phase_err = phases.std(0) + phases[:,1:ioff].std(1).mean()
+            ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data_error_upper'] = phase_err
+            ne_line_err = phase_err * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+
+        ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data'] = phase
+        # translates density phase to single-pass, line-integral density in m^-2.
+        ne_line = phase * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+        ods['interferometer.channel'][ch]['n_e_line.data'] = ne_line
+
+        valid = np.zeros(n_time)
+        if ne_line.mean() < 1e18:
+            # issue with old discharges (175492), wrong calibration of the edge chords??
+            ods['interferometer.channel'][ch]['n_e_line.validity'] = -1
+            valid = -1
+        else:
+            ods['interferometer.channel'][ch]['n_e_line.validity'] = 0
+            # enforce positivivity
+            valid[ne_line < 0] = -1
+        ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
+        if pulse >= 177052:
+            ne_line_err[ne_line < 0] = np.inf
+            ods['interferometer.channel'][ch]['n_e_line.data_error_upper'] = ne_line_err
+
+    for ch in ods1['polarimeter.channel']:
+        iden = ods1['polarimeter.channel'][ch]['identifier']
+        ods['polarimeter.channel'][ch]['faraday_angle.time'] = time
+        ods['polarimeter.channel'][ch]['faraday_angle.validity'] = 0
+        valid = np.zeros(n_time)
+        if pulse < 177052:
+            ods['polarimeter.channel'][ch]['faraday_angle.data'] = data[iden]
+        else:
+            angles = np.zeros([n_pol, n_time])
+            for i, m in enumerate(polarimeter_measurements):
+                angles[i] = data[f'{iden}{m}']
+            #TODO do it better??
+            ods['polarimeter.channel'][ch]['faraday_angle.data'] = angles.mean(0)
+            angle_err = angles.std(0)# + angles[:, 1:ioff].std(1).mean()
+            angle_err[angle_err <= 0] = np.inf
+            ods['polarimeter.channel'][ch]['faraday_angle.data_error_upper'] = angle_err
+            valid[angle_err <= 0] = -1
+        ods['polarimeter.channel'][ch]['faraday_angle.validity_timed'] = valid
+
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def interferometer_polarimeter_hardware(ods, pulse, include_CO2=True, include_RIP=True):
+    """
+    Combines the interferometer and polarimeter hardware for CO2 and RIP diagnostics
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+
+    :param include_CO2: boolean
+
+    :param include_RIP: boolean
+    """
+
+    n_CO2 = 0
+    if include_CO2:
+        ods1 = ODS()
+        unwrap(interferometer_hardware)(ods1, pulse=pulse)
+        n_CO2 = len(ods1['interferometer.channel'])
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][i]['name'] = ods1['interferometer.channel'][i]['name']
+            ods['interferometer.channel'][i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
+
+    if include_RIP:
+        ods1 = ODS()
+        unwrap(rip_hardware)(ods1, pulse=pulse)
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][n_CO2 + i]['identifier'] = ods1['interferometer.channel'][i]['identifier']
+            ods['interferometer.channel'][n_CO2 + i]['name'] = ods1['interferometer.channel'][i]['name']
+            ods['interferometer.channel'][n_CO2 + i]['line_of_sight'] = ods1['interferometer.channel'][i]['line_of_sight']
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0.value'] = ods1['interferometer.channel'][i]['wavelength.0.value']
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = ods1['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line']
+        for i in ods1['polarimeter.channel']:
+            ods['polarimeter.channel'][i]['identifier'] = ods1['polarimeter.channel'][i]['identifier']
+            ods['polarimeter.channel'][i]['name'] = ods1['polarimeter.channel'][i]['name']
+            ods['polarimeter.channel'][i]['line_of_sight'] = ods1['polarimeter.channel'][i]['line_of_sight']
+            ods['polarimeter.channel'][i]['wavelength'] = ods1['polarimeter.channel'][i]['wavelength']
+
+@machine_mapping_function(__regression_arguments__, pulse=200000)
+def interferometer_polarimeter_data(ods, pulse, include_CO2=True, include_RIP=True):
+    """
+    Loads DIII-D interferometer and polarimter measurement data for CO2 and RIP
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+
+    :param include_CO2: boolean
+
+    :param include_RIP: boolean
+    """
+
+    n_CO2 = 0
+    if include_CO2:
+        ods1 = ODS()
+        unwrap(interferometer_data)(ods1, pulse=pulse)
+        n_CO2 = len(ods1['interferometer.channel'])
+        for i in ods1['interferometer.channel']:
+            ods['interferometer.channel'][i]['n_e_line'] = ods1['interferometer.channel'][i]['n_e_line']
+
+    if include_RIP:
+        ods1 = ODS()
+        unwrap(rip_data)(ods1, pulse=pulse)
+        for i in ods1['interferometer.channel']:
+            if 'phase_to_n_e_line' in ods['interferometer.channel'][n_CO2 + i]['wavelength.0']:
+                conv = ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line']
+            else:
+                conv = None
+            ods['interferometer.channel'][n_CO2 + i]['wavelength.0'] = ods1['interferometer.channel'][i]['wavelength.0']
+            ods['interferometer.channel'][n_CO2 + i]['n_e_line'] = ods1['interferometer.channel'][i]['n_e_line']
+            if not conv is None:
+                ods['interferometer.channel'][n_CO2 + i]['wavelength.0.phase_to_n_e_line'] = conv
+
+        for i in ods1['polarimeter.channel']:
+            ods['polarimeter.channel'][i]['faraday_angle'] = ods1['polarimeter.channel'][i]['faraday_angle']
 
 
 # ================================
@@ -827,7 +1144,7 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         for j in range(nc):
             ch = ods['thomson_scattering']['channel'][i]
             ch['name'] = 'TS_{system}_r{lens:+0d}_{ch:}'.format(
-                system=system.lower(), ch=j, lens=lenses[j] if lenses is not None else -9
+                system=system.lower(), ch=j, lens=lenses[min(j,len(lenses)-1)]
             )
             ch['identifier'] = f'{system[0]}{j:02d}'
             ch['position']['r'] = tsdat[f'{system}_R'][j]
@@ -921,6 +1238,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
 
 
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def bolometer_hardware(ods, pulse):
     """
@@ -1224,8 +1542,12 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}, 0)/1000"
+                    if sub == 'TANGENTIAL' and pos == 'ROT':
+                        pos1 = 'ROTC'
+                    else:
+                        pos1 = pos
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
@@ -1254,7 +1576,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
-                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'], data[f'{sub}_{channel}_ROT_ERR__data'])
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
@@ -1285,14 +1607,15 @@ def magnetics_hardware(ods, pulse):
     return ods
 
 
-@machine_mapping_function(__regression_arguments__, pulse=133221)
-def magnetics_floops_data(ods, pulse, nref=None):
+@machine_mapping_function(__regression_arguments__, pulse=147131)
+def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     from scipy.interpolate import interp1d
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
+    unwrap(ip_bt_dflux_data)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1309,6 +1632,7 @@ def magnetics_floops_data(ods, pulse, nref=None):
             data_norm=1.0,
         )
 
+    # Apply compensations
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         if len(comp) == 0:
@@ -1321,24 +1645,27 @@ def magnetics_floops_data(ods, pulse, nref=None):
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000.0
-            for channel in ods['magnetics.flux_loop']:
-                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
-                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                    compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
-                    ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
+            try:
+                compsig_data = m.data()
+                compsig_time = m.dim_of(0) / 1000.0
+                for channel in ods['magnetics.flux_loop']:
+                    if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
+                        sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                        sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
+                        compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
+                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+            except Exception:
+                printe(f"NO {compsig}")
 
-    # fetch uncertainties
+    # Fetch uncertainties
     TDIs = {}
     for k in ods1['magnetics.flux_loop']:
         identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
     weights = D3Dmagnetics_weights(pulse, 'fwtsi')
+    Ip = interp1d(ods1[f'magnetics.ip.0.time'], ods1[f'magnetics.ip.0.data'], bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.0.flux.time']) # assuming all probes have the same time basis (expected, more efficient)
     for k in ods1['magnetics.flux_loop']:
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         if ods[f'magnetics.flux_loop.{k}.flux.validity'] == -2:
@@ -1351,29 +1678,44 @@ def magnetics_floops_data(ods, pulse, nref=None):
         else:
             # Convert digitizer counts (bit uncertainty) to flux
             identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
+            digi_error = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
+            # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
+            rel_error = 0.03 * ods[f'magnetics.flux_loop.{k}.flux.data']
+            # Extra EFIT uncertainty term (not clear why but it's been in EFIT for more than 30 year)
+            flux_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * Ip
+            # Use whichever error source is largest (this is how it is treated in EFIT)
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, flux_error])
 
-    # Use reference flux loop to convert to relative flux if wanted
-    if nref is not None:
+    # Convert the differential fluxes to total
+    # This is how DIII-D data has been stored since at least 1988, but IMAS does not support this type of flux loops
+    ods[f'magnetics.flux_loop.{nref}.type.index'] = 1
+    if not store_differential:
         ref_data = ods[f'magnetics.flux_loop.{nref}.flux.data']
+        ref_uncertainty = ods[f'magnetics.flux_loop.{nref}.flux.data_error_upper']
         len_ref = len(ref_data)
         for k in ods1['magnetics.flux_loop']:
-            if len(ods[f'magnetics.flux_loop.{k}.flux.data']) < 2:
+            if k == nref or len(ods[f'magnetics.flux_loop.{k}.flux.data']) < 2:
                 continue
             elif len(ods[f'magnetics.flux_loop.{k}.flux.data']) == len_ref:
-                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_data
+                ods[f'magnetics.flux_loop.{k}.type.index'] = 1
+                ods[f'magnetics.flux_loop.{k}.flux.data'] += ref_data
+                uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_uncertainty**2)
             else:
+                ods[f'magnetics.flux_loop.{k}.type.index'] = 1
                 ref_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_data, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
-                ods[f'magnetics.flux_loop.{k}.flux.data'] -= ref_interp
+                ref_un_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_uncertainty, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
+                uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
+                ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
 
-@machine_mapping_function(__regression_arguments__, pulse=133221)
+@machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
 
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         fetch_assign(
             ods,
             ods1,
@@ -1391,6 +1733,7 @@ def magnetics_probes_data(ods, pulse):
             homogeneous_time=False
         )
 
+    # Apply compensations
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         compshot = -1
@@ -1415,12 +1758,11 @@ def magnetics_probes_data(ods, pulse):
                     compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                     ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
 
-    # fetch uncertainties
+    # Fetch uncertainties
     TDIs = {}
     for k in ods1['magnetics.b_field_pol_probe']:
         identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
     weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
     for k in ods1['magnetics.b_field_pol_probe']:
@@ -1435,7 +1777,11 @@ def magnetics_probes_data(ods, pulse):
         else:
             # Convert digitizer counts (bit uncertainty) to field
             identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+            digi_error = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
+            # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
+            rel_error = 0.03 * ods[f'magnetics.b_field_pol_probe.{k}.field.data']
+            # Use whichever error source is largest (this is how it is treated in EFIT)
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.fmax(digi_error, rel_error)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1450,10 +1796,10 @@ def ip_bt_dflux_data(ods, pulse):
 
     mappings = {'magnetics.ip.0': 'IP', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
 
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         TDIs = {}
         for key, val in mappings.items():
-            TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
+            TDIs[key + '.data'] = f'ptdata2("{val}",{pulse})'
             TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
             TDIs[key + '.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
 
@@ -1468,8 +1814,11 @@ def ip_bt_dflux_data(ods, pulse):
             if 'magnetics.diamagnetic_flux.0.data' in key:
                 ods[key] *= 1e-3
 
-        ods['tf.b_field_tor_vacuum_r.data'] *= 1.6955
+            if 'tf.b_field_tor_vacuum_r.data' in key:
+                ods[key] *= 1.6955
 
+
+# ================================
 def add_extra_profile_structures():
     extra_structures = {}
     extra_structures["core_profiles"] = {}
@@ -1505,11 +1854,12 @@ def add_extra_profile_structures():
                           core_profiles_strict_grid=True)
 def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_run_id=None, core_profiles_strict_grid=True):
     from scipy.interpolate import interp1d
+    from scipy.interpolate import InterpolatedUnivariateSpline
 
-    add_extra_profile_structures()
     ods["core_profiles.ids_properties.homogeneous_time"] = 1
     sh = "core_profiles.profiles_1d"
     if "OMFIT_PROFS" in PROFILES_tree:
+        add_extra_profile_structures()
         # May extend beyond rho = 1.0
         pulse_id = pulse
         if PROFILES_run_id is not None:
@@ -1580,6 +1930,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             # Need to set _fit.rho_tor_norm first otherwise the IMAS consistency checker complains
                 #
             for i_time, time in enumerate(data["time"]):
+                ods[f'{sh}[{i_time}].time'] = data['time'][i_time]
                 try:
                     if "_fit.measured" in entry:
                         data_mask = np.isfinite(data[entry][i_time])
@@ -1683,9 +2034,7 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
     if len(str(pulse))>8:
         mpulse = int(str(pulse)[:6])
 
-    ods1 = ODS()
-    unwrap(magnetics_hardware)(ods1, pulse)
-    with omas_environment(ods, cocosio=1):
+    with omas_environment(ods, cocosio=7):
         cp = ods['core_profiles']
         gq = ods['core_profiles.global_quantities']
 
@@ -1718,6 +2067,123 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.ids_properties.homogeneous_time"] = 1
 
 # ================================
+@machine_mapping_function(__regression_arguments__, pulse=174436)
+def reflectometer_hardware(ods, pulse):
+    """
+    Loads DIII-D reflectometer chord locations
+
+    The chord endpoints are approximative. They do not take into account
+    the vessel wall contour of the shot. The values have been taken from IDA-lite.
+
+    Data sources: https://github.com/GA-IDA/ida_lite/blob/c1398c826b7a327d6629b5518c3219b8870436ce/D3D/synt_diags/REFL.py#L41
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+    bands=['Q','V','QO', 'VO']
+
+    # reflectometer LOS, not actual location of measured density!
+    R_in, R_out = 1.6, 2.377
+    Z0 =  0.0254
+
+    # phi angles are compliant with odd COCOS
+    for i, band in enumerate(bands):
+        ods['reflectometer_profile.channel'][i]['identifier'] = ods['reflectometer_profile.channel'][i]['name'] = f'{band}BAND'
+        if 'O' in band:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'O'
+        else:
+            ods['reflectometer_profile.channel'][i]['mode'] = 'X'
+        los = ods['reflectometer_profile.channel'][i]['line_of_sight_emission']
+        los['first_point.r'], los['second_point.r'] = R_out, R_in  # End points from IDA-lite
+        # TODO: is this correct? publications suggest the antennas (emission and detection) are tilted...
+        los['first_point.z'] = los['second_point.z'] = Z0
+        los['first_point.phi'] = los['second_point.phi'] = 255 * (-np.pi / 180.0)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=174436)
+def reflectometer_data(ods, pulse):
+    """
+    Loads DIII-D reflectometer measurement data
+
+    :param ods: an OMAS ODS instance
+
+    :param pulse: int
+    """
+
+    ods1 = ODS()
+    unwrap(reflectometer_hardware)(ods1, pulse=pulse)
+
+    # fetch
+    TDIs = {}
+    for k in ods1['reflectometer_profile.channel']:
+        identifier = ods1[f'reflectometer_profile.channel.{k}.identifier'].upper()
+        path = f'\\ELECTRONS::TOP.REFLECT.{identifier}.PROCESSED:'
+        TDIs[f'{identifier}_frequency'] = path + 'FREQUENCY'
+        TDIs[f'{identifier}_phase'] = path + 'PHASE'
+        TDIs[f'{identifier}_time'] = path + 'TIME'
+    TDIs['full_profile_time'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:TIME'
+    TDIs['full_profile_R'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:R'
+    TDIs['full_profile_density'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:DENSITY'
+
+    data = mdsvalue('d3d', 'ELECTRONS', pulse, TDIs).raw()
+
+    # assign
+    time = None
+    for k in ods1['reflectometer_profile.channel']:
+        identifier = ods1[f'reflectometer_profile.channel.{k}.identifier'].upper()
+
+        if isinstance(data[f'{identifier}_time'], Exception):
+            printe(f'WARNING: reflectometer data is missing for {identifier}')
+            continue
+
+        time_ = data[f'{identifier}_time']/1e3 #s
+        freq = data[f'{identifier}_frequency'] #Hz
+        phase = data[f'{identifier}_phase'].T #rad
+
+        if np.size(phase) < 3:
+            printe(f'WARNING: reflectometer data is missing for {identifier}')
+            continue
+
+        # ensure all bands have equal size - sometimes a single slice can miss
+        if time is None:
+            time = time_
+        else:
+            it = np.minimum(time_.searchsorted(time), len(time)-1)
+            phase = phase[it]
+        
+        invalid = np.any(np.abs(phase) > 2e3,axis=1)
+        phase[invalid] = 0
+
+        ods[f'reflectometer_profile.channel.{k}.phase.time'] = time
+        ods[f'reflectometer_profile.channel.{k}.frequencies'] = freq
+        ods[f'reflectometer_profile.channel.{k}.phase.data'] = phase.T
+
+    if isinstance(data['full_profile_time'], Exception):
+        printe('WARNING: reflectometer density is missing')
+        return
+    _time = data['full_profile_time']/1e3
+    R = data['full_profile_R'].T
+    density = data['full_profile_density'].T
+
+    if np.size(_time) < 3:
+        printe('WARNING: reflectometer density is missing')
+        return
+
+    if time is None:
+        it = np.arange(_time.shape[0])
+    else:
+        it = np.argmin(abs(_time - time[:,None]),axis=1)
+
+    ods[f'reflectometer_profile.position.r'] = R[it].T
+    ods[f'reflectometer_profile.position.z'] = 0.0254 + 0 * R[it].T
+    # TODO: add todoidal position
+    #ods[f'reflectometer_profile.position.phi'] = ... + 0 * R[it].T
+    ods[f'reflectometer_profile.n_e.time'] = _time[it]
+    ods[f'reflectometer_profile.n_e.data'] = density[it].T
+
+
+# ================================
 @machine_mapping_function(__regression_arguments__, pulse=194306)
 def summary(ods, pulse):
     with omas_environment(ods):
@@ -1736,4 +2202,4 @@ def summary(ods, pulse):
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["charge_exchange_data"], globals(), locals())
+    test_machine_mapping_functions('d3d', ["interferometer_data"], globals(), locals())

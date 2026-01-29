@@ -19,7 +19,7 @@ Learn More:
 
 * `Video of a talk <https://youtu.be/kGVbEu1dG4c>`_ given at the 2020 American Physical Society meeting and associated `slides <https://www.dropbox.com/s/n0i5yc0kv0vehgc/OMAS_APS2020.pdf?dl=0>`_
 
-* 2021 DIII-D friday science meeting on machine mappings via OMAS `slides <https://www.dropbox.com/s/uir6hxqaxr0g8he/FSM_OMAS_2021_LR.pdf?dl=0>`_ and `tutorial <https://www.youtube.com/watch?v=jcWPCxWVamw&index=18&list=PLdksEfhRAD67q1fGDlZMAYcWSO8BlhbK5>`_
+* 2021 DIII-D friday science meeting on machine mappings via OMAS `slides <https://www.dropbox.com/scl/fi/8jqewt403rnt2fw6bz102/APS_2021.pdf?rlkey=cpazb7w40v5td8jmhxwog68iw&dl=0>`_ and `tutorial <https://www.youtube.com/watch?v=jcWPCxWVamw&index=18&list=PLdksEfhRAD67q1fGDlZMAYcWSO8BlhbK5>`_
 
 * Read more details in the appendix of `Meneghini et al. Nuclear Fusion (2020) <https://iopscience.iop.org/article/10.1088/1741-4326/abb918/meta>`_ publication.
 
