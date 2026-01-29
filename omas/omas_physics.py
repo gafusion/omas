@@ -9,6 +9,7 @@ except ImportError:
     from numpy import trapz
 from .omas_utils import *
 from .omas_core import ODS
+from omas.omas_structure import add_extra_structures
 __all__ = []
 __ods__ = []
 
@@ -647,8 +648,26 @@ def equilibrium_profiles_2d_map(
     return mapped_values
 
 @add_to__ODS__
-def add_volume_profile(ods, grid_index=0):
+def add_flux_surface_averages(ods, grid_index=0):
     import contourpy
+    import numpy as np
+
+    # Safe alias for trapz across versions
+    try:
+        trapz = np.trapezoid  # modern NumPy >=1.20
+    except AttributeError:
+        trapz = np.trapz      # older NumPy
+
+    # adding gm10 to ODS structure to handle HF (helical flux function)
+    extra_structures = {}
+    extra_structures["equilibrium"] = {}
+    hf_struct = {"coordinates": "equilibrium.time_slice[:].profiles_1d.psi"}
+    hf_struct["documentation"] = "Helical Flux function"
+    hf_struct["data_type"] = "FLT_1D"
+    hf_struct["units"] = ""
+    extra_structures["equilibrium"][f"equilibrium.time_slice[:].profiles_1d.gm10"] = hf_struct
+    add_extra_structures(extra_structures)
+
     with omas_environment(ods, cocosio=11):
         cocos = define_cocos(11)
         for time_index in range(len(ods['equilibrium']['time'])):
@@ -661,6 +680,10 @@ def add_volume_profile(ods, grid_index=0):
             if not "b_field_z" in eq_slice[f'profiles_2d.0']:
                 ods, cache = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_z", 
                                                                     cache=cache, return_cache=True)
+            if not "b_field_tor" in eq_slice[f'profiles_2d.0']:
+                ods = derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, "b_field_tor", 
+                                                                    cache=cache, return_cache=False)
+            
             b_field_r_spline = RectBivariateSpline(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
@@ -671,6 +694,11 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
                     eq_slice[f'profiles_2d.{grid_index}.b_field_z'])
             
+            b_field_tor_spline = RectBivariateSpline(
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
+                    eq_slice[f'profiles_2d.{grid_index}.grid.dim2'],
+                    eq_slice[f'profiles_2d.{grid_index}.b_field_tor'])
+            
             # Lifted from OMFIT but don't use the outdated contouring algorithm
             contgen = contourpy.contour_generator(
                     eq_slice[f'profiles_2d.{grid_index}.grid.dim1'],
@@ -678,8 +706,22 @@ def add_volume_profile(ods, grid_index=0):
                     eq_slice[f'profiles_2d.{grid_index}.psi'].T,
                     corner_mask=True)
             eq_slice['profiles_1d.dvolume_dpsi'] = numpy.zeros(len(eq1d_psi))
+                        
+            Bmax = []
+            Btot_avg = []
+            Btot2_avg = []
+            R_avg = []
+            hf = []
             for k, psi in enumerate(eq1d_psi):
                 if k == 0:
+                    RMAXIS = ods['equilibrium.time_slice.'+str(time_index)+'.global_quantities.magnetic_axis.r']
+                    ZMAXIS = ods['equilibrium.time_slice.'+str(time_index)+'.global_quantities.magnetic_axis.z']
+                    Btot = numpy.sqrt(b_field_r_spline(RMAXIS, ZMAXIS, grid=False)**2 + b_field_z_spline(RMAXIS, ZMAXIS, grid=False)**2 + b_field_tor_spline(RMAXIS, ZMAXIS, grid=False)**2)
+                    Btot_avg.append(Btot)
+                    Btot2_avg.append(Btot**2)
+                    R_avg.append(RMAXIS)
+                    hf.append(0)
+                    Bmax.append(Btot)
                     # Skip the axis
                     continue
                 # This produces bp close to zero throwing things off
@@ -707,18 +749,44 @@ def add_volume_profile(ods, grid_index=0):
                 # Linear correction for the reduction in psi above
                 if k == len(eq1d_psi) - 1:
                     dl /= (1.0 - 1.e-3)
+
+                # calculate flux expansion
                 bp = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2)
-                int_fluxexpansion_dl = numpy.sum(dl/bp)
+                fluxexpansion = 1/bp
+                fluxexpansion_dl = fluxexpansion*dl
+                int_fluxexpansion_dl = numpy.sum(fluxexpansion_dl)
+                
+                # define volume integrand                
                 eq_slice['profiles_1d.dvolume_dpsi'][k] = (
                             cocos['sigma_rhotp']
                             * cocos['sigma_Bp']
                             * numpy.sign(numpy.mean(bp))
                             * int_fluxexpansion_dl
                             * (2.0 * numpy.pi) ** (1.0 - cocos['exp_Bp']))
+                
+                # determine flux-surface-averaged quantities
+                Btot = numpy.sqrt(b_field_r_spline(r, z, grid=False)**2 + b_field_z_spline(r, z, grid=False)**2 + b_field_tor_spline(r, z, grid=False)**2)
+                Bmax.append(numpy.max(Btot))
+                hf.append(trapz(numpy.sqrt(1.0 - (b_field_tor_spline(r, z, grid=False) / Bmax[k])) * dl) / numpy.sum(dl)) # we need to check index for Bmax (should we use k-1 instead of k?)
+                Btot_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot))
+                Btot2_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,Btot**2))
+                R_avg.append(flxAvg(fluxexpansion_dl,int_fluxexpansion_dl,r))
+            
+            # put flux-surface-averaged quantities in ODS object
+            eq_slice['profiles_1d.gm5'] = Btot2_avg
+            eq_slice['profiles_1d.gm8'] = R_avg
+            eq_slice['profiles_1d.gm10'] = hf
+            eq_slice['profiles_1d.b_field_average'] = Btot_avg
 
+            # integrate to determine volume
             volume_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
             eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi)
+
     return ods
+
+def flxAvg(fluxexpansion_dl,int_fluxexpansion_dl, input):
+# define function for flux-surface averaging (based on function of same name in omfit_classes fluxSurface.py)
+    return numpy.sum(fluxexpansion_dl * input) / int_fluxexpansion_dl
 
 def remove_integrator_drift(time, data, time_after_shot):
     # assume that the drift is zero at time[0]
@@ -3375,6 +3443,26 @@ _cocos_signals = {}
         _extra_structures.clear()
         _extra_structures.update(_extra_structures_bkp)
 
+def convert_IMAS_launch_angles_to_DIII_D(beam, itime=None):
+    import numpy as np
+    if itime is None:
+        beta = -beam['steering_angle_tor'][:]
+        alpha = beam['steering_angle_pol'][:]
+    else:
+        beta = -beam['steering_angle_tor'][itime]
+        alpha = beam['steering_angle_pol'][itime]
+        
+    AZIANG = np.rad2deg(np.arctan2(np.tan(beta), np.cos(alpha))) + 180.0e0
+    POLANG = np.rad2deg(np.arcsin(np.sin(alpha) * np.cos(beta))) + 90.0e0
+    return AZIANG, POLANG
+
+def convert_DIII_D_to_IMAS_launch_angles(AZIANG, POLANG):
+    import numpy as np
+    phi_tor = np.deg2rad(AZIANG - 180.0)
+    theta_pol = np.deg2rad(POLANG - 90.0)
+    steering_angle_tor = -np.arcsin(np.cos(theta_pol) * np.sin(phi_tor))
+    steering_angle_pol = np.arctan2(np.tan(theta_pol), np.cos(phi_tor))
+    return steering_angle_tor, steering_angle_pol
 
 # The CocosSignals class is just a dictionary that raises warnings when users access
 # entries that are likely to need a COCOS transformation, but do not have one.
