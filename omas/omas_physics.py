@@ -505,9 +505,9 @@ def derive_equilibrium_profiles_2d_quantity(ods, time_index, grid_index, quantit
         elif quantity == "b_field_tor":
             mask = numpy.logical_and(
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
-                < numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
+                <= numpy.max(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
                 ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.psi']
-                > numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
+                >= numpy.min(ods[f'equilibrium.time_slice.{time_index}.profiles_1d.psi']),
             )
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'] = numpy.zeros(r.shape)
             ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}.b_field_tor'][mask == False] = (
@@ -593,8 +593,8 @@ def equilibrium_profiles_2d_map(
     :param time_index: time slices to process
 
     :param grid_index: Index of grid to map
-
     :param quantity: Member of profiles_2d[:] to map
+
 
     :param dim1: First coordinate of the points to map to
 
@@ -604,7 +604,7 @@ def equilibrium_profiles_2d_map(
 
     :param return_cache: Toggles return of cache
 
-    :return: mapped positions (and cahce if return_cache)
+    :return: mapped positions (and cache if return_cache)
     """
     if quantity not in ods[f'equilibrium.time_slice.{time_index}.profiles_2d.{grid_index}']:
         ods.physics_derive_equilibrium_profiles_2d_quantity(time_index, grid_index, quantity)

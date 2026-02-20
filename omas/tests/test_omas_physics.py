@@ -209,16 +209,16 @@ class TestOmasPhysics(UnittestCaseOmas):
         sample_path = os.path.join(sample_path, os.pardir, "samples", "D3D_standard_Lmode.json")
         ods = load_omas_json(sample_path)
         with omas_environment(ods, cocosio=11):
-            for (b_component, atol) in zip(['b_field_r', 'b_field_tor', 'b_field_z'], [5.e-3, 0.1, 5.e-3]):
+            for (b_component, atol) in zip(['b_field_r', 'b_field_tor', 'b_field_z'], [5.e-3, 0.5e-3, 5.e-3]):
                 print(f"Testing {b_component}")
                 b_check = copy.copy(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
                 del(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'])
                 ods = ods.physics_derive_equilibrium_profiles_2d_quantity(0, 0, b_component, 
-                                                                                force_linear_interpolation=True)
+                                                                          force_linear_interpolation=True)
                 check = numpy.abs(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}']-b_check)
                 if numpy.any(check>atol):
                     print(check[check>atol])
-                assert numpy.allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check, atol=atol)
+                numpy.testing.assert_allclose(ods[f'equilibrium.time_slice.0.profiles_2d.0.{b_component}'], b_check, atol=atol)
 
 
     def test_add_volume_profile(self):
