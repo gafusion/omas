@@ -23,8 +23,7 @@ extras_require = {
     'machine': [
         'omfit_classes',
         'pexpect',
-        'fortranformat',
-        'pygacode',
+        'fortranformat'
     ],
     'hdc': ['pyhdc'],
     'imas': ['imas', 'tqdm'],
