@@ -7,12 +7,12 @@ from omas.machine_mappings._common import *
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.omas_core import ODS
 import glob
-import pyuda
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
 
 def get_pyuda_client(server=None, port=None):
+    import pyuda
     if server is not None:
         pyuda.Client.server = server
     elif not os.environ.get('UDA_HOST'):
@@ -82,6 +82,7 @@ def pf_active_coil_current_data(ods, pulse, server=None, port=None):
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
     from omfit_classes.utils_math import firFilter
+    import pyuda
     ods1 = ODS()
     unwrap(pf_active_hardware)(ods1, pulse)
 
@@ -183,6 +184,7 @@ def magnetics_floops_data(ods, pulse, server=None, port=None):
 
     :param pulse: shot number
     """
+    import pyuda
     from omfit_classes.omfit_efund import OMFITnstxMHD
     
     signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
@@ -225,6 +227,7 @@ def magnetics_probes_data(ods, pulse, server=None, port=None):
     :param pulse: shot number
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
+    import pyuda
 
     signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
 
@@ -263,7 +266,7 @@ def ip_bt_dflux_data(ods, pulse, server=None, port=None):
     :param pulse: shot number
     """
     from omfit_classes.omfit_efund import OMFITnstxMHD
-
+    import pyuda
     signals = get_support_file(OMFITnstxMHD, mast_filenames('signals', pulse))
 
     mappings = {'PR': 'magnetics.ip.0', 'TF': 'tf.b_field_tor_vacuum_r'}
