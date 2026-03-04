@@ -12,6 +12,7 @@ build/
 /tmp
 
 omas/data-dictionary
+omas/IMAS-Data-Dictionary
 omas/Saxon*
 omas/imas_structures/*/*.xml
 
