@@ -868,21 +868,14 @@ def omas_global_quantities(imas_version=omas_rcparams['default_imas_version']):
     return _global_quantities[imas_version]
 
 
-# only attempt cython if effective user owns this copy of omas
-# disabled for Windows: need to add check for file ownership under Windows
-if os.name == 'nt' or os.geteuid() != os.stat(__file__).st_uid:
+# Import compiled Cython extension
+# Fall back to pure Python implementation if the compiled extension is not available
+try:
+    from .omas_cython import *
+except ImportError as _excp:
+    warnings.warn('Compiled Cython extension not available, falling back to pure Python: ' + str(_excp))
     with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
         exec(f.read(), globals())
-else:
-    try:
-        import pyximport
-
-        pyximport.install(language_level=3)
-        from .omas_cython import *
-    except Exception as _excp:
-        warnings.warn('omas cython failed: ' + str(_excp))
-        with open(os.path.split(__file__)[0] + os.sep + 'omas_cython.pyx', 'r') as f:
-            exec(f.read(), globals())
 
 
 def l2ut(path):

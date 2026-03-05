@@ -1,6 +1,8 @@
 import os
 import glob
 import subprocess
+from setuptools import Extension
+from Cython.Build import cythonize
 
 install_requires = [
     'numpy>=1.16.1',
@@ -51,7 +53,7 @@ if os.path.exists(here + '.git') and not os.path.exists(here + 'requirements.txt
 
 packages = ['omas', 'omas.examples', 'omas.samples', 'omas.tests', 'omas.utilities']
 package_data = {
-    'omas': ['*.py', '*.pyx', 'version'],
+    'omas': ['*.py', 'version'],
     'omas.examples': ['*.py'],
     'omas.samples': ['*'],
     'omas.tests': ['*.py'],
@@ -109,6 +111,13 @@ print()
 
 from setuptools import setup
 
+# Build Cython extension
+ext_modules = cythonize(
+    [Extension("omas.omas_cython", ["omas/omas_cython.pyx"])],
+    language_level=3,
+    compiler_directives={'embedsignature': True}
+)
+
 setup(
     name='omas',
     version=open(here + 'omas/version', 'r').read().strip(),
@@ -124,4 +133,6 @@ setup(
     package_data=package_data,
     install_requires=install_requires,
     extras_require=extras_require,
+    ext_modules=ext_modules,
+    setup_requires=['Cython>=0.29', 'numpy>=1.16.1'],
 )

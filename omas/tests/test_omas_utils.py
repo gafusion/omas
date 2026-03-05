@@ -117,6 +117,17 @@ class TestOmasUtils(UnittestCaseOmas):
         ods_info_list = omas_info(get_list)
         assert all(item in ods_info_list for item in get_list)
 
+    def test_cython_extension_compiled(self):
+        """Test that the Cython extension was properly compiled and is being used"""
+        import omas.omas_cython as cython_module
+        # Check that we're using the compiled extension (.so file) not the .pyx source
+        assert hasattr(cython_module, '__file__'), "Cython module should have a __file__ attribute"
+        module_file = cython_module.__file__
+        # Compiled extension should end with .so (Linux/Mac) or .pyd (Windows)
+        assert module_file.endswith('.so') or module_file.endswith('.pyd'), \
+            f"Expected compiled extension (.so/.pyd), but got: {module_file}"
+        print(f"✓ Using compiled Cython extension: {module_file}")
+
     def test_p2l(self):
         assert p2l('0') == [0]
         assert p2l('equilibrium') == ['equilibrium']
