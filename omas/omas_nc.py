@@ -60,7 +60,7 @@ def get_ds_item(dataset, item):
         if item + '_error_upper' in dataset.variables.keys():
             tmp = uarray(numpy.array(dataset.variables[item]), numpy.array(dataset.variables[item + '_error_upper']))
         else:
-            tmp = numpy.array(dataset.variables[item])
+            tmp = numpy.asarray(dataset.variables[item])
     else:
         # uncertain scalars
         if item + '_error_upper' in dataset.variables.keys():
