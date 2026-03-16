@@ -1,5 +1,7 @@
 import numpy as np
 from inspect import unwrap
+from scipy.signal import medfilt
+from collections import OrderedDict
 
 from omas import *
 from omas.omas_utils import printd, printe
@@ -10,7 +12,7 @@ from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
-from collections import OrderedDict
+
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -754,6 +756,19 @@ def interferometer_hardware(ods, pulse):
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
 
+def add_error_structure_channel(ods, ids_name, location, units):
+    interferometer_struct = {ids_name: {}}
+    channel_struct = {"coordinates": ("1- 1...N", "1- 1...N", location.split("error")[0] + "time")}
+    channel_struct["documentation"] = """
+Uncertainties broken down into individual contributions:
+[0] -> stat. error
+[1] -> sys. error
+    """
+    channel_struct["data_type"] =  "FLT_1D"
+    channel_struct["units"] = units
+    interferometer_struct[ids_name][location] = channel_struct
+    add_extra_structures(interferometer_struct)
+
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_data(ods, pulse):
     """
@@ -783,8 +798,10 @@ def interferometer_data(ods, pulse):
     if isinstance(data['time'], Exception):
         printe('WARNING: CO2 interferometer data is missing')
         return
-
     # assign
+    add_error_structure_channel(ods, "interferometer",  
+                                f"interferometer.channel.:.n_e_line.error",
+                                "m^-2")
     for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
@@ -798,10 +815,14 @@ def interferometer_data(ods, pulse):
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = valid
-        ne_err = np.zeros(data[identifier].shape)
-        ne_err[:] = np.median(np.abs(data[identifier][data['time']<0])) * 1e6
-        ne_err[valid<0] = np.inf
-        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = ne_err
+        ne_err = [np.zeros_like(data[identifier]),
+                  np.zeros_like(data[identifier])]
+        ne_err[0][:] = np.std(data[identifier][data['time']<0]) * 1e6
+
+        ne_err[1][:] = np.max(medfilt(np.abs(data[identifier][data['time'] < 0]), 5))* 1e6
+        ne_err[0][valid<0] = np.inf
+        ne_err[0][data[identifier]<0]  = np.inf
+        ods[f'interferometer.channel.{k}.n_e_line.error'] = ne_err
 
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
@@ -937,7 +958,10 @@ def rip_data(ods, pulse):
         # use median to keep the fringe jumps sharp
         #data[s] = np.median(data[s][:nt//n_down*n_down].reshape(-1, n_down), 1)
     #time = time[:nt//n_down*n_down].reshape(-1, n_down).mean(1)
-
+    if pulse >= 177052 :
+        add_error_structure_channel(ods, "interferometer",  
+                                    "interferometer.channel.:.n_e_line.error",
+                                    "m^-2")
     for ch in ods1['interferometer.channel']:
         iden = ods1['interferometer.channel'][ch]['identifier']
         ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.time'] = time
@@ -962,6 +986,8 @@ def rip_data(ods, pulse):
             phase_err = phases.std(0) + phases[:,1:ioff].std(1).mean()
             ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data_error_upper'] = phase_err
             ne_line_err = phase_err * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+            ne_line_sys_error = np.zeros_like(ne_line_err)
+            ne_line_sys_error[:] = np.max(medfilt(np.abs(phase[time < 0]), 5))* ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
 
         ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data'] = phase
         # translates density phase to single-pass, line-integral density in m^-2.
@@ -980,8 +1006,11 @@ def rip_data(ods, pulse):
         ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
         if pulse >= 177052:
             ne_line_err[ne_line < 0] = np.inf
-            ods['interferometer.channel'][ch]['n_e_line.data_error_upper'] = ne_line_err
-
+            ods['interferometer.channel'][ch]['n_e_line.error'] = [ne_line_err, 
+                                                                   ne_line_sys_error]
+    add_error_structure_channel(ods, "polarimeter",  
+                                f"polarimeter.channel.:.faraday_angle.error",
+                                "rad")
     for ch in ods1['polarimeter.channel']:
         iden = ods1['polarimeter.channel'][ch]['identifier']
         ods['polarimeter.channel'][ch]['faraday_angle.time'] = time
@@ -997,7 +1026,11 @@ def rip_data(ods, pulse):
             ods['polarimeter.channel'][ch]['faraday_angle.data'] = angles.mean(0)
             angle_err = angles.std(0)# + angles[:, 1:ioff].std(1).mean()
             angle_err[angle_err <= 0] = np.inf
-            ods['polarimeter.channel'][ch]['faraday_angle.data_error_upper'] = angle_err
+            median_angle = np.median(angles,0)
+            angle_sys_error = np.zeros_like(angle_err)
+            angle_sys_error[:] = np.max(medfilt(np.abs(median_angle[time < 0]), 5))
+            ods['polarimeter.channel'][ch]['faraday_angle.error'] = [angle_err,
+                                                                     angle_sys_error]
             valid[angle_err <= 0] = -1
         ods['polarimeter.channel'][ch]['faraday_angle.validity_timed'] = valid
 
