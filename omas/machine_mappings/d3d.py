@@ -441,8 +441,9 @@ def pf_active_hardware(ods, pulse):
     for k, fcid in enumerate(coil_names):
         ods['pf_active.coil'][k]['name'] = fcid
         ods['pf_active.coil'][k]['identifier'] = fcid
-        ods['pf_active.coil'][k]['element.0.name'] = fcid
-        ods['pf_active.coil'][k]['element.0.identifier'] = fcid
+        # Element names/identifiers are loaded from hardware file and should not be overridden
+        # ods['pf_active.coil'][k]['element.0.name'] = fcid
+        # ods['pf_active.coil'][k]['element.0.identifier'] = fcid
         if k < 6:
             # `flux` function
             ods['pf_active.coil'][k]["function.0.index"] = 0
