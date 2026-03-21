@@ -189,31 +189,37 @@ def setup_gas_injection_hardware_description_east(ods, pulse):
     # OUPEV2
     # I think it's between probes 8 & 9. I am guessing. This gives R, Z
     # I think it's in port O
+    valve = ods['gas_injection']['valve'][i]
+    valve['identifier'] = 'OUPEV2'
+    valve['pipe_indices'] = [i]
     pipe = ods['gas_injection']['pipe'][i]
     phi = port_angle('o')
     pipe['name'] = 'OUPEV2_{:03d}'.format(int(round(phi * 180 / np.pi)))
     pipe['exit_position']['r'] = 1.73  # m
     pipe['exit_position']['z'] = 1.057  # m
     pipe['exit_position']['phi'] = phi
-    pipe['valve'][0]['identifier'] = 'OUPEV2'
     pipe['second_point']['phi'] = phi
     pipe['second_point']['r'] = 1.729
     pipe['second_point']['z'] = 1.05675
+    pipe['valve_indices'] = [i]
     i += 1
 
     # ODPEV2
     # It's in the lower divertor. I'll have to eyeball from a drawing. Also, I am guessing which tip it is.
     # I think it's in port O
+    valve = ods['gas_injection']['valve'][i]
+    valve['identifier'] = 'ODPEV2'
+    valve['pipe_indices'] = [i]
     pipe = ods['gas_injection']['pipe'][i]
     phi = port_angle('o')
     pipe['name'] = 'ODPEV2_{:03d}'.format(int(round(phi * 180 / np.pi)))
     pipe['exit_position']['r'] = 1.811  # m
     pipe['exit_position']['z'] = -0.972  # m
     pipe['exit_position']['phi'] = phi
-    pipe['valve'][0]['identifier'] = 'ODPEV2'
     pipe['second_point']['phi'] = phi
     pipe['second_point']['r'] = 1.806
     pipe['second_point']['z'] = -0.9715
+    pipe['valve_indices'] = [i]
     i += 1
 
 
