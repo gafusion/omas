@@ -31,10 +31,16 @@
  "gas_injection.pipe.:.second_point.z": {
   "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
  },
- "gas_injection.pipe.:.valve.:": {
+ "gas_injection.pipe.:.valve_indices": {
   "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
  },
- "gas_injection.pipe.:.valve.:.identifier": {
+ "gas_injection.valve.:": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.valve.:.identifier": {
+  "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
+ },
+ "gas_injection.valve.:.pipe_indices": {
   "PYTHON": "setup_gas_injection_hardware_description_east(ods, {pulse})"
  },
  "langmuir_probes.embedded.:": {
