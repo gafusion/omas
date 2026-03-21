@@ -49,4 +49,6 @@ ods.plot_quantity('@core.*zeff', t, **kw)
 ax.set_title(t, y=0.8)
 
 fig.subplots_adjust(hspace=0)
-pyplot.show()
+# Only show plot if using an interactive backend
+if pyplot.get_backend() != 'Agg':
+    pyplot.show()
