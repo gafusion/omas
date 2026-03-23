@@ -491,6 +491,9 @@
  "interferometer.channel.:.n_e_line.data": {
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
+ "interferometer.channel.:.n_e_line.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
  "interferometer.channel.:.n_e_line.error": {
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },

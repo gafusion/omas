@@ -823,6 +823,7 @@ def interferometer_data(ods, pulse):
         ne_err[0][valid<0] = np.inf
         ne_err[0][data[identifier]<0]  = np.inf
         ods[f'interferometer.channel.{k}.n_e_line.error'] = ne_err
+        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = np.sum(ne_err, axis=0)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
