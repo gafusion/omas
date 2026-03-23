@@ -1186,9 +1186,13 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
             ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
             if _get_measurements:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
-                ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
+                ne_error = tsdat[f'{system}_DENSITY_E'][j]
+                ne_error[tsdat[f'{system}_DENSITY'][j] <=0] = np.inf
+                ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], ne_error)
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
-                ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], tsdat[f'{system}_TEMP_E'][j])
+                te_error = tsdat[f'{system}_TEMP_E'][j]
+                te_error[tsdat[f'{system}_TEMP'][j] <=0] = np.inf
+                ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], te_error)
             i += 1
 
 
