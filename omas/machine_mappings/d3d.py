@@ -1009,6 +1009,8 @@ def rip_data(ods, pulse):
             ne_line_err[ne_line < 0] = np.inf
             ods['interferometer.channel'][ch]['n_e_line.error'] = [ne_line_err, 
                                                                    ne_line_sys_error]
+            ods[f'interferometer.channel.{ch}.n_e_line.data_error_upper'] = ne_line_err + ne_line_sys_error
+
     add_error_structure_channel(ods, "polarimeter",  
                                 f"polarimeter.channel.:.faraday_angle.error",
                                 "rad")
@@ -1032,6 +1034,7 @@ def rip_data(ods, pulse):
             angle_sys_error[:] = np.max(medfilt(np.abs(median_angle[time < 0]), 5))
             ods['polarimeter.channel'][ch]['faraday_angle.error'] = [angle_err,
                                                                      angle_sys_error]
+            ods[f'polarimeter.channel.{ch}.faraday_angle.data_error_upper'] = angle_err + angle_sys_error
             valid[angle_err <= 0] = -1
         ods['polarimeter.channel'][ch]['faraday_angle.validity_timed'] = valid
 
