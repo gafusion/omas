@@ -881,13 +881,14 @@ def rip_hardware(ods, pulse):
         else: 
             phi = phi0
             conv = conv0
-        los = ods['polarimeter.channel'][i]['line_of_sight']
-        los['first_point.phi'] = los['second_point.phi'] = los['third_point.phi'] = phi
-        los['first_point.r'], los['second_point.r'], los['third_point.r'] = Rout, Rin, Rout # End points from IDA-lite
-        los['first_point.z'] = los['second_point.z'] = los['third_point.z'] = z[i]
-        ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
-        los = ods['interferometer.channel'][i]['line_of_sight']
-
+        for system in ["interferometer", "polarimeter"]:
+            los = ods[f'{system}.channel'][i]['line_of_sight']
+            los['first_point.phi'] = los['second_point.phi'] = los['third_point.phi'] = phi
+            los['first_point.r'], los['second_point.r'], los['third_point.r'] = Rout, Rin, Rout # End points from IDA-lite
+            los['first_point.z'] = los['second_point.z'] = los['third_point.z'] = z[i]
+        ods[f'polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
+        ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6 #m
+        ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
 def rip_data(ods, pulse):
