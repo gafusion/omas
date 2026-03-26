@@ -882,9 +882,9 @@ def rip_hardware(ods, pulse):
             phi = phi0
             conv = conv0
         los = ods['polarimeter.channel'][i]['line_of_sight']
-        los['first_point.phi'] = los['second_point.phi'], los['third_point.phi'] = phi
+        los['first_point.phi'] = los['second_point.phi'] = los['third_point.phi'] = phi
         los['first_point.r'], los['second_point.r'], los['third_point.r'] = Rout, Rin, Rout # End points from IDA-lite
-        los['first_point.z'] = los['second_point.z'], los['third_point.z'] = z[i]
+        los['first_point.z'] = los['second_point.z'] = los['third_point.z'] = z[i]
         ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
         los = ods['interferometer.channel'][i]['line_of_sight']
 
