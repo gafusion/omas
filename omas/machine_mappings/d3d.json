@@ -10,7 +10,7 @@
   "EFIT_tree": "EFIT01",
   "PROFILES_run_id": null,
   "PROFILES_tree": "ZIPFIT01",
-  "analysis_type": "CERQUICK",
+  "analysis_type": "CERAUTO",
   "core_profiles_strict_grid": true,
   "default_tree": "D3D",
   "fast_ece": false,
