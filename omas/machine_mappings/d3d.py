@@ -1788,7 +1788,7 @@ def magnetics_probes_data(ods, pulse):
             compsig_time = m.dim_of(0) / 1000
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if (
-                    'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
+                    f'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
                     and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
                 ):
                     sig = 'magnetics.b_field_pol_probe.{channel}.identifier'

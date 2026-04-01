@@ -665,7 +665,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.ip.:": {
   "VALUE": 1
