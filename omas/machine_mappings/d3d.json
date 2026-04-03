@@ -494,6 +494,9 @@
  "interferometer.channel.:.n_e_line.data_error_upper": {
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
+ "interferometer.channel.:.n_e_line.error": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
  "interferometer.channel.:.n_e_line.time": {
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
@@ -662,7 +665,7 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
+  "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.ip.:": {
   "VALUE": 1
@@ -769,6 +772,9 @@
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "polarimeter.channel.:.faraday_angle.data_error_upper": {
+  "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
+ },
+ "polarimeter.channel.:.faraday_angle.error": {
   "PYTHON": "interferometer_polarimeter_data(ods, {pulse}, {include_CO2!r}, {include_RIP!r})"
  },
  "polarimeter.channel.:.faraday_angle.time": {

@@ -1,5 +1,7 @@
 import numpy as np
 from inspect import unwrap
+from scipy.signal import medfilt
+from collections import OrderedDict
 
 from omas import *
 from omas.omas_utils import printd, printe
@@ -10,7 +12,7 @@ from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
-from collections import OrderedDict
+
 
 __all__ = []
 __regression_arguments__ = {'__all__': __all__}
@@ -754,6 +756,19 @@ def interferometer_hardware(ods, pulse):
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
 
 
+def add_error_structure_channel(ods, ids_name, location, units):
+    interferometer_struct = {ids_name: {}}
+    channel_struct = {"coordinates": ("1- 1...N", "1- 1...N", location.split("error")[0] + "time")}
+    channel_struct["documentation"] = """
+Uncertainties broken down into individual contributions:
+[0] -> stat. error
+[1] -> sys. error
+    """
+    channel_struct["data_type"] =  "FLT_1D"
+    channel_struct["units"] = units
+    interferometer_struct[ids_name][location] = channel_struct
+    add_extra_structures(interferometer_struct)
+
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def interferometer_data(ods, pulse):
     """
@@ -783,8 +798,10 @@ def interferometer_data(ods, pulse):
     if isinstance(data['time'], Exception):
         printe('WARNING: CO2 interferometer data is missing')
         return
-
     # assign
+    add_error_structure_channel(ods, "interferometer",  
+                                f"interferometer.channel.:.n_e_line.error",
+                                "m^-2")
     for k in ods1['interferometer.channel']:
         identifier = ods1[f'interferometer.channel.{k}.identifier'].upper()
         ods[f'interferometer.channel.{k}.n_e_line.time'] = data['time'] / 1.0e3
@@ -798,10 +815,15 @@ def interferometer_data(ods, pulse):
             assume_sorted=True,
         )(ods[f'interferometer.channel.{k}.n_e_line.time'])
         ods[f'interferometer.channel.{k}.n_e_line.validity_timed'] = valid
-        ne_err = np.zeros(data[identifier].shape)
-        ne_err[:] = np.median(np.abs(data[identifier][data['time']<0])) * 1e6
-        ne_err[valid<0] = np.inf
-        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = ne_err
+        ne_err = [np.zeros_like(data[identifier]),
+                  np.zeros_like(data[identifier])]
+        ne_err[0][:] = np.std(data[identifier][data['time']<0]) * 1e6
+
+        ne_err[1][:] = np.max(medfilt(np.abs(data[identifier][data['time'] < 0]), 5))* 1e6
+        ne_err[0][valid<0] = np.inf
+        ne_err[0][data[identifier]<0]  = np.inf
+        ods[f'interferometer.channel.{k}.n_e_line.error'] = ne_err
+        ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = np.sum(ne_err, axis=0)
 
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
@@ -859,18 +881,14 @@ def rip_hardware(ods, pulse):
         else: 
             phi = phi0
             conv = conv0
-        los = ods['polarimeter.channel'][i]['line_of_sight']
-        los['first_point.phi'] = los['second_point.phi'] = phi
-        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
-        los['first_point.z'] = los['second_point.z'] = z[i]
-        ods['polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
-        los = ods['interferometer.channel'][i]['line_of_sight']
-        los['first_point.phi'] = los['second_point.phi'] = phi
-        los['first_point.r'], los['second_point.r'] = Rout, Rin # End points from IDA-lite
-        los['first_point.z'] = los['second_point.z'] = z[i]
+        for system in ["interferometer", "polarimeter"]:
+            los = ods[f'{system}.channel'][i]['line_of_sight']
+            los['first_point.phi'] = los['second_point.phi'] = los['third_point.phi'] = phi
+            los['first_point.r'], los['second_point.r'], los['third_point.r'] = Rout, Rin, Rout # End points from IDA-lite
+            los['first_point.z'] = los['second_point.z'] = los['third_point.z'] = z[i]
+        ods[f'polarimeter.channel'][i]['wavelength'] = 461.5e-6 #m
         ods['interferometer.channel'][i]['wavelength.0.value'] = 461.5e-6 #m
         ods['interferometer.channel'][i]['wavelength.0.phase_to_n_e_line'] = conv
-
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
 def rip_data(ods, pulse):
@@ -937,7 +955,10 @@ def rip_data(ods, pulse):
         # use median to keep the fringe jumps sharp
         #data[s] = np.median(data[s][:nt//n_down*n_down].reshape(-1, n_down), 1)
     #time = time[:nt//n_down*n_down].reshape(-1, n_down).mean(1)
-
+    if pulse >= 177052 :
+        add_error_structure_channel(ods, "interferometer",  
+                                    "interferometer.channel.:.n_e_line.error",
+                                    "m^-2")
     for ch in ods1['interferometer.channel']:
         iden = ods1['interferometer.channel'][ch]['identifier']
         ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.time'] = time
@@ -962,6 +983,8 @@ def rip_data(ods, pulse):
             phase_err = phases.std(0) + phases[:,1:ioff].std(1).mean()
             ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data_error_upper'] = phase_err
             ne_line_err = phase_err * ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
+            ne_line_sys_error = np.zeros_like(ne_line_err)
+            ne_line_sys_error[:] = np.max(medfilt(np.abs(phase[time < 0]), 5))* ods1['interferometer.channel'][ch]['wavelength.0.phase_to_n_e_line']
 
         ods['interferometer.channel'][ch]['wavelength.0.phase_corrected.data'] = phase
         # translates density phase to single-pass, line-integral density in m^-2.
@@ -980,8 +1003,13 @@ def rip_data(ods, pulse):
         ods['interferometer.channel'][ch]['n_e_line.validity_timed'] = valid
         if pulse >= 177052:
             ne_line_err[ne_line < 0] = np.inf
-            ods['interferometer.channel'][ch]['n_e_line.data_error_upper'] = ne_line_err
+            ods['interferometer.channel'][ch]['n_e_line.error'] = [ne_line_err, 
+                                                                   ne_line_sys_error]
+            ods[f'interferometer.channel.{ch}.n_e_line.data_error_upper'] = ne_line_err + ne_line_sys_error
 
+    add_error_structure_channel(ods, "polarimeter",  
+                                f"polarimeter.channel.:.faraday_angle.error",
+                                "rad")
     for ch in ods1['polarimeter.channel']:
         iden = ods1['polarimeter.channel'][ch]['identifier']
         ods['polarimeter.channel'][ch]['faraday_angle.time'] = time
@@ -997,7 +1025,12 @@ def rip_data(ods, pulse):
             ods['polarimeter.channel'][ch]['faraday_angle.data'] = angles.mean(0)
             angle_err = angles.std(0)# + angles[:, 1:ioff].std(1).mean()
             angle_err[angle_err <= 0] = np.inf
-            ods['polarimeter.channel'][ch]['faraday_angle.data_error_upper'] = angle_err
+            median_angle = np.median(angles,0)
+            angle_sys_error = np.zeros_like(angle_err)
+            angle_sys_error[:] = np.max(medfilt(np.abs(median_angle[time < 0]), 5))
+            ods['polarimeter.channel'][ch]['faraday_angle.error'] = [angle_err,
+                                                                     angle_sys_error]
+            ods[f'polarimeter.channel.{ch}.faraday_angle.data_error_upper'] = angle_err + angle_sys_error
             valid[angle_err <= 0] = -1
         ods['polarimeter.channel'][ch]['faraday_angle.validity_timed'] = valid
 
@@ -1153,9 +1186,13 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
             ch['position']['phi'] = -tsdat[f'{system}_PHI'][j] * np.pi / 180.0
             if _get_measurements:
                 ch['n_e.time'] = tsdat[f'{system}_TIME'] / 1e3
-                ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], tsdat[f'{system}_DENSITY_E'][j])
+                ne_error = tsdat[f'{system}_DENSITY_E'][j]
+                ne_error[tsdat[f'{system}_DENSITY'][j] <=0] = np.inf
+                ch['n_e.data'] = unumpy.uarray(tsdat[f'{system}_DENSITY'][j], ne_error)
                 ch['t_e.time'] = tsdat[f'{system}_TIME'] / 1e3
-                ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], tsdat[f'{system}_TEMP_E'][j])
+                te_error = tsdat[f'{system}_TEMP_E'][j]
+                te_error[tsdat[f'{system}_TEMP'][j] <=0] = np.inf
+                ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], te_error)
             i += 1
 
 
@@ -1610,8 +1647,6 @@ def magnetics_hardware(ods, pulse):
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
-    from scipy.interpolate import interp1d
-
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
     unwrap(ip_bt_dflux_data)(ods1, pulse)
@@ -1637,27 +1672,27 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
         if len(comp) == 0:
-            raise ValueError(f"Could not find d3d {compfile} for shot {pulse}")
+            raise ValueError(f"Could not find d3d {compfile} file")
         compshot = -1
         for shot in comp:
-            if pulse > compshot:
+            if pulse > shot:
                 compshot = shot
                 break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
             m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
-            try:
-                compsig_data = m.data()
-                compsig_time = m.dim_of(0) / 1000.0
-                for channel in ods['magnetics.flux_loop']:
-                    if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
-                        sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+            compsig_data = m.data()
+            compsig_time = m.dim_of(0) / 1000.0
+            for channel in ods['magnetics.flux_loop']:
+                if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
+                    sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
+                    if sig in comp[compshot][compsig]:
                         sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
-                        compsig_data_interp = interp1d(compsig_time, compsig_data, bounds_error=False, fill_value=(0, 0))(sigraw_time)
+                        compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
                         ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
-            except Exception:
-                printe(f"NO {compsig}")
+                    else:
+                            printe(f"No {compsig} compensation for {sig}, skipping")
 
     # Fetch uncertainties
     TDIs = {}
@@ -1666,7 +1701,7 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
     data = mdsvalue('d3d', None, pulse, TDIs).raw()
     weights = D3Dmagnetics_weights(pulse, 'fwtsi')
-    Ip = interp1d(ods1[f'magnetics.ip.0.time'], ods1[f'magnetics.ip.0.data'], bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.0.flux.time']) # assuming all probes have the same time basis (expected, more efficient)
+    Ip = np.interp(ods[f'magnetics.flux_loop.0.flux.time'], ods1[f'magnetics.ip.0.time'], ods1[f'magnetics.ip.0.data']) # assuming all probes have the same time basis (expected, more efficient)
     for k in ods1['magnetics.flux_loop']:
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         if ods[f'magnetics.flux_loop.{k}.flux.validity'] == -2:
@@ -1681,11 +1716,11 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
             digi_error = 10 * abs(data[identifier][3] * data[identifier][4]) * np.ones(nt)
             # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
-            rel_error = 0.03 * ods[f'magnetics.flux_loop.{k}.flux.data']
-            # Extra EFIT uncertainty term (not clear why but it's been in EFIT for more than 30 year)
-            flux_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * Ip
+            rel_error = 0.03 * abs(ods[f'magnetics.flux_loop.{k}.flux.data'])
+            # Approximate error in the flux loop positions estimated with DIII-D parameters (often largest error term)
+            position_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
             # Use whichever error source is largest (this is how it is treated in EFIT)
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, flux_error])
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, position_error])
 
     # Convert the differential fluxes to total
     # This is how DIII-D data has been stored since at least 1988, but IMAS does not support this type of flux loops
@@ -1712,7 +1747,6 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
-
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
 
@@ -1737,27 +1771,32 @@ def magnetics_probes_data(ods, pulse):
     # Apply compensations
     for compfile in ['btcomp', 'ccomp', 'icomp']:
         comp = get_support_file(D3DCompfile, support_filenames('d3d', compfile, pulse))
+        if len(comp) == 0:
+            raise ValueError(f"Could not find d3d {compfile} file")
         compshot = -1
         for shot in comp:
-            if pulse > compshot:
+            if pulse > shot:
                 compshot = shot
                 break
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f"[ptdata2(\"{compsig}\",{pulse})]", treename=None)
+            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
             compsig_data = m.data()
-
             compsig_time = m.dim_of(0) / 1000
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if (
-                    'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
+                    f'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
                     and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
                 ):
-                    sig = 'magnetics.b_field_pol_probe.{channel}.identifier'
-                    sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
-                    compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
-                    ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+                    sig = ods1[f'magnetics.b_field_pol_probe.{channel}.identifier']
+                    if sig in comp[compshot][compsig]:
+                        sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
+                        compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
+                        ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+                    else:
+                        printe(f"No {compsig} compensation for {sig}, skipping")
+
 
     # Fetch uncertainties
     TDIs = {}
@@ -1780,7 +1819,7 @@ def magnetics_probes_data(ods, pulse):
             identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
             digi_error = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
             # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
-            rel_error = 0.03 * ods[f'magnetics.b_field_pol_probe.{k}.field.data']
+            rel_error = 0.03 * abs(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
             # Use whichever error source is largest (this is how it is treated in EFIT)
             ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.fmax(digi_error, rel_error)
 
