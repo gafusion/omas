@@ -493,7 +493,7 @@ def pf_active_coil_current_data(ods, pulse):
         # IMAS stores the current in the coil not multiplied by the number of turns
         for channel in ods1['pf_active.coil']:
             if f'pf_active.coil.{channel}.current.data' in ods:
-                if 'F' in f'pf_active.coil.{channel}.identifier':
+                if 'F' in ods1[f'pf_active.coil.{channel}.identifier']:
                     ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
                     ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
             else:
