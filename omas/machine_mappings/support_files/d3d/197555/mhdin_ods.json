@@ -157,9 +157,9 @@
 }
 },
 {
-"identifier": "MPI67A3",
+"identifier": "MPI67A157",
 "length": 0.1561,
-"name": "MPI67A3",
+"name": "MPI67A157",
 "poloidal_angle": 1.1833332328521553,
 "position": {
 "r": 2.2641,
@@ -172,9 +172,9 @@
 }
 },
 {
-"identifier": "MPI67A067",
+"identifier": "MPI67A097",
 "length": 0.155,
-"name": "MPI67A067",
+"name": "MPI67A097",
 "poloidal_angle": 1.1798425743481666,
 "position": {
 "r": 2.2655,
@@ -382,9 +382,9 @@
 }
 },
 {
-"identifier": "MPI67B3",
+"identifier": "MPI67B157",
 "length": 0.1549,
-"name": "MPI67B3",
+"name": "MPI67B157",
 "poloidal_angle": 1.9687313962496038,
 "position": {
 "r": 2.2596,
@@ -397,9 +397,9 @@
 }
 },
 {
-"identifier": "MPI67B067",
+"identifier": "MPI67B097",
 "length": 0.1557,
-"name": "MPI67B067",
+"name": "MPI67B097",
 "poloidal_angle": 1.965240737745615,
 "position": {
 "r": 2.2624,
