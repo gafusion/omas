@@ -1,4 +1,4 @@
- *** 4/3/2024
+ *** 4/2/2026
  &MACHINEIN
  device = 'DIII-D'
  magpri=76
@@ -7,34 +7,17 @@
  nvesel=28
  nvsum=28
  /
- &INCHECK
- li_max=2.5
- li_min=0.05
- betap_max=6.0
- betat_max=25.
- plasma_diff=0.08
- aminor_max=75.0
- aminor_min=30.
- elong_max=4.0
- elong_min=0.8
- rcntr_max=240.
- rcntr_min=90.0
- zcntr_max=100.
- zcntr_min=-100.
- rcurrt_max=240.
- rcurrt_min=90.0
- zcurrt_max=100.
- zcurrt_min=-100.
- qstar_max=200.
- qstar_min=1.
- gapin_min=-0.2
- gapout_min=-0.2
- gaptop_min=-0.2
- sepin_check=-90.0
- qout_min=1.
- qout_max=200.
- dbpli_diff=0.05
- delbp_diff=0.08
+ &IN5
+ IGRID = 1
+ RLEFT = 0.84
+ RRIGHT = 2.54
+ ZBOTTO = -1.6
+ ZTOP = 1.6
+ IFCOIL = 1
+ NSMP2 = 25
+ IECOIL = 1
+ IVESEL = 1
+ IACOIL = 0
  /
  &IN3
  rlin=1.05  rlout=1.7  zlbot=-1.2   zltop=1.
@@ -120,10 +103,10 @@
  MPNAM2=
  'MPI11M067 ','MPI1A139  ','MPI2A067  ','MPI2A139  ','MPI3A139  ',
  'MPI4A139  ','MPI5A139  ','MPI66M247 ','MPI79A147 ','MPI67A142 ',
- 'MPI67A3   ','MPI67A067 ','MPI6NA132 ','MPI6NA157 ','MPI66M067 ',
+ 'MPI67A157 ','MPI67A097 ','MPI6NA132 ','MPI6NA157 ','MPI66M067 ',
  'MPI1B139  ','MPI2B067  ','MPI2B139  ','MPI3B139  ','MPI4B139  ',
  'MPI5B139  ','MPI66M157 ','MPI1B157  ','MPI79B142 ','MPI7NB142 ',
- 'MPI67B3   ','MPI67B067 ','MPI6FB142 ','MPI6NB157 ',
+ 'MPI67B157 ','MPI67B097 ','MPI6FB142 ','MPI6NB157 ',
  'MPI8A322  ','MPI89A322 ','MPI9A322  ','MPI79FA322','MPI79NA322',
  'MPI7FA322 ','MPI7NA322 ','MPI67A322 ','MPI6FA322 ','MPI6NA322 ',
  'MPI66M322 ','MPI6NB322 ','MPI6FB322 ','MPI67B322 ','MPI7NB322 ',
@@ -242,15 +225,32 @@
  0.0038912 0.0063351 0.0068921 0.0058032 0.0061324 0.0055482 0.00503212
  0.0011978 0.0166639 0.0166193 0.0292222
  /
- &IN5
- IGRID = 1
- RLEFT = 0.84
- RRIGHT = 2.54
- ZBOTTO = -1.6
- ZTOP = 1.6
- IFCOIL = 1
- NSMP2 = 25
- IECOIL = 1
- IVESEL = 1
- IACOIL = 0
+ &INCHECK
+ li_max=2.5
+ li_min=0.05
+ betap_max=6.0
+ betat_max=25.
+ plasma_diff=0.08
+ aminor_max=75.0
+ aminor_min=30.
+ elong_max=4.0
+ elong_min=0.8
+ rcntr_max=240.
+ rcntr_min=90.0
+ zcntr_max=100.
+ zcntr_min=-100.
+ rcurrt_max=240.
+ rcurrt_min=90.0
+ zcurrt_max=100.
+ zcurrt_min=-100.
+ qstar_max=200.
+ qstar_min=1.
+ gapin_min=-0.2
+ gapout_min=-0.2
+ gaptop_min=-0.2
+ sepin_check=-90.0
+ qout_min=1.
+ qout_max=200.
+ dbpli_diff=0.05
+ delbp_diff=0.08
  /
