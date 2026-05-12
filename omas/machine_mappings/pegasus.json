@@ -1,0 +1,187 @@
+{
+ "__include__": [
+ "_common"
+ ],
+ "__mdsserver__": "atum.ep.wisc.edu:8000",
+ "__options__": {},
+ "magnetics.ip.:": {
+ "VALUE":2
+ },
+ "magnetics.ip.:.data" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})",
+ "COCOSIO":1
+ },
+ "magnetics.ip.:.data_error_upper" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.ip.:.time" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:": {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.flux.data" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})",
+ "COCOSIO":1
+ },
+ "magnetics.flux_loop.:.flux.data_error_upper" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.flux.time" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.name" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.identifier" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.type" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.type.index" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.r" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.flux_loop.:.position.:.z" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:": {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.field.data" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})",
+ "COCOSIO":1
+ },
+ "magnetics.b_field_pol_probe.:.field.data_error_upper" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.field.time" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "magnetics.b_field_pol_probe.:.name" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.identifier" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.length" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.r" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.phi" : {
+ "PYTHON":"magnetics_hardware(ods)",
+ "COCOSIO":1
+ },
+ "magnetics.b_field_pol_probe.:.position.angle" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "magnetics.b_field_pol_probe.:.position.z" : {
+ "PYTHON":"magnetics_hardware(ods)"
+ },
+ "tf.r0": {
+ "VALUE": 0.4
+ },
+ "tf.b_field_tor_vacuum_r.data": {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})",
+ "COCOSIO":1
+ },
+ "tf.b_field_tor_vacuum_r.data_error_upper": {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "tf.b_field_tor_vacuum_r.time": {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "pf_active.coil.:" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.identifier" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.name" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.current.data" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})",
+ "COCOSIO":1
+ },
+ "pf_active.coil.:.current.data_error_upper" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.current.time" : {
+ "PYTHON":"pegasus_equil_data(ods, {pulse})"
+ },
+ "pf_active.coil.:.element.:" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.identifier" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.turns_with_sign" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.geometry_type" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.height" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.r" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.width" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.rectangle.z" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.alpha" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.r" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.beta" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.z" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.length_alpha" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.oblique.length_beta" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.r" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "pf_active.coil.:.element.:.geometry.outline.z" : {
+ "PYTHON":"pegasus_pf_hardware(ods)"
+ },
+ "wall.description_2d.:": {
+ "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.type.description": {
+ "PYTHON": "pegasus_limiter(ods)"
+ },
+ "wall.description_2d.:.limiter.type.index": {
+ "PYTHON":"pegasus_limiter(ods)"
+ },
+ "wall.description_2d.:.limiter.type.name": {
+ "PYTHON":"pegasus_limiter(ods)"
+ },
+ "wall.description_2d.:.limiter.unit.:": {
+ "VALUE": 1
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.r": {
+ "PYTHON":"pegasus_limiter(ods)"
+ },
+ "wall.description_2d.:.limiter.unit.:.outline.z": {
+ "PYTHON":"pegasus_limiter(ods)"
+ }
+}
