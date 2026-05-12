@@ -5,7 +5,6 @@ from omas.omas_utils import printd
 from omas.machine_mappings._common import *
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.omas_core import ODS
-import MDSplus #mdsthin
 from os import path
 from math import pi
 
@@ -44,6 +43,7 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbo
     ods['dataset_description.ids_properties.comment'] = f'Comment for {pulse}: {user_argument}'
     ods['dataset_description.data_entry.machine'] = 'pegasus'
 
+    import MDSplus #mdsthin
     #c = mdsthin.Connection('atum.ep.wisc.edu')
     c = MDSplus.Connection('atum.ep.wisc.edu')
     c.openTree('p3magtest', pulse)
