@@ -40,10 +40,11 @@ def pegasus_equil_data(ods, pulse, user_argument='loading data from mds+', verbo
     None.
 
     """
+    import MDSplus #mdsthin
+
     ods['dataset_description.ids_properties.comment'] = f'Comment for {pulse}: {user_argument}'
     ods['dataset_description.data_entry.machine'] = 'pegasus'
 
-    import MDSplus #mdsthin
     #c = mdsthin.Connection('atum.ep.wisc.edu')
     c = MDSplus.Connection('atum.ep.wisc.edu')
     c.openTree('p3magtest', pulse)
