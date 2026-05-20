@@ -2,13 +2,14 @@ import numpy as np
 from inspect import unwrap
 from scipy.signal import medfilt
 from collections import OrderedDict
+import re
 
 from omas import *
 from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
@@ -1574,28 +1575,53 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
     # fetch
     TDIs = {}
+
+    # look up reference
+    look_up = {}
+    # Number of channels in each system
+    n_ch = {}
     for sub in subsystems:
-        for channel in range(1,100):
+        n_ch[sub] =  len(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")'))
+        for channel in range(1, n_ch[sub]+1):
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
-                TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+                TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
                         pos1 = 'ROTC'
                     else:
                         pos1 = pos
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
-
+                    look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
+                    
+    references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
+    impcon_TDIs = {}
+    impcon_tree_name = None
+    SIGNAL_PATTERN = re.compile(r'::TOP\.([A-Z0-9_.:]+?)[\s",].*?"([A-Z0-9_]+)"')
+    for key, path in references.items():
+        if "error" in path:
+            continue
+        match = SIGNAL_PATTERN.search(path)
+        if not match:
+            print(f"Failed to resolve {key}'s true location from {path}")
+            continue
+        new_path = match.group(1)  
+        tree_name = match.group(2)
+        if impcon_tree_name is None:
+            impcon_tree_name = tree_name
+        else:
+            assert impcon_tree_name==tree_name, "References to multiple IMCPON trees in one IMPDENS analysis type are not supported."
+        impcon_TDIs[key] = new_path
+        impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
     # fetch
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
-
+    data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+    
     # assign
     for sub in subsystems:
-        for channel in range(1,100):
+        for channel in range(1, n_ch[sub]+1):
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
