@@ -5,9 +5,9 @@ import numpy as np
 try:
     import MDSplus
 
-except ImportError:
+except ImportError as e:
     print("Warning no MDSplus! No machine mappings available.")
-    MDSplus = None
+    MDSplus = e
 
 __all__ = [
     'mdstree',
@@ -86,6 +86,8 @@ def tunnel_mds(server, treename):
     return server.format(**os.environ)
 
 def get_cached_connection(server, pulse, treename):
+    if type(MDSplus) == ModuleNotFoundError:
+        raise MDSplus
     for fallback in [0, 1]:
         if server not in _mds_connection_cache:
             _mds_connection_cache[server] = MDSplus.Connection(server)
@@ -129,6 +131,8 @@ class mdsvalue(dict):
     """
 
     def __init__(self, machine, treename, pulse, TDI, old_MDS_server=False):
+        if type(MDSplus) == ModuleNotFoundError:
+            raise MDSplus
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI

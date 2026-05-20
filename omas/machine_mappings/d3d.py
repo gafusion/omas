@@ -3,6 +3,7 @@ from inspect import unwrap
 from scipy.signal import medfilt
 from collections import OrderedDict
 import re
+import sys
 
 from omas import *
 from omas.omas_utils import printd, printe
@@ -1621,9 +1622,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
         impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
     # fetch
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
-    data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+    if sys.version_info >= (3, 9):
+        data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+    else:
+        data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
     
-    # assign
     for sub in subsystems:
         for channel in range(1, n_ch[sub]+1):
             if not active_channels[sub][channel - 1]:
