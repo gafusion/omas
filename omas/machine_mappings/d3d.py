@@ -1580,9 +1580,13 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     look_up = {}
     # Number of channels in each system
     n_ch = {}
+    active_channels = {}
     for sub in subsystems:
-        n_ch[sub] =  len(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")'))
+        active_channels[sub] = np.asarray(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
+        n_ch[sub] = len(active_channels[sub]) 
         for channel in range(1, n_ch[sub]+1):
+            if not active_channels[sub][channel - 1]:
+                continue
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
@@ -1622,6 +1626,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     # assign
     for sub in subsystems:
         for channel in range(1, n_ch[sub]+1):
+            if not active_channels[sub][channel - 1]:
+                continue
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
