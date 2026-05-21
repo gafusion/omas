@@ -860,7 +860,7 @@ def rip_hardware(ods, pulse):
         z = z + (0,)
     # phi angles are compliant with odd COCOS
     phi0 = 286.6 * (-np.pi / 180.0)
-    conv0 = 6.71e15#m^-2/rad
+    conv0 = 6.71e15*2.0 #m^-2/rad *2 passes
 
     for i, ch in enumerate(channels):
         if pulse < 177052:
@@ -877,7 +877,7 @@ def rip_hardware(ods, pulse):
 
         if ch == 'T':
             phi = 283 * (-np.pi / 180.0)
-            conv = 1.436
+            conv = 1.436*2.0
         else: 
             phi = phi0
             conv = conv0
