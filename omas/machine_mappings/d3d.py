@@ -1591,7 +1591,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
-                for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
+                for pos in ['TEMP', 'TEMP_ERR', 'TEMP_ERR_PS', 'ROT', 'ROT_ERR', 'ROT_ERR_PS']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
                         pos1 = 'ROTC'
                     else:
@@ -1646,10 +1646,14 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             if _measurements:
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
                     ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
-                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
+                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], 
+                                                         data[f'{sub}_{channel}_TEMP_ERR_PS__data']
+                                                         + data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
-                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, 
+                                                                  data[f'{sub}_{channel}_ROT_ERR_PS__data'] * 1000.0
+                                                                  + data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
