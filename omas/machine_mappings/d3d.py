@@ -1707,11 +1707,11 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         if ods[f'magnetics.flux_loop.{k}.flux.validity'] == -2:
             # Set large uncertainty for invalid data
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.inf * np.ones(nt)
         elif weights[k] < 0.5:
             # Use static weight to mark sensor invalid and set large uncertainty
             ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.inf * np.ones(nt)
         else:
             # Convert digitizer counts (bit uncertainty) to flux
             identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
@@ -1810,11 +1810,11 @@ def magnetics_probes_data(ods, pulse):
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
             # Set large uncertainty for invalid data
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.inf * np.ones(nt)
         elif weights[k] < 0.5:
             # Use static weight to mark sensor invalid and set large uncertainty
             ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.inf * np.ones(nt)
         else:
             # Convert digitizer counts (bit uncertainty) to field
             identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
@@ -1835,7 +1835,7 @@ def ip_bt_dflux_data(ods, pulse):
     :param pulse: shot number
     """
 
-    mappings = {'magnetics.ip.0': 'IP', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
+    mappings = {'magnetics.ip.0': 'IP', 'magnetics.ip.1': 'IPSPR15V', 'tf.b_field_tor_vacuum_r': 'BT', 'magnetics.diamagnetic_flux.0': 'DIAMAG3'}
 
     with omas_environment(ods, cocosio=7):
         TDIs = {}
@@ -1857,6 +1857,14 @@ def ip_bt_dflux_data(ods, pulse):
 
             if 'tf.b_field_tor_vacuum_r.data' in key:
                 ods[key] *= 1.6955
+
+            # IPSPR15V is in units of 2 V/MA, multiply by 500e3 to convert to Amperes
+            if 'magnetics.ip.1.data' in key or 'magnetics.ip.1.data_error_upper' in key:
+                ods[key] *= 500e3
+
+        # Add method names for IP measurements
+        ods['magnetics.ip.0.method_name'] = 'IP'
+        ods['magnetics.ip.1.method_name'] = 'IPSPR15V'
 
 
 # ================================
