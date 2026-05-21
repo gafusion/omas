@@ -555,6 +555,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
 @machine_mapping_function(__regression_arguments__, pulse=170325)
 def ec_launcher_active_hardware(ods, pulse):
     from omas.omas_core import CodeParameters
+    import re
     setup = '.ECH.'
     
     # We need three queries in order to retrieve only the fields we need
@@ -630,7 +631,7 @@ def ec_launcher_active_hardware(ods, pulse):
         beam['launching_position.r'] = np.atleast_1d(systems[f'LAUNCH_R_{system_no}'])[0] * np.ones(ntime)
         beam['launching_position.z'] = np.atleast_1d(systems[f'LAUNCH_Z_{system_no}'])[0] * np.ones(ntime)
 
-        phi = np.deg2rad(float(systems[f'PORT_{system_no}'].split(' ')[0]))
+        phi = np.deg2rad(float(re.sub(r'[^0-9.+]', '', systems[f'PORT_{system_no}']).split('+')[0]))
         beam['launching_position.phi'] = phi * np.ones(ntime)
 
         beam['frequency.time'] = np.atleast_1d(0)
