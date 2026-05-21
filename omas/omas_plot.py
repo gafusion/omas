@@ -1097,8 +1097,12 @@ def equilibrium_summary(ods, time_index=None, time=None, fig=None, ggd_points_tr
             ax = cached_add_subplot(fig, axs, 2, 3, 3, sharex=ax)
             x_constr = remap_flux_coordinates(ods, time_index, "psi", raw_xName, 
                                             ods[f"equilibrium.time_slice.{time_index}.constraints.j_tor.:.position.psi"])
-            plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
+            plot_1d_equilbrium_quantity(ax, x, eq["profiles_1d.j_tor"] / 1.e6,
                                         xName, r"$\langle j_\mathrm{tor} / R \rangle$ [MA m$^{-2}$]", 
+                                        r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
+                                        color='red')
+            plot_1d_equilbrium_quantity(ax, x_constr, eq["constraints.j_tor.:.measured"] / 1.e6,
+                                        xName, r"$\langle j_\mathrm{tor, meas} / R \rangle$ [MA m$^{-2}$]", 
                                         r"$j_\mathrm{tor}$", visible_x=omas_viewer, linestyle="None", marker=".",
                                         color='red')
         except ValueError:
