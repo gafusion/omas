@@ -1706,11 +1706,11 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
         nt = len(ods[f'magnetics.flux_loop.{k}.flux.data'])
         if ods[f'magnetics.flux_loop.{k}.flux.validity'] == -2:
             # Set large uncertainty for invalid data
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.inf * np.ones(nt)
         elif weights[k] < 0.5:
             # Use static weight to mark sensor invalid and set large uncertainty
             ods[f'magnetics.flux_loop.{k}.flux.validity'] = -2
-            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.inf * np.ones(nt)
         else:
             # Convert digitizer counts (bit uncertainty) to flux
             identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
@@ -1809,11 +1809,11 @@ def magnetics_probes_data(ods, pulse):
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
             # Set large uncertainty for invalid data
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.inf * np.ones(nt)
         elif weights[k] < 0.5:
             # Use static weight to mark sensor invalid and set large uncertainty
             ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] = -2
-            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = 1.e30 * np.ones(nt)
+            ods[f'magnetics.b_field_pol_probe.{k}.field.data_error_upper'] = np.inf * np.ones(nt)
         else:
             # Convert digitizer counts (bit uncertainty) to field
             identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
