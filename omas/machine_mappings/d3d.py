@@ -2,13 +2,15 @@ import numpy as np
 from inspect import unwrap
 from scipy.signal import medfilt
 from collections import OrderedDict
+import re
+import sys
 
 from omas import *
 from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
+from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment
@@ -1575,28 +1577,61 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
 
     # fetch
     TDIs = {}
+
+    # look up reference
+    look_up = {}
+    # Number of channels in each system
+    n_ch = {}
+    active_channels = {}
     for sub in subsystems:
-        for channel in range(1,100):
+        active_channels[sub] = np.asarray(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
+        n_ch[sub] = len(active_channels[sub]) 
+        for channel in range(1, n_ch[sub]+1):
+            if not active_channels[sub][channel - 1]:
+                continue
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
-                TDIs[f'{sub}_{channel}_{pos}'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+                TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
             if _measurements:
-                for pos in ['TEMP', 'TEMP_ERR', 'ROT', 'ROT_ERR']:
+                for pos in ['TEMP', 'TEMP_ERR', 'TEMP_ERR_PS', 'ROT', 'ROT_ERR', 'ROT_ERR_PS']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
                         pos1 = 'ROTC'
                     else:
                         pos1 = pos
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
+                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
                 for pos in ['FZ', 'ZEFF']:
-                    TDIs[f'{sub}_{channel}_{pos}__data'] = f"\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(\\IONS::TOP.IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}, 0)/1000"
-
+                    look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
+                    
+    references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
+    impcon_TDIs = {}
+    impcon_tree_name = None
+    SIGNAL_PATTERN = re.compile(r'::TOP\.([A-Z0-9_.:]+?)[\s",].*?"([A-Z0-9_]+)"')
+    for key, path in references.items():
+        if "error" in path:
+            continue
+        match = SIGNAL_PATTERN.search(path)
+        if not match:
+            print(f"Failed to resolve {key}'s true location from {path}")
+            continue
+        new_path = match.group(1)  
+        tree_name = match.group(2)
+        if impcon_tree_name is None:
+            impcon_tree_name = tree_name
+        else:
+            assert impcon_tree_name==tree_name, "References to multiple IMCPON trees in one IMPDENS analysis type are not supported."
+        impcon_TDIs[key] = new_path
+        impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
     # fetch
     data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
-
-    # assign
+    if sys.version_info >= (3, 9):
+        data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+    else:
+        data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
+    
     for sub in subsystems:
-        for channel in range(1,100):
+        for channel in range(1, n_ch[sub]+1):
+            if not active_channels[sub][channel - 1]:
+                continue
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
@@ -1612,10 +1647,14 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             if _measurements:
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
                     ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
-                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], data[f'{sub}_{channel}_TEMP_ERR__data'])
+                    ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], 
+                                                         data[f'{sub}_{channel}_TEMP_ERR_PS__data']
+                                                         + data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
                     ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
-                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
+                    ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, 
+                                                                  data[f'{sub}_{channel}_ROT_ERR_PS__data'] * 1000.0
+                                                                  + data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
