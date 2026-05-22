@@ -144,7 +144,7 @@
  },
  "core_profiles.global_quantities.v_loop": {
   "COCOSIO": 11,
-  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse}, {PROFILES_run_id!r})"
+  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "core_profiles.ids_properties.homogeneous_time": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
@@ -297,7 +297,7 @@
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
  "core_profiles.time": {
-  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+  "PYTHON": "core_profiles_global_quantities_data(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r})"
  },
  "ec_launchers.beam.:": {
   "PYTHON": "ec_launcher_active_hardware(ods, {pulse})"
