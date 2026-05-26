@@ -1955,6 +1955,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query = OrderedDict()
         
         # These quantities have an uncertainty associated with them
+        query["electrons.density"] = "N_E"
         query["electrons.density_thermal"] = "N_E"
         query["electrons.density_fit.measured"] = "RW_N_E"
         query["electrons.temperature"] = "T_E"
@@ -2067,6 +2068,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         # ZIPFIT uses conventional rho_tor < 1.0
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
+            "electrons.density": "\\TOP.PROFILES.EDENSFIT",
             "electrons.temperature": "\\TOP.PROFILES.ETEMPFIT",
             "ion[1].density_thermal": "\\TOP.PROFILES.ZDENSFIT",
             "ion[0].temperature": "\\TOP.PROFILES.ITEMPFIT",
