@@ -2,7 +2,7 @@ name: Mark stale issues and pull requests
 
 on:
   schedule:
-  - cron: "30 1 * * *"
+  - cron: "30 7 * * 1-5"
 
 jobs:
   stale:
@@ -14,18 +14,18 @@ jobs:
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         # Do not mark issues with these labels
-        exempt-issue-labels: "bug,enhancement,WIP"
+        exempt-issue-labels: "bug,enhancement,WIP,wontfix"
         stale-issue-message: >
-            This issue has not seen any activity in the past 60 days.
-            It is now marked as stale and will be closed in 7 days if
+            This issue has not seen any activity in the past 180 days.
+            It is now marked as stale and will be closed in 180 days if
             no further activity is registered.
         # Do not mark PRs with these labels
-        exempt-pr-labels: 'WIP,Blocked-by-other-PR'
+        exempt-pr-labels: 'bug,enhancement,WIP,Blocked-by-other-PR'
         stale-pr-message: >
-            This PR has not seen any activity in the past 60 days.
-            It is now marked as stale and will be closed in 7 days if
+            This PR has not seen any activity in the past 180 days.
+            It is now marked as stale and will be closed in 180 days if
             no further activity is registered.
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
-        days-before-stale: 60
-        days-before-close: 21
+        days-before-stale: 180
+        days-before-close: 180
