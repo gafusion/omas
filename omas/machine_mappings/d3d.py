@@ -1553,7 +1553,10 @@ def add_n_i_charge_exchange():
     extra_structures = {}
     extra_structures["charge_exchange"] = {}
     # Need to use IMAS structure here
-    sh = "channel.:.ion[:].n_i"
+    sh = "charge_exchange.channel[:].ion[:].n_i"
+    struct_stuct = {"data_type": "structure"}
+    struct_stuct["documentation"] = "Ion density at channel measurement position"
+    extra_structures["charge_exchange"][sh] = struct_stuct
     time_struct = {"coordinates": "1- 1...N"}
     time_struct["documentation"] = "Time [s]"
     time_struct["data_type"] =  "FLT_1D"
@@ -1563,7 +1566,12 @@ def add_n_i_charge_exchange():
     data_struct["documentation"] = "Ion density [1/m^3]"
     data_struct["data_type"] =  "FLT_1D"
     data_struct["units"] = "m^-3"
-    extra_structures["charge_exchange"][f"{sh}.time"] = data_struct
+    extra_structures["charge_exchange"][f"{sh}.data"] = data_struct
+    unc_struct = {"coordinates": f"{sh}.time"}
+    unc_struct["documentation"] = "Ion density uncertainty [1/m^3]"
+    unc_struct["data_type"] =  "FLT_1D"
+    unc_struct["units"] = "m^-3"
+    extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
     add_extra_structures(extra_structures)
 
 # ================================
@@ -1677,8 +1685,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
-                    ch['ion.0.n_i'] = data[f'{sub}_{channel}_FZ__time']
-                    ch['ion.0.n_i'] = data[f'{sub}_{channel}_NZ__data']
+                    ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
