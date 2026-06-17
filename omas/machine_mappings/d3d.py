@@ -1549,6 +1549,30 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                             raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
 
+def add_n_i_charge_exchange():
+    extra_structures = {}
+    extra_structures["charge_exchange"] = {}
+    # Need to use IMAS structure here
+    sh = "charge_exchange.channel[:].ion[:].n_i"
+    struct_stuct = {"data_type": "structure"}
+    struct_stuct["documentation"] = "Ion density at channel measurement position"
+    extra_structures["charge_exchange"][sh] = struct_stuct
+    time_struct = {"coordinates": "1- 1...N"}
+    time_struct["documentation"] = "Time [s]"
+    time_struct["data_type"] =  "FLT_1D"
+    time_struct["units"] = "[s]"
+    extra_structures["charge_exchange"][f"{sh}.time"] = time_struct
+    data_struct = {"coordinates": f"{sh}.time"}
+    data_struct["documentation"] = "Ion density [1/m^3]"
+    data_struct["data_type"] =  "FLT_1D"
+    data_struct["units"] = "m^-3"
+    extra_structures["charge_exchange"][f"{sh}.data"] = data_struct
+    unc_struct = {"coordinates": f"{sh}.time"}
+    unc_struct["documentation"] = "Ion density uncertainty [1/m^3]"
+    unc_struct["data_type"] =  "FLT_1D"
+    unc_struct["units"] = "m^-3"
+    extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
+    add_extra_structures(extra_structures)
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1599,7 +1623,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                         pos1 = pos
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
-                for pos in ['FZ', 'ZEFF']:
+                for pos in ['FZ', 'ZEFF', 'NZ']:
                     look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
                     
     references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
@@ -1628,6 +1652,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     else:
         data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
     
+    add_n_i_charge_exchange()
+
     for sub in subsystems:
         for channel in range(1, n_ch[sub]+1):
             if not active_channels[sub][channel - 1]:
@@ -1658,6 +1684,9 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
+                if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
+                    ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
