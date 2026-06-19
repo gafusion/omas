@@ -2107,6 +2107,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
+        query["equilibrium.time"] = "\\EFIT01::TOP.RESULTS.GEQDSK.GTIME"
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
 
         # processing
@@ -2124,8 +2125,12 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__") and not isinstance(data[entry], Exception) and len(data[entry])>0]))
-        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0])]))
+        time = data.pop("equilibrium.time")
+        # every ZIPFIT profile has the same spatial grid so use whatever is first in query
+        for entry in query.keys():
+            if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
+                rho_tor_norm = data[entry]
+                break
         rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
@@ -2140,10 +2145,14 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             for entry in data.keys():
                 if "__" in entry or isinstance(data[entry], Exception):
                     continue
-                time_index = np.argmin(np.abs(data["time__" + entry] - time0))
-                ods[f"{sh}[{i_time}]."+entry] = interp1d(data["rho__" + entry], data[entry][time_index], bounds_error=False, fill_value=np.nan)(rho_tor_norm) 
+                if np.min(np.abs(data["time__" + entry] - time0)) < 1.e-3:
+                    time_index = np.argmin(np.abs(data["time__" + entry] - time0))
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index]
             # deuterium from quasineutrality
-            ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
+            try:
+                ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
+            except Exception:
+                pass
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
@@ -2159,8 +2168,8 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
         if 'time' not in cp:
             if "ZIPFIT0" in PROFILES_tree:
-                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
-                cp['time'] = m.dim_of(1) * 1e-3
+                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME", treename="EFIT01")
+                cp['time'] = m.raw() * 1e-3
             elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
                 pulse_id = int(str(pulse) + PROFILES_run_id)
                 dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
