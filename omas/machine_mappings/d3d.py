@@ -2107,7 +2107,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
-        query["equilibrium.time"] = "\\EFIT01::TOP.RESULTS.GEQDSK.GTIME"
+
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
 
         # processing
@@ -2125,7 +2125,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = data.pop("equilibrium.time")
+        time = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME/1000.", treename="EFIT01").raw()
         # every ZIPFIT profile has the same spatial grid so use whatever is first in query
         for entry in query.keys():
             if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
@@ -2147,7 +2147,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     continue
                 if np.min(np.abs(data["time__" + entry] - time0)) < 1.e-3:
                     time_index = np.argmin(np.abs(data["time__" + entry] - time0))
-                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index]
+                    rho = data["rho__" + entry]
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][rho<=1.0]
             # deuterium from quasineutrality
             try:
                 ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
