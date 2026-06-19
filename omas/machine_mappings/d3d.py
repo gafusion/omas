@@ -2184,7 +2184,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
-    ods["wall.description_2d.0.limiter.type.name"] = EFIT_tree if EFIT_run_id==None else EFIT_run_id + EFIT_tree
+    ods["wall.description_2d.0.limiter.type.name"] = EFIT_tree if EFIT_run_id is None else EFIT_run_id + EFIT_tree
     ods["wall.time"] = [0.0]
     ods["wall.ids_properties.homogeneous_time"] = 1
 
