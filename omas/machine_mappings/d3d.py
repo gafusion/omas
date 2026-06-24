@@ -2188,7 +2188,7 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     run = pulse
     if EFIT_run_id is not None:
         run = int(str(pulse) + str(EFIT_run_id))
-        if EFIT_tree is not "EFIT":
+        if EFIT_tree != "EFIT":
             raise ValueError(f"Invalid EFIT tree for specifying EFIT_run_id: {EFIT_tree}")
     lim = mdsvalue('d3d', treename=EFIT_tree, pulse=run, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
     ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
