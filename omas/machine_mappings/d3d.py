@@ -2019,9 +2019,6 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["j_tor"] = "J_TOT"
         query["j_bootstrap"] = "J_BS"
 
-        query["electrons.pressure"] = "P_E"
-        query["pressure_ion_non_thermal"] = "P_FAST_D"
-
         normal_entries = set(query.keys()) - set(uncertain_entries)
         # Raw ion pressures fetched here but written manually below: pressure_ion_total
         # and pressure_total are sums and pressure_total is a non-standard structure.
