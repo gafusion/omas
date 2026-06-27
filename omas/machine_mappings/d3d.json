@@ -295,6 +295,18 @@
  "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.rho_tor_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.j_bootstrap": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.j_ohmic": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.j_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.j_total": {
   "COCOSIO": 11,
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"

@@ -2015,8 +2015,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["grid.rho_tor_norm"] = "rho"
         query["electrons.pressure"] = "P_E"
         query["pressure_ion_non_thermal"] = "P_FAST_D"
-        #query["j_total"] = "J_TOT"
-        #query["pressur_perpendicular"] = "P_TOT"
+        query["j_ohmic"] = "J_OHM"
+        query["j_tor"] = "J_TOT"
+        query["j_bootstrap"] = "J_BS"
 
         normal_entries = set(query.keys()) - set(uncertain_entries)
         # Raw ion pressures fetched here but written manually below: pressure_ion_total
