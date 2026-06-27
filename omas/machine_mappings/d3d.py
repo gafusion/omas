@@ -1964,6 +1964,13 @@ def add_extra_profile_structures():
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.psi_norm"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    # electrons.pressure and pressure_ion_total are standard IMAS nodes; these two are not
+    pressure_struct = {"coordinates": sh + "[:].grid.rho_tor_norm"}
+    pressure_struct["documentation"] = "Pressure profile added for DIII-D OMFIT_PROFS"
+    pressure_struct["data_type"] = "FLT_1D"
+    pressure_struct["units"] = "Pa"
+    for quant in ["pressure_ion_non_thermal", "pressure_total"]:
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = pressure_struct
     add_extra_structures(extra_structures)
 
 
@@ -2006,15 +2013,20 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
         query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
-
         query["electrons.pressure"] = "P_E"
         query["pressure_ion_non_thermal"] = "P_FAST_D"
         query["j_ohmic"] = "J_OHM"
         query["j_tor"] = "J_TOT"
         query["j_bootstrap"] = "J_BS"
-        #query["pressur_perpendicular"] = "P_TOT"
-        
+
+        query["electrons.pressure"] = "P_E"
+        query["pressure_ion_non_thermal"] = "P_FAST_D"
+
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        # Raw ion pressures fetched here but written manually below: pressure_ion_total
+        # and pressure_total are sums and pressure_total is a non-standard structure.
+        query["_pressure_deuterium"] = "P_D"
+        query["_pressure_carbon"] = "P_C"
         omfit_profiles_node = '\\TOP.'
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
@@ -2091,6 +2103,15 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     print("================ DATA =================")
                     print(data[entry][i_time])
                     print(e)
+        # pressure_ion_total = P_D + P_C; pressure_total sums the IMAS pressure fields
+        pressure_inputs = ["electrons.pressure", "pressure_ion_non_thermal",
+                           "_pressure_deuterium", "_pressure_carbon"]
+        if not any(isinstance(data[entry], Exception) for entry in pressure_inputs):
+            p_ion_total = data["_pressure_deuterium"] + data["_pressure_carbon"]
+            p_total = data["electrons.pressure"] + data["pressure_ion_non_thermal"] + p_ion_total
+            for i_time, time in enumerate(data["time"]):
+                ods[f"{sh}[{i_time}].pressure_ion_total"] = p_ion_total[i_time][mask[i_time]]
+                ods[f"{sh}[{i_time}].pressure_total"] = p_total[i_time][mask[i_time]]
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
