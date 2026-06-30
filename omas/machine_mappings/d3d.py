@@ -2174,7 +2174,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     rho = data["rho__" + entry]
                     if core_profiles_strict_grid:
                         mask = rho <= 1.0
-                     else:
+                    else:
                         mask = np.ones(rho.shape, dtype=bool)
                     ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][mask]
             # deuterium from quasineutrality
