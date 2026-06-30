@@ -2117,7 +2117,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
-        # ZIPFIT uses conventional rho_tor < 1.0
+        # ZIPFIT
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
             "electrons.density": "\\TOP.PROFILES.EDENSFIT",
@@ -2154,7 +2154,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
                 rho_tor_norm = data[entry]
                 break
-        rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
+        if core_profiles_strict_grid:
+            rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
             ods[f"{sh}[{i_time}].time"] = time0
@@ -2171,7 +2172,11 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 if np.min(np.abs(data["time__" + entry] - time0)) < 1.e-3:
                     time_index = np.argmin(np.abs(data["time__" + entry] - time0))
                     rho = data["rho__" + entry]
-                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][rho<=1.0]
+                    if core_profiles_strict_grid:
+                        mask = rho <= 1.0
+                     else:
+                        mask = np.ones(rho.shape, dtype=bool)
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][mask]
             # deuterium from quasineutrality
             try:
                 ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
