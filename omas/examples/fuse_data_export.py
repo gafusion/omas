@@ -7,15 +7,16 @@ from numpy import *
 import argparse
 
 
-def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, 
-                EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK"):
+def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
+                EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK",
+                pull_gslite_min=False):
     ods = omas.ODS()
-    
+
     if len(EFIT_RUN_ID) == 0:
         EFIT_RUN_ID = None
     if len(PROFILES_RUN_ID) == 0:
         PROFILES_RUN_ID = None
-    
+
     tic = time.time()
     if device.lower() != "d3d":
         raise ValueError(f"Unsupported device {device}. Only 'd3d' supported at present.")
@@ -26,38 +27,46 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
     # printe("- Fetching nbi data")
     # d3d.nbi_active_hardware(ods, $shot)
 
-    printe("- Fetching core_profiles data")
-    d3d.core_profiles_profile_1d(ods, shot, PROFILES_tree=PROFILES_TREE, 
-                                 PROFILES_run_id=PROFILES_RUN_ID)
-
     printe("- Fetching wall data")
     d3d.wall(ods, shot)
 
-    printe("- Fetching coils data")
+    printe("- Fetching coils hardware data")
     d3d.pf_active_hardware(ods, shot)
-    d3d.pf_active_coil_current_data(ods, shot)
 
     printe("- Fetching magnetic hardware data")
     d3d.magnetics_hardware(ods, shot)
 
-    printe("- Fetching flux loops data")
-    d3d.magnetics_floops_data(ods, shot)
-
-    printe("- Fetching magnetic probes data")
-    d3d.magnetics_probes_data(ods, shot)
-
-    printe("- Fetching Thomson scattering data")
-    d3d.thomson_scattering_data(ods, shot)
-
-    printe("- Fetching interferometer data")
+    printe("- Fetching interferometer hardware data")
     d3d.interferometer_hardware(ods, shot)
-    d3d.interferometer_data(ods, shot)
 
-    printe("- Fetching charge exchange data")
-    d3d.charge_exchange_data(ods, shot, analysis_type=CER_analysis_type)
+    if pull_gslite_min:
+        printe("- Fetching ip/bt/dflux data")
+        d3d.ip_bt_dflux_data(ods, shot)
+    else:
+        printe("- Fetching core_profiles data")
+        d3d.core_profiles_profile_1d(ods, shot, PROFILES_tree=PROFILES_TREE,
+                                     PROFILES_run_id=PROFILES_RUN_ID)
 
-    printe("- Fetching summary data")
-    d3d.summary(ods, shot)
+        printe("- Fetching coils current data")
+        d3d.pf_active_coil_current_data(ods, shot)
+
+        printe("- Fetching flux loops data")
+        d3d.magnetics_floops_data(ods, shot)
+
+        printe("- Fetching magnetic probes data")
+        d3d.magnetics_probes_data(ods, shot)
+
+        printe("- Fetching Thomson scattering data")
+        d3d.thomson_scattering_data(ods, shot)
+
+        printe("- Fetching interferometer data")
+        d3d.interferometer_data(ods, shot)
+
+        printe("- Fetching charge exchange data")
+        d3d.charge_exchange_data(ods, shot, analysis_type=CER_analysis_type)
+
+        printe("- Fetching summary data")
+        d3d.summary(ods, shot)
 
     printe("- Fetching equilibrium data")
     with ods.open(device, shot, options={'EFIT_tree': EFIT_TREE, "EFIT_run_id": EFIT_RUN_ID}):
@@ -81,6 +90,7 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
     ods.save(save_path)
     printe(f" Done in {time.time()-tic:.2f} [s]")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -95,11 +105,11 @@ if __name__ == "__main__":
     parser.add_argument('--EFIT_RUN_ID', default="")
     parser.add_argument('--PROFILES_RUN_ID', default="")
     parser.add_argument('--CER_ANALYSIS_TYPE', default="CERQUICK")
+    parser.add_argument("--PULL_GSLITE_MIN", action="store_true")
 
     # Parse the arguments
     args = parser.parse_args()
 
-    fuse_export(args.save_path, args.device, args.shot, args.EFIT_TREE, 
+    fuse_export(args.save_path, args.device, args.shot, args.EFIT_TREE,
                 args.PROFILES_TREE, args.EFIT_RUN_ID, args.PROFILES_RUN_ID,
-                args.CER_ANALYSIS_TYPE)
-    
+                args.CER_ANALYSIS_TYPE, args.PULL_GSLITE_MIN)
