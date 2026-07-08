@@ -8,7 +8,7 @@ import argparse
 
 
 def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE, 
-                EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK",pull_gslite_min=False):
+                EFIT_RUN_ID, PROFILES_RUN_ID, CER_analysis_type="CERQUICK",pull_gslite_min=False, pull_hardware=False,start_time=None):
     ods = omas.ODS()
 
     if len(EFIT_RUN_ID) == 0:
@@ -23,24 +23,30 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
     printe("- Fetching ec_launcher data")
     d3d.ec_launcher_active_hardware(ods, shot)
 
-    # printe("- Fetching nbi data")
-    # d3d.nbi_active_hardware(ods, $shot)
+    printe("- Fetching nbi data")
+    d3d.nbi_active_hardware(ods, shot)
+    
+    if pull_hardware:
+        printe("- Fetching coil hardware")
+        d3d.pf_active_hardware(ods, shot)
+        
+        printe("- Fetching magnetic hardware data")
+        d3d.magnetics_hardware(ods, shot)
    
     if not pull_gslite_min:
-       printe("- Fetching core_profiles data")
-       d3d.core_profiles_profile_1d(ods, shot, PROFILES_tree=PROFILES_TREE, 
+        printe("- Fetching core_profiles data")
+        d3d.core_profiles_profile_1d(ods, shot, PROFILES_tree=PROFILES_TREE, 
                                  PROFILES_run_id=PROFILES_RUN_ID)
 
-    printe("- Fetching wall data")
-    d3d.wall(ods, shot)
-
-    printe("- Fetching coils data")
-    d3d.pf_active_hardware(ods, shot)
-    if not pull_gslite_min:
+        printe("- Fetching wall data")
+        d3d.wall(ods, shot)
+        
+        printe("- Fetching coils data")
         d3d.pf_active_coil_current_data(ods, shot)
 
-    printe("- Fetching magnetic hardware data")
-    d3d.magnetics_hardware(ods, shot)
+        printe("- Fetching interferometer data")
+        d3d.interferometer_hardware(ods, shot)
+
 
     if not pull_gslite_min:
         printe("- Fetching flux loops data")
@@ -51,10 +57,9 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
 
         printe("- Fetching Thomson scattering data")
         d3d.thomson_scattering_data(ods, shot)
-
-    printe("- Fetching interferometer data")
-    d3d.interferometer_hardware(ods, shot)
+   
     if not pull_gslite_min:
+        printe("- Fetching interferometer data")
         d3d.interferometer_data(ods, shot)
 
         printe("- Fetching charge exchange data")
@@ -62,10 +67,9 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
 
         printe("- Fetching summary data")
         d3d.summary(ods, shot)
-
-    if pull_gslite_min:
+    else:
         d3d.ip_bt_dflux_data(ods, shot)
-
+   
     printe("- Fetching equilibrium data")
     with ods.open(device, shot, options={'EFIT_tree': EFIT_TREE, "EFIT_run_id": EFIT_RUN_ID}):
         for k in range(len(ods["equilibrium.time"])):
@@ -80,6 +84,12 @@ def fuse_export(save_path, device, shot, EFIT_TREE, PROFILES_TREE,
             ods["equilibrium.time_slice"][k]["profiles_2d[0].grid_type.index"] = 1
             ods["equilibrium.vacuum_toroidal_field.r0"]
             ods["equilibrium.vacuum_toroidal_field.b0"]
+
+    if pull_gslite_min:
+        if start_time is None:
+            start_time = ods["equilibrium.time_slice"][2]["time"]
+        ods["equilibrium"].slice_at_time(time=start_time)
+
 
     printe(f"Data fetched via OMAS in {time.time()-tic:.2f} [s]")
 
