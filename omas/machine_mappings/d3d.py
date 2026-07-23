@@ -2012,6 +2012,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["ion[1].density_fit.measured"] = "RW_N_C"
         query["ion[1].temperature"] = "T_C"
         query["ion[1].temperature_fit.measured"] = "RW_T_C"
+        query["zeff"] = "ZEFF"
 
         uncertain_entries = list(query.keys())
         query["electrons.density_fit.psi_norm"] = "PS_N_E"
