@@ -209,6 +209,17 @@
  "core_profiles.profiles_1d.:.electrons.temperature_fit.rho_tor_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.grid.psi": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.psi_magnetic_axis": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.psi_magnetic_boundary": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.grid.rho_pol_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
