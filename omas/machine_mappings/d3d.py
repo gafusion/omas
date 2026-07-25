@@ -13,7 +13,7 @@ from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
-from omas.omas_physics import omas_environment
+from omas.omas_physics import omas_environment, cocos_transform
 
 
 __all__ = []
@@ -1971,6 +1971,14 @@ def add_extra_profile_structures():
     pressure_struct["units"] = "Pa"
     for quant in ["pressure_ion_non_thermal", "pressure_total"]:
         extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = pressure_struct
+    # psi at the magnetic axis / boundary, derived from the absolute psi profile (grid.psi
+    # is standard IMAS; these two scalars are not, so register them here). DIII-D OMFIT_PROFS.
+    for quant in ["grid.psi_magnetic_axis", "grid.psi_magnetic_boundary"]:
+        psi_scalar = {}
+        psi_scalar["documentation"] = "Poloidal flux at the magnetic axis / boundary for DIII-D OMFIT_PROFS."
+        psi_scalar["data_type"] = "FLT_0D"
+        psi_scalar["units"] = "Wb"
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = psi_scalar
     add_extra_structures(extra_structures)
 
 
@@ -2021,6 +2029,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["j_bootstrap"] = "J_BS"
 
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        # grid.psi (absolute poloidal flux) is fetched here but written manually below so
+        # the COCOS transform is applied and psi_magnetic_axis/boundary can be derived.
+        query["grid.psi"] = "PSI"
         # Raw ion pressures fetched here but written manually below: pressure_ion_total
         # and pressure_total are sums and pressure_total is a non-standard structure.
         query["_pressure_deuterium"] = "P_D"
@@ -2101,6 +2112,21 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     print("================ DATA =================")
                     print(data[entry][i_time])
                     print(e)
+        # Absolute poloidal flux (COCOS-sensitive) plus the axis/boundary values derived
+        # from it. Identify the gEQDSK COCOS convention dynamically from BCENTR/CPASMA
+        # (same as the equilibrium mapping's MDS_gEQDSK_psi — DIII-D is not always COCOS 7),
+        # transform the full profile to COCOS 11 (IMAS), then derive psi_magnetic_axis
+        # (psi_norm index 0) and psi_magnetic_boundary (interpolated at psi_norm = 1.0)
+        # from the transformed full profile.
+        if not isinstance(data["grid.psi"], Exception):
+            cocosio = MDS_gEQDSK_COCOS_identify('d3d', pulse, 'EFIT01')
+            psi_full = data["grid.psi"] * cocos_transform(cocosio, 11)["PSI"]
+            for i_time, time in enumerate(data["time"]):
+                ods[f"{sh}[{i_time}].grid.psi"] = psi_full[i_time][mask[i_time]]
+                ods[f"{sh}[{i_time}].grid.psi_magnetic_axis"] = psi_full[i_time][0]
+                ods[f"{sh}[{i_time}].grid.psi_magnetic_boundary"] = float(
+                    InterpolatedUnivariateSpline(psi_n, psi_full[i_time])(1.0)
+                )
         # pressure_ion_total = P_D + P_C; pressure_total sums the IMAS pressure fields
         pressure_inputs = ["electrons.pressure", "pressure_ion_non_thermal",
                            "_pressure_deuterium", "_pressure_carbon"]
