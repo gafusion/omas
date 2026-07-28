@@ -1787,7 +1787,8 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
             rel_error = 0.03 * abs(ods[f'magnetics.flux_loop.{k}.flux.data'])
             # Approximate error in the flux loop positions estimated with DIII-D parameters (often largest error term)
-            position_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
+            # Needs to use ods1 here since the position is not in ods
+            position_error = 1.e-9 * ods1[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
             # Use whichever error source is largest (this is how it is treated in EFIT)
             ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, position_error])
 
