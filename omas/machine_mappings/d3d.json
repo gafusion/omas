@@ -724,6 +724,9 @@
  "magnetics.ip.:.data_error_upper": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
+ "magnetics.ip.:.method_name": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
