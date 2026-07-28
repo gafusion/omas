@@ -5,7 +5,6 @@ from omas import *
 from omas.omas_utils import printd, printe, unumpy
 from omas.machine_mappings._common import *
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue
 from omas.omas_core import ODS
 from omas.omas_physics import omas_environment
 import glob
@@ -279,7 +278,8 @@ def MDS_gEQDSK_bbbs_nstx(ods, pulse, EFIT_tree='EFIT01'):
         'z': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
         'n': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.NBBBS',
     }
-    res = mdsvalue('nstxu', pulse=pulse, treename=EFIT_tree, TDI=TDIs).raw()
+    provider = ods.get_mds_provider('nstxu')
+    res = provider.raw(EFIT_tree, pulse, TDIs)
     res['n'] = res['n'].astype(int)
     for k in range(len(res['n'])):
         ods[f'equilibrium.time_slice.{k}.boundary.outline.r'] = res['r'][k, : res['n'][k]]
@@ -305,7 +305,8 @@ def ip_bt_dflux_data(ods, pulse):
     for item in ['PR', 'TF', 'DL']:
         TDIs[item + '_data'] = '\\' + signals[item][0]['mds_name'].strip('\\')
         TDIs[item + '_time'] = 'dim_of(\\' + signals[item][0]['mds_name'].strip('\\') + ')'
-    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+    provider = ods.get_mds_provider('nstxu')
+    res = provider.raw('NSTX', pulse, TDIs)
 
     for item in ['PR', 'TF', 'DL']:
         if not isinstance(res[item + '_data'], Exception) and not isinstance(res[item + '_time'], Exception):
@@ -411,7 +412,8 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     TDIs = {'time': f'\\MSE::TOP.MSE_CIF.{MSE_revision}.TIME'}
 
     # find average beam voltage
-    voltage = mdsvalue('nstxu', pulse=pulse, treename='NBI', TDI=f'\\NBI::CALC_NB_{beamline}_VACCEL').raw()
+    provider = ods.get_mds_provider('nstxu')
+    voltage = provider.raw('NBI', pulse, f'\\NBI::CALC_NB_{beamline}_VACCEL')
     keep = voltage >= minVolt_keV
     avg_voltage = np.mean(voltage[keep]) * 1000.0  # Average beam voltage in Volts
     if beam_species == 'D':
@@ -436,7 +438,7 @@ def mse_data(ods, pulse, MSE_revision="ANALYSIS", MSE_Er_correction=True):
     TDIs[name + '_error'] = f'\\MSE::TOP.MSE_CIF.{MSE_revision}.{MDSERRname} * {norm}'
 
     # data fetching
-    res = mdsvalue('nstxu', pulse=pulse, treename='MSE', TDI=TDIs).raw()
+    res = provider.raw('MSE', pulse, TDIs)
 
     # Er correction coefficients (assumes MSE sight lines are in the same Z plane as the beam line (theta =0)
     coef_list = {}
@@ -519,7 +521,8 @@ def thomson_scattering_data(ods, pulse):
     for item in signals:
         TDI = f'\\ACTIVESPEC::TOP.MPTS.OUTPUT_DATA.BEST.{item}'
         TDIs[item] = '\\' + TDI.strip('\\')
-    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+    provider = ods.get_mds_provider('nstxu')
+    res = provider.raw('NSTX', pulse, TDIs)
     for i, R in enumerate(res['FIT_RADII']):
 
         ch = ods['thomson_scattering']['channel'][i]
@@ -563,7 +566,8 @@ def charge_exchange_data(ods, pulse, edition='CT1'):
         TDI = f'\\{tree}::TOP.CHERS.ANALYSIS.{edition}:{sig}'
         TDIs[sig] = '\\' + TDI.strip('\\')
 
-    res = mdsvalue('nstxu', pulse=pulse, treename='NSTX', TDI=TDIs).raw()
+    provider = ods.get_mds_provider('nstxu')
+    res = provider.raw('NSTX', pulse, TDIs)
 
     ods['charge_exchange.ids_properties.homogeneous_time'] = 1
     ods['charge_exchange.time'] = time = res['TIME'] * signals_norm['TIME']

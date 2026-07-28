@@ -2,7 +2,7 @@
  "__cocos_rules__": {
   "EFIT_tree": {
    "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')",
-   "PYTHON": "MDS_gEQDSK_COCOS_identify({machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+   "PYTHON": "MDS_gEQDSK_COCOS_identify(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
   }
  },
  "equilibrium.code.name": {
