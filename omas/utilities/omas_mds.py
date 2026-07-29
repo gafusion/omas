@@ -347,12 +347,10 @@ class MdsProvider(BaseProvider):
         
         :return: result of TDI expression, or dictionary with results of TDI expressions
         """
+        t0 = time.time()
+        out_results = None
         try:
-            import time
-            
-            t0 = time.time()
-            import MDSplus
-            
+
             def mdsk(value):
                 """Translate strings to MDSplus bytes"""
                 return str(str(value).encode('utf8'))
@@ -436,7 +434,6 @@ class MdsProvider(BaseProvider):
         
         finally:
             self.handle_fetch_status(TDI, t0, out_results)
-
 
 class ToksearchProvider(BaseProvider):
     """
