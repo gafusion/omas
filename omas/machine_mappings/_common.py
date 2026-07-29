@@ -175,10 +175,12 @@ def D3Dmagnetics_weights(pulse, name=None):
         raise ValueError(f"{name} is part of the d3d fitweight")
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id=None):
+def MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id=None):
     """
     Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
+
+    :param ods: ODS to derive provider from
 
     :param machine: machine name
 
@@ -331,7 +333,7 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # assign the data to the ods
     del all_data['time']
     del all_data['mtime']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -395,7 +397,7 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     del all_data['time']
     del all_data['mtime']
     del all_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -477,7 +479,7 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         return
     ndata = concat_data['ndata']
     del concat_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in concat_data.items():
             if len(np.atleast_1d(data)) == 0:
@@ -532,7 +534,7 @@ def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_
     psi = (abs(psin).T * (data['psib'] - data['psia']) + data['psia']).T
 
     # assign the data to the ods
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for k in range(ntimes):
             for n in range(ndata):

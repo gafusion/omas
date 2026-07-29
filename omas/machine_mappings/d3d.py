@@ -2149,7 +2149,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         # (psi_norm index 0) and psi_magnetic_boundary (interpolated at psi_norm = 1.0)
         # from the transformed full profile.
         if not isinstance(data["grid.psi"], Exception):
-            cocosio = MDS_gEQDSK_COCOS_identify('d3d', pulse, 'EFIT01')
+            cocosio = MDS_gEQDSK_COCOS_identify(ods, 'd3d', pulse, 'EFIT01')
             psi_full = data["grid.psi"] * cocos_transform(cocosio, 11)["PSI"]
             for i_time, time in enumerate(data["time"]):
                 ods[f"{sh}[{i_time}].grid.psi"] = psi_full[i_time][mask[i_time]]
