@@ -1,5 +1,8 @@
 import json
 import os
+import re
+from types import SimpleNamespace
+from urllib.parse import urlparse
 from omas.omas_utils import printd
 import numpy as np
 try:
@@ -301,6 +304,22 @@ class BaseProvider:
             raise tdi_failed_exception
 
 
+# PTDATA TDI forms the DIII-D machine mappings build.  ToksearchProvider must
+# route these through PtDataSignal rather than evaluate them as TDI: they carry
+# treename=None so there is no tree to open, and ptdata2() TDI hangs under the
+# FDP environment.  Each maps onto a key of fetch_from_req's __ptdata__ dict.
+_PTDATA_TREENAME = "__ptdata__"
+_PTDATA_CALL = r'\[?\s*ptdata2?\s*\(\s*["\']([^"\']+)["\']\s*,\s*(\d+)\s*\)\s*\]?'
+_PTDATA_FORMS = (
+    (re.compile(rf'^{_PTDATA_CALL}$', re.I), 'data'),
+    (re.compile(rf'^dim_of\s*\(\s*{_PTDATA_CALL}\s*,\s*\d+\s*\)$', re.I), 'times'),
+    (re.compile(r'^pthead2?\s*\(\s*["\']([^"\']+)["\']\s*,\s*(\d+)\s*\)\s*,\s*__rarray$',
+                re.I), 'rarray'),
+)
+# BaseProvider.data() wraps expressions as data(<expr>); strip that before matching.
+_DATA_WRAPPER = re.compile(r'^data\s*\((.*)\)$', re.I | re.S)
+
+
 # ===============================
 # New Provider-based Architecture
 # ===============================
@@ -440,42 +459,64 @@ class ToksearchProvider(BaseProvider):
     TokSearch provider - instantiated once per server, reused for multiple signals
     """
     
-    def _init_server_connection(self, **kwargs):
-        """Initialize toksearch connection and import MdsSignal"""
-        # Import and cache MdsSignal class
-        from toksearch import MdsSignal
-        self.mds_server = "remote://atlas.gat.com"
-        self.MdsSignal = MdsSignal
-        # Get the actual server location
+    def _init_server_connection(self, mds_server=None, **kwargs):
+        """Initialize the toksearch fetch path
+
+        :param mds_server: None (default) resolves trees through the ambient
+            MDSplus treepath, which under the FDP environment is the Pelican
+            origin -- reachable off-site and tolerant of parallel access.
+            Pass 'remote://<host>' to use a thin-client server instead.
+        """
+        # Imported here rather than at module scope so that MdsProvider keeps
+        # working in environments without toksearch_d3d installed.
+        from toksearch_d3d.interfaces.req_interface import fetch_from_req
+
+        self.fetch_from_req = fetch_from_req
+        self.mds_server = mds_server
+        self.is_remote = False
+        self.server_host = None
+        if isinstance(mds_server, str):
+            parsed = urlparse(mds_server)
+            self.is_remote = parsed.scheme == 'remote'
+            self.server_host = parsed.netloc if self.is_remote else None
 
     def clean_up(self, pulse):
         from toksearch.signal import SignalRegistry
         SignalRegistry().cleanup_shot(pulse)
         SignalRegistry().cleanup()
 
-    def single_fetch(self, treename, pulse, expression, dims=None):
-        if dims is None:
-            dims = []
-        signal = self.MdsSignal(expression, treename, location=self.mds_server, dims=dims)
-        result = signal.fetch(pulse)
-        signal.cleanup_shot(pulse)
-        return result
-    
-    def dim_of(self, treename, pulse, TDI, dim):
-        """Get dimension of the signal"""
-        dims = list(range(dim+1))
-        results = self.single_fetch(treename, pulse, TDI, dims)
-        return results[dim]
-    
-    def dispatch_expression(self, treename, pulse, TDI):
-        if "dim_of" in TDI:
-            start = TDI.find("(") + 1
-            end = TDI.rfind(",")
-            dim = int(TDI.split(",")[-1].replace(")", ""))
-            return self.dim_of(treename, pulse, TDI[start:end], dim)
-        else:
-            return self.single_fetch(treename, pulse, TDI)
-        
+    @staticmethod
+    def _as_ptdata(expression):
+        """Return (pointname, shot, field) if expression is a PTDATA TDI form
+
+        Returns None for anything else, which is then evaluated as ordinary TDI.
+        """
+        expr = expression.strip()
+        wrapper = _DATA_WRAPPER.match(expr)
+        if wrapper:
+            expr = wrapper.group(1).strip()
+        for regex, field in _PTDATA_FORMS:
+            match = regex.match(expr)
+            if match:
+                return match.group(1), int(match.group(2)), field
+        return None
+
+    def single_fetch(self, treename, pulse, expression):
+        """Fetch one TDI expression via toksearch's cached tree/connection
+
+        Delegates to ``fetch_from_req``, which keeps the tree open in
+        ``MdsTreeRegistry`` across calls rather than reopening it per
+        expression, and routes PTDATA through ``PtDataSignal``.
+        """
+        ptdata = self._as_ptdata(expression)
+        if ptdata is not None:
+            pointname, shot, field = ptdata
+            req = SimpleNamespace(mds_path=pointname, shot=shot, treename=_PTDATA_TREENAME)
+            return self.fetch_from_req(req, None, False, None)[field]
+
+        req = SimpleNamespace(mds_path=expression, shot=pulse, treename=treename)
+        return self.fetch_from_req(req, self.server_host, self.is_remote, self.mds_server)
+
 
     def raw(self, treename, pulse, TDI):
         """
@@ -501,7 +542,7 @@ class ToksearchProvider(BaseProvider):
             if isinstance(TDI, dict):
                 for name, expr in TDI.items():
                     try:
-                        result= self.dispatch_expression(treename, pulse, expr)
+                        result= self.single_fetch(treename, pulse, expr)
                         # Extract the data component
                         if isinstance(result, dict) and 'data' in result:
                             results[name] = result['data']
@@ -514,7 +555,7 @@ class ToksearchProvider(BaseProvider):
             
             # Single TDI expression
             else:
-                results[TDI] = self.dispatch_expression(treename, pulse, TDI)
+                results[TDI] = self.single_fetch(treename, pulse, TDI)
                 # Extract the data component
                 if isinstance(results[TDI], dict) and 'data' in results[TDI]:
                     return results[TDI]['data']
