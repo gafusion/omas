@@ -5,7 +5,7 @@ import os
 import glob
 from omas.omas_setup import omas_dir
 from omas.omas_physics import omas_environment
-from omas.utilities.omas_mds import mdsvalue, get_pulse_id
+from omas.utilities.omas_mds import get_pulse_id
 
 __support_files_cache__ = {}
 
@@ -318,7 +318,7 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -370,7 +370,7 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -433,7 +433,7 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
             TDIs[f'chi_squared_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared[i]})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -504,7 +504,7 @@ def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_
     TDIs['psin'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{psin})'
 
     # fetch the data for all signals
-    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     try:
         ndata = data['ndata']
@@ -554,7 +554,7 @@ def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw
     TDIs['error'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)'
 
     # fetch the data for all signals
-    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS

@@ -10,7 +10,6 @@ from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment, cocos_transform
@@ -947,7 +946,8 @@ def rip_data(ods, pulse):
 
     TDIs['time'] = f'dim_of({next(iter(TDIs.values()))})'
 
-    data = mdsvalue('d3d', tree, pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw(tree, pulse, TDIs)
     if isinstance(data['time'], Exception):
         printe('WARNING: RIP data is missing')
         return
@@ -1629,7 +1629,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     n_ch = {}
     active_channels = {}
     for sub in subsystems:
-        active_channels[sub] = np.asarray(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
+        active_channels[sub] = np.asarray(provider.raw('IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
         n_ch[sub] = len(active_channels[sub]) 
         for channel in range(1, n_ch[sub]+1):
             if not active_channels[sub][channel - 1]:
@@ -1647,7 +1647,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 for pos in ['FZ', 'ZEFF', 'NZ']:
                     look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
                     
-    references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
+    references = provider.raw('IONS', pulse, look_up)
     impcon_TDIs = {}
     impcon_tree_name = None
     SIGNAL_PATTERN = re.compile(r'::TOP\.([A-Z0-9_.:]+?)[\s",].*?"([A-Z0-9_]+)"')
@@ -1667,11 +1667,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
         impcon_TDIs[key] = new_path
         impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
     # fetch
-    data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
+    data = provider.raw('IONS', pulse, TDIs)
     if sys.version_info >= (3, 9):
-        data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+        data = data | provider.raw(impcon_tree_name, pulse, impcon_TDIs)
     else:
-        data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
+        data = {**data, **provider.raw(impcon_tree_name, pulse, impcon_TDIs)}
     
     add_n_i_charge_exchange()
 
@@ -2206,7 +2206,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME/1000.", treename="EFIT01").raw()
+        time = provider.raw("EFIT01", pulse, "\\TOP.RESULTS.GEQDSK.GTIME/1000.")
         # every ZIPFIT profile has the same spatial grid so use whatever is first in query
         for entry in query.keys():
             if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
@@ -2342,7 +2342,8 @@ def reflectometer_data(ods, pulse):
     TDIs['full_profile_R'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:R'
     TDIs['full_profile_density'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:DENSITY'
 
-    data = mdsvalue('d3d', 'ELECTRONS', pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw('ELECTRONS', pulse, TDIs)
 
     # assign
     time = None

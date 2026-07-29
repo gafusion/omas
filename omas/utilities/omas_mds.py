@@ -377,7 +377,7 @@ class MdsProvider(BaseProvider):
                         results = {}
                         for tdi in TDI:
                             try:
-                                data = mdsvalue(self.server, self.treename, self.pulse, TDI[tdi]).raw()
+                                data = self.raw(treename, pulse, TDI[tdi])
 
                                 # Convert float32 arrays to float64 to preserve precision
                                 if isinstance(data, np.ndarray) and data.dtype == np.float32:
