@@ -1972,8 +1972,6 @@ def add_extra_profile_structures():
     pressure_struct["units"] = "Pa"
     for quant in ["pressure_ion_non_thermal", "pressure_total"]:
         extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = pressure_struct
-    # psi at the magnetic axis / boundary, derived from the absolute psi profile (grid.psi
-    # is standard IMAS; these two scalars are not, so register them here). DIII-D OMFIT_PROFS.
     add_extra_structures(extra_structures)
 
 
