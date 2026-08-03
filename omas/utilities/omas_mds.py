@@ -179,7 +179,7 @@ def get_cached_connection(server, pulse, treename):
 
 def resolve_server(machine, treename):
     if 'nstx' in machine:
-            old_MDS_server = True
+        old_MDS_server = True
     try:
         # handle the case that server is just the machine name
         machine_mappings_path = os.path.join(os.path.dirname(__file__), "../", "machine_mappings")
@@ -193,7 +193,7 @@ def resolve_server(machine, treename):
             raise
     
     old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-    if server in old_servers or machine in old_servers:
+    if server in old_servers or 'nstx' in machine:
         return server, True
     return server, False
 
