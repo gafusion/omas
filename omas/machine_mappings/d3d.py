@@ -1576,7 +1576,7 @@ def add_n_i_charge_exchange():
 
 
 # Element symbol -> (nuclear charge, mass number) for every species CERFIT can fit.
-# D is kept separate from H so that the mass number stays 2.
+# D is the only uncommon isotope in the list (different mass number than element atomic average for H) so a different letter is used
 CER_ELEMENTS = {
     'D': (1, 2.0),
     'He': (2, 4.0),
