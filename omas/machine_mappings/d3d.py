@@ -1574,6 +1574,69 @@ def add_n_i_charge_exchange():
     extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
     add_extra_structures(extra_structures)
 
+
+# Element symbol -> (nuclear charge, mass number) for every species CERFIT can fit.
+# D is kept separate from H so that the mass number stays 2.
+CER_ELEMENTS = {
+    'D': (1, 2.0),
+    'He': (2, 4.0),
+    'Li': (3, 7.0),
+    'B': (5, 11.0),
+    'C': (6, 12.0),
+    'N': (7, 14.0),
+    'O': (8, 16.0),
+    'F': (9, 19.0),
+    'Ne': (10, 20.0),
+    'Al': (13, 27.0),
+    'Si': (14, 28.0),
+    'Ar': (18, 40.0),
+    'Ca': (20, 40.0),
+    'Kr': (36, 84.0),
+}
+
+ROMAN_DIGITS = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+
+# '<element><charge state in Roman numerals><upper-lower transition>', e.g. 'C VI 8-7'.
+# Spaces are optional and the transition levels may carry orbital letters ('C IV 6h-7i').
+LINEID_PATTERN = re.compile('([A-Z][a-z]*) *([A-Z]*) *([0-9]*[a-z]*-[0-9]*[a-z]*)')
+
+
+def roman_to_int(roman):
+    total = 0
+    highest = 0
+    for char in reversed(roman):
+        value = ROMAN_DIGITS[char]
+        total += value if value >= highest else -value
+        highest = max(highest, value)
+    return total
+
+
+def parse_cer_lineid(lineid, sub, channel):
+    """Parse a CER CALIBRATION LINEID string into (label, a, z_ion, z_n).
+
+    Charge exchange measures the ion in the charge state it held *before* capturing the
+    beam electron, so the Roman numeral of the observed line is the ion charge: 'C VI 8-7'
+    is emitted by C5+ but reports the C6+ population, giving z_ion = 6. z_n stays the
+    nuclear charge of the element, so it is 6 for every carbon line including 'C IV'
+    (z_ion = 4). Do not collapse the two.
+    """
+    if lineid is None or isinstance(lineid, Exception):
+        raise ValueError(f'{sub} channel {channel:02d}: LINEID is missing')
+    if isinstance(lineid, np.ndarray):
+        lineid = lineid.item()
+    if isinstance(lineid, bytes):
+        lineid = lineid.decode()
+    match = LINEID_PATTERN.search(lineid)
+    element = match.group(1) if match else ''
+    roman = match.group(2) if match else ''
+    if element not in CER_ELEMENTS or not roman or not set(roman) <= set(ROMAN_DIGITS):
+        raise ValueError(f'{sub} channel {channel:02d}: cannot parse LINEID {lineid!r}')
+    z_n, a = CER_ELEMENTS[element]
+    z_ion = roman_to_int(roman)
+    symbol = 'H' if element == 'D' else element
+    return str(f'{round(a)}{symbol}{z_ion}'), a, float(z_ion), float(z_n)
+
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
@@ -1615,6 +1678,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 continue
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+            # Ion identity is calibration data, so it is fetched independently of _measurements
+            TDIs[f'{sub}_{channel}_LINEID'] = f"CER.CALIBRATION.{sub}.CHANNEL{channel:02d}:LINEID"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'TEMP_ERR_PS', 'ROT', 'ROT_ERR', 'ROT_ERR_PS']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
@@ -1665,6 +1730,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             ch = ods['charge_exchange.channel.+'] # + does the next channel
             ch['name'] = 'impCER_{}{:02d}'.format(sub, channel)
             ch['identifier'] = '{}{:02d}'.format(sub[0], channel)
+            label, a, z_ion, z_n = parse_cer_lineid(data[f'{sub}_{channel}_LINEID'], sub, channel)
+            ch['ion.0.label'] = label
+            ch['ion.0.a'] = a
+            ch['ion.0.z_ion'] = z_ion
+            ch['ion.0.z_n'] = z_n
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
                 chpos = ch['position'][pos.lower().split('_')[-1]]
@@ -1687,9 +1757,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
                     ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
-                # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
-                # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
-                # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
                     ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
                     ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
