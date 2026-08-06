@@ -1594,7 +1594,7 @@ CER_ELEMENTS = {
     'Kr': (36, 84.0),
 }
 
-ROMAN_DIGITS = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+ROMAN_DIGITS = {'I': 1, 'V': 5, 'X': 10}
 
 # '<element><charge state in Roman numerals><upper-lower transition>', e.g. 'C VI 8-7'.
 # Spaces are optional and the transition levels may carry orbital letters ('C IV 6h-7i').
