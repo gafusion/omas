@@ -71,6 +71,12 @@
  "charge_exchange.channel.:.ion.:": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.n_i.data": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.n_i.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.n_i_over_n_e.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
@@ -182,6 +188,9 @@
  "core_profiles.profiles_1d.:.electrons.density_thermal_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.electrons.pressure": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.electrons.temperature": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
@@ -198,6 +207,18 @@
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
  "core_profiles.profiles_1d.:.electrons.temperature_fit.rho_tor_norm": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.psi": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.psi_boundary": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.grid.psi_magnetic_axis": {
+  "COCOSIO": 11,
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
  "core_profiles.profiles_1d.:.grid.rho_pol_norm": {
@@ -286,14 +307,41 @@
  "core_profiles.profiles_1d.:.ion.:.velocity.toroidal_fit.rho_tor_norm": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.j_bootstrap": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.j_ohmic": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.j_tor": {
+  "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.j_total": {
   "COCOSIO": 11,
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.pressure_ion_non_thermal": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.pressure_ion_total": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
  "core_profiles.profiles_1d.:.pressure_perpendicular": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
+ "core_profiles.profiles_1d.:.pressure_total": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
  "core_profiles.profiles_1d.:.time": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.zeff": {
+  "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
+ },
+ "core_profiles.profiles_1d.:.zeff_error_upper": {
   "PYTHON": "core_profiles_profile_1d(ods, {pulse}, {PROFILES_tree!r}, {PROFILES_run_id!r}, {core_profiles_strict_grid!r})"
  },
  "core_profiles.time": {
@@ -677,6 +725,9 @@
  "magnetics.ip.:.data_error_upper": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
+ "magnetics.ip.:.method_name": {
+  "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
+ },
  "magnetics.ip.:.time": {
   "PYTHON": "ip_bt_dflux_data(ods, {pulse})"
  },
@@ -942,6 +993,9 @@
   "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.type.index": {
+  "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+ },
+ "wall.description_2d.:.limiter.type.name": {
   "PYTHON": "wall(ods, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "wall.description_2d.:.limiter.unit.:": {

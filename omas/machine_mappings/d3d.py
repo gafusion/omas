@@ -13,7 +13,7 @@ from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
-from omas.omas_physics import omas_environment
+from omas.omas_physics import omas_environment, cocos_transform
 
 
 __all__ = []
@@ -1549,6 +1549,30 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                             raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
 
+def add_n_i_charge_exchange():
+    extra_structures = {}
+    extra_structures["charge_exchange"] = {}
+    # Need to use IMAS structure here
+    sh = "charge_exchange.channel[:].ion[:].n_i"
+    struct_stuct = {"data_type": "structure"}
+    struct_stuct["documentation"] = "Ion density at channel measurement position"
+    extra_structures["charge_exchange"][sh] = struct_stuct
+    time_struct = {"coordinates": "1- 1...N"}
+    time_struct["documentation"] = "Time [s]"
+    time_struct["data_type"] =  "FLT_1D"
+    time_struct["units"] = "[s]"
+    extra_structures["charge_exchange"][f"{sh}.time"] = time_struct
+    data_struct = {"coordinates": f"{sh}.time"}
+    data_struct["documentation"] = "Ion density [1/m^3]"
+    data_struct["data_type"] =  "FLT_1D"
+    data_struct["units"] = "m^-3"
+    extra_structures["charge_exchange"][f"{sh}.data"] = data_struct
+    unc_struct = {"coordinates": f"{sh}.time"}
+    unc_struct["documentation"] = "Ion density uncertainty [1/m^3]"
+    unc_struct["data_type"] =  "FLT_1D"
+    unc_struct["units"] = "m^-3"
+    extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
+    add_extra_structures(extra_structures)
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1599,7 +1623,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                         pos1 = pos
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
                     TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
-                for pos in ['FZ', 'ZEFF']:
+                for pos in ['FZ', 'ZEFF', 'NZ']:
                     look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
                     
     references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
@@ -1628,6 +1652,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     else:
         data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
     
+    add_n_i_charge_exchange()
+
     for sub in subsystems:
         for channel in range(1, n_ch[sub]+1):
             if not active_channels[sub][channel - 1]:
@@ -1658,6 +1684,9 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
+                if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
+                    ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
                 # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
                 # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
                 # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
@@ -1758,7 +1787,8 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
             rel_error = 0.03 * abs(ods[f'magnetics.flux_loop.{k}.flux.data'])
             # Approximate error in the flux loop positions estimated with DIII-D parameters (often largest error term)
-            position_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
+            # Needs to use ods1 here since the position is not in ods
+            position_error = 1.e-9 * ods1[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
             # Use whichever error source is largest (this is how it is treated in EFIT)
             ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, position_error])
 
@@ -1935,6 +1965,13 @@ def add_extra_profile_structures():
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.psi_norm"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured"] = velo_struct
     extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].ion[:].velocity.toroidal_fit.measured_error_upper"] = velo_struct
+    # electrons.pressure and pressure_ion_total are standard IMAS nodes; these two are not
+    pressure_struct = {"coordinates": sh + "[:].grid.rho_tor_norm"}
+    pressure_struct["documentation"] = "Pressure profile added for DIII-D OMFIT_PROFS"
+    pressure_struct["data_type"] = "FLT_1D"
+    pressure_struct["units"] = "Pa"
+    for quant in ["pressure_ion_non_thermal", "pressure_total"]:
+        extra_structures["core_profiles"][f"core_profiles.profiles_1d[:].{quant}"] = pressure_struct
     add_extra_structures(extra_structures)
 
 
@@ -1968,6 +2005,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["ion[1].density_fit.measured"] = "RW_N_C"
         query["ion[1].temperature"] = "T_C"
         query["ion[1].temperature_fit.measured"] = "RW_T_C"
+        query["zeff"] = "ZEFF"
 
         uncertain_entries = list(query.keys())
         query["electrons.density_fit.psi_norm"] = "PS_N_E"
@@ -1977,10 +2015,20 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["ion[1].velocity.toroidal_fit.psi_norm"]= "PS_V_TOR_C"
         query["e_field.radial"] = "ER_C"
         query["grid.rho_tor_norm"] = "rho"
-        #query["j_total"] = "J_TOT"
-        #query["pressur_perpendicular"] = "P_TOT"
-        
+        query["electrons.pressure"] = "P_E"
+        query["pressure_ion_non_thermal"] = "P_FAST_D"
+        query["j_ohmic"] = "J_OHM"
+        query["j_tor"] = "J_TOT"
+        query["j_bootstrap"] = "J_BS"
+
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        # grid.psi (absolute poloidal flux) is fetched here but written manually below so
+        # the COCOS transform is applied and psi_magnetic_axis/boundary can be derived.
+        query["grid.psi"] = "PSI"
+        # Raw ion pressures fetched here but written manually below: pressure_ion_total
+        # and pressure_total are sums and pressure_total is a non-standard structure.
+        query["_pressure_deuterium"] = "P_D"
+        query["_pressure_carbon"] = "P_C"
         omfit_profiles_node = '\\TOP.'
         for entry in query:
             query[entry] = omfit_profiles_node + query[entry]
@@ -2057,6 +2105,30 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     print("================ DATA =================")
                     print(data[entry][i_time])
                     print(e)
+        # Absolute poloidal flux (COCOS-sensitive) plus the axis/boundary values derived
+        # from it. Identify the gEQDSK COCOS convention dynamically from BCENTR/CPASMA
+        # (same as the equilibrium mapping's MDS_gEQDSK_psi — DIII-D is not always COCOS 7),
+        # transform the full profile to COCOS 11 (IMAS), then derive psi_magnetic_axis
+        # (psi_norm index 0) and psi_boundary (interpolated at psi_norm = 1.0)
+        # from the transformed full profile.
+        if not isinstance(data["grid.psi"], Exception):
+            cocosio = MDS_gEQDSK_COCOS_identify('d3d', pulse, 'EFIT01')
+            psi_full = data["grid.psi"] * cocos_transform(cocosio, 11)["PSI"]
+            for i_time, time in enumerate(data["time"]):
+                ods[f"{sh}[{i_time}].grid.psi"] = psi_full[i_time][mask[i_time]]
+                ods[f"{sh}[{i_time}].grid.psi_magnetic_axis"] = psi_full[i_time][0]
+                ods[f"{sh}[{i_time}].grid.psi_boundary"] = float(
+                    InterpolatedUnivariateSpline(psi_n, psi_full[i_time])(1.0)
+                )
+        # pressure_ion_total = P_D + P_C; pressure_total sums the IMAS pressure fields
+        pressure_inputs = ["electrons.pressure", "pressure_ion_non_thermal",
+                           "_pressure_deuterium", "_pressure_carbon"]
+        if not any(isinstance(data[entry], Exception) for entry in pressure_inputs):
+            p_ion_total = data["_pressure_deuterium"] + data["_pressure_carbon"]
+            p_total = data["electrons.pressure"] + data["pressure_ion_non_thermal"] + p_ion_total
+            for i_time, time in enumerate(data["time"]):
+                ods[f"{sh}[{i_time}].pressure_ion_total"] = p_ion_total[i_time][mask[i_time]]
+                ods[f"{sh}[{i_time}].pressure_total"] = p_total[i_time][mask[i_time]]
         for i_time, time in enumerate(data["time"]):
             ods[f"{sh}[{i_time}].ion[0].element[0].z_n"] = 1
             ods[f"{sh}[{i_time}].ion[0].element[0].a"] = 2.0141
@@ -2078,6 +2150,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         for entry in list(query.keys()):
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
+
         data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
 
         # processing
@@ -2095,8 +2168,12 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = np.unique(np.concatenate([data[entry] for entry in query.keys() if entry.startswith("time__") and not isinstance(data[entry], Exception) and len(data[entry])>0]))
-        rho_tor_norm = np.unique(np.concatenate([[1.0],np.concatenate([data[entry] for entry in query.keys() if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0])]))
+        time = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME/1000.", treename="EFIT01").raw()
+        # every ZIPFIT profile has the same spatial grid so use whatever is first in query
+        for entry in query.keys():
+            if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
+                rho_tor_norm = data[entry]
+                break
         rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
@@ -2111,10 +2188,15 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             for entry in data.keys():
                 if "__" in entry or isinstance(data[entry], Exception):
                     continue
-                time_index = np.argmin(np.abs(data["time__" + entry] - time0))
-                ods[f"{sh}[{i_time}]."+entry] = interp1d(data["rho__" + entry], data[entry][time_index], bounds_error=False, fill_value=np.nan)(rho_tor_norm) 
+                if np.min(np.abs(data["time__" + entry] - time0)) < 1.e-3:
+                    time_index = np.argmin(np.abs(data["time__" + entry] - time0))
+                    rho = data["rho__" + entry]
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][rho<=1.0]
             # deuterium from quasineutrality
-            ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
+            try:
+                ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
+            except Exception:
+                pass
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221, PROFILES_tree="ZIPFIT01", PROFILES_run_id=None)
@@ -2130,8 +2212,8 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
 
         if 'time' not in cp:
             if "ZIPFIT0" in PROFILES_tree:
-                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.PROFILES.EDENSFIT", treename=PROFILES_tree)
-                cp['time'] = m.dim_of(1) * 1e-3
+                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME", treename="EFIT01")
+                cp['time'] = m.raw() * 1e-3
             elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
                 pulse_id = int(str(pulse) + PROFILES_run_id)
                 dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
@@ -2149,10 +2231,13 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
     run = pulse
     if EFIT_run_id is not None:
         run = int(str(pulse) + str(EFIT_run_id))
+        if EFIT_tree != "EFIT":
+            raise ValueError(f"Invalid EFIT tree for specifying EFIT_run_id: {EFIT_tree}")
     lim = mdsvalue('d3d', treename=EFIT_tree, pulse=run, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
     ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
+    ods["wall.description_2d.0.limiter.type.name"] = EFIT_tree if EFIT_run_id is None else EFIT_run_id + EFIT_tree
     ods["wall.time"] = [0.0]
     ods["wall.ids_properties.homogeneous_time"] = 1
 
