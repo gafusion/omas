@@ -24,7 +24,7 @@ for structure in sorted(list(structures_filenames(omas_rcparams['default_imas_ve
 def generate_xml_schemas(imas_version=None):
     """
     Generate IMAS IDSDef.xml files by:
-     1. clone the IMAS data-dictionary repository (access to git.iter.org required)
+     1. clone the IMAS data-dictionary repository (open source on github.com/iterorganization/)
      2. download the Saxon XSLT and XQuery Processor
      3. generate IDSDef.xml in imas_structures folder
     """
@@ -34,10 +34,10 @@ def generate_xml_schemas(imas_version=None):
     saxon_major_version = '9.' + saxon_version.split('-')[1]
 
     # clone the IMAS data-dictionary repository
-    dd_folder = os.sep.join([omas_dir, 'data-dictionary'])
+    dd_folder = os.sep.join([omas_dir, 'IMAS-Data-Dictionary'])
     if not os.path.exists(dd_folder):
         subprocess.Popen(
-            f'cd {omas_dir} ; git clone ssh://git@git.iter.org/imas/data-dictionary.git', stdout=subprocess.PIPE, shell=True
+            f'cd {omas_dir} ; git clone git@github.com:iterorganization/IMAS-Data-Dictionary.git', stdout=subprocess.PIPE, shell=True
         ).communicate()[0]
 
     # download Saxon
@@ -66,8 +66,8 @@ def generate_xml_schemas(imas_version=None):
     # find IMAS data-dictionary tags
     result = b2s(subprocess.Popen('cd %s;git tag' % dd_folder, stdout=subprocess.PIPE, shell=True).communicate()[0])
     tags = list(filter(lambda x: str(x).startswith('3.') and int(x.split('.')[1]) >= 10, result.split()))
-    # add development branch at the beginning of list of tags
-    tags.insert(0, 'develop/3')
+    # add main branch at the beginning of list of tags
+    tags.insert(0, 'main')
     imas_versions = OrderedDict()
     for item in tags:
         imas_versions[item] = item.replace('.', '_').replace('/', '_')
@@ -140,7 +140,7 @@ def create_json_structure(imas_version=omas_rcparams['default_imas_version']):
                         me[coord] = path_propagate[0] + '/' + me[coord]
                 # identifiers documentation
                 if '@doc_identifier' in me:
-                    doc_id = xmltodict.parse(open(omas_dir + os.sep + 'data-dictionary' + os.sep + me['@doc_identifier']).read())
+                    doc_id = xmltodict.parse(open(omas_dir + os.sep + 'IMAS-Data-Dictionary' + os.sep + me['@doc_identifier']).read())
                     hlp = doc_id['constants']['int']
                     try:
                         if '@name' in hlp:
