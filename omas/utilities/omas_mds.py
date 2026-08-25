@@ -1,8 +1,5 @@
 import json
 import os
-import re
-from types import SimpleNamespace
-from urllib.parse import urlparse
 from omas.omas_utils import printd
 import numpy as np
 try:
@@ -304,22 +301,6 @@ class BaseProvider:
             raise tdi_failed_exception
 
 
-# PTDATA TDI forms the DIII-D machine mappings build.  ToksearchProvider must
-# route these through PtDataSignal rather than evaluate them as TDI: they carry
-# treename=None so there is no tree to open, and ptdata2() TDI hangs under the
-# FDP environment.  Each maps onto a key of fetch_from_req's __ptdata__ dict.
-_PTDATA_TREENAME = "__ptdata__"
-_PTDATA_CALL = r'\[?\s*ptdata2?\s*\(\s*["\']([^"\']+)["\']\s*,\s*(\d+)\s*\)\s*\]?'
-_PTDATA_FORMS = (
-    (re.compile(rf'^{_PTDATA_CALL}$', re.I), 'data'),
-    (re.compile(rf'^dim_of\s*\(\s*{_PTDATA_CALL}\s*,\s*\d+\s*\)$', re.I), 'times'),
-    (re.compile(r'^pthead2?\s*\(\s*["\']([^"\']+)["\']\s*,\s*(\d+)\s*\)\s*,\s*__rarray$',
-                re.I), 'rarray'),
-)
-# BaseProvider.data() wraps expressions as data(<expr>); strip that before matching.
-_DATA_WRAPPER = re.compile(r'^data\s*\((.*)\)$', re.I | re.S)
-
-
 # ===============================
 # New Provider-based Architecture
 # ===============================
@@ -356,37 +337,39 @@ class MdsProvider(BaseProvider):
         self.old_MDS_server = old_MDS_server
     
 
-    def raw(self, treename, pulse, TDI):
+    def raw(self, treename, pulse, TDI, server=None):
         """
         Fetch data from MDSplus with connection caching
-        
+
         :param treename: MDSplus tree name
-        :param pulse: pulse number  
+        :param pulse: pulse number
         :param TDI: string, list or dict of strings - MDSplus TDI expression(s)
-        
+        :param server: connection target override; defaults to self.server. Lets a
+            subclass fetch the same TDI against a different server without
+            duplicating the getMany body.
+
         :return: result of TDI expression, or dictionary with results of TDI expressions
         """
         t0 = time.time()
         out_results = None
+        if server is None:
+            server = self.server
         try:
 
             def mdsk(value):
                 """Translate strings to MDSplus bytes"""
                 return str(str(value).encode('utf8'))
-            
+
             try:
                 out_results = None
-                
-                # Resolve server for this specific tree
-                server = self.resolved_server
-                
+
                 # try connecting and re-try on fail
-                conn = get_cached_connection(self.server, pulse, treename)
-                
+                conn = get_cached_connection(server, pulse, treename)
+
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
                     TDI = {expr: expr for expr in TDI}
-                
+
                 # dictionary of TDI expressions
                 if isinstance(TDI, dict):
                     # old versions of MDSplus server do not support getMany
@@ -394,7 +377,7 @@ class MdsProvider(BaseProvider):
                         results = {}
                         for tdi in TDI:
                             try:
-                                data = self.raw(treename, pulse, TDI[tdi])
+                                data = self.raw(treename, pulse, TDI[tdi], server=server)
 
                                 # Convert float32 arrays to float64 to preserve precision
                                 if isinstance(data, np.ndarray) and data.dtype == np.float32:
@@ -454,121 +437,46 @@ class MdsProvider(BaseProvider):
         finally:
             self.handle_fetch_status(TDI, t0, out_results)
 
-class ToksearchProvider(BaseProvider):
-    """
-    TokSearch provider - instantiated once per server, reused for multiple signals
-    """
-    
-    def _init_server_connection(self, mds_server=None, **kwargs):
-        """Initialize the toksearch fetch path
+class ToksearchProvider(MdsProvider):
+    """MDS provider for the toksearch backend.
 
-        :param mds_server: None (default) resolves trees through the ambient
-            MDSplus treepath, which under the FDP environment is the Pelican
-            origin -- reachable off-site and tolerant of parallel access.
-            Pass 'remote://<host>' to use a thin-client server instead.
-        """
+    The FDP thin client is just another MDSplus server, reachable and TDI-evaluated
+    exactly like atlas, so this reuses all of MdsProvider's getMany machinery and
+    only overrides which server it talks to: the FDP thin client first, atlas as a
+    fallback.
+    """
+
+    def _init_server_connection(self, **kwargs):
         # Imported here rather than at module scope so that MdsProvider keeps
         # working in environments without toksearch_d3d installed.
-        from toksearch_d3d.interfaces.req_interface import fetch_from_req
+        from toksearch_d3d.interfaces.req_interface import (
+            _FDP_THINCLIENT_SERVER,
+            _FALLBACK_MDS_SERVER,
+            _atlas_reachable,
+        )
 
-        self.fetch_from_req = fetch_from_req
-        self.mds_server = mds_server
-        self.is_remote = False
-        self.server_host = None
-        if isinstance(mds_server, str):
-            parsed = urlparse(mds_server)
-            self.is_remote = parsed.scheme == 'remote'
-            self.server_host = parsed.netloc if self.is_remote else None
-
-    def clean_up(self, pulse):
-        from toksearch.signal import SignalRegistry
-        SignalRegistry().cleanup_shot(pulse)
-        SignalRegistry().cleanup()
-
-    @staticmethod
-    def _as_ptdata(expression):
-        """Return (pointname, shot, field) if expression is a PTDATA TDI form
-
-        Returns None for anything else, which is then evaluated as ordinary TDI.
-        """
-        expr = expression.strip()
-        wrapper = _DATA_WRAPPER.match(expr)
-        if wrapper:
-            expr = wrapper.group(1).strip()
-        for regex, field in _PTDATA_FORMS:
-            match = regex.match(expr)
-            if match:
-                return match.group(1), int(match.group(2)), field
-        return None
-
-    def single_fetch(self, treename, pulse, expression):
-        """Fetch one TDI expression via toksearch's cached tree/connection
-
-        Delegates to ``fetch_from_req``, which keeps the tree open in
-        ``MdsTreeRegistry`` across calls rather than reopening it per
-        expression, and routes PTDATA through ``PtDataSignal``.
-        """
-        ptdata = self._as_ptdata(expression)
-        if ptdata is not None:
-            pointname, shot, field = ptdata
-            req = SimpleNamespace(mds_path=pointname, shot=shot, treename=_PTDATA_TREENAME)
-            return self.fetch_from_req(req, None, False, None)[field]
-
-        req = SimpleNamespace(mds_path=expression, shot=pulse, treename=treename)
-        return self.fetch_from_req(req, self.server_host, self.is_remote, self.mds_server)
-
+        self.original_server = self.server
+        self.server = _FDP_THINCLIENT_SERVER
+        self.resolved_server = _FDP_THINCLIENT_SERVER
+        self._fallback_server = _FALLBACK_MDS_SERVER
+        self._atlas_reachable = _atlas_reachable
+        self.old_MDS_server = False
 
     def raw(self, treename, pulse, TDI):
+        """Fetch via MdsProvider.raw against the FDP thin client, then atlas.
+
+        Only a whole-fetch failure (connection/execute raising) trips the fallback;
+        per-node failures inside a successful getMany stay in-band as MdsProvider
+        already handles them.
         """
-        Fetch data using toksearch MdsSignal backend
-        
-        :param treename: MDSplus tree name
-        :param pulse: pulse number
-        :param TDI: string, list or dict of strings - TDI expression(s) to fetch
-        
-        :return: result of TDI expression, or dictionary with results of TDI expressions
-        """
-        try:
-            import time
-            
-            t0 = time.time()
-            
-            # Handle different TDI input types
-            if isinstance(TDI, (list, tuple)):
-                TDI = {expr: expr for expr in TDI}
-            
-            # Dictionary of TDI expressions
-            results = {}
-            if isinstance(TDI, dict):
-                for name, expr in TDI.items():
-                    try:
-                        result= self.single_fetch(treename, pulse, expr)
-                        # Extract the data component
-                        if isinstance(result, dict) and 'data' in result:
-                            results[name] = result['data']
-                        else:
-                            results[name] = result
-                        # Clean up the signal
-                    except Exception as _excp:
-                        results[name] = Exception(str(_excp))
-                return results
-            
-            # Single TDI expression
-            else:
-                results[TDI] = self.single_fetch(treename, pulse, TDI)
-                # Extract the data component
-                if isinstance(results[TDI], dict) and 'data' in results[TDI]:
-                    return results[TDI]['data']
-                else:
-                    return results[TDI]
-                    
-        except Exception as _excp:
-            txt = []
-            for item in ['server', 'treename', 'pulse']:
-                value = locals().get(item, getattr(self, item, 'unknown'))
-                txt += [f' - {item}: {value}']
-            txt += [f' - TDI: {TDI}']
-            raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
-        
-        finally:
-            self.handle_fetch_status(TDI, t0, results)
+        servers = [self.server]
+        if self._atlas_reachable():
+            servers.append(self._fallback_server)
+
+        last_exc = None
+        for server in servers:
+            try:
+                return super().raw(treename, pulse, TDI, server=server)
+            except Exception as e:
+                last_exc = e
+        raise last_exc
