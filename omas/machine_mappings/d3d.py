@@ -1833,21 +1833,21 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             if pulse > shot:
                 compshot = shot
                 break
-        for compsig in comp[compshot]:
-            if compsig == 'N1COIL' and pulse > 112962:
+        for compsig_name in comp[compshot]:
+            if compsig_name == 'N1COIL' and pulse > 112962:
                 continue
             provider = ods.get_mds_provider('d3d')
-            compsig_data = provider.data(None, pulse, f'ptdata("{compsig}",{pulse})')
-            compsig_time = provider.dim_of(None, pulse, f'ptdata("{compsig}",{pulse})', 0) / 1000.0
+            compsig_data = provider.data(None, pulse, f'ptdata("{compsig_name}",{pulse})')
+            compsig_time = provider.dim_of(None, pulse, f'ptdata("{compsig_name}",{pulse})', 0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
                 if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
-                    if sig in comp[compshot][compsig]:
+                    if sig in comp[compshot][compsig_name]:
                         sigraw_time = ods[f'magnetics.flux_loop.{channel}.flux.time']
                         compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
-                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+                        ods[f'magnetics.flux_loop.{channel}.flux.data'] -= comp[compshot][compsig_name][sig] * compsig_data_interp
                     else:
-                            printe(f"No {compsig} compensation for {sig}, skipping")
+                            printe(f"No {compsig_name} compensation for {sig}, skipping")
 
     # Fetch uncertainties
     TDIs = {}
@@ -1937,24 +1937,31 @@ def magnetics_probes_data(ods, pulse):
             if pulse > shot:
                 compshot = shot
                 break
-        for compsig in comp[compshot]:
-            if compsig == 'N1COIL' and pulse > 112962:
-                continue
-            provider = ods.get_mds_provider('d3d')
-            compsig_data = provider.data(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]")
-            compsig_time = provider.dim_of(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]", 0) / 1000.0
+        compsig_TDIs = {}
+        if pulse > 112962 and 'N1COIL' in comp[compshot]:
+            comp[compshot].pop('N1COIL')
+        for compsig_name in comp[compshot]:
+            compsig_TDIs[compsig_name] = f"ptdata2(\"{compsig_name}\",{pulse})"
+            compsig_TDIs[compsig_name+"_time"] = f"dim_of(ptdata2(\"{compsig_name}\",{pulse}),0)"
+        
+        provider = ods.get_mds_provider('d3d')
+        compsig_data = provider.raw(None, pulse, compsig_TDIs)
+
+        for compsig_name in comp[compshot]:
+            compsig = compsig_data[compsig_name]
+            compsig_time = compsig_data[compsig_name+"_time"] * 1.e-3
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if (
                     f'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
                     and ods[f'magnetics.b_field_pol_probe.{channel}.field.validity'] >= 0
                 ):
                     sig = ods1[f'magnetics.b_field_pol_probe.{channel}.identifier']
-                    if sig in comp[compshot][compsig]:
+                    if sig in comp[compshot][compsig_name]:
                         sigraw_time = ods[f'magnetics.b_field_pol_probe.{channel}.field.time']
-                        compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig_data)
-                        ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig][sig] * compsig_data_interp
+                        compsig_data_interp = np.interp(sigraw_time, compsig_time, compsig)
+                        ods[f'magnetics.b_field_pol_probe.{channel}.field.data'] -= comp[compshot][compsig_name][sig] * compsig_data_interp
                     else:
-                        printe(f"No {compsig} compensation for {sig}, skipping")
+                        printe(f"No {compsig_name} compensation for {sig}, skipping")
 
 
     # Fetch uncertainties
