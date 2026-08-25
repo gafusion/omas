@@ -5,7 +5,7 @@ import os
 import glob
 from omas.omas_setup import omas_dir
 from omas.omas_physics import omas_environment
-from omas.utilities.omas_mds import mdsvalue, get_pulse_id
+from omas.utilities.omas_mds import get_pulse_id
 
 __support_files_cache__ = {}
 
@@ -175,10 +175,12 @@ def D3Dmagnetics_weights(pulse, name=None):
         raise ValueError(f"{name} is part of the d3d fitweight")
 
 
-def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id=None):
+def MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id=None):
     """
     Python function that queries MDSplus EFIT tree to figure
     out COCOS convention used for a particular reconstruction
+
+    :param ods: ODS to derive provider from
 
     :param machine: machine name
 
@@ -194,7 +196,8 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id=None):
     if (machine, pulse_id, EFIT_tree) in __MDS_gEQDSK_COCOS_identify_cache__:
         return __MDS_gEQDSK_COCOS_identify_cache__[(machine, pulse_id, EFIT_tree)]
     TDIs = {'bt': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'ip': f'mean(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'}
-    res = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    provider = ods.get_mds_provider(machine)
+    res = provider.raw(EFIT_tree, pulse_id, TDIs)
     bt = res['bt']
     ip = res['ip']
     g_cocos = {(+1, +1): 1, (+1, -1): 3, (-1, +1): 5, (-1, -1): 7, (+1, 0): 1, (-1, 0): 3}
@@ -205,7 +208,7 @@ def MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id=None):
     return cocosio
 
 
-def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
+def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree, EFIT_run_id):
     """
     evaluate EFIT psi
 
@@ -219,14 +222,16 @@ def MDS_gEQDSK_psi(ods, machine, pulse, EFIT_tree):
 
     :return: integer cocos convention
     """
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
+    pulse_id =  get_pulse_id(pulse, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         TDIs = {
             'psi_axis': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG',
             'psi_boundary': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY',
             'rho_tor_norm': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN',
         }
-        res = mdsvalue(machine, EFIT_tree, pulse, TDIs).raw()
+        provider = ods.get_mds_provider(machine)
+        res = provider.raw(EFIT_tree, pulse_id, TDIs)
         n = res['rho_tor_norm'].shape[1]
         for k in range(len(res['psi_axis'])):
             ods[f'equilibrium.time_slice.{k}.global_quantities.psi_axis'] = res['psi_axis'][k]
@@ -315,7 +320,7 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -328,7 +333,7 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # assign the data to the ods
     del all_data['time']
     del all_data['mtime']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -367,7 +372,7 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         TDIs['chi_squared'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -392,7 +397,7 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     del all_data['time']
     del all_data['mtime']
     del all_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -430,7 +435,7 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
             TDIs[f'chi_squared_{i}'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{chi_squared[i]})'
 
     # fetch the data for all signals
-    all_data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    all_data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -474,7 +479,7 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         return
     ndata = concat_data['ndata']
     del concat_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in concat_data.items():
             if len(np.atleast_1d(data)) == 0:
@@ -501,7 +506,7 @@ def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_
     TDIs['psin'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.{psin})'
 
     # fetch the data for all signals
-    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     try:
         ndata = data['ndata']
@@ -529,7 +534,7 @@ def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_
     psi = (abs(psin).T * (data['psib'] - data['psia']) + data['psia']).T
 
     # assign the data to the ods
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    cocosio = MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for k in range(ntimes):
             for n in range(ndata):
@@ -551,7 +556,7 @@ def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw
     TDIs['error'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.CERROR)'
 
     # fetch the data for all signals
-    data = mdsvalue(machine, EFIT_tree, pulse_id, TDIs).raw()
+    data = ods.get_mds_provider(machine).raw(EFIT_tree, pulse_id, TDIs)
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
@@ -641,7 +646,9 @@ def fetch_assign(
                 TDIs.append(f'dim_of({TDI},0)')
             elif stage == 'fetch' and t is None:
                 try:
-                    t = mdsvalue(mds_server, mds_tree, pulse, TDI=TDI).dim_of(0)
+                    provider = ods.get_mds_provider(mds_server)
+                    result = provider.raw(mds_tree, pulse, TDI)
+                    t = provider.raw(mds_tree, pulse, f'dim_of({TDI},0)')
                     if len(t) <= 1:
                         t = None
                 except Exception:
@@ -672,5 +679,6 @@ def fetch_assign(
                 elif validity is not None:
                     ods[validity.format(**locals())] = -2
         if stage == 'fetch':
-            tmp = mdsvalue(mds_server, mds_tree, pulse, TDI=TDIs).raw()
+            provider = ods.get_mds_provider(mds_server)
+            tmp = provider.raw(mds_tree, pulse, TDIs)
     return ods

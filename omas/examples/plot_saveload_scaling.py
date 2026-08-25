@@ -187,4 +187,4 @@ pyplot.ylabel('Time [s]')
 pyplot.legend(loc='upper left', frameon=False)
 pyplot.title('Access', y=0.85, x=0.7)
 
-pyplot.show()
+# pyplot.show()

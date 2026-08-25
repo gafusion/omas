@@ -10,7 +10,6 @@ from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
 from uncertainties import unumpy
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
-from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
 from omas.omas_physics import omas_environment, cocos_transform
@@ -400,6 +399,7 @@ def gas_injection_hardware(ods, pulse):
     pipe_cpmid['second_point']['z'] = pipe_cpmid['exit_position']['z']
     ip += 1
     iv += 1
+    return ods
 
 
 # ================================
@@ -453,6 +453,7 @@ def pf_active_hardware(ods, pulse):
         else:
             # `shaping` function
             ods['pf_active.coil'][k]["function.0.index"] = 1
+    return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def pf_active_coil_current_data(ods, pulse):
@@ -486,7 +487,8 @@ def pf_active_coil_current_data(ods, pulse):
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
             TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
 
-        data = mdsvalue('d3d', None, pulse, TDIs).raw()
+        provider = ods.get_mds_provider('d3d')
+        data = provider.raw(None, pulse, TDIs)
         for k in ods1['pf_active.coil']:
             identifier = ods1[f'pf_active.coil.{k}.identifier'].upper()
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
@@ -500,6 +502,7 @@ def pf_active_coil_current_data(ods, pulse):
                     ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
             else:
                 print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
+    return ods
 
 
 # ================================
@@ -510,7 +513,6 @@ def coils_non_axisymmetric_hardware(ods, pulse):
 
     :param ods: ODS instance
     """
-
 
     coil_names = []
     for compfile in ['ccomp', 'icomp']:
@@ -525,7 +527,7 @@ def coils_non_axisymmetric_hardware(ods, pulse):
     for k, fcid in enumerate(coil_names):
         ods['coils_non_axisymmetric.coil'][k]['name'] = fcid
         ods['coils_non_axisymmetric.coil'][k]['identifier'] = fcid
-
+    return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def coils_non_axisymmetric_current_data(ods, pulse):
@@ -551,6 +553,7 @@ def coils_non_axisymmetric_current_data(ods, pulse):
             time_norm=0.001,
             data_norm=1.0,
         )
+    return ods
 
 
 # ================================
@@ -563,15 +566,17 @@ def ec_launcher_active_hardware(ods, pulse):
     # We need three queries in order to retrieve only the fields we need
     
     # First the amount of systems in use
+    provider = ods.get_mds_provider('d3d')
     query = {'NUM_SYSTEMS': setup + 'NUM_SYSTEMS'}
-    num_systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()['NUM_SYSTEMS']
+    num_systems = provider.raw('RF', pulse, query)['NUM_SYSTEMS']
     try:
         system_max = num_systems + 1
     except:
         return
 
     # we use last time of EFIT01 to trim data
-    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME/1000.'}
+    query = {'ip_time': '\\EFIT01::TOP.RESULTS.GEQDSK.GTIME'}
+    last_time = provider.raw('EFIT01', pulse, query)['ip_time'][-1]/1000.
 
     # Second query the used systems to resolve the gyrotron names
     query = {}
@@ -584,7 +589,7 @@ def ec_launcher_active_hardware(ods, pulse):
         query["DISPERSION" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.DISPERSION'
         query["GB_RCURVE" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_RCURVE'
         query["GB_WAIST" + f'_{system_no}'] = setup + cur_system + f'ANTENNA.GB_WAIST'
-    systems = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+    systems = provider.raw('RF', pulse, query)
 
     # Final, third query now that we have resolved all the TDIs related to gyrotron names
     query = {}
@@ -603,7 +608,7 @@ def ec_launcher_active_hardware(ods, pulse):
             query[field + f'_{system_no}'] = setup + f'{gyrotron.upper()}.EC{gyr}{field}'
             if field in ['FPWRC', 'AZIANG']:
                 query["TIME_" + field + f'_{system_no}'] = "dim_of(" + query[field + f'_{system_no}'] + "+01) / 1E3"
-    gyrotrons = mdsvalue('d3d', treename='RF', pulse=pulse, TDI=query).raw()
+    gyrotrons = provider.raw('RF', pulse, query)
 
     # assign data to ODS
     b_half = []
@@ -680,6 +685,7 @@ def ec_launcher_active_hardware(ods, pulse):
     cp["toray"] = ODS()
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
+    return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=180893)
 def nbi_active_hardware(ods, pulse):
@@ -695,7 +701,8 @@ def nbi_active_hardware(ods, pulse):
             #query[f"{beam_name}.{field}_time"] = f"dim_of(\\NB::TOP.NB{beam_name}.{field}, 0)/1E3"
         for field in ["GAS"]:
             query[f"{beam_name}.{field}"] = f"NB{beam_name}.{field}"
-    data = mdsvalue('d3d', treename='NB', pulse=pulse, TDI=query).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw('NB', pulse, query)
 
     beam_index = 0
     for beam_name in beam_names:
@@ -718,6 +725,7 @@ def nbi_active_hardware(ods, pulse):
             nbu["species.a"] = 2.0
         else:            
             nbu["species.a"] = int(gas[1])
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -757,6 +765,7 @@ def interferometer_hardware(ods, pulse):
         ch['wavelength.0.value'] = 10.6e-6 #m
         for field in ch['line_of_sight.first_point'].keys():
             ch['line_of_sight.third_point'][field] = ch['line_of_sight.first_point'][field]
+    return ods
 
 
 def add_error_structure_channel(ods, ids_name, location, units):
@@ -797,7 +806,8 @@ def interferometer_data(ods, pulse):
         TDIs[f'{identifier}_validity'] = f"\\{BCI}.STAT{identifier}"
     TDIs['time'] = f"dim_of({TDIs['R0']})"
     TDIs['time_valid'] = f"dim_of({TDIs['R0_validity']})"
-    data = mdsvalue('d3d', 'BCI', pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw('BCI', pulse, TDIs)
     if isinstance(data['time'], Exception):
         printe('WARNING: CO2 interferometer data is missing')
         return
@@ -827,7 +837,6 @@ def interferometer_data(ods, pulse):
         ne_err[0][data[identifier]<0]  = np.inf
         ods[f'interferometer.channel.{k}.n_e_line.error'] = ne_err
         ods[f'interferometer.channel.{k}.n_e_line.data_error_upper'] = np.sum(ne_err, axis=0)
-
 
 @machine_mapping_function(__regression_arguments__, pulse=200000)
 def rip_hardware(ods, pulse):
@@ -937,7 +946,8 @@ def rip_data(ods, pulse):
 
     TDIs['time'] = f'dim_of({next(iter(TDIs.values()))})'
 
-    data = mdsvalue('d3d', tree, pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw(tree, pulse, TDIs)
     if isinstance(data['time'], Exception):
         printe('WARNING: RIP data is missing')
         return
@@ -1130,6 +1140,7 @@ def thomson_scattering_hardware(ods, pulse, revision='BLESSED'):
         Thomson scattering data revision, like 'BLESSED', 'REVISIONS.REVISION00', etc.
     """
     unwrap(thomson_scattering_data)(ods, pulse, revision, _get_measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1152,14 +1163,15 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
         if _get_measurements:
             for quantity in ['TEMP', 'TEMP_E', 'DENSITY', 'DENSITY_E', 'TIME']:
                 query[f'{system}_{quantity}'] = f'.TS.{revision}.{system}:{quantity}'
-    tsdat = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+    provider = ods.get_mds_provider('d3d')
+    tsdat = provider.raw('ELECTRONS', pulse, query)
 
     # Read the Thomson scattering hardware map to figure out which lens each chord looks through
     cal_set = tsdat['calib_nums'][0]
     query = {}
     for system in systems:
         query[f'{system}_hwmapints'] = f'.{system}.hwmapints'
-    hw_ints = mdsvalue('d3d', treename='TSCAL', pulse=cal_set, TDI=query).raw()
+    hw_ints = provider.raw('TSCAL', cal_set, query)
 
     # assign data in ODS
     i = 0
@@ -1197,10 +1209,11 @@ def thomson_scattering_data(ods, pulse, revision='BLESSED', _get_measurements=Tr
                 te_error[tsdat[f'{system}_TEMP'][j] <=0] = np.inf
                 ch['t_e.data'] = unumpy.uarray(tsdat[f'{system}_TEMP'][j], te_error)
             i += 1
+    return ods
 
 
 # ================================
-@machine_mapping_function(__regression_arguments__, pulse=133221)
+@machine_mapping_function(__regression_arguments__, pulse=170325)
 def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
     """
     Gathers DIII-D Electron cyclotron emission locations
@@ -1211,10 +1224,11 @@ def electron_cyclotron_emission_hardware(ods, pulse, fast_ece=False):
         Use data sampled at high frequency
     """
     unwrap(electron_cyclotron_emission_data)(ods, pulse, fast_ece=fast_ece, _measurements=False)
+    return ods
 
 
-@machine_mapping_function(__regression_arguments__, pulse=133221)
-def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measurements=True):
+@machine_mapping_function(__regression_arguments__, pulse=170325)
+def electron_cyclotron_emission_data(ods, pulse=170325, fast_ece=False, _measurements=True):
     """
     Loads DIII-D Electron cyclotron emission data
 
@@ -1233,7 +1247,8 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         for quantity in quantities:
             query[quantity] = node + quantity
     query['TIME'] = f"dim_of({TECE + '01'})"
-    ece_map = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+    provider = ods.get_mds_provider('d3d')
+    ece_map = provider.raw('ELECTRONS', pulse, query)
     N_time = len(ece_map['TIME'])
     N_ch = ece_map['NUMCH' + fast_ece].item()
 
@@ -1241,7 +1256,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
         query = {}
         for ich in range(1, N_ch + 1):
             query[f'T{ich}'] = TECE + '{0:02d}'.format(ich)
-        ece_data = mdsvalue('d3d', treename='ELECTRONS', pulse=pulse, TDI=query).raw()
+        ece_data = provider.raw('ELECTRONS', pulse, query)
         ece_uncertainty = {}
         for key in ece_data:
             # Calculate uncertainties and convert to eV
@@ -1277,6 +1292,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             f[:] = ece_map['FREQ'][ich]
             ch['frequency']['data'] = f * 1.0e9
             ch['if_bandwidth'] = ece_map['FLTRWID'][ich] * 1.0e9
+    return ods
 
 
 # ================================
@@ -1411,7 +1427,7 @@ def bolometer_hardware(ods, pulse):
         power int(Prad,dl) in cm**-2 needs to be divided by the
         etendue to compare to reported power in Watts.'''
 
-    return {'postcommands': ['trim_bolometer_second_points_to_box(ods)']}
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=149472)
@@ -1434,7 +1450,8 @@ def bolometer_data(ods, pulse):
         TDIs[f'{ch}_time'] = f"dim_of({TDI},0)"
 
     # then fetch all the data for all signals
-    all_data = mdsvalue('d3d', 'BOLOM', pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    all_data = provider.raw('BOLOM', pulse, TDIs)
 
     # assign the data to the ods
     for ch in ods1['bolometer.channel']:
@@ -1448,6 +1465,7 @@ def bolometer_data(ods, pulse):
             ods[f'bolometer.channel[{ch}].power.time'] = time / 1e3
         except:
             printe(f'bolometer data was not found for channel {ch}')
+    return ods
 
 
 # ================================
@@ -1465,6 +1483,7 @@ def langmuir_probes_hardware(ods, pulse):
     """
 
     unwrap(langmuir_probes_data)(ods, pulse, _get_measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=176235)
@@ -1491,9 +1510,9 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
         f'pulse {pulse}; checking availability, TDI={tdi}',
         topic='machine',
     )
-    m = mdsvalue('d3d', pulse=pulse, treename='LANGMUIR', TDI=tdi)
+    provider = ods.get_mds_provider('d3d')
     try:
-        data_present = m.data() > 0
+        data_present = provider.data('LANGMUIR', pulse, tdi) > 0
     except MDSplus.MdsException:
         data_present = []
     nprobe = len(data_present)
@@ -1502,16 +1521,16 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
     for i in range(nprobe):
         if data_present[i]:
             try:
-                r = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.r'.format(i)).data()
+                r = provider.data('langmuir', pulse, r'\langmuir::top.probe_{:03d}.r'.format(i))
                 if r is None:
                     raise ValueError()
             except Exception:
                 continue
             if r > 0:
                 # Don't bother gathering more if r is junk
-                z = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.z'.format(i)).data()
-                pnum = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.pnum'.format(i)).data()
-                label = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=r'\langmuir::top.probe_{:03d}.label'.format(i)).data()
+                z = provider.data('langmuir', pulse, r'\langmuir::top.probe_{:03d}.z'.format(i))
+                pnum = provider.data('langmuir', pulse, r'\langmuir::top.probe_{:03d}.pnum'.format(i))
+                label = provider.data('langmuir', pulse, r'\langmuir::top.probe_{:03d}.label'.format(i))
                 printd('  Probe i={i:}, j={j:}, label={label:} passed the check; r={r:}, z={z:}'.format(**locals()), topic='machine')
                 ods['langmuir_probes.embedded'][j]['position.r'] = r
                 ods['langmuir_probes.embedded'][j]['position.z'] = z
@@ -1519,7 +1538,7 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                 ods['langmuir_probes.embedded'][j]['identifier'] = 'PROBE_{:03d}: PNUM={}'.format(i, pnum)
                 ods['langmuir_probes.embedded'][j]['name'] = str(label).strip()
                 if _get_measurements:
-                    t = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.time').data()
+                    t = provider.data('langmuir', pulse, rf'\langmuir::top.probe_{i:03d}.time')
                     ods['langmuir_probes.embedded'][j]['time'] = t
 
                     nodes = dict(
@@ -1542,12 +1561,14 @@ def langmuir_probes_data(ods, pulse, _get_measurements=True):
                         heatflux=1e3 * 1e4,  # kW cm^-2 --> W m^-2
                     )
                     for tdi_part, imas_part in nodes.items():
-                        mds_dat = mdsvalue('d3d', pulse=pulse, treename='langmuir', TDI=rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
-                        if np.array_equal(t, mds_dat.dim_of(0)):
-                            ods['langmuir_probes.embedded'][j][f'{imas_part}.data'] = mds_dat.data() * unit_conversions.get(tdi_part, 1)
+                        mds_dat_time = provider.dim_of('langmuir', pulse, rf'\langmuir::top.probe_{i:03d}.{tdi_part}', 0)
+                        if np.array_equal(t, mds_dat_time):
+                            mds_dat_data = provider.data('langmuir', pulse, rf'\langmuir::top.probe_{i:03d}.{tdi_part}')
+                            ods['langmuir_probes.embedded'][j][f'{imas_part}.data'] = mds_dat_data * unit_conversions.get(tdi_part, 1)
                         else:
                             raise ValueError('Time base for Langmuir probe {i:03d} does not match {tdi_part} data')
                 j += 1
+    return ods
 
 def add_n_i_charge_exchange():
     extra_structures = {}
@@ -1574,6 +1595,69 @@ def add_n_i_charge_exchange():
     extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
     add_extra_structures(extra_structures)
 
+
+# Element symbol -> (nuclear charge, mass number) for every species CERFIT can fit.
+# D is the only uncommon isotope in the list (different mass number than element atomic average for H) so a different letter is used
+CER_ELEMENTS = {
+    'D': (1, 2.0),
+    'He': (2, 4.0),
+    'Li': (3, 7.0),
+    'B': (5, 11.0),
+    'C': (6, 12.0),
+    'N': (7, 14.0),
+    'O': (8, 16.0),
+    'F': (9, 19.0),
+    'Ne': (10, 20.0),
+    'Al': (13, 27.0),
+    'Si': (14, 28.0),
+    'Ar': (18, 40.0),
+    'Ca': (20, 40.0),
+    'Kr': (36, 84.0),
+}
+
+ROMAN_DIGITS = {'I': 1, 'V': 5, 'X': 10}
+
+# '<element><charge state in Roman numerals><upper-lower transition>', e.g. 'C VI 8-7'.
+# Spaces are optional and the transition levels may carry orbital letters ('C IV 6h-7i').
+LINEID_PATTERN = re.compile('([A-Z][a-z]*) *([A-Z]*) *([0-9]*[a-z]*-[0-9]*[a-z]*)')
+
+
+def roman_to_int(roman):
+    total = 0
+    highest = 0
+    for char in reversed(roman):
+        value = ROMAN_DIGITS[char]
+        total += value if value >= highest else -value
+        highest = max(highest, value)
+    return total
+
+
+def parse_cer_lineid(lineid, sub, channel):
+    """Parse a CER CALIBRATION LINEID string into (label, a, z_ion, z_n).
+
+    Charge exchange measures the ion in the charge state it held *before* capturing the
+    beam electron, so the Roman numeral of the observed line is the ion charge: 'C VI 8-7'
+    is emitted by C5+ but reports the C6+ population, giving z_ion = 6. z_n stays the
+    nuclear charge of the element, so it is 6 for every carbon line including 'C IV'
+    (z_ion = 4). Do not collapse the two.
+    """
+    if lineid is None or isinstance(lineid, Exception):
+        raise ValueError(f'{sub} channel {channel:02d}: LINEID is missing')
+    if isinstance(lineid, np.ndarray):
+        lineid = lineid.item()
+    if isinstance(lineid, bytes):
+        lineid = lineid.decode()
+    match = LINEID_PATTERN.search(lineid)
+    element = match.group(1) if match else ''
+    roman = match.group(2) if match else ''
+    if element not in CER_ELEMENTS or not roman or not set(roman) <= set(ROMAN_DIGITS):
+        raise ValueError(f'{sub} channel {channel:02d}: cannot parse LINEID {lineid!r}')
+    z_n, a = CER_ELEMENTS[element]
+    z_ion = roman_to_int(roman)
+    symbol = 'H' if element == 'D' else element
+    return str(f'{round(a)}{symbol}{z_ion}'), a, float(z_ion), float(z_n)
+
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
@@ -1584,6 +1668,7 @@ def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
         CER analysis quality level like CERQUICK, CERAUTO, or CERFIT
     """
     unwrap(charge_exchange_data)(ods, pulse, analysis_type, _measurements=False)
+    return ods
 
 
 @machine_mapping_function(__regression_arguments__, pulse=168830)
@@ -1596,25 +1681,26 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
     """
 
     printd('Setting up DIII-D CER data...', topic='machine')
-
+    provider = ods.get_mds_provider('d3d')
     subsystems = ['TANGENTIAL', 'VERTICAL']
 
     # fetch
     TDIs = {}
-
     # look up reference
     look_up = {}
     # Number of channels in each system
     n_ch = {}
     active_channels = {}
     for sub in subsystems:
-        active_channels[sub] = np.asarray(exec_tdi('d3d', 'IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
+        active_channels[sub] = np.asarray(provider.raw('IONS', pulse, f'getnci("CER.{analysis_type}.{sub}.CHANNEL*:TIME","LENGTH")')) > 0
         n_ch[sub] = len(active_channels[sub]) 
         for channel in range(1, n_ch[sub]+1):
             if not active_channels[sub][channel - 1]:
                 continue
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+            # Ion identity is calibration data, so it is fetched independently of _measurements
+            TDIs[f'{sub}_{channel}_LINEID'] = f"CER.CALIBRATION.{sub}.CHANNEL{channel:02d}:LINEID"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'TEMP_ERR_PS', 'ROT', 'ROT_ERR', 'ROT_ERR_PS']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
@@ -1626,7 +1712,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 for pos in ['FZ', 'ZEFF', 'NZ']:
                     look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
                     
-    references = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=look_up).raw()
+    references = provider.raw('IONS', pulse, look_up)
     impcon_TDIs = {}
     impcon_tree_name = None
     SIGNAL_PATTERN = re.compile(r'::TOP\.([A-Z0-9_.:]+?)[\s",].*?"([A-Z0-9_]+)"')
@@ -1646,11 +1732,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
         impcon_TDIs[key] = new_path
         impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
     # fetch
-    data = mdsvalue('d3d', treename='IONS', pulse=pulse, TDI=TDIs).raw()
+    data = provider.raw('IONS', pulse, TDIs)
     if sys.version_info >= (3, 9):
-        data = data | mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()
+        data = data | provider.raw(impcon_tree_name, pulse, impcon_TDIs)
     else:
-        data = {**data, **mdsvalue('d3d', treename=impcon_tree_name, pulse=pulse, TDI=impcon_TDIs).raw()}
+        data = {**data, **provider.raw(impcon_tree_name, pulse, impcon_TDIs)}
     
     add_n_i_charge_exchange()
 
@@ -1665,10 +1751,15 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             ch = ods['charge_exchange.channel.+'] # + does the next channel
             ch['name'] = 'impCER_{}{:02d}'.format(sub, channel)
             ch['identifier'] = '{}{:02d}'.format(sub[0], channel)
+            label, a, z_ion, z_n = parse_cer_lineid(data[f'{sub}_{channel}_LINEID'], sub, channel)
+            ch['ion.0.label'] = label
+            ch['ion.0.a'] = a
+            ch['ion.0.z_ion'] = z_ion
+            ch['ion.0.z_n'] = z_n
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
                 chpos = ch['position'][pos.lower().split('_')[-1]]
-                chpos['time'] = postime
+                chpos['time'] = postime / 1000.0
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
             if _measurements:
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
@@ -1682,18 +1773,15 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                                                                   data[f'{sub}_{channel}_ROT_ERR_PS__data'] * 1000.0
                                                                   + data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
                 if not isinstance(data[f'{sub}_{channel}_FZ__data'], Exception):
-                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']/1000.0
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
                     ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
-                # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
-                # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
-                # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
-                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
+                    ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time'] / 1000.0
                     ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
-
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1706,13 +1794,11 @@ def magnetics_hardware(ods, pulse):
     # Handle cases where an MDSplus ID is passed instead of the pulse
     if len(str(pulse)) > 6:
         pulse = int(str(pulse)[:6])
-    
     filename = support_filenames('d3d', 'mhdin_ods.json', pulse)
     tmp_ods = ODS()
     tmp_ods.load(filename)
     ods["magnetics"] = tmp_ods["magnetics"].copy()
     return ods
-
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
@@ -1750,9 +1836,9 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000.0
+            provider = ods.get_mds_provider('d3d')
+            compsig_data = provider.data(None, pulse, f'ptdata("{compsig}",{pulse})')
+            compsig_time = provider.dim_of(None, pulse, f'ptdata("{compsig}",{pulse})', 0) / 1000.0
             for channel in ods['magnetics.flux_loop']:
                 if f'magnetics.flux_loop.{channel}.identifier' in ods1 and ods[f'magnetics.flux_loop.{channel}.flux.validity'] >= 0:
                     sig = ods1[f'magnetics.flux_loop.{channel}.identifier']
@@ -1768,7 +1854,9 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
     for k in ods1['magnetics.flux_loop']:
         identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw(None, pulse, TDIs)
     weights = D3Dmagnetics_weights(pulse, 'fwtsi')
     Ip = np.interp(ods[f'magnetics.flux_loop.0.flux.time'], ods1[f'magnetics.ip.0.time'], ods1[f'magnetics.ip.0.data']) # assuming all probes have the same time basis (expected, more efficient)
     for k in ods1['magnetics.flux_loop']:
@@ -1814,6 +1902,7 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
                 uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
                 ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
+    return ods
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
@@ -1851,9 +1940,9 @@ def magnetics_probes_data(ods, pulse):
         for compsig in comp[compshot]:
             if compsig == 'N1COIL' and pulse > 112962:
                 continue
-            m = mdsvalue('d3d', pulse=pulse, TDI=f'ptdata2("{compsig}",{pulse})', treename=None)
-            compsig_data = m.data()
-            compsig_time = m.dim_of(0) / 1000
+            provider = ods.get_mds_provider('d3d')
+            compsig_data = provider.data(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]")
+            compsig_time = provider.dim_of(None, pulse, f"[ptdata2(\"{compsig}\",{pulse})]", 0) / 1000.0
             for channel in ods1['magnetics.b_field_pol_probe']:
                 if (
                     f'magnetics.b_field_pol_probe.{channel}.identifier' in ods1
@@ -1873,8 +1962,11 @@ def magnetics_probes_data(ods, pulse):
     for k in ods1['magnetics.b_field_pol_probe']:
         identifier = ods1[f'magnetics.b_field_pol_probe.{k}.identifier'].upper()
         TDIs[identifier] = f'pthead2("{identifier}",{pulse}), __rarray'
-    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw(None, pulse, TDIs)
     weights = D3Dmagnetics_weights(pulse, 'fwtmp2')
+
     for k in ods1['magnetics.b_field_pol_probe']:
         nt = len(ods[f'magnetics.b_field_pol_probe.{k}.field.data'])
         if ods[f'magnetics.b_field_pol_probe.{k}.field.validity'] == -2:
@@ -1909,15 +2001,18 @@ def ip_bt_dflux_data(ods, pulse):
     with omas_environment(ods, cocosio=7):
         TDIs = {}
         for key, val in mappings.items():
-            TDIs[key + '.data'] = f'ptdata2("{val}",{pulse})'
-            TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)/1000.'
+            TDIs[key + '.data'] = f'ptdata("{val}",{pulse})'
+            TDIs[key + '.time'] = f'dim_of(ptdata2("{val}",{pulse}),0)'
             TDIs[key + '.data_error_upper'] = f'pthead2("{val}",{pulse}), __rarray'
 
-        data = mdsvalue('d3d', None, pulse, TDIs).raw()
+        provider = ods.get_mds_provider('d3d')
+        data = provider.raw(None, pulse, TDIs)
         for key in TDIs.keys():
             if 'data_error_upper' in key:
                 nt = len(ods[key[:-12]])
                 ods[key] = abs(data[key][3] * data[key][4]) * np.ones(nt) * 10.0
+            elif 'time' in key:
+                ods[key] = data[key] / 1000.0
             else:
                 ods[key] = data[key]
 
@@ -2034,17 +2129,18 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query[entry] = omfit_profiles_node + query[entry]
         for entry in uncertain_entries:
             query[entry + "_error_upper"] = "error_of(" + query[entry] + ")"
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI=query).raw()
+        # Get MDS provider from ODS instance (cached per server)
+        provider = ods.get_mds_provider('d3d')
+        data = provider.raw(PROFILES_tree, pulse_id, query)
         if data is None:
             print("No MDSplus data")
             raise ValueError(f"Could not find any data in MDSplus for {pulse} and {PROFILES_tree}")
-        dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
+        data['time'] = provider.dim_of(PROFILES_tree, pulse_id, "\\TOP.n_e", 1) * 1.e-3
+        psi_n = provider.dim_of(PROFILES_tree, pulse_id, "\\TOP.n_e", 0)
         if core_profiles_strict_grid:
             mask = data["grid.rho_tor_norm"] <= 1.0
         else:
             mask = np.ones(data["grid.rho_tor_norm"].shape, dtype=bool)
-        data['time'] = dim_info.dim_of(1) * 1.e-3
-        psi_n = dim_info.dim_of(0)
         data['grid.rho_pol_norm'] = np.zeros((data['time'].shape + psi_n.shape))
         data['grid.rho_pol_norm'][:] = np.sqrt(psi_n)
         # for density_thermal in densities:
@@ -2112,7 +2208,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         # (psi_norm index 0) and psi_boundary (interpolated at psi_norm = 1.0)
         # from the transformed full profile.
         if not isinstance(data["grid.psi"], Exception):
-            cocosio = MDS_gEQDSK_COCOS_identify('d3d', pulse, 'EFIT01')
+            cocosio = MDS_gEQDSK_COCOS_identify(ods, 'd3d', pulse, 'EFIT01')
             psi_full = data["grid.psi"] * cocos_transform(cocosio, 11)["PSI"]
             for i_time, time in enumerate(data["time"]):
                 ods[f"{sh}[{i_time}].grid.psi"] = psi_full[i_time][mask[i_time]]
@@ -2151,7 +2247,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             query["time__" + entry] = f"dim_of({query[entry]},1)"
             query["rho__" + entry] = f"dim_of({query[entry]},0)"
 
-        data = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse, TDI=query).raw()
+        provider = ods.get_mds_provider('d3d')
+        data = provider.raw(PROFILES_tree, pulse, query)
 
         # processing
         for entry in data.keys():
@@ -2168,7 +2265,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             elif "rotation" in entry:
                 data[entry] *= 1E3 # in [rad/s]
 
-        time = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME/1000.", treename="EFIT01").raw()
+        time = provider.raw("EFIT01", pulse, "\\TOP.RESULTS.GEQDSK.GTIME/1000.")
         # every ZIPFIT profile has the same spatial grid so use whatever is first in query
         for entry in query.keys():
             if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
@@ -2211,19 +2308,21 @@ def core_profiles_global_quantities_data(ods, pulse, PROFILES_tree="ZIPFIT01", P
         gq = ods['core_profiles.global_quantities']
 
         if 'time' not in cp:
+            provider = ods.get_mds_provider('d3d')
             if "ZIPFIT0" in PROFILES_tree:
-                m = mdsvalue('d3d', pulse=pulse, TDI="\\TOP.RESULTS.GEQDSK.GTIME", treename="EFIT01")
-                cp['time'] = m.raw() * 1e-3
+                cp['time'] = provider.dim_of(PROFILES_tree, pulse, "\\TOP.PROFILES.EDENSFIT", 1) * 1e-3
             elif "OMFIT_PROFS" in PROFILES_tree and PROFILES_run_id is not None:
                 pulse_id = int(str(pulse) + PROFILES_run_id)
-                dim_info = mdsvalue('d3d', treename=PROFILES_tree, pulse=pulse_id, TDI="\\TOP.n_e")
-                cp['time'] = dim_info.dim_of(1) * 1.e-3
+                cp['time'] = provider.dim_of(PROFILES_tree, pulse_id, "\\TOP.n_e", 1) * 1.e-3
             else:
                 raise ValueError(f"Trying to access global_quantities with unknown profiles tree: {PROFILES_tree}")
         t = cp['time']
 
-        m = mdsvalue('d3d', pulse=pulse, TDI=f"ptdata2(\"VLOOP\",{pulse})", treename=None)
-        gq['v_loop'] = interp1d(m.dim_of(0) * 1e-3, m.data(), bounds_error=False, fill_value=np.nan)(t)
+        provider = ods.get_mds_provider('d3d')
+        vloop_time = provider.dim_of(None, pulse, f"ptdata2(\"VLOOP\",{pulse})", 0) * 1e-3
+        vloop_data = provider.data(None, pulse, f"ptdata2(\"VLOOP\",{pulse})")
+        gq['v_loop'] = interp1d(vloop_time, vloop_data, bounds_error=False, fill_value=np.nan)(t)
+    return ods
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -2233,7 +2332,8 @@ def wall(ods, pulse, EFIT_tree="EFIT01", EFIT_run_id=None):
         run = int(str(pulse) + str(EFIT_run_id))
         if EFIT_tree != "EFIT":
             raise ValueError(f"Invalid EFIT tree for specifying EFIT_run_id: {EFIT_tree}")
-    lim = mdsvalue('d3d', treename=EFIT_tree, pulse=run, TDI="\\TOP.RESULTS.GEQDSK.LIM").raw()
+    provider = ods.get_mds_provider('d3d')
+    lim = provider.raw(EFIT_tree, run, "\\TOP.RESULTS.GEQDSK.LIM")
     ods["wall.description_2d.0.limiter.unit.0.outline.r"] = lim[:,0]
     ods["wall.description_2d.0.limiter.unit.0.outline.z"] = lim[:,1]
     ods["wall.description_2d.0.limiter.type.index"] = 0
@@ -2301,7 +2401,8 @@ def reflectometer_data(ods, pulse):
     TDIs['full_profile_R'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:R'
     TDIs['full_profile_density'] = f'\\ELECTRONS::TOP.REFLECT.FULL_PROF:DENSITY'
 
-    data = mdsvalue('d3d', 'ELECTRONS', pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw('ELECTRONS', pulse, TDIs)
 
     # assign
     time = None
@@ -2364,17 +2465,24 @@ def summary(ods, pulse):
     with omas_environment(ods):
 
         # prad_tot
+        provider = ods.get_mds_provider('d3d')
         try: # eg for 133221
-            prad_tot = mdsvalue('d3d', "BOLOM", pulse, "\\BOLOM::PRAD_TOT")
-            ods['summary.time'] = prad_tot.dim_of(0)/1000.0
-            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -prad_tot.data()
+            prad_tot_data = provider.data("BOLOM", pulse, "\\BOLOM::PRAD_TOT")
+            prad_tot_time = provider.dim_of("BOLOM", pulse, "\\BOLOM::PRAD_TOT", 0)
+            ods['summary.time'] = prad_tot_time/1000.0
+            ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -prad_tot_data
         except Exception:
             TDIs = {} # eg for 194306
             TDIs["prad_tot.data"] = f"ptdata2(\"prad_tot\",{pulse})"
-            TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)/1000"
-            data = mdsvalue('d3d', None, pulse, TDIs).raw()
-            ods['summary.time'] = data["prad_tot.time"]
+            TDIs["prad_tot.time"] = f"dim_of(ptdata2(\"prad_tot\",{pulse}),0)"
+            data = provider.raw(None, pulse, TDIs)
+            ods['summary.time'] = data["prad_tot.time"] / 1000.0
             ods['summary.global_quantities.power_radiated_inside_lcfs.value'] = -data["prad_tot.data"]
 
 if __name__ == '__main__':
-    test_machine_mapping_functions('d3d', ["interferometer_data"], globals(), locals())
+    # Test ALL machine mapping functions (skip OMFIT-dependent ones in test environments)
+    test_machine_mapping_functions('d3d', __all__, globals(), locals(), compare_to_toksearch=True)
+    
+    # Backend comparison testing (new feature)
+    # Uncomment the line below to test backend consistency for compatible functions
+    # test_machine_mapping_functions('d3d', __all__, globals(), locals(), compare_to_toksearch=True)
