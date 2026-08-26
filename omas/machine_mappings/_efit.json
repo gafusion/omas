@@ -29,16 +29,10 @@
  "equilibrium.time_slice.:.boundary_separatrix.outline.z": {
   "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.:.r": {
   "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.1.r": {
-  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.0.z": {
-  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.1.z": {
+ "equilibrium.time_slice.:.boundary_separatrix.x_point.:.z": {
   "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.strike_point.:.r": {
