@@ -1,484 +1,119 @@
 {
  "__cocos_rules__": {
   "EFIT_tree": {
-   "eval2TDI": "py2tdi(TDI_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')",
-   "PYTHON": "MDS_gEQDSK_COCOS_identify(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
+    "PYTHON": "MDS_gEQDSK_COCOS_identify(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
   }
  },
- "equilibrium.code.name": {
-  "EVAL": "{EFIT_tree!r}"
- },
- "equilibrium.code.version": {
-  "EVAL": "{EFIT_tree!r}"
- },
-
- "equilibrium.ids_properties.homogeneous_time": {
-   "VALUE": 1
-  },
- "equilibrium.time": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.time": {
-  "TDI": "\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME/1000.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:": {
-  "TDI": "size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.GTIME)",
-  "treename": "{EFIT_tree}"
- },
+ 
  "equilibrium.time_slice.:.boundary.outline.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary.outline.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary.x_point.:": {
-   "VALUE":2
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary.x_point.0.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary.x_point.1.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary.x_point.0.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary.x_point.1.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.outline.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.outline.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',0)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.x_point.:": {
-   "VALUE":2
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.0.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.1.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.0.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.x_point.1.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',0)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)/100.",
-  "treename": "{EFIT_tree}"
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.:.r": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.z": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.:": {
-   "VALUE":4
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.0.name": {
-  "VALUE": "inboard"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.0.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
-  "VALUE": "outboard"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.2.name": {
-  "VALUE": "top"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.2.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.3.name": {
-  "VALUE": "bottom"
- },
- "equilibrium.time_slice.:.boundary_separatrix.gap.3.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.:": {
-   "VALUE":4
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.0.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.0.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.1.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.2.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.r": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.strike_point.3.z": {
-  "NANFILTER": true,
-  "eval2TDI": "py2tdi(nan_where,'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU/100.','\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU/100.',-0.89)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.triangularity_upper": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TRITOP)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.triangularity_lower": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.TRIBOT)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.elongation": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.KAPPA)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)/100.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.boundary_separatrix.psi": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.constraints.ip.measured": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.ip.measured_error_upper": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.ip.weight": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.ip.reconstructed": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.ip.chi_squared": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:.measured": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:.measured_error_upper": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:.weight": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:.reconstructed": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.bpol_probe.:.chi_squared": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.diamagnetic_flux.measured_error_upper": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.diamagnetic_flux.weight": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.diamagnetic_flux.reconstructed": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.diamagnetic_flux.chi_squared": {
-  "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:.measured": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:.measured_error_upper": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:.weight": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:.reconstructed": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.flux_loop.:.chi_squared": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured_error_upper": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.weight": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.reconstructed": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.chi_squared": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
+ "equilibrium.time_slice.:.boundary_separatrix.strike_point.:.z": {
+  "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured_error_upper": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.weight": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.reconstructed": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.chi_squared": {
-  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+  "PYTHON": "efit.pf_current_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
-  "equilibrium.time_slice.:.constraints.pressure.:": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
- },
+
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured_error_upper": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.weight": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.reconstructed": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.chi_squared": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
+  "PYTHON": "efit.pressure_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
-  "PYTHON": "constraint_psi_to_real_psi(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'RPRESS', EFIT_run_id={EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.constraints.j_tor.:": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'VZEROJ', EFIT_run_id={EFIT_run_id!r})"
+  "PYTHON": "efit.psi_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
-  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'VZEROJ', EFIT_run_id={EFIT_run_id!r})"
+  "PYTHON": "efit.jtor_measurements(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.position.psi": {
-  "PYTHON": "constraint_psi_to_real_psi(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'SIZEROJ', EFIT_run_id={EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.global_quantities.ip": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.li_3": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.LI3)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.magnetic_axis.r": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RMAXIS)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.magnetic_axis.z": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZMAXIS)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.magnetic_axis.b_field_tor": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BT0)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.psi_axis": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.psi_boundary": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.area": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)/10000.",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.surface": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.PSURFA)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.volume": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.VOLUME)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.beta_pol": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAP)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.beta_tor": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAT)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.beta_normal": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.BETAN)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.q_95": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.Q95)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.q_axis": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.Q0)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.global_quantities.q_min.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.QMIN)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.dpressure_dpsi": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PPRIME)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.f": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.FPOL)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.f_df_dpsi": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.FFPRIM)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.pressure": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PRES)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.psi_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_1d.psi": {
-  "eval2TDI": "py2tdi(geqdsk_psi,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.q": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.QPSI)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.profiles_1d.rho_tor_norm": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RHOVN)",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.psi_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_1d.j_tor": {
-  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JEFF','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.fluxfun_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_1d.j_parallel": {
-  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JLL','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.fluxfun_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_1d.volume": {
-  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.VOL','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
-  "treename": "{EFIT_tree}"
+  "PYTHON": "efit.fluxfun_profiles(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.profiles_2d.:": {
-  "VALUE": 1
- },
+
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim1": {
-  "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.R','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "PYTHON": "efit.grid_2d_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid.dim2": {
-  "eval2TDI": "py2tdi(tile,'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.Z','size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-  "treename": "{EFIT_tree}",
-  "TRANSPOSE": [1,0,2]
+  "PYTHON": "efit.grid_2d_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.profiles_2d.:.grid_type.index": {
-    "eval2TDI": "py2tdi(tile,1,'size(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)')",
-    "treename": "{EFIT_tree}",
-    "TRANSPOSE": [1,0]
+  "PYTHON": "efit.grid_2d_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
- "equilibrium.time_slice.:.profiles_2d.:.psi": {
-  "TDI": "[data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIRZ)]",
-  "TRANSPOSE": [
-   1,
-   0,
-   3,
-   2
-  ],
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.vacuum_toroidal_field.b0": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.vacuum_toroidal_field.r0": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RZERO)[0]",
-  "treename": "{EFIT_tree}"
- },
+
  "equilibrium.time_slice.:.convergence.iterations_n": {
-  "PYTHON": "efit_iteration_number(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
- },
- "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ERROR)",
-  "treename": "{EFIT_tree}"
- },
- "equilibrium.time_slice.:.convergence.grad_shafranov_deviation_expression.index": {
-  "EVAL": "3"
+  "PYTHON": "efit.convergence_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  }
 }

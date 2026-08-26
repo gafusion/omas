@@ -565,8 +565,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
         m = os.path.splitext(os.path.split(filename)[1])[0]
-        # Allow backend-specific mappings (e.g., _efit_toksearch.json) alongside regular machine mappings
-        if not m.startswith('_') or m.startswith('_efit_toksearch'):
+        if not m.startswith('_'):
             _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines

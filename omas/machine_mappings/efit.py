@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.interpolate import interp1d
 from omas import *
 from omas.omas_utils import printd, printe
 from omas.machine_mappings._common import *
@@ -13,128 +14,88 @@ __regression_arguments__ = {'__all__': __all__, "requires_omfit": []}
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
 def equilibrium_time_slice_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
-    Load EFIT equilibrium time slice data that requires complex TDI expressions
-    
-    This function replaces the complex py2tdi expressions in _efit.json that
+    Load EFIT boundary outline, X-point and strike point data
+
+    This function replaces the py2tdi(nan_where, ...) expressions in _efit.json that
     TokSearch cannot handle, providing backend-agnostic access to EFIT data.
-    
+
     :param ods: OMAS ODS instance
+    :param machine: machine name
     :param pulse: shot number
-    :param EFIT_tree: EFIT tree name (e.g., 'EFIT01', 'EFIT02')  
+    :param EFIT_tree: EFIT tree name (e.g., 'EFIT01', 'EFIT02')
     :param EFIT_run_id: run id extension for pulse number
     """
-    printd(f'Loading EFIT equilibrium data from {EFIT_tree}...', topic='machine')
-    
+    printd(f'Loading EFIT boundary data from {EFIT_tree}...', topic='machine')
+
     # Get provider from ODS
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
-    
-    # Fetch only data requiring NaN filtering (not available via simple TDI)
-    printd('Loading EFIT data requiring NaN filtering...', topic='machine')
+
+    # The strike points are fetched undivided because the -0.89 sentinel is a property
+    # of the stored value, not of the value scaled by 1/100.
     TDIs = {
         # Boundary data requiring NaN filtering
         'rbbbs': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
         'zbbbs': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.ZBBBS',
         # X-point data requiring NaN filtering
         'rxpt1': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT1',
-        'zxpt1': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1', 
+        'zxpt1': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT1',
         'rxpt2': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RXPT2',
         'zxpt2': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZXPT2',
-        # Strike point data requiring NaN filtering (with /100. conversion)
-        'rvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID/100.',
-        'zvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID/100.',
-        'rvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD/100.',
-        'zvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD/100.',
-        'rvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU/100.',
-        'zvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU/100.',
-        'rvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU/100.',
-        'zvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU/100.'
+        # Strike point data requiring NaN filtering
+        'rvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSID',
+        'zvsid': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSID',
+        'rvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOD',
+        'zvsod': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOD',
+        'rvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSIU',
+        'zvsiu': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSIU',
+        'rvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RVSOU',
+        'zvsou': f'\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZVSOU'
     }
-    
+
     # Single provider call for all data
     efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
     with omas_environment(ods, cocosio=MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)):
-        # Get time data just for array sizing (time data is handled by simple TDI expressions)
-        # We need this just to know how many time slices to process
-        n_times = len(efit_data['rbbbs']) if len(efit_data['rbbbs'].shape) > 1 else 1
-        
-        # Process boundary data with NaN filtering
-        rbbbs = efit_data['rbbbs'] 
-        zbbbs = efit_data['zbbbs']
-        
-        # Set NaN where R boundary is 0 (invalid data)
-        rbbbs[rbbbs == 0] = np.nan
-        zbbbs[rbbbs == 0] = np.nan  # Use same mask for Z
-        
-        # Set boundary data for all time slices
+        # Boundary outline: RBBBS == 0 marks the unused tail of the fixed size arrays,
+        # and masks Z as well so that both keep the same length once the NaNs are dropped
+        rbbbs = np.atleast_2d(efit_data['rbbbs'])
+        zbbbs = np.atleast_2d(efit_data['zbbbs'])
+        unset = rbbbs == 0
+        rbbbs[unset] = np.nan
+        zbbbs[unset] = np.nan
+
+        n_times = rbbbs.shape[0]
         for i in range(n_times):
-            if i < rbbbs.shape[0]:
-                ods['equilibrium']['time_slice'][i]['boundary']['outline']['r'] = rbbbs[i, :]
-                ods['equilibrium']['time_slice'][i]['boundary']['outline']['z'] = zbbbs[i, :]
-        
-        # Process X-point data with NaN filtering
-        rxpt1 = efit_data['rxpt1']
-        zxpt1 = efit_data['zxpt1'] 
-        rxpt2 = efit_data['rxpt2']
-        zxpt2 = efit_data['zxpt2']
-        
-        # Set NaN where X-point data is 0 (invalid)
-        rxpt1[rxpt1 == 0] = np.nan
-        zxpt1[rxpt1 == 0] = np.nan
-        rxpt2[rxpt2 == 0] = np.nan  
-        zxpt2[rxpt2 == 0] = np.nan
-        
-        # Set X-point data for all time slices (up to 2 X-points)
-        for i in range(n_times):
-            time_slice = ods['equilibrium']['time_slice'][i]
-            
-            # Set X-point array size
-            if i < rxpt1.shape[0]:
-                time_slice['boundary']['x_point'][0]['r'] = rxpt1[i]
-                time_slice['boundary']['x_point'][0]['z'] = zxpt1[i]
-                
-            if i < rxpt2.shape[0]:
-                time_slice['boundary']['x_point'][1]['r'] = rxpt2[i] 
-                time_slice['boundary']['x_point'][1]['z'] = zxpt2[i]
-        
-        # Process strike point data with NaN filtering (nan_where with -0.89 threshold)
-        strike_data = {
-            'rvsid': efit_data['rvsid'], 'zvsid': efit_data['zvsid'],
-            'rvsod': efit_data['rvsod'], 'zvsod': efit_data['zvsod'], 
-            'rvsiu': efit_data['rvsiu'], 'zvsiu': efit_data['zvsiu'],
-            'rvsou': efit_data['rvsou'], 'zvsou': efit_data['zvsou']
-        }
-        
-        # Apply nan_where logic: set NaN where data equals -0.89
-        for key in strike_data:
-            strike_data[key][strike_data[key] == -0.89] = np.nan
-        
-        # Set strike point data for all time slices (4 strike points)
-        for i in range(n_times):
-            time_slice = ods['equilibrium']['time_slice'][i]
-            
-            # Strike point 0 (RVSID, ZVSID)
-            if i < strike_data['rvsid'].shape[0]:
-                time_slice['boundary_separatrix']['strike_point'][0]['r'] = strike_data['rvsid'][i]
-                time_slice['boundary_separatrix']['strike_point'][0]['z'] = strike_data['zvsid'][i]
-            
-            # Strike point 1 (RVSOD, ZVSOD)
-            if i < strike_data['rvsod'].shape[0]:
-                time_slice['boundary_separatrix']['strike_point'][1]['r'] = strike_data['rvsod'][i]
-                time_slice['boundary_separatrix']['strike_point'][1]['z'] = strike_data['zvsod'][i]
-            
-            # Strike point 2 (RVSIU, ZVSIU)
-            if i < strike_data['rvsiu'].shape[0]:
-                time_slice['boundary_separatrix']['strike_point'][2]['r'] = strike_data['rvsiu'][i]
-                time_slice['boundary_separatrix']['strike_point'][2]['z'] = strike_data['zvsiu'][i]
-            
-            # Strike point 3 (RVSOU, ZVSOU)
-            if i < strike_data['rvsou'].shape[0]:
-                time_slice['boundary_separatrix']['strike_point'][3]['r'] = strike_data['rvsou'][i]
-                time_slice['boundary_separatrix']['strike_point'][3]['z'] = strike_data['zvsou'][i]
-        
-        # Note: Global quantities, vacuum field, COCOS, and code info are handled by simple TDI expressions
-        
+            valid = ~np.isnan(rbbbs[i])
+            for boundary in ['boundary', 'boundary_separatrix']:
+                ods['equilibrium']['time_slice'][i][boundary]['outline']['r'] = rbbbs[i][valid]
+                ods['equilibrium']['time_slice'][i][boundary]['outline']['z'] = zbbbs[i][valid]
+
+        # X-points: a 0 means no X-point was found at that time
+        for i in range(len(efit_data['rxpt1'])):
+            n = 0
+            for k, (r_node, z_node) in enumerate([('rxpt1', 'zxpt1'), ('rxpt2', 'zxpt2')]):
+                r = np.atleast_1d(efit_data[r_node])
+                z = np.atleast_1d(efit_data[z_node])
+                # Do not append points that do not actually hold an X-point
+                if r[i] <= 0.0:
+                    continue
+                for boundary in ['boundary', 'boundary_separatrix']:
+                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['r'] = r[i]
+                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['z'] = z[i] / 1.e2
+                n += 1
+        # Only add strike points with R > 0.0
+        for i in range(len(efit_data['rvsid'])):
+            n = 0
+            for k, (r_node, z_node) in enumerate([('rvsid', 'zvsid'), ('rvsod', 'zvsod'), ('rvsiu', 'zvsiu'), ('rvsou', 'zvsou')]):
+                r = np.atleast_1d(efit_data[r_node])
+                z = np.atleast_1d(efit_data[z_node])
+                # Do not append points that do not actually hold a strike point
+                if r[i] <= 0.0:
+                    continue
+                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['r'] = r[i]
+                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['z'] = z[i] / 1.e2
+                n += 1
         printd(f'Successfully loaded EFIT data for {n_times} time slices', topic='machine')
     return ods
 
@@ -148,7 +109,7 @@ def pf_current_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id
     """
     printd(f'Loading PF current measurements from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d') 
+    provider = ods.get_mds_provider(machine) 
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get E-coil and F-coil current measurements
@@ -208,7 +169,7 @@ def psi_profiles(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     printd(f'Loading PSI profiles from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get data for complex PSI transformations (simple PSI data handled by TDI expressions)
@@ -272,6 +233,49 @@ def psi_profiles(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
+def fluxfun_profiles(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
+    """
+    Load the FLUXFUN profiles interpolated onto the GEQDSK psi grid
+
+    Replaces py2tdi(interpolate_psi_1d, ...) expressions for TokSearch compatibility
+    """
+    printd(f'Loading FLUXFUN profiles from {EFIT_tree}...', topic='machine')
+
+    provider = ods.get_mds_provider(machine)
+    pulse_id = get_pulse_id(pulse, EFIT_run_id)
+
+    TDIs = {
+        'ssimag': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG',
+        'ssibry': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY',
+        'psin': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN',
+        'psi': f'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI',
+        'j_tor': f'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JEFF',
+        'j_parallel': f'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JLL',
+        'volume': f'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.VOL'
+    }
+
+    efit_data = provider.raw(EFIT_tree, pulse_id, TDIs)
+
+    # interpolate_psi_1d algorithm from python_tdi.py: the FLUXFUN quantities live on
+    # their own psi grid and are interpolated onto the geqdsk_psi grid, holding the
+    # end values constant outside the range
+    ssimag = efit_data['ssimag']
+    ssibry = efit_data['ssibry']
+    n = len(efit_data['psin'])
+    geqdsk_psi = ssimag[:, None] + np.linspace(0, 1, n) * (ssibry[:, None] - ssimag[:, None])
+    x1 = efit_data['psi'].T
+
+    with omas_environment(ods, cocosio=MDS_gEQDSK_COCOS_identify(ods, machine, pulse, EFIT_tree, EFIT_run_id)):
+        for entry in ['j_tor', 'j_parallel', 'volume']:
+            y1 = efit_data[entry].T
+            for i in range(x1.shape[0]):
+                fill_value = (y1[i][0], y1[i][-1])
+                interpolator = interp1d(x1[i], y1[i], kind='cubic', bounds_error=False, fill_value=fill_value)
+                ods['equilibrium']['time_slice'][i]['profiles_1d'][entry] = interpolator(geqdsk_psi[i])
+    return ods
+
+# ================================
+@machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
 def grid_2d_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     Load 2D grid data that requires tiling operations
@@ -280,7 +284,7 @@ def grid_2d_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     printd(f'Loading 2D grid data from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get grid data
@@ -312,7 +316,7 @@ def grid_2d_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=194844, EFIT_tree='EFIT01', EFIT_run_id='')
-def convergence_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
+def convergence_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     Load convergence data that requires complex axis operations
     
@@ -320,7 +324,7 @@ def convergence_data(ods, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     printd(f'Loading convergence data from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get convergence error data
@@ -362,7 +366,7 @@ def pressure_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id='
     """
     printd(f'Loading pressure measurements from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get pressure measurement data  
@@ -423,7 +427,7 @@ def jtor_measurements(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_run_id=''):
     """
     printd(f'Loading j_tor measurements from {EFIT_tree}...', topic='machine')
     
-    provider = ods.get_mds_provider('d3d')
+    provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
     
     # Get j_tor measurement data
