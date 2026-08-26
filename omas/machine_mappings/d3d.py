@@ -1708,7 +1708,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     else:
                         pos1 = pos
                     TDIs[f'{sub}_{channel}_{pos}__data'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}"
-                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)/1000"
+                    TDIs[f'{sub}_{channel}_{pos}__time'] = f"dim_of(CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos1}, 0)"
                 for pos in ['FZ', 'ZEFF', 'NZ']:
                     look_up[f'{sub}_{channel}_{pos}__data'] = f"TCL('decomp IMPDENS.{analysis_type}.{pos}{sub[0]}{channel}', _output), _output"
                     
@@ -1730,7 +1730,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
         else:
             assert impcon_tree_name==tree_name, "References to multiple IMCPON trees in one IMPDENS analysis type are not supported."
         impcon_TDIs[key] = new_path
-        impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)/1000"
+        impcon_TDIs[key.replace("_data", "_time")] = f"dim_of({new_path},0)"
     # fetch
     data = provider.raw('IONS', pulse, TDIs)
     if sys.version_info >= (3, 9):
@@ -1747,7 +1747,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             postime = data[f'{sub}_{channel}_TIME']
             if isinstance(postime, Exception):
                 continue
-            postime = postime / 1000.0  # Convert ms to s
             ch = ods['charge_exchange.channel.+'] # + does the next channel
             ch['name'] = 'impCER_{}{:02d}'.format(sub, channel)
             ch['identifier'] = '{}{:02d}'.format(sub[0], channel)
@@ -1763,12 +1762,12 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 chpos['data'] = posdat * -np.pi / 180.0 if pos == 'VIEW_PHI' and not isinstance(posdat, Exception) else posdat
             if _measurements:
                 if not isinstance(data[f'{sub}_{channel}_TEMP__data'], Exception):
-                    ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time']
+                    ch['ion.0.t_i.time'] = data[f'{sub}_{channel}_TEMP__time'] / 1000.e0
                     ch['ion.0.t_i.data'] = unumpy.uarray(data[f'{sub}_{channel}_TEMP__data'], 
                                                          data[f'{sub}_{channel}_TEMP_ERR_PS__data']
                                                          + data[f'{sub}_{channel}_TEMP_ERR__data'])
                 if not isinstance(data[f'{sub}_{channel}_ROT__data'], Exception):
-                    ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']
+                    ch['ion.0.velocity_tor.time'] = data[f'{sub}_{channel}_ROT__time']/1000.0
                     ch['ion.0.velocity_tor.data'] = unumpy.uarray(data[f'{sub}_{channel}_ROT__data'] * 1000.0, 
                                                                   data[f'{sub}_{channel}_ROT_ERR_PS__data'] * 1000.0
                                                                   + data[f'{sub}_{channel}_ROT_ERR__data'] * 1000.0) # from Km/s to m/s
@@ -1776,7 +1775,7 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                     ch['ion.0.n_i_over_n_e.time'] = data[f'{sub}_{channel}_FZ__time']/1000.0
                     ch['ion.0.n_i_over_n_e.data'] = data[f'{sub}_{channel}_FZ__data'] * 0.01
                 if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
-                    ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
+                    ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']/1000.0
                     ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
                     ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time'] / 1000.0
