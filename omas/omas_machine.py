@@ -248,7 +248,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                 # Add machine specific module
                 call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
             local_vars = {"ods": ods}
-            exec("ods = " +  call_w_update_mapping, globals(), local_vars)
+            exec(call_w_update_mapping, globals(), local_vars)
             ods = local_vars['ods']
             if isinstance(cache, dict):
                 cache[call] = ods

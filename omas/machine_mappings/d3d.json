@@ -2,7 +2,7 @@
  "__cocos_rules__": {},
  "__include__": [
   "_common",
-  "_efit"
+  "_efit_no_py2tdi"
  ],
  "__mdsserver__": "atlas.gat.com:8000",
  "__options__": {
