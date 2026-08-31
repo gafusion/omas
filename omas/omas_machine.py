@@ -248,7 +248,7 @@ def resolve_mapped(ods, machine, pulse,  mappings, location, idm, options_with_d
                 # Add machine specific module
                 call_w_update_mapping = machine + "." + call[:-1] + ", update_callback=update_mapping)"
             local_vars = {"ods": ods}
-            exec("ods = " +  call_w_update_mapping, globals(), local_vars)
+            exec(call_w_update_mapping, globals(), local_vars)
             ods = local_vars['ods']
             if isinstance(cache, dict):
                 cache[call] = ods
@@ -565,8 +565,7 @@ svn export --force https://github.com/gafusion/omas.git/{svn_branch}/omas/machin
     _machines_dict[branch] = {}
     for filename in glob.glob(f'{dir}/*.json'):
         m = os.path.splitext(os.path.split(filename)[1])[0]
-        # Allow backend-specific mappings (e.g., _efit_toksearch.json) alongside regular machine mappings
-        if not m.startswith('_') or m.startswith('_efit_toksearch'):
+        if not m.startswith('_'):
             _machines_dict[branch][m] = os.path.abspath(filename)
 
     # return list of supported machines
