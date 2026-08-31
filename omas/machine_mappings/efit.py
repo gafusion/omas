@@ -82,7 +82,7 @@ def equilibrium_time_slice_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_ru
                     continue
                 for boundary in ['boundary', 'boundary_separatrix']:
                     ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['r'] = r[i]
-                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['z'] = z[i] / 1.e2
+                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['z'] = z[i]
                 n += 1
         # Only add strike points with R > 0.0
         for i in range(len(efit_data['rvsid'])):
