@@ -683,7 +683,7 @@ def ec_launcher_active_hardware(ods, pulse):
 
 # GAS string -> mass number (A). A fired beam reports one of these;
 # an unfired beam reports an empty string (after stripping).
-NBI_GAS_A = {'H1': 1.0, 'D2': 2.0, 'He3': 3.0, 'He4': 4.0}
+NBI_GAS_A = {'H2': 1.0, 'D2': 2.0, 'HE': 4.0}
 
 
 @machine_mapping_function(__regression_arguments__, pulse=180893)
