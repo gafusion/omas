@@ -71,6 +71,12 @@
  "charge_exchange.channel.:.ion.:": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.a": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.label": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.n_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
@@ -100,6 +106,12 @@
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.ion.:.velocity_tor.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.z_ion": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.z_n": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
