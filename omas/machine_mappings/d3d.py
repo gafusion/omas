@@ -681,6 +681,11 @@ def ec_launcher_active_hardware(ods, pulse):
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
+# GAS string -> mass number (A). A fired beam reports one of these;
+# an unfired beam reports an empty string (after stripping).
+NBI_GAS_A = {'H2': 1.0, 'D2': 2.0, 'HE': 4.0}
+
+
 @machine_mapping_function(__regression_arguments__, pulse=180893)
 def nbi_active_hardware(ods, pulse):
     beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
@@ -716,8 +721,9 @@ def nbi_active_hardware(ods, pulse):
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
             nbu["species.a"] = 2.0
-        else:            
-            nbu["species.a"] = int(gas[1])
+        else:
+            assert gas in NBI_GAS_A, f"Unexpected NBI GAS value: {gas!r}"
+            nbu["species.a"] = NBI_GAS_A[gas]
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
