@@ -1249,6 +1249,7 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
 
     ods['ece.ids_properties.homogeneous_time'] = 0
+    ods['ece.time'] = ece_map['TIME'] * 1.0e-3
     # Not in MDSplus
     if not _measurements:
         points = [{}, {}]
