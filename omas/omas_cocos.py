@@ -964,6 +964,7 @@ _cocos_signals['magnetics.b_field_tor_probe.:.field.data']='TOR'                
 _cocos_signals['magnetics.b_field_tor_probe.:.voltage.data']='TOR'                                         # 1.500000 # b  b_field  [V]
 _cocos_signals['magnetics.ip.:.data']='TOR'                                                                # 1.333333 # ip  [A]
 _cocos_signals['magnetics.flux_loop.:.flux.data']='PSI'                                             #[DEL?]# -1.000000 # flux
+_cocos_signals['magnetics.flux_loop.:.voltage.data']='TOR'                                                 # loop voltage  [V]
 
 # MHD
 _cocos_signals['mhd.ggd.:.b_field_tor.:.values']='?'                                               #[ADD?]# 2.800000 # b  b_field  _tor  [T]
