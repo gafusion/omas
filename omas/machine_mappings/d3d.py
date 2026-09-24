@@ -1817,6 +1817,46 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
 
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
+def magnetics_floops_voltage_data(ods, pulse):
+    r"""
+    Load DIII-D tokamak loop voltage measured on the flux loops
+
+    Only one loop voltage signal is mapped per flux loop: the slow digitizer with the smallest dynamic range.
+    Flux loops without a loop voltage signal get empty voltage arrays.
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    ods1 = ODS()
+    unwrap(magnetics_hardware)(ods1, pulse)
+
+    vloop_signals = {'PSF1A': 'VLOOP', 'PSF6NA': 'VLOOPF6NA', 'PSI11M': 'VLOOPI11M', 'PSI6A': 'VLOOPI6A'}
+
+    TDIs = {}
+    for identifier, signal in vloop_signals.items():
+        TDIs[identifier + '.data'] = f'ptdata2("{signal}",{pulse})'
+        TDIs[identifier + '.time'] = f'dim_of(ptdata2("{signal}",{pulse}),0)/1000.'
+        TDIs[identifier + '.header'] = f'pthead2("{signal}",{pulse}), __rarray'
+    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+    with omas_environment(ods, cocosio=7):
+        for k in ods1['magnetics.flux_loop']:
+            identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
+            if identifier not in vloop_signals:
+                # Empty arrays keep the flux_loop array aligned with the hardware
+                for quantity in ['data', 'time', 'data_error_upper']:
+                    ods[f'magnetics.flux_loop.{k}.voltage.{quantity}'] = np.array([])
+                continue
+            nt = len(data[identifier + '.data'])
+            ods[f'magnetics.flux_loop.{k}.voltage.data'] = data[identifier + '.data']
+            ods[f'magnetics.flux_loop.{k}.voltage.time'] = data[identifier + '.time']
+            # Convert digitizer counts (bit uncertainty) to voltage
+            header = data[identifier + '.header']
+            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(header[3] * header[4]) * np.ones(nt) * 10.0
+
+
+@machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
     ods1 = ODS()
     unwrap(magnetics_hardware)(ods1, pulse)
