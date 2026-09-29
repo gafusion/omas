@@ -2236,7 +2236,7 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
         else:
             return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs**kw)
 
-    colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
+    colors = [matplotlib.colors.to_hex(k['color']) for k in list(matplotlib.rcParams['axes.prop_cycle'])]
     lss = ['-', '--', 'dotted']
     colors, lss = numpy.meshgrid(colors, lss)
     if len(ods[f'core_sources.source']) > len(colors):
