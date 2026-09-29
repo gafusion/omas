@@ -4,7 +4,7 @@
 
 numpy>=1.16.1                                      # required
 numpy<2;python_version=='3.9'                      # required to use pint
-uncertainties                                      # required
+uncertainties<=3.2.3                               # required
 pint                                               # required
 netCDF4                                            # required
 matplotlib                                         # required
