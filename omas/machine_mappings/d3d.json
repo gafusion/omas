@@ -474,6 +474,9 @@
  "ece.line_of_sight.second_point.z": {
   "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
  },
+ "ece.time": {
+  "PYTHON": "electron_cyclotron_emission_hardware(ods, {pulse}, {fast_ece!r})"
+ },
  "gas_injection.pipe.:": {
   "PYTHON": "gas_injection_hardware(ods, {pulse})"
  },
