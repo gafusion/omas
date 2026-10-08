@@ -1824,6 +1824,10 @@ def magnetics_floops_voltage_data(ods, pulse):
     Only one loop voltage signal is mapped per flux loop: the slow digitizer with the smallest dynamic range.
     Flux loops without a loop voltage signal get empty voltage arrays.
 
+    Note: most users should just use the voltage from PSF1A (index 0). This is the standard for most
+    DIII-D applications and the different positions for PSF6* complicates their interpretation. The
+    magentics group also suggests using an LPF filter to make sure any time averages are causal.
+
     :param ods: ODS instance
 
     :param pulse: shot number
