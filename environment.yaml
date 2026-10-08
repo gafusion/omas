@@ -1,0 +1,34 @@
+name: omas
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python
+  - pip
+  - setuptools
+
+  # Core runtime deps (from requirements.txt / setup.py install_requires)
+  - numpy >=1.16.1
+  - uncertainties
+  - pint
+  - netcdf4
+  - matplotlib-base
+  - scipy
+  - h5py
+  - xarray
+  - cython
+  - contourpy
+
+  # "machine" extra (setup.py extras_require['machine'])
+  - omfit_classes
+  - pexpect
+  - fortranformat
+
+  # OMAS-feedstock run deps not already listed above
+  - boto3
+  - botocore
+  - dnspython
+  - pymongo
+  - xmltodict
+  - pyro5
