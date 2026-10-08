@@ -6,30 +6,32 @@ on:
   pull_request:
   workflow_dispatch:
 
+defaults:
+  run:
+    # Login shell so the micromamba environment is activated
+    shell: bash -el {0}
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11','3.12', '3.13', '3.14']
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run tests in Python ${{ matrix.python-version }} container
-        uses: addnab/docker-run-action@v3
+      - uses: mamba-org/setup-micromamba@v2
         with:
-          image: python:${{ matrix.python-version }}
-          options: -v ${{ github.workspace }}:/workspace -w /workspace -e USER=ci_user
-          run: |
-            apt-get update
-            apt-get install -y libhdf5-dev libnetcdf-dev gfortran
-            python -m pip install --upgrade pip
-            python -m pip install numpy
-            python -m pip install -r requirements.txt
-            python -m pip install boto3 xmltodict
-            python -m pip install wheel
-            python -m pip install --no-build-isolation .[machine]
-            python -c "import omas; print(omas.__version__)"
-            make test
+          environment-file: environment.yaml
+          create-args: python=${{ matrix.python-version }}
+          cache-environment: true
+
+      - name: Install omas
+        run: pip install --no-deps --no-build-isolation -e .
+
+      - name: Run tests
+        run: |
+          python -c "import omas; print(omas.__version__)"
+          make test
