@@ -6,7 +6,7 @@ import shutil
 from omas.omas_utils import *
 from omas.omas_core import ODS, dynamic_ODS, omas_environment, omas_info_node, imas_json_dir, omas_rcparams
 from omas.omas_physics import cocos_signals
-from omas.machine_mappings import d3d, nstx, nstxu, east
+from omas.machine_mappings import d3d, nstx, nstxu, east, pegasus
 from omas.machine_mappings.d3d import __regression_arguments__
 from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue, check_for_pulse_id

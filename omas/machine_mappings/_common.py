@@ -354,6 +354,9 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     TDIs['mtime'] = f'data(\\{EFIT_tree}::TOP.MEASUREMENTS.MTIME)'
     TDIs['ndata'] = f'size(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured},0)'
     TDIs['measured'] = f'{operation}(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured})'
+    if base == 'j_tor':
+        # VZEROJ is stored as a magnitude without the plasma-current direction
+        TDIs['ip'] = f'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)'
     if measured_error_upper is not None:
         TDIs['measured_error_upper'] = f'{operation}(\\{EFIT_tree}::TOP.MEASUREMENTS.{measured_error_upper})'
     if weight is not None:
@@ -379,6 +382,11 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     ndata = all_data['ndata']
     if len(np.shape(all_data['measured'])) < 2 and ndata == mtimes:
         ndata = 1
+
+    # restore the plasma-current direction onto the unsigned VZEROJ magnitude
+    if base == 'j_tor':
+        ip_sign = np.sign(np.mean(all_data.pop('ip')))
+        all_data['measured'] = all_data['measured'] * ip_sign
 
     # assign the data to the ods
     del all_data['time']

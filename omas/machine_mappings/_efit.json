@@ -214,6 +214,9 @@
  "equilibrium.time_slice.:.constraints.ip.chi_squared": {
   "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'ip', 'PLASMA', 'SIGPASMA', 'FWTPASMA', 'CPASMA', 'CHIPASMA', {EFIT_run_id!r})"
  },
+ "equilibrium.time_slice.:.constraints.bpol_probe.:": {
+  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
+ },
  "equilibrium.time_slice.:.constraints.bpol_probe.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'bpol_probe', 'EXPMPI', 'SIGMPI', 'FWTMP2', 'CMPR2', 'SAIMPI', {EFIT_run_id!r})"
  },
@@ -244,6 +247,9 @@
  "equilibrium.time_slice.:.constraints.diamagnetic_flux.chi_squared": {
   "PYTHON": "scalar_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'diamagnetic_flux', 'DIAMAG', 'SIGDIA', 'FWTDIA', 'CDFLUX', 'CHIDFLUX', {EFIT_run_id!r})"
  },
+ "equilibrium.time_slice.:.constraints.flux_loop.:": {
+  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
+ },
  "equilibrium.time_slice.:.constraints.flux_loop.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
  },
@@ -258,6 +264,9 @@
  },
  "equilibrium.time_slice.:.constraints.flux_loop.:.chi_squared": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'flux_loop', 'SILOPT', 'SIGSIL', 'FWTSI', 'CSILOP', 'SAISIL', {EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:": {
+  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
@@ -274,6 +283,9 @@
  "equilibrium.time_slice.:.constraints.mse_polarisation_angle.:.chi_squared": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'mse_polarisation_angle', 'TANGAM', 'SIGGAM', 'FWTGAM', 'CMGAM', 'CHIGAM', {EFIT_run_id!r})"
  },
+ "equilibrium.time_slice.:.constraints.pf_current.:": {
+  "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+ },
  "equilibrium.time_slice.:.constraints.pf_current.:.measured": {
   "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
  },
@@ -288,6 +300,9 @@
  },
  "equilibrium.time_slice.:.constraints.pf_current.:.chi_squared": {
   "PYTHON": "concat_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pf_current', ['ECCURT','FCCURT'], ['SIGECC','SIGFCC'], ['FWTEC','FWTFC'], ['CECURR','CCBRSP'], ['CHIECC','CHIFCC'], {EFIT_run_id!r})"
+ },
+  "equilibrium.time_slice.:.constraints.pressure.:": {
+  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.pressure.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'PRESSR', 'SIGPRE', 'FWTPRE', 'CPRESS', 'SAIPRE', {EFIT_run_id!r})"
@@ -306,6 +321,9 @@
  },
  "equilibrium.time_slice.:.constraints.pressure.:.position.psi": {
   "PYTHON": "constraint_psi_to_real_psi(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'pressure', 'RPRESS', EFIT_run_id={EFIT_run_id!r})"
+ },
+ "equilibrium.time_slice.:.constraints.j_tor.:": {
+  "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'VZEROJ', EFIT_run_id={EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.constraints.j_tor.:.measured": {
   "PYTHON": "vector_constraint_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, 'j_tor', 'VZEROJ', EFIT_run_id={EFIT_run_id!r})"
@@ -407,6 +425,10 @@
  },
  "equilibrium.time_slice.:.profiles_1d.j_tor": {
   "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JEFF','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
+  "treename": "{EFIT_tree}"
+ },
+ "equilibrium.time_slice.:.profiles_1d.j_parallel": {
+  "eval2TDI": "py2tdi(interpolate_psi_1d,'\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.PSI','\\{EFIT_tree}::TOP.RESULTS.FLUXFUN.JLL','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIMAG','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.SSIBRY','\\{EFIT_tree}::TOP.RESULTS.GEQDSK.PSIN')",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.profiles_1d.volume": {

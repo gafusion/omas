@@ -2,6 +2,12 @@ import json
 import os
 from omas.omas_utils import printd
 import numpy as np
+try:
+    import MDSplus
+
+except ImportError as e:
+    print("Warning no MDSplus! No machine mappings available.")
+    MDSplus = e
 
 __all__ = [
     'mdstree',
@@ -79,36 +85,61 @@ def tunnel_mds(server, treename):
 
     return server.format(**os.environ)
 
+def get_cached_connection(server, pulse, treename):
+    if type(MDSplus) == ModuleNotFoundError:
+        raise MDSplus
+    for fallback in [0, 1]:
+        if server not in _mds_connection_cache:
+            _mds_connection_cache[server] = MDSplus.Connection(server)
+            _last_open_tree[server] = None
+        try:
+            conn = _mds_connection_cache[server]
+            if treename is not None:
+                open_tree_cached(conn, server, pulse, treename)
+            break
+        except Exception as _excp:
+            if server in _mds_connection_cache:
+                _last_open_tree[server] = None
+                _mds_connection_cache[server].reconnect()
+            if fallback:
+                raise
+    return conn
 
-
-
+def resolve_server(machine, treename):
+    if 'nstx' in machine:
+            old_MDS_server = True
+    try:
+        # handle the case that server is just the machine name
+        machine_mappings_path = os.path.join(os.path.dirname(__file__), "../", "machine_mappings")
+        machine_mappings_path = os.path.join(machine_mappings_path, machine + ".json")
+        with open(machine_mappings_path, "r") as machine_file:
+                server = json.load(machine_file)["__mdsserver__"]
+    except Exception:
+        # handle case where server is actually a URL
+        server = tunnel_mds(server, treename)
+        if '.' not in server:
+            raise
+    
+    old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
+    if server in old_servers or machine in old_servers:
+        return server, True
+    return server, False
 
 class mdsvalue(dict):
     """
     Execute MDSplus TDI functions
     """
 
-    def __init__(self, server, treename, pulse, TDI, old_MDS_server=False):
+    def __init__(self, machine, treename, pulse, TDI, old_MDS_server=False):
+        if type(MDSplus) == ModuleNotFoundError:
+            raise MDSplus
         self.treename = treename
         self.pulse = pulse
         self.TDI = TDI
-        if 'nstx' in server:
-            old_MDS_server = True
-        try:
-            # handle the case that server is just the machine name
-            machine_mappings_path = os.path.join(os.path.dirname(__file__), "../", "machine_mappings")
-            machine_mappings_path = os.path.join(machine_mappings_path, server + ".json")
-            with open(machine_mappings_path, "r") as machine_file:
-                    server = json.load(machine_file)["__mdsserver__"]
-        except Exception:
-            # hanlde case where server is actually a URL
-            if '.' not in server:
-                raise
-        self.server = tunnel_mds(server, self.treename)
-        old_servers = ['skylark.pppl.gov:8500', 'skylark.pppl.gov:8501', 'skylark.pppl.gov:8000']
-        if server in old_servers or self.server in old_servers:
-            old_MDS_server = True
-        self.old_MDS_server = old_MDS_server
+        self.server, self.old_MDS_server = resolve_server(machine, treename)
+        if old_MDS_server:
+            self.old_MDS_server = old_MDS_server
+        
 
     def data(self):
         return self.raw(f'data({self.TDI})')
@@ -144,7 +175,6 @@ class mdsvalue(dict):
             import time
 
             t0 = time.time()
-            import MDSplus
 
             def mdsk(value):
                 """
@@ -159,21 +189,7 @@ class mdsvalue(dict):
                 out_results = None
 
                 # try connecting and re-try on fail
-                for fallback in [0, 1]:
-                    if self.server not in _mds_connection_cache:
-                        _mds_connection_cache[self.server] = MDSplus.Connection(self.server)
-                        _last_open_tree[self.server] = None
-                    try:
-                        conn = _mds_connection_cache[self.server]
-                        if self.treename is not None:
-                            open_tree_cached(conn, self.server, self.pulse, self.treename)
-                        break
-                    except Exception as _excp:
-                        if self.server in _mds_connection_cache:
-                            _last_open_tree[self.server] = None
-                            _mds_connection_cache[self.server].reconnect()
-                        if fallback:
-                            raise
+                conn = get_cached_connection(self.server, self.pulse, self.treename)
                 
                 # list of TDI expressions
                 if isinstance(TDI, (list, tuple)):
@@ -276,3 +292,11 @@ class mdstree(dict):
                 h[path[-1]] = mdsvalue(server, treename, pulse, TDI)
             else:
                 h[path[-1]].TDI = TDI
+
+def exec_tdi(machine, treename, pulse, tdi_command):
+    """
+    Simple helper function to extract number of active channels for things like CER
+    """
+    server, _ = resolve_server(machine, treename)
+    conn = get_cached_connection(server, pulse, treename)
+    return conn.get(tdi_command)
