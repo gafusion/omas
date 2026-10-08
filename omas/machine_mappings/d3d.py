@@ -13,7 +13,7 @@ from omas.utilities.machine_mapping_decorator import machine_mapping_function
 from omas.utilities.omas_mds import mdsvalue, exec_tdi
 from omas.omas_core import ODS
 from omas.omas_structure import add_extra_structures
-from omas.omas_physics import omas_environment
+from omas.omas_physics import omas_environment, cocos_transform
 
 
 __all__ = []
@@ -1248,7 +1248,8 @@ def electron_cyclotron_emission_data(ods, pulse=133221, fast_ece=False, _measure
             # Assumes 7% calibration error (optimisitic) + Poisson uncertainty
             ece_uncertainty[key] = np.sqrt(np.abs(ece_data[key] * 1.e3)) + 70 * np.abs(ece_data[key])
 
-    ods['ece.ids_properties.homogeneous_time'] = 0
+    ods['ece.ids_properties.homogeneous_time'] = 1
+    ods['ece.time'] = ece_map['TIME'] * 1.0e-3
     # Not in MDSplus
     if not _measurements:
         points = [{}, {}]
@@ -1787,7 +1788,8 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
             # Relative uncertainty from EFIT (probably an overestimate for error in compensations)
             rel_error = 0.03 * abs(ods[f'magnetics.flux_loop.{k}.flux.data'])
             # Approximate error in the flux loop positions estimated with DIII-D parameters (often largest error term)
-            position_error = 1.e-9 * ods[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
+            # Needs to use ods1 here since the position is not in ods
+            position_error = 1.e-9 * ods1[f'magnetics.flux_loop.{k}.position.0.r'] * abs(Ip)
             # Use whichever error source is largest (this is how it is treated in EFIT)
             ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.fmax.reduce([digi_error, rel_error, position_error])
 
@@ -2004,6 +2006,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["ion[1].density_fit.measured"] = "RW_N_C"
         query["ion[1].temperature"] = "T_C"
         query["ion[1].temperature_fit.measured"] = "RW_T_C"
+        query["zeff"] = "ZEFF"
 
         uncertain_entries = list(query.keys())
         query["electrons.density_fit.psi_norm"] = "PS_N_E"
@@ -2020,6 +2023,9 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
         query["j_bootstrap"] = "J_BS"
 
         normal_entries = set(query.keys()) - set(uncertain_entries)
+        # grid.psi (absolute poloidal flux) is fetched here but written manually below so
+        # the COCOS transform is applied and psi_magnetic_axis/boundary can be derived.
+        query["grid.psi"] = "PSI"
         # Raw ion pressures fetched here but written manually below: pressure_ion_total
         # and pressure_total are sums and pressure_total is a non-standard structure.
         query["_pressure_deuterium"] = "P_D"
@@ -2100,6 +2106,21 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                     print("================ DATA =================")
                     print(data[entry][i_time])
                     print(e)
+        # Absolute poloidal flux (COCOS-sensitive) plus the axis/boundary values derived
+        # from it. Identify the gEQDSK COCOS convention dynamically from BCENTR/CPASMA
+        # (same as the equilibrium mapping's MDS_gEQDSK_psi — DIII-D is not always COCOS 7),
+        # transform the full profile to COCOS 11 (IMAS), then derive psi_magnetic_axis
+        # (psi_norm index 0) and psi_boundary (interpolated at psi_norm = 1.0)
+        # from the transformed full profile.
+        if not isinstance(data["grid.psi"], Exception):
+            cocosio = MDS_gEQDSK_COCOS_identify('d3d', pulse, 'EFIT01')
+            psi_full = data["grid.psi"] * cocos_transform(cocosio, 11)["PSI"]
+            for i_time, time in enumerate(data["time"]):
+                ods[f"{sh}[{i_time}].grid.psi"] = psi_full[i_time][mask[i_time]]
+                ods[f"{sh}[{i_time}].grid.psi_magnetic_axis"] = psi_full[i_time][0]
+                ods[f"{sh}[{i_time}].grid.psi_boundary"] = float(
+                    InterpolatedUnivariateSpline(psi_n, psi_full[i_time])(1.0)
+                )
         # pressure_ion_total = P_D + P_C; pressure_total sums the IMAS pressure fields
         pressure_inputs = ["electrons.pressure", "pressure_ion_non_thermal",
                            "_pressure_deuterium", "_pressure_carbon"]
