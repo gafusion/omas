@@ -71,6 +71,12 @@
  "charge_exchange.channel.:.ion.:": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
+ "charge_exchange.channel.:.ion.:.a": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.label": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
  "charge_exchange.channel.:.ion.:.n_i.data": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
@@ -100,6 +106,12 @@
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.ion.:.velocity_tor.time": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.z_ion": {
+  "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
+ },
+ "charge_exchange.channel.:.ion.:.z_n": {
   "PYTHON": "charge_exchange_data(ods, {pulse}, {analysis_type!r})"
  },
  "charge_exchange.channel.:.name": {
@@ -716,7 +728,17 @@
   "PYTHON": "magnetics_hardware(ods, {pulse})"
  },
  "magnetics.flux_loop.:.type.index": {
-  "PYTHON": "magnetics_hardware(ods, {pulse})"
+  "PYTHON": "magnetics_floops_data(ods, {pulse}, {store_differential!r}, {nref!r})"
+ },
+ "magnetics.flux_loop.:.voltage.data": {
+  "COCOSIO": 11,
+  "PYTHON": "magnetics_floops_voltage_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.voltage.data_error_upper": {
+  "PYTHON": "magnetics_floops_voltage_data(ods, {pulse})"
+ },
+ "magnetics.flux_loop.:.voltage.time": {
+  "PYTHON": "magnetics_floops_voltage_data(ods, {pulse})"
  },
  "magnetics.ip.:": {
   "VALUE": 1

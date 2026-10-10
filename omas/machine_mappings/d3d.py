@@ -681,6 +681,11 @@ def ec_launcher_active_hardware(ods, pulse):
     cp["toray.bhalf"] = np.array(b_half)
     ods['ec_launchers.code.parameters'] = cp
 
+# GAS string -> mass number (A). A fired beam reports one of these;
+# an unfired beam reports an empty string (after stripping).
+NBI_GAS_A = {'H2': 1.0, 'D2': 2.0, 'HE': 4.0}
+
+
 @machine_mapping_function(__regression_arguments__, pulse=180893)
 def nbi_active_hardware(ods, pulse):
     beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
@@ -716,8 +721,9 @@ def nbi_active_hardware(ods, pulse):
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
             nbu["species.a"] = 2.0
-        else:            
-            nbu["species.a"] = int(gas[1])
+        else:
+            assert gas in NBI_GAS_A, f"Unexpected NBI GAS value: {gas!r}"
+            nbu["species.a"] = NBI_GAS_A[gas]
 
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
@@ -1575,6 +1581,69 @@ def add_n_i_charge_exchange():
     extra_structures["charge_exchange"][f"{sh}.data_error_upper"] = unc_struct
     add_extra_structures(extra_structures)
 
+
+# Element symbol -> (nuclear charge, mass number) for every species CERFIT can fit.
+# D is the only uncommon isotope in the list (different mass number than element atomic average for H) so a different letter is used
+CER_ELEMENTS = {
+    'D': (1, 2.0),
+    'He': (2, 4.0),
+    'Li': (3, 7.0),
+    'B': (5, 11.0),
+    'C': (6, 12.0),
+    'N': (7, 14.0),
+    'O': (8, 16.0),
+    'F': (9, 19.0),
+    'Ne': (10, 20.0),
+    'Al': (13, 27.0),
+    'Si': (14, 28.0),
+    'Ar': (18, 40.0),
+    'Ca': (20, 40.0),
+    'Kr': (36, 84.0),
+}
+
+ROMAN_DIGITS = {'I': 1, 'V': 5, 'X': 10}
+
+# '<element><charge state in Roman numerals><upper-lower transition>', e.g. 'C VI 8-7'.
+# Spaces are optional and the transition levels may carry orbital letters ('C IV 6h-7i').
+LINEID_PATTERN = re.compile('([A-Z][a-z]*) *([A-Z]*) *([0-9]*[a-z]*-[0-9]*[a-z]*)')
+
+
+def roman_to_int(roman):
+    total = 0
+    highest = 0
+    for char in reversed(roman):
+        value = ROMAN_DIGITS[char]
+        total += value if value >= highest else -value
+        highest = max(highest, value)
+    return total
+
+
+def parse_cer_lineid(lineid, sub, channel):
+    """Parse a CER CALIBRATION LINEID string into (label, a, z_ion, z_n).
+
+    Charge exchange measures the ion in the charge state it held *before* capturing the
+    beam electron, so the Roman numeral of the observed line is the ion charge: 'C VI 8-7'
+    is emitted by C5+ but reports the C6+ population, giving z_ion = 6. z_n stays the
+    nuclear charge of the element, so it is 6 for every carbon line including 'C IV'
+    (z_ion = 4). Do not collapse the two.
+    """
+    if lineid is None or isinstance(lineid, Exception):
+        raise ValueError(f'{sub} channel {channel:02d}: LINEID is missing')
+    if isinstance(lineid, np.ndarray):
+        lineid = lineid.item()
+    if isinstance(lineid, bytes):
+        lineid = lineid.decode()
+    match = LINEID_PATTERN.search(lineid)
+    element = match.group(1) if match else ''
+    roman = match.group(2) if match else ''
+    if element not in CER_ELEMENTS or not roman or not set(roman) <= set(ROMAN_DIGITS):
+        raise ValueError(f'{sub} channel {channel:02d}: cannot parse LINEID {lineid!r}')
+    z_n, a = CER_ELEMENTS[element]
+    z_ion = roman_to_int(roman)
+    symbol = 'H' if element == 'D' else element
+    return str(f'{round(a)}{symbol}{z_ion}'), a, float(z_ion), float(z_n)
+
+
 # ================================
 @machine_mapping_function(__regression_arguments__, pulse=133221)
 def charge_exchange_hardware(ods, pulse, analysis_type='CERQUICK'):
@@ -1616,6 +1685,8 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 continue
             for pos in ['TIME', 'R', 'Z', 'VIEW_PHI']:
                 TDIs[f'{sub}_{channel}_{pos}'] = f"CER.{analysis_type}.{sub}.CHANNEL{channel:02d}.{pos}"
+            # Ion identity is calibration data, so it is fetched independently of _measurements
+            TDIs[f'{sub}_{channel}_LINEID'] = f"CER.CALIBRATION.{sub}.CHANNEL{channel:02d}:LINEID"
             if _measurements:
                 for pos in ['TEMP', 'TEMP_ERR', 'TEMP_ERR_PS', 'ROT', 'ROT_ERR', 'ROT_ERR_PS']:
                     if sub == 'TANGENTIAL' and pos == 'ROT':
@@ -1666,6 +1737,11 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
             ch = ods['charge_exchange.channel.+'] # + does the next channel
             ch['name'] = 'impCER_{}{:02d}'.format(sub, channel)
             ch['identifier'] = '{}{:02d}'.format(sub[0], channel)
+            label, a, z_ion, z_n = parse_cer_lineid(data[f'{sub}_{channel}_LINEID'], sub, channel)
+            ch['ion.0.label'] = label
+            ch['ion.0.a'] = a
+            ch['ion.0.z_ion'] = z_ion
+            ch['ion.0.z_n'] = z_n
             for pos in ['R', 'Z', 'VIEW_PHI']:
                 posdat = data[f'{sub}_{channel}_{pos}']
                 chpos = ch['position'][pos.lower().split('_')[-1]]
@@ -1688,9 +1764,6 @@ def charge_exchange_data(ods, pulse, analysis_type='CERQUICK', _measurements=Tru
                 if not isinstance(data[f'{sub}_{channel}_NZ__data'], Exception):
                     ch['ion.0.n_i.time'] = data[f'{sub}_{channel}_FZ__time']
                     ch['ion.0.n_i.data'] = data[f'{sub}_{channel}_NZ__data']
-                # ch['ion.0.z_ion'] = impdata['ZIMP'].data()[0] # not sure what is required to make this work
-                # ch['ion.0.a'] = impdata['MASS']  # this is a placehold, not sure where to get it
-                # ch['ion.0.z_n'] = impdata['NUCLEAR']  # this is a placehold, not sure where to get it
                 if not isinstance(data[f'{sub}_{channel}_ZEFF__data'], Exception):
                     ch['zeff.time'] = data[f'{sub}_{channel}_ZEFF__time']
                     ch['zeff.data'] = data[f'{sub}_{channel}_ZEFF__data']
@@ -1814,6 +1887,50 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
                 ref_un_interp = interp1d(ods[f'magnetics.flux_loop.{nref}.flux.time'], ref_uncertainty, bounds_error=False, fill_value=(0, 0))(ods[f'magnetics.flux_loop.{k}.flux.time']) # would be faster outside of loop if this is common (not expected)
                 uncertainty = ods[f'magnetics.flux_loop.{k}.flux.data_error_upper']
                 ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
+
+
+@machine_mapping_function(__regression_arguments__, pulse=147131)
+def magnetics_floops_voltage_data(ods, pulse):
+    r"""
+    Load DIII-D tokamak loop voltage measured on the flux loops
+
+    Only one loop voltage signal is mapped per flux loop: the slow digitizer with the smallest dynamic range.
+    Flux loops without a loop voltage signal get empty voltage arrays.
+
+    Note: most users should just use the voltage from PSF1A (index 0). This is the standard for most
+    DIII-D applications and the different positions for PSF6* complicates their interpretation. The
+    magentics group also suggests using an LPF filter to make sure any time averages are causal.
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    ods1 = ODS()
+    unwrap(magnetics_hardware)(ods1, pulse)
+
+    vloop_signals = {'PSF1A': 'VLOOP', 'PSF6NA': 'VLOOPF6NA', 'PSI11M': 'VLOOPI11M', 'PSI6A': 'VLOOPI6A'}
+
+    TDIs = {}
+    for identifier, signal in vloop_signals.items():
+        TDIs[identifier + '.data'] = f'ptdata2("{signal}",{pulse})'
+        TDIs[identifier + '.time'] = f'dim_of(ptdata2("{signal}",{pulse}),0)/1000.'
+        TDIs[identifier + '.header'] = f'pthead2("{signal}",{pulse}), __rarray'
+    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+    with omas_environment(ods, cocosio=7):
+        for k in ods1['magnetics.flux_loop']:
+            identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
+            if identifier not in vloop_signals:
+                # Empty arrays keep the flux_loop array aligned with the hardware
+                for quantity in ['data', 'time', 'data_error_upper']:
+                    ods[f'magnetics.flux_loop.{k}.voltage.{quantity}'] = np.array([])
+                continue
+            nt = len(data[identifier + '.data'])
+            ods[f'magnetics.flux_loop.{k}.voltage.data'] = data[identifier + '.data']
+            ods[f'magnetics.flux_loop.{k}.voltage.time'] = data[identifier + '.time']
+            # Convert digitizer counts (bit uncertainty) to voltage
+            header = data[identifier + '.header']
+            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(header[3] * header[4]) * np.ones(nt) * 10.0
 
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)

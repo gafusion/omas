@@ -94,11 +94,11 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.z": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
@@ -192,7 +192,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.psi": {
