@@ -293,7 +293,7 @@ def pf_coils_to_ods(ods, coil_data):
     return ods
 
 
-def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, cocosio=None, **kw):
     """
     Loads EFIT scalar constraint data
     """
@@ -328,7 +328,8 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     # assign the data to the ods
     del all_data['time']
     del all_data['mtime']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    if cocosio is None:
+        cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -338,7 +339,7 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
                 printe(f'EFIT data was not found for {base} {entry}')
 
 
-def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, cocosio=None, **kw):
     """
     Loads EFIT vector constraint data
     """
@@ -392,7 +393,8 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
     del all_data['time']
     del all_data['mtime']
     del all_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    if cocosio is None:
+        cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in all_data.items():
             try:
@@ -405,7 +407,7 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
                 printe(f'EFIT data was not found for {base} {entry}')
 
 
-def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, **kw):
+def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measured_error_upper=None, weight=None, reconstructed=None, chi_squared=None, EFIT_run_id=None, cocosio=None, **kw):
     """
     Loads EFIT constraint data and concatonates muliple arrays
     """
@@ -474,7 +476,8 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
         return
     ndata = concat_data['ndata']
     del concat_data['ndata']
-    cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
+    if cocosio is None:
+        cocosio = MDS_gEQDSK_COCOS_identify(machine, pulse, EFIT_tree, EFIT_run_id)
     with omas_environment(ods, cocosio=cocosio):
         for entry, data in concat_data.items():
             if len(np.atleast_1d(data)) == 0:
