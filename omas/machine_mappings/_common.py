@@ -319,11 +319,9 @@ def scalar_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
-    ntimes = len(all_data['time'])
-    if ntimes == len(all_data['mtime']):
-        it = np.arange(ntimes)
-    else:
-        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+    it = np.abs(all_data['mtime'][:, None] - all_data['time'][None, :]).argmin(axis=0)
+    if not np.allclose(all_data['mtime'][it], all_data['time'], rtol=0, atol=0.1):
+        raise ValueError(f'{EFIT_tree} GEQDSK times of pulse {pulse} have no matching MEASUREMENTS times')
 
     # assign the data to the ods
     del all_data['time']
@@ -370,12 +368,10 @@ def vector_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
-    ntimes = len(all_data['time'])
     mtimes = len(all_data['mtime'])
-    if ntimes == mtimes:
-        it = np.arange(ntimes)
-    else:
-        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+    it = np.abs(all_data['mtime'][:, None] - all_data['time'][None, :]).argmin(axis=0)
+    if not np.allclose(all_data['mtime'][it], all_data['time'], rtol=0, atol=0.1):
+        raise ValueError(f'{EFIT_tree} GEQDSK times of pulse {pulse} have no matching MEASUREMENTS times')
 
     # ensure data has correct dimensions
     ndata = all_data['ndata']
@@ -432,12 +428,10 @@ def concat_constraint_data(ods, machine, pulse, EFIT_tree, base, measured, measu
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
-    ntimes = len(all_data['time'])
     mtimes = len(all_data['mtime'])
-    if ntimes == mtimes:
-        it = np.arange(ntimes)
-    else:
-        it = np.minimum(all_data['mtime'].searchsorted(all_data['time']), ntimes-1)
+    it = np.abs(all_data['mtime'][:, None] - all_data['time'][None, :]).argmin(axis=0)
+    if not np.allclose(all_data['mtime'][it], all_data['time'], rtol=0, atol=0.1):
+        raise ValueError(f'{EFIT_tree} GEQDSK times of pulse {pulse} have no matching MEASUREMENTS times')
 
     # concatonate data
     concat_data = {}
@@ -511,10 +505,9 @@ def constraint_psi_to_real_psi(ods, machine, pulse, EFIT_tree, base, psin, EFIT_
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
     ntimes = len(data['time'])
     mtimes = len(data['mtime'])
-    if ntimes == mtimes:
-        it = np.arange(ntimes)
-    else:
-        it = np.minimum(data['mtime'].searchsorted(data['time']), ntimes-1)
+    it = np.abs(data['mtime'][:, None] - data['time'][None, :]).argmin(axis=0)
+    if not np.allclose(data['mtime'][it], data['time'], rtol=0, atol=0.1):
+        raise ValueError(f'{EFIT_tree} GEQDSK times of pulse {pulse} have no matching MEASUREMENTS times')
     psin = psin[it]
 
     # ensure psi has correct dimensions
@@ -552,11 +545,9 @@ def efit_iteration_number(ods, machine, pulse, EFIT_tree, EFIT_run_id=None, **kw
 
     # determine common times for equilibrium data
     # this is required because the between shot EFIT filters are not applied to the MEASUREMENTS
-    ntimes = len(data['time'])
-    if ntimes == len(data['mtime']):
-        it = np.arange(ntimes)
-    else:
-        it = np.minimum(data['mtime'].searchsorted(data['time']), ntimes-1)
+    it = np.abs(data['mtime'][:, None] - data['time'][None, :]).argmin(axis=0)
+    if not np.allclose(data['mtime'][it], data['time'], rtol=0, atol=0.1):
+        raise ValueError(f'{EFIT_tree} GEQDSK times of pulse {pulse} have no matching MEASUREMENTS times')
 
     # find the number of iterations taken
     try:
