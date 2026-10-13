@@ -79,7 +79,7 @@ with open('../source/schema.rst', 'w') as f:
 IMAS & OMAS data schema
 =======================
 
-OMAS enforces compliance with the `IMAS data schema <https://git.iter.org/projects/IMAS/repos/data-dictionary/browse>`_.
+OMAS enforces compliance with the `IMAS data schema <https://github.com/iterorganization/IMAS-Data-Dictionary>`_.
 
 For convenience we report here the documentation for IMAS data schema **version %s**.
 
