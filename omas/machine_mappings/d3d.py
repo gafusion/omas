@@ -492,13 +492,12 @@ def pf_active_coil_current_data(ods, pulse):
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
             ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
-        # IMAS stores the current in the coil not multiplied by the number of turns
+        # IMAS stores the current per turn, and the DIII-D F-coil PTDATA signals already are the per-turn
+        # (power-supply) current: the amp-turns are PTDATA * turns_with_sign, so no division is applied here.
+        # A free-boundary refit of the EFIT02 boundary (shot 200000, t = 3.04 s) needs F6A = -227.7 kA-turns
+        # = -4.14 kA * 55, i.e. the undivided PTDATA (-4.12 kA); divided values are 55-58x too small.
         for channel in ods1['pf_active.coil']:
-            if f'pf_active.coil.{channel}.current.data' in ods:
-                if 'F' in ods1[f'pf_active.coil.{channel}.identifier']:
-                    ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
-                    ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
-            else:
+            if f'pf_active.coil.{channel}.current.data' not in ods:
                 print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
 
 
