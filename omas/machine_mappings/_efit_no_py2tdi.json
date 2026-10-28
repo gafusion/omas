@@ -56,15 +56,15 @@
   "PYTHON": "efit.equilibrium_time_slice_data(ods, {machine!r}, {pulse}, {EFIT_tree!r}, {EFIT_run_id!r})"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.r": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.RSURF)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.geometric_axis.z": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.ZSURF)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.closest_wall_point.distance": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.SEPLIM)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.:": {
@@ -74,28 +74,28 @@
   "VALUE": "inboard"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.0.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPIN)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.1.name": {
   "VALUE": "outboard"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.1.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPOUT)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.2.name": {
   "VALUE": "top"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.2.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPTOP)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.3.name": {
   "VALUE": "bottom"
  },
  "equilibrium.time_slice.:.boundary_separatrix.gap.3.value": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.GAPBOT)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.strike_point.:": {
@@ -120,7 +120,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.minor_radius": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)/100.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AMINOR)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.boundary_separatrix.psi": {
@@ -288,7 +288,7 @@
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.area": {
-  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)/10000.",
+  "TDI": "data(\\{EFIT_tree}::TOP.RESULTS.AEQDSK.AREA)",
   "treename": "{EFIT_tree}"
  },
  "equilibrium.time_slice.:.global_quantities.surface": {

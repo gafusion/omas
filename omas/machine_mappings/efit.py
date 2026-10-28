@@ -31,8 +31,6 @@ def equilibrium_time_slice_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_ru
     provider = ods.get_mds_provider(machine)
     pulse_id = get_pulse_id(pulse, EFIT_run_id)
 
-    # The strike points are fetched undivided because the -0.89 sentinel is a property
-    # of the stored value, not of the value scaled by 1/100.
     TDIs = {
         # Boundary data requiring NaN filtering
         'rbbbs': f'\\{EFIT_tree}::TOP.RESULTS.GEQDSK.RBBBS',
@@ -94,7 +92,7 @@ def equilibrium_time_slice_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_ru
                 if r[i] <= 0.0:
                     continue
                 ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['r'] = r[i]
-                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['z'] = z[i] / 1.e2
+                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['z'] = z[i]
                 n += 1
         printd(f'Successfully loaded EFIT data for {n_times} time slices', topic='machine')
     return ods
