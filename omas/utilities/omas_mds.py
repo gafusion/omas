@@ -450,8 +450,8 @@ class ToksearchProvider(MdsProvider):
 
     def _init_server_connection(self, **kwargs):
         # Imported here rather than at module scope so that MdsProvider keeps
-        # working in environments without toksearch_d3d installed.
-        from toksearch_d3d.interfaces.req_interface import (
+        # working in environments without toksearch installed.
+        from toksearch.interfaces.req_interface import (
             _FDP_THINCLIENT_SERVER,
             _FALLBACK_MDS_SERVER,
             _atlas_reachable,

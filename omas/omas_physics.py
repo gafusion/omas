@@ -715,9 +715,11 @@ def add_volume_profile(ods, grid_index=0):
                             * numpy.sign(numpy.mean(bp))
                             * int_fluxexpansion_dl
                             * (2.0 * numpy.pi) ** (1.0 - cocos['exp_Bp']))
-
-            volume_spline = InterpolatedUnivariateSpline(eq1d_psi, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
-            eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi)
+            # normalize so we have an increasing x-axis for the spline
+            dpsi_psi_n = (eq1d_psi[-1] - eq1d_psi[0])
+            eq1d_psi_n = (eq1d_psi - eq1d_psi[0])/dpsi_psi_n
+            volume_spline = InterpolatedUnivariateSpline(eq1d_psi_n, eq_slice['profiles_1d.dvolume_dpsi']).antiderivative()
+            eq_slice['profiles_1d.volume'] = volume_spline(eq1d_psi_n) * numpy.abs(dpsi_psi_n)
     return ods
 
 def remove_integrator_drift(time, data, time_after_shot):
