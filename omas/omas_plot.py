@@ -2236,20 +2236,21 @@ def core_sources_summary(ods, time_index=None, time=None, fig=None, **kw):
         else:
             return ods_time_plot(core_sources, ods, time_index, time, fig=fig, ax=axs**kw)
 
+    import itertools
+
     colors = [k['color'] for k in list(matplotlib.rcParams['axes.prop_cycle'])]
     lss = ['-', '--', 'dotted']
-    colors, lss = numpy.meshgrid(colors, lss)
-    if len(ods[f'core_sources.source']) > len(colors):
-        colors = colors.T
-        lss = lss.T
-    colors = colors.flatten()
-    lss = lss.flatten()
+    # cross product of colors and linestyles: each color is repeated once per linestyle
+    # before moving to the next color, so `colors[k]`/`lss[k]` is a valid pairing for any k
+    colors, lss = zip(*itertools.product(colors, lss))
+    colors, lss = list(colors), list(lss)
 
     # if list is too small use all colors
     if len(ods[f'core_sources.source']) > len(colors):
         import matplotlib.colors as mcolors
 
         colors = list(mcolors.CSS4_COLORS.keys())
+        lss = list(itertools.islice(itertools.cycle(['-', '--', 'dotted']), len(colors)))
 
     for k, s in enumerate(ods['core_sources.source']):
         rho = ods[f'core_sources.source.{s}.profiles_1d.{time_index}.grid.rho_tor_norm']
