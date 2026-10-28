@@ -687,6 +687,11 @@ def ec_launcher_active_hardware(ods, pulse):
     ods['ec_launchers.code.parameters'] = cp
     return ods
 
+# GAS string -> mass number (A). A fired beam reports one of these;
+# an unfired beam reports an empty string (after stripping).
+NBI_GAS_A = {'H2': 1.0, 'D2': 2.0, 'HE': 4.0}
+
+
 @machine_mapping_function(__regression_arguments__, pulse=180893)
 def nbi_active_hardware(ods, pulse):
     beam_names = ["30L", "30R", "15L", "15R", "21L", "21R", "33L", "33R"]
@@ -723,8 +728,9 @@ def nbi_active_hardware(ods, pulse):
         gas = data[f"{beam_name}.GAS"].strip()
         if not len(gas):
             nbu["species.a"] = 2.0
-        else:            
-            nbu["species.a"] = int(gas[1])
+        else:
+            assert gas in NBI_GAS_A, f"Unexpected NBI GAS value: {gas!r}"
+            nbu["species.a"] = NBI_GAS_A[gas]
     return ods
 
 # ================================
@@ -1903,6 +1909,50 @@ def magnetics_floops_data(ods, pulse, store_differential=False, nref=0):
                 ods[f'magnetics.flux_loop.{k}.flux.data_error_upper'] = np.sqrt(uncertainty**2 + ref_un_interp**2)
 
     return ods
+
+@machine_mapping_function(__regression_arguments__, pulse=147131)
+def magnetics_floops_voltage_data(ods, pulse):
+    r"""
+    Load DIII-D tokamak loop voltage measured on the flux loops
+
+    Only one loop voltage signal is mapped per flux loop: the slow digitizer with the smallest dynamic range.
+    Flux loops without a loop voltage signal get empty voltage arrays.
+
+    Note: most users should just use the voltage from PSF1A (index 0). This is the standard for most
+    DIII-D applications and the different positions for PSF6* complicates their interpretation. The
+    magentics group also suggests using an LPF filter to make sure any time averages are causal.
+
+    :param ods: ODS instance
+
+    :param pulse: shot number
+    """
+    ods1 = ODS()
+    unwrap(magnetics_hardware)(ods1, pulse)
+
+    vloop_signals = {'PSF1A': 'VLOOP', 'PSF6NA': 'VLOOPF6NA', 'PSI11M': 'VLOOPI11M', 'PSI6A': 'VLOOPI6A'}
+
+    TDIs = {}
+    for identifier, signal in vloop_signals.items():
+        TDIs[identifier + '.data'] = f'ptdata2("{signal}",{pulse})'
+        TDIs[identifier + '.time'] = f'dim_of(ptdata2("{signal}",{pulse}),0)/1000.'
+        TDIs[identifier + '.header'] = f'pthead2("{signal}",{pulse}), __rarray'
+    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+
+    with omas_environment(ods, cocosio=7):
+        for k in ods1['magnetics.flux_loop']:
+            identifier = ods1[f'magnetics.flux_loop.{k}.identifier'].upper()
+            if identifier not in vloop_signals:
+                # Empty arrays keep the flux_loop array aligned with the hardware
+                for quantity in ['data', 'time', 'data_error_upper']:
+                    ods[f'magnetics.flux_loop.{k}.voltage.{quantity}'] = np.array([])
+                continue
+            nt = len(data[identifier + '.data'])
+            ods[f'magnetics.flux_loop.{k}.voltage.data'] = data[identifier + '.data']
+            ods[f'magnetics.flux_loop.{k}.voltage.time'] = data[identifier + '.time']
+            # Convert digitizer counts (bit uncertainty) to voltage
+            header = data[identifier + '.header']
+            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(header[3] * header[4]) * np.ones(nt) * 10.0
+
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
 def magnetics_probes_data(ods, pulse):
