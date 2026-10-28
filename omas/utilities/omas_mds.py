@@ -435,7 +435,9 @@ class MdsProvider(BaseProvider):
                 raise _excp.__class__(str(_excp) + '\n' + '\n'.join(txt))
         
         finally:
-            self.handle_fetch_status(TDI, t0, out_results)
+            # A failed fetch has no results to check, and checking them would mask its exception
+            if out_results is not None:
+                self.handle_fetch_status(TDI, t0, out_results)
 
 class ToksearchProvider(MdsProvider):
     """MDS provider for the toksearch backend.
