@@ -69,31 +69,26 @@ def equilibrium_time_slice_data(ods, machine, pulse, EFIT_tree='EFIT01', EFIT_ru
                 ods['equilibrium']['time_slice'][i][boundary]['outline']['r'] = rbbbs[i][valid]
                 ods['equilibrium']['time_slice'][i][boundary]['outline']['z'] = zbbbs[i][valid]
 
-        # X-points: a 0 means no X-point was found at that time
+        # X-points and strike points keep their slot like the _efit.json mappings do:
+        # R <= 0 (0 for X-points, the -0.89 sentinel for strike points) means there is
+        # no point at that time, and both R and Z are NaN there
         for i in range(len(efit_data['rxpt1'])):
-            n = 0
-            for k, (r_node, z_node) in enumerate([('rxpt1', 'zxpt1'), ('rxpt2', 'zxpt2')]):
-                r = np.atleast_1d(efit_data[r_node])
-                z = np.atleast_1d(efit_data[z_node])
-                # Do not append points that do not actually hold an X-point
-                if r[i] <= 0.0:
-                    continue
+            for n, (r_node, z_node) in enumerate([('rxpt1', 'zxpt1'), ('rxpt2', 'zxpt2')]):
+                r = np.atleast_1d(efit_data[r_node])[i]
+                z = np.atleast_1d(efit_data[z_node])[i]
+                if r <= 0.0:
+                    r = z = np.nan
                 for boundary in ['boundary', 'boundary_separatrix']:
-                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['r'] = r[i]
-                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['z'] = z[i]
-                n += 1
-        # Only add strike points with R > 0.0
+                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['r'] = r
+                    ods['equilibrium']['time_slice'][i][boundary]['x_point'][n]['z'] = z
         for i in range(len(efit_data['rvsid'])):
-            n = 0
-            for k, (r_node, z_node) in enumerate([('rvsid', 'zvsid'), ('rvsod', 'zvsod'), ('rvsiu', 'zvsiu'), ('rvsou', 'zvsou')]):
-                r = np.atleast_1d(efit_data[r_node])
-                z = np.atleast_1d(efit_data[z_node])
-                # Do not append points that do not actually hold a strike point
-                if r[i] <= 0.0:
-                    continue
-                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['r'] = r[i]
-                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['z'] = z[i]
-                n += 1
+            for n, (r_node, z_node) in enumerate([('rvsid', 'zvsid'), ('rvsod', 'zvsod'), ('rvsiu', 'zvsiu'), ('rvsou', 'zvsou')]):
+                r = np.atleast_1d(efit_data[r_node])[i]
+                z = np.atleast_1d(efit_data[z_node])[i]
+                if r <= 0.0:
+                    r = z = np.nan
+                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['r'] = r
+                ods['equilibrium']['time_slice'][i]['boundary_separatrix']['strike_point'][n]['z'] = z
         printd(f'Successfully loaded EFIT data for {n_times} time slices', topic='machine')
     return ods
 
