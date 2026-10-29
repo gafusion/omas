@@ -1,7 +1,7 @@
 {
  "__cocos_rules__": {
   "::TOP\\.RESULTS\\..?EQDSK": {
-   "eval2TDI": "py2tdi(MDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
+   "eval2TDI": "py2tdi(TDS_gEQDSK_COCOS_identify, 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.BCENTR)', 'data(\\{EFIT_tree}::TOP.RESULTS.GEQDSK.CPASMA)')"
   }
  },
  "__include__": [

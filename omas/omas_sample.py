@@ -5,7 +5,6 @@
 
 from .omas_utils import *
 from .omas_core import ODS
-from .omas_physics import constants
 from .omas_plot import geo_type_lookup
 
 __all__ = []

@@ -89,8 +89,8 @@ def profile_db_to_ODS(ods, pulse, tok, db, ngrid):
         "['TWOD']['SNBII']": 's_nbi_se',
         "['TWOD']['QOHM']": 'q_ohm_e',
     }
-
-    mds_tree = mdstree(server='tokamak-profiledb.ccfe.ac.uk:8000', pulse=int(pulse), treename=f'pr{db}_{tok}')
+    provider = ods.get_mds_provider('tokamak-profiledb.ccfe.ac.uk:8000')
+    mds_tree = provider.mds_tree(pulse=int(pulse), treename=f'pr{db}_{tok}')
 
     ods['summary.global_quantities.h_mode.value'] = [True]
     ods['dataset_description.data_entry.machine'] = tok

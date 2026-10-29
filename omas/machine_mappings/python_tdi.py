@@ -12,7 +12,7 @@ def nan_where(a, b, n):
     a[b == n] = np.nan
     return a
 
-def MDS_gEQDSK_COCOS_identify(bt, ip):
+def TDI_gEQDSK_COCOS_identify(bt, ip):
     import numpy as np
 
     bt = np.mean(bt)
