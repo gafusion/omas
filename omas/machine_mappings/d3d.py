@@ -1936,7 +1936,8 @@ def magnetics_floops_voltage_data(ods, pulse):
         TDIs[identifier + '.data'] = f'ptdata2("{signal}",{pulse})'
         TDIs[identifier + '.time'] = f'dim_of(ptdata2("{signal}",{pulse}),0)/1000.'
         TDIs[identifier + '.header'] = f'pthead2("{signal}",{pulse}), __rarray'
-    data = mdsvalue('d3d', None, pulse, TDIs).raw()
+    provider = ods.get_mds_provider('d3d')
+    data = provider.raw(None, pulse, TDIs)
 
     with omas_environment(ods, cocosio=7):
         for k in ods1['magnetics.flux_loop']:
