@@ -1929,7 +1929,9 @@ def magnetics_floops_voltage_data(ods, pulse):
             ods[f'magnetics.flux_loop.{k}.voltage.time'] = data[identifier + '.time']
             # Convert digitizer counts (bit uncertainty) to voltage
             header = data[identifier + '.header']
-            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(header[3] * header[4]) * np.ones(nt) * 10.0
+            k = header[3] # inherent number
+            rcg = header[4] # integrator calibration factor
+            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(k * rcg) * np.ones(nt) * 6.0 # Est. 6 bit of noise variance using 200000 and Vloop
 
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
