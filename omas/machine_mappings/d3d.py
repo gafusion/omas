@@ -494,13 +494,12 @@ def pf_active_coil_current_data(ods, pulse):
             nt = len(ods[f'pf_active.coil.{k}.current.data'])
             ods[f'pf_active.coil.{k}.current.data_error_upper'] = abs(data[identifier][3] * data[identifier][4]) * np.ones(nt) * 10.0
 
-        # IMAS stores the current in the coil not multiplied by the number of turns
+        # IMAS stores the current per turn, and the DIII-D F-coil PTDATA signals already are the per-turn
+        # (power-supply) current: the amp-turns are PTDATA * turns_with_sign, so no division is applied here.
+        # A free-boundary refit of the EFIT02 boundary (shot 200000, t = 3.04 s) needs F6A = -227.7 kA-turns
+        # = -4.14 kA * 55, i.e. the undivided PTDATA (-4.12 kA); divided values are 55-58x too small.
         for channel in ods1['pf_active.coil']:
-            if f'pf_active.coil.{channel}.current.data' in ods:
-                if 'F' in ods1[f'pf_active.coil.{channel}.identifier']:
-                    ods[f'pf_active.coil.{channel}.current.data'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
-                    ods[f'pf_active.coil.{channel}.current.data_error_upper'] /= ods1[f'pf_active.coil.{channel}.element.0.turns_with_sign']
-            else:
+            if f'pf_active.coil.{channel}.current.data' not in ods:
                 print(f'WARNING: pf_active.coil[{channel}].current.data is missing')
     return ods
 
@@ -1952,7 +1951,9 @@ def magnetics_floops_voltage_data(ods, pulse):
             ods[f'magnetics.flux_loop.{k}.voltage.time'] = data[identifier + '.time']
             # Convert digitizer counts (bit uncertainty) to voltage
             header = data[identifier + '.header']
-            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(header[3] * header[4]) * np.ones(nt) * 10.0
+            K = header[3] # inherent number
+            rcg = header[4] # integrator calibration factor
+            ods[f'magnetics.flux_loop.{k}.voltage.data_error_upper'] = abs(K * rcg) * np.ones(nt) * 6.02 # Est. 6 bit of noise variance using 200000 and Vloop
 
 
 @machine_mapping_function(__regression_arguments__, pulse=147131)
@@ -2291,7 +2292,7 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             ods[f"{sh}[{i_time}].ion[0].label"] = "D"
             ods[f"{sh}[{i_time}].ion[1].label"] = "C"
     else:
-        # ZIPFIT uses conventional rho_tor < 1.0
+        # ZIPFIT
         query = {
             "electrons.density_thermal": "\\TOP.PROFILES.EDENSFIT",
             "electrons.density": "\\TOP.PROFILES.EDENSFIT",
@@ -2329,7 +2330,8 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
             if entry.startswith("rho__") and not isinstance(data[entry], Exception) and len(data[entry])>0:
                 rho_tor_norm = data[entry]
                 break
-        rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
+        if core_profiles_strict_grid:
+            rho_tor_norm = rho_tor_norm[rho_tor_norm<=1.0]
         ods["core_profiles.time"] = time
         for i_time, time0 in enumerate(time):
             ods[f"{sh}[{i_time}].time"] = time0
@@ -2346,7 +2348,11 @@ def core_profiles_profile_1d(ods, pulse, PROFILES_tree="OMFIT_PROFS", PROFILES_r
                 if np.min(np.abs(data["time__" + entry] - time0)) < 1.e-3:
                     time_index = np.argmin(np.abs(data["time__" + entry] - time0))
                     rho = data["rho__" + entry]
-                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][rho<=1.0]
+                    if core_profiles_strict_grid:
+                        mask = rho <= 1.0
+                    else:
+                        mask = np.ones(rho.shape, dtype=bool)
+                    ods[f"{sh}[{i_time}]."+entry] = data[entry][time_index][mask]
             # deuterium from quasineutrality
             try:
                 ods[f"{sh}[{i_time}].ion[0].density_thermal"] = ods[f"{sh}[{i_time}].electrons.density_thermal"] - ods[f"{sh}[{i_time}].ion[1].density_thermal"] * 6
