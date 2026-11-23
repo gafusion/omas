@@ -8,6 +8,7 @@ conveniently and rapidly plot individual ODS quantities
 """
 
 from matplotlib import pyplot
+from matplotlib.backend_bases import NonGuiException
 import os
 from omas import *
 
